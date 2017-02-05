@@ -771,7 +771,7 @@ $(document).ready(function() {
 				paymentToken = true;
 				$.ajax({
 					type: 'GET',
-					url: 'http://www.lifepurposeapp.com/temp/stripe_charge.php',
+					url: 'https://ecstaticliving.github.io/stripe/index.php',
 					crossDomain: true,
 					dataType: 'jsonp',
 					jsonp: 'callback',
