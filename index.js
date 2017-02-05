@@ -771,7 +771,7 @@ $(document).ready(function() {
 				paymentToken = true;
 				$.ajax({
 					type: 'GET',
-					url: 'https://ecstaticliving.github.io/stripe/index.php',
+					url: 'https://www.ecstaticliving.institute/stripe/stripe_charge.php',
 					crossDomain: true,
 					dataType: 'jsonp',
 					jsonp: 'callback',
