@@ -768,10 +768,10 @@ $(document).ready(function() {
 			billingAddress: true,
 			amount: eventPrice,
 			token: function(token) {
-				paymentToken = true
+				paymentToken = true;
 				$.ajax({
 					type: 'GET',
-					url: 'https://ecstaticliving.github.io/stripe/index.php',
+					url: 'http://www.lifepurposeapp.com/temp/stripe_charge.php',
 					crossDomain: true,
 					dataType: 'jsonp',
 					jsonp: 'callback',
