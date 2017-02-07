@@ -6,7 +6,7 @@ $(document).ready(function() {
 
 	//	DECLARATIONS
 	//	General
-	var siteUrl = 'http://www.ecstaticliving.com/',
+	var siteUrl = 'https://www.ecstaticliving.com/',
 		$main = $('.main'),
 		$mainSection = $('.main-section'),
 
