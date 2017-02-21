@@ -45,6 +45,7 @@ $(document).ready(function() {
 		eventDates = $('.hidden.event-dates').text(),
 		eventVenue = $('.hidden.event-venue').text(),
 		eventDeposit = $('.hidden.event-deposit').text(),
+		eventDepositDue = parseInt($('.hidden.event-depositdue').text(), 10),
 		eventLodgingOptions = $('.hidden.event-lodgingoptions').text(),
 		eventLodgingPrices = $('.hidden.event-lodgingprices').text(),
 		eventStripeDescriptions = $('.hidden.event-stripedescriptions').text()
@@ -362,9 +363,9 @@ $(document).ready(function() {
 		eventDate = new Date(eventStartDate)
 		depositDate = new Date(eventDate)
 		if ((eventCode.substring(0, 3) != 'let') && (eventCode.substring(0, 4) != 'ctt')) {
-			depositDate.setDate(eventDate.getDate() - 14)
+			depositDate.setDate(eventDate.getDate() - eventDepositDue)
 		} else {
-			depositDate.setDate(eventDate.getDate() - 21)
+			depositDate.setDate(eventDate.getDate() - eventDepositDue)
 		}
 		return depositDate
 	}
@@ -768,7 +769,7 @@ $(document).ready(function() {
 			billingAddress: true,
 			amount: eventPrice,
 			token: function(token) {
-				paymentToken = true;
+				paymentToken = true
 				$.ajax({
 					type: 'GET',
 					url: 'https://www.ecstaticliving.institute/stripe/stripe_charge.php',
