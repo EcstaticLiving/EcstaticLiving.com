@@ -50,6 +50,7 @@ $(document).ready(function() {
 		eventLodgingPrices = $('.hidden.event-lodgingprices').text(),
 		eventStripeDescriptions = $('.hidden.event-stripedescriptions').text()
 
+		eventDepositDue = eventDepositDue.isNaN() ? 14 : eventDepositDue
 		console.log(eventDepositDue);
 
 	//	INITIALIZE
