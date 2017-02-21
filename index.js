@@ -50,6 +50,8 @@ $(document).ready(function() {
 		eventLodgingPrices = $('.hidden.event-lodgingprices').text(),
 		eventStripeDescriptions = $('.hidden.event-stripedescriptions').text()
 
+		console.log(eventDepositDue);
+
 	//	INITIALIZE
 	function initialize() {
 		if (Math.min($(window).width(), $(window).height()) >= 320) {
