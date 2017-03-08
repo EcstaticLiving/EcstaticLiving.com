@@ -4,15 +4,15 @@ Created by Conscious Apps Inc. www.consciousapps.com
 */
 $(document).ready(function () {
 	// Load all modules
-	$.getScript('general/declarations.js')
-	$.getScript('general/initialize.js')
-	$.getScript('general/nav.js')
-	$.getScript('general/introModal.js')
-	$.getScript('general/contactModal.js')
-	$.getScript('events/initialize.js')
-	$.getScript('events/nav.js')
-	$.getScript('events/forms.js')
-	$.getScript('events/regForm.js')
-	$.getScript('general/stripe.js')
+	$.getScript('https://ecstaticliving.github.io/ecstaticliving.com/general/declarations.js')
+	$.getScript('https://ecstaticliving.github.io/ecstaticliving.com/general/initialize.js')
+	$.getScript('https://ecstaticliving.github.io/ecstaticliving.com/general/nav.js')
+	$.getScript('https://ecstaticliving.github.io/ecstaticliving.com/general/introModal.js')
+	$.getScript('https://ecstaticliving.github.io/ecstaticliving.com/general/contactModal.js')
+	$.getScript('https://ecstaticliving.github.io/ecstaticliving.com/events/initialize.js')
+	$.getScript('https://ecstaticliving.github.io/ecstaticliving.com/events/nav.js')
+	$.getScript('https://ecstaticliving.github.io/ecstaticliving.com/events/forms.js')
+	$.getScript('https://ecstaticliving.github.io/ecstaticliving.com/events/regForm.js')
+	$.getScript('https://ecstaticliving.github.io/ecstaticliving.com/general/stripe.js')
 
 })
