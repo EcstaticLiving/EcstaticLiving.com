@@ -1,3 +1,5 @@
+// Intro Modal Module
+
 //	INTRO MODAL
 $('#button-modal-intro').on('click', function() {
 	if ($(window).width() < 768) {

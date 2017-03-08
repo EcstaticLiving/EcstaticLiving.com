@@ -1,4 +1,4 @@
-//	EVENT REGISTRATION
+//	Event initialization
 var regButton = '.button.register'
 var regFirstName = '.input-field.register-firstname.desktop',
 	regLastName = '.input-field.register-lastname.desktop',

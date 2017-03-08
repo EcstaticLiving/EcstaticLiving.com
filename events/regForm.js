@@ -1,3 +1,5 @@
+// Event registration module
+
 $(regButton).on('click', function() {
 	// Causes Reg section to scroll smoothly on iOS
 	document.getElementById('registration-section').style.webkitOverflowScrolling = 'touch'

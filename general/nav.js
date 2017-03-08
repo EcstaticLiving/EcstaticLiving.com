@@ -1,3 +1,5 @@
+// Nav Module
+
 //	NAV MENU
 $navButton.on('click', function() {
 	//	If nav menu is opened

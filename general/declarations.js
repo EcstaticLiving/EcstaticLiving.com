@@ -1,3 +1,5 @@
+// Declarations Module
+
 //	DECLARATIONS
 //	General
 const siteUrl = 'https://www.ecstaticliving.com/',

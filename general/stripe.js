@@ -1,3 +1,5 @@
+// Stripe Module
+
 //	STRIPE
 $(`${regContinue}, ${regContinueMobile}, ${regPayNow}, ${regPayNowMobile}`).on('click', function() {
 	var stripeTitle = eventStripeDescriptions.split(' | ')

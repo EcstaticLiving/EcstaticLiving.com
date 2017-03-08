@@ -1,3 +1,5 @@
+// Contact Module
+
 //	CONTACT
 function clearContactModal() {
 	$receivedSection.fadeTo(500, 0)

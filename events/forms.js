@@ -1,4 +1,4 @@
-//	CART FUNCTIONS
+//	Form module
 function saveForm() {
 	var values = {};
 	$('input, textarea, select').each(function() {

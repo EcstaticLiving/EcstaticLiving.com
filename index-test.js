@@ -3,7 +3,7 @@ Code ©2016 Ecstatic Living Institute All rights reserved.
 Created by Conscious Apps Inc. www.consciousapps.com
 */
 $(document).ready(function () {
-
+	// Load all modules
 	$.getScript('general/declarations.js')
 	$.getScript('general/initialize.js')
 	$.getScript('general/nav.js')

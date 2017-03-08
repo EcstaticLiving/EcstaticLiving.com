@@ -1,3 +1,5 @@
+// Initialization Module
+
 //	INITIALIZE
 function initialize() {
 	if (Math.min($(window).width(), $(window).height()) >= 320) {
