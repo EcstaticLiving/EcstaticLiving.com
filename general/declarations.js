@@ -2,13 +2,12 @@
 
 //	DECLARATIONS
 //	General
-const siteUrl = 'https://www.ecstaticliving.com/',
+const
 $main = $('.main'),
 $mainSection = $('.main-section'),
 
 //	Nav Menu
 $navMenu = $('.navigation-menu'),
-$navButton = $('.nav-menu-button'),
 $navContainer = $('.nav-container'),
 $navClose = $('.close-menu.nav-menu'),
 
@@ -41,8 +40,7 @@ eventStartDate = $('.hidden.event-startdate').text(),
 eventDates = $('.hidden.event-dates').text(),
 eventVenue = $('.hidden.event-venue').text(),
 eventDeposit = $('.hidden.event-deposit').text(),
-eventDepositDue = parseInt($('.hidden.event-depositdue').text(), 10),
+eventDepositDue = isNaN(parseInt($('.hidden.event-depositdue').text(), 10)) ? 14 : parseInt($('.hidden.event-depositdue').text(), 10),
 eventLodgingOptions = $('.hidden.event-lodgingoptions').text(),
 eventLodgingPrices = $('.hidden.event-lodgingprices').text(),
-eventStripeDescriptions = $('.hidden.event-stripedescriptions').text(),
-eventDepositDue = isNaN(eventDepositDue) ? 14 : eventDepositDue
+eventStripeDescriptions = $('.hidden.event-stripedescriptions').text()

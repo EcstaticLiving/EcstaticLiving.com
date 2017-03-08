@@ -1,4 +1,5 @@
 // Initialization Module
+const siteUrl = 'https://www.ecstaticliving.com/'
 
 //	INITIALIZE
 function initialize() {
