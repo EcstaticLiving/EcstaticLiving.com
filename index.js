@@ -2,11 +2,11 @@
 Code ©2016 Ecstatic Living Institute All rights reserved.
 Created by Conscious Apps Inc. www.consciousapps.com
 */
-$(document).ready(function() {
+$(document).ready(function () {
 
 	//	DECLARATIONS
 	//	General
-	var siteUrl = 'https://www.ecstaticliving.com/',
+	const siteUrl = 'https://www.ecstaticliving.com/',
 		$main = $('.main'),
 		$mainSection = $('.main-section'),
 
@@ -48,9 +48,8 @@ $(document).ready(function() {
 		eventDepositDue = parseInt($('.hidden.event-depositdue').text(), 10),
 		eventLodgingOptions = $('.hidden.event-lodgingoptions').text(),
 		eventLodgingPrices = $('.hidden.event-lodgingprices').text(),
-		eventStripeDescriptions = $('.hidden.event-stripedescriptions').text()
+		eventStripeDescriptions = $('.hidden.event-stripedescriptions').text(),
 		eventDepositDue = isNaN(eventDepositDue) ? 14 : eventDepositDue
-		console.log(eventDepositDue);
 
 	//	INITIALIZE
 	function initialize() {
@@ -71,9 +70,7 @@ $(document).ready(function() {
 		}
 		if (device == 'tablet') {
 			//	Remove featured workshop on Reg Modal for tablets
-			$('#register-column').css({
-				'width': '100%'
-			})
+			$('#register-column').css({ 'width': '100%' })
 			$('#feature-column').hide()
 			if (deviceOrientation == 'landscape') {
 				$introModal.css({
