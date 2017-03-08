@@ -9,7 +9,6 @@ $mainSection = $('.main-section'),
 //	Nav Menu
 $navMenu = $('.navigation-menu'),
 $navContainer = $('.nav-container'),
-$navClose = $('.close-menu.nav-menu'),
 
 //	Intro Modal
 $introModal = $('.modals.introduction'),
