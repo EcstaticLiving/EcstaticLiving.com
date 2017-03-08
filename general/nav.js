@@ -1,4 +1,5 @@
 // Nav Module
+const $navButton = $('.nav-menu-button')
 
 //	NAV MENU
 $navButton.on('click', function() {
