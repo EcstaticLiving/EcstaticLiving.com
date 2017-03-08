@@ -1,5 +1,5 @@
 /*
-Code ©2016 Ecstatic Living Institute All rights reserved.
+Code ©2016-2017 Ecstatic Living Institute All rights reserved.
 Created by Conscious Apps Inc. www.consciousapps.com
 */
 $(document).ready(function () {
