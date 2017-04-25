@@ -6,7 +6,7 @@ $('#button-modal-intro').on('click', function() {
 		window.open(`${siteUrl}mobile/introduction`)
 	} //	If on mobile, open “Introduction” window instead of modal
 	else {
-		$modalBackground.css('position', 'fixed')
+		$mainContainer.css('position', 'fixed')
 		$introModal.fadeTo(500, 1)
 	}
 })

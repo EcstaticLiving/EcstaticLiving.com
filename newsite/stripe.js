@@ -31,11 +31,11 @@ $(`${regContinue}, ${regContinueMobile}, ${regPayNow}, ${regPayNowMobile}`).on('
 		}
 		var customerDescription = `${$(regFirstName).val()} ${$(regLastName).val()}`
 		var completeFunction = function(data, textStatus, xhr) {
-			$modalBackground.css('position', 'fixed')
+			$mainContainer.css('position', 'fixed')
 			$confirmationModal.fadeIn()
 		}
 		var chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(regLodging + ' option:selected').text().substring(0, $(regLodging + ' option:selected').text().length - 17)}, ${eventDeposit}`
-		$modalBackground.css('position', 'absolute')
+		$mainContainer.css('position', 'absolute')
 	}
 	if ((window.location.href == `${siteUrl}charge`) || (window.location.href == `${siteUrl}charge#`)) {
 		if (device == 'mobile') {
@@ -73,7 +73,7 @@ $(`${regContinue}, ${regContinueMobile}, ${regPayNow}, ${regPayNowMobile}`).on('
 				success: completeFunction,
 				complete: completeFunction,
 				error: function(xhr, textStatus, errorThrown) {
-					$modalBackground.css('position', 'absolute')
+					$mainContainer.css('position', 'absolute')
 					console.log(`${textStatus} ${errorThrown}`)
 				}
 			})

@@ -60,7 +60,7 @@ function determineDepositDate() {
 
 function resetRegFormMobile() {
 	//	Keep background frozen while Reg Modal is loaded
-	$modalBackground.css('position', 'fixed')
+	$mainContainer.css('position', 'fixed')
 	$('.w-form-done').hide()
 	$('.w-form-fail').hide()
 	let depositDate = determineDepositDate()
@@ -83,7 +83,7 @@ function resetRegFormMobile() {
 
 function resetRegForm() {
 	//	Keep background frozen while Reg Modal is loaded
-	$modalBackground.css('position', 'fixed')
+	$mainContainer.css('position', 'fixed')
 	$('.w-form-done').hide()
 	$('.w-form-fail').hide()
 	let depositDate = determineDepositDate()

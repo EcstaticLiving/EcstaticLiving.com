@@ -23,7 +23,7 @@ $receivedSection = $('.received-section'),
 //	Register Modal
 $registerModal = $('.modals.register'),
 $registerModalMobile = $('.modals.register-mobile'),
-$modalBackground = $('.modal-background'),
+$mainContainer = $('.main-container'),
 $registerForm = $('.form.registration.desktop'),
 $registerFormMobile = $('.form.registration.mobile'),
 $registrationSection = $('.registration-section.desktop'),

@@ -1,12 +1,12 @@
 // Nav Module
-const $navButton = $('.nav-menu-button'),
+const $navButton = $('.menu-icon'),
 	$navClose = $('.close-menu.nav-menu')
 
 //	NAV MENU
 $navButton.on('click', function() {
 	//	If nav menu is opened
 	if ($navClose.is(':hidden')) {
-		$modalBackground.css('position', 'fixed')
+		$mainContainer.css('position', 'fixed')
 		if ((window.location.href == siteUrl) && ($('.top-marker').is(':visible'))) {
 			$('.banner-container').hide()
 		}
@@ -15,7 +15,7 @@ $navButton.on('click', function() {
 		}, 500)
 		$navClose.fadeTo(1000, 1).show()
 	} else {
-		$modalBackground.css('position', 'absolute')
+		$mainContainer.css('position', 'absolute')
 		if ((window.location.href == siteUrl) && ($('.top-marker').is(':visible'))) {
 			$('.banner-container').show()
 		}
@@ -38,7 +38,7 @@ SocialShareKit.init({
 //	CLOSE MODALS, WINDOWS
 function closeModals() {
 	if (($registerModal.is(':visible')) || ($registerModalMobile.is(':visible')) || ($confirmationModal.is(':visible')) || ($contactModal.is(':visible')) || ($introModal.is(':visible'))) {
-		$modalBackground.css('position', 'absolute')
+		$mainContainer.css('position', 'absolute')
 		$registerModal.fadeOut()
 		$registerModalMobile.fadeOut()
 		$confirmationModal.fadeOut()

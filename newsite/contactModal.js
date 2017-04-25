@@ -22,7 +22,7 @@ $('.modal-contact-trigger').on('click', function() {
 	} else if (window.location.href.indexOf('/contact') == -1) {
 		//	Only open “Contact” modal if not on “Contact” page.
 		$contactModal.fadeTo(500, 1)
-		$modalBackground.css('position', 'fixed')
+		$mainContainer.css('position', 'fixed')
 	}
 })
 if (window.location.href.indexOf('/contact') != -1) {
@@ -44,6 +44,6 @@ $('.button.contact-close').on('click', function() {
 		window.close()
 	} else {
 		$contactModal.fadeTo(500, 0).hide()
-		$modalBackground.css('position', 'absolute')
+		$mainContainer.css('position', 'absolute')
 	}
 })
