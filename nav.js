@@ -1,6 +1,6 @@
 // Nav Module
 const $navButton = $('.menu-icon'),
-	$navClose = $('.close-menu.nav-menu')
+	$navClose = $('.nav-close')
 
 //	NAV MENU
 $navButton.on('click', function() {
