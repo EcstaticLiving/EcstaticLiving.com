@@ -16,14 +16,7 @@ $('.modal-contact-trigger').on('click', function() {
 		$navButton.trigger('click')
 	}
 	clearContactModal()
-		//	If on mobile, open “Contact” window instead of modal
-	if ($(window).width() < 768) {
-		window.open(`${siteUrl}contact`)
-	} else if (window.location.href.indexOf('/contact') == -1) {
-		//	Only open “Contact” modal if not on “Contact” page.
-		$contactModal.fadeTo(500, 1)
-		$mainContainer.css('position', 'fixed')
-	}
+	window.open(`${siteUrl}contact`)
 })
 if (window.location.href.indexOf('/contact') != -1) {
 	clearContactModal()
