@@ -195,7 +195,7 @@ function resetLodging(paymentStatus) {
 			text: lodgingOptions[i] + ' ($' + lodgingPrices[i] * paymentFactor + spacer + paymentStatus + closer
 		}))
 	}
-	eventPrice = parseInt(eventDeposit) * paymentFactor
+	eventPrice = parseInt(eventDepositAmount) * paymentFactor
 	$(eventDepositText).text(`Pay deposit only ($${eventPrice}${spacer}${paymentStatus})`)
 }
 
