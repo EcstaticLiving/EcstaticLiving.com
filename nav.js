@@ -11,9 +11,6 @@ $navButton.on('click', function() {
 		}, 500)
 		$navClose.fadeTo(1000, 1).show()
 	} else {
-		if ((window.location.href == siteUrl) && ($('.top-marker').is(':visible'))) {
-			$('.banner-container').show()
-		}
 		$navContainer.animate({
 			marginLeft: '100%'
 		}, 500)
