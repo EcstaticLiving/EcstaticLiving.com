@@ -18,8 +18,8 @@ function initialize() {
 	} else {
 		deviceOrientation = 'portrait'
 	}
-	if (device == 'tablet') {
-		if (deviceOrientation == 'landscape') {
+	if (device === 'tablet') {
+		if (deviceOrientation === 'landscape') {
 			//	Increase side padding for small screen
 			$mainSection.css({
 				'padding-left': '100px',

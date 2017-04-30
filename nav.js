@@ -28,7 +28,7 @@ SocialShareKit.init({
 
 // BACK BUTTON
 $('.navigate-back').on('click', function() {
-	if (document.referrer == '') {
+	if (document.referrer === '') {
 		window.location.href = '/'
 	} else {
 		parent.history.back()

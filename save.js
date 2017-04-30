@@ -9,12 +9,12 @@ function saveForm() {
 			values[$(this).attr('name')] = $(this).val()
 		}
 	})
-	sessionStorage.setItem('registration', JSON.stringify(values))
+	localStorage.setItem('EcstaticLiving:Form', JSON.stringify(values))
 }
 
 function repopulateForm() {
-	if (sessionStorage.getItem('registration')) {
-		var values = JSON.parse( sessionStorage.getItem('registration') )
+	if (localStorage.getItem('EcstaticLiving:Form')) {
+		var values = JSON.parse(localStorage.getItem('EcstaticLiving:Form'))
 		for (var item in values) {
 			if ($('*[name=' + item + ']').is(':radio')) {
 				$('input[name=' + item + '][value="' + values[item] + '"]').prop('checked', true)
@@ -23,6 +23,6 @@ function repopulateForm() {
 				$('*[name=' + item + ']').val(values[item])
 			}
 		}
-		sessionStorage.removeItem('registration')
+		localStorage.removeItem('EcstaticLiving:Form')
 	}
 }
