@@ -179,9 +179,22 @@ function resetLodging(paymentStatus) {
 }
 
 
+// SHOW REGISTRATION
+function showRegistration() {
+	$registrationSection.show()
+	$confirmationSection.hide()
+}
+
+// SHOW CONFIRMATION
+function showConfirmation() {
+	$registrationSection.hide()
+	$confirmationSection.show()
+}
+
 
 // EVENT PAGE
 if (window.location.href.indexOf('/events/') > -1) {
+	showRegistration()
 	resetLodging()
 	hideExperience()
 	hideDiet()

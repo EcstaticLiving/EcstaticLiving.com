@@ -4,23 +4,23 @@
 $(`${eventButton}`).on('click', function() {
 	var stripeTitle = eventStripe.split(' | ')
 	saveForm()
-	$registerForm.submit()
-	var count = $(regLodging).prop('selectedIndex') - 1
-	if ($(regPayDepositOnly).is(':checked')) {
-		eventPrice *= 100
-		var eventDeposit = 'DEPOSIT'
-	} else {
-		eventPrice = $(regLodging).val() * 100
-		var eventDeposit = 'FULL'
-	}
-	var customerDescription = `${$(regFirstName).val()} ${$(regLastName).val()}`
-	var completeFunction = function(data, textStatus, xhr) {
-		$confirmationSection.fadeIn()
-	}
-	var chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(regLodging + ' option:selected').text().substring(0, $(regLodging + ' option:selected').text().length - 17)}, ${eventDeposit}`
+	var completeFunction = () => showRegistration()
 	if ((window.location.href === `${siteUrl}charge`) || (window.location.href === `${siteUrl}charge#`)) {
 		$customChargeForm.submit()
+		var customerDescription = `${$(customFirstName).val()} ${$(customLastName).val()}`
 		var chargeDescription = 'Custom Charge'
+	} else {
+		$registerForm.submit()
+		var count = $(eventLodging).prop('selectedIndex') - 1
+		if ($(eventDepositDeposit).is(':checked')) {
+			eventPrice *= 100
+			var eventDeposit = 'DEPOSIT'
+		} else {
+			eventPrice = $(eventLodging).val() * 100
+			var eventDeposit = 'FULL'
+		}
+		var customerDescription = `${$(eventFirstName).val()} ${$(eventLastName).val()}`
+		var chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(eventLodging + ' option:selected').text().substring(0, $(eventLodging + ' option:selected').text().length - 17)}, ${eventDeposit}`
 	}
 	let paymentToken = false
 	var handler = StripeCheckout.configure({
