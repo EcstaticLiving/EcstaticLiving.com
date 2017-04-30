@@ -1,7 +1,6 @@
 // Event registration
 
-
-
+// PARTICIPANTS
 function participants() {
 	if (($(eventStatus).find('option:selected').val() === 'Couple') || ($(eventStatus).find('option:selected').val() === 'Two Singles (paired)')) {
 		return 2
@@ -11,7 +10,7 @@ function participants() {
 }
 
 
-
+// FORM VALIDATION
 function validationPersonal() {
 	if ($(eventFirstName).val() !== '' && $(eventLastName).val() !== '' && $(eventEmail).val() !== '' && $(eventMobile).val() !== '' && $(eventBirthdate).val() !== '' &&
 		($(eventFemale).is(':checked') || $(eventMale).is(':checked') || $(eventOther).is(':checked'))) {
@@ -59,26 +58,6 @@ function eventValidation() {
 $(eventFirstName + ',' + eventLastName + ',' + eventEmail + ',' + eventMobile + ',' + eventBirthdate + ',' + eventFemale + ',' + eventMale + ',' + eventOther + ',' + eventReferral + ',' + eventExperienceDetails + ',' + eventDietDetails + ',' + eventStatus + ',' + eventPartnerName + ',' + eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther + ',' + eventLodging + ',' + eventTerms).on('change', function () {
 	eventValidation()
 })
-
-
-
-// Reset Registration
-function resetRegistration() {
-	$('.w-form-done').hide()
-	$('.w-form-fail').hide()
-	$registerForm[0].reset()
-	repopulateForm()
-	if (new Date() < new Date(eventDepositDate)) {
-		$(eventDepositContainer).show()
-		$(eventDepositFull).prop('checked', true)
-	} else {
-		$(eventDepositContainer).hide()
-	}
-	$registerForm.parsley()
-	$registerForm.show()
-	$(eventTerms).attr('checked', false)
-	eventValidation()
-}
 
 
 
@@ -202,11 +181,24 @@ function resetLodging(paymentStatus) {
 
 
 // EVENT PAGE
-if (window.location.href.indexOf('/contact') > -1) {
+if (window.location.href.indexOf('/events/') > -1) {
 	resetLodging()
 	hideExperience()
 	hideDiet()
 	hidePartner()
 	eventValidation()
-	resetRegistration()
+	$('.w-form-done').hide()
+	$('.w-form-fail').hide()
+	$registerForm[0].reset()
+	repopulateForm()
+	if (new Date() < new Date(eventDepositDate)) {
+		$(eventDepositContainer).show()
+		$(eventDepositFull).prop('checked', true)
+	} else {
+		$(eventDepositContainer).hide()
+	}
+	$registerForm.parsley()
+	$registerForm.show()
+	$(eventTerms).attr('checked', false)
+	eventValidation()
 }
