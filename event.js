@@ -1,4 +1,4 @@
-// Event registration
+ && // Event registration
 
 
 
@@ -13,35 +13,36 @@ function participants() {
 
 
 function validationPersonal() {
-	if (($(eventFirstName).val() !== '') && ($(eventLastName).val() !== '') && ($(eventEmail).val() !== '') && ($(eventMobile).val() !== '') && ($(eventBirthdate).val() !== '')) &&
-		(($(eventFemale).is(':checked')) || ($(eventMale).is(':checked')) || ($(eventOther).is(':checked')))) {
+	if ($(eventFirstName).val() !== '' && $(eventLastName).val() !== '' && $(eventEmail).val() !== '' && $(eventMobile).val() !== '' && $(eventBirthdate).val() !== '' &&
+		($(eventFemale).is(':checked') || $(eventMale).is(':checked') || $(eventOther).is(':checked'))) {
 		return true
 	}
 	return false
 }
 function validationDetails() {
-	if ((($(eventReferral).val() !== '')) &&
-		((($(eventExperienceYes).is(':checked')) && ($(eventExperienceDetails).val() !== '')) || ($(eventExperienceNo).is(':checked'))) &&
-		((($(eventDietYes).is(':checked')) && ($(eventDietDetails).val() !== '')) || ($(eventDietNo).is(':checked')))) {
+	if ($(eventReferral).val() !== ''
+		&& (($(eventExperienceYes).is(':checked') && $(eventExperienceDetails).val() !== '') || $(eventExperienceNo).is(':checked'))
+		&& (($(eventDietYes).is(':checked') && $(eventDietDetails).val() !== '') || $(eventDietNo).is(':checked'))) {
 		return true
 	}
 	return false
 }
 function validationStatus() {
-	if (((participants() === 2)
-			&& ($(eventPartnerName).val() !== '')
-			&& (($(eventPartnerFemale).is(':checked')) || ($(eventPartnerMale).is(':checked')) || ($(eventPartnerOther).is(':checked')))
-			&& ($(eventPayBoth).is(':checked') || ($(eventPayMe).is(':checked'))))
-		|| (participants() === 1)) {
+	if (
+		(participants() === 2
+			&& $(eventPartnerName).val() !== ''
+			&& ($(eventPartnerFemale).is(':checked') || $(eventPartnerMale).is(':checked') || $(eventPartnerOther).is(':checked'))
+			&& ($(eventPayBoth).is(':checked') || $(eventPayMe).is(':checked')))
+		|| participants() === 1
+	) {
 		return true
 	}
 	return false
 }
 function validationLodging() {
-	if (($(eventLodging).val() !== '') && (
-		($(eventDepositContainer).is(':visible') && ($(eventDepositFull).is(':checked') || $(eventDepositDeposit).is(':checked')))
-		|| ($(eventDepositContainer).is(':hidden'))
-	)) {
+	if ($(eventLodging).val() !== '' && (
+		$(eventDepositContainer).is(':visible') && ($(eventDepositFull).is(':checked') || $(eventDepositDeposit).is(':checked'))
+	) || $(eventDepositContainer).is(':hidden')) {
 		return true
 	}
 	return false
