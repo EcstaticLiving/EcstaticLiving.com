@@ -32,9 +32,8 @@ eventLodgingOptions = $('#event-lodging-options').text(),
 eventLodgingPrices = $('#event-lodging-prices').text(),
 eventStripe = $('#event-stripe').text()
 
-//	Event initialization
-var eventButton = '.button.pay',
-
+// Event initialization
+const eventButton = '.button.pay',
 eventFirstName = '#event-firstname',
 eventLastName = '#event-lastname',
 eventEmail = '#event-email',
