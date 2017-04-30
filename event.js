@@ -53,7 +53,7 @@ function eventValidation() {
 		$(eventButton).css('background-color', '#800000')
 	} else {
 		$(eventButton).prop('disabled', true)
-		$(regContinue).css('background-color', '')
+		$(eventButton).css('background-color', '')
 	}
 }
 $(eventFirstName + ',' + eventLastName + ',' + eventEmail + ',' + eventMobile + ',' + eventBirthdate + ',' + eventFemale + ',' + eventMale + ',' + eventOther + ',' + eventReferral + ',' + eventExperienceDetails + ',' + eventDietDetails + ',' + eventStatus + ',' + eventPartnerName + ',' + eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther + ',' + eventLodging + ',' + eventTerms).on('change', function () {
@@ -178,9 +178,9 @@ function resetLodging(paymentStatus) {
 	//	Adds lodging options & prices based on CMS input
 	var lodgingOptions = eventLodgingOptions.split(' | ')
 	var lodgingPrices = eventLodgingPrices.split(' | ')
-	$(regLodging).empty()
+	$(eventLodging).empty()
 	if (lodgingOptions.length > 0) {
-		$(regLodging).append($('<option>', {
+		$(eventLodging).append($('<option>', {
 			value: '',
 			text: 'Event option...'
 		}))
@@ -190,7 +190,7 @@ function resetLodging(paymentStatus) {
 	const spacer = paymentStatus ? ' ' : ''
 	const closer = (paymentStatus || paymentStatus === '') ? ')' : ''
 	for (let i = 0; i < lodgingOptions.length; i++) {
-		$(regLodging).append($('<option>', {
+		$(eventLodging).append($('<option>', {
 			value: lodgingPrices[i] * factor,
 			text: lodgingOptions[i] + ' ($' + lodgingPrices[i] * factor + spacer + paymentStatus + closer
 		}))
