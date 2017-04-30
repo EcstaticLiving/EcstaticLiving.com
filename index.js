@@ -7,11 +7,9 @@ $(document).ready(function () {
 	$.getScript('https://ecstaticliving.github.io/ecstaticliving.com/declarations.js')
 	$.getScript('https://ecstaticliving.github.io/ecstaticliving.com/init.js')
 	$.getScript('https://ecstaticliving.github.io/ecstaticliving.com/nav.js')
-	$.getScript('https://ecstaticliving.github.io/ecstaticliving.com/contactModal.js')
+	$.getScript('https://ecstaticliving.github.io/ecstaticliving.com/contact.js')
 	$.getScript('https://ecstaticliving.github.io/ecstaticliving.com/eventinit.js')
-	$.getScript('https://ecstaticliving.github.io/ecstaticliving.com/eventnav.js')
 	$.getScript('https://ecstaticliving.github.io/ecstaticliving.com/forms.js')
 	$.getScript('https://ecstaticliving.github.io/ecstaticliving.com/regForm.js')
 	$.getScript('https://ecstaticliving.github.io/ecstaticliving.com/stripe.js')
-
 })

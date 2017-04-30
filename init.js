@@ -25,18 +25,10 @@ function initialize() {
 				'padding-left': '100px',
 				'padding-right': '100px'
 			})
-			$registerModal.css({
-				'padding-left': '190px',
-				'padding-right': '190px'
-			})
 		} else {
 			$mainSection.css({
 				'padding-left': '30px',
 				'padding-right': '30px'
-			})
-			$registerModal.css({
-				'padding-left': '0px',
-				'padding-right': '0px'
 			})
 		}
 	}

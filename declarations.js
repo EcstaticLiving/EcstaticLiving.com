@@ -11,7 +11,6 @@ $navMenu = $('.navigation-menu'),
 $navContainer = $('.nav-container'),
 
 //	Contact Modal
-$contactModal = $('.modals.contact'),
 $contactForm = $('.contact-form'),
 $contactSection = $('.contact-section'),
 $receivedSection = $('.received-section'),
@@ -19,10 +18,10 @@ $receivedSection = $('.received-section'),
 //	Register Modal
 $registerModal = $('.modals.register'),
 $mainContainer = $('.main-container'),
-$registerForm = $('.form.registration.desktop'),
-$registrationSection = $('.registration-section.desktop'),
-$customChargeForm = $('.form.custom-charge.desktop'),
-$paymentSection = $('.payment-section.desktop'),
+$registerForm = $('.form.registration'),
+$registrationSection = $('.registration-section'),
+$customChargeForm = $('.form.custom-charge'),
+$paymentSection = $('.payment-section'),
 $confirmationModal = $('.modals.confirmation'),
 eventCode = $('.hidden.event-code').text().toLowerCase(),
 eventTitle = $('.hidden.event-title').text(), //	Needed for Stripe long description

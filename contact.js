@@ -1,5 +1,5 @@
 //	CONTACT
-if (window.location.href.indexOf('/contact') != -1) {
+if (window.location.href.indexOf('/contact') > -1) {
 	$receivedSection.fadeTo(500, 0)
 	$receivedSection.hide()
 	$contactSection.fadeTo(500, 1)
