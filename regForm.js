@@ -51,15 +51,14 @@ function resetLodging(paymentStatus) {
 	//	Adds lodging prices based on CMS input
 	var lodgingPrices = eventLodgingPrices.split(' | ')
 	$(regLodging).empty()
-	$(regLodgingMobile).empty()
 	if (lodgingOptions.length > 0) {
 		if ((window.location.href == `${siteUrl}charge`) || (window.location.href == `${siteUrl}charge#`)) {
-				$(regLodging + ', ' + regLodgingMobile).append($('<option>', {
+				$(regLodging).append($('<option>', {
 					value: '',
 					text: 'Select charge amount...'
 				}))
 		} else {
-				$(regLodging + ', ' + regLodgingMobile).append($('<option>', {
+				$(regLodging).append($('<option>', {
 					value: '',
 					text: 'Event option...'
 				}))
@@ -74,14 +73,9 @@ function resetLodging(paymentStatus) {
 			value: lodgingPrices[i] * factor,
 			text: lodgingOptions[i] + ' ($' + lodgingPrices[i] * factor + spacer + paymentStatus + closer
 		}))
-		$(regLodgingMobile).append($('<option>', {
-			value: lodgingPrices[i] * factor,
-			text: lodgingOptions[i] + ' ($' + lodgingPrices[i] * factor + spacer + paymentStatus + closer
-		}))
 	}
 	eventPrice = parseInt(eventDeposit) * factor
 	$(regPayDepositText).text(`Pay deposit only ($${eventPrice}${spacer}${paymentStatus})`)
-	$(regPayDepositTextMobile).text(`Pay deposit only ($${eventPrice}${spacer}${paymentStatus})`)
 }
 
 $(regButton).on('click', function() {
@@ -90,95 +84,55 @@ $(regButton).on('click', function() {
 	document.getElementById('registration-section-mobile').style.webkitOverflowScrolling = 'touch'
 	resetLodging()
 	if ((window.location.href === `${siteUrl}charge`) || (window.location.href === `${siteUrl}charge#`)) {
-		if (device === 'mobile') { resetChargeFormMobile() }
-		else { resetChargeForm() }
+		resetChargeForm()
 	} else {
 		hideExperience()
 		hideDiet()
 		hidePartner()
 		deActivateRegContinue()
-		if (device == 'mobile') { resetRegFormMobile() }
-		else { resetRegForm() }
+		resetRegForm()
 	}
 })
 
 function deActivateRegContinue() {
 	$(regContinue).prop('disabled', true)
 	$(regContinue).css('background-color', '#cccccc')
-	$(regContinueMobile).prop('disabled', true)
-	$(regContinueMobile).css('background-color', '#cccccc')
 }
 
 function checkRegForm() {
-	if (device == 'mobile') {
-		if (
-			(($(regFirstNameMobile).val() != '') && ($(regLastNameMobile).val() != '') && ($(regEmailMobile).val() != '') && ($(regMobileMobile).val() != '') && ($(regBirthdateMobile).val() != '')) &&
-			(($(regFemaleMobile).is(':checked')) || ($(regMaleMobile).is(':checked')) || ($(regOtherMobile).is(':checked'))) &&
-			(($(regReferralMobile).val() != '')) &&
-			((($(regExpYesMobile).is(':checked')) && ($(regExpMobile).val() != '')) || ($(regExpNoMobile).is(':checked'))) &&
-			((($(regDietYesMobile).is(':checked')) && ($(regDietMobile).val() != '')) || ($(regDietNoMobile).is(':checked'))) &&
-			((
-				(($(regTypeMobile).val() == 'Couple') || ($(regTypeMobile).val() == 'Two Singles (paired)')) &&
-				($(regPartnerNameMobile).val() != '') &&
-				(($(regPartnerFemaleMobile).is(':checked')) || ($(regPartnerMaleMobile).is(':checked')) || ($(regPartnerOtherMobile).is(':checked'))) &&
-				($(regPayBothYesMobile).is(':checked') || ($(regPayBothNoMobile).is(':checked')))
-			) || ($(regTypeMobile).val() == 'Single')) &&
-			($(regLodgingMobile).val() != '') &&
-			(($(regPayDepositMobile).is(':visible') && ($(regPayDepositFullMobile).is(':checked') || $(regPayDepositOnlyMobile).is(':checked'))) || ($(regPayDepositMobile).is(':hidden'))) &&
-			($(regTermsMobile).is(':checked'))
-		) {
-			$(regContinueMobile).prop('disabled', false)
-			$(regContinueMobile).css('background-color', '#9b3831')
-		} else {
-			deActivateRegContinue()
-		}
+	if (
+		(($(regFirstName).val() != '') && ($(regLastName).val() != '') && ($(regEmail).val() != '') && ($(regMobile).val() != '') && ($(regBirthdate).val() != '')) &&
+		(($(regFemale).is(':checked')) || ($(regMale).is(':checked')) || ($(regOther).is(':checked'))) &&
+		(($(regReferral).val() != '')) &&
+		((($(regExpYes).is(':checked')) && ($(regExp).val() != '')) || ($(regExpNo).is(':checked'))) &&
+		((($(regDietYes).is(':checked')) && ($(regDiet).val() != '')) || ($(regDietNo).is(':checked'))) &&
+		((
+			(($(regType).val() == 'Couple') || ($(regType).val() == 'Two Singles (paired)')) &&
+			($(regPartnerName).val() != '') &&
+			(($(regPartnerFemale).is(':checked')) || ($(regPartnerMale).is(':checked')) || ($(regPartnerOther).is(':checked'))) &&
+			($(regPayBothYes).is(':checked') || ($(regPayBothNo).is(':checked')))
+		) || ($(regType).val() == 'Single')) &&
+		($(regLodging).val() != '') &&
+		(($(regPayDeposit).is(':visible') && ($(regPayDepositFull).is(':checked') || $(regPayDepositOnly).is(':checked'))) || ($(regPayDeposit).is(':hidden'))) &&
+		($(regTerms).is(':checked'))
+	) {
+		$(regContinue).prop('disabled', false)
+		$(regContinue).css('background-color', '#9b3831')
 	} else {
-		if (
-			(($(regFirstName).val() != '') && ($(regLastName).val() != '') && ($(regEmail).val() != '') && ($(regMobile).val() != '') && ($(regBirthdate).val() != '')) &&
-			(($(regFemale).is(':checked')) || ($(regMale).is(':checked')) || ($(regOther).is(':checked'))) &&
-			(($(regReferral).val() != '')) &&
-			((($(regExpYes).is(':checked')) && ($(regExp).val() != '')) || ($(regExpNo).is(':checked'))) &&
-			((($(regDietYes).is(':checked')) && ($(regDiet).val() != '')) || ($(regDietNo).is(':checked'))) &&
-			((
-				(($(regType).val() == 'Couple') || ($(regType).val() == 'Two Singles (paired)')) &&
-				($(regPartnerName).val() != '') &&
-				(($(regPartnerFemale).is(':checked')) || ($(regPartnerMale).is(':checked')) || ($(regPartnerOther).is(':checked'))) &&
-				($(regPayBothYes).is(':checked') || ($(regPayBothNo).is(':checked')))
-			) || ($(regType).val() == 'Single')) &&
-			($(regLodging).val() != '') &&
-			(($(regPayDeposit).is(':visible') && ($(regPayDepositFull).is(':checked') || $(regPayDepositOnly).is(':checked'))) || ($(regPayDeposit).is(':hidden'))) &&
-			($(regTerms).is(':checked'))
-		) {
-			$(regContinue).prop('disabled', false)
-			$(regContinue).css('background-color', '#9b3831')
-		} else {
-			deActivateRegContinue()
+		deActivateRegContinue()
+	}
+	$(regFirstName + ',' + regLastName + ',' + regEmail + ',' + regMobile + ',' + regBirthdate + ',' + regFemale + ',' + regMale + ',' + regOther + ',' + regReferral + ',' + regExp + ',' + regDiet + ',' + regType + ',' + regPartnerName + ',' + regPartnerFemale + ',' + regPartnerMale + ',' + regPartnerOther + ',' + regLodging + ',' + regTerms).on('change', function() {
+		//	Disable reg form verification for Charge form
+		if ((window.location.href != `${siteUrl}charge`) && (window.location.href != `${siteUrl}charge#`)) {
+			checkRegForm()
 		}
-	}
+	})
 }
-$(regFirstName + ',' + regLastName + ',' + regEmail + ',' + regMobile + ',' + regBirthdate + ',' + regFemale + ',' + regMale + ',' + regOther + ',' + regReferral + ',' + regExp + ',' + regDiet + ',' + regType + ',' + regPartnerName + ',' + regPartnerFemale + ',' + regPartnerMale + ',' + regPartnerOther + ',' + regLodging + ',' + regTerms).on('change', function() {
-	//	Disable reg form verification for Charge form
-	if ((window.location.href != `${siteUrl}charge`) && (window.location.href != `${siteUrl}charge#`)) {
-		checkRegForm()
-	}
-})
-$(regFirstNameMobile + ',' + regLastNameMobile + ',' + regEmailMobile + ',' + regMobileMobile + ',' + regBirthdateMobile + ',' + regFemaleMobile + ',' + regMaleMobile + ',' + regOtherMobile + ',' + regReferralMobile + ',' + regExpMobile + ',' + regDietMobile + ',' + regTypeMobile + ',' + regPartnerNameMobile + ',' + regPartnerFemaleMobile + ',' + regPartnerMaleMobile + ',' + regPartnerOtherMobile + ',' + regLodgingMobile + ',' + regTermsMobile).on('change', function() {
-	//	Disable reg form verification for Charge form
-	if ((window.location.href != `${siteUrl}charge`) && (window.location.href != `${siteUrl}charge`)) {
-		checkRegForm()
-	}
-})
 
 function showExperience() {
 	$(regExp).show()
 	$(regExp).prop('disabled', false)
 	$(regExp).animate({
-		top: 40,
-		opacity: 1
-	}, 200)
-	$(regExpMobile).show()
-	$(regExpMobile).prop('disabled', false)
-	$(regExpMobile).animate({
 		top: 40,
 		opacity: 1
 	}, 200)
@@ -192,33 +146,16 @@ function hideExperience() {
 	}, 200)
 	$(regExp).prop('disabled', true)
 	$(regExp).hide()
-	$(regExpMobile).val('')
-	$(regExpMobile).animate({
-		top: 0,
-		opacity: 0
-	}, 200)
-	$(regExpMobile).prop('disabled', true)
-	$(regExpMobile).hide()
 }
 $(regExpNo + ',' + regExpYes).change(function() {
 	if ($(regExpYes).is(':checked')) showExperience()
 	if ($(regExpNo).is(':checked')) hideExperience()
-})
-$(regExpNoMobile + ',' + regExpYesMobile).change(function() {
-	if ($(regExpYesMobile).is(':checked')) showExperience()
-	if ($(regExpNoMobile).is(':checked')) hideExperience()
 })
 
 function showDiet() {
 	$(regDiet).show()
 	$(regDiet).prop('disabled', false)
 	$(regDiet).animate({
-		top: 0,
-		opacity: 1
-	}, 200)
-	$(regDietMobile).show()
-	$(regDietMobile).prop('disabled', false)
-	$(regDietMobile).animate({
 		top: 0,
 		opacity: 1
 	}, 200)
@@ -232,90 +169,46 @@ function hideDiet() {
 	}, 200)
 	$(regDiet).prop('disabled', true)
 	$(regDiet).hide()
-	$(regDietMobile).val('')
-	$(regDietMobile).animate({
-		top: -40,
-		opacity: 0
-	}, 200)
-	$(regDietMobile).prop('disabled', true)
-	$(regDietMobile).hide()
 }
 $(regDietNo + ',' + regDietYes).change(function() {
 	if ($(regDietYes).is(':checked')) showDiet()
 	if ($(regDietNo).is(':checked')) hideDiet()
 })
-$(regDietNoMobile + ',' + regDietYesMobile).change(function() {
-	if ($(regDietYesMobile).is(':checked')) showDiet()
-	if ($(regDietNoMobile).is(':checked')) hideDiet()
-})
 
 function showPartner() {
-	if (device == 'mobile') {
-		$(regPartnerNameMobile + ',' + regPartnerGenderMobile + ',' + regPayBothTextMobile + ',' + regPayBothMobile).show()
-		$(regPartnerNameMobile + ',' + regPartnerFemaleMobile + ',' + regPartnerMaleMobile + ',' + regPartnerOtherMobile + ',' + regPayBothNoMobile + ',' + regPayBothYesMobile).prop('disabled', false)
-		$(regPartnerNameMobile + ',' + regPartnerGenderMobile + ',' + regPayBothTextMobile + ',' + regPayBothMobile).animate({
-			top: 0,
-			opacity: 1
-		}, 200)
-		if ($(regPayBothYesMobile).is(':checked')) {
-			resetLodging('for both')
-		} else {
-			resetLodging('per person')
-		}
+	$(regPartnerName + ',' + regPartnerGender + ',' + regPayBothText + ',' + regPayBoth).show()
+	$(regPartnerName + ',' + regPartnerFemale + ',' + regPartnerMale + ',' + regPartnerOther + ',' + regPayBothNo + ',' + regPayBothYes).prop('disabled', false)
+	$(regPartnerName + ',' + regPartnerGender + ',' + regPayBothText + ',' + regPayBoth).animate({
+		top: 0,
+		opacity: 1
+	}, 200)
+	if ($(regPayBothYes).is(':checked')) {
+		resetLodging('for both')
 	} else {
-		$(regPartnerName + ',' + regPartnerGender + ',' + regPayBothText + ',' + regPayBoth).show()
-		$(regPartnerName + ',' + regPartnerFemale + ',' + regPartnerMale + ',' + regPartnerOther + ',' + regPayBothNo + ',' + regPayBothYes).prop('disabled', false)
-		$(regPartnerName + ',' + regPartnerGender + ',' + regPayBothText + ',' + regPayBoth).animate({
-			top: 0,
-			opacity: 1
-		}, 200)
-		if ($(regPayBothYes).is(':checked')) {
-			resetLodging('for both')
-		} else {
-			resetLodging('per person')
-		}
+		resetLodging('per person')
 	}
 }
 
 function hidePartner() {
-	if (device == 'mobile') {
-		$(regPartnerNameMobile).val('')
-		$(regPartnerFemaleMobile + ',' + regPartnerMaleMobile + ',' + regPartnerOtherMobile + ',' + regPayBothNoMobile + ',' + regPayBothYesMobile).prop('checked', false)
-		$(regPartnerNameMobile + ',' + regPartnerFemaleMobile + ',' + regPartnerMaleMobile + ',' + regPartnerOtherMobile + ',' + regPayBothNoMobile + ',' + regPayBothYesMobile).prop('disabled', true)
-		$(regPartnerNameMobile + ',' + regPartnerGenderMobile + ',' + regPayBothTextMobile + ',' + regPayBothMobile).animate({
-			top: -40,
-			opacity: 0
-		}, 200)
-		$(regPartnerNameMobile + ',' + regPartnerGenderMobile + ',' + regPayBothTextMobile + ',' + regPayBothMobile).hide()
-	} else {
-		$(regPartnerName).val('')
-		$(regPartnerFemale + ',' + regPartnerMale + ',' + regPartnerOther + ',' + regPayBothNo + ',' + regPayBothYes).prop('checked', false)
-		$(regPartnerName + ',' + regPartnerFemale + ',' + regPartnerMale + ',' + regPartnerOther + ',' + regPayBothNo + ',' + regPayBothYes).prop('disabled', true)
-		$(regPartnerName + ',' + regPartnerGender + ',' + regPayBothText + ',' + regPayBoth).animate({
-			top: -40,
-			opacity: 0
-		}, 200)
-		$(regPartnerName + ',' + regPartnerGender + ',' + regPayBothText + ',' + regPayBoth).hide()
-	}
+	$(regPartnerName).val('')
+	$(regPartnerFemale + ',' + regPartnerMale + ',' + regPartnerOther + ',' + regPayBothNo + ',' + regPayBothYes).prop('checked', false)
+	$(regPartnerName + ',' + regPartnerFemale + ',' + regPartnerMale + ',' + regPartnerOther + ',' + regPayBothNo + ',' + regPayBothYes).prop('disabled', true)
+	$(regPartnerName + ',' + regPartnerGender + ',' + regPayBothText + ',' + regPayBoth).animate({
+		top: -40,
+		opacity: 0
+	}, 200)
+	$(regPartnerName + ',' + regPartnerGender + ',' + regPayBothText + ',' + regPayBoth).hide()
 	resetLodging()
 }
 
 function participants() {
-	if (device == 'mobile') {
-		if (($(regTypeMobile).find('option:selected').val() == 'Couple') || ($(regTypeMobile).find('option:selected').val() == 'Two Singles (paired)')) {
-			return 2
-		} else if ($(regTypeMobile).find('option:selected').val() == 'Single') {
-			return 1
-		}
-	} else {
-		if (($(regType).find('option:selected').val() == 'Couple') || ($(regType).find('option:selected').val() == 'Two Singles (paired)')) {
-			return 2
-		} else if ($(regType).find('option:selected').val() == 'Single') {
-			return 1
-		}
+	if (($(regType).find('option:selected').val() == 'Couple') || ($(regType).find('option:selected').val() == 'Two Singles (paired)')) {
+		return 2
+	} else if ($(regType).find('option:selected').val() == 'Single') {
+		return 1
 	}
 }
-$(`${regType}, ${regTypeMobile}`).change(function() {
+$(regType).change(function() {
 	if (participants() == 2) {
 		showPartner()
 	} else {
@@ -324,15 +217,6 @@ $(`${regType}, ${regTypeMobile}`).change(function() {
 })
 $(regPayBothNo + ',' + regPayBothYes).change(function() {
 	if ($(regPayBothYes).is(':checked')) {
-		resetLodging('for both')
-	} else if (participants() == 2) {
-		resetLodging('per person')
-	} else {
-		resetLodging('')
-	}
-})
-$(regPayBothNoMobile + ',' + regPayBothYesMobile).change(function() {
-	if ($(regPayBothYesMobile).is(':checked')) {
 		resetLodging('for both')
 	} else if (participants() == 2) {
 		resetLodging('per person')

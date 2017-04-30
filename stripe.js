@@ -1,46 +1,25 @@
 // Stripe Module
 
 //	STRIPE
-$(`${regContinue}, ${regContinueMobile}, ${regPayNow}, ${regPayNowMobile}`).on('click', function() {
+$(`${regContinue}, ${regPayNow}`).on('click', function() {
 	var stripeTitle = eventStripeDescriptions.split(' | ')
 	saveForm()
-	if (device == 'mobile') {
-		$registerFormMobile.submit()
-		var count = $(regLodgingMobile).prop('selectedIndex') - 1
-		if ($(regPayDepositOnlyMobile).is(':checked')) {
-			eventPrice *= 100
-			var eventDeposit = 'DEPOSIT'
-		} else {
-			eventPrice = $(regLodgingMobile).val() * 100
-			var eventDeposit = 'FULL'
-		}
-		var customerDescription = `${$(regFirstNameMobile).val()} ${$(regLastNameMobile).val()}`
-		var completeFunction = function(data, textStatus, xhr) {
-			window.location.href = '/mobile/registered'
-		}
-		var chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(regLodgingMobile + ' option:selected').text().substring(0, $(regLodgingMobile + ' option:selected').text().length - 17)}, ${eventDeposit}`
+	$registerForm.submit()
+	var count = $(regLodging).prop('selectedIndex') - 1
+	if ($(regPayDepositOnly).is(':checked')) {
+		eventPrice *= 100
+		var eventDeposit = 'DEPOSIT'
 	} else {
-		$registerForm.submit()
-		var count = $(regLodging).prop('selectedIndex') - 1
-		if ($(regPayDepositOnly).is(':checked')) {
-			eventPrice *= 100
-			var eventDeposit = 'DEPOSIT'
-		} else {
-			eventPrice = $(regLodging).val() * 100
-			var eventDeposit = 'FULL'
-		}
-		var customerDescription = `${$(regFirstName).val()} ${$(regLastName).val()}`
-		var completeFunction = function(data, textStatus, xhr) {
-			$confirmationModal.fadeIn()
-		}
-		var chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(regLodging + ' option:selected').text().substring(0, $(regLodging + ' option:selected').text().length - 17)}, ${eventDeposit}`
+		eventPrice = $(regLodging).val() * 100
+		var eventDeposit = 'FULL'
 	}
+	var customerDescription = `${$(regFirstName).val()} ${$(regLastName).val()}`
+	var completeFunction = function(data, textStatus, xhr) {
+		$confirmationModal.fadeIn()
+	}
+	var chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(regLodging + ' option:selected').text().substring(0, $(regLodging + ' option:selected').text().length - 17)}, ${eventDeposit}`
 	if ((window.location.href == `${siteUrl}charge`) || (window.location.href == `${siteUrl}charge#`)) {
-		if (device == 'mobile') {
-			$customChargeFormMobile.submit()
-		} else {
-			$customChargeForm.submit()
-		}
+		$customChargeForm.submit()
 		var chargeDescription = 'Custom Charge'
 	}
 	let paymentToken = false
@@ -76,20 +55,12 @@ $(`${regContinue}, ${regContinueMobile}, ${regPayNow}, ${regPayNowMobile}`).on('
 			})
 		}
 	})
-	if (device == 'mobile') {
-		$registerModalMobile.fadeOut()
-	} else {
-		$registerModal.fadeOut()
-	}
+	$registerModal.fadeOut()
 	handler.open({
 		closed: function () {
 			if(paymentToken === false) {
 				console.log('Stripe closed prior to successful transaction.')
-				if (device == 'mobile') {
-					resetRegFormMobile()
-				} else {
-					resetRegForm()
-				}
+				resetRegForm()
 			}
 		}
 	})

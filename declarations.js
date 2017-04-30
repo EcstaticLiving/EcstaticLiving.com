@@ -18,16 +18,11 @@ $receivedSection = $('.received-section'),
 
 //	Register Modal
 $registerModal = $('.modals.register'),
-$registerModalMobile = $('.modals.register-mobile'),
 $mainContainer = $('.main-container'),
 $registerForm = $('.form.registration.desktop'),
-$registerFormMobile = $('.form.registration.mobile'),
 $registrationSection = $('.registration-section.desktop'),
-$registrationSectionMobile = $('.registration-section.mobile'),
 $customChargeForm = $('.form.custom-charge.desktop'),
-$customChargeFormMobile = $('.form.custom-charge.mobile'),
 $paymentSection = $('.payment-section.desktop'),
-$paymentSectionMobile = $('.payment-section.mobile'),
 $confirmationModal = $('.modals.confirmation'),
 eventCode = $('.hidden.event-code').text().toLowerCase(),
 eventTitle = $('.hidden.event-title').text(), //	Needed for Stripe long description

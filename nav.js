@@ -35,9 +35,8 @@ SocialShareKit.init({
 
 //	CLOSE MODALS, WINDOWS
 function closeModals() {
-	if (($registerModal.is(':visible')) || ($registerModalMobile.is(':visible')) || ($confirmationModal.is(':visible')) || ($contactModal.is(':visible'))) {
+	if (($registerModal.is(':visible')) || ($confirmationModal.is(':visible')) || ($contactModal.is(':visible'))) {
 		$registerModal.fadeOut()
-		$registerModalMobile.fadeOut()
 		$confirmationModal.fadeOut()
 		$contactModal.fadeOut()
 	}
