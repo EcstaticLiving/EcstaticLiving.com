@@ -186,16 +186,16 @@ function resetLodging(paymentStatus) {
 		}))
 	}
 	paymentStatus = paymentStatus ? paymentStatus : ''
-	const factor = (paymentStatus === 'for both') ? 2 : 1
+	const paymentFactor = (paymentStatus === 'for both') ? 2 : 1
 	const spacer = paymentStatus ? ' ' : ''
 	const closer = (paymentStatus || paymentStatus === '') ? ')' : ''
 	for (let i = 0; i < lodgingOptions.length; i++) {
 		$(eventLodging).append($('<option>', {
-			value: lodgingPrices[i] * factor,
-			text: lodgingOptions[i] + ' ($' + lodgingPrices[i] * factor + spacer + paymentStatus + closer
+			value: lodgingPrices[i] * paymentFactor,
+			text: lodgingOptions[i] + ' ($' + lodgingPrices[i] * paymentFactor + spacer + paymentStatus + closer
 		}))
 	}
-	eventPrice = parseInt(eventDeposit) * factor
+	eventPrice = parseInt(eventDeposit) * paymentFactor
 	$(eventDepositText).text(`Pay deposit only ($${eventPrice}${spacer}${paymentStatus})`)
 }
 
