@@ -1,7 +1,7 @@
 // Stripe Module
 
 //	STRIPE
-$(`${regContinue}, ${regPayNow}`).on('click', function() {
+$(`${eventButton}`).on('click', function() {
 	var stripeTitle = eventStripe.split(' | ')
 	saveForm()
 	$registerForm.submit()
