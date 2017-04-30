@@ -10,10 +10,6 @@ $mainSection = $('.main-section'),
 $navMenu = $('.navigation-menu'),
 $navContainer = $('.nav-container'),
 
-//	Intro Modal
-$introModal = $('.modals.introduction'),
-$introModalWindow = $('.modal-window.introduction'),
-
 //	Contact Modal
 $contactModal = $('.modals.contact'),
 $contactForm = $('.contact-form'),

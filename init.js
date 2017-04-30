@@ -23,12 +23,6 @@ function initialize() {
 		$('#register-column').css({ 'width': '100%' })
 		$('#feature-column').hide()
 		if (deviceOrientation == 'landscape') {
-			$introModal.css({
-				'padding-top': '25px'
-			})
-			$introModalWindow.css({
-				'width': '520px'
-			})
 			//	Increase side padding for small screen
 			$mainSection.css({
 				'padding-left': '100px',
@@ -39,12 +33,6 @@ function initialize() {
 				'padding-right': '190px'
 			})
 		} else {
-			$introModal.css({
-				'padding-top': '50px'
-			})
-			$introModalWindow.css({
-				'width': '360px'
-			})
 			$mainSection.css({
 				'padding-left': '30px',
 				'padding-right': '30px'

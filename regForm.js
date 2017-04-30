@@ -1,5 +1,89 @@
 // Event registration module
 
+function resetChargeForm() {
+	$customChargeForm[0].reset()
+	repopulateForm()
+	$customChargeForm.parsley()
+	$customChargeForm.show()
+	$(regTerms).attr('checked', false)
+	$regFrame.attr('src', `${window.location.href}#register-feature-charge`)
+	$registerModal.fadeIn()
+	$regFrame.delay(200).fadeTo(1000, 1)
+}
+
+function determineDepositDate() {
+	eventDate = new Date(eventStartDate)
+	depositDate = new Date(eventDate)
+	if ((eventCode.substring(0, 3) != 'let') && (eventCode.substring(0, 4) != 'ctt')) {
+		depositDate.setDate(eventDate.getDate() - eventDepositDue)
+	} else {
+		depositDate.setDate(eventDate.getDate() - eventDepositDue)
+	}
+	return depositDate
+}
+
+function resetRegForm() {
+	$('.w-form-done').hide()
+	$('.w-form-fail').hide()
+	let depositDate = determineDepositDate()
+	$registerForm[0].reset()
+	repopulateForm()
+	$('.hidden.register-workshop.desktop').val(eventCode)
+	if (new Date() < depositDate) {
+		$(regPayDeposit).show()
+		$(regPayDepositFull).prop('checked', true)
+	} else {
+		$(regPayDeposit).hide()
+	}
+	$('#question-mark').show()
+	$registerForm.parsley()
+	$registerForm.show()
+	$(regTerms).attr('checked', false)
+	checkRegForm()
+	$regFrame.attr('src', `${window.location.href}#register-feature`)
+	$registerModal.fadeIn()
+	$regFrame.delay(200).fadeTo(1000, 1)
+}
+
+function resetLodging(paymentStatus) {
+	//	Adds lodging options based on CMS input
+	var lodgingOptions = eventLodgingOptions.split(' | ')
+	//	Adds lodging prices based on CMS input
+	var lodgingPrices = eventLodgingPrices.split(' | ')
+	$(regLodging).empty()
+	$(regLodgingMobile).empty()
+	if (lodgingOptions.length > 0) {
+		if ((window.location.href == `${siteUrl}charge`) || (window.location.href == `${siteUrl}charge#`)) {
+				$(regLodging + ', ' + regLodgingMobile).append($('<option>', {
+					value: '',
+					text: 'Select charge amount...'
+				}))
+		} else {
+				$(regLodging + ', ' + regLodgingMobile).append($('<option>', {
+					value: '',
+					text: 'Event option...'
+				}))
+		}
+	}
+	paymentStatus = (paymentStatus) ? paymentStatus : ''
+	const factor = (paymentStatus === 'for both') ? 2 : 1
+	const spacer = (paymentStatus) ? ' ' : ''
+	const closer = (paymentStatus || paymentStatus === '') ? ')' : ''
+	for (let i = 0; i < lodgingOptions.length; i++) {
+		$(regLodging).append($('<option>', {
+			value: lodgingPrices[i] * factor,
+			text: lodgingOptions[i] + ' ($' + lodgingPrices[i] * factor + spacer + paymentStatus + closer
+		}))
+		$(regLodgingMobile).append($('<option>', {
+			value: lodgingPrices[i] * factor,
+			text: lodgingOptions[i] + ' ($' + lodgingPrices[i] * factor + spacer + paymentStatus + closer
+		}))
+	}
+	eventPrice = parseInt(eventDeposit) * factor
+	$(regPayDepositText).text(`Pay deposit only ($${eventPrice}${spacer}${paymentStatus})`)
+	$(regPayDepositTextMobile).text(`Pay deposit only ($${eventPrice}${spacer}${paymentStatus})`)
+}
+
 $(regButton).on('click', function() {
 	// Causes Reg section to scroll smoothly on iOS
 	document.getElementById('registration-section').style.webkitOverflowScrolling = 'touch'

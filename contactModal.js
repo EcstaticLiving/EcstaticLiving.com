@@ -37,6 +37,5 @@ $('.button.contact-close').on('click', function() {
 		window.close()
 	} else {
 		$contactModal.fadeTo(500, 0).hide()
-		$mainContainer.css('position', 'absolute')
 	}
 })

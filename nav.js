@@ -6,7 +6,6 @@ const $navButton = $('.menu-icon'),
 $navButton.on('click', function() {
 	//	If nav menu is opened
 	if ($navClose.is(':hidden')) {
-		$mainContainer.css('position', 'fixed')
 		if ((window.location.href == siteUrl) && ($('.top-marker').is(':visible'))) {
 			$('.banner-container').hide()
 		}
@@ -15,7 +14,6 @@ $navButton.on('click', function() {
 		}, 500)
 		$navClose.fadeTo(1000, 1).show()
 	} else {
-		$mainContainer.css('position', 'absolute')
 		if ((window.location.href == siteUrl) && ($('.top-marker').is(':visible'))) {
 			$('.banner-container').show()
 		}
@@ -37,13 +35,11 @@ SocialShareKit.init({
 
 //	CLOSE MODALS, WINDOWS
 function closeModals() {
-	if (($registerModal.is(':visible')) || ($registerModalMobile.is(':visible')) || ($confirmationModal.is(':visible')) || ($contactModal.is(':visible')) || ($introModal.is(':visible'))) {
-		$mainContainer.css('position', 'absolute')
+	if (($registerModal.is(':visible')) || ($registerModalMobile.is(':visible')) || ($confirmationModal.is(':visible')) || ($contactModal.is(':visible'))) {
 		$registerModal.fadeOut()
 		$registerModalMobile.fadeOut()
 		$confirmationModal.fadeOut()
 		$contactModal.fadeOut()
-		$introModal.fadeOut()
 	}
 }
 $('.close-modal, .button.notice, .button.contact-close, .close-mobile-reg').click(closeModals)
