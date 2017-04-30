@@ -6,9 +6,7 @@ function resetChargeForm() {
 	$customChargeForm.parsley()
 	$customChargeForm.show()
 	$(regTerms).attr('checked', false)
-	$regFrame.attr('src', `${window.location.href}#register-feature-charge`)
 	$registerModal.fadeIn()
-	$regFrame.delay(200).fadeTo(1000, 1)
 }
 
 function determineDepositDate() {
@@ -40,9 +38,7 @@ function resetRegForm() {
 	$registerForm.show()
 	$(regTerms).attr('checked', false)
 	checkRegForm()
-	$regFrame.attr('src', `${window.location.href}#register-feature`)
 	$registerModal.fadeIn()
-	$regFrame.delay(200).fadeTo(1000, 1)
 }
 
 function resetLodging(paymentStatus) {

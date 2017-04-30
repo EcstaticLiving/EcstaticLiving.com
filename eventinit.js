@@ -35,5 +35,3 @@ var regFirstName = '.input-field.register-firstname',
 	regContinue = '.button.register-continue',
 	regReturn = '.register-return',
 	regPayNow = '.button.register-paynow'
-var $regFeature = $('.register-feature'),
-	$regFrame = $('.register-frame')
