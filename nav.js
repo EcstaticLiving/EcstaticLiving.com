@@ -1,14 +1,11 @@
 // Nav Module
-const $navButton = $('.menu-icon'),
-	$navClose = $('.nav-close')
+const $navButton = $('.menu-icon')
+const $navClose = $('.nav-close')
 
 //	NAV MENU
 $navButton.on('click', function() {
 	//	If nav menu is opened
 	if ($navClose.is(':hidden')) {
-		if ((window.location.href == siteUrl) && ($('.top-marker').is(':visible'))) {
-			$('.banner-container').hide()
-		}
 		$navContainer.show().animate({
 			marginLeft: '0%'
 		}, 500)

@@ -19,9 +19,6 @@ function initialize() {
 		deviceOrientation = 'portrait'
 	}
 	if (device == 'tablet') {
-		//	Remove featured workshop on Reg Modal for tablets
-		$('#register-column').css({ 'width': '100%' })
-		$('#feature-column').hide()
 		if (deviceOrientation == 'landscape') {
 			//	Increase side padding for small screen
 			$mainSection.css({
@@ -48,15 +45,3 @@ function initialize() {
 $(window).on('load orientationchange', function() {
 	initialize()
 })
-if (window.location.href == `${siteUrl} #1`) {
-	$('#header-tab-1').click()
-}
-if (window.location.href == `${siteUrl} #2`) {
-	$('#header-tab-2').click()
-}
-if (window.location.href == `${siteUrl} #3`) {
-	$('#header-tab-3').click()
-}
-if (window.location.href == `${siteUrl} #4`) {
-	$('#header-tab-4').click()
-}
