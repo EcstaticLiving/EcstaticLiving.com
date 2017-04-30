@@ -2,7 +2,7 @@
 
 //	STRIPE
 $(`${regContinue}, ${regPayNow}`).on('click', function() {
-	var stripeTitle = eventStripeDescriptions.split(' | ')
+	var stripeTitle = eventStripe.split(' | ')
 	saveForm()
 	$registerForm.submit()
 	var count = $(regLodging).prop('selectedIndex') - 1
@@ -15,7 +15,7 @@ $(`${regContinue}, ${regPayNow}`).on('click', function() {
 	}
 	var customerDescription = `${$(regFirstName).val()} ${$(regLastName).val()}`
 	var completeFunction = function(data, textStatus, xhr) {
-		$confirmationModal.fadeIn()
+		$confirmationSection.fadeIn()
 	}
 	var chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(regLodging + ' option:selected').text().substring(0, $(regLodging + ' option:selected').text().length - 17)}, ${eventDeposit}`
 	if ((window.location.href == `${siteUrl}charge`) || (window.location.href == `${siteUrl}charge#`)) {
@@ -55,7 +55,6 @@ $(`${regContinue}, ${regPayNow}`).on('click', function() {
 			})
 		}
 	})
-	$registerModal.fadeOut()
 	handler.open({
 		closed: function () {
 			if(paymentToken === false) {

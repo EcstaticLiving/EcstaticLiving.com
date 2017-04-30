@@ -1,21 +1,17 @@
 // Event registration module
 
 function resetChargeForm() {
-	$customChargeForm[0].reset()
 	repopulateForm()
-	$customChargeForm.parsley()
-	$customChargeForm.show()
 	$(regTerms).attr('checked', false)
-	$registerModal.fadeIn()
 }
 
 function determineDepositDate() {
 	eventDate = new Date(eventStartDate)
 	depositDate = new Date(eventDate)
 	if ((eventCode.substring(0, 3) != 'let') && (eventCode.substring(0, 4) != 'ctt')) {
-		depositDate.setDate(eventDate.getDate() - eventDepositDue)
+		depositDate.setDate(eventDate.getDate() - eventDepositDate)
 	} else {
-		depositDate.setDate(eventDate.getDate() - eventDepositDue)
+		depositDate.setDate(eventDate.getDate() - eventDepositDate)
 	}
 	return depositDate
 }
@@ -38,7 +34,6 @@ function resetRegForm() {
 	$registerForm.show()
 	$(regTerms).attr('checked', false)
 	checkRegForm()
-	$registerModal.fadeIn()
 }
 
 function resetLodging(paymentStatus) {
@@ -79,15 +74,11 @@ $(regButton).on('click', function() {
 	document.getElementById('registration-section').style.webkitOverflowScrolling = 'touch'
 	document.getElementById('registration-section-mobile').style.webkitOverflowScrolling = 'touch'
 	resetLodging()
-	if ((window.location.href === `${siteUrl}charge`) || (window.location.href === `${siteUrl}charge#`)) {
-		resetChargeForm()
-	} else {
-		hideExperience()
-		hideDiet()
-		hidePartner()
-		deActivateRegContinue()
-		resetRegForm()
-	}
+	hideExperience()
+	hideDiet()
+	hidePartner()
+	deActivateRegContinue()
+	resetRegForm()
 })
 
 function deActivateRegContinue() {
@@ -118,10 +109,7 @@ function checkRegForm() {
 		deActivateRegContinue()
 	}
 	$(regFirstName + ',' + regLastName + ',' + regEmail + ',' + regMobile + ',' + regBirthdate + ',' + regFemale + ',' + regMale + ',' + regOther + ',' + regReferral + ',' + regExp + ',' + regDiet + ',' + regType + ',' + regPartnerName + ',' + regPartnerFemale + ',' + regPartnerMale + ',' + regPartnerOther + ',' + regLodging + ',' + regTerms).on('change', function() {
-		//	Disable reg form verification for Charge form
-		if ((window.location.href != `${siteUrl}charge`) && (window.location.href != `${siteUrl}charge#`)) {
-			checkRegForm()
-		}
+		checkRegForm()
 	})
 }
 
