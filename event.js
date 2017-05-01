@@ -218,9 +218,7 @@ function showConfirmation() {
 	$confirmationSection.show()
 }
 
-
-// EVENT PAGE
-if (window.location.href.indexOf('/events/') > -1) {
+function resetEventForm() {
 	showRegistration()
 	$('.w-form-done').hide()
 	$('.w-form-fail').hide()
@@ -241,4 +239,9 @@ if (window.location.href.indexOf('/events/') > -1) {
 	$registerForm.show()
 	$(eventTerms).attr('checked', false)
 	eventValidation()
+}
+
+// EVENT PAGE
+if (window.location.href.indexOf('/events/') > -1) {
+	resetEventForm()
 }
