@@ -403,6 +403,7 @@ $(document).ready(function () {
 		$('.w-form-fail').hide()
 		$registerForm[0].reset()
 		repopulateEvent()
+		$('#event').val(eventCode)
 		resetLodging()
 		if ($(eventExperienceDetails).val() === '') hideExperience()
 		if ($(eventDietDetails).val() === '') hideDiet()
