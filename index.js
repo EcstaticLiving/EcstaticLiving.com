@@ -8,7 +8,6 @@ $(document).ready(function () {
 	$.getScript('https://ecstaticliving.github.io/ecstaticliving.com/init.js')
 	$.getScript('https://ecstaticliving.github.io/ecstaticliving.com/nav.js')
 	$.getScript('https://ecstaticliving.github.io/ecstaticliving.com/contact.js')
-	$.getScript('https://ecstaticliving.github.io/ecstaticliving.com/save.js')
 	$.getScript('https://ecstaticliving.github.io/ecstaticliving.com/event.js')
 	$.getScript('https://ecstaticliving.github.io/ecstaticliving.com/customcharge.js')
 	$.getScript('https://ecstaticliving.github.io/ecstaticliving.com/stripe.js')
