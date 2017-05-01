@@ -202,7 +202,7 @@ eventLodgingPrices = $('#event-lodging-prices').text(),
 eventStripe = $('#event-stripe').text()
 
 // Event initialization
-const eventButton = '.button.register',
+const payButton = '.button.pay',
 eventFirstName = '#event-firstname',
 eventLastName = '#event-lastname',
 eventEmail = '#event-email',
@@ -282,13 +282,13 @@ function validationLodging() {
 }
 function eventValidation() {
 	if (validationPersonal() && validationDetails() && validationStatus() && validationLodging() && $(eventTerms).is(':checked')) {
-		document.getElementById('register-button').disabled = false
-		$(eventButton).css({ 'background-color': '#800000' })
-		$(eventButton).css({ 'color': '#ffffff' })
+		$(payButton).prop('disabled', false)
+		$(payButton).css({ 'background-color': '#800000' })
+		$(payButton).css({ 'color': '#ffffff' })
 	} else {
-		document.getElementById('register-button').disabled = true
-		$(eventButton).css({ 'background-color': '#f5f5f5' })
-		$(eventButton).css({ 'color': '#333333' })
+		$(payButton).prop('disabled', true)
+		$(payButton).css({ 'background-color': '#f5f5f5' })
+		$(payButton).css({ 'color': '#333333' })
 	}
 }
 $(eventFirstName + ',' + eventLastName + ',' + eventEmail + ',' + eventMobile + ',' + eventBirthdate + ',' + eventFemale + ',' + eventMale + ',' + eventOther + ',' + eventReferral + ',' + eventExperienceYes + ',' + eventExperienceNo + ',' + eventExperienceDetails + ',' + eventDietYes + ',' + eventDietNo + ',' + eventDietDetails + ',' + eventStatus + ',' + eventPartnerName + ',' + eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther + ',' + eventLodging + ',' + eventTerms).on('change', function () {
@@ -497,14 +497,14 @@ if (window.location.href.indexOf('/charge') > -1) {
 
 
 // PAYMENT MODE
-const paymentMode = (window.location.href.indexOf('/events/') > -1) ? 'Event' : 'Custom'
+const payMode = (window.location.href.indexOf('/events/') > -1) ? 'Event' : 'Custom'
 
 
 
 //	STRIPE
-$(`${eventButton}`).on('click', function() {
+$(`${payButton}`).on('click', function() {
 	var stripeTitle = eventStripe.split(' | ')
-	saveForm(paymentMode)
+	saveForm(payMode)
 	var completeFunction = () => window.location.href = `${siteUrl}/registered`
 	if ((window.location.href === `${siteUrl}charge`) || (window.location.href === `${siteUrl}charge#`)) {
 		$customForm.submit()
