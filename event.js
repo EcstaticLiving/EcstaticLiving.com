@@ -124,10 +124,12 @@ function validationLodging() {
 }
 function eventValidation() {
 	if (validationPersonal() && validationDetails() && validationStatus() && validationLodging() && $(eventTerms).is(':checked')) {
+		console.log('*** VALID ***');
 		$(eventButton).prop('disabled', false)
 		document.getElementById('register-button').style.background = 'linear-gradient(bottom left, #800000, #b00000)'
 		$(eventButton).css('color', '#333333')
 	} else {
+		console.log('invalid');
 		$(eventButton).prop('disabled', true)
 		document.getElementById('register-button').style.background = ''
 		$(eventButton).css('color', '#ffffff')
