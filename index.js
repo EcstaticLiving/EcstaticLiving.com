@@ -193,7 +193,6 @@ $(document).ready(function () {
 		const url = window.location.href
 		const s = (url.indexOf('/events/') > -1) ? url.split('/').pop() : null
 		const eventId = s.substr(0, s.indexOf('#') === -1 ? s.length : s.indexOf('#'))
-		console.log(eventId);
 		localStorage.setItem(`EcstaticLiving:Event`, JSON.stringify(values))
 	}
 
@@ -202,7 +201,6 @@ $(document).ready(function () {
 		const url = window.location.href
 		const s = (url.indexOf('/events/') > -1) ? url.split('/').pop() : null
 		const eventId = s.substr(0, s.indexOf('#') === -1 ? s.length : s.indexOf('#'))
-		console.log(eventId);
 		if (localStorage.getItem(`EcstaticLiving:Event`)) {
 			var values = JSON.parse(localStorage.getItem(`EcstaticLiving:Event`))
 			for (var item in values) {
