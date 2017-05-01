@@ -1,3 +1,5 @@
+$('.form.let').parsley()
+$('.form.elf').parsley()
 $('.form.ctt').parsley()
 
 
