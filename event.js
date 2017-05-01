@@ -122,13 +122,16 @@ function validationLodging() {
 	}
 	return false
 }
+var number = 0
 function eventValidation() {
+	number++
 	if (validationPersonal() && validationDetails() && validationStatus() && validationLodging() && $(eventTerms).is(':checked')) {
 		console.log('*** VALID ***');
 		document.getElementById('register-button').disabled = false
 		$(eventButton).css({ 'background-image': 'linear-gradient(bottom left, #800000 100%, #b00000 100%)' })
 		$(eventButton).css({ 'color': '#ffffff' })
 	} else {
+		console.log(`Pass ${number}`);
 		document.getElementById('register-button').disabled = true
 		$(eventButton).css({ 'background-image': '' })
 		$(eventButton).css({ 'color': '#333333' })
