@@ -127,12 +127,12 @@ function eventValidation() {
 		console.log('*** VALID ***');
 		document.getElementById('register-button').disabled = false
 		document.getElementById('register-button').style.background = 'linear-gradient(bottom left, #800000, #b00000)'
-		document.getElementById('register-button').style.color = '#333333'
+		document.getElementById('register-button').style.color = '#ffffff'
 	} else {
 		console.log('invalid');
 		document.getElementById('register-button').disabled = true
 		document.getElementById('register-button').style.background = ''
-		document.getElementById('register-button').style.color = '#ffffff'
+		document.getElementById('register-button').style.color = '#333333'
 	}
 }
 $(eventFirstName + ',' + eventLastName + ',' + eventEmail + ',' + eventMobile + ',' + eventBirthdate + ',' + eventFemale + ',' + eventMale + ',' + eventOther + ',' + eventReferral + ',' + eventExperienceDetails + ',' + eventDietDetails + ',' + eventStatus + ',' + eventPartnerName + ',' + eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther + ',' + eventLodging + ',' + eventTerms).on('change', function () {
