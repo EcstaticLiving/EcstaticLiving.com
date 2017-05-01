@@ -58,16 +58,15 @@ function saveEvent() {
 			values[$(this).attr('name')] = $(this).val()
 		}
 	})
-	localStorage.setItem('EcstaticLiving:Event', JSON.stringify(values))
+	const url = window.location.href
+	const eventId = (url.indexOf('/events/') > -1) ? url.split('/').pop() : null
+	localStorage.setItem(`EcstaticLiving:Event:${eventId}`, JSON.stringify(values))
 }
 
 // REPOPULATE SAVED FORM
 function repopulateEvent() {
 	const url = window.location.href
-	if (url.indexOf('/events/') > -1) {
-		const eventId = url.split('/').pop()
-		console.log(eventId)
-	}
+	const eventId = (url.indexOf('/events/') > -1) ? url.split('/').pop() : null
 	if (localStorage.getItem(`EcstaticLiving:Event:${eventId}`)) {
 		var values = JSON.parse(localStorage.getItem(`EcstaticLiving:Event:${eventId}`))
 		for (var item in values) {
