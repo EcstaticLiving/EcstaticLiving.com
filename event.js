@@ -66,6 +66,7 @@ function saveEvent() {
 	const url = window.location.href
 	const s = (url.indexOf('/events/') > -1) ? url.split('/').pop() : null
 	const eventId = s.substring(0, s.indexOf('#'))
+	console.log(eventId);
 	localStorage.setItem(`EcstaticLiving:Event:${eventId}`, JSON.stringify(values))
 }
 
