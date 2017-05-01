@@ -195,15 +195,15 @@ function showConfirmation() {
 // EVENT PAGE
 if (window.location.href.indexOf('/events/') > -1) {
 	showRegistration()
-	resetLodging()
-	hideExperience()
-	hideDiet()
-	hidePartner()
-	eventValidation()
 	$('.w-form-done').hide()
 	$('.w-form-fail').hide()
 	$registerForm[0].reset()
 	repopulateForm()
+	resetLodging()
+	if (!eventExperienceDetails) hideExperience()
+	if (!eventDietDetails) hideDiet()
+	if (!eventPartnerName) hidePartner()
+	eventValidation()
 	if (new Date() < new Date(eventDepositDate)) {
 		$(eventDepositContainer).show()
 		$(eventDepositFull).prop('checked', true)
