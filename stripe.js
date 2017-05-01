@@ -3,7 +3,7 @@
 //	STRIPE
 $(`${eventButton}`).on('click', function() {
 	var stripeTitle = eventStripe.split(' | ')
-	saveForm()
+	saveEvent()
 	var completeFunction = () => showRegistration()
 	if ((window.location.href === `${siteUrl}charge`) || (window.location.href === `${siteUrl}charge#`)) {
 		$customChargeForm.submit()

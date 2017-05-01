@@ -1,5 +1,5 @@
 // SAVE FORM
-function saveForm() {
+function saveEvent() {
 	var values = {};
 	$('input, textarea, select').each(function() {
 		if ($(this).is(':radio')) {
@@ -9,13 +9,13 @@ function saveForm() {
 			values[$(this).attr('name')] = $(this).val()
 		}
 	})
-	localStorage.setItem('EcstaticLiving:Form', JSON.stringify(values))
+	localStorage.setItem('EcstaticLiving:Event', JSON.stringify(values))
 }
 
 // REPOPULATE SAVED FORM
-function repopulateForm() {
-	if (localStorage.getItem('EcstaticLiving:Form')) {
-		var values = JSON.parse(localStorage.getItem('EcstaticLiving:Form'))
+function repopulateEvent() {
+	if (localStorage.getItem('EcstaticLiving:Event')) {
+		var values = JSON.parse(localStorage.getItem('EcstaticLiving:Event'))
 		for (var item in values) {
 			if ($('*[name=' + item + ']').is(':radio')) {
 				$('input[name=' + item + '][value="' + values[item] + '"]').prop('checked', true)
@@ -24,7 +24,7 @@ function repopulateForm() {
 				$('*[name=' + item + ']').val(values[item])
 			}
 		}
-		localStorage.removeItem('EcstaticLiving:Form')
+		localStorage.removeItem('EcstaticLiving:Event')
 	}
 }
 
@@ -223,7 +223,7 @@ function resetEventForm() {
 	$('.w-form-done').hide()
 	$('.w-form-fail').hide()
 	$registerForm[0].reset()
-	repopulateForm()
+	repopulateEvent()
 	resetLodging()
 	if ($(eventExperienceDetails).val() === '') hideExperience()
 	if ($(eventDietDetails).val() === '') hideDiet()
