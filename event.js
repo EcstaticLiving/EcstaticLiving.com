@@ -1,3 +1,52 @@
+// Registration
+$registrationSection = $('.registration-section'),
+$confirmationSection = $('.confirmation-section'),
+$registerForm = $('.form.registration'),
+eventCode = $('#event-code').text().toLowerCase(),
+eventTitle = $('#event-name').text(), // Stripe description
+eventStartDate = $('#event-start').text(),
+eventDates = $('#event-dates').text(),
+eventVenue = $('#event-venue').text(),
+eventDepositAmount = $('#event-deposit-amount').text(),
+eventDepositDate = $('#event-deposit-date').text(),
+eventLodgingOptions = $('#event-lodging-options').text(),
+eventLodgingPrices = $('#event-lodging-prices').text(),
+eventStripe = $('#event-stripe').text()
+
+// Event initialization
+const eventButton = '.button.pay',
+eventFirstName = '#event-firstname',
+eventLastName = '#event-lastname',
+eventEmail = '#event-email',
+eventMobile = '#event-mobile',
+eventBirthdate = '#event-birthdate',
+eventFemale = '#event-gender-female',
+eventMale = '#event-gender-male',
+eventOther = '#event-gender-other',
+eventReferral = '#event-referral',
+eventExperienceContainer = '.event-container.experience',
+eventExperienceYes = '#event-experience-yes',
+eventExperienceNo = '#event-experience-no',
+eventExperienceDetails = '#event-experience-details',
+eventDietContainer = '.event-container.diet',
+eventDietYes = '#event-diet-yes',
+eventDietNo = '#event-diet-no',
+eventDietDetails = '#event-diet-details'
+eventStatus = '#event-status',
+eventPartnerContainer = '.event-container.partner',
+eventPartnerName = '#event-partner-name'
+eventPartnerFemale = '#event-partner-gender-female',
+eventPartnerMale = '#event-partner-gender-male',
+eventPartnerOther = '#event-partner-gender-other',
+eventPayBoth = '#event-pay-both',
+eventPayMe = '#event-pay-me',
+eventLodging = '#event-lodging',
+eventDepositContainer = '.event-container.deposit',
+eventDepositText = '#event-deposit-text',
+eventDepositFull = '#event-deposit-full',
+eventDepositDeposit = '#event-deposit-deposit',
+eventTerms = '#event-terms'
+
 // SAVE FORM
 function saveEvent() {
 	var values = {};
@@ -76,12 +125,12 @@ function validationLodging() {
 function eventValidation() {
 	if (validationPersonal() && validationDetails() && validationStatus() && validationLodging() && $(eventTerms).is(':checked')) {
 		$(eventButton).prop('disabled', false)
-		document.getElementsByClassName('.button.pay')[0].style.background = 'linear-gradient(bottom left, #800000, #b00000)'
+		document.getElementsByClassName('.button.register')[0].style.background = 'linear-gradient(bottom left, #800000, #b00000)'
 		$(eventButton).css('color', '#333333')
 	} else {
-		console.log(document.getElementsByClassName('.button.pay'));
+		console.log(document.getElementsByClassName('.button.register'));
 		$(eventButton).prop('disabled', true)
-		document.getElementsByClassName('.button.pay')[0].style.background = ''
+		document.getElementsByClassName('.button.register')[0].style.background = ''
 		$(eventButton).css('color', '#ffffff')
 	}
 }
