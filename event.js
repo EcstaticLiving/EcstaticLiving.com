@@ -126,12 +126,11 @@ function eventValidation() {
 	if (validationPersonal() && validationDetails() && validationStatus() && validationLodging() && $(eventTerms).is(':checked')) {
 		console.log('*** VALID ***');
 		document.getElementById('register-button').disabled = false
-		document.getElementById('register-button').style.background = 'linear-gradient(bottom left, #800000, #b00000)'
+		$(eventButton).css({' background-image': 'linear-gradient(bottom left, #800000 100%, #b00000 100%)' })
 		document.getElementById('register-button').style.color = '#ffffff'
 	} else {
-		console.log('invalid');
 		document.getElementById('register-button').disabled = true
-		document.getElementById('register-button').style.background = ''
+		$(eventButton).css({' background-image': '' })
 		document.getElementById('register-button').style.color = '#333333'
 	}
 }
