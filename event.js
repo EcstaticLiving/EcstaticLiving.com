@@ -63,6 +63,7 @@ function saveEvent() {
 
 // REPOPULATE SAVED FORM
 function repopulateEvent() {
+	console.log(localStorage.getItem('EcstaticLiving:Event'));
 	if (localStorage.getItem('EcstaticLiving:Event')) {
 		var values = JSON.parse(localStorage.getItem('EcstaticLiving:Event'))
 		for (var item in values) {
