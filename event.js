@@ -200,9 +200,9 @@ if (window.location.href.indexOf('/events/') > -1) {
 	$registerForm[0].reset()
 	repopulateForm()
 	resetLodging()
-	if (!eventExperienceDetails) hideExperience()
-	if (!eventDietDetails) hideDiet()
-	if (!eventPartnerName) hidePartner()
+	if ($(eventExperienceDetails).val() === '') hideExperience()
+	if ($(eventDietDetails).val() === '') hideDiet()
+	if ($(eventPartnerName).val() === '') hidePartner()
 	eventValidation()
 	if (new Date() < new Date(eventDepositDate)) {
 		$(eventDepositContainer).show()
