@@ -136,9 +136,6 @@ function saveForm(eventId) {
 			values[$(this).attr('name')] = $(this).val()
 		}
 	})
-	const url = window.location.href
-	const s = (url.indexOf('/events/') > -1) ? url.split('/').pop() : null
-	const eventId = s.substr(0, s.indexOf('#') === -1 ? s.length : s.indexOf('#'))
 	localStorage.setItem(`EcstaticLiving:${eventId}`, JSON.stringify(values))
 }
 
