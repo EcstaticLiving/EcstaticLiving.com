@@ -431,7 +431,8 @@ $(document).ready(function () {
 	$(`${eventButton}`).on('click', function() {
 		var stripeTitle = eventStripe.split(' | ')
 		saveEvent()
-		var completeFunction = () => window.location.href = `${siteUrl}/registered`
+		// var completeFunction = () => window.location.href = `${siteUrl}registered`
+		var completeFunction = function () {}
 		if ((window.location.href === `${siteUrl}charge`) || (window.location.href === `${siteUrl}charge#`)) {
 			$customChargeForm.submit()
 			var customerDescription = `${$(customFirstName).val()} ${$(customLastName).val()}`
