@@ -507,7 +507,7 @@ $(`${eventButton}`).on('click', function() {
 	saveForm(paymentMode)
 	var completeFunction = () => window.location.href = `${siteUrl}/registered`
 	if ((window.location.href === `${siteUrl}charge`) || (window.location.href === `${siteUrl}charge#`)) {
-		$customChargeForm.submit()
+		$customForm.submit()
 		var customerDescription = `${$(customFirstName).val()} ${$(customLastName).val()}`
 		var chargeDescription = 'Custom Charge'
 	} else {
