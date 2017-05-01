@@ -64,14 +64,17 @@ function saveEvent() {
 		}
 	})
 	const url = window.location.href
-	const eventId = (url.indexOf('/events/') > -1) ? url.split('/').pop() : null
+	const s = (url.indexOf('/events/') > -1) ? url.split('/').pop() : null
+	const eventId = s.substring(0, s.indexOf('#'))
 	localStorage.setItem(`EcstaticLiving:Event:${eventId}`, JSON.stringify(values))
 }
 
 // REPOPULATE SAVED FORM
 function repopulateEvent() {
 	const url = window.location.href
-	const eventId = (url.indexOf('/events/') > -1) ? url.split('/').pop() : null
+	const s = (url.indexOf('/events/') > -1) ? url.split('/').pop() : null
+	const eventId = s.substring(0, s.indexOf('#'))
+	console.log(eventId);
 	if (localStorage.getItem(`EcstaticLiving:Event:${eventId}`)) {
 		var values = JSON.parse(localStorage.getItem(`EcstaticLiving:Event:${eventId}`))
 		for (var item in values) {
