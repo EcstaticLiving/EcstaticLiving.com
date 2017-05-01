@@ -68,8 +68,8 @@ function repopulateEvent() {
 		const eventId = url.split('/').pop()
 		console.log(eventId)
 	}
-	if (localStorage.getItem('EcstaticLiving:Event')) {
-		var values = JSON.parse(localStorage.getItem('EcstaticLiving:Event'))
+	if (localStorage.getItem(`EcstaticLiving:Event:${eventId}`)) {
+		var values = JSON.parse(localStorage.getItem(`EcstaticLiving:Event:${eventId}`))
 		for (var item in values) {
 			if ($('*[name=' + item + ']').is(':radio')) {
 				$('input[name=' + item + '][value="' + values[item] + '"]').prop('checked', true)
