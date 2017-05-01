@@ -76,10 +76,10 @@ function validationLodging() {
 function eventValidation() {
 	if (validationPersonal() && validationDetails() && validationStatus() && validationLodging() && $(eventTerms).is(':checked')) {
 		$(eventButton).prop('disabled', false)
-		$(eventButton).css('background-color', '#800000')
+		$(eventButton).css({ 'background': 'linear-gradient(bottom left, #800000, #b00000)' })
 	} else {
 		$(eventButton).prop('disabled', true)
-		$(eventButton).css('background-color', '')
+		$(eventButton).css({ 'background': '' })
 	}
 }
 $(eventFirstName + ',' + eventLastName + ',' + eventEmail + ',' + eventMobile + ',' + eventBirthdate + ',' + eventFemale + ',' + eventMale + ',' + eventOther + ',' + eventReferral + ',' + eventExperienceDetails + ',' + eventDietDetails + ',' + eventStatus + ',' + eventPartnerName + ',' + eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther + ',' + eventLodging + ',' + eventTerms).on('change', function () {
