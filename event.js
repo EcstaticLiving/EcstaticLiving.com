@@ -128,7 +128,6 @@ function eventValidation() {
 		document.getElementById('register-button').style.background = 'linear-gradient(bottom left, #800000, #b00000)'
 		$(eventButton).css('color', '#333333')
 	} else {
-		console.log(document.getElementById('register-button'));
 		$(eventButton).prop('disabled', true)
 		document.getElementById('register-button').style.background = ''
 		$(eventButton).css('color', '#ffffff')
