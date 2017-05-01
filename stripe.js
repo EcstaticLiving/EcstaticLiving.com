@@ -59,7 +59,7 @@ $(`${eventButton}`).on('click', function() {
 		closed: function () {
 			if(paymentToken === false) {
 				console.log('Stripe closed prior to successful transaction.')
-				showRegistration()
+				resetEventForm()
 			}
 		}
 	})
