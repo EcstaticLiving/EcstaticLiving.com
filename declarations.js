@@ -15,4 +15,4 @@ $contactSection = $('.contact-section'),
 $receivedSection = $('.received-section'),
 
 // Custom Charge
-$customChargeForm = $('.form.custom-charge'),
+$customChargeForm = $('.form.custom-charge')
