@@ -23,8 +23,10 @@ $(`${eventButton}`).on('click', function() {
 		var chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(eventLodging + ' option:selected').text().substring(0, $(eventLodging + ' option:selected').text().length - 17)}, ${eventDeposit}`
 	}
 	let paymentToken = false
+	// pk_test_4kIoImMu4SrlfXGmfnApGp7E
+	// pk_live_Vrm4z9BrnRFFE1PvogsOKiq5
 	var handler = StripeCheckout.configure({
-		key: 'pk_test_4kIoImMu4SrlfXGmfnApGp7E',
+		key: 'pk_live_Vrm4z9BrnRFFE1PvogsOKiq5',
 		image: 'https://daks2k3a4ib2z.cloudfront.net/564aac835a5735b1375b5cdf/56b9741e0758a4b421e7aa05_ELI-Logo-color-heart.jpg',
 		locale: 'auto',
 		name: 'Ecstatic Living',
