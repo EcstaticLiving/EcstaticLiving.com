@@ -4,7 +4,7 @@
 $(`${eventButton}`).on('click', function() {
 	var stripeTitle = eventStripe.split(' | ')
 	saveEvent()
-	var completeFunction = () => showConfirmation()
+	var completeFunction = () => window.location.href = `${siteUrl}/registered`
 	if ((window.location.href === `${siteUrl}charge`) || (window.location.href === `${siteUrl}charge#`)) {
 		$customChargeForm.submit()
 		var customerDescription = `${$(customFirstName).val()} ${$(customLastName).val()}`
