@@ -63,7 +63,11 @@ function saveEvent() {
 
 // REPOPULATE SAVED FORM
 function repopulateEvent() {
-	console.log(localStorage.getItem('EcstaticLiving:Event'));
+	const url = window.location.href
+	if (url.indexOf('/events/') > -1) {
+		const eventId = url.split('/').pop()
+		console.log(eventId)
+	}
 	if (localStorage.getItem('EcstaticLiving:Event')) {
 		var values = JSON.parse(localStorage.getItem('EcstaticLiving:Event'))
 		for (var item in values) {
@@ -74,7 +78,6 @@ function repopulateEvent() {
 				$('*[name=' + item + ']').val(values[item])
 			}
 		}
-		localStorage.removeItem('EcstaticLiving:Event')
 	}
 }
 
