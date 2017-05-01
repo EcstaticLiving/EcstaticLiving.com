@@ -79,6 +79,7 @@ function eventValidation() {
 		document.getElementsByClassName('.button.pay')[0].style.background = 'linear-gradient(bottom left, #800000, #b00000)'
 		$(eventButton).css('color', '#333333')
 	} else {
+		console.log(document.getElementsByClassName('.button.pay'));
 		$(eventButton).prop('disabled', true)
 		document.getElementsByClassName('.button.pay')[0].style.background = ''
 		$(eventButton).css('color', '#ffffff')
