@@ -126,12 +126,12 @@ function eventValidation() {
 	if (validationPersonal() && validationDetails() && validationStatus() && validationLodging() && $(eventTerms).is(':checked')) {
 		console.log('*** VALID ***');
 		document.getElementById('register-button').disabled = false
-		$(eventButton).css({' background-image': 'linear-gradient(bottom left, #800000 100%, #b00000 100%)' })
-		document.getElementById('register-button').style.color = '#ffffff'
+		$(eventButton).css({ 'background-image': 'linear-gradient(bottom left, #800000 100%, #b00000 100%)' })
+		$(eventButton).css({ 'color': '#ffffff' })
 	} else {
 		document.getElementById('register-button').disabled = true
-		$(eventButton).css({' background-image': '' })
-		document.getElementById('register-button').style.color = '#333333'
+		$(eventButton).css({ 'background-image': '' })
+		$(eventButton).css({ 'color': '#333333' })
 	}
 }
 $(eventFirstName + ',' + eventLastName + ',' + eventEmail + ',' + eventMobile + ',' + eventBirthdate + ',' + eventFemale + ',' + eventMale + ',' + eventOther + ',' + eventReferral + ',' + eventExperienceDetails + ',' + eventDietDetails + ',' + eventStatus + ',' + eventPartnerName + ',' + eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther + ',' + eventLodging + ',' + eventTerms).on('change', function () {
