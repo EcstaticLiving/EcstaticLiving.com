@@ -125,12 +125,12 @@ function validationLodging() {
 function eventValidation() {
 	if (validationPersonal() && validationDetails() && validationStatus() && validationLodging() && $(eventTerms).is(':checked')) {
 		$(eventButton).prop('disabled', false)
-		document.getElementsByClassName('input.button.register')[0].style.background = 'linear-gradient(bottom left, #800000, #b00000)'
+		document.getElementsByClassName('input.button.register.w-button')[0].style.background = 'linear-gradient(bottom left, #800000, #b00000)'
 		$(eventButton).css('color', '#333333')
 	} else {
-		console.log(document.getElementsByClassName('input.button.register'));
+		console.log(document.getElementsByClassName('input.button.register.w-button'));
 		$(eventButton).prop('disabled', true)
-		document.getElementsByClassName('input.button.register')[0].style.background = ''
+		document.getElementsByClassName('input.button.register.w-button')[0].style.background = ''
 		$(eventButton).css('color', '#ffffff')
 	}
 }
