@@ -1,3 +1,6 @@
+$('.form.ctt').parsley()
+
+
 // Registration
 $registrationSection = $('.registration-section'),
 $confirmationSection = $('.confirmation-section'),

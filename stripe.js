@@ -24,7 +24,7 @@ $(`${eventButton}`).on('click', function() {
 	}
 	let paymentToken = false
 	var handler = StripeCheckout.configure({
-		key: 'pk_live_Vrm4z9BrnRFFE1PvogsOKiq5',
+		key: 'pk_test_4kIoImMu4SrlfXGmfnApGp7E',
 		image: 'https://daks2k3a4ib2z.cloudfront.net/564aac835a5735b1375b5cdf/56b9741e0758a4b421e7aa05_ELI-Logo-color-heart.jpg',
 		locale: 'auto',
 		name: 'Ecstatic Living',
