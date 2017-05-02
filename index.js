@@ -605,7 +605,6 @@ if (payMode) {
 		saveForm(payMode)
 		var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0, count = 0
 		if (payMode === 'Event') {
-			$registerForm.submit()
 			count = $(eventSelect).prop('selectedIndex') - 1
 			chargeAmount = $(eventDepositDeposit).is(':checked') ? eventDepositPrice * 100 : $(eventSelect).val() * 100
 			const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
@@ -613,7 +612,6 @@ if (payMode) {
 			customerEmail = $(eventEmail).val()
 			chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(eventSelect + ' option:selected').text().substring(0, $(eventSelect + ' option:selected').text().length - 16)}, ${eventDeposit}`
 		} else {
-			$customForm.submit()
 			count = $(customSelect).prop('selectedIndex') - 1
 			chargeAmount = $(customSelect).val() * 100
 			customerDescription = $(customFirstName).val() + ' ' + $(customLastName).val() + ' <' + $(customEmail).val() + '>'
@@ -627,21 +625,20 @@ if (payMode) {
 			chargeDescription,
 			chargeAmount
 		}
-		stripe.createToken(card)
-			.then(function(result) {
-				console.log(result);
-				if (result.complete) {
-					stripeTokenHandler(result.token, data)
-				} else if (result.error) {
-					if (payMode === 'Event') {
-						resetEventForm()
-					} else {
-						resetCustomForm()
-					}
-					paymentOutcome(result)
+		stripe.createToken(card).then(function(result) {
+			if (result.error) {
+				paymentOutcome(result)
+			} else {
+				if (payMode === 'Event') {
+					$registerForm.submit()
+				} else {
+					$customForm.submit()
 				}
-			})
+				stripeTokenHandler(result.token, data)
+			}
+		})
 	})
+
 }
 
 })
