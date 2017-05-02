@@ -551,12 +551,12 @@ if (payMode) {
 
 	style = {
 		base: {
-			fontFamily: 'Lato',
-			fontWeight: 300,
-			color: '#333',
-			fontSize: '18px',
-			lineHeight: '24px',
-			fontSmoothing: 'antialiased',
+			// fontFamily: 'Lato',
+			// fontWeight: 300,
+			// color: '#333',
+			// fontSize: '18px',
+			// lineHeight: '24px',
+			// fontSmoothing: 'antialiased',
 			'::placeholder': {
 				color: '#999',
 			}
