@@ -464,6 +464,9 @@ function customValidation() {
 		$(customButton).css({ 'color': '#333333' })
 	}
 }
+$(customFirstName + ',' + customLastName + ',' + customSelect + ',' + customTerms).on('change', function () {
+	customValidation()
+})
 
 function setCustomSelect() {
 	//	Adds options & prices based on CMS input
