@@ -572,14 +572,14 @@ if (payMode) {
 	const card = elements.create('card', { style })
 	card.mount('#card-element')
 	card.addEventListener('change', (result) => {
+		console.log(result);
 		const displayError = document.getElementById('card-errors')
 		if (result.error) {
 			displayError.textContent = result.error.message
 		} else if (result.complete) {
-			console.log(result);
+			$('#event-card').prop('checked', true)
 			displayError.textContent = 'Works'
 		} else {
-			console.log(result);
 			displayError.textContent = ''
 		}
 	})
