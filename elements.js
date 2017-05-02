@@ -510,6 +510,14 @@ const stripe = Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
 const elements = stripe.elements()
 const card = elements.create('card')
 card.mount('#card-element')
+card.addEventListener('change', ({error}) => {
+	const displayError = document.getElementById('card-errors')
+	if (error) {
+		displayError.textContent = error.message
+	} else {
+		displayError.textContent = ''
+	}
+});
 
 $(`${payButton}`).on('click', function() {
 	saveForm(payMode)
