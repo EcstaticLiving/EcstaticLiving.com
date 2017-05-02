@@ -279,8 +279,6 @@ function validationEventOptions() {
 	return false
 }
 function eventValidation() {
-	console.log('Validation');
-	console.log($(eventSelect).val());
 	if (validationPersonal() && validationDetails() && validationStatus() && validationEventOptions() && $(eventTerms).is(':checked')) {
 		$(eventButton).prop('disabled', false)
 		$(eventButton).css({ 'background-color': '#800000' })
