@@ -510,6 +510,8 @@ const stripe = Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
 const elements = stripe.elements()
 style = {
 	base: {
+		fontFamily: 'Lato',
+		fontWeight: 300,
 		color: '#333',
 		fontSize: '18px',
 		lineHeight: '24px',
@@ -526,7 +528,7 @@ style = {
 		},
 	},
 }
-const card = elements.create('card', { style })
+const card = elements.create('card')
 card.mount('#card-element')
 card.addEventListener('change', ({error}) => {
 	const displayError = document.getElementById('card-errors')
