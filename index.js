@@ -528,6 +528,8 @@ $(`${payButton}`).on('click', function() {
 	let paymentToken = false
 	// pk_test_QO6tO6bHny3y10LjH96f4n3p
 	// pk_live_0rULIvKhv6aSLqI49Ae5rflI
+	var completeFunction = () => {}
+	// var completeFunction = () => { window.location.href = `${siteUrl}registered` }
 	var handler = StripeCheckout.configure({
 		key: 'pk_test_QO6tO6bHny3y10LjH96f4n3p',
 		image: 'https://daks2k3a4ib2z.cloudfront.net/564aac835a5735b1375b5cdf/56b9741e0758a4b421e7aa05_ELI-Logo-color-heart.jpg',
@@ -548,15 +550,14 @@ $(`${payButton}`).on('click', function() {
 					'stripeCustomer': customerDescription + ' <' + token.email + '>',
 					'stripeCharge': chargeDescription,
 					'stripeAmount': chargeAmount
+				},
+				success: completeFunction,
+				complete: completeFunction,
+				error: function(err) {
+					alert('The payment did not go through. Please try again.');
+					console.log(err);
 				}
 			})
-			.then(function (res) {
-				window.location.href = `${siteUrl}registered`
-			})
-			.fail(function (err) {
-				alert('The payment did not go through. Please try again.');
-				console.log(err);
-			});
 		}
 	})
 	handler.open({
