@@ -453,9 +453,14 @@ customTerms = '#custom-terms'
 // CUSTOM AMOUNT
 function customValidation() {
 	if ($(customFirstName).val() !== '' && $(customLastName).val() !== '' && $(customSelect).val() !== '' && $(customTerms).is(':checked')) {
-		return true
+		$(payButton).prop('disabled', false)
+		$(payButton).css({ 'background-color': '#800000' })
+		$(payButton).css({ 'color': '#ffffff' })
+	} else {
+		$(payButton).prop('disabled', true)
+		$(payButton).css({ 'background-color': '#f5f5f5' })
+		$(payButton).css({ 'color': '#333333' })
 	}
-	return false
 }
 
 function setCustomSelect() {
