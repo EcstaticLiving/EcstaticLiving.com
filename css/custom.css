@@ -62,6 +62,7 @@ a.w-dropdown-link.w--current {color:#800000;}
 
 /* INPUT ON FOCUS HIGHLIGHT */
 .form-input:focus,
+.form-input.stripe:focus,
 .form-select:focus,
 .form-textarea:focus,
 .form-radio:focus,
