@@ -517,6 +517,7 @@ style = {
 		'::placeholder': {
 			color: '#ccc',
 		},
+		borderColor: '#ddd'
 	},
 	invalid: {
 		color: '#e5424d',
