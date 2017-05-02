@@ -601,8 +601,8 @@ if (payMode) {
 		paymentOutcome(result)
 	})
 
-	$(`${payButton}`).on('click', function(event) {
-		event.preventDefault()
+	$(`${payButton}`).on('click', function(e) {
+		e.preventDefault()
 		saveForm(payMode)
 		var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0, count = 0
 		if (payMode === 'Event') {
