@@ -198,8 +198,7 @@ eventVenue = $('#event-venue').text(),
 eventDepositAmount = $('#event-deposit-amount').text(),
 eventDepositDate = $('#event-deposit-date').text(),
 eventLodgingOptions = $('#event-lodging-options').text(),
-eventLodgingPrices = $('#event-lodging-prices').text(),
-eventStripe = $('#event-stripe').text()
+eventLodgingPrices = $('#event-lodging-prices').text()
 
 // Event initialization
 const payButton = '.button.pay',
@@ -503,7 +502,8 @@ const payMode = (window.location.href.indexOf('/events/') > -1) ? 'Event' : 'Cus
 
 //	STRIPE
 $(`${payButton}`).on('click', function() {
-	var stripeTitle = eventStripe.split(' | ')
+	const stripe = $('#stripe-description').text()
+	var stripeDescription = stripe.split(' | ')
 	saveForm(payMode)
 	// var completeFunction = () => window.location.href = `${siteUrl}registered`
 	var completeFunction = () => {}
@@ -524,6 +524,8 @@ $(`${payButton}`).on('click', function() {
 		var customerDescription = `${$(eventFirstName).val()} ${$(eventLastName).val()}`
 		var chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(eventLodging + ' option:selected').text().substring(0, $(eventLodging + ' option:selected').text().length - 17)}, ${eventDeposit}`
 	}
+	console.log(count);
+	console.log(stripeDescription[count]);
 	let paymentToken = false
 	// pk_test_QO6tO6bHny3y10LjH96f4n3p
 	// pk_live_0rULIvKhv6aSLqI49Ae5rflI
@@ -532,7 +534,7 @@ $(`${payButton}`).on('click', function() {
 		image: 'https://daks2k3a4ib2z.cloudfront.net/564aac835a5735b1375b5cdf/56b9741e0758a4b421e7aa05_ELI-Logo-color-heart.jpg',
 		locale: 'auto',
 		name: 'Ecstatic Living',
-		description: stripeTitle[count],
+		description: stripeDescription[count],
 		billingAddress: true,
 		amount: eventPrice,
 		token: function(token) {
