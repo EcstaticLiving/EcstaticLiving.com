@@ -531,7 +531,7 @@ $(`${payButton}`).on('click', function() {
 	var completeFunction = () => {}
 	// var completeFunction = () => { window.location.href = `${siteUrl}registered` }
 	var handler = StripeCheckout.configure({
-		key: 'pk_test_QO6tO6bHny3y10LjH96f4n3p',
+		key: 'pk_live_0rULIvKhv6aSLqI49Ae5rflI',
 		image: 'https://daks2k3a4ib2z.cloudfront.net/564aac835a5735b1375b5cdf/56b9741e0758a4b421e7aa05_ELI-Logo-color-heart.jpg',
 		locale: 'auto',
 		name: 'Ecstatic Living',
