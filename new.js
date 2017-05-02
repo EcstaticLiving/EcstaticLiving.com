@@ -432,6 +432,7 @@ function resetEventForm() {
 
 // EVENT PAGE
 if (window.location.href.indexOf('/events/') > -1) {
+	console.log('Event');
 	resetEventForm()
 }
 
@@ -489,6 +490,7 @@ function resetCustomForm() {
 }
 
 if (window.location.href.indexOf('/charge') > -1) {
+	console.log('Custom Charge');
 	resetCustomForm()
 }
 
