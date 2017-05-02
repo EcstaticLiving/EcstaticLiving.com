@@ -160,9 +160,7 @@ function repopulateForm(eventId) {
 				$('input[name=' + item + '][value="' + values[item] + '"]').prop('checked', true)
 			}
 			else {
-				if (item !== 'Event-Lodging') {
-					$('*[name=' + item + ']').val(values[item])
-				}
+				$('*[name=' + item + ']').val(values[item])
 			}
 		}
 	}
@@ -410,8 +408,14 @@ function resetEventForm() {
 	$('.w-form-done').hide()
 	$('.w-form-fail').hide()
 	$registerForm[0].reset()
-	resetLodging()
 	repopulateForm('Event')
+	if ($(eventPayBoth).is(':checked')) {
+		resetLodging('for both')
+	} else if (participants() === 2) {
+		resetLodging('per person')
+	} else {
+		resetLodging('')
+	}
 	$('#event').val(eventCode)
 	if ($(eventExperienceDetails).val() === '') hideExperience()
 	if ($(eventDietDetails).val() === '') hideDiet()
