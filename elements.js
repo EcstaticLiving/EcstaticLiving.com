@@ -579,6 +579,7 @@ if (payMode) {
 			console.log(result.token);
 			displayError.textContent = 'Works'
 		} else {
+			console.log(result);
 			displayError.textContent = ''
 		}
 	})
