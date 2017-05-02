@@ -516,7 +516,7 @@ style = {
 		lineHeight: '24px',
 		fontSmoothing: 'antialiased',
 		'::placeholder': {
-			color: '#ccc',
+			color: '#999',
 		},
 		borderColor: '#ddd'
 	},
