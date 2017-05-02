@@ -633,6 +633,11 @@ if (payMode) {
 				if (result.complete) {
 					stripeTokenHandler(result.token, data)
 				} else if (result.error) {
+					if (payMode === 'Event') {
+						resetEventForm()
+					} else {
+						resetCustomForm()
+					}
 					paymentOutcome(result)
 				}
 			})
