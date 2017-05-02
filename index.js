@@ -550,14 +550,15 @@ $(`${payButton}`).on('click', function() {
 					'stripeCustomer': customerDescription + ' <' + token.email + '>',
 					'stripeCharge': chargeDescription,
 					'stripeAmount': chargeAmount
-				},
-				success: completeFunction,
-				complete: completeFunction,
-				error: function(err) {
-					alert('The payment did not go through. Please try again.');
-					console.log(err);
 				}
 			})
+			.then(function (res) {
+				completeFunction()
+			})
+			.fail(function (err) {
+				alert('The payment did not go through. Please try again.');
+				console.log(err);
+			});
 		}
 	})
 	handler.open({
