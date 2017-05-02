@@ -505,11 +505,12 @@ if (window.location.href.indexOf('/charge') > -1) {
 
 
 // STRIPE
-// TEST
+//
+// TEST:
 // pk_test_QO6tO6bHny3y10LjH96f4n3p
 // https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test
 //
-// LIVE
+// LIVE:
 // pk_live_0rULIvKhv6aSLqI49Ae5rflI
 // https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe
 
@@ -533,8 +534,8 @@ if (payMode) {
 			crossDomain: true,
 			data: {
 				'stripeToken': token.id,
-				'stripeEmail': token.email,
-				'stripeCustomer': data.customerDescription + ' <' + token.email + '>',
+				'stripeEmail': data.customerEmail,
+				'stripeCustomer': data.customerDescription,
 				'stripeCharge': data.chargeDescription,
 				'stripeAmount': data.chargeAmount
 			}
@@ -580,24 +581,27 @@ if (payMode) {
 
 	$(`${payButton}`).on('click', function() {
 		saveForm(payMode)
-		var customerDescription = '', chargeDescription = '', chargeAmount = 0, count = 0
+		var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0, count = 0
 		if (payMode === 'Event') {
 			$registerForm.submit()
 			count = $(eventSelect).prop('selectedIndex') - 1
 			chargeAmount = $(eventDepositDeposit).is(':checked') ? eventDepositPrice * 100 : $(eventSelect).val() * 100
 			const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
-			customerDescription = `${$(eventFirstName).val()} ${$(eventLastName).val()}`
+			customerDescription = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' <' + $(eventEmail).val() + '>'
+			customerEmail = $(eventEmail).val()
 			chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(eventSelect + ' option:selected').text().substring(0, $(eventSelect + ' option:selected').text().length - 17)}, ${eventDeposit}`
 		} else {
 			$customForm.submit()
 			count = $(customSelect).prop('selectedIndex') - 1
 			chargeAmount = $(customSelect).val() * 100
-			customerDescription = `${$(customFirstName).val()} ${$(customLastName).val()}`
+			customerDescription = $(customFirstName).val() + ' ' + $(customLastName).val() + ' <' + $(customEmail).val() + '>'
+			customerEmail = $(customEmail).val()
 			chargeDescription = `Custom Charge: ${$(customSelect + ' option:selected').text().substring(0, $(customSelect + ' option:selected').text().length - 17)}`
 		}
 		const stripeDescription = $('#stripe-description').text().split(' | ')
 		const data = {
 			customerDescription,
+			customerEmail,
 			chargeDescription,
 			chargeAmount
 		}
