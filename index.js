@@ -553,7 +553,7 @@ $(`${payButton}`).on('click', function() {
 				}
 			})
 			.then(function (res) {
-				completeFunction()
+				window.location.href = `${siteUrl}registered`
 			})
 			.fail(function (err) {
 				alert('The payment did not go through. Please try again.');
