@@ -516,6 +516,29 @@ if (window.location.href.indexOf('/charge') > -1) {
 // pk_live_0rULIvKhv6aSLqI49Ae5rflI
 // https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe
 
+function stripeTokenHandler(token, data) {
+	console.log(data.customerDescription);
+	$.ajax({
+		type: 'POST',
+		url: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test',
+		crossDomain: true,
+		data: {
+			'stripeToken': token.id,
+			'stripeEmail': data.customerEmail,
+			'stripeCustomer': data.customerDescription,
+			'stripeCharge': data.chargeDescription,
+			'stripeAmount': data.chargeAmount
+		}
+	})
+	.then(function (res) {
+		window.location.href = `${siteUrl}registered`
+	})
+	.fail(function (err) {
+		alert('The payment did not go through. Please try again.');
+		console.log(err);
+	})
+}
+
 let payMode
 if (window.location.href.indexOf('/events/') > -1) {
 	payMode = 'Event'
@@ -527,29 +550,6 @@ if (window.location.href.indexOf('/events/') > -1) {
 if (payMode) {
 	const stripe = Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
 	const elements = stripe.elements()
-
-	function stripeTokenHandler(token, data) {
-		console.log(data.customerDescription);
-		$.ajax({
-			type: 'POST',
-			url: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test',
-			crossDomain: true,
-			data: {
-				'stripeToken': token.id,
-				'stripeEmail': data.customerEmail,
-				'stripeCustomer': data.customerDescription,
-				'stripeCharge': data.chargeDescription,
-				'stripeAmount': data.chargeAmount
-			}
-		})
-		.then(function (res) {
-			window.location.href = `${siteUrl}registered`
-		})
-		.fail(function (err) {
-			alert('The payment did not go through. Please try again.');
-			console.log(err);
-		})
-	}
 
 	style = {
 		base: {
@@ -572,10 +572,12 @@ if (payMode) {
 	}
 	const card = elements.create('card', { style })
 	card.mount('#card-element')
-	card.addEventListener('change', ({ error }) => {
+	card.addEventListener('change', (result) => {
 		const displayError = document.getElementById('card-errors')
-		if (error) {
+		if (result.error) {
 			displayError.textContent = error.message
+		} else if (result.token) {
+			displayError.textContent = 'Works'
 		} else {
 			displayError.textContent = ''
 		}
