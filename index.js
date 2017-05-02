@@ -435,11 +435,17 @@ if (window.location.href.indexOf('/events/') > -1) {
 
 
 
+
+
+
 // CUSTOM CHARGE
-const $customForm = $('.form.custom-charge')
+const $customForm = $('.form.custom-charge'),
+customFirstName = '#custom-firstname',
+customLastName = '#custom-lastname',
+customAmount = '#custom-amount'
 
 // CUSTOM AMOUNT
-function customAmount() {
+function setCustomAmount() {
 	//	Adds lodging options & prices based on CMS input
 	var lodgingOptions = eventLodgingOptions.split(' | ')
 	var lodgingPrices = eventLodgingPrices.split(' | ')
@@ -502,29 +508,23 @@ const payMode = (window.location.href.indexOf('/events/') > -1) ? 'Event' : 'Cus
 
 //	STRIPE
 $(`${payButton}`).on('click', function() {
-	const stripe = $('#stripe-description').text()
-	var stripeDescription = stripe.split(' | ')
 	saveForm(payMode)
-	// var completeFunction = () => window.location.href = `${siteUrl}registered`
-	var completeFunction = () => {}
-	if ((window.location.href === `${siteUrl}charge`) || (window.location.href === `${siteUrl}charge#`)) {
-		$customForm.submit()
-		var customerDescription = `${$(customFirstName).val()} ${$(customLastName).val()}`
-		var chargeDescription = 'Custom Charge'
-	} else {
+	let customerDescription = '', chargeDescription = '', amount = 0, count = 0
+	if (window.location.href.indexOf('/events/') > -1) {
 		$registerForm.submit()
-		var count = $(eventLodging).prop('selectedIndex') - 1
-		if ($(eventDepositDeposit).is(':checked')) {
-			eventPrice *= 100
-			var eventDeposit = 'DEPOSIT'
-		} else {
-			eventPrice = $(eventLodging).val() * 100
-			var eventDeposit = 'FULL'
-		}
-		var customerDescription = `${$(eventFirstName).val()} ${$(eventLastName).val()}`
-		var chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(eventLodging + ' option:selected').text().substring(0, $(eventLodging + ' option:selected').text().length - 17)}, ${eventDeposit}`
+		count = $(eventLodging).prop('selectedIndex') - 1
+		amount = $(eventDepositDeposit).is(':checked') ? eventPrice * 100 : $(eventLodging).val() * 100
+		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
+		customerDescription = `${$(eventFirstName).val()} ${$(eventLastName).val()}`
+		chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(eventLodging + ' option:selected').text().substring(0, $(eventLodging + ' option:selected').text().length - 17)}, ${eventDeposit}`
+	} else {
+		$customForm.submit()
+		count = $(customAmount).prop('selectedIndex') - 1
+		amount = $(customAmount).val() * 100
+		customerDescription = `${$(customFirstName).val()} ${$(customLastName).val()}`
+		chargeDescription = 'Custom Charge'
 	}
-	console.log(count);
+	const stripeDescription = $('#stripe-description').text().split(' | ')
 	console.log(stripeDescription[count]);
 	let paymentToken = false
 	// pk_test_QO6tO6bHny3y10LjH96f4n3p
@@ -536,29 +536,28 @@ $(`${payButton}`).on('click', function() {
 		name: 'Ecstatic Living',
 		description: stripeDescription[count],
 		billingAddress: true,
-		amount: eventPrice,
+		amount: amount,
 		token: function(token) {
 			paymentToken = true
 			$.ajax({
-				type: 'GET',
-				url: 'https://www.ecstaticliving.institute/stripe/stripe_charge.php',
+				type: 'POST',
+				url: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe',
 				crossDomain: true,
-				dataType: 'jsonp',
-				jsonp: 'callback',
-				jsonpCallback: 'jsonpCallback',
 				data: {
-					'token_id': token.id,
-					'email_address': customerDescription + ' <' + token.email + '>',
-					'customerDescription': customerDescription,
-					'amount': eventPrice,
-					'chargeDescription': chargeDescription
-				},
-				success: completeFunction,
-				complete: completeFunction,
-				error: function(xhr, textStatus, errorThrown) {
-					console.log(`${textStatus} ${errorThrown}`)
+					'stripeToken': token.id,
+					'stripeEmail': token.email,
+					'stripeCustomer': customerDescription + ' <' + token.email + '>',
+					'stripeCharge': chargeDescription,
+					'stripeAmount': chargeAmount
 				}
 			})
+			.then(function (res) {
+				window.location.href = `${siteUrl}registered`
+			})
+			.fail(function (err) {
+				alert('The payment did not go through. Please try again.');
+				console.log(err);
+			});
 		}
 	})
 	handler.open({
