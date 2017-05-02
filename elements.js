@@ -577,7 +577,7 @@ if (payMode) {
 		if (result.error) {
 			displayError.textContent = result.error.message
 		} else if (result.complete) {
-			$('#event-card').prop('checked', true)
+			$('#card-details').prop('checked', true)
 			displayError.textContent = 'Works'
 		} else {
 			displayError.textContent = ''
