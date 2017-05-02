@@ -281,14 +281,14 @@ function validationEventOptions() {
 }
 function eventValidation() {
 	if (validationPersonal() && validationDetails() && validationStatus() && validationEventOptions() && $(eventTerms).is(':checked') && $(eventCard).is(':checked')) {
-		$(eventButton).prop('disabled', false)
 		$(eventButton).css({ 'background-color': '#800000' })
 		$(eventButton).css({ 'color': '#ffffff' })
-	} else {
-		$(eventButton).prop('disabled', true)
-		$(eventButton).css({ 'background-color': '#f5f5f5' })
-		$(eventButton).css({ 'color': '#333333' })
+		return true
 	}
+	$eventForm.parsley().validate()
+	$(eventButton).css({ 'background-color': '#f5f5f5' })
+	$(eventButton).css({ 'color': '#333333' })
+	return false
 }
 $(eventFirstName + ',' + eventLastName + ',' + eventEmail + ',' + eventMobile + ',' + eventBirthdate + ',' + eventFemale + ',' + eventMale + ',' + eventOther + ',' + eventReferral + ',' + eventExperienceYes + ',' + eventExperienceNo + ',' + eventExperienceDetails + ',' + eventDietYes + ',' + eventDietNo + ',' + eventDietDetails + ',' + eventStatus + ',' + eventPartnerName + ',' + eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther + ',' + eventSelect + ',' + eventTerms + ',' + eventCard).on('change', function () {
 	eventValidation()
@@ -458,14 +458,14 @@ customButton = '#custom-button'
 // CUSTOM AMOUNT
 function customValidation() {
 	if ($(customFirstName).val() !== '' && $(customLastName).val() !== '' && $(customSelect).val() !== '' && $(customTerms).is(':checked') && $(customCard).is(':checked')) {
-		$(customButton).prop('disabled', false)
 		$(customButton).css({ 'background-color': '#800000' })
 		$(customButton).css({ 'color': '#ffffff' })
-	} else {
-		$(customButton).prop('disabled', true)
-		$(customButton).css({ 'background-color': '#f5f5f5' })
-		$(customButton).css({ 'color': '#333333' })
+		return true
 	}
+	$customForm.parsley().validate()
+	$(customButton).css({ 'background-color': '#f5f5f5' })
+	$(customButton).css({ 'color': '#333333' })
+	return false
 }
 $(customFirstName + ',' + customLastName + ',' + customSelect + ',' + customTerms + ',' + customCard).on('change', function () {
 	customValidation()
@@ -611,6 +611,9 @@ if (payMode) {
 		saveForm(payMode)
 		var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0, count = 0
 		if (payMode === 'Event') {
+			if (!eventValidation()) {
+				return false
+			}
 			count = $(eventSelect).prop('selectedIndex') - 1
 			chargeAmount = $(eventDepositDeposit).is(':checked') ? eventDepositPrice * 100 : $(eventSelect).val() * 100
 			const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
@@ -618,6 +621,9 @@ if (payMode) {
 			customerEmail = $(eventEmail).val()
 			chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(eventSelect + ' option:selected').text().substring(0, $(eventSelect + ' option:selected').text().length - 16)}, ${eventDeposit}`
 		} else {
+			if (!customValidation()) {
+				return false
+			}
 			count = $(customSelect).prop('selectedIndex') - 1
 			chargeAmount = $(customSelect).val() * 100
 			customerDescription = $(customFirstName).val() + ' ' + $(customLastName).val() + ' <' + $(customEmail).val() + '>'
