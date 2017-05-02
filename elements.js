@@ -514,6 +514,7 @@ style = {
 		color: '#333',
 		fontSize: '18px',
 		lineHeight: '24px',
+		fontWeight: 300,
 		fontSmoothing: 'antialiased',
 		'::placeholder': {
 			color: '#999',
