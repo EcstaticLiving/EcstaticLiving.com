@@ -230,6 +230,7 @@ eventDepositText = '#event-deposit-text',
 eventDepositFull = '#event-deposit-full',
 eventDepositDeposit = '#event-deposit-deposit',
 eventTerms = '#event-terms',
+eventCard = '#event-card',
 eventButton = '#event-button'
 
 // PARTICIPANTS
@@ -279,7 +280,7 @@ function validationEventOptions() {
 	return false
 }
 function eventValidation() {
-	if (validationPersonal() && validationDetails() && validationStatus() && validationEventOptions() && $(eventTerms).is(':checked')) {
+	if (validationPersonal() && validationDetails() && validationStatus() && validationEventOptions() && $(eventTerms).is(':checked') && $(eventCard).is(':checked')) {
 		$(eventButton).prop('disabled', false)
 		$(eventButton).css({ 'background-color': '#800000' })
 		$(eventButton).css({ 'color': '#ffffff' })
@@ -289,7 +290,7 @@ function eventValidation() {
 		$(eventButton).css({ 'color': '#333333' })
 	}
 }
-$(eventFirstName + ',' + eventLastName + ',' + eventEmail + ',' + eventMobile + ',' + eventBirthdate + ',' + eventFemale + ',' + eventMale + ',' + eventOther + ',' + eventReferral + ',' + eventExperienceYes + ',' + eventExperienceNo + ',' + eventExperienceDetails + ',' + eventDietYes + ',' + eventDietNo + ',' + eventDietDetails + ',' + eventStatus + ',' + eventPartnerName + ',' + eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther + ',' + eventSelect + ',' + eventTerms).on('change', function () {
+$(eventFirstName + ',' + eventLastName + ',' + eventEmail + ',' + eventMobile + ',' + eventBirthdate + ',' + eventFemale + ',' + eventMale + ',' + eventOther + ',' + eventReferral + ',' + eventExperienceYes + ',' + eventExperienceNo + ',' + eventExperienceDetails + ',' + eventDietYes + ',' + eventDietNo + ',' + eventDietDetails + ',' + eventStatus + ',' + eventPartnerName + ',' + eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther + ',' + eventSelect + ',' + eventTerms + ',' + eventCard).on('change', function () {
 	eventValidation()
 })
 
@@ -449,12 +450,13 @@ customFirstName = '#custom-firstname',
 customLastName = '#custom-lastname',
 customSelect = '#custom-select',
 customTerms = '#custom-terms',
+customCard = '#custom-card',
 customButton = '#custom-button'
 
 
 // CUSTOM AMOUNT
 function customValidation() {
-	if ($(customFirstName).val() !== '' && $(customLastName).val() !== '' && $(customSelect).val() !== '' && $(customTerms).is(':checked')) {
+	if ($(customFirstName).val() !== '' && $(customLastName).val() !== '' && $(customSelect).val() !== '' && $(customTerms).is(':checked') && $(customCard).is(':checked')) {
 		$(customButton).prop('disabled', false)
 		$(customButton).css({ 'background-color': '#800000' })
 		$(customButton).css({ 'color': '#ffffff' })
@@ -464,7 +466,7 @@ function customValidation() {
 		$(customButton).css({ 'color': '#333333' })
 	}
 }
-$(customFirstName + ',' + customLastName + ',' + customSelect + ',' + customTerms).on('change', function () {
+$(customFirstName + ',' + customLastName + ',' + customSelect + ',' + customTerms + ',' + customCard).on('change', function () {
 	customValidation()
 })
 
@@ -516,7 +518,6 @@ if (window.location.href.indexOf('/charge') > -1) {
 // https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe
 
 function stripeTokenHandler(token, data) {
-	console.log(data.customerDescription);
 	$.ajax({
 		type: 'POST',
 		url: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test',
@@ -572,13 +573,15 @@ if (payMode) {
 	const card = elements.create('card', { style })
 	card.mount('#card-element')
 	card.addEventListener('change', (result) => {
-		console.log(result);
 		const displayError = document.getElementById('card-errors')
 		if (result.error) {
 			displayError.textContent = result.error.message
 		} else if (result.complete) {
-			$('#card-details').prop('checked', true)
-			displayError.textContent = 'Works'
+			if (payMode === 'Event') {
+				$(eventCard).prop('checked', true)
+			} else {
+				$(customCard).prop('checked', true)
+			}
 		} else {
 			displayError.textContent = ''
 		}
