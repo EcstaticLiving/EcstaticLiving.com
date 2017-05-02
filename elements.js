@@ -578,6 +578,11 @@ if (payMode) {
 		const displayError = document.getElementById('card-errors')
 		if (result.error) {
 			displayError.textContent = result.error.message
+			if (payMode === 'Event') {
+				$(eventCard).prop('checked', false)
+			} else {
+				$(customCard).prop('checked', false)
+			}
 		} else if (result.complete) {
 			if (payMode === 'Event') {
 				$(eventCard).prop('checked', true)
@@ -586,6 +591,11 @@ if (payMode) {
 			}
 		} else {
 			displayError.textContent = ''
+			if (payMode === 'Event') {
+				$(eventCard).prop('checked', false)
+			} else {
+				$(customCard).prop('checked', false)
+			}
 		}
 	})
 
