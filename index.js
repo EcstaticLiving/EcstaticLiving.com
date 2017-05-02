@@ -1,5 +1,5 @@
 /*
-Code ©2016 Ecstatic Living Institute All rights reserved.
+Code ©2017 Ecstatic Living Institute All rights reserved.
 Created by Conscious Apps Inc. www.consciousapps.com
 */
 $(document).ready(function () {
@@ -195,9 +195,7 @@ eventStartDate = $('#event-start').text(),
 eventDates = $('#event-dates').text(),
 eventVenue = $('#event-venue').text(),
 eventDepositAmount = $('#event-deposit-amount').text(),
-eventDepositDate = $('#event-deposit-date').text(),
-eventLodgingOptions = $('#event-lodging-options').text(),
-eventLodgingPrices = $('#event-lodging-prices').text()
+eventDepositDate = $('#event-deposit-date').text()
 
 // Event initialization
 const payButton = '.button.pay',
@@ -226,12 +224,13 @@ eventPartnerMale = '#event-partner-gender-male',
 eventPartnerOther = '#event-partner-gender-other',
 eventPayBoth = '#event-pay-both',
 eventPayMe = '#event-pay-me',
-eventLodging = '#event-lodging',
+eventSelect = '#event-option',
 eventDepositContainer = '.event-container.deposit',
 eventDepositText = '#event-deposit-text',
 eventDepositFull = '#event-deposit-full',
 eventDepositDeposit = '#event-deposit-deposit',
-eventTerms = '#event-terms'
+eventTerms = '#event-terms',
+eventButton = '#event-button'
 
 // PARTICIPANTS
 function participants() {
@@ -271,7 +270,7 @@ function validationStatus() {
 	return false
 }
 function validationLodging() {
-	if ($(eventLodging).val() !== '' && (
+	if ($(eventSelect).val() !== '' && (
 		$(eventDepositContainer).is(':visible') && ($(eventDepositFull).is(':checked') || $(eventDepositDeposit).is(':checked'))
 	) || $(eventDepositContainer).is(':hidden')) {
 		return true
@@ -280,16 +279,16 @@ function validationLodging() {
 }
 function eventValidation() {
 	if (validationPersonal() && validationDetails() && validationStatus() && validationLodging() && $(eventTerms).is(':checked')) {
-		$(payButton).prop('disabled', false)
-		$(payButton).css({ 'background-color': '#800000' })
-		$(payButton).css({ 'color': '#ffffff' })
+		$(eventButton).prop('disabled', false)
+		$(eventButton).css({ 'background-color': '#800000' })
+		$(eventButton).css({ 'color': '#ffffff' })
 	} else {
-		$(payButton).prop('disabled', true)
-		$(payButton).css({ 'background-color': '#f5f5f5' })
-		$(payButton).css({ 'color': '#333333' })
+		$(eventButton).prop('disabled', true)
+		$(eventButton).css({ 'background-color': '#f5f5f5' })
+		$(eventButton).css({ 'color': '#333333' })
 	}
 }
-$(eventFirstName + ',' + eventLastName + ',' + eventEmail + ',' + eventMobile + ',' + eventBirthdate + ',' + eventFemale + ',' + eventMale + ',' + eventOther + ',' + eventReferral + ',' + eventExperienceYes + ',' + eventExperienceNo + ',' + eventExperienceDetails + ',' + eventDietYes + ',' + eventDietNo + ',' + eventDietDetails + ',' + eventStatus + ',' + eventPartnerName + ',' + eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther + ',' + eventLodging + ',' + eventTerms).on('change', function () {
+$(eventFirstName + ',' + eventLastName + ',' + eventEmail + ',' + eventMobile + ',' + eventBirthdate + ',' + eventFemale + ',' + eventMale + ',' + eventOther + ',' + eventReferral + ',' + eventExperienceYes + ',' + eventExperienceNo + ',' + eventExperienceDetails + ',' + eventDietYes + ',' + eventDietNo + ',' + eventDietDetails + ',' + eventStatus + ',' + eventPartnerName + ',' + eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther + ',' + eventSelect + ',' + eventTerms).on('change', function () {
 	eventValidation()
 })
 
@@ -301,9 +300,9 @@ function showPartner() {
 		opacity: 1
 	}, 200)
 	if ($(eventPayBoth).is(':checked')) {
-		resetLodging('for both')
+		setEventSelect('for both')
 	} else {
-		resetLodging('per person')
+		setEventSelect('per person')
 	}
 }
 
@@ -315,7 +314,7 @@ function hidePartner() {
 		opacity: 0
 	}, 200)
 	$(eventPartnerContainer).hide()
-	resetLodging()
+	setEventSelect()
 }
 
 $(eventStatus).change(function() {
@@ -324,11 +323,11 @@ $(eventStatus).change(function() {
 
 $(eventPayBoth + ',' + eventPayMe).change(function() {
 	if ($(eventPayBoth).is(':checked')) {
-		resetLodging('for both')
+		setEventSelect('for both')
 	} else if (participants() === 2) {
-		resetLodging('per person')
+		setEventSelect('per person')
 	} else {
-		resetLodging('')
+		setEventSelect('')
 	}
 })
 
@@ -379,29 +378,29 @@ $(eventDietNo + ',' + eventDietYes).change(function() {
 })
 
 // LODGING
-function resetLodging(paymentStatus) {
-	//	Adds lodging options & prices based on CMS input
-	var lodgingOptions = eventLodgingOptions.split(' | ')
-	var lodgingPrices = eventLodgingPrices.split(' | ')
-	$(eventLodging).empty()
-	if (lodgingOptions.length > 0) {
-		$(eventLodging).append($('<option>', {
+function setEventSelect(people) {
+	//	Adds event options & prices based on CMS input
+	var eventOptions = $('#event-options').text().split(' | ')
+	var eventPrices = $('#event-prices').text().split(' | ')
+	$(eventSelect).empty()
+	if (eventOptions.length > 0) {
+		$(eventSelect).append($('<option>', {
 			value: '',
 			text: 'Event option...'
 		}))
 	}
-	paymentStatus = paymentStatus ? paymentStatus : ''
-	const paymentFactor = (paymentStatus === 'for both') ? 2 : 1
-	const spacer = paymentStatus ? ' ' : ''
-	const closer = (paymentStatus || paymentStatus === '') ? ')' : ''
-	for (var i = 0; i < lodgingOptions.length; i++) {
-		$(eventLodging).append($('<option>', {
-			value: lodgingPrices[i] * paymentFactor,
-			text: lodgingOptions[i] + ' ($' + lodgingPrices[i] * paymentFactor + spacer + paymentStatus + closer
+	people = people ? people : ''
+	const paymentFactor = (people === 'for both') ? 2 : 1
+	const spacer = people ? ' ' : ''
+	const closer = (people || people === '') ? ')' : ''
+	for (var i = 0; i < eventOptions.length; i++) {
+		$(eventSelect).append($('<option>', {
+			value: eventPrices[i] * paymentFactor,
+			text: eventOptions[i] + ' ($' + eventPrices[i] * paymentFactor + spacer + people + closer
 		}))
 	}
-	eventPrice = parseInt(eventDepositAmount) * paymentFactor
-	$(eventDepositText).text(`Pay deposit only ($${eventPrice}${spacer}${paymentStatus})`)
+	const eventDepositPrice = parseInt(eventDepositAmount) * paymentFactor
+	$(eventDepositText).text(`Pay deposit only ($${eventDepositPrice}${spacer}${people})`)
 }
 
 function resetEventForm() {
@@ -410,17 +409,16 @@ function resetEventForm() {
 	$registerForm[0].reset()
 	repopulateForm('Event')
 	if ($(eventPayBoth).is(':checked')) {
-		resetLodging('for both')
+		setEventSelect('for both')
 	} else if (participants() === 2) {
-		resetLodging('per person')
+		setEventSelect('per person')
 	} else {
-		resetLodging('')
+		setEventSelect('')
 	}
 	$('#event').val(eventCode)
 	if ($(eventExperienceDetails).val() === '') hideExperience()
 	if ($(eventDietDetails).val() === '') hideDiet()
 	if ($(eventPartnerName).val() === '') hidePartner()
-	eventValidation()
 	if (new Date() < new Date(eventDepositDate)) {
 		$(eventDepositContainer).show()
 		$(eventDepositFull).prop('checked', true)
@@ -445,34 +443,47 @@ if (window.location.href.indexOf('/events/') > -1) {
 
 // CUSTOM CHARGE
 const $customForm = $('.form.custom-charge'),
+customCode = '#custom-code',
 customFirstName = '#custom-firstname',
 customLastName = '#custom-lastname',
-customAmount = '#custom-amount'
+customSelect = '#custom-select',
+customTerms = '#custom-terms',
+customButton = '#custom-button'
+
 
 // CUSTOM AMOUNT
-function setCustomAmount() {
-	//	Adds lodging options & prices based on CMS input
-	var lodgingOptions = eventLodgingOptions.split(' | ')
-	var lodgingPrices = eventLodgingPrices.split(' | ')
-	$(eventLodging).empty()
-	if (lodgingOptions.length > 0) {
-		$(eventLodging).append($('<option>', {
+function customValidation() {
+	if ($(customFirstName).val() !== '' && $(customLastName).val() !== '' && $(customSelect).val() !== '' && $(customTerms).is(':checked')) {
+		$(customButton).prop('disabled', false)
+		$(customButton).css({ 'background-color': '#800000' })
+		$(customButton).css({ 'color': '#ffffff' })
+	} else {
+		$(customButton).prop('disabled', true)
+		$(customButton).css({ 'background-color': '#f5f5f5' })
+		$(customButton).css({ 'color': '#333333' })
+	}
+}
+$(customFirstName + ',' + customLastName + ',' + customSelect + ',' + customTerms).on('change', function () {
+	customValidation()
+})
+
+function setCustomSelect() {
+	//	Adds options & prices based on CMS input
+	var customOptions = $('#custom-options').text().split(' | ')
+	var customPrices = $('#custom-prices').text().split(' | ')
+	$(customSelect).empty()
+	if (customOptions.length > 0) {
+		$(customSelect).append($('<option>', {
 			value: '',
-			text: 'Event option...'
+			text: 'Custom charge option...'
 		}))
 	}
-	paymentStatus = paymentStatus ? paymentStatus : ''
-	const paymentFactor = (paymentStatus === 'for both') ? 2 : 1
-	const spacer = paymentStatus ? ' ' : ''
-	const closer = (paymentStatus || paymentStatus === '') ? ')' : ''
-	for (var i = 0; i < lodgingOptions.length; i++) {
-		$(eventLodging).append($('<option>', {
-			value: lodgingPrices[i] * paymentFactor,
-			text: lodgingOptions[i] + ' ($' + lodgingPrices[i] * paymentFactor + spacer + paymentStatus + closer
+	for (var i = 0; i < customOptions.length; i++) {
+		$(customSelect).append($('<option>', {
+			value: customPrices[i],
+			text: customOptions[i] + ' - $' + customPrices[i]
 		}))
 	}
-	eventPrice = parseInt(eventDepositAmount) * paymentFactor
-	$(eventDepositText).text(`Pay deposit only ($${eventPrice}${spacer}${paymentStatus})`)
 }
 
 function resetCustomForm() {
@@ -480,28 +491,15 @@ function resetCustomForm() {
 	$('.w-form-fail').hide()
 	$customForm[0].reset()
 	repopulateForm('Custom')
-	$('#event').val(eventCode)
-	resetLodging()
-	if ($(eventExperienceDetails).val() === '') hideExperience()
-	if ($(eventDietDetails).val() === '') hideDiet()
-	if ($(eventPartnerName).val() === '') hidePartner()
-	eventValidation()
-	if (new Date() < new Date(eventDepositDate)) {
-		$(eventDepositContainer).show()
-		$(eventDepositFull).prop('checked', true)
-	} else {
-		$(eventDepositContainer).hide()
-	}
-	$registerForm.parsley()
-	$registerForm.show()
-	$(eventTerms).attr('checked', false)
-	eventValidation()
+	setCustomSelect()
+	$customForm.parsley()
+	$customForm.show()
+	$(customTerms).attr('checked', false)
+	customValidation()
 }
 
 if (window.location.href.indexOf('/charge') > -1) {
-	$customForm[0].reset()
-	$customForm.parsley()
-	$customForm.show()
+	resetCustomForm()
 }
 
 
@@ -515,26 +513,24 @@ const payMode = (window.location.href.indexOf('/events/') > -1) ? 'Event' : 'Cus
 $(`${payButton}`).on('click', function() {
 	saveForm(payMode)
 	var customerDescription = '', chargeDescription = '', chargeAmount = 0, count = 0
-	if (window.location.href.indexOf('/events/') > -1) {
+	if (payMode === 'Event') {
 		$registerForm.submit()
-		count = $(eventLodging).prop('selectedIndex') - 1
-		chargeAmount = $(eventDepositDeposit).is(':checked') ? eventPrice * 100 : $(eventLodging).val() * 100
+		count = $(eventSelect).prop('selectedIndex') - 1
+		chargeAmount = $(eventDepositDeposit).is(':checked') ? eventDepositPrice * 100 : $(eventSelect).val() * 100
 		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
 		customerDescription = `${$(eventFirstName).val()} ${$(eventLastName).val()}`
-		chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(eventLodging + ' option:selected').text().substring(0, $(eventLodging + ' option:selected').text().length - 17)}, ${eventDeposit}`
+		chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(eventSelect + ' option:selected').text().substring(0, $(eventSelect + ' option:selected').text().length - 17)}, ${eventDeposit}`
 	} else {
 		$customForm.submit()
-		count = $(customAmount).prop('selectedIndex') - 1
-		chargeAmount = $(customAmount).val() * 100
+		count = $(customSelect).prop('selectedIndex') - 1
+		chargeAmount = $(customSelect).val() * 100
 		customerDescription = `${$(customFirstName).val()} ${$(customLastName).val()}`
-		chargeDescription = 'Custom Charge'
+		chargeDescription = `Custom Charge: ${$(customSelect + ' option:selected').text().substring(0, $(customSelect + ' option:selected').text().length - 17)}`
 	}
 	const stripeDescription = $('#stripe-description').text().split(' | ')
 	var paymentToken = false
 	// pk_test_QO6tO6bHny3y10LjH96f4n3p
 	// pk_live_0rULIvKhv6aSLqI49Ae5rflI
-	var completeFunction = () => {}
-	// var completeFunction = () => { window.location.href = `${siteUrl}registered` }
 	var handler = StripeCheckout.configure({
 		key: 'pk_live_0rULIvKhv6aSLqI49Ae5rflI',
 		image: 'https://daks2k3a4ib2z.cloudfront.net/564aac835a5735b1375b5cdf/56b9741e0758a4b421e7aa05_ELI-Logo-color-heart.jpg',
@@ -570,7 +566,11 @@ $(`${payButton}`).on('click', function() {
 		closed: function () {
 			if(paymentToken === false) {
 				console.log('Stripe closed prior to successful transaction.')
-				resetEventForm()
+				if (payMode === 'Event') {
+					resetEventForm()
+				} else {
+					resetCustomForm()
+				}
 			}
 		}
 	})

@@ -1,3 +1,7 @@
+// Uses webtask.io
+// To create a server, enter the following code on the CLI:
+// wt create stripe.js --secret elistripe=STRIPESECRET --parse-body
+// Then add the resulting URL to the Stripe url in the index.js file.
 module.exports = function (body, callback) {
   var stripe = require('stripe')(body.secrets.elistripe)
   stripe.customers.create({
