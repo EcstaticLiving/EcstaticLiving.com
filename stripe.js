@@ -4,8 +4,8 @@ module.exports = function (body, callback) {
     email: body.data.stripeCustomer,
     source: body.data.stripeToken,
     description: body.data.stripeCustomer
-  }, function(err, charge) {
-    console.log(err);
+  }, function(err, customer) {
+    console.log(customer);
   })
   .then(function(customer) {
     return stripe.charges.create({
@@ -14,7 +14,7 @@ module.exports = function (body, callback) {
       customer: customer.id,
       description: body.data.stripeCharge
     }, function(err, charge) {
-      console.log(err);
+      console.log(charge);
     });
   })
 };
