@@ -505,7 +505,8 @@ const payMode = (window.location.href.indexOf('/events/') > -1) ? 'Event' : 'Cus
 $(`${payButton}`).on('click', function() {
 	var stripeTitle = eventStripe.split(' | ')
 	saveForm(payMode)
-	var completeFunction = () => window.location.href = `${siteUrl}/registered`
+	// var completeFunction = () => window.location.href = `${siteUrl}registered`
+	var completeFunction = () => {}
 	if ((window.location.href === `${siteUrl}charge`) || (window.location.href === `${siteUrl}charge#`)) {
 		$customForm.submit()
 		var customerDescription = `${$(customFirstName).val()} ${$(customLastName).val()}`
