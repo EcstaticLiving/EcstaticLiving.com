@@ -515,7 +515,7 @@ $(`${payButton}`).on('click', function() {
 		count = $(customSelect).prop('selectedIndex') - 1
 		chargeAmount = $(customSelect).val() * 100
 		customerDescription = `${$(customFirstName).val()} ${$(customLastName).val()}`
-		chargeDescription = 'Custom Charge'
+		chargeDescription = `Custom Charge: ${$(customSelect + ' option:selected').text().substring(0, $(customSelect + ' option:selected').text().length - 17)}`
 	}
 	const stripeDescription = $('#stripe-description').text().split(' | ')
 	var paymentToken = false
