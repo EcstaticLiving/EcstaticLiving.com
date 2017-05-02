@@ -541,7 +541,7 @@ $(`${payButton}`).on('click', function() {
 		token: function(token) {
 			paymentToken = true
 			$.ajax({
-				type: 'GET',
+				type: 'POST',
 				url: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe',
 				crossDomain: true,
 				data: {
