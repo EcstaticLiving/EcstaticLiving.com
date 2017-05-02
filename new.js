@@ -1,5 +1,5 @@
 /*
-Code ©2016 Ecstatic Living Institute All rights reserved.
+Code ©2017 Ecstatic Living Institute All rights reserved.
 Created by Conscious Apps Inc. www.consciousapps.com
 */
 $(document).ready(function () {
@@ -468,7 +468,6 @@ function setCustomSelect() {
 			text: 'Custom charge option...'
 		}))
 	}
-	people = people ? people : ''
 	for (var i = 0; i < customOptions.length; i++) {
 		$(eventSelect).append($('<option>', {
 			value: customPrices[i],
