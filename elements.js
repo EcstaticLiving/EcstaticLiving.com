@@ -578,23 +578,24 @@ if (payMode) {
 		const displayError = document.getElementById('card-errors')
 		if (result.error) {
 			displayError.textContent = result.error.message
-			if (payMode === 'Event') {
-				$(eventCard).prop('checked', false)
-			} else {
-				$(customCard).prop('checked', false)
-			}
-		} else if (result.complete) {
-			if (payMode === 'Event') {
-				$(eventCard).prop('checked', true)
-			} else {
-				$(customCard).prop('checked', true)
-			}
 		} else {
 			displayError.textContent = ''
+		}
+		if (result.complete) {
+			if (payMode === 'Event') {
+				$(eventCard).prop('checked', true)
+				eventValidation()
+			} else {
+				$(customCard).prop('checked', true)
+				customValidation()
+			}
+		} else {
 			if (payMode === 'Event') {
 				$(eventCard).prop('checked', false)
+				eventValidation()
 			} else {
 				$(customCard).prop('checked', false)
+				customValidation()
 			}
 		}
 	})
