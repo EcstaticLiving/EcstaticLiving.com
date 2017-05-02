@@ -442,6 +442,7 @@ if (window.location.href.indexOf('/events/') > -1) {
 
 // CUSTOM CHARGE
 const $customForm = $('.form.custom-charge'),
+customCode = '#custom-code',
 customFirstName = '#custom-firstname',
 customLastName = '#custom-lastname',
 customSelect = '#custom-select',
@@ -481,7 +482,7 @@ function resetCustomForm() {
 	$('.w-form-fail').hide()
 	$customForm[0].reset()
 	repopulateForm('Custom')
-	$('#event').val(eventCode)
+	$('#custom').val(customCode)
 	setCustomSelect()
 	$customForm.parsley()
 	$(customTerms).attr('checked', false)
