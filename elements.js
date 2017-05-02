@@ -510,11 +510,9 @@ const stripe = Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
 const elements = stripe.elements()
 style = {
 	base: {
-		fontFamily: 'Lato',
 		color: '#333',
 		fontSize: '18px',
 		lineHeight: '24px',
-		fontWeight: 300,
 		fontSmoothing: 'antialiased',
 		'::placeholder': {
 			color: '#999',
