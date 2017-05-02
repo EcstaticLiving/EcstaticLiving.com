@@ -270,9 +270,10 @@ function validationStatus() {
 	return false
 }
 function validationEventOptions() {
-	if ($(eventSelect).val() !== '' && (
-		$(eventDepositContainer).is(':visible') && ($(eventDepositFull).is(':checked') || $(eventDepositDeposit).is(':checked'))
-	) || $(eventDepositContainer).is(':hidden')) {
+	if ($(eventSelect).val() && (
+		($(eventDepositContainer).is(':visible') && ($(eventDepositFull).is(':checked') || $(eventDepositDeposit).is(':checked'))
+		|| $(eventDepositContainer).is(':hidden'))
+	)) {
 		return true
 	}
 	return false
