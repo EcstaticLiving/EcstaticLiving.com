@@ -539,6 +539,32 @@ function stripeTokenHandler(token, data) {
 	})
 }
 
+function paymentOutcome(result) {
+	const displayError = document.getElementById('card-errors')
+	if (result.error) {
+		displayError.textContent = result.error.message
+	} else {
+		displayError.textContent = ''
+	}
+	if (result.complete) {
+		if (payMode === 'Event') {
+			$(eventCard).prop('checked', true)
+			eventValidation()
+		} else {
+			$(customCard).prop('checked', true)
+			customValidation()
+		}
+	} else {
+		if (payMode === 'Event') {
+			$(eventCard).prop('checked', false)
+			eventValidation()
+		} else {
+			$(customCard).prop('checked', false)
+			customValidation()
+		}
+	}
+}
+
 let payMode
 if (window.location.href.indexOf('/events/') > -1) {
 	payMode = 'Event'
@@ -550,7 +576,6 @@ if (window.location.href.indexOf('/events/') > -1) {
 if (payMode) {
 	const stripe = Stripe('pk_live_0rULIvKhv6aSLqI49Ae5rflI')
 	const elements = stripe.elements()
-
 	style = {
 		base: {
 			fontFamily: 'Lato',
@@ -573,67 +598,44 @@ if (payMode) {
 	const card = elements.create('card', { style })
 	card.mount('#card-element')
 	card.addEventListener('change', (result) => {
-		const displayError = document.getElementById('card-errors')
-		if (result.error) {
-			displayError.textContent = result.error.message
-		} else {
-			displayError.textContent = ''
-		}
-		if (result.complete) {
-			if (payMode === 'Event') {
-				$(eventCard).prop('checked', true)
-				eventValidation()
-			} else {
-				$(customCard).prop('checked', true)
-				customValidation()
-			}
-		} else {
-			if (payMode === 'Event') {
-				$(eventCard).prop('checked', false)
-				eventValidation()
-			} else {
-				$(customCard).prop('checked', false)
-				customValidation()
-			}
-		}
-	})
-
-	$(`${payButton}`).on('click', function() {
-		saveForm(payMode)
-		var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0, count = 0
-		if (payMode === 'Event') {
-			$registerForm.submit()
-			count = $(eventSelect).prop('selectedIndex') - 1
-			chargeAmount = $(eventDepositDeposit).is(':checked') ? eventDepositPrice * 100 : $(eventSelect).val() * 100
-			const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
-			customerDescription = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' <' + $(eventEmail).val() + '>'
-			customerEmail = $(eventEmail).val()
-			chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(eventSelect + ' option:selected').text().substring(0, $(eventSelect + ' option:selected').text().length - 17)}, ${eventDeposit}`
-		} else {
-			$customForm.submit()
-			count = $(customSelect).prop('selectedIndex') - 1
-			chargeAmount = $(customSelect).val() * 100
-			customerDescription = $(customFirstName).val() + ' ' + $(customLastName).val() + ' <' + $(customEmail).val() + '>'
-			customerEmail = $(customEmail).val()
-			chargeDescription = `Custom Charge: ${$(customSelect + ' option:selected').text().substring(0, $(customSelect + ' option:selected').text().length - 17)}`
-		}
-		const stripeDescription = $('#stripe-description').text().split(' | ')
-		const data = {
-			customerDescription,
-			customerEmail,
-			chargeDescription,
-			chargeAmount
-		}
-		stripe.createToken(card)
-			.then(function(result) {
-				if (result.error) {
-					var errorElement = document.getElementById('card-errors')
-					errorElement.textContent = result.error.message
-				} else {
-					stripeTokenHandler(result.token, data)
-				}
-			})
+		paymentOutcome(result)
 	})
 }
+
+$(`${payButton}`).on('click', function() {
+	saveForm(payMode)
+	var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0, count = 0
+	if (payMode === 'Event') {
+		$registerForm.submit()
+		count = $(eventSelect).prop('selectedIndex') - 1
+		chargeAmount = $(eventDepositDeposit).is(':checked') ? eventDepositPrice * 100 : $(eventSelect).val() * 100
+		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
+		customerDescription = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' <' + $(eventEmail).val() + '>'
+		customerEmail = $(eventEmail).val()
+		chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(eventSelect + ' option:selected').text().substring(0, $(eventSelect + ' option:selected').text().length - 16)}, ${eventDeposit}`
+	} else {
+		$customForm.submit()
+		count = $(customSelect).prop('selectedIndex') - 1
+		chargeAmount = $(customSelect).val() * 100
+		customerDescription = $(customFirstName).val() + ' ' + $(customLastName).val() + ' <' + $(customEmail).val() + '>'
+		customerEmail = $(customEmail).val()
+		chargeDescription = `Custom Charge: ${$(customSelect + ' option:selected').text().substring(0, $(customSelect + ' option:selected').text().length - 16)}`
+	}
+	const stripeDescription = $('#stripe-description').text().split(' | ')
+	const data = {
+		customerDescription,
+		customerEmail,
+		chargeDescription,
+		chargeAmount
+	}
+	stripe.createToken(card)
+		.then(function(result) {
+			console.log(result);
+			if (result.complete) {
+				stripeTokenHandler(result.token, data)
+			}
+		})
+})
+
 
 })
