@@ -532,7 +532,11 @@ function stripeTokenHandler(token, data) {
 		}
 	})
 	.then(function (res) {
-		window.location.href = `${siteUrl}registered`
+		if (payMode === 'Event') {
+			window.location.href = `${siteUrl}registered`
+		} else {
+			window.location.href = `${siteUrl}success`
+		}
 	})
 	.fail(function (err) {
 		alert('The payment did not go through. Please try again.');
