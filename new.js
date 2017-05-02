@@ -494,6 +494,7 @@ function resetCustomForm() {
 	repopulateForm('Custom')
 	setCustomSelect()
 	$customForm.parsley()
+	$customForm.show()
 	$(customTerms).attr('checked', false)
 	customValidation()
 }
