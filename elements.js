@@ -524,13 +524,13 @@ style = {
 	invalid: {
 		color: '#e5424d',
 		':focus': {
-			color: '#303238',
-		},
-	},
+			color: '#303238'
+		}
+	}
 }
-const card = elements.create('card')
+const card = elements.create('card', { style })
 card.mount('#card-element')
-card.addEventListener('change', ({error}) => {
+card.addEventListener('change', ({ error }) => {
 	const displayError = document.getElementById('card-errors')
 	if (error) {
 		displayError.textContent = error.message
@@ -538,6 +538,28 @@ card.addEventListener('change', ({error}) => {
 		displayError.textContent = ''
 	}
 })
+
+function stripeTokenHandler(token) {
+	$.ajax({
+		type: 'POST',
+		url: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe',
+		crossDomain: true,
+		data: {
+			'stripeToken': token.id,
+			'stripeEmail': token.email,
+			'stripeCustomer': customerDescription + ' <' + token.email + '>',
+			'stripeCharge': chargeDescription,
+			'stripeAmount': chargeAmount
+		}
+	})
+	.then(function (res) {
+		window.location.href = `${siteUrl}registered`
+	})
+	.fail(function (err) {
+		alert('The payment did not go through. Please try again.');
+		console.log(err);
+	})
+}
 
 $(`${payButton}`).on('click', function() {
 	saveForm(payMode)
@@ -566,77 +588,6 @@ $(`${payButton}`).on('click', function() {
 				stripeTokenHandler(result.token)
 			}
 		})
-
-	function stripeTokenHandler(token) {
-		$.ajax({
-			type: 'POST',
-			url: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe',
-			crossDomain: true,
-			data: {
-				'stripeToken': token.id,
-				'stripeEmail': token.email,
-				'stripeCustomer': customerDescription + ' <' + token.email + '>',
-				'stripeCharge': chargeDescription,
-				'stripeAmount': chargeAmount
-			}
-		})
-		.then(function (res) {
-			window.location.href = `${siteUrl}registered`
-		})
-		.fail(function (err) {
-			alert('The payment did not go through. Please try again.');
-			console.log(err);
-		})
-
-	// var paymentToken = false
-	// pk_test_QO6tO6bHny3y10LjH96f4n3p
-	// pk_live_0rULIvKhv6aSLqI49Ae5rflI
-	// var handler = StripeCheckout.configure({
-	// 	key: 'pk_live_0rULIvKhv6aSLqI49Ae5rflI',
-	// 	image: 'https://daks2k3a4ib2z.cloudfront.net/564aac835a5735b1375b5cdf/56b9741e0758a4b421e7aa05_ELI-Logo-color-heart.jpg',
-	// 	locale: 'auto',
-	// 	name: 'Ecstatic Living',
-	// 	description: stripeDescription[count],
-	// 	billingAddress: true,
-	// 	amount: chargeAmount,
-	// 	token: function(token) {
-	// 		paymentToken = true
-	// 		$.ajax({
-	// 			type: 'POST',
-	// 			url: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe',
-	// 			crossDomain: true,
-	// 			data: {
-	// 				'stripeToken': token.id,
-	// 				'stripeEmail': token.email,
-	// 				'stripeCustomer': customerDescription + ' <' + token.email + '>',
-	// 				'stripeCharge': chargeDescription,
-	// 				'stripeAmount': chargeAmount
-	// 			}
-	// 		})
-	// 		.then(function (res) {
-	// 			window.location.href = `${siteUrl}registered`
-	// 		})
-	// 		.fail(function (err) {
-	// 			alert('The payment did not go through. Please try again.');
-	// 			console.log(err);
-	// 		});
-	// 	}
-	// })
-	// handler.open({
-	// 	closed: function () {
-	// 		if(paymentToken === false) {
-	// 			console.log('Stripe closed prior to successful transaction.')
-	// 			if (payMode === 'Event') {
-	// 				resetEventForm()
-	// 			} else {
-	// 				resetCustomForm()
-	// 			}
-	// 		}
-	// 	}
-	// })
-	// $(window).on('popstate', function() {
-	// 	handler.close()
-	// })
 })
 
 
