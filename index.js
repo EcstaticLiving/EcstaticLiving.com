@@ -509,18 +509,18 @@ const payMode = (window.location.href.indexOf('/events/') > -1) ? 'Event' : 'Cus
 //	STRIPE
 $(`${payButton}`).on('click', function() {
 	saveForm(payMode)
-	let customerDescription = '', chargeDescription = '', amount = 0, count = 0
+	let customerDescription = '', chargeDescription = '', chargeAmount = 0, count = 0
 	if (window.location.href.indexOf('/events/') > -1) {
 		$registerForm.submit()
 		count = $(eventLodging).prop('selectedIndex') - 1
-		amount = $(eventDepositDeposit).is(':checked') ? eventPrice * 100 : $(eventLodging).val() * 100
+		chargeAmount = $(eventDepositDeposit).is(':checked') ? eventPrice * 100 : $(eventLodging).val() * 100
 		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
 		customerDescription = `${$(eventFirstName).val()} ${$(eventLastName).val()}`
 		chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(eventLodging + ' option:selected').text().substring(0, $(eventLodging + ' option:selected').text().length - 17)}, ${eventDeposit}`
 	} else {
 		$customForm.submit()
 		count = $(customAmount).prop('selectedIndex') - 1
-		amount = $(customAmount).val() * 100
+		chargeAmount = $(customAmount).val() * 100
 		customerDescription = `${$(customFirstName).val()} ${$(customLastName).val()}`
 		chargeDescription = 'Custom Charge'
 	}
@@ -536,7 +536,7 @@ $(`${payButton}`).on('click', function() {
 		name: 'Ecstatic Living',
 		description: stripeDescription[count],
 		billingAddress: true,
-		amount: amount,
+		amount: chargeAmount,
 		token: function(token) {
 			paymentToken = true
 			$.ajax({
