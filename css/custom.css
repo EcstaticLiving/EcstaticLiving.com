@@ -1,0 +1,72 @@
+/*
+Code ©2016 Ecstatic Living Institute All rights reserved.
+Created by Conscious Apps Inc., November 2015 - June 2016, www.consciousapps.com
+*/
+<style>
+/* Harmonize scrolling for iOS */
+body,
+.main-section,
+.modal-background,
+.registration-section,
+.modals.register-mobile {–webkit-overflow-scrolling: touch;}
+
+/* Rich-text formatting */
+.w-input.input-field, .w-input.email-signup-input-field {-webkit-appearance: none;}
+.w-richtext p {
+	margin: 0 0 22px 0;
+}
+.w-richtext h1, .w-richtext h2, .w-richtext h3, .w-richtext h4, .w-richtext h5, .w-richtext h6 {margin-top:20px;}
+.w-richtext.text-18,
+.w-richtext.text-18 p,
+.w-richtext.text-18 li {
+	font-size: 18px;
+	line-height: 24px;
+}
+.w-richtext p a strong {color: #800000; text-decoration:none;}
+.w-richtext.text-18 p a,
+a {color: #800000; text-decoration:none;}
+.w-richtext.accordion-dropdown-text p {font-size: 18px; line-height: 24px;}
+@media only screen and (max-device-width: 800px) {
+	.w-richtext.accordion-dropdown-text p {font-size: 15px; line-height: 22px;}
+}
+
+/* ACCORDION LINE WRAP */
+.accordion-toggle, .accordion-toggle-text {white-space: normal; word-wrap: break-word;}
+
+/* FORM VALIDATION */
+input.parsley-error,
+select.parsley-error,
+textarea.parsley-error {
+	color: #B94A48;
+	background-color: #F2DEDE;
+	border: 1px solid #EED3D7;
+}
+.parsley-errors-list {
+	margin: 0px 0 10px;
+	padding: 0;
+	list-style-type: none;
+	color: #9b3831;
+	font-size: 0.9em;
+	line-height: 0.9em;
+	opacity: 0;
+	transition: all .3s ease-in;
+	-o-transition: all .3s ease-in;
+	-moz-transition: all .3s ease-in;
+	-webkit-transition: all .3s ease-in;
+}
+.parsley-errors-list.filled {
+	opacity: 1;
+}
+a.w-dropdown-link.w--current {color:#800000;}
+
+/* INPUT ON FOCUS HIGHLIGHT */
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus,
+.form-radio:focus,
+.email-input-field:focus
+{
+	outline: none !important;
+	border:1px solid #800000;
+}
+</style>
