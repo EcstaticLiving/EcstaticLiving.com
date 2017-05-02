@@ -492,7 +492,6 @@ function resetCustomForm() {
 	$('.w-form-fail').hide()
 	$customForm[0].reset()
 	repopulateForm('Custom')
-	$('#custom').val(customCode)
 	setCustomSelect()
 	$customForm.parsley()
 	$(customTerms).attr('checked', false)
@@ -568,7 +567,11 @@ $(`${payButton}`).on('click', function() {
 		closed: function () {
 			if(paymentToken === false) {
 				console.log('Stripe closed prior to successful transaction.')
-				resetEventForm()
+				if (payMode === 'Event') {
+					resetEventForm()
+				} else {
+					resetCustomForm()
+				}
 			}
 		}
 	})
