@@ -513,96 +513,104 @@ if (window.location.href.indexOf('/charge') > -1) {
 // pk_live_0rULIvKhv6aSLqI49Ae5rflI
 // https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe
 
-const payMode = (window.location.href.indexOf('/events/') > -1) ? 'Event' : 'Custom'
-const stripe = Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
-const elements = stripe.elements()
-
-function stripeTokenHandler(token, data) {
-	console.log(data.customerDescription);
-	$.ajax({
-		type: 'POST',
-		url: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test',
-		crossDomain: true,
-		data: {
-			'stripeToken': token.id,
-			'stripeEmail': token.email,
-			'stripeCustomer': data.customerDescription + ' <' + token.email + '>',
-			'stripeCharge': data.chargeDescription,
-			'stripeAmount': data.chargeAmount
-		}
-	})
-	.then(function (res) {
-		window.location.href = `${siteUrl}registered`
-	})
-	.fail(function (err) {
-		alert('The payment did not go through. Please try again.');
-		console.log(err);
-	})
+let payMode
+if (window.location.href.indexOf('/events/') > -1) {
+	payMode = 'Event'
+} else if (window.location.href.indexOf('/charge') > -1) {
+	payMode = 'Custom'
+} else {
+	payMode = null
 }
+if (payMode) {
+	const stripe = Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
+	const elements = stripe.elements()
 
-style = {
-	base: {
-		fontFamily: 'Lato',
-		fontWeight: 300,
-		color: '#333',
-		fontSize: '18px',
-		lineHeight: '24px',
-		fontSmoothing: 'antialiased',
-		'::placeholder': {
-			color: '#999',
-		}
-	},
-	invalid: {
-		color: '#e5424d',
-		':focus': {
-			color: '#303238'
-		}
-	}
-}
-const card = elements.create('card', { style })
-card.mount('#card-element')
-card.addEventListener('change', ({ error }) => {
-	const displayError = document.getElementById('card-errors')
-	if (error) {
-		displayError.textContent = error.message
-	} else {
-		displayError.textContent = ''
-	}
-})
-
-$(`${payButton}`).on('click', function() {
-	saveForm(payMode)
-	var customerDescription = '', chargeDescription = '', chargeAmount = 0, count = 0
-	if (payMode === 'Event') {
-		$registerForm.submit()
-		count = $(eventSelect).prop('selectedIndex') - 1
-		chargeAmount = $(eventDepositDeposit).is(':checked') ? eventDepositPrice * 100 : $(eventSelect).val() * 100
-		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
-		customerDescription = `${$(eventFirstName).val()} ${$(eventLastName).val()}`
-		chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(eventSelect + ' option:selected').text().substring(0, $(eventSelect + ' option:selected').text().length - 17)}, ${eventDeposit}`
-	} else {
-		$customForm.submit()
-		count = $(customSelect).prop('selectedIndex') - 1
-		chargeAmount = $(customSelect).val() * 100
-		customerDescription = `${$(customFirstName).val()} ${$(customLastName).val()}`
-		chargeDescription = `Custom Charge: ${$(customSelect + ' option:selected').text().substring(0, $(customSelect + ' option:selected').text().length - 17)}`
-	}
-	const stripeDescription = $('#stripe-description').text().split(' | ')
-	const data = {
-		customerDescription,
-		chargeDescription,
-		chargeAmount
-	}
-	stripe.createToken(card)
-		.then(function(result) {
-			if (result.error) {
-				var errorElement = document.getElementById('card-errors')
-				errorElement.textContent = result.error.message
-			} else {
-				stripeTokenHandler(result.token, data)
+	function stripeTokenHandler(token, data) {
+		console.log(data.customerDescription);
+		$.ajax({
+			type: 'POST',
+			url: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test',
+			crossDomain: true,
+			data: {
+				'stripeToken': token.id,
+				'stripeEmail': token.email,
+				'stripeCustomer': data.customerDescription + ' <' + token.email + '>',
+				'stripeCharge': data.chargeDescription,
+				'stripeAmount': data.chargeAmount
 			}
 		})
-})
+		.then(function (res) {
+			window.location.href = `${siteUrl}registered`
+		})
+		.fail(function (err) {
+			alert('The payment did not go through. Please try again.');
+			console.log(err);
+		})
+	}
 
+	style = {
+		base: {
+			fontFamily: 'Lato',
+			fontWeight: 300,
+			color: '#333',
+			fontSize: '18px',
+			lineHeight: '24px',
+			fontSmoothing: 'antialiased',
+			'::placeholder': {
+				color: '#999',
+			}
+		},
+		invalid: {
+			color: '#e5424d',
+			':focus': {
+				color: '#303238'
+			}
+		}
+	}
+	const card = elements.create('card', { style })
+	card.mount('#card-element')
+	card.addEventListener('change', ({ error }) => {
+		const displayError = document.getElementById('card-errors')
+		if (error) {
+			displayError.textContent = error.message
+		} else {
+			displayError.textContent = ''
+		}
+	})
+
+	$(`${payButton}`).on('click', function() {
+		saveForm(payMode)
+		var customerDescription = '', chargeDescription = '', chargeAmount = 0, count = 0
+		if (payMode === 'Event') {
+			$registerForm.submit()
+			count = $(eventSelect).prop('selectedIndex') - 1
+			chargeAmount = $(eventDepositDeposit).is(':checked') ? eventDepositPrice * 100 : $(eventSelect).val() * 100
+			const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
+			customerDescription = `${$(eventFirstName).val()} ${$(eventLastName).val()}`
+			chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(eventSelect + ' option:selected').text().substring(0, $(eventSelect + ' option:selected').text().length - 17)}, ${eventDeposit}`
+		} else {
+			$customForm.submit()
+			count = $(customSelect).prop('selectedIndex') - 1
+			chargeAmount = $(customSelect).val() * 100
+			customerDescription = `${$(customFirstName).val()} ${$(customLastName).val()}`
+			chargeDescription = `Custom Charge: ${$(customSelect + ' option:selected').text().substring(0, $(customSelect + ' option:selected').text().length - 17)}`
+		}
+		const stripeDescription = $('#stripe-description').text().split(' | ')
+		const data = {
+			customerDescription,
+			chargeDescription,
+			chargeAmount
+		}
+		stripe.createToken(card)
+			.then(function(result) {
+				if (result.error) {
+					var errorElement = document.getElementById('card-errors')
+					errorElement.textContent = result.error.message
+				} else {
+					stripeTokenHandler(result.token, data)
+				}
+			})
+	})
+}
 
 })
