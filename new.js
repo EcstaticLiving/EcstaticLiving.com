@@ -467,7 +467,6 @@ function setCustomSelect() {
 	//	Adds options & prices based on CMS input
 	var customOptions = $('#custom-options').text().split(' | ')
 	var customPrices = $('#custom-prices').text().split(' | ')
-	console.log(customOptions);
 	$(customSelect).empty()
 	if (customOptions.length > 0) {
 		$(customSelect).append($('<option>', {
@@ -476,7 +475,7 @@ function setCustomSelect() {
 		}))
 	}
 	for (var i = 0; i < customOptions.length; i++) {
-		$(eventSelect).append($('<option>', {
+		$(customSelect).append($('<option>', {
 			value: customPrices[i],
 			text: customOptions[i] + ' ($' + customPrices[i] + ')'
 		}))
