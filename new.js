@@ -229,7 +229,8 @@ eventDepositContainer = '.event-container.deposit',
 eventDepositText = '#event-deposit-text',
 eventDepositFull = '#event-deposit-full',
 eventDepositDeposit = '#event-deposit-deposit',
-eventTerms = '#event-terms'
+eventTerms = '#event-terms',
+eventButton = '#event-button'
 
 // PARTICIPANTS
 function participants() {
@@ -278,13 +279,13 @@ function validationLodging() {
 }
 function eventValidation() {
 	if (validationPersonal() && validationDetails() && validationStatus() && validationLodging() && $(eventTerms).is(':checked')) {
-		$(payButton).prop('disabled', false)
-		$(payButton).css({ 'background-color': '#800000' })
-		$(payButton).css({ 'color': '#ffffff' })
+		$(eventButton).prop('disabled', false)
+		$(eventButton).css({ 'background-color': '#800000' })
+		$(eventButton).css({ 'color': '#ffffff' })
 	} else {
-		$(payButton).prop('disabled', true)
-		$(payButton).css({ 'background-color': '#f5f5f5' })
-		$(payButton).css({ 'color': '#333333' })
+		$(eventButton).prop('disabled', true)
+		$(eventButton).css({ 'background-color': '#f5f5f5' })
+		$(eventButton).css({ 'color': '#333333' })
 	}
 }
 $(eventFirstName + ',' + eventLastName + ',' + eventEmail + ',' + eventMobile + ',' + eventBirthdate + ',' + eventFemale + ',' + eventMale + ',' + eventOther + ',' + eventReferral + ',' + eventExperienceYes + ',' + eventExperienceNo + ',' + eventExperienceDetails + ',' + eventDietYes + ',' + eventDietNo + ',' + eventDietDetails + ',' + eventStatus + ',' + eventPartnerName + ',' + eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther + ',' + eventSelect + ',' + eventTerms).on('change', function () {
@@ -447,19 +448,20 @@ customCode = '#custom-code',
 customFirstName = '#custom-firstname',
 customLastName = '#custom-lastname',
 customSelect = '#custom-select',
-customTerms = '#custom-terms'
+customTerms = '#custom-terms',
+customButton = '#custom-button'
 
 
 // CUSTOM AMOUNT
 function customValidation() {
 	if ($(customFirstName).val() !== '' && $(customLastName).val() !== '' && $(customSelect).val() !== '' && $(customTerms).is(':checked')) {
-		$(payButton).prop('disabled', false)
-		$(payButton).css({ 'background-color': '#800000' })
-		$(payButton).css({ 'color': '#ffffff' })
+		$(customButton).prop('disabled', false)
+		$(customButton).css({ 'background-color': '#800000' })
+		$(customButton).css({ 'color': '#ffffff' })
 	} else {
-		$(payButton).prop('disabled', true)
-		$(payButton).css({ 'background-color': '#f5f5f5' })
-		$(payButton).css({ 'color': '#333333' })
+		$(customButton).prop('disabled', true)
+		$(customButton).css({ 'background-color': '#f5f5f5' })
+		$(customButton).css({ 'color': '#333333' })
 	}
 }
 
