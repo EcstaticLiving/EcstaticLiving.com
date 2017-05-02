@@ -395,7 +395,7 @@ function resetLodging(paymentStatus) {
 	const paymentFactor = (paymentStatus === 'for both') ? 2 : 1
 	const spacer = paymentStatus ? ' ' : ''
 	const closer = (paymentStatus || paymentStatus === '') ? ')' : ''
-	for (let i = 0; i < lodgingOptions.length; i++;) {
+	for (var i = 0; i < lodgingOptions.length; i++) {
 		$(eventLodging).append($('<option>', {
 			value: lodgingPrices[i] * paymentFactor,
 			text: lodgingOptions[i] + ' ($' + lodgingPrices[i] * paymentFactor + spacer + paymentStatus + closer
