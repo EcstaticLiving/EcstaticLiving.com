@@ -517,8 +517,8 @@ const payMode = (window.location.href.indexOf('/events/') > -1) ? 'Event' : 'Cus
 const stripe = Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
 const elements = stripe.elements()
 
-function stripeTokenHandler(token) {
-	console.log(customerDescription);
+function stripeTokenHandler(token, data) {
+	console.log(data.customerDescription);
 	$.ajax({
 		type: 'POST',
 		url: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test',
@@ -526,9 +526,9 @@ function stripeTokenHandler(token) {
 		data: {
 			'stripeToken': token.id,
 			'stripeEmail': token.email,
-			'stripeCustomer': customerDescription + ' <' + token.email + '>',
-			'stripeCharge': chargeDescription,
-			'stripeAmount': chargeAmount
+			'stripeCustomer': data.customerDescription + ' <' + token.email + '>',
+			'stripeCharge': data.chargeDescription,
+			'stripeAmount': data.chargeAmount
 		}
 	})
 	.then(function (res) {
@@ -588,13 +588,18 @@ $(`${payButton}`).on('click', function() {
 		chargeDescription = `Custom Charge: ${$(customSelect + ' option:selected').text().substring(0, $(customSelect + ' option:selected').text().length - 17)}`
 	}
 	const stripeDescription = $('#stripe-description').text().split(' | ')
+	const data = {
+		customerDescription,
+		chargeDescription,
+		chargeAmount
+	}
 	stripe.createToken(card)
 		.then(function(result) {
 			if (result.error) {
 				var errorElement = document.getElementById('card-errors')
 				errorElement.textContent = result.error.message
 			} else {
-				stripeTokenHandler(result.token)
+				stripeTokenHandler(result.token, data)
 			}
 		})
 })
