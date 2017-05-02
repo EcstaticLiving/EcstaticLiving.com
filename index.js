@@ -525,7 +525,6 @@ $(`${payButton}`).on('click', function() {
 		chargeDescription = 'Custom Charge'
 	}
 	const stripeDescription = $('#stripe-description').text().split(' | ')
-	console.log(stripeDescription[count]);
 	let paymentToken = false
 	// pk_test_QO6tO6bHny3y10LjH96f4n3p
 	// pk_live_0rULIvKhv6aSLqI49Ae5rflI
