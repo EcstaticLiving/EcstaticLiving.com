@@ -479,7 +479,7 @@ function setCustomSelect() {
 	for (var i = 0; i < customOptions.length; i++) {
 		$(customSelect).append($('<option>', {
 			value: customPrices[i],
-			text: customOptions[i] + ': $' + customPrices[i]
+			text: customOptions[i] + ' - $' + customPrices[i]
 		}))
 	}
 }
