@@ -285,7 +285,6 @@ function eventValidation() {
 		$(eventButton).css({ 'color': '#ffffff' })
 		return true
 	}
-	$eventForm.parsley().validate()
 	$(eventButton).css({ 'background-color': '#f5f5f5' })
 	$(eventButton).css({ 'color': '#333333' })
 	return false
@@ -462,7 +461,6 @@ function customValidation() {
 		$(customButton).css({ 'color': '#ffffff' })
 		return true
 	}
-	$customForm.parsley().validate()
 	$(customButton).css({ 'background-color': '#f5f5f5' })
 	$(customButton).css({ 'color': '#333333' })
 	return false
