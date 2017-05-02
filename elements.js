@@ -511,13 +511,13 @@ if (window.location.href.indexOf('/charge') > -1) {
 
 // STRIPE
 //
-// TEST:
-// pk_test_QO6tO6bHny3y10LjH96f4n3p
-// https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test
-//
 // LIVE:
 // pk_live_0rULIvKhv6aSLqI49Ae5rflI
 // https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe
+//
+// TEST:
+// pk_test_QO6tO6bHny3y10LjH96f4n3p
+// https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test
 
 function stripeTokenHandler(token, data) {
 	$.ajax({
