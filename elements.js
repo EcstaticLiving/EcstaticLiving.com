@@ -575,8 +575,8 @@ if (payMode) {
 		const displayError = document.getElementById('card-errors')
 		if (result.error) {
 			displayError.textContent = result.error.message
-		} else if (result.token) {
-			console.log(result.token);
+		} else if (result.complete) {
+			console.log(result);
 			displayError.textContent = 'Works'
 		} else {
 			console.log(result);
