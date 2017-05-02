@@ -160,7 +160,7 @@ function repopulateForm(eventId) {
 				$('input[name=' + item + '][value="' + values[item] + '"]').prop('checked', true)
 			}
 			else {
-				if (item !== 'event-lodging') {
+				if (item !== 'Event-Lodging') {
 					$('*[name=' + item + ']').val(values[item])
 				}
 			}
