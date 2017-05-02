@@ -269,7 +269,7 @@ function validationStatus() {
 	}
 	return false
 }
-function validationLodging() {
+function validationEventOptions() {
 	if ($(eventSelect).val() !== '' && (
 		$(eventDepositContainer).is(':visible') && ($(eventDepositFull).is(':checked') || $(eventDepositDeposit).is(':checked'))
 	) || $(eventDepositContainer).is(':hidden')) {
@@ -278,7 +278,7 @@ function validationLodging() {
 	return false
 }
 function eventValidation() {
-	if (validationPersonal() && validationDetails() && validationStatus() && validationLodging() && $(eventTerms).is(':checked')) {
+	if (validationPersonal() && validationDetails() && validationStatus() && validationEventOptions() && $(eventTerms).is(':checked')) {
 		$(eventButton).prop('disabled', false)
 		$(eventButton).css({ 'background-color': '#800000' })
 		$(eventButton).css({ 'color': '#ffffff' })
@@ -377,7 +377,7 @@ $(eventDietNo + ',' + eventDietYes).change(function() {
 	if ($(eventDietNo).is(':checked')) hideDiet()
 })
 
-// LODGING
+// EVENT OPTIONS
 function setEventSelect(people) {
 	//	Adds event options & prices based on CMS input
 	var eventOptions = $('#event-options').text().split(' | ')
