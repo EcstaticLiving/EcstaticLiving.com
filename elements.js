@@ -278,8 +278,6 @@ function validationEventOptions() {
 	return false
 }
 function eventValidation() {
-	console.log($(eventSelect).val());
-	console.log(' ');
 	if (validationPersonal() && validationDetails() && validationStatus() && validationEventOptions() && $(eventTerms).is(':checked')) {
 		$(eventButton).prop('disabled', false)
 		$(eventButton).css({ 'background-color': '#800000' })
@@ -575,8 +573,9 @@ if (payMode) {
 	card.addEventListener('change', (result) => {
 		const displayError = document.getElementById('card-errors')
 		if (result.error) {
-			displayError.textContent = error.message
+			displayError.textContent = result.error.message
 		} else if (result.token) {
+			console.log(result.token);
 			displayError.textContent = 'Works'
 		} else {
 			displayError.textContent = ''
