@@ -629,6 +629,7 @@ if (payMode) {
 			if (result.error) {
 				paymentOutcome(result)
 			} else {
+				console.log(result);
 				if (payMode === 'Event') {
 					$registerForm.submit()
 				} else {
