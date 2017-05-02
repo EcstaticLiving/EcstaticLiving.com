@@ -230,7 +230,7 @@ eventDepositText = '#event-deposit-text',
 eventDepositFull = '#event-deposit-full',
 eventDepositDeposit = '#event-deposit-deposit',
 eventTerms = '#event-terms',
-eventCard = '#event-card',
+eventCard = '#card-details',
 eventButton = '#event-button'
 
 // PARTICIPANTS
@@ -452,7 +452,7 @@ customFirstName = '#custom-firstname',
 customLastName = '#custom-lastname',
 customSelect = '#custom-select',
 customTerms = '#custom-terms',
-customCard = '#custom-card',
+customCard = '#card-details',
 customButton = '#custom-button'
 
 
