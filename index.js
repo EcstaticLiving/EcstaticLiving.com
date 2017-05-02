@@ -509,7 +509,7 @@ const payMode = (window.location.href.indexOf('/events/') > -1) ? 'Event' : 'Cus
 //	STRIPE
 $(`${payButton}`).on('click', function() {
 	saveForm(payMode)
-	let customerDescription = '', chargeDescription = '', chargeAmount = 0, count = 0
+	var customerDescription = '', chargeDescription = '', chargeAmount = 0, count = 0
 	if (window.location.href.indexOf('/events/') > -1) {
 		$registerForm.submit()
 		count = $(eventLodging).prop('selectedIndex') - 1
@@ -525,7 +525,7 @@ $(`${payButton}`).on('click', function() {
 		chargeDescription = 'Custom Charge'
 	}
 	const stripeDescription = $('#stripe-description').text().split(' | ')
-	let paymentToken = false
+	var paymentToken = false
 	// pk_test_QO6tO6bHny3y10LjH96f4n3p
 	// pk_live_0rULIvKhv6aSLqI49Ae5rflI
 	var completeFunction = () => {}
