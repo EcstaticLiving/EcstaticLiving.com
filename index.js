@@ -188,7 +188,7 @@ if (window.location.href.indexOf('/forms/ctt-application') > -1) {
 
 
 // EVENT REGISTRATION
-$registerForm = $('.form.registration'),
+$eventForm = $('.form.registration'),
 eventCode = $('#event-code').text().toLowerCase(),
 eventTitle = $('#event-name').text(), // Stripe description
 eventStartDate = $('#event-start').text(),
@@ -408,7 +408,7 @@ function setEventSelect(people) {
 function resetEventForm() {
 	$('.w-form-done').hide()
 	$('.w-form-fail').hide()
-	$registerForm[0].reset()
+	$eventForm[0].reset()
 	repopulateForm('Event')
 	if ($(eventPayBoth).is(':checked')) {
 		setEventSelect('for both')
@@ -427,8 +427,8 @@ function resetEventForm() {
 	} else {
 		$(eventDepositContainer).hide()
 	}
-	$registerForm.parsley()
-	$registerForm.show()
+	$eventForm.parsley()
+	$eventForm.show()
 	$(eventTerms).attr('checked', false)
 	eventValidation()
 }
@@ -643,7 +643,7 @@ if (payMode) {
 			} else {
 				console.log(result);
 				if (payMode === 'Event') {
-					$registerForm.submit()
+					$eventForm.submit()
 				} else {
 					$customForm.submit()
 				}
