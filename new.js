@@ -378,7 +378,7 @@ $(eventDietNo + ',' + eventDietYes).change(function() {
 
 // LODGING
 function setEventSelect(people) {
-	//	Adds lodging options & prices based on CMS input
+	//	Adds event options & prices based on CMS input
 	var eventOptions = $('#event-options').text().split(' | ')
 	var eventPrices = $('#event-prices').text().split(' | ')
 	$(eventSelect).empty()
@@ -464,9 +464,10 @@ function customValidation() {
 }
 
 function setCustomSelect() {
-	//	Adds lodging options & prices based on CMS input
+	//	Adds options & prices based on CMS input
 	var customOptions = $('#custom-options').text().split(' | ')
 	var customPrices = $('#custom-prices').text().split(' | ')
+	console.log(customOptions);
 	$(customSelect).empty()
 	if (customOptions.length > 0) {
 		$(customSelect).append($('<option>', {
