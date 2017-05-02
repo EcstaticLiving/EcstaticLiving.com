@@ -508,7 +508,24 @@ if (window.location.href.indexOf('/charge') > -1) {
 const payMode = (window.location.href.indexOf('/events/') > -1) ? 'Event' : 'Custom'
 const stripe = Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
 const elements = stripe.elements()
-const card = elements.create('card')
+style = {
+	base: {
+		color: '#333',
+		fontSize: '18px',
+		lineHeight: '24px',
+		fontSmoothing: 'antialiased',
+		'::placeholder': {
+			color: '#ccc',
+		},
+	},
+	invalid: {
+		color: '#e5424d',
+		':focus': {
+			color: '#303238',
+		},
+	},
+}
+const card = elements.create('card', { style })
 card.mount('#card-element')
 card.addEventListener('change', ({error}) => {
 	const displayError = document.getElementById('card-errors')
@@ -517,7 +534,7 @@ card.addEventListener('change', ({error}) => {
 	} else {
 		displayError.textContent = ''
 	}
-});
+})
 
 $(`${payButton}`).on('click', function() {
 	saveForm(payMode)
@@ -537,6 +554,17 @@ $(`${payButton}`).on('click', function() {
 		chargeDescription = `Custom Charge: ${$(customSelect + ' option:selected').text().substring(0, $(customSelect + ' option:selected').text().length - 17)}`
 	}
 	const stripeDescription = $('#stripe-description').text().split(' | ')
+	stripe.createToken(card)
+		.then(function(result) {
+			if (result.error) {
+				var errorElement = document.getElementById('card-errors')
+				errorElement.textContent = result.error.message
+			} else {
+				// Send the token to your server
+				stripeTokenHandler(result.token);
+			}
+		});
+
 	var paymentToken = false
 	// pk_test_QO6tO6bHny3y10LjH96f4n3p
 	// pk_live_0rULIvKhv6aSLqI49Ae5rflI
