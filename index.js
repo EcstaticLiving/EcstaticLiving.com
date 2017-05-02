@@ -632,6 +632,8 @@ if (payMode) {
 				console.log(result);
 				if (result.complete) {
 					stripeTokenHandler(result.token, data)
+				} else if (result.error) {
+					paymentOutcome(result)
 				}
 			})
 	})
