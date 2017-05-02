@@ -504,10 +504,42 @@ if (window.location.href.indexOf('/charge') > -1) {
 
 
 
-//	STRIPE
+// STRIPE
+// TEST
+// pk_test_QO6tO6bHny3y10LjH96f4n3p
+// https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test
+//
+// LIVE
+// pk_live_0rULIvKhv6aSLqI49Ae5rflI
+// https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe
+
 const payMode = (window.location.href.indexOf('/events/') > -1) ? 'Event' : 'Custom'
 const stripe = Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
 const elements = stripe.elements()
+
+function stripeTokenHandler(token) {
+	console.log(customerDescription);
+	$.ajax({
+		type: 'POST',
+		url: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test',
+		crossDomain: true,
+		data: {
+			'stripeToken': token.id,
+			'stripeEmail': token.email,
+			'stripeCustomer': customerDescription + ' <' + token.email + '>',
+			'stripeCharge': chargeDescription,
+			'stripeAmount': chargeAmount
+		}
+	})
+	.then(function (res) {
+		window.location.href = `${siteUrl}registered`
+	})
+	.fail(function (err) {
+		alert('The payment did not go through. Please try again.');
+		console.log(err);
+	})
+}
+
 style = {
 	base: {
 		fontFamily: 'Lato',
@@ -518,8 +550,7 @@ style = {
 		fontSmoothing: 'antialiased',
 		'::placeholder': {
 			color: '#999',
-		},
-		borderColor: '#ddd'
+		}
 	},
 	invalid: {
 		color: '#e5424d',
@@ -538,28 +569,6 @@ card.addEventListener('change', ({ error }) => {
 		displayError.textContent = ''
 	}
 })
-
-function stripeTokenHandler(token) {
-	$.ajax({
-		type: 'POST',
-		url: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe',
-		crossDomain: true,
-		data: {
-			'stripeToken': token.id,
-			'stripeEmail': token.email,
-			'stripeCustomer': customerDescription + ' <' + token.email + '>',
-			'stripeCharge': chargeDescription,
-			'stripeAmount': chargeAmount
-		}
-	})
-	.then(function (res) {
-		window.location.href = `${siteUrl}registered`
-	})
-	.fail(function (err) {
-		alert('The payment did not go through. Please try again.');
-		console.log(err);
-	})
-}
 
 $(`${payButton}`).on('click', function() {
 	saveForm(payMode)
