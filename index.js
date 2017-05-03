@@ -281,10 +281,12 @@ function validationEventOptions() {
 }
 function eventValidation() {
 	if (validationPersonal() && validationDetails() && validationStatus() && validationEventOptions() && $(eventTerms).is(':checked') && $(eventCard).is(':checked')) {
+		$(eventButton).prop('disabled', false)
 		$(eventButton).css({ 'background-color': '#800000' })
 		$(eventButton).css({ 'color': '#ffffff' })
 		return true
 	}
+	$(eventButton).prop('disabled', true)
 	$(eventButton).css({ 'background-color': '#f5f5f5' })
 	$(eventButton).css({ 'color': '#333333' })
 	return false
@@ -457,10 +459,12 @@ customButton = '#custom-button'
 // CUSTOM AMOUNT
 function customValidation() {
 	if ($(customFirstName).val() !== '' && $(customLastName).val() !== '' && $(customSelect).val() !== '' && $(customTerms).is(':checked') && $(customCard).is(':checked')) {
+		$(customButton).prop('disabled', false)
 		$(customButton).css({ 'background-color': '#800000' })
 		$(customButton).css({ 'color': '#ffffff' })
 		return true
 	}
+	$(customButton).prop('disabled', true)
 	$(customButton).css({ 'background-color': '#f5f5f5' })
 	$(customButton).css({ 'color': '#333333' })
 	return false
