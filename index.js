@@ -583,12 +583,13 @@ if (window.location.href.indexOf('/events/') > -1) {
 if (payMode) {
 	const stripe = Stripe('pk_live_0rULIvKhv6aSLqI49Ae5rflI')
 	const elements = stripe.elements()
+	const fontSize = (Math.min($(window).width(), $(window).height()) <= 375) ? '12px' : '16px'
 	style = {
 		base: {
 			fontFamily: 'Lato',
 			fontWeight: 300,
 			color: '#333',
-			fontSize: '16px',
+			fontSize,
 			lineHeight: '24px',
 			fontSmoothing: 'antialiased',
 			'::placeholder': {
