@@ -584,8 +584,8 @@ if (payMode) {
 	const stripe = Stripe('pk_live_0rULIvKhv6aSLqI49Ae5rflI')
 	const elements = stripe.elements()
 	let fontSize
-	fontSize = (Math.min($(window).width(), $(window).height()) <= 375) ? '12px' : '16px'
-	fontSize = (Math.min($(window).width(), $(window).height()) <= 320) ? '11px' : fontSize
+	fontSize = (Math.min($(window).width(), $(window).height()) < 414) ? '12px' : '16px'
+	fontSize = (Math.min($(window).width(), $(window).height()) < 375) ? '11px' : fontSize
 	style = {
 		base: {
 			fontFamily: 'Lato',
