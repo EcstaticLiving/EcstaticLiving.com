@@ -584,7 +584,10 @@ if (payMode) {
 	const stripe = Stripe('pk_live_0rULIvKhv6aSLqI49Ae5rflI')
 	const elements = stripe.elements()
 	let fontSize
-	fontSize = (Math.min($(window).width(), $(window).height()) < 414) ? '12px' : '16px'
+	// Desktop, tablet, and iPhone 6Plus: 16px
+	// iPhone 6 or smaller: 12px
+	fontSize = (Math.min($(window).width(), $(window).height()) < 414) ? '13px' : '16px'
+	// iPhone 5: 11px
 	fontSize = (Math.min($(window).width(), $(window).height()) < 375) ? '11px' : fontSize
 	style = {
 		base: {
