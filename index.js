@@ -572,7 +572,7 @@ function paymentOutcome(result) {
 	}
 }
 
-let payMode = '';
+var payMode = '';
 if (window.location.href.indexOf('/events/') > -1) {
 	payMode = 'Event'
 } else if (window.location.href.indexOf('/charge') > -1) {
@@ -583,7 +583,7 @@ if (window.location.href.indexOf('/events/') > -1) {
 if (payMode) {
 	const stripe = Stripe('pk_live_0rULIvKhv6aSLqI49Ae5rflI')
 	const elements = stripe.elements()
-	let fontSize
+	var fontSize = '';
 	// Desktop, tablet, and iPhone 6Plus: 16px
 	// iPhone 6 or smaller: 12px
 	fontSize = (Math.min($(window).width(), $(window).height()) < 414) ? '13px' : '16px'
