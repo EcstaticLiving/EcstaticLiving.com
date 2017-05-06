@@ -572,7 +572,7 @@ function paymentOutcome(result) {
 	}
 }
 
-let payMode
+let payMode = '';
 if (window.location.href.indexOf('/events/') > -1) {
 	payMode = 'Event'
 } else if (window.location.href.indexOf('/charge') > -1) {
