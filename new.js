@@ -654,6 +654,7 @@ $(`${payButton}`).on('click', function(e) {
 	const billingData = {
 		name: $(billingFirstName).val() + ' ' + $(billingLastName).val(),
 		address_line1: $(billingStreet).val(),
+		address_line2: '',
 		address_city: $(billingCity).val(),
 		address_state: $(billingState).val(),
 		address_zip: $(billingPostal).val(),
