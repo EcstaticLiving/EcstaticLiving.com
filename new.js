@@ -230,7 +230,6 @@ eventDepositText = '#event-deposit-text',
 eventDepositFull = '#event-deposit-full',
 eventDepositDeposit = '#event-deposit-deposit',
 eventTerms = '#event-terms',
-eventCard = '#card-details',
 eventButton = '#event-button'
 
 // PARTICIPANTS
@@ -519,6 +518,15 @@ if (window.location.href.indexOf('/charge') > -1) {
 // TEST:
 // pk_test_QO6tO6bHny3y10LjH96f4n3p
 // https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test
+//
+const billingFirstName = '#event-billing-firstname',
+billingLastName = '#event-billing-lastname',
+billingStreet = '#event-billing-street',
+billingCity = '#event-billing-city',
+billingState = '#event-billing-state',
+billingPostal = '#event-billing-postal',
+billingCountry = '#country',
+eventCard = '#card-details'
 
 function stripeTokenHandler(token, data) {
 	$.ajax({
@@ -546,7 +554,7 @@ function stripeTokenHandler(token, data) {
 	})
 }
 
-function paymentOutcome(result) {
+function paymentValidation(result) {
 	const displayError = document.getElementById('card-errors')
 	if (result.error) {
 		displayError.textContent = result.error.message
@@ -575,6 +583,9 @@ function paymentOutcome(result) {
 var payMode = '';
 if (window.location.href.indexOf('/events/') > -1) {
 	payMode = 'Event'
+	$(eventFirstName + ',' + eventLastName).on('change', function () {
+
+	})
 } else if (window.location.href.indexOf('/charge') > -1) {
 	payMode = 'Custom'
 } else {
@@ -614,7 +625,7 @@ if (payMode) {
 	})
 	card.mount('#card-element')
 	card.addEventListener('change', (result) => {
-		paymentOutcome(result)
+		paymentValidation(result)
 	})
 
 	$(`${payButton}`).on('click', function(e) {
@@ -650,7 +661,7 @@ if (payMode) {
 		}
 		stripe.createToken(card).then(function(result) {
 			if (result.error) {
-				paymentOutcome(result)
+				paymentValidation(result)
 			} else {
 				if (payMode === 'Event') {
 					$eventForm.submit()
