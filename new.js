@@ -669,6 +669,8 @@ $(`${payButton}`).on('click', function(e) {
 		chargeDescription,
 		chargeAmount
 	}
+	console.log(completeCard);
+	return false
 	stripe.createToken(completeCard)
 	.then(function(result) {
 		if (result.error) {
