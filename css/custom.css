@@ -77,24 +77,24 @@ a.w-dropdown-link.w--current {color:#800000;}
 .form-textarea::-webkit-input-placeholder,
 .form-radio::-webkit-input-placeholder,
 .email-input-field::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-	color: #800000;
+	color: #333;
 }
 .form-input::-moz-placeholder,
 .form-textarea::-moz-placeholder,
 .form-radio::-moz-placeholder,
 .email-input-field::-moz-placeholder { /* Firefox 19+ */
-	color: #800000;
+	color: #333;
 }
 .form-input:-ms-input-placeholder,
 .form-textarea:-ms-input-placeholder,
 .form-radio:-ms-input-placeholder,
 .email-input-field:-ms-input-placeholder { /* IE 10+ */
-	color: #800000;
+	color: #333;
 }
 .form-input:-moz-placeholder,
 .form-textarea:-moz-placeholder,
 .form-radio:-moz-placeholder,
 .email-input-field:-moz-placeholder { /* Firefox 18- */
-	color: #800000;
+	color: #333;
 }
 </style>
