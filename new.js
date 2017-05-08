@@ -233,7 +233,7 @@ eventDepositFull = '#event-deposit-full',
 eventDepositDeposit = '#event-deposit-deposit',
 eventTerms = '#event-terms',
 eventButton = '#event-button'
-const $eventModal = $('.modal')
+const $eventModal = $('.event-modal')
 
 // Stripe billing variables
 const billingFirstName = '#event-billing-firstname',
