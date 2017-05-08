@@ -532,6 +532,33 @@ if (window.location.href.indexOf('/charge') > -1) {
 
 
 // STRIPE
+
+function paymentValidation(result) {
+	const displayError = document.getElementById('card-errors')
+	if (result.error) {
+		displayError.textContent = result.error.message
+	} else {
+		displayError.textContent = ''
+	}
+	if (result.complete) {
+		if (payMode === 'Event') {
+			$(billingCard).prop('checked', true)
+			eventValidation()
+		} else {
+			$(customCard).prop('checked', true)
+			customValidation()
+		}
+	} else {
+		if (payMode === 'Event') {
+			$(billingCard).prop('checked', false)
+			eventValidation()
+		} else {
+			$(customCard).prop('checked', false)
+			customValidation()
+		}
+	}
+}
+
 //
 // LIVE:
 // pk_live_0rULIvKhv6aSLqI49Ae5rflI
@@ -566,32 +593,6 @@ function stripeTokenHandler(token, data) {
 		alert('The payment did not go through. Please try again.');
 		console.log(err);
 	})
-}
-
-function paymentValidation(result) {
-	const displayError = document.getElementById('card-errors')
-	if (result.error) {
-		displayError.textContent = result.error.message
-	} else {
-		displayError.textContent = ''
-	}
-	if (result.complete) {
-		if (payMode === 'Event') {
-			$(billingCard).prop('checked', true)
-			eventValidation()
-		} else {
-			$(customCard).prop('checked', true)
-			customValidation()
-		}
-	} else {
-		if (payMode === 'Event') {
-			$(billingCard).prop('checked', false)
-			eventValidation()
-		} else {
-			$(customCard).prop('checked', false)
-			customValidation()
-		}
-	}
 }
 
 var payMode = '';
@@ -668,21 +669,21 @@ if (payMode) {
 			customerEmail = $(customEmail).val()
 			chargeDescription = `Custom Charge: ${$(customSelect + ' option:selected').text().substring(0, $(customSelect + ' option:selected').text().length - 16)}`
 		}
-		const stripeDescription = $('#stripe-description').text().split(' | ')
-		const data = {
-			customerDescription,
-			customerEmail,
-			chargeDescription,
-			chargeAmount
-		}
-		stripe.createToken(card, {
+		const billingData = {
 			name: billingFirstName + ' ' + billingLastName,
 			address_line1: billingStreet,
 			address_city: billingCity,
 			address_state: billingState,
 			address_zip: billingPostal,
 			address_country: billingCountry
-		})
+		}
+		const serverData = {
+			customerDescription,
+			customerEmail,
+			chargeDescription,
+			chargeAmount
+		}
+		stripe.createToken(card, billingData)
 		.then(function(result) {
 			if (result.error) {
 				paymentValidation(result)
@@ -692,7 +693,7 @@ if (payMode) {
 				} else {
 					$customForm.submit()
 				}
-				stripeTokenHandler(result.token, data)
+				stripeTokenHandler(result.token, serverData)
 			}
 		})
 	})
