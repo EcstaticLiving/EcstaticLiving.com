@@ -230,6 +230,7 @@ eventDepositText = '#event-deposit-text',
 eventDepositFull = '#event-deposit-full',
 eventDepositDeposit = '#event-deposit-deposit',
 eventTerms = '#event-terms',
+eventCard = '#card-details',
 eventButton = '#event-button'
 
 // PARTICIPANTS
@@ -525,8 +526,7 @@ billingStreet = '#event-billing-street',
 billingCity = '#event-billing-city',
 billingState = '#event-billing-state',
 billingPostal = '#event-billing-postal',
-billingCountry = '#country',
-eventCard = '#card-details'
+billingCountry = '#country'
 
 function stripeTokenHandler(token, data) {
 	$.ajax({
@@ -585,6 +585,9 @@ if (window.location.href.indexOf('/events/') > -1) {
 	payMode = 'Event'
 	$(eventFirstName).on('change', function () {
 		$(billingFirstName).val($(eventFirstName).val())
+	})
+	$(eventLastName).on('change', function () {
+		$(billingLastName).val($(eventLastName).val())
 	})
 } else if (window.location.href.indexOf('/charge') > -1) {
 	payMode = 'Custom'
