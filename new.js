@@ -233,6 +233,7 @@ eventDepositFull = '#event-deposit-full',
 eventDepositDeposit = '#event-deposit-deposit',
 eventTerms = '#event-terms',
 eventButton = '#event-button'
+const $eventModal = $('.modal.event')
 
 // Stripe billing variables
 const billingFirstName = '#event-billing-firstname',
@@ -585,6 +586,7 @@ function stripeTokenHandler(token, data) {
 	})
 	.then(function (res) {
 		if (payMode === 'Event') {
+			$eventModal.hide()
 			window.location.href = `${siteUrl}registered`
 		} else {
 			window.location.href = `${siteUrl}success`
@@ -634,6 +636,7 @@ card.addEventListener('change', (result) => {
 
 $(`${payButton}`).on('click', function(e) {
 	e.preventDefault()
+	$eventModal.show()
 	saveForm(payMode)
 	var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0, count = 0
 	if (payMode === 'Event') {
@@ -650,7 +653,6 @@ $(`${payButton}`).on('click', function(e) {
 		customerEmail = $(customEmail).val()
 		chargeDescription = `Custom Charge: ${$(customSelect + ' option:selected').text().substring(0, $(customSelect + ' option:selected').text().length - 16)}`
 	}
-
 	const billingData = {
 		name: $(billingFirstName).val() + ' ' + $(billingLastName).val(),
 		address_line1: $(billingStreet).val(),
