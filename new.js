@@ -583,8 +583,8 @@ function paymentValidation(result) {
 var payMode = '';
 if (window.location.href.indexOf('/events/') > -1) {
 	payMode = 'Event'
-	$(eventFirstName + ',' + eventLastName).on('change', function () {
-
+	$(eventFirstName).on('change', function () {
+		$(billingFirstName).val($(eventFirstName).val())
 	})
 } else if (window.location.href.indexOf('/charge') > -1) {
 	payMode = 'Custom'
