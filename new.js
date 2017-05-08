@@ -603,7 +603,8 @@ function stripeTokenHandler(token, data) {
 			} else {
 				window.location.href = `${siteUrl}success`
 			}
-		}
+		},
+		timeout: 5000
 	})
 }
 
