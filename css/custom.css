@@ -66,9 +66,12 @@ a.w-dropdown-link.w--current {color:#800000;}
 .form-select:focus,
 .form-textarea:focus,
 .form-radio:focus,
-.email-input-field:focus
-{
+.email-input-field:focus {
 	outline: none !important;
 	border-bottom:1px solid #800000;
+}
+.form-select:focus {
+	outline: none !important;
+	border:1px solid #800000;
 }
 </style>
