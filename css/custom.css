@@ -67,6 +67,7 @@ a.w-dropdown-link.w--current {color:#800000;}
 .form-radio:focus,
 .email-input-field:focus {
 	outline: none !important;
+	border-right:1px solid #800000;
 	border-bottom:1px solid #800000;
 }
 .form-select:focus {
