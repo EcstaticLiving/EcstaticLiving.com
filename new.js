@@ -670,12 +670,12 @@ if (payMode) {
 			chargeDescription = `Custom Charge: ${$(customSelect + ' option:selected').text().substring(0, $(customSelect + ' option:selected').text().length - 16)}`
 		}
 		const billingData = {
-			name: billingFirstName + ' ' + billingLastName,
-			address_line1: billingStreet,
-			address_city: billingCity,
-			address_state: billingState,
-			address_zip: billingPostal,
-			address_country: billingCountry
+			name: $(billingFirstName).val() + ' ' + $(billingLastName).val(),
+			address_line1: $(billingStreet).val(),
+			address_city: $(billingCity).val(),
+			address_state: $(billingState).val(),
+			address_zip: $(billingPostal).val(),
+			address_country: $(billingCountry).val()
 		}
 		const serverData = {
 			customerDescription,
