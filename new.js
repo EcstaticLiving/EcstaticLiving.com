@@ -296,7 +296,7 @@ function validationBilling() {
 	return false
 }
 function eventValidation() {
-	if (validationPersonal() && validationDetails() && validationPartner() && validationEventOptions() && $(eventTerms).is(':checked')) {
+	if (validationPersonal() && validationDetails() && validationPartner() && validationEventOptions() && $(eventTerms).is(':checked') && validationBilling()) {
 		$(eventButton).prop('disabled', false)
 		$(eventButton).css({ 'background-color': '#800000' })
 		$(eventButton).css({ 'color': '#ffffff' })
