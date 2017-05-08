@@ -637,6 +637,12 @@ if (payMode) {
 		}
 	}
 	const card = elements.create('card', {
+		name: $(billingFirstName).val() + ' ' + $(billingLastName).val(),
+		address_line1: $(billingStreet).val(),
+		address_city: $(billingCity).val(),
+		address_state: $(billingState).val(),
+		address_zip: $(billingPostal).val(),
+		address_country: $(billingCountry).val(),
 		hidePostalCode: true,
 		style
 	})
@@ -669,21 +675,13 @@ if (payMode) {
 			customerEmail = $(customEmail).val()
 			chargeDescription = `Custom Charge: ${$(customSelect + ' option:selected').text().substring(0, $(customSelect + ' option:selected').text().length - 16)}`
 		}
-		const billingData = {
-			name: $(billingFirstName).val() + ' ' + $(billingLastName).val(),
-			address_line1: $(billingStreet).val(),
-			address_city: $(billingCity).val(),
-			address_state: $(billingState).val(),
-			address_zip: $(billingPostal).val(),
-			address_country: $(billingCountry).val()
-		}
 		const serverData = {
 			customerDescription,
 			customerEmail,
 			chargeDescription,
 			chargeAmount
 		}
-		stripe.createToken(card, billingData)
+		stripe.createToken(card)
 		.then(function(result) {
 			if (result.error) {
 				paymentValidation(result)
