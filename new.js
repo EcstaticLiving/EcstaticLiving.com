@@ -665,7 +665,6 @@ $(`${payButton}`).on('click', function(e) {
 		chargeDescription,
 		chargeAmount
 	}
-	alert(card)
 	stripe.createToken(card, billingData)
 	.then(function(result) {
 		if (result.error) {
