@@ -582,28 +582,28 @@ function stripeTokenHandler(token, data) {
 			'stripeCustomer': data.customerDescription,
 			'stripeCharge': data.chargeDescription,
 			'stripeAmount': data.chargeAmount
+		},
+		error: function (err) {
+			$('.stripe.processing').hide()
+			$('.stripe.error').show()
+			$('#button-stripe-error').on('click', function() {
+				$($eventModal.hide())
+			})
+			if (payMode === 'Event') {
+				resetEventForm()
+			} else {
+				resetCustomForm()
+			}
+			console.log(err)
+		},
+		success: function (res) {
+			if (payMode === 'Event') {
+				$eventModal.hide()
+				window.location.href = `${siteUrl}registered`
+			} else {
+				window.location.href = `${siteUrl}success`
+			}
 		}
-	})
-	.then(function (res) {
-		if (payMode === 'Event') {
-			$eventModal.hide()
-			window.location.href = `${siteUrl}registered`
-		} else {
-			window.location.href = `${siteUrl}success`
-		}
-	})
-	.fail(function (err) {
-		$('.stripe.processing').hide()
-		$('.stripe.error').show()
-		$('#button-stripe-error').on('click', function() {
-			$($eventModal.hide())
-		})
-		if (payMode === 'Event') {
-			resetEventForm()
-		} else {
-			resetCustomForm()
-		}
-		console.log(err)
 	})
 }
 
