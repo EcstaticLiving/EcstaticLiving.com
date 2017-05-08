@@ -229,6 +229,7 @@ eventDepositContainer = '.event-container.deposit',
 eventDepositText = '#event-deposit-text',
 eventDepositFull = '#event-deposit-full',
 eventDepositDeposit = '#event-deposit-deposit',
+eventDepositPrice = 0,
 eventTerms = '#event-terms',
 eventCard = '#card-details',
 eventButton = '#event-button'
@@ -402,7 +403,7 @@ function setEventSelect(people) {
 			text: eventOptions[i] + ' ($' + eventPrices[i] * paymentFactor + spacer + people + closer
 		}))
 	}
-	const eventDepositPrice = parseInt(eventDepositAmount) * paymentFactor
+	eventDepositPrice = parseInt(eventDepositAmount) * paymentFactor
 	$(eventDepositText).text(`Pay deposit only ($${eventDepositPrice}${spacer}${people})`)
 }
 
