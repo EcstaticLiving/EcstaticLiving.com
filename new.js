@@ -197,7 +197,7 @@ eventVenue = $('#event-venue').text(),
 eventDepositAmount = $('#event-deposit-amount').text(),
 eventDepositDate = $('#event-deposit-date').text()
 
-// Event initialization
+// Event variables
 const payButton = '.button.pay',
 eventFirstName = '#event-firstname',
 eventLastName = '#event-lastname',
@@ -230,8 +230,17 @@ eventDepositText = '#event-deposit-text',
 eventDepositFull = '#event-deposit-full',
 eventDepositDeposit = '#event-deposit-deposit',
 eventTerms = '#event-terms',
-eventCard = '#card-details',
 eventButton = '#event-button'
+
+// Stripe billing variables
+const billingFirstName = '#event-billing-firstname',
+billingLastName = '#event-billing-lastname',
+billingStreet = '#event-billing-street',
+billingCity = '#event-billing-city',
+billingState = '#event-billing-state',
+billingPostal = '#event-billing-postal',
+billingCountry = '#country',
+billingCard = '#card-details'
 
 // PARTICIPANTS
 function participants() {
@@ -258,7 +267,7 @@ function validationDetails() {
 	}
 	return false
 }
-function validationStatus() {
+function validationPartner() {
 	if (
 		(participants() === 2
 			&& $(eventPartnerName).val() !== ''
@@ -279,8 +288,15 @@ function validationEventOptions() {
 	}
 	return false
 }
+function validationBilling() {
+	if ($(billingFirstName).val() !== '' && $(billingLastName).val() !== '' && $(billingStreet).val() !== '' && $(billingCity).val() !== ''
+		&& $(billingState).val() !== '' && $(billingPostal).val() !== '' && $(billingCountry).val() !== '' && $(billingCard).is(':checked')) {
+		return true
+	}
+	return false
+}
 function eventValidation() {
-	if (validationPersonal() && validationDetails() && validationStatus() && validationEventOptions() && $(eventTerms).is(':checked') && $(eventCard).is(':checked')) {
+	if (validationPersonal() && validationDetails() && validationPartner() && validationEventOptions() && $(eventTerms).is(':checked')) {
 		$(eventButton).prop('disabled', false)
 		$(eventButton).css({ 'background-color': '#800000' })
 		$(eventButton).css({ 'color': '#ffffff' })
@@ -291,7 +307,7 @@ function eventValidation() {
 	$(eventButton).css({ 'color': '#333333' })
 	return false
 }
-$(eventFirstName + ',' + eventLastName + ',' + eventEmail + ',' + eventMobile + ',' + eventBirthdate + ',' + eventFemale + ',' + eventMale + ',' + eventOther + ',' + eventReferral + ',' + eventExperienceYes + ',' + eventExperienceNo + ',' + eventExperienceDetails + ',' + eventDietYes + ',' + eventDietNo + ',' + eventDietDetails + ',' + eventStatus + ',' + eventPartnerName + ',' + eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther + ',' + eventSelect + ',' + eventTerms + ',' + eventCard).on('change', function () {
+$(eventFirstName + ',' + eventLastName + ',' + eventEmail + ',' + eventMobile + ',' + eventBirthdate + ',' + eventFemale + ',' + eventMale + ',' + eventOther + ',' + eventReferral + ',' + eventExperienceYes + ',' + eventExperienceNo + ',' + eventExperienceDetails + ',' + eventDietYes + ',' + eventDietNo + ',' + eventDietDetails + ',' + eventStatus + ',' + eventPartnerName + ',' + eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther + ',' + eventSelect + ',' + eventTerms + ',' + billingCard).on('change', function () {
 	eventValidation()
 })
 
@@ -520,13 +536,6 @@ if (window.location.href.indexOf('/charge') > -1) {
 // pk_test_QO6tO6bHny3y10LjH96f4n3p
 // https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test
 //
-const billingFirstName = '#event-billing-firstname',
-billingLastName = '#event-billing-lastname',
-billingStreet = '#event-billing-street',
-billingCity = '#event-billing-city',
-billingState = '#event-billing-state',
-billingPostal = '#event-billing-postal',
-billingCountry = '#country'
 
 function stripeTokenHandler(token, data) {
 	$.ajax({
@@ -563,7 +572,7 @@ function paymentValidation(result) {
 	}
 	if (result.complete) {
 		if (payMode === 'Event') {
-			$(eventCard).prop('checked', true)
+			$(billingCard).prop('checked', true)
 			eventValidation()
 		} else {
 			$(customCard).prop('checked', true)
@@ -571,7 +580,7 @@ function paymentValidation(result) {
 		}
 	} else {
 		if (payMode === 'Event') {
-			$(eventCard).prop('checked', false)
+			$(billingCard).prop('checked', false)
 			eventValidation()
 		} else {
 			$(customCard).prop('checked', false)
