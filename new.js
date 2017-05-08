@@ -662,8 +662,6 @@ $(`${payButton}`).on('click', function(e) {
 		address_zip: $(billingPostal).val(),
 		address_country: $(billingCountry).val()
 	}
-	console.log(billingData);
-	return false
 	const serverData = {
 		customerDescription,
 		customerEmail,
