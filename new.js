@@ -637,9 +637,6 @@ $(`${payButton}`).on('click', function(e) {
 	saveForm(payMode)
 	var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0, count = 0
 	if (payMode === 'Event') {
-		if (!eventValidation()) {
-			return false
-		}
 		count = $(eventSelect).prop('selectedIndex') - 1
 		chargeAmount = $(eventDepositDeposit).is(':checked') ? eventDepositPrice * 100 : $(eventSelect).val() * 100
 		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
@@ -647,9 +644,6 @@ $(`${payButton}`).on('click', function(e) {
 		customerEmail = $(eventEmail).val()
 		chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(eventSelect + ' option:selected').text().substring(0, $(eventSelect + ' option:selected').text().length - 16)}, ${eventDeposit}`
 	} else {
-		if (!customValidation()) {
-			return false
-		}
 		count = $(customSelect).prop('selectedIndex') - 1
 		chargeAmount = $(customSelect).val() * 100
 		customerDescription = $(customFirstName).val() + ' ' + $(customLastName).val() + ' <' + $(customEmail).val() + '>'
@@ -672,7 +666,7 @@ $(`${payButton}`).on('click', function(e) {
 		chargeAmount
 	}
 	alert(card)
-	stripe.createToken(card)
+	stripe.createToken(card, billingData)
 	.then(function(result) {
 		if (result.error) {
 			paymentValidation(result)
