@@ -610,7 +610,6 @@ if (payMode) {
 			color: '#333',
 			fontSize,
 			lineHeight: '24px',
-			fontSmoothing: 'antialiased',
 			'::placeholder': {
 				color: '#333',
 			}
