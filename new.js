@@ -546,6 +546,7 @@ if (window.location.href.indexOf('/events/') > -1) {
 function paymentValidation(result) {
 	const displayError = document.getElementById('card-errors')
 	if (result.error) {
+		$eventModal.hide()
 		displayError.textContent = result.error.message
 	} else {
 		displayError.textContent = ''
