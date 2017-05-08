@@ -685,9 +685,9 @@ $(`${payButton}`).on('click', function(e) {
 			paymentValidation(result)
 		} else {
 			if (payMode === 'Event') {
-				$eventForm.submit()
+				// $eventForm.submit()
 			} else {
-				$customForm.submit()
+				// $customForm.submit()
 			}
 			stripeTokenHandler(result.token, serverData)
 		}
