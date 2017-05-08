@@ -615,9 +615,9 @@ if (payMode) {
 			}
 		},
 		invalid: {
-			color: '#e5424d',
+			color: '#b00000',
 			':focus': {
-				color: '#303238'
+				color: '#800000'
 			}
 		}
 	}
