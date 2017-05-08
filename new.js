@@ -582,8 +582,7 @@ function stripeTokenHandler(token, data) {
 			'stripeCustomer': data.customerDescription,
 			'stripeCharge': data.chargeDescription,
 			'stripeAmount': data.chargeAmount
-		},
-		timeout: 5000
+		}
 	})
 	.then(function (res) {
 		if (payMode === 'Event') {
