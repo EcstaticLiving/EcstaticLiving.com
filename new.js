@@ -598,7 +598,12 @@ function stripeTokenHandler(token, data) {
 		$('#button-stripe-error').on('click', function() {
 			$($eventModal.hide())
 		})
-		console.log(err);
+		if (payMode === 'Event') {
+			resetEventForm()
+		} else {
+			resetCustomForm()
+		}
+		console.log(err)
 	})
 }
 
