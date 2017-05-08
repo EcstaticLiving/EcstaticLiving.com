@@ -604,7 +604,7 @@ function stripeTokenHandler(token, data) {
 				window.location.href = `${siteUrl}success`
 			}
 		},
-		timeout: 5000
+		timeout: 8000
 	})
 }
 
