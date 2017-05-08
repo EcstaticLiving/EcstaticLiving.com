@@ -582,7 +582,8 @@ function stripeTokenHandler(token, data) {
 			'stripeCustomer': data.customerDescription,
 			'stripeCharge': data.chargeDescription,
 			'stripeAmount': data.chargeAmount
-		}
+		},
+		timeout: 5000
 	})
 	.then(function (res) {
 		if (payMode === 'Event') {
@@ -685,9 +686,9 @@ $(`${payButton}`).on('click', function(e) {
 			paymentValidation(result)
 		} else {
 			if (payMode === 'Event') {
-				// $eventForm.submit()
+				$eventForm.submit()
 			} else {
-				// $customForm.submit()
+				$customForm.submit()
 			}
 			stripeTokenHandler(result.token, serverData)
 		}
