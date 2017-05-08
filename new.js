@@ -662,16 +662,13 @@ $(`${payButton}`).on('click', function(e) {
 		address_zip: $(billingPostal).val(),
 		address_country: $(billingCountry).val()
 	}
-	const completeCard = Object.assign(card, billingData)
 	const serverData = {
 		customerDescription,
 		customerEmail,
 		chargeDescription,
 		chargeAmount
 	}
-	console.log(completeCard);
-	return false
-	stripe.createToken(completeCard)
+	stripe.createToken(card, billingData)
 	.then(function(result) {
 		if (result.error) {
 			paymentValidation(result)
