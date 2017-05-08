@@ -523,7 +523,7 @@ if (window.location.href.indexOf('/charge') > -1) {
 function stripeTokenHandler(token, data) {
 	$.ajax({
 		type: 'POST',
-		url: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe',
+		url: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test',
 		crossDomain: true,
 		data: {
 			'stripeToken': token.id,
@@ -581,7 +581,7 @@ if (window.location.href.indexOf('/events/') > -1) {
 	payMode = null
 }
 if (payMode) {
-	const stripe = Stripe('pk_live_0rULIvKhv6aSLqI49Ae5rflI')
+	const stripe = Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
 	const elements = stripe.elements()
 	var fontSize = '';
 	// Desktop, tablet, and iPhone 6Plus: 16px
