@@ -546,7 +546,6 @@ if (window.location.href.indexOf('/events/') > -1) {
 function paymentValidation(result) {
 	const displayError = document.getElementById('card-errors')
 	if (result.error) {
-		$eventModal.hide()
 		displayError.textContent = result.error.message
 	} else {
 		displayError.textContent = ''
@@ -594,7 +593,11 @@ function stripeTokenHandler(token, data) {
 		}
 	})
 	.fail(function (err) {
-		alert('The payment did not go through. Please try again.');
+		$('.stripe.processing').hide()
+		$('.stripe.error').show()
+		$('#button-stripe-error').on('click', function() {
+			$($eventModal.hide())
+		})
 		console.log(err);
 	})
 }
@@ -637,6 +640,8 @@ card.addEventListener('change', (result) => {
 
 $(`${payButton}`).on('click', function(e) {
 	e.preventDefault()
+	$('.stripe.processing').show()
+	$('.stripe.error').hide()
 	$eventModal.show()
 	saveForm(payMode)
 	var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0, count = 0
