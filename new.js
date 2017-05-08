@@ -187,6 +187,8 @@ if (window.location.href.indexOf('/forms/ctt-application') > -1) {
 
 
 
+
+
 // EVENT REGISTRATION
 $eventForm = $('.form.registration'),
 eventCode = $('#event-code').text().toLowerCase(),
@@ -307,14 +309,6 @@ function eventValidation() {
 	$(eventButton).css({ 'color': '#333333' })
 	return false
 }
-const eventFieldsPersonal = eventFirstName + ',' + eventLastName + ',' + eventEmail + ',' + eventMobile + ',' + eventBirthdate + ',' + eventFemale + ',' + eventMale + ',' + eventOther
-const eventFieldsDetails = eventReferral + ',' + eventExperienceYes + ',' + eventExperienceNo + ',' + eventExperienceDetails + ',' + eventDietYes + ',' + eventDietNo + ',' + eventDietDetails
-const eventFieldsPartner = eventStatus + ',' + eventPartnerName + ',' + eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther
-const eventFieldsOptions = eventSelect
-const eventFieldsBilling = billingFirstName + ',' + billingLastName + ',' + billingStreet + ',' + billingCity + ',' + billingState + ',' + billingPostal + ',' + billingCountry
-$(eventFieldsPersonal + ',' + eventFieldsDetails + ',' + eventFieldsPartner + ',' + eventFieldsOptions + ',' + eventTerms + ',' + eventFieldsBilling).on('change', function () {
-	eventValidation()
-})
 
 // PARTNERSHIP
 function showPartner() {
@@ -341,20 +335,6 @@ function hidePartner() {
 	setEventSelect()
 }
 
-$(eventStatus).change(function() {
-	participants() === 2 ? showPartner() : hidePartner()
-})
-
-$(eventPayBoth + ',' + eventPayMe).change(function() {
-	if ($(eventPayBoth).is(':checked')) {
-		setEventSelect('for both')
-	} else if (participants() === 2) {
-		setEventSelect('per person')
-	} else {
-		setEventSelect('')
-	}
-})
-
 // PREVIOUS EXPERIENCE
 function showExperience() {
 	$(eventExperienceContainer).show()
@@ -373,11 +353,6 @@ function hideExperience() {
 	$(eventExperienceContainer).hide()
 }
 
-$(eventExperienceNo + ',' + eventExperienceYes).change(function() {
-	if ($(eventExperienceYes).is(':checked')) showExperience()
-	if ($(eventExperienceNo).is(':checked')) hideExperience()
-})
-
 // DIETARY NEEDS
 function showDiet() {
 	$(eventDietContainer).show()
@@ -395,11 +370,6 @@ function hideDiet() {
 	}, 200)
 	$(eventDietContainer).hide()
 }
-
-$(eventDietNo + ',' + eventDietYes).change(function() {
-	if ($(eventDietYes).is(':checked')) showDiet()
-	if ($(eventDietNo).is(':checked')) hideDiet()
-})
 
 // EVENT OPTIONS
 function setEventSelect(people) {
@@ -454,12 +424,6 @@ function resetEventForm() {
 	$(eventTerms).attr('checked', false)
 	eventValidation()
 }
-
-// EVENT PAGE
-if (window.location.href.indexOf('/events/') > -1) {
-	resetEventForm()
-}
-
 
 
 
@@ -525,14 +489,59 @@ function resetCustomForm() {
 	customValidation()
 }
 
-if (window.location.href.indexOf('/charge') > -1) {
+
+
+
+
+// EVENT or CUSTOM CHARGE mode
+var payMode = ''
+if (window.location.href.indexOf('/events/') > -1) {
+	payMode = 'Event'
+	$(eventFirstName).on('change', function () {
+		$(billingFirstName).val($(eventFirstName).val())
+	})
+	$(eventLastName).on('change', function () {
+		$(billingLastName).val($(eventLastName).val())
+	})
+	$(eventDietNo + ',' + eventDietYes).on('change', function () {
+		if ($(eventDietYes).is(':checked')) showDiet()
+		if ($(eventDietNo).is(':checked')) hideDiet()
+	})
+	$(eventExperienceNo + ',' + eventExperienceYes).on('change', function () {
+		if ($(eventExperienceYes).is(':checked')) showExperience()
+		if ($(eventExperienceNo).is(':checked')) hideExperience()
+	})
+	$(eventStatus).on('change', function () {
+		participants() === 2 ? showPartner() : hidePartner()
+	})
+	$(eventPayBoth + ',' + eventPayMe).on('change', function () {
+		if ($(eventPayBoth).is(':checked')) {
+			setEventSelect('for both')
+		} else if (participants() === 2) {
+			setEventSelect('per person')
+		} else {
+			setEventSelect('')
+		}
+	})
+	const eventFieldsPersonal = eventFirstName + ',' + eventLastName + ',' + eventEmail + ',' + eventMobile + ',' + eventBirthdate + ',' + eventFemale + ',' + eventMale + ',' + eventOther
+	const eventFieldsDetails = eventReferral + ',' + eventExperienceYes + ',' + eventExperienceNo + ',' + eventExperienceDetails + ',' + eventDietYes + ',' + eventDietNo + ',' + eventDietDetails
+	const eventFieldsPartner = eventStatus + ',' + eventPartnerName + ',' + eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther
+	const eventFieldsOptions = eventSelect
+	const eventFieldsBilling = billingFirstName + ',' + billingLastName + ',' + billingStreet + ',' + billingCity + ',' + billingState + ',' + billingPostal + ',' + billingCountry
+	$(eventFieldsPersonal + ',' + eventFieldsDetails + ',' + eventFieldsPartner + ',' + eventFieldsOptions + ',' + eventTerms + ',' + eventFieldsBilling).on('change', function () {
+		eventValidation()
+	})
+	resetEventForm()
+} else if (window.location.href.indexOf('/charge') > -1) {
+	payMode = 'Custom'
 	resetCustomForm()
+} else {
+	payMode = null
 }
 
 
 
 // STRIPE
-
 function paymentValidation(result) {
 	const displayError = document.getElementById('card-errors')
 	if (result.error) {
@@ -587,20 +596,42 @@ function stripeTokenHandler(token, data) {
 	})
 }
 
-var payMode = '';
-if (window.location.href.indexOf('/events/') > -1) {
-	payMode = 'Event'
-	$(eventFirstName).on('change', function () {
-		$(billingFirstName).val($(eventFirstName).val())
-	})
-	$(eventLastName).on('change', function () {
-		$(billingLastName).val($(eventLastName).val())
-	})
-} else if (window.location.href.indexOf('/charge') > -1) {
-	payMode = 'Custom'
-} else {
-	payMode = null
+// LIVE: pk_live_0rULIvKhv6aSLqI49Ae5rflI
+// TEST: pk_test_QO6tO6bHny3y10LjH96f4n3p
+const stripe = Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
+const elements = stripe.elements()
+var fontSize = '';
+// Desktop, tablet, and iPhone 6Plus: 16px, iPhone 6 or smaller: 12px
+fontSize = (Math.min($(window).width(), $(window).height()) < 414) ? '13px' : '16px'
+// iPhone 5: 11px
+fontSize = (Math.min($(window).width(), $(window).height()) < 375) ? '11px' : fontSize
+style = {
+	base: {
+		fontFamily: 'Lato',
+		fontWeight: 300,
+		color: '#333',
+		fontSize,
+		lineHeight: '24px',
+		'::placeholder': {
+			color: '#666',
+		}
+	},
+	invalid: {
+		color: '#b00000',
+		':focus': {
+			color: '#800000'
+		}
+	}
 }
+const card = elements.create('card', {
+	hidePostalCode: true,
+	style
+})
+card.mount('#card-element')
+card.addEventListener('change', (result) => {
+	paymentValidation(result)
+})
+
 $(`${payButton}`).on('click', function(e) {
 	e.preventDefault()
 	saveForm(payMode)
@@ -626,41 +657,6 @@ $(`${payButton}`).on('click', function(e) {
 		chargeDescription = `Custom Charge: ${$(customSelect + ' option:selected').text().substring(0, $(customSelect + ' option:selected').text().length - 16)}`
 	}
 
-	// LIVE: pk_live_0rULIvKhv6aSLqI49Ae5rflI
-	// TEST: pk_test_QO6tO6bHny3y10LjH96f4n3p
-	const stripe = Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
-	const elements = stripe.elements()
-	var fontSize = '';
-	// Desktop, tablet, and iPhone 6Plus: 16px, iPhone 6 or smaller: 12px
-	fontSize = (Math.min($(window).width(), $(window).height()) < 414) ? '13px' : '16px'
-	// iPhone 5: 11px
-	fontSize = (Math.min($(window).width(), $(window).height()) < 375) ? '11px' : fontSize
-	style = {
-		base: {
-			fontFamily: 'Lato',
-			fontWeight: 300,
-			color: '#333',
-			fontSize,
-			lineHeight: '24px',
-			'::placeholder': {
-				color: '#666',
-			}
-		},
-		invalid: {
-			color: '#b00000',
-			':focus': {
-				color: '#800000'
-			}
-		}
-	}
-	const card = elements.create('card', {
-		hidePostalCode: true,
-		style
-	})
-	card.mount('#card-element')
-	card.addEventListener('change', (result) => {
-		paymentValidation(result)
-	})
 	const billingData = {
 		name: $(billingFirstName).val() + ' ' + $(billingLastName).val(),
 		address_line1: $(billingStreet).val(),
