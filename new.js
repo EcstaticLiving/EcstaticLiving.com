@@ -653,14 +653,18 @@ $(`${payButton}`).on('click', function(e) {
 		customerEmail = $(customEmail).val()
 		chargeDescription = `Custom Charge: ${$(customSelect + ' option:selected').text().substring(0, $(customSelect + ' option:selected').text().length - 16)}`
 	}
+	// const billingData = {
+	// 	name: $(billingFirstName).val() + ' ' + $(billingLastName).val(),
+	// 	address_line1: $(billingStreet).val(),
+	// 	address_line2: '',
+	// 	address_city: $(billingCity).val(),
+	// 	address_state: $(billingState).val(),
+	// 	address_zip: $(billingPostal).val(),
+	// 	address_country: $(billingCountry).val()
+	// }
 	const billingData = {
 		name: $(billingFirstName).val() + ' ' + $(billingLastName).val(),
-		address_line1: $(billingStreet).val(),
-		address_line2: '',
-		address_city: $(billingCity).val(),
-		address_state: $(billingState).val(),
-		address_zip: $(billingPostal).val(),
-		address_country: $(billingCountry).val()
+		address: $(billingStreet).val() + '\n' + $(billingCity).val() + ', ' + $(billingState).val() + ' ' + $(billingPostal).val() + '\n' + $(billingCountry).val()
 	}
 	const serverData = {
 		customerDescription,
