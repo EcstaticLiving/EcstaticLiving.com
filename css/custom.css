@@ -73,4 +73,16 @@ a.w-dropdown-link.w--current {color:#800000;}
 	outline: none !important;
 	border:1px solid #800000;
 }
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	color: #aaa;
+}
+::-moz-placeholder { /* Firefox 19+ */
+	color: #aaa;
+}
+:-ms-input-placeholder { /* IE 10+ */
+	color: #aaa;
+}
+:-moz-placeholder { /* Firefox 18- */
+	color: #aaa;
+}
 </style>
