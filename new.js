@@ -239,7 +239,7 @@ billingStreet = '#event-billing-street',
 billingCity = '#event-billing-city',
 billingState = '#event-billing-state',
 billingPostal = '#event-billing-postal',
-billingCountry = '#country',
+billingCountry = '#event-billing-country',
 billingCard = '#card-details'
 
 // PARTICIPANTS
