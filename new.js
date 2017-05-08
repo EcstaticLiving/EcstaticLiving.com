@@ -675,7 +675,15 @@ if (payMode) {
 			chargeDescription,
 			chargeAmount
 		}
-		stripe.createToken(card).then(function(result) {
+		stripe.createToken(card, {
+			name: billingFirstName + ' ' + billingLastName,
+			address_line1: billingStreet,
+			address_city: billingCity,
+			address_state: billingState,
+			address_zip: billingPostal,
+			address_country: billingCountry
+		})
+		.then(function(result) {
 			if (result.error) {
 				paymentValidation(result)
 			} else {
