@@ -625,7 +625,7 @@ if (payMode) {
 			fontSize,
 			lineHeight: '24px',
 			'::placeholder': {
-				color: '#333',
+				color: '#666',
 			}
 		},
 		invalid: {
