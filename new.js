@@ -601,97 +601,94 @@ if (window.location.href.indexOf('/events/') > -1) {
 } else {
 	payMode = null
 }
-if (payMode) {
-	$(`${payButton}`).on('click', function(e) {
-		e.preventDefault()
-		saveForm(payMode)
-		var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0, count = 0
-		if (payMode === 'Event') {
-			if (!eventValidation()) {
-				return false
-			}
-			count = $(eventSelect).prop('selectedIndex') - 1
-			chargeAmount = $(eventDepositDeposit).is(':checked') ? eventDepositPrice * 100 : $(eventSelect).val() * 100
-			const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
-			customerDescription = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' <' + $(eventEmail).val() + '>'
-			customerEmail = $(eventEmail).val()
-			chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(eventSelect + ' option:selected').text().substring(0, $(eventSelect + ' option:selected').text().length - 16)}, ${eventDeposit}`
-		} else {
-			if (!customValidation()) {
-				return false
-			}
-			count = $(customSelect).prop('selectedIndex') - 1
-			chargeAmount = $(customSelect).val() * 100
-			customerDescription = $(customFirstName).val() + ' ' + $(customLastName).val() + ' <' + $(customEmail).val() + '>'
-			customerEmail = $(customEmail).val()
-			chargeDescription = `Custom Charge: ${$(customSelect + ' option:selected').text().substring(0, $(customSelect + ' option:selected').text().length - 16)}`
+$(`${payButton}`).on('click', function(e) {
+	e.preventDefault()
+	saveForm(payMode)
+	var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0, count = 0
+	if (payMode === 'Event') {
+		if (!eventValidation()) {
+			return false
 		}
+		count = $(eventSelect).prop('selectedIndex') - 1
+		chargeAmount = $(eventDepositDeposit).is(':checked') ? eventDepositPrice * 100 : $(eventSelect).val() * 100
+		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
+		customerDescription = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' <' + $(eventEmail).val() + '>'
+		customerEmail = $(eventEmail).val()
+		chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(eventSelect + ' option:selected').text().substring(0, $(eventSelect + ' option:selected').text().length - 16)}, ${eventDeposit}`
+	} else {
+		if (!customValidation()) {
+			return false
+		}
+		count = $(customSelect).prop('selectedIndex') - 1
+		chargeAmount = $(customSelect).val() * 100
+		customerDescription = $(customFirstName).val() + ' ' + $(customLastName).val() + ' <' + $(customEmail).val() + '>'
+		customerEmail = $(customEmail).val()
+		chargeDescription = `Custom Charge: ${$(customSelect + ' option:selected').text().substring(0, $(customSelect + ' option:selected').text().length - 16)}`
+	}
 
-		// LIVE: pk_live_0rULIvKhv6aSLqI49Ae5rflI
-		// TEST: pk_test_QO6tO6bHny3y10LjH96f4n3p
-		const stripe = Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
-		const elements = stripe.elements()
-		var fontSize = '';
-		// Desktop, tablet, and iPhone 6Plus: 16px, iPhone 6 or smaller: 12px
-		fontSize = (Math.min($(window).width(), $(window).height()) < 414) ? '13px' : '16px'
-		// iPhone 5: 11px
-		fontSize = (Math.min($(window).width(), $(window).height()) < 375) ? '11px' : fontSize
-		style = {
-			base: {
-				fontFamily: 'Lato',
-				fontWeight: 300,
-				color: '#333',
-				fontSize,
-				lineHeight: '24px',
-				'::placeholder': {
-					color: '#666',
-				}
-			},
-			invalid: {
-				color: '#b00000',
-				':focus': {
-					color: '#800000'
-				}
+	// LIVE: pk_live_0rULIvKhv6aSLqI49Ae5rflI
+	// TEST: pk_test_QO6tO6bHny3y10LjH96f4n3p
+	const stripe = Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
+	const elements = stripe.elements()
+	var fontSize = '';
+	// Desktop, tablet, and iPhone 6Plus: 16px, iPhone 6 or smaller: 12px
+	fontSize = (Math.min($(window).width(), $(window).height()) < 414) ? '13px' : '16px'
+	// iPhone 5: 11px
+	fontSize = (Math.min($(window).width(), $(window).height()) < 375) ? '11px' : fontSize
+	style = {
+		base: {
+			fontFamily: 'Lato',
+			fontWeight: 300,
+			color: '#333',
+			fontSize,
+			lineHeight: '24px',
+			'::placeholder': {
+				color: '#666',
+			}
+		},
+		invalid: {
+			color: '#b00000',
+			':focus': {
+				color: '#800000'
 			}
 		}
-		const card = elements.create('card', {
-			hidePostalCode: true,
-			style
-		})
-		card.mount('#card-element')
-		card.addEventListener('change', (result) => {
-			paymentValidation(result)
-		})
-		const billingData = {
-			name: $(billingFirstName).val() + ' ' + $(billingLastName).val(),
-			address_line1: $(billingStreet).val(),
-			address_city: $(billingCity).val(),
-			address_state: $(billingState).val(),
-			address_zip: $(billingPostal).val(),
-			address_country: $(billingCountry).val()
-		}
-		const serverData = {
-			customerDescription,
-			customerEmail,
-			chargeDescription,
-			chargeAmount
-		}
-		alert(card)
-		stripe.createToken(card)
-		.then(function(result) {
-			if (result.error) {
-				paymentValidation(result)
-			} else {
-				if (payMode === 'Event') {
-					$eventForm.submit()
-				} else {
-					$customForm.submit()
-				}
-				stripeTokenHandler(result.token, serverData)
-			}
-		})
+	}
+	const card = elements.create('card', {
+		hidePostalCode: true,
+		style
 	})
-
-}
+	card.mount('#card-element')
+	card.addEventListener('change', (result) => {
+		paymentValidation(result)
+	})
+	const billingData = {
+		name: $(billingFirstName).val() + ' ' + $(billingLastName).val(),
+		address_line1: $(billingStreet).val(),
+		address_city: $(billingCity).val(),
+		address_state: $(billingState).val(),
+		address_zip: $(billingPostal).val(),
+		address_country: $(billingCountry).val()
+	}
+	const serverData = {
+		customerDescription,
+		customerEmail,
+		chargeDescription,
+		chargeAmount
+	}
+	alert(card)
+	stripe.createToken(card)
+	.then(function(result) {
+		if (result.error) {
+			paymentValidation(result)
+		} else {
+			if (payMode === 'Event') {
+				$eventForm.submit()
+			} else {
+				$customForm.submit()
+			}
+			stripeTokenHandler(result.token, serverData)
+		}
+	})
+})
 
 })
