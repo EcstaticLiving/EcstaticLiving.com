@@ -544,6 +544,12 @@ if (window.location.href.indexOf('/events/') > -1) {
 		$('.button-load-data').hide()
 		$('.button-clear-form').show()
 	}
+	$('.button-clear-form').on('click', function () {
+		clearForm(payMode)
+	})
+	$('.button-load-data').on('click', function () {
+		repopulateForm(payMode)
+	})
 } else if (window.location.href.indexOf('/charge') > -1) {
 	payMode = 'Custom'
 	$(customFirstName).on('change', function () {
@@ -560,15 +566,16 @@ if (window.location.href.indexOf('/events/') > -1) {
 		$('.button-load-data').hide()
 		$('.button-clear-form').show()
 	}
+	$('.button-clear-form').on('click', function () {
+		clearForm(payMode)
+	})
+	$('.button-load-data').on('click', function () {
+		repopulateForm(payMode)
+	})
 } else {
 	payMode = null
 }
-$('.button-clear-form').on('click', function () {
-	clearForm()
-})
-$('.button-load-data').on('click', function () {
-	repopulateForm()
-})
+
 
 
 
