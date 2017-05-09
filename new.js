@@ -131,7 +131,7 @@ var countriesfile = "United States, Canada, Afghanistan, Albania, Algeria, Andor
 var countries = countriesfile.split(', ');
 for(var i = 0; i < countries.length; i++) {
 	if (window.location.href.indexOf('/events/') > -1) {
-		$('#event-billing-country').append('<option value="' + countries[i] + '">' + countries[i] + '</option>');
+		$('#-country').append('<option value="' + countries[i] + '">' + countries[i] + '</option>');
 	} else {
 		$('#country').append('<option value="' + countries[i] + '">' + countries[i] + '</option>');
 	}
@@ -232,16 +232,16 @@ eventDepositText = '#event-deposit-text',
 eventDepositFull = '#event-deposit-full',
 eventDepositDeposit = '#event-deposit-deposit',
 eventTerms = '#event-terms',
-eventButton = '#event-button'
+paymentButton = '#payment-button'
 
 // Stripe billing variables
-const billingFirstName = '#event-billing-firstname',
-billingLastName = '#event-billing-lastname',
-billingStreet = '#event-billing-street',
-billingCity = '#event-billing-city',
-billingState = '#event-billing-state',
-billingPostal = '#event-billing-postal',
-billingCountry = '#event-billing-country',
+const billingFirstName = '#billing-firstname',
+billingLastName = '#billing-lastname',
+billingStreet = '#billing-street',
+billingCity = '#billing-city',
+billingState = '#billing-state',
+billingPostal = '#billing-postal',
+billingCountry = '#billing-country',
 billingCard = '#card-details'
 
 // PARTICIPANTS
@@ -254,14 +254,14 @@ function participants() {
 }
 
 // FORM VALIDATION
-function validationPersonal() {
+function personalValidation() {
 	if ($(eventFirstName).val() !== '' && $(eventLastName).val() !== '' && $(eventEmail).val() !== '' && $(eventMobile).val() !== '' && $(eventBirthdate).val() !== '' &&
 		($(eventFemale).is(':checked') || $(eventMale).is(':checked') || $(eventOther).is(':checked'))) {
 		return true
 	}
 	return false
 }
-function validationDetails() {
+function detailsValidation() {
 	if ($(eventReferral).val() !== ''
 		&& (($(eventExperienceYes).is(':checked') && $(eventExperienceDetails).val() !== '') || $(eventExperienceNo).is(':checked'))
 		&& (($(eventDietYes).is(':checked') && $(eventDietDetails).val() !== '') || $(eventDietNo).is(':checked'))) {
@@ -269,7 +269,7 @@ function validationDetails() {
 	}
 	return false
 }
-function validationPartner() {
+function partnerValidation() {
 	if (
 		(participants() === 2
 			&& $(eventPartnerName).val() !== ''
@@ -281,7 +281,7 @@ function validationPartner() {
 	}
 	return false
 }
-function validationEventOptions() {
+function eventOptionValidation() {
 	if ($(eventSelect).val() && (
 		($(eventDepositContainer).is(':visible') && ($(eventDepositFull).is(':checked') || $(eventDepositDeposit).is(':checked'))
 		|| $(eventDepositContainer).is(':hidden'))
@@ -290,7 +290,7 @@ function validationEventOptions() {
 	}
 	return false
 }
-function validationBilling() {
+function billingValidation() {
 	if ($(billingFirstName).val() !== '' && $(billingLastName).val() !== '' && $(billingStreet).val() !== '' && $(billingCity).val() !== ''
 		&& $(billingState).val() !== '' && $(billingPostal).val() !== '' && $(billingCountry).val() !== '' && $(billingCard).is(':checked')) {
 		return true
@@ -298,15 +298,15 @@ function validationBilling() {
 	return false
 }
 function eventValidation() {
-	if (validationPersonal() && validationDetails() && validationPartner() && validationEventOptions() && $(eventTerms).is(':checked') && validationBilling()) {
-		$(eventButton).prop('disabled', false)
-		$(eventButton).css({ 'background-color': '#800000' })
-		$(eventButton).css({ 'color': '#ffffff' })
+	if (personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && $(eventTerms).is(':checked') && billingValidation()) {
+		$(paymentButton).prop('disabled', false)
+		$(paymentButton).css({ 'background-color': '#800000' })
+		$(paymentButton).css({ 'color': '#ffffff' })
 		return true
 	}
-	$(eventButton).prop('disabled', true)
-	$(eventButton).css({ 'background-color': '#f5f5f5' })
-	$(eventButton).css({ 'color': '#333333' })
+	$(paymentButton).prop('disabled', true)
+	$(paymentButton).css({ 'background-color': '#f5f5f5' })
+	$(paymentButton).css({ 'color': '#333333' })
 	return false
 }
 
@@ -437,26 +437,31 @@ customLastName = '#custom-lastname',
 customEmail = '#custom-email',
 customSelect = '#custom-select',
 customTerms = '#custom-terms',
-customCard = '#card-details',
-customButton = '#custom-button'
+customCard = '#card-details'
+
+const billingFirstName = '#billing-firstname',
+billingLastName = '#billing-lastname',
+billingStreet = '#billing-street',
+billingCity = '#billing-city',
+billingState = '#billing-state',
+billingPostal = '#billing-postal',
+billingCountry = '#billing-country',
+billingCard = '#card-details'
 
 
 // CUSTOM AMOUNT
 function customValidation() {
-	if ($(customFirstName).val() !== '' && $(customLastName).val() !== '' && $(customSelect).val() !== '' && $(customTerms).is(':checked') && $(customCard).is(':checked')) {
-		$(customButton).prop('disabled', false)
-		$(customButton).css({ 'background-color': '#800000' })
-		$(customButton).css({ 'color': '#ffffff' })
+	if (billingValidation()) {
+		$(paymentButton).prop('disabled', false)
+		$(paymentButton).css({ 'background-color': '#800000' })
+		$(paymentButton).css({ 'color': '#ffffff' })
 		return true
 	}
-	$(customButton).prop('disabled', true)
-	$(customButton).css({ 'background-color': '#f5f5f5' })
-	$(customButton).css({ 'color': '#333333' })
+	$(paymentButton).prop('disabled', true)
+	$(paymentButton).css({ 'background-color': '#f5f5f5' })
+	$(paymentButton).css({ 'color': '#333333' })
 	return false
 }
-$(customFirstName + ',' + customLastName + ',' + customSelect + ',' + customTerms + ',' + customCard).on('change', function () {
-	customValidation()
-})
 
 function setCustomSelect() {
 	//	Adds options & prices based on CMS input
@@ -532,9 +537,11 @@ if (window.location.href.indexOf('/events/') > -1) {
 		eventValidation()
 	})
 	resetEventForm()
-
 } else if (window.location.href.indexOf('/charge') > -1) {
 	payMode = 'Custom'
+	$(billingFirstName + ',' + billingLastName + ',' + billingStreet + ',' + billingCity + ',' + billingState + ',' + billingPostal + ',' + billingCountry).on('change', function () {
+		customValidation()
+	})
 	resetCustomForm()
 } else {
 	payMode = null
@@ -587,18 +594,18 @@ function stripeTokenHandler(token, data) {
 	})
 	.then(function (res) {
 		window.setTimeout(function() {}, 2000)
+		$('.notification-modal.processing').hide()
 		if (payMode === 'Event') {
-			$('.event-modal.processing').hide()
 			window.location.href = `${siteUrl}registered`
 		} else {
 			window.location.href = `${siteUrl}success`
 		}
 	})
 	.fail(function (err) {
-		$('.event-modal.processing').hide()
-		$('.event-modal.error').show()
+		$('.notification-modal.processing').hide()
+		$('.notification-modal.error').show()
 		$('#button-stripe-error').on('click', function() {
-			$('.event-modal.error').hide()
+			$('.notification-modal.error').hide()
 		})
 		if (payMode === 'Event') {
 			resetEventForm()
@@ -651,7 +658,7 @@ $(`${payButton}`).on('click', function(e) {
 	e.preventDefault()
 	$('.stripe.processing').show()
 	$('.stripe.error').hide()
-	$('.event-modal.processing').show()
+	$('.notification-modal.processing').show()
 	saveForm(payMode)
 	var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0, count = 0
 	if (payMode === 'Event') {
