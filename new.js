@@ -439,7 +439,6 @@ customSelect = '#custom-select',
 customTerms = '#custom-terms',
 customCard = '#card-details'
 
-
 // CUSTOM AMOUNT
 function customValidation() {
 	if (billingValidation()) {
