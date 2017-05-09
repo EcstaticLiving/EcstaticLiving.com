@@ -583,7 +583,7 @@ function stripeTokenHandler(token, data) {
 			'stripeCharge': data.chargeDescription,
 			'stripeAmount': data.chargeAmount
 		},
-		timeout: 3000
+		timeout: 1000
 	})
 	.then(function (res) {
 		if (payMode === 'Event') {
@@ -651,6 +651,7 @@ $(`${payButton}`).on('click', function(e) {
 	$('.stripe.processing').show()
 	$('.stripe.error').hide()
 	$('.event-modal.processing').show()
+	window.setTimeout(function() {}, 2000)
 	saveForm(payMode)
 	var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0, count = 0
 	if (payMode === 'Event') {
