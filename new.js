@@ -610,44 +610,40 @@ function stripeTokenHandler(token, data) {
 
 // LIVE: pk_live_0rULIvKhv6aSLqI49Ae5rflI
 // TEST: pk_test_QO6tO6bHny3y10LjH96f4n3p
-function stripeInit() {
-	const stripe = Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
-	const elements = stripe.elements()
-	var fontSize = '';
-	// Desktop, tablet, and iPhone 6Plus: 16px, iPhone 6 or smaller: 12px
-	fontSize = (Math.min($(window).width(), $(window).height()) < 414) ? '13px' : '16px'
-	// iPhone 5: 11px
-	fontSize = (Math.min($(window).width(), $(window).height()) < 375) ? '11px' : fontSize
-	style = {
-		base: {
-			fontFamily: 'Lato',
-			fontWeight: 300,
-			color: '#333',
-			fontSize,
-			lineHeight: '24px',
-			'::placeholder': {
-				color: '#666',
-			}
-		},
-		invalid: {
-			color: '#b00000',
-			':focus': {
-				color: '#800000'
-			}
+const stripe = Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
+const elements = stripe.elements()
+var fontSize = '';
+// Desktop, tablet, and iPhone 6Plus: 16px, iPhone 6 or smaller: 12px
+fontSize = (Math.min($(window).width(), $(window).height()) < 414) ? '13px' : '16px'
+// iPhone 5: 11px
+fontSize = (Math.min($(window).width(), $(window).height()) < 375) ? '11px' : fontSize
+style = {
+	base: {
+		fontFamily: 'Lato',
+		fontWeight: 300,
+		color: '#333',
+		fontSize,
+		lineHeight: '24px',
+		'::placeholder': {
+			color: '#666',
+		}
+	},
+	invalid: {
+		color: '#b00000',
+		':focus': {
+			color: '#800000'
 		}
 	}
-	const card = elements.create('card', {
-		hidePostalCode: true,
-		style
-	})
+}
+const card = elements.create('card', {
+	hidePostalCode: true,
+	style
+})
+if (window.location.href.indexOf('/events/') > -1 || window.location.href.indexOf('/charge') > -1) {
 	card.mount('#card-element')
 	card.addEventListener('change', (result) => {
 		paymentValidation(result)
 	})
-}
-
-if (window.location.href.indexOf('/events/') > -1 || window.location.href.indexOf('/charge') > -1) {
-	stripeInit()
 }
 
 $(`${payButton}`).on('click', function(e) {
@@ -686,7 +682,6 @@ $(`${payButton}`).on('click', function(e) {
 		chargeDescription,
 		chargeAmount
 	}
-	stripeInit()
 	stripe.createToken(card, billingData)
 	.then(function(result) {
 		if (result.error) {
