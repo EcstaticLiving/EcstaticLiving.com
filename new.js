@@ -439,15 +439,6 @@ customSelect = '#custom-select',
 customTerms = '#custom-terms',
 customCard = '#card-details'
 
-const billingFirstName = '#billing-firstname',
-billingLastName = '#billing-lastname',
-billingStreet = '#billing-street',
-billingCity = '#billing-city',
-billingState = '#billing-state',
-billingPostal = '#billing-postal',
-billingCountry = '#billing-country',
-billingCard = '#card-details'
-
 
 // CUSTOM AMOUNT
 function customValidation() {
