@@ -597,7 +597,7 @@ function stripeTokenHandler(token, data) {
 		$('.event-modal.processing').hide()
 		$('.event-modal.error').show()
 		$('#button-stripe-error').on('click', function() {
-			$('.event-modal.error'.hide())
+			$('.event-modal.error').hide()
 		})
 		if (payMode === 'Event') {
 			resetEventForm()
