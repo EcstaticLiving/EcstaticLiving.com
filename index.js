@@ -282,6 +282,7 @@ function participants() {
 function personalValidation() {
 	if ($(eventFirstName).val() !== '' && $(eventLastName).val() !== '' && $(eventEmail).val() !== '' && $(eventMobile).val() !== '' && $(eventBirthdate).val() !== '' &&
 		($(eventFemale).is(':checked') || $(eventMale).is(':checked') || $(eventOther).is(':checked'))) {
+		console.log('personal');
 		return true
 	}
 	return false
@@ -290,6 +291,7 @@ function detailsValidation() {
 	if ($(eventReferral).val() !== ''
 		&& (($(eventExperienceYes).is(':checked') && $(eventExperienceDetails).val() !== '') || $(eventExperienceNo).is(':checked'))
 		&& (($(eventDietYes).is(':checked') && $(eventDietDetails).val() !== '') || $(eventDietNo).is(':checked'))) {
+		console.log('details');
 		return true
 	}
 	return false
@@ -302,6 +304,7 @@ function partnerValidation() {
 			&& ($(eventPayBoth).is(':checked') || $(eventPayMe).is(':checked')))
 		|| participants() === 1
 	) {
+		console.log('partner');
 		return true
 	}
 	return false
@@ -311,6 +314,7 @@ function eventOptionValidation() {
 		($(eventDepositContainer).is(':visible') && ($(eventDepositFull).is(':checked') || $(eventDepositDeposit).is(':checked'))
 		|| $(eventDepositContainer).is(':hidden'))
 	)) {
+		console.log('event options');
 		return true
 	}
 	return false
@@ -318,6 +322,7 @@ function eventOptionValidation() {
 function billingValidation() {
 	if ($(billingFirstName).val() !== '' && $(billingLastName).val() !== '' && $(billingStreet).val() !== '' && $(billingCity).val() !== ''
 		&& $(billingState).val() !== '' && $(billingPostal).val() !== '' && $(billingCountry).val() !== '' && $(billingCard).is(':checked')) {
+		console.log('billing');
 		return true
 	}
 	return false
