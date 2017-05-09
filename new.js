@@ -611,6 +611,7 @@ function stripeTokenHandler(token, data) {
 // LIVE: pk_live_0rULIvKhv6aSLqI49Ae5rflI
 // TEST: pk_test_QO6tO6bHny3y10LjH96f4n3p
 if (window.location.href.indexOf('/events/') > -1 || window.location.href.indexOf('/charge') > -1) {
+	console.log('stripe');
 	const stripe = Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
 	const elements = stripe.elements()
 	var fontSize = '';
