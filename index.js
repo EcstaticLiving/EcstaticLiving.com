@@ -626,7 +626,6 @@ function stripeTokenHandler(token, data) {
 		timeout: 3000
 	})
 	.then(function (res) {
-		window.setTimeout(function() {}, 2000)
 		$('.notification-modal.processing').hide()
 		if (page === 'Event') {
 			window.location.href = `${siteUrl}registered`
