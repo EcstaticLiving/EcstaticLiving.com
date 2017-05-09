@@ -69,7 +69,7 @@ a.w-dropdown-link.w--current {color:#800000;}
 	border-bottom:1px solid #800000;
 }
 .form-radio:checked,
-.form-select:checked {
+.form-select:focus {
 	outline: none !important;
 	border:1px solid #800000;
 }
