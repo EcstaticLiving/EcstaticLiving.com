@@ -594,7 +594,7 @@ function paymentValidation(result) {
 		if (page === 'Event') {
 			$(billingCard).prop('checked', true)
 			eventValidation()
-		} else if page === 'Custom' {
+		} else if (page === 'Custom') {
 			$(customCard).prop('checked', true)
 			customValidation()
 		}
@@ -602,7 +602,7 @@ function paymentValidation(result) {
 		if (page === 'Event') {
 			$(billingCard).prop('checked', false)
 			eventValidation()
-		} else if page === 'Custom' {
+		} else if (page === 'Custom') {
 			$(customCard).prop('checked', false)
 			customValidation()
 		}
@@ -630,7 +630,7 @@ function stripeTokenHandler(token, data) {
 		$('.notification-modal.processing').hide()
 		if (page === 'Event') {
 			window.location.href = `${siteUrl}registered`
-		} else if page === 'Custom' {
+		} else if (page === 'Custom') {
 			window.location.href = `${siteUrl}success`
 		}
 	})
@@ -642,7 +642,7 @@ function stripeTokenHandler(token, data) {
 		})
 		if (page === 'Event') {
 			resetEventForm()
-		} else if page === 'Custom' {
+		} else if (page === 'Custom') {
 			resetCustomForm()
 		}
 		console.log(err)
@@ -701,7 +701,7 @@ $(`${payButton}`).on('click', function(e) {
 		customerDescription = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' <' + $(eventEmail).val() + '>'
 		customerEmail = $(eventEmail).val()
 		chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(eventSelect + ' option:selected').text().substring(0, $(eventSelect + ' option:selected').text().length - 16)}, ${eventDeposit}`
-	} else if page === 'Custom' {
+	} else if (page === 'Custom') {
 		count = $(customSelect).prop('selectedIndex') - 1
 		chargeAmount = $(customSelect).val() * 100
 		customerDescription = $(customFirstName).val() + ' ' + $(customLastName).val() + ' <' + $(customEmail).val() + '>'
@@ -730,7 +730,7 @@ $(`${payButton}`).on('click', function(e) {
 		} else {
 			if (page === 'Event') {
 				$eventForm.submit()
-			} else if page === 'Custom' {
+			} else if (page === 'Custom') {
 				$customForm.submit()
 			}
 			stripeTokenHandler(result.token, serverData)
