@@ -2,7 +2,8 @@
 Code ©2017 Ecstatic Living Institute All rights reserved.
 Created by Conscious Apps Inc. www.consciousapps.com
 */
-$(document).ready(function () {
+var Webflow = Webflow || [];
+Webflow.push(function () {
 
 // DECLARATIONS
 // General
@@ -58,6 +59,17 @@ $(window).on('load orientationchange', function() {
 	initialize()
 })
 
+var page
+if (window.location.href.indexOf('/events/') > -1) {
+	page = 'Event'
+}
+if (window.location.href.indexOf('/charge') > -1) {
+	page = 'Custom'
+}
+if (window.location.href.indexOf('/contact') > -1) {
+	page = 'Contact'
+}
+
 
 
 // NAV MENU
@@ -101,7 +113,7 @@ $('.navigate-back').on('click', function() {
 
 
 //	CONTACT
-if (window.location.href.indexOf('/contact') > -1) {
+if (page === 'Contact') {
 	$receivedSection.fadeTo(500, 0)
 	$receivedSection.hide()
 	$contactSection.fadeTo(500, 1)
@@ -126,19 +138,18 @@ $('.button.contact').on('click', function() {
 // FORMS
 
 // Countries
-Webflow.push(function() {
-	addCountries('#country');
-	function addCountries(whereto) {
-		var countriesfile = "United States, Canada, Afghanistan, Albania, Algeria, Andorra, Angola, Antigua & Deps, Argentina, Armenia, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bhutan, Bolivia, Bosnia Herzegovina, Botswana, Brazil, Brunei, Bulgaria, Burkina, Burma, Burundi, Cambodia, Cameroon, Cape Verde, Central African Rep, Chad, Chile, People's Republic of China, Republic of China, Colombia, Comoros, Democratic Republic of the Congo, Republic of the Congo, Costa Rica, Croatia, Cuba, Cyprus, Czech Republic, Danzig, Denmark, Djibouti, Dominica, Dominican Republic, East Timor, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, Gabon, Gaza Strip, The Gambia, Georgia, Germany, Ghana, Greece, Grenada, Guatemala, Guinea, Guinea-Bissau, Guyana, Haiti, Holy Roman Empire, Honduras, Hungary, Iceland, India, Indonesia, Iran, Iraq, Republic of Ireland, Israel, Italy, Ivory Coast, Jamaica, Japan, Jonathanland, Jordan, Kazakhstan, Kenya, Kiribati, North Korea, South Korea, Kosovo, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Marshall Islands, Mauritania, Mauritius, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Morocco, Mount Athos, Mozambique, Namibia, Nauru, Nepal, Newfoundland, Netherlands, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Ottoman Empire, Pakistan, Palau, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Prussia, Qatar, Romania, Rome, Russian Federation, Rwanda, St Kitts & Nevis, St Lucia, Saint Vincent & the, Grenadines, Samoa, San Marino, Sao Tome & Principe, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Solomon Islands, Somalia, South Africa, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Tajikistan, Tanzania, Thailand, Togo, Tonga, Trinidad & Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom, Uruguay, Uzbekistan, Vanuatu, Vatican City, Venezuela, Vietnam, Yemen, Zambia, Zimbabwe";
-		var countries = countriesfile.split(", ");
-		for(var c = 0; c<countries.length; c++) {
-			$(whereto).append('<option value="' + countries[c] + '">' + countries[c] + '</option>');
-		}
+var countriesfile = "United States, Canada, Afghanistan, Albania, Algeria, Andorra, Angola, Antigua & Deps, Argentina, Armenia, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bhutan, Bolivia, Bosnia Herzegovina, Botswana, Brazil, Brunei, Bulgaria, Burkina, Burma, Burundi, Cambodia, Cameroon, Cape Verde, Central African Rep, Chad, Chile, People's Republic of China, Republic of China, Colombia, Comoros, Democratic Republic of the Congo, Republic of the Congo, Costa Rica, Croatia, Cuba, Cyprus, Czech Republic, Danzig, Denmark, Djibouti, Dominica, Dominican Republic, East Timor, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, Gabon, Gaza Strip, The Gambia, Georgia, Germany, Ghana, Greece, Grenada, Guatemala, Guinea, Guinea-Bissau, Guyana, Haiti, Holy Roman Empire, Honduras, Hungary, Iceland, India, Indonesia, Iran, Iraq, Republic of Ireland, Israel, Italy, Ivory Coast, Jamaica, Japan, Jonathanland, Jordan, Kazakhstan, Kenya, Kiribati, North Korea, South Korea, Kosovo, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Marshall Islands, Mauritania, Mauritius, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Morocco, Mount Athos, Mozambique, Namibia, Nauru, Nepal, Newfoundland, Netherlands, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Ottoman Empire, Pakistan, Palau, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Prussia, Qatar, Romania, Rome, Russian Federation, Rwanda, St Kitts & Nevis, St Lucia, Saint Vincent & the, Grenadines, Samoa, San Marino, Sao Tome & Principe, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Solomon Islands, Somalia, South Africa, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Tajikistan, Tanzania, Thailand, Togo, Tonga, Trinidad & Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom, Uruguay, Uzbekistan, Vanuatu, Vatican City, Venezuela, Vietnam, Yemen, Zambia, Zimbabwe";
+var countries = countriesfile.split(', ');
+for(var i = 0; i < countries.length; i++) {
+	if (page === 'Event' || page === 'Custom') {
+		$('#billing-country').append('<option value="' + countries[i] + '">' + countries[i] + '</option>');
+	} else {
+		$('#country').append('<option value="' + countries[i] + '">' + countries[i] + '</option>');
 	}
-});
+}
 
 // Save Form
-function saveForm(eventId) {
+function saveForm(formType) {
 	var values = {};
 	$('input, textarea, select').each(function() {
 		if ($(this).is(':radio')) {
@@ -148,13 +159,15 @@ function saveForm(eventId) {
 			values[$(this).attr('name')] = $(this).val()
 		}
 	})
-	localStorage.setItem(`EcstaticLiving:${eventId}`, JSON.stringify(values))
+	localStorage.setItem(`EcstaticLiving:${formType}`, JSON.stringify(values))
 }
 
 // Repopulate Saved Form
-function repopulateForm(eventId) {
-	if (localStorage.getItem(`EcstaticLiving:${eventId}`)) {
-		var values = JSON.parse(localStorage.getItem(`EcstaticLiving:${eventId}`))
+function repopulateForm(formType) {
+	if (localStorage.getItem(`EcstaticLiving:${formType}`)) {
+		$('#form-load').hide()
+		$('#form-clear').show()
+		var values = JSON.parse(localStorage.getItem(`EcstaticLiving:${formType}`))
 		for (var item in values) {
 			if ($('*[name=' + item + ']').is(':radio')) {
 				$('input[name=' + item + '][value="' + values[item] + '"]').prop('checked', true)
@@ -166,6 +179,18 @@ function repopulateForm(eventId) {
 	}
 }
 
+// Clear Form
+function clearForm(formType) {
+	$('#form-load').show()
+	$('#form-clear').hide()
+	$('.w-form-done').hide()
+	$('.w-form-fail').hide()
+	if (formType === 'Event') {
+		$eventForm[0].reset()
+	} else if (formType === 'Custom') {
+		$customForm[0].reset()
+	}
+}
 
 
 // FORMS AND QUESTIONNAIRS
@@ -187,6 +212,8 @@ if (window.location.href.indexOf('/forms/ctt-application') > -1) {
 
 
 
+
+
 // EVENT REGISTRATION
 $eventForm = $('.form.registration'),
 eventCode = $('#event-code').text().toLowerCase(),
@@ -197,7 +224,7 @@ eventVenue = $('#event-venue').text(),
 eventDepositAmount = $('#event-deposit-amount').text(),
 eventDepositDate = $('#event-deposit-date').text()
 
-// Event initialization
+// Event variables
 const payButton = '.button.pay',
 eventFirstName = '#event-firstname',
 eventLastName = '#event-lastname',
@@ -229,10 +256,18 @@ eventDepositContainer = '.event-container.deposit',
 eventDepositText = '#event-deposit-text',
 eventDepositFull = '#event-deposit-full',
 eventDepositDeposit = '#event-deposit-deposit',
-eventDepositPrice = 0,
 eventTerms = '#event-terms',
-eventCard = '#card-details',
-eventButton = '#event-button'
+paymentButton = '#payment-button'
+
+// Stripe billing variables
+const billingFirstName = '#billing-firstname',
+billingLastName = '#billing-lastname',
+billingStreet = '#billing-street',
+billingCity = '#billing-city',
+billingState = '#billing-state',
+billingPostal = '#billing-postal',
+billingCountry = '#billing-country',
+billingCard = '#billing-card'
 
 // PARTICIPANTS
 function participants() {
@@ -244,14 +279,14 @@ function participants() {
 }
 
 // FORM VALIDATION
-function validationPersonal() {
+function personalValidation() {
 	if ($(eventFirstName).val() !== '' && $(eventLastName).val() !== '' && $(eventEmail).val() !== '' && $(eventMobile).val() !== '' && $(eventBirthdate).val() !== '' &&
 		($(eventFemale).is(':checked') || $(eventMale).is(':checked') || $(eventOther).is(':checked'))) {
 		return true
 	}
 	return false
 }
-function validationDetails() {
+function detailsValidation() {
 	if ($(eventReferral).val() !== ''
 		&& (($(eventExperienceYes).is(':checked') && $(eventExperienceDetails).val() !== '') || $(eventExperienceNo).is(':checked'))
 		&& (($(eventDietYes).is(':checked') && $(eventDietDetails).val() !== '') || $(eventDietNo).is(':checked'))) {
@@ -259,7 +294,7 @@ function validationDetails() {
 	}
 	return false
 }
-function validationStatus() {
+function partnerValidation() {
 	if (
 		(participants() === 2
 			&& $(eventPartnerName).val() !== ''
@@ -271,7 +306,7 @@ function validationStatus() {
 	}
 	return false
 }
-function validationEventOptions() {
+function eventOptionValidation() {
 	if ($(eventSelect).val() && (
 		($(eventDepositContainer).is(':visible') && ($(eventDepositFull).is(':checked') || $(eventDepositDeposit).is(':checked'))
 		|| $(eventDepositContainer).is(':hidden'))
@@ -280,21 +315,25 @@ function validationEventOptions() {
 	}
 	return false
 }
-function eventValidation() {
-	if (validationPersonal() && validationDetails() && validationStatus() && validationEventOptions() && $(eventTerms).is(':checked') && $(eventCard).is(':checked')) {
-		$(eventButton).prop('disabled', false)
-		$(eventButton).css({ 'background-color': '#800000' })
-		$(eventButton).css({ 'color': '#ffffff' })
+function billingValidation() {
+	if ($(billingFirstName).val() !== '' && $(billingLastName).val() !== '' && $(billingStreet).val() !== '' && $(billingCity).val() !== ''
+		&& $(billingState).val() !== '' && $(billingPostal).val() !== '' && $(billingCountry).val() !== '' && $(billingCard).is(':checked')) {
 		return true
 	}
-	$(eventButton).prop('disabled', true)
-	$(eventButton).css({ 'background-color': '#f5f5f5' })
-	$(eventButton).css({ 'color': '#333333' })
 	return false
 }
-$(eventFirstName + ',' + eventLastName + ',' + eventEmail + ',' + eventMobile + ',' + eventBirthdate + ',' + eventFemale + ',' + eventMale + ',' + eventOther + ',' + eventReferral + ',' + eventExperienceYes + ',' + eventExperienceNo + ',' + eventExperienceDetails + ',' + eventDietYes + ',' + eventDietNo + ',' + eventDietDetails + ',' + eventStatus + ',' + eventPartnerName + ',' + eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther + ',' + eventSelect + ',' + eventTerms + ',' + eventCard).on('change', function () {
-	eventValidation()
-})
+function eventValidation() {
+	if (personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && $(eventTerms).is(':checked') && billingValidation()) {
+		$(paymentButton).prop('disabled', false)
+		$(paymentButton).css({ 'background-color': '#800000' })
+		$(paymentButton).css({ 'color': '#ffffff' })
+		return true
+	}
+	$(paymentButton).prop('disabled', true)
+	$(paymentButton).css({ 'background-color': '#f5f5f5' })
+	$(paymentButton).css({ 'color': '#333333' })
+	return false
+}
 
 // PARTNERSHIP
 function showPartner() {
@@ -321,20 +360,6 @@ function hidePartner() {
 	setEventSelect()
 }
 
-$(eventStatus).change(function() {
-	participants() === 2 ? showPartner() : hidePartner()
-})
-
-$(eventPayBoth + ',' + eventPayMe).change(function() {
-	if ($(eventPayBoth).is(':checked')) {
-		setEventSelect('for both')
-	} else if (participants() === 2) {
-		setEventSelect('per person')
-	} else {
-		setEventSelect('')
-	}
-})
-
 // PREVIOUS EXPERIENCE
 function showExperience() {
 	$(eventExperienceContainer).show()
@@ -353,11 +378,6 @@ function hideExperience() {
 	$(eventExperienceContainer).hide()
 }
 
-$(eventExperienceNo + ',' + eventExperienceYes).change(function() {
-	if ($(eventExperienceYes).is(':checked')) showExperience()
-	if ($(eventExperienceNo).is(':checked')) hideExperience()
-})
-
 // DIETARY NEEDS
 function showDiet() {
 	$(eventDietContainer).show()
@@ -375,11 +395,6 @@ function hideDiet() {
 	}, 200)
 	$(eventDietContainer).hide()
 }
-
-$(eventDietNo + ',' + eventDietYes).change(function() {
-	if ($(eventDietYes).is(':checked')) showDiet()
-	if ($(eventDietNo).is(':checked')) hideDiet()
-})
 
 // EVENT OPTIONS
 function setEventSelect(people) {
@@ -403,14 +418,12 @@ function setEventSelect(people) {
 			text: eventOptions[i] + ' ($' + eventPrices[i] * paymentFactor + spacer + people + closer
 		}))
 	}
-	eventDepositPrice = parseInt(eventDepositAmount) * paymentFactor
+	const eventDepositPrice = parseInt(eventDepositAmount) * paymentFactor
 	$(eventDepositText).text(`Pay deposit only ($${eventDepositPrice}${spacer}${people})`)
 }
 
 function resetEventForm() {
-	$('.w-form-done').hide()
-	$('.w-form-fail').hide()
-	$eventForm[0].reset()
+	clearForm('Event')
 	repopulateForm('Event')
 	if ($(eventPayBoth).is(':checked')) {
 		setEventSelect('for both')
@@ -420,8 +433,8 @@ function resetEventForm() {
 		setEventSelect('')
 	}
 	$('#event').val(eventCode)
-	if ($(eventExperienceNo).is(':checked')) hideExperience()
-	if ($(eventDietNo).is(':checked')) hideDiet()
+	if (!$(eventExperienceYes).is(':checked')) hideExperience()
+	if (!$(eventDietYes).is(':checked')) hideDiet()
 	if (participants() === 1) hidePartner()
 	if (new Date() < new Date(eventDepositDate)) {
 		$(eventDepositContainer).show()
@@ -435,12 +448,6 @@ function resetEventForm() {
 	eventValidation()
 }
 
-// EVENT PAGE
-if (window.location.href.indexOf('/events/') > -1) {
-	resetEventForm()
-}
-
-
 
 
 
@@ -453,26 +460,21 @@ customLastName = '#custom-lastname',
 customEmail = '#custom-email',
 customSelect = '#custom-select',
 customTerms = '#custom-terms',
-customCard = '#card-details',
-customButton = '#custom-button'
-
+customCard = '#billing-card'
 
 // CUSTOM AMOUNT
 function customValidation() {
-	if ($(customFirstName).val() !== '' && $(customLastName).val() !== '' && $(customSelect).val() !== '' && $(customTerms).is(':checked') && $(customCard).is(':checked')) {
-		$(customButton).prop('disabled', false)
-		$(customButton).css({ 'background-color': '#800000' })
-		$(customButton).css({ 'color': '#ffffff' })
+	if (billingValidation()) {
+		$(paymentButton).prop('disabled', false)
+		$(paymentButton).css({ 'background-color': '#800000' })
+		$(paymentButton).css({ 'color': '#ffffff' })
 		return true
 	}
-	$(customButton).prop('disabled', true)
-	$(customButton).css({ 'background-color': '#f5f5f5' })
-	$(customButton).css({ 'color': '#333333' })
+	$(paymentButton).prop('disabled', true)
+	$(paymentButton).css({ 'background-color': '#f5f5f5' })
+	$(paymentButton).css({ 'color': '#333333' })
 	return false
 }
-$(customFirstName + ',' + customLastName + ',' + customSelect + ',' + customTerms + ',' + customCard).on('change', function () {
-	customValidation()
-})
 
 function setCustomSelect() {
 	//	Adds options & prices based on CMS input
@@ -494,9 +496,7 @@ function setCustomSelect() {
 }
 
 function resetCustomForm() {
-	$('.w-form-done').hide()
-	$('.w-form-fail').hide()
-	$customForm[0].reset()
+	clearForm('Custom')
 	repopulateForm('Custom')
 	setCustomSelect()
 	$customForm.parsley()
@@ -505,49 +505,85 @@ function resetCustomForm() {
 	customValidation()
 }
 
-if (window.location.href.indexOf('/charge') > -1) {
+
+
+
+
+// EVENT or CUSTOM CHARGE mode
+if (page === 'Event') {
+	$(eventFirstName).on('change', function () {
+		$(billingFirstName).val($(eventFirstName).val())
+	})
+	$(eventLastName).on('change', function () {
+		$(billingLastName).val($(eventLastName).val())
+	})
+	$(eventDietNo + ',' + eventDietYes).on('change', function () {
+		if ($(eventDietYes).is(':checked')) showDiet()
+		if ($(eventDietNo).is(':checked')) hideDiet()
+	})
+	$(eventExperienceNo + ',' + eventExperienceYes).on('change', function () {
+		if ($(eventExperienceYes).is(':checked')) showExperience()
+		if ($(eventExperienceNo).is(':checked')) hideExperience()
+	})
+	$(eventStatus).on('change', function () {
+		participants() === 2 ? showPartner() : hidePartner()
+	})
+	$(eventPayBoth + ',' + eventPayMe).on('change', function () {
+		if ($(eventPayBoth).is(':checked')) {
+			setEventSelect('for both')
+		} else if (participants() === 2) {
+			setEventSelect('per person')
+		} else {
+			setEventSelect('')
+		}
+	})
+	const eventFieldsPersonal = eventFirstName + ',' + eventLastName + ',' + eventEmail + ',' + eventMobile + ',' + eventBirthdate + ',' + eventFemale + ',' + eventMale + ',' + eventOther
+	const eventFieldsDetails = eventReferral + ',' + eventExperienceYes + ',' + eventExperienceNo + ',' + eventExperienceDetails + ',' + eventDietYes + ',' + eventDietNo + ',' + eventDietDetails
+	const eventFieldsPartner = eventStatus + ',' + eventPartnerName + ',' + eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther
+	const eventFieldsOptions = eventSelect
+	const eventFieldsBilling = billingFirstName + ',' + billingLastName + ',' + billingStreet + ',' + billingCity + ',' + billingState + ',' + billingPostal + ',' + billingCountry
+	$(eventFieldsPersonal + ',' + eventFieldsDetails + ',' + eventFieldsPartner + ',' + eventFieldsOptions + ',' + eventTerms + ',' + eventFieldsBilling).on('change', function () {
+		eventValidation()
+	})
+	resetEventForm()
+	if (localStorage.getItem(`EcstaticLiving:${page}`)) {
+		$('#form-load').hide()
+		$('#form-clear').show()
+	}
+	$('#form-clear').on('click', function () {
+		clearForm(page)
+	})
+	$('#form-load').on('click', function () {
+		repopulateForm(page)
+	})
+} else if (page === 'Custom') {
+	$(customFirstName).on('change', function () {
+		$(billingFirstName).val($(eventFirstName).val())
+	})
+	$(customLastName).on('change', function () {
+		$(billingLastName).val($(eventLastName).val())
+	})
+	$(billingFirstName + ',' + billingLastName + ',' + billingStreet + ',' + billingCity + ',' + billingState + ',' + billingPostal + ',' + billingCountry).on('change', function () {
+		customValidation()
+	})
 	resetCustomForm()
+	if (localStorage.getItem(`EcstaticLiving:${page}`)) {
+		$('#form-load').hide()
+		$('#form-clear').show()
+	}
+	$('#form-clear').on('click', function () {
+		clearForm(page)
+	})
+	$('#form-load').on('click', function () {
+		repopulateForm(page)
+	})
 }
+
 
 
 
 // STRIPE
-//
-// LIVE:
-// pk_live_0rULIvKhv6aSLqI49Ae5rflI
-// https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe
-//
-// TEST:
-// pk_test_QO6tO6bHny3y10LjH96f4n3p
-// https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test
-
-function stripeTokenHandler(token, data) {
-	$.ajax({
-		type: 'POST',
-		url: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe',
-		crossDomain: true,
-		data: {
-			'stripeToken': token.id,
-			'stripeEmail': data.customerEmail,
-			'stripeCustomer': data.customerDescription,
-			'stripeCharge': data.chargeDescription,
-			'stripeAmount': data.chargeAmount
-		}
-	})
-	.then(function (res) {
-		if (payMode === 'Event') {
-			window.location.href = `${siteUrl}registered`
-		} else {
-			window.location.href = `${siteUrl}success`
-		}
-	})
-	.fail(function (err) {
-		alert('The payment did not go through. Please try again.');
-		console.log(err);
-	})
-}
-
-function paymentOutcome(result) {
+function paymentValidation(result) {
 	const displayError = document.getElementById('card-errors')
 	if (result.error) {
 		displayError.textContent = result.error.message
@@ -555,111 +591,151 @@ function paymentOutcome(result) {
 		displayError.textContent = ''
 	}
 	if (result.complete) {
-		if (payMode === 'Event') {
-			$(eventCard).prop('checked', true)
+		if (page === 'Event') {
+			$(billingCard).prop('checked', true)
 			eventValidation()
-		} else {
+		} else if (page === 'Custom') {
 			$(customCard).prop('checked', true)
 			customValidation()
 		}
 	} else {
-		if (payMode === 'Event') {
-			$(eventCard).prop('checked', false)
+		if (page === 'Event') {
+			$(billingCard).prop('checked', false)
 			eventValidation()
-		} else {
+		} else if (page === 'Custom') {
 			$(customCard).prop('checked', false)
 			customValidation()
 		}
 	}
 }
 
-var payMode = '';
-if (window.location.href.indexOf('/events/') > -1) {
-	payMode = 'Event'
-} else if (window.location.href.indexOf('/charge') > -1) {
-	payMode = 'Custom'
-} else {
-	payMode = null
-}
-if (payMode) {
-	const stripe = Stripe('pk_live_0rULIvKhv6aSLqI49Ae5rflI')
-	const elements = stripe.elements()
-	var fontSize = '';
-	// Desktop, tablet, and iPhone 6Plus: 16px
-	// iPhone 6 or smaller: 12px
-	fontSize = (Math.min($(window).width(), $(window).height()) < 414) ? '13px' : '16px'
-	// iPhone 5: 11px
-	fontSize = (Math.min($(window).width(), $(window).height()) < 375) ? '11px' : fontSize
-	style = {
-		base: {
-			fontFamily: 'Lato',
-			fontWeight: 300,
-			color: '#333',
-			fontSize,
-			lineHeight: '24px',
-			fontSmoothing: 'antialiased',
-			'::placeholder': {
-				color: '#999',
-			}
+// LIVE: https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe
+// TEST: https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test
+function stripeTokenHandler(token, data) {
+	$.ajax({
+		type: 'POST',
+		url: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test',
+		crossDomain: true,
+		data: {
+			'stripeToken': token.id,
+			'stripeEmail': data.customerEmail,
+			'stripeCustomer': data.customerDescription,
+			'stripeCharge': data.chargeDescription,
+			'stripeAmount': data.chargeAmount
 		},
-		invalid: {
-			color: '#e5424d',
-			':focus': {
-				color: '#303238'
-			}
+		timeout: 3000
+	})
+	.then(function (res) {
+		window.setTimeout(function() {}, 2000)
+		$('.notification-modal.processing').hide()
+		if (page === 'Event') {
+			window.location.href = `${siteUrl}registered`
+		} else if (page === 'Custom') {
+			window.location.href = `${siteUrl}success`
+		}
+	})
+	.fail(function (err) {
+		$('.notification-modal.processing').hide()
+		$('.notification-modal.error').show()
+		$('#button-stripe-error').on('click', function() {
+			$('.notification-modal.error').hide()
+		})
+		if (page === 'Event') {
+			resetEventForm()
+		} else if (page === 'Custom') {
+			resetCustomForm()
+		}
+		console.log(err)
+	})
+}
+
+// LIVE: pk_live_0rULIvKhv6aSLqI49Ae5rflI
+// TEST: pk_test_QO6tO6bHny3y10LjH96f4n3p
+const stripe = Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
+const elements = stripe.elements()
+var fontSize = '';
+// Desktop, tablet, and iPhone 6Plus: 16px, iPhone 6 or smaller: 12px
+fontSize = (Math.min($(window).width(), $(window).height()) < 414) ? '13px' : '16px'
+// iPhone 5: 11px
+fontSize = (Math.min($(window).width(), $(window).height()) < 375) ? '11px' : fontSize
+style = {
+	base: {
+		fontFamily: 'Lato',
+		fontWeight: 300,
+		color: '#333',
+		fontSize,
+		lineHeight: '24px',
+		'::placeholder': {
+			color: '#666',
+		}
+	},
+	invalid: {
+		color: '#b00000',
+		':focus': {
+			color: '#800000'
 		}
 	}
-	const card = elements.create('card', { style })
+}
+const card = elements.create('card', {
+	hidePostalCode: true,
+	style
+})
+if (page === 'Event' || page === 'Custom') {
 	card.mount('#card-element')
 	card.addEventListener('change', (result) => {
-		paymentOutcome(result)
+		paymentValidation(result)
 	})
-
-	$(`${payButton}`).on('click', function(e) {
-		e.preventDefault()
-		saveForm(payMode)
-		var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0, count = 0
-		if (payMode === 'Event') {
-			if (!eventValidation()) {
-				return false
-			}
-			count = $(eventSelect).prop('selectedIndex') - 1
-			chargeAmount = $(eventDepositDeposit).is(':checked') ? eventDepositPrice * 100 : $(eventSelect).val() * 100
-			const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
-			customerDescription = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' <' + $(eventEmail).val() + '>'
-			customerEmail = $(eventEmail).val()
-			chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(eventSelect + ' option:selected').text().substring(0, $(eventSelect + ' option:selected').text().length - 16)}, ${eventDeposit}`
-		} else {
-			if (!customValidation()) {
-				return false
-			}
-			count = $(customSelect).prop('selectedIndex') - 1
-			chargeAmount = $(customSelect).val() * 100
-			customerDescription = $(customFirstName).val() + ' ' + $(customLastName).val() + ' <' + $(customEmail).val() + '>'
-			customerEmail = $(customEmail).val()
-			chargeDescription = `Custom Charge: ${$(customSelect + ' option:selected').text().substring(0, $(customSelect + ' option:selected').text().length - 16)}`
-		}
-		const stripeDescription = $('#stripe-description').text().split(' | ')
-		const data = {
-			customerDescription,
-			customerEmail,
-			chargeDescription,
-			chargeAmount
-		}
-		stripe.createToken(card).then(function(result) {
-			if (result.error) {
-				paymentOutcome(result)
-			} else {
-				if (payMode === 'Event') {
-					$eventForm.submit()
-				} else {
-					$customForm.submit()
-				}
-				stripeTokenHandler(result.token, data)
-			}
-		})
-	})
-
 }
+
+$(`${payButton}`).on('click', function(e) {
+	e.preventDefault()
+	$('.stripe.processing').show()
+	$('.stripe.error').hide()
+	$('.notification-modal.processing').show()
+	saveForm(page)
+	var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0, count = 0
+	if (page === 'Event') {
+		count = $(eventSelect).prop('selectedIndex') - 1
+		chargeAmount = $(eventDepositDeposit).is(':checked') ? eventDepositPrice * 100 : $(eventSelect).val() * 100
+		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
+		customerDescription = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' <' + $(eventEmail).val() + '>'
+		customerEmail = $(eventEmail).val()
+		chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(eventSelect + ' option:selected').text().substring(0, $(eventSelect + ' option:selected').text().length - 16)}, ${eventDeposit}`
+	} else if (page === 'Custom') {
+		count = $(customSelect).prop('selectedIndex') - 1
+		chargeAmount = $(customSelect).val() * 100
+		customerDescription = $(customFirstName).val() + ' ' + $(customLastName).val() + ' <' + $(customEmail).val() + '>'
+		customerEmail = $(customEmail).val()
+		chargeDescription = `Custom Charge: ${$(customSelect + ' option:selected').text().substring(0, $(customSelect + ' option:selected').text().length - 16)}`
+	}
+	const billingData = {
+		name: $(billingFirstName).val() + ' ' + $(billingLastName).val(),
+		address_line1: $(billingStreet).val(),
+		address_line2: '',
+		address_city: $(billingCity).val(),
+		address_state: $(billingState).val(),
+		address_zip: $(billingPostal).val(),
+		address_country: $(billingCountry).val()
+	}
+	const serverData = {
+		customerDescription,
+		customerEmail,
+		chargeDescription,
+		chargeAmount
+	}
+	stripe.createToken(card, billingData)
+	.then(function(result) {
+		if (result.error) {
+			paymentValidation(result)
+		} else {
+			if (page === 'Event') {
+				$eventForm.submit()
+			} else if (page === 'Custom') {
+				$customForm.submit()
+			}
+			stripeTokenHandler(result.token, serverData)
+		}
+	})
+})
 
 })
