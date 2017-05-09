@@ -424,8 +424,8 @@ function resetEventForm() {
 		setEventSelect('')
 	}
 	$('#event').val(eventCode)
-	if ($(eventExperienceNo).is(':checked')) hideExperience()
-	if ($(eventDietNo).is(':checked')) hideDiet()
+	if (!$(eventExperienceYes).is(':checked')) hideExperience()
+	if (!$(eventDietYes).is(':checked')) hideDiet()
 	if (participants() === 1) hidePartner()
 	if (new Date() < new Date(eventDepositDate)) {
 		$(eventDepositContainer).show()
