@@ -583,9 +583,10 @@ function stripeTokenHandler(token, data) {
 			'stripeCharge': data.chargeDescription,
 			'stripeAmount': data.chargeAmount
 		},
-		timeout: 1000
+		timeout: 3000
 	})
 	.then(function (res) {
+		window.setTimeout(function() {}, 2000)
 		if (payMode === 'Event') {
 			$('.event-modal.processing').hide()
 			window.location.href = `${siteUrl}registered`
@@ -651,7 +652,6 @@ $(`${payButton}`).on('click', function(e) {
 	$('.stripe.processing').show()
 	$('.stripe.error').hide()
 	$('.event-modal.processing').show()
-	window.setTimeout(function() {}, 2000)
 	saveForm(payMode)
 	var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0, count = 0
 	if (payMode === 'Event') {
