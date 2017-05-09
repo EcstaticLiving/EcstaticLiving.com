@@ -138,7 +138,7 @@ for(var i = 0; i < countries.length; i++) {
 }
 
 // Save Form
-function saveForm(eventId) {
+function saveForm(formType) {
 	var values = {};
 	$('input, textarea, select').each(function() {
 		if ($(this).is(':radio')) {
@@ -148,13 +148,15 @@ function saveForm(eventId) {
 			values[$(this).attr('name')] = $(this).val()
 		}
 	})
-	localStorage.setItem(`EcstaticLiving:${eventId}`, JSON.stringify(values))
+	localStorage.setItem(`EcstaticLiving:${formType}`, JSON.stringify(values))
 }
 
 // Repopulate Saved Form
-function repopulateForm(eventId) {
-	if (localStorage.getItem(`EcstaticLiving:${eventId}`)) {
-		var values = JSON.parse(localStorage.getItem(`EcstaticLiving:${eventId}`))
+function repopulateForm(formType) {
+	if (localStorage.getItem(`EcstaticLiving:${formType}`)) {
+		$('#button-load-data').hide()
+		$('#button-clear-form').show()
+		var values = JSON.parse(localStorage.getItem(`EcstaticLiving:${formType}`))
 		for (var item in values) {
 			if ($('*[name=' + item + ']').is(':radio')) {
 				$('input[name=' + item + '][value="' + values[item] + '"]').prop('checked', true)
@@ -166,6 +168,20 @@ function repopulateForm(eventId) {
 	}
 }
 
+// Clear Form
+function clearForm(formType) {
+	if (localStorage.getItem(`EcstaticLiving:${formType}`)) {
+		$('#button-load-data').show()
+		$('#button-clear-form').hide()
+	}
+	$('.w-form-done').hide()
+	$('.w-form-fail').hide()
+	if (formType === 'Event') {
+		$eventForm[0].reset()
+	} else if (formType === 'Custom') {
+		$customForm[0].reset()
+	}
+}
 
 
 // FORMS AND QUESTIONNAIRS
@@ -398,9 +414,7 @@ function setEventSelect(people) {
 }
 
 function resetEventForm() {
-	$('.w-form-done').hide()
-	$('.w-form-fail').hide()
-	$eventForm[0].reset()
+	clearForm('Event')
 	repopulateForm('Event')
 	if ($(eventPayBoth).is(':checked')) {
 		setEventSelect('for both')
@@ -473,9 +487,7 @@ function setCustomSelect() {
 }
 
 function resetCustomForm() {
-	$('.w-form-done').hide()
-	$('.w-form-fail').hide()
-	$customForm[0].reset()
+	clearForm('Custom')
 	repopulateForm('Custom')
 	setCustomSelect()
 	$customForm.parsley()
@@ -529,6 +541,12 @@ if (window.location.href.indexOf('/events/') > -1) {
 	resetEventForm()
 } else if (window.location.href.indexOf('/charge') > -1) {
 	payMode = 'Custom'
+	$(customFirstName).on('change', function () {
+		$(billingFirstName).val($(eventFirstName).val())
+	})
+	$(customLastName).on('change', function () {
+		$(billingLastName).val($(eventLastName).val())
+	})
 	$(billingFirstName + ',' + billingLastName + ',' + billingStreet + ',' + billingCity + ',' + billingState + ',' + billingPostal + ',' + billingCountry).on('change', function () {
 		customValidation()
 	})
@@ -536,6 +554,12 @@ if (window.location.href.indexOf('/events/') > -1) {
 } else {
 	payMode = null
 }
+$('.button-clear-form').on('click', function () {
+	clearForm()
+})
+$('.button-load-data').on('click', function () {
+	repopulateForm()
+})
 
 
 
