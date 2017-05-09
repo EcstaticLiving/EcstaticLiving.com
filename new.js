@@ -131,7 +131,7 @@ var countriesfile = "United States, Canada, Afghanistan, Albania, Algeria, Andor
 var countries = countriesfile.split(', ');
 for(var i = 0; i < countries.length; i++) {
 	if (window.location.href.indexOf('/events/') > -1) {
-		$('#-country').append('<option value="' + countries[i] + '">' + countries[i] + '</option>');
+		$('#billing-country').append('<option value="' + countries[i] + '">' + countries[i] + '</option>');
 	} else {
 		$('#country').append('<option value="' + countries[i] + '">' + countries[i] + '</option>');
 	}
