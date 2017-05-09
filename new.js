@@ -154,8 +154,8 @@ function saveForm(formType) {
 // Repopulate Saved Form
 function repopulateForm(formType) {
 	if (localStorage.getItem(`EcstaticLiving:${formType}`)) {
-		$('#button-load-data').hide()
-		$('#button-clear-form').show()
+		$('#form-load').hide()
+		$('#form-clear').show()
 		var values = JSON.parse(localStorage.getItem(`EcstaticLiving:${formType}`))
 		for (var item in values) {
 			if ($('*[name=' + item + ']').is(':radio')) {
@@ -170,8 +170,8 @@ function repopulateForm(formType) {
 
 // Clear Form
 function clearForm(formType) {
-	$('#button-load-data').show()
-	$('#button-clear-form').hide()
+	$('#form-load').show()
+	$('#form-clear').hide()
 	$('.w-form-done').hide()
 	$('.w-form-fail').hide()
 	if (formType === 'Event') {
@@ -538,13 +538,13 @@ if (window.location.href.indexOf('/events/') > -1) {
 	})
 	resetEventForm()
 	if (localStorage.getItem(`EcstaticLiving:${payMode}`)) {
-		$('#button-load-data').hide()
-		$('#button-clear-form').show()
+		$('#form-load').hide()
+		$('#form-clear').show()
 	}
-	$('#button-clear-form').on('click', function () {
+	$('#form-clear').on('click', function () {
 		clearForm(payMode)
 	})
-	$('#button-load-data').on('click', function () {
+	$('#form-load').on('click', function () {
 		repopulateForm(payMode)
 	})
 } else if (window.location.href.indexOf('/charge') > -1) {
@@ -560,13 +560,13 @@ if (window.location.href.indexOf('/events/') > -1) {
 	})
 	resetCustomForm()
 	if (localStorage.getItem(`EcstaticLiving:${payMode}`)) {
-		$('#button-load-data').hide()
-		$('#button-clear-form').show()
+		$('#form-load').hide()
+		$('#form-clear').show()
 	}
-	$('#button-clear-form').on('click', function () {
+	$('#form-clear').on('click', function () {
 		clearForm(payMode)
 	})
-	$('#button-load-data').on('click', function () {
+	$('#form-load').on('click', function () {
 		repopulateForm(payMode)
 	})
 } else {
