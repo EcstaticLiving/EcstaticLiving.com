@@ -662,7 +662,7 @@ style = {
 		fontFamily: 'Lato',
 		fontWeight: 300,
 		color: '#333',
-		fontSize,
+		fontSize: '16px',
 		lineHeight: '24px',
 		'::placeholder': {
 			color: '#666',
