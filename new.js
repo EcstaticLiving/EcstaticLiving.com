@@ -233,7 +233,6 @@ eventDepositFull = '#event-deposit-full',
 eventDepositDeposit = '#event-deposit-deposit',
 eventTerms = '#event-terms',
 eventButton = '#event-button'
-const $eventModal = $('.event-modal')
 
 // Stripe billing variables
 const billingFirstName = '#event-billing-firstname',
@@ -588,17 +587,17 @@ function stripeTokenHandler(token, data) {
 	})
 	.then(function (res) {
 		if (payMode === 'Event') {
-			$eventModal.hide()
+			$('.event-modal.processing').hide()
 			window.location.href = `${siteUrl}registered`
 		} else {
 			window.location.href = `${siteUrl}success`
 		}
 	})
 	.fail(function (err) {
-		$('.stripe.processing').hide()
-		$('.stripe.error').show()
+		$('.event-modal.processing').hide()
+		$('.event-modal.error').show()
 		$('#button-stripe-error').on('click', function() {
-			$($eventModal.hide())
+			$('.event-modal.error'.hide())
 		})
 		if (payMode === 'Event') {
 			resetEventForm()
@@ -649,7 +648,7 @@ $(`${payButton}`).on('click', function(e) {
 	e.preventDefault()
 	$('.stripe.processing').show()
 	$('.stripe.error').hide()
-	$eventModal.show()
+	$('.event-modal.processing').show()
 	saveForm(payMode)
 	var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0, count = 0
 	if (payMode === 'Event') {
