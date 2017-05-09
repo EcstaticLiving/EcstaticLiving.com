@@ -64,18 +64,17 @@ a.w-dropdown-link.w--current {color:#800000;}
 .form-input:focus,
 .form-input.stripe:focus,
 .form-textarea:focus,
-.form-radio:focus,
 .email-input-field:focus {
 	outline: none !important;
 	border-bottom:1px solid #800000;
 }
+.form-radio:focus,
 .form-select:focus {
 	outline: none !important;
 	border:1px solid #800000;
 }
 .form-input::placeholder,
 .form-textarea::placeholder,
-.form-radio::placeholder,
 .email-input-field::placeholder {
 	color: #666;
 }
