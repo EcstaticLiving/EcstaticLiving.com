@@ -680,7 +680,7 @@ const card = elements.create('card', {
 	hidePostalCode: true,
 	style
 })
-if (window.location.href.indexOf('/events/') > -1 || window.location.href.indexOf('/charge') > -1) {
+if (page === 'Event' || page === 'Custom') {
 	card.mount('#card-element')
 	card.addEventListener('change', (result) => {
 		paymentValidation(result)
