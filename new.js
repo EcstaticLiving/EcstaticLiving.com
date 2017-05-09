@@ -170,12 +170,9 @@ function repopulateForm(formType) {
 
 // Clear Form
 function clearForm(formType) {
-	if (localStorage.getItem(`EcstaticLiving:${formType}`)) {
-		$('#button-load-data').show()
-		$('#button-clear-form').hide()
-	}
-	$('.w-form-done').hide()
-	$('.w-form-fail').hide()
+	$('#button-load-data').show()
+	$('#button-clear-form').hide()
+	localStorage.removeItem(`EcstaticLiving:${formType}`)
 	if (formType === 'Event') {
 		$eventForm[0].reset()
 	} else if (formType === 'Custom') {
@@ -414,7 +411,9 @@ function setEventSelect(people) {
 }
 
 function resetEventForm() {
-	clearForm('Event')
+	$('.w-form-done').hide()
+	$('.w-form-fail').hide()
+	$eventForm[0].reset()
 	repopulateForm('Event')
 	if ($(eventPayBoth).is(':checked')) {
 		setEventSelect('for both')
@@ -487,7 +486,9 @@ function setCustomSelect() {
 }
 
 function resetCustomForm() {
-	clearForm('Custom')
+	$('.w-form-done').hide()
+	$('.w-form-fail').hide()
+	$customForm[0].reset()
 	repopulateForm('Custom')
 	setCustomSelect()
 	$customForm.parsley()
@@ -539,6 +540,10 @@ if (window.location.href.indexOf('/events/') > -1) {
 		eventValidation()
 	})
 	resetEventForm()
+	if (localStorage.getItem(`EcstaticLiving:${payMode}`)) {
+		$('.button-load-data').hide()
+		$('.button-clear-form').show()
+	}
 } else if (window.location.href.indexOf('/charge') > -1) {
 	payMode = 'Custom'
 	$(customFirstName).on('change', function () {
@@ -551,6 +556,10 @@ if (window.location.href.indexOf('/events/') > -1) {
 		customValidation()
 	})
 	resetCustomForm()
+	if (localStorage.getItem(`EcstaticLiving:${payMode}`)) {
+		$('.button-load-data').hide()
+		$('.button-clear-form').show()
+	}
 } else {
 	payMode = null
 }
