@@ -267,7 +267,7 @@ billingCity = '#billing-city',
 billingState = '#billing-state',
 billingPostal = '#billing-postal',
 billingCountry = '#billing-country',
-billingCard = '#card-details'
+billingCard = '#billing-card'
 
 // PARTICIPANTS
 function participants() {
@@ -460,7 +460,7 @@ customLastName = '#custom-lastname',
 customEmail = '#custom-email',
 customSelect = '#custom-select',
 customTerms = '#custom-terms',
-customCard = '#card-details'
+customCard = '#billing-card'
 
 // CUSTOM AMOUNT
 function customValidation() {
