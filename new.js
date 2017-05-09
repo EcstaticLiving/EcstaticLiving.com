@@ -610,8 +610,7 @@ function stripeTokenHandler(token, data) {
 
 // LIVE: pk_live_0rULIvKhv6aSLqI49Ae5rflI
 // TEST: pk_test_QO6tO6bHny3y10LjH96f4n3p
-if (window.location.href.indexOf('/events/') > -1 || window.location.href.indexOf('/charge') > -1) {
-	console.log('stripe');
+function stripeInit() {
 	const stripe = Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
 	const elements = stripe.elements()
 	var fontSize = '';
@@ -645,6 +644,10 @@ if (window.location.href.indexOf('/events/') > -1 || window.location.href.indexO
 	card.addEventListener('change', (result) => {
 		paymentValidation(result)
 	})
+}
+
+if (window.location.href.indexOf('/events/') > -1 || window.location.href.indexOf('/charge') > -1) {
+	stripeInit()
 }
 
 $(`${payButton}`).on('click', function(e) {
@@ -683,7 +686,7 @@ $(`${payButton}`).on('click', function(e) {
 		chargeDescription,
 		chargeAmount
 	}
-	console.log(stripe);
+	stripeInit()
 	stripe.createToken(card, billingData)
 	.then(function(result) {
 		if (result.error) {
