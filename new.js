@@ -172,7 +172,8 @@ function repopulateForm(formType) {
 function clearForm(formType) {
 	$('#button-load-data').show()
 	$('#button-clear-form').hide()
-	localStorage.removeItem(`EcstaticLiving:${formType}`)
+	$('.w-form-done').hide()
+	$('.w-form-fail').hide()
 	if (formType === 'Event') {
 		$eventForm[0].reset()
 	} else if (formType === 'Custom') {
@@ -411,9 +412,7 @@ function setEventSelect(people) {
 }
 
 function resetEventForm() {
-	$('.w-form-done').hide()
-	$('.w-form-fail').hide()
-	$eventForm[0].reset()
+	clearForm('Event')
 	repopulateForm('Event')
 	if ($(eventPayBoth).is(':checked')) {
 		setEventSelect('for both')
@@ -486,9 +485,7 @@ function setCustomSelect() {
 }
 
 function resetCustomForm() {
-	$('.w-form-done').hide()
-	$('.w-form-fail').hide()
-	$customForm[0].reset()
+	clearForm('Custom')
 	repopulateForm('Custom')
 	setCustomSelect()
 	$customForm.parsley()
