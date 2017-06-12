@@ -282,7 +282,7 @@ function participants() {
 // FORM VALIDATION
 function eventCorrection() {
 	if (payButtonClicked) {
-		if (!$(eventFemale).is(':checked') && !$(eventMale).is(':checked') && !$(eventOther).is(':checked')) { $(eventFemale).focus() }
+		if (!$(eventFemale).is(':checked') && !$(eventMale).is(':checked') && !$(eventOther).is(':checked')) { $(eventFemale).css({ 'border-color': '#800000', 'background-color': '#fdd' }); $(eventFemale).focus() }
 		if ($(eventBirthdate).val() === '') { $(eventBirthdate).css({ 'border-color': '#800000', 'background-color': '#fdd' }); $(eventBirthdate).focus() }
 			else { $(eventBirthdate).css({ 'border-color': '#ccc', 'background-color': '#fff' }) }
 		if ($(eventMobile).val() === '') { $(eventMobile).css({ 'border-color': '#800000', 'background-color': '#fdd' }); $(eventMobile).focus() }
