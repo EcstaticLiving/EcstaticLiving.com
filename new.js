@@ -353,7 +353,7 @@ function billingValidation() {
 	return false
 }
 function eventValidation() {
-	eventCorrection()
+	if (!eventCorrection()) { return false }
 	if (personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && $(eventTerms).is(':checked') && billingValidation()) {
 		$('#card-errors').text('Oops! There’s some missing information.')
 		$('#card-errors').css({ 'border': '1px solid #800000', 'background-color': '#fdd' })
