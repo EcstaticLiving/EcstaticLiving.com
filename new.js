@@ -755,6 +755,12 @@ $(`${payButton}`).on('click', function(e) {
 		console.log(result);
 		if (result.error) {
 			paymentValidation(result)
+			$('.notification-modal.processing').hide()
+			$('.notification-modal.error').show()
+			$('#button-stripe-error').on('click', function() {
+				$('.notification-modal.error').hide()
+			})
+			console.log(err)
 		} else {
 			if (page === 'Event') {
 				$eventForm.submit()
