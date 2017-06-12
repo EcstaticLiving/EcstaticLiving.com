@@ -232,28 +232,34 @@ eventLastName = '#event-lastname',
 eventEmail = '#event-email',
 eventMobile = '#event-mobile',
 eventBirthdate = '#event-birthdate',
+eventGenderValidation = '#event-gender-validation',
 eventFemale = '#event-gender-female',
 eventMale = '#event-gender-male',
 eventOther = '#event-gender-other',
 eventReferral = '#event-referral',
 eventExperienceContainer = '.event-container.experience',
+eventExperienceValidation = '#event-experience-validation',
 eventExperienceYes = '#event-experience-yes',
 eventExperienceNo = '#event-experience-no',
 eventExperienceDetails = '#event-experience-details',
 eventDietContainer = '.event-container.diet',
+eventDietValidation = '#event-diet-validation',
 eventDietYes = '#event-diet-yes',
 eventDietNo = '#event-diet-no',
 eventDietDetails = '#event-diet-details'
 eventStatus = '#event-status',
 eventPartnerContainer = '.event-container.partner',
 eventPartnerName = '#event-partner-name'
+eventPartnerGenderValidation = '#event-partner-gender-validation',
 eventPartnerFemale = '#event-partner-gender-female',
 eventPartnerMale = '#event-partner-gender-male',
 eventPartnerOther = '#event-partner-gender-other',
+eventPayValidation = '#event-pay-validation',
 eventPayBoth = '#event-pay-both',
 eventPayMe = '#event-pay-me',
 eventSelect = '#event-option',
 eventDepositContainer = '.event-container.deposit',
+eventDepositValidation = '#event-deposit-validation',
 eventDepositText = '#event-deposit-text',
 eventDepositFull = '#event-deposit-full',
 eventDepositDeposit = '#event-deposit-deposit',
@@ -286,17 +292,16 @@ function eventCorrection() {
 		const clearInput = { 'border-color': '#ccc', 'background-color': '#fff' }
 		const errorRadio = { 'border': '1px solid #800000', 'background-color': '#fdd' }
 		const clearRadio = { 'border': 'none', 'background-color': 'transparent' }
-		if (!$(eventDietYes).is(':checked') && !$(eventDietNo).is(':checked')) { $('#event-diet').css(errorRadio); } else { $('#event-diet').css(clearRadio); }
+
+		if ($(eventDepositContainer).is(':visible') && !$(eventDepositFull).is(':checked') && !$(eventDepositDeposit).is(':checked')) { $(eventDepositValidation).css(errorRadio); } else { $(eventDepositValidation).css(clearRadio); }
+		if (participants() === 2 && !$(eventPayBoth).is(':checked') && !$(eventPayMe).is(':checked')) { $(eventPayValidation).css(errorRadio); } else { $(eventPayValidation).css(clearRadio); }
+		if (participants() === 2 && !$(eventPartnerFemale).is(':checked') && !$(eventPartnerMale).is(':checked') && !$(eventPartnerOther).is(':checked')) { $(eventPartnerGenderValidation).css(errorRadio); } else { $(eventPartnerGenderValidation).css(clearRadio); }
+		if (participants() === 2 && $(eventPartnerName).val() === '') { $(eventPartnerName).css(errorInput); $(eventPartnerName).focus() } else { $(eventPartnerName).css(clearInput) }
+		if (!$(eventDietYes).is(':checked') && !$(eventDietNo).is(':checked')) { $(eventDietValidation).css(errorRadio); } else { $(eventDietValidation).css(clearRadio); }
 		if ($(eventDietYes).is(':checked') && $(eventDietDetails).val() === '') { $(eventDietDetails).css(errorInput); } else { $(eventDietDetails).css(clearInput); }
-		if (!$(eventExperienceYes).is(':checked') && !$(eventExperienceNo).is(':checked')) { $('#event-experience').css(errorRadio); } else { $('#event-experience').css(clearRadio); }
+		if (!$(eventExperienceYes).is(':checked') && !$(eventExperienceNo).is(':checked')) { $(eventExperienceValidation).css(errorRadio); } else { $(eventExperienceValidation).css(clearRadio); }
 		if ($(eventExperienceYes).is(':checked') && $(eventExperienceDetails).val() === '') { $(eventExperienceDetails).css(errorInput); } else { $(eventExperienceDetails).css(clearInput); }
-		// if ($(eventReferral).val() === '') { $(eventReferral).css(errorInput); $(eventReferral).focus() } else { $(eventReferral).css(clearInput) }
-		if (!$(eventFemale).is(':checked') && !$(eventMale).is(':checked') && !$(eventOther).is(':checked')) { $('#event-gender').css(errorRadio); } else { $('#event-gender').css(clearRadio); }
-		// if ($(eventBirthdate).val() === '') { $(eventBirthdate).css(errorInput); $(eventBirthdate).focus() } else { $(eventBirthdate).css(clearInput) }
-		// if ($(eventMobile).val() === '') { $(eventMobile).css(errorInput); $(eventMobile).focus() } else { $(eventMobile).css(clearInput) }
-		// if ($(eventEmail).val() === '') { $(eventEmail).css(errorInput); $(eventEmail).focus() } else { $(eventEmail).css(clearInput) }
-		// if ($(eventLastName).val() === '') { $(eventLastName).css(errorInput); $(eventLastName).focus() } else { $(eventLastName).css(clearInput) }
-		// if ($(eventFirstName).val() === '') { $(eventFirstName).css(errorInput); $(eventFirstName).focus() } else { $(eventFirstName).css(clearInput) }
+		if (!$(eventFemale).is(':checked') && !$(eventMale).is(':checked') && !$(eventOther).is(':checked')) { $(eventGenderValidation).css(errorRadio); } else { $(eventGenderValidation).css(clearRadio); }
 		$eventForm.parsley().validate()
 		// if ($(xxx).val() === '') { $(xxx).css(errorInput); $(xxx).focus() } else { $(xxx).css(clearInput) }
 		// if (!$(xxx).is(':checked') && !$(xxx).is(':checked') && !$(xxx).is(':checked')) { $('#xxx').css(errorRadio); } else { $('#xxx').css(clearRadio); }
