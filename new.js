@@ -284,13 +284,6 @@ function personalValidation() {
 		($(eventFemale).is(':checked') || $(eventMale).is(':checked') || $(eventOther).is(':checked'))) {
 		return true
 	}
-	if (!$(eventFemale).is(':checked') && !$(eventMale).is(':checked') && !$(eventOther).is(':checked')) { $(eventFemale).focus() }
-	if ($(eventBirthdate).val() === '') { $(eventBirthdate).css('border', '1px solid #800000'); $(eventBirthdate).focus() }
-	if ($(eventMobile).val() === '') { $(eventMobile).css('border', '1px solid #800000'); $(eventMobile).focus() }
-	if ($(eventEmail).val() === '') { $(eventEmail).css('border', '1px solid #800000'); $(eventEmail).focus() }
-	if ($(eventLastName).val() === '') { $(eventLastName).css('border', '1px solid #800000'); $(eventLastName).focus() }
-	if ($(eventFirstName).val() === '') { $(eventFirstName).css('border', '1px solid #800000'); $(eventFirstName).focus() }
-	// if ($(xxx).val() === '') { $(xxx).css('border', '1px solid #800000'); $(xxx).focus() }
 	return false
 }
 function detailsValidation() {
@@ -338,6 +331,15 @@ function eventValidation() {
 	$(paymentButton).css({ 'background-color': '#f5f5f5' })
 	$(paymentButton).css({ 'color': '#333333' })
 	return false
+}
+function eventCorrection() {
+	if (!$(eventFemale).is(':checked') && !$(eventMale).is(':checked') && !$(eventOther).is(':checked')) { $(eventFemale).focus() }
+	if ($(eventBirthdate).val() === '') { $(eventBirthdate).css('border', '1px solid #800000'); $(eventBirthdate).focus() }
+	if ($(eventMobile).val() === '') { $(eventMobile).css('border', '1px solid #800000'); $(eventMobile).focus() }
+	if ($(eventEmail).val() === '') { $(eventEmail).css('border', '1px solid #800000'); $(eventEmail).focus() }
+	if ($(eventLastName).val() === '') { $(eventLastName).css('border', '1px solid #800000'); $(eventLastName).focus() }
+	if ($(eventFirstName).val() === '') { $(eventFirstName).css('border', '1px solid #800000'); $(eventFirstName).focus() }
+	// if ($(xxx).val() === '') { $(xxx).css('border', '1px solid #800000'); $(xxx).focus() }
 }
 
 // PARTNERSHIP
