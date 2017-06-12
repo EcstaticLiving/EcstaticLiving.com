@@ -617,6 +617,7 @@ function paymentValidation(result) {
 		$('#card-errors').css({ 'border': '1px solid #800000', 'background-color': '#fdd' })
 	} else {
 		$('#card-errors').text('')
+		$('#card-errors').css({ 'border': 'none', 'background-color': 'transparent' })
 		console.log(result);
 	}
 	if (result.complete) {
