@@ -360,7 +360,6 @@ function billingValidation() {
 	return false
 }
 function eventValidation() {
-	eventCorrection()
 	if (personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && $(eventTerms).is(':checked') && billingValidation()) {
 		$(paymentButton).css({ 'background-color': '#800000' })
 		$(paymentButton).css({ 'color': '#ffffff' })
