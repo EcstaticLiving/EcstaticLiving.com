@@ -66,12 +66,12 @@ a.w-dropdown-link.w--current {color:#800000;}
 .form-textarea:focus,
 .email-input-field:focus {
 	outline: none !important;
-	border:1px solid #800000;
+	border-bottom:1px solid #800000;
 }
 .radio:checked,
 .form-select:focus {
 	outline: none !important;
-	border:1px solid #800000;
+	border-bottom:1px solid #800000;
 }
 .form-input::placeholder,
 .form-textarea::placeholder,
