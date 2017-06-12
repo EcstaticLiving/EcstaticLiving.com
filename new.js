@@ -263,6 +263,7 @@ eventDepositValidation = '#event-deposit-validation',
 eventDepositText = '#event-deposit-text',
 eventDepositFull = '#event-deposit-full',
 eventDepositDeposit = '#event-deposit-deposit',
+eventTermsValidation = '#event-terms-validation',
 eventTerms = '#event-terms',
 paymentButton = '#payment-button'
 
@@ -292,7 +293,7 @@ function eventCorrection() {
 		const clearInput = { 'border-color': '#ccc', 'background-color': '#fff' }
 		const errorRadio = { 'border': '1px solid #800000', 'background-color': '#fdd' }
 		const clearRadio = { 'border': 'none', 'background-color': 'transparent' }
-
+		if (!$(eventTerms).is(':checked')) { $(eventTermsValidation).css(errorRadio); } else { $(eventTermsValidation).css(clearRadio); }
 		if ($(eventDepositContainer).is(':visible') && !$(eventDepositFull).is(':checked') && !$(eventDepositDeposit).is(':checked')) { $(eventDepositValidation).css(errorRadio); } else { $(eventDepositValidation).css(clearRadio); }
 		if (participants() === 2 && !$(eventPayBoth).is(':checked') && !$(eventPayMe).is(':checked')) { $(eventPayValidation).css(errorRadio); } else { $(eventPayValidation).css(clearRadio); }
 		if (participants() === 2 && !$(eventPartnerFemale).is(':checked') && !$(eventPartnerMale).is(':checked') && !$(eventPartnerOther).is(':checked')) { $(eventPartnerGenderValidation).css(errorRadio); } else { $(eventPartnerGenderValidation).css(clearRadio); }
