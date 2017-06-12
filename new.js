@@ -353,7 +353,7 @@ function billingValidation() {
 	return false
 }
 function eventValidation() {
-	if (!eventCorrection()) { return false }
+	eventCorrection()
 	if (personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && $(eventTerms).is(':checked') && billingValidation()) {
 		$('#card-errors').text('Oops! There’s some missing information.')
 		$('#card-errors').css({ 'border': '1px solid #800000', 'background-color': '#fdd' })
@@ -718,6 +718,7 @@ $(`${payButton}`).on('click', function(e) {
 	e.preventDefault()
 	payButtonClicked = true
 	eventCorrection()
+	// if (!eventValidation()) { return false }
 	$('.stripe.processing').show()
 	$('.stripe.error').hide()
 	$('.notification-modal.processing').show()
