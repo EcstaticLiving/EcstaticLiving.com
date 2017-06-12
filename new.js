@@ -286,7 +286,7 @@ function eventCorrection() {
 		const clearInput = { 'border-color': '#ccc', 'background-color': '#fff' }
 		const errorRadio = { 'border': '1px solid #800000', 'background-color': '#fdd' }
 		const clearRadio = { 'border': 'none', 'background-color': 'transparent' }
-
+		$eventForm.parsley().validate()
 		if (!$(eventDietYes).is(':checked') && !$(eventDietNo).is(':checked')) { $('#event-diet').css(errorRadio); } else { $('#event-diet').css(clearRadio); }
 		if ($(eventDietYes).is(':checked') && $(eventDietDetails).val() === '') { $(eventDietDetails).css(errorInput); } else { $(eventDietDetails).css(clearInput); }
 		if (!$(eventExperienceYes).is(':checked') && !$(eventExperienceNo).is(':checked')) { $('#event-experience').css(errorRadio); } else { $('#event-experience').css(clearRadio); }
