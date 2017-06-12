@@ -66,4 +66,36 @@ a.w-dropdown-link.w--current {color:#800000;}
 .email-input-field::placeholder {
 	color: #555;
 }
+
+/* CUSTOM RADIO BUTTONS */
+input[type=checkbox]:not(old),
+input[type=radio   ]:not(old){
+	width     : 2em;
+	margin    : 0;
+	padding   : 0;
+	font-size : 1em;
+	opacity   : 0;
+}
+input[type=checkbox]:not(old) + label,
+input[type=radio   ]:not(old) + label{
+	display      : inline-block;
+	margin-left  : -2em;
+	line-height  : 1.5em;
+}
+input[type=checkbox]:not(old) + label > span,
+input[type=radio   ]:not(old) + label > span {
+	display          : inline-block;
+	width            : 0.875em;
+	height           : 0.875em;
+	margin           : 0.25em 0.5em 0.25em 0.25em;
+	border           : 0.0625em solid rgb(192,192,192);
+	border-radius    : 0.25em;
+	background       : rgb(224,224,224);
+	background-image :    -moz-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+	background-image :     -ms-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+	background-image :      -o-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+	background-image : -webkit-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+	background-image :         linear-gradient(rgb(240,240,240),rgb(224,224,224));
+	vertical-align   : bottom;
+}
 </style>
