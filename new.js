@@ -282,7 +282,7 @@ function participants() {
 // FORM VALIDATION
 function eventCorrection() {
 	if (payButtonClicked) {
-		if (!$(eventFemale).is(':checked') && !$(eventMale).is(':checked') && !$(eventOther).is(':checked')) { $('#event-gender').css({ 'border-bottom': '1px solid #800000', 'background-color': '#fdd' }); }
+		if (!$(eventFemale).is(':checked') && !$(eventMale).is(':checked') && !$(eventOther).is(':checked')) { $('#event-gender').css({ 'border': '1px solid #800000', 'background-color': '#fdd' }); }
 			else { $('#event-gender').css({ 'border': 'none', 'background-color': 'transparent' }); }
 		if ($(eventBirthdate).val() === '') { $(eventBirthdate).css({ 'border-color': '#800000', 'background-color': '#fdd' }); $(eventBirthdate).focus() }
 			else { $(eventBirthdate).css({ 'border-color': '#ccc', 'background-color': '#fff' }) }
@@ -295,7 +295,9 @@ function eventCorrection() {
 		if ($(eventFirstName).val() === '') { $(eventFirstName).css({ 'border-color': '#800000', 'background-color': '#fdd' }); $(eventFirstName).focus() }
 			else { $(eventFirstName).css({ 'border-color': '#ccc', 'background-color': '#fff' }) }
 		// if ($(xxx).val() === '') { $(xxx).css({ 'border-color': '#800000', 'background-color': '#fdd' }); $(xxx).focus() }
-			// else { $(xxx).css({ 'border-bottom-color': '#ccc', 'background-color': '#fff' }) }
+			// else { $(xxx).css({ 'border-color': '#ccc', 'background-color': '#fff' }) }
+		// if (!$(xxx).is(':checked') && !$(xxx).is(':checked') && !$(xxx).is(':checked')) { $('#xxx').css({ 'border': '1px solid #800000', 'background-color': '#fdd' }); }
+		// 	else { $('#xxx').css({ 'border': 'none', 'background-color': 'transparent' }); }
 	}
 }
 function personalValidation() {
