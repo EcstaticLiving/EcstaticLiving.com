@@ -285,12 +285,12 @@ function personalValidation() {
 		return true
 	}
 	if ($(eventFemale).is(':checked') || $(eventMale).is(':checked') || $(eventOther).is(':checked')) { $(eventFemale).focus() }
-	if ($(eventBirthdate).val() !== '') { $(eventBirthdate).css('border-color': '#800000'); $(eventBirthdate).focus() }
-	if ($(eventMobile).val() !== '') { $(eventMobile).css('border-color': '#800000'); $(eventMobile).focus() }
-	if ($(eventEmail).val() !== '') { $(eventEmail).css('border-color': '#800000'); $(eventEmail).focus() }
-	if ($(eventLastName).val() !== '') { $(eventLastName).css('border-color': '#800000'); $(eventLastName).focus() }
-	if ($(eventFirstName).val() !== '') { $(eventFirstName).css('border-color': '#800000'); $(eventFirstName).focus() }
-	// if ($(xxx).val() !== '') { $(xxx).css('border-color': '#800000'); $(xxx).focus() }
+	if ($(eventBirthdate).val() !== '') { $(eventBirthdate).css('border-color', '#800000'); $(eventBirthdate).focus() }
+	if ($(eventMobile).val() !== '') { $(eventMobile).css('border-color', '#800000'); $(eventMobile).focus() }
+	if ($(eventEmail).val() !== '') { $(eventEmail).css('border-color', '#800000'); $(eventEmail).focus() }
+	if ($(eventLastName).val() !== '') { $(eventLastName).css('border-color', '#800000'); $(eventLastName).focus() }
+	if ($(eventFirstName).val() !== '') { $(eventFirstName).css('border-color', '#800000'); $(eventFirstName).focus() }
+	// if ($(xxx).val() !== '') { $(xxx).css('border-color', '#800000'); $(xxx).focus() }
 	return false
 }
 function detailsValidation() {
