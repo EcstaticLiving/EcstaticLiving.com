@@ -282,22 +282,24 @@ function participants() {
 // FORM VALIDATION
 function eventCorrection() {
 	if (payButtonClicked) {
-		if (!$(eventFemale).is(':checked') && !$(eventMale).is(':checked') && !$(eventOther).is(':checked')) { $('#event-gender').css({ 'border': '1px solid #800000', 'background-color': '#fdd' }); }
-			else { $('#event-gender').css({ 'border': 'none', 'background-color': 'transparent' }); }
-		if ($(eventBirthdate).val() === '') { $(eventBirthdate).css({ 'border-color': '#800000', 'background-color': '#fdd' }); $(eventBirthdate).focus() }
-			else { $(eventBirthdate).css({ 'border-color': '#ccc', 'background-color': '#fff' }) }
-		if ($(eventMobile).val() === '') { $(eventMobile).css({ 'border-color': '#800000', 'background-color': '#fdd' }); $(eventMobile).focus() }
-			else { $(eventMobile).css({ 'border-color': '#ccc', 'background-color': '#fff' }) }
-		if ($(eventEmail).val() === '') { $(eventEmail).css({ 'border-color': '#800000', 'background-color': '#fdd' }); $(eventEmail).focus() }
-			else { $(eventEmail).css({ 'border-color': '#ccc', 'background-color': '#fff' }) }
-		if ($(eventLastName).val() === '') { $(eventLastName).css({ 'border-color': '#800000', 'background-color': '#fdd' }); $(eventLastName).focus() }
-			else { $(eventLastName).css({ 'border-color': '#ccc', 'background-color': '#fff' }) }
-		if ($(eventFirstName).val() === '') { $(eventFirstName).css({ 'border-color': '#800000', 'background-color': '#fdd' }); $(eventFirstName).focus() }
-			else { $(eventFirstName).css({ 'border-color': '#ccc', 'background-color': '#fff' }) }
-		// if ($(xxx).val() === '') { $(xxx).css({ 'border-color': '#800000', 'background-color': '#fdd' }); $(xxx).focus() }
-			// else { $(xxx).css({ 'border-color': '#ccc', 'background-color': '#fff' }) }
-		// if (!$(xxx).is(':checked') && !$(xxx).is(':checked') && !$(xxx).is(':checked')) { $('#xxx').css({ 'border': '1px solid #800000', 'background-color': '#fdd' }); }
-		// 	else { $('#xxx').css({ 'border': 'none', 'background-color': 'transparent' }); }
+		const errorInput = { 'border-color': '#800000', 'background-color': '#fdd' }
+		const clearInput = { 'border-color': '#ccc', 'background-color': '#fff' }
+		const errorRadio = { 'border': '1px solid #800000', 'background-color': '#fdd' }
+		const clearRadio = { 'border': 'none', 'background-color': 'transparent' }
+
+		if (!$(eventDietYes).is(':checked') && !$(eventDietNo).is(':checked')) { $('#event-diet').css(errorRadio); } else { $('#event-diet').css(clearRadio); }
+		if ($(eventDietYes).is(':checked') && $(eventDietDetails).val() === '') { $(eventDietDetails).css(errorInput); } else { $(eventDietDetails).css(clearInput); }
+		if (!$(eventExperienceYes).is(':checked') && !$(eventExperienceNo).is(':checked')) { $('#event-experience').css(errorRadio); } else { $('#event-experience').css(clearRadio); }
+		if ($(eventExperienceYes).is(':checked') && $(eventExperienceDetails).val() === '') { $(eventExperienceDetails).css(errorInput); } else { $(eventExperienceDetails).css(clearInput); }
+		if ($(eventReferral).val() === '') { $(eventReferral).css(errorInput); $(eventReferral).focus() } else { $(eventReferral).css(clearInput) }
+		if (!$(eventFemale).is(':checked') && !$(eventMale).is(':checked') && !$(eventOther).is(':checked')) { $('#event-gender').css(errorRadio); } else { $('#event-gender').css(clearRadio); }
+		if ($(eventBirthdate).val() === '') { $(eventBirthdate).css(errorInput); $(eventBirthdate).focus() } else { $(eventBirthdate).css(clearInput) }
+		if ($(eventMobile).val() === '') { $(eventMobile).css(errorInput); $(eventMobile).focus() } else { $(eventMobile).css(clearInput) }
+		if ($(eventEmail).val() === '') { $(eventEmail).css(errorInput); $(eventEmail).focus() } else { $(eventEmail).css(clearInput) }
+		if ($(eventLastName).val() === '') { $(eventLastName).css(errorInput); $(eventLastName).focus() } else { $(eventLastName).css(clearInput) }
+		if ($(eventFirstName).val() === '') { $(eventFirstName).css(errorInput); $(eventFirstName).focus() } else { $(eventFirstName).css(clearInput) }
+		// if ($(xxx).val() === '') { $(xxx).css(errorInput); $(xxx).focus() } else { $(xxx).css(clearInput) }
+		// if (!$(xxx).is(':checked') && !$(xxx).is(':checked') && !$(xxx).is(':checked')) { $('#xxx').css(errorRadio); } else { $('#xxx').css(clearRadio); }
 	}
 }
 function personalValidation() {
