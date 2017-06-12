@@ -89,13 +89,7 @@ input[type=radio   ] {
 	margin           : 0.25em 0.5em 0.25em 0.25em;
 	border           : 0.0625em solid #800000;
 	border-radius    : 0.25em;
-	background       : #800000;
-	background-image :    -moz-linear-gradient(#b00000,#800000);
-	background-image :     -ms-linear-gradient(#b00000,#800000);
-	background-image :      -o-linear-gradient(#b00000,#800000);
-	background-image : -webkit-linear-gradient(#b00000,#800000);
-	background-image :         linear-gradient(#b00000,#800000);
-	vertical-align   : bottom;
+	background       : #FFF;
 }
 input[type=checkbox]:checked:before{
   content     : '✓';
@@ -108,7 +102,7 @@ input[type=checkbox]:checked:before{
   text-shadow : 0 0 0.0714em #b00000;
   font-weight : bold;
 }
-input[type=radio]:checked + label > span > span{
+input[type=radio]:checked {
   display          : block;
   width            : 0.5em;
   height           : 0.5em;
@@ -116,10 +110,5 @@ input[type=radio]:checked + label > span > span{
   border           : 0.0625em solid #800000;
   border-radius    : 0.125em;
   background       : #800000;
-  background-image :    -moz-linear-gradient(#b00000,#800000);
-  background-image :     -ms-linear-gradient(#b00000,#800000);
-  background-image :      -o-linear-gradient(#b00000,#800000);
-  background-image : -webkit-linear-gradient(#b00000,#800000);
-  background-image :         linear-gradient(#b00000,#800000);
 }
 </style>
