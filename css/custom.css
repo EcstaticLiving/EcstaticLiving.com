@@ -38,7 +38,7 @@ a {color: #800000; text-decoration:none;}
 input.parsley-error,
 select.parsley-error,
 textarea.parsley-error {
-	color: #B94A48;
+	color: #800000;
 	background-color: #F2DEDE;
 	border: 1px solid #EED3D7;
 }
@@ -46,7 +46,7 @@ textarea.parsley-error {
 	margin: 0px 0 10px;
 	padding: 0;
 	list-style-type: none;
-	color: #9b3831;
+	color: #800000;
 	font-size: 0.9em;
 	line-height: 0.9em;
 	opacity: 0;
@@ -66,7 +66,7 @@ a.w-dropdown-link.w--current {color:#800000;}
 .form-textarea:focus,
 .email-input-field:focus {
 	outline: none !important;
-	border-bottom:1px solid #800000;
+	border:1px solid #800000;
 }
 .radio:checked,
 .form-select:focus {
