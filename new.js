@@ -354,7 +354,6 @@ function eventValidation() {
 	eventCorrection()
 	if (personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && $(eventTerms).is(':checked') && billingValidation()) {
 		$('#card-errors').text('')
-		$('#card-errors').css({ 'border': 'none', 'background-color': 'transparent' })
 		$(paymentButton).css({ 'background-color': '#800000' })
 		$(paymentButton).css({ 'color': '#ffffff' })
 		return true
@@ -638,13 +637,9 @@ function paymentValidation(result) {
 		}
 	}
 	if (result.error) {
-		$('#card-element').css({ 'border-color': '#b00000', 'background-color': '#fdd' })
 		$('#card-errors').text(result.error.message)
-		$('#card-errors').css({ 'border': '1px solid #b00000', 'background-color': '#fdd' })
 	} else {
-		$('#card-element').css({ 'border-color': '#ccc', 'background-color': '#fff' })
 		$('#card-errors').text('')
-		$('#card-errors').css({ 'border': 'none', 'background-color': 'transparent' })
 	}
 }
 
