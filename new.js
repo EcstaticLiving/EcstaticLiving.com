@@ -618,15 +618,6 @@ if (page === 'Event') {
 function paymentValidation(result) {
 	console.log('Payment validation');
 	console.log(result);
-	if (result.error) {
-		$('#card-element').css({ 'border-color': '#800000', 'background-color': '#fdd' })
-		$('#card-errors').text(result.error.message)
-		$('#card-errors').css({ 'border': '1px solid #800000', 'background-color': '#fdd' })
-	} else {
-		$('#card-element').css({ 'border-color': '#ccc', 'background-color': '#fff' })
-		$('#card-errors').text('')
-		$('#card-errors').css({ 'border': 'none', 'background-color': 'transparent' })
-	}
 	if (result.complete) {
 		if (page === 'Event') {
 			$(billingCard).prop('checked', true)
@@ -635,14 +626,15 @@ function paymentValidation(result) {
 			$(customCard).prop('checked', true)
 			customValidation()
 		}
+	}
+	if (result.error) {
+		$('#card-element').css({ 'border-color': '#800000', 'background-color': '#fdd' })
+		$('#card-errors').text(result.error.message)
+		$('#card-errors').css({ 'border': '1px solid #800000', 'background-color': '#fdd' })
 	} else {
-		if (page === 'Event') {
-			$(billingCard).prop('checked', false)
-			eventValidation()
-		} else if (page === 'Custom') {
-			$(customCard).prop('checked', false)
-			customValidation()
-		}
+		$('#card-element').css({ 'border-color': '#ccc', 'background-color': '#fff' })
+		$('#card-errors').text('')
+		$('#card-errors').css({ 'border': 'none', 'background-color': 'transparent' })
 	}
 }
 
