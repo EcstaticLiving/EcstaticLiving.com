@@ -283,12 +283,18 @@ function participants() {
 function eventCorrection() {
 	if (payButtonClicked) {
 		if (!$(eventFemale).is(':checked') && !$(eventMale).is(':checked') && !$(eventOther).is(':checked')) { $(eventFemale).focus() }
-		if ($(eventBirthdate).val() === '') { $(eventBirthdate).css({ 'border-bottom-color': '#800000', 'background-color': '#fdd' }); $(eventBirthdate).focus() } else { $(eventBirthdate).css({ 'border-bottom-color': '#ccc', 'background-color': '#fff' }) }
-		if ($(eventMobile).val() === '') { $(eventMobile).css({ 'border-bottom-color': '#800000', 'background-color': '#fdd' }); $(eventMobile).focus() } else { $(eventMobile).css({ 'border-bottom-color': '#ccc', 'background-color': '#fff' }) }
-		if ($(eventEmail).val() === '') { $(eventEmail).css({ 'border-bottom-color': '#800000', 'background-color': '#fdd' }); $(eventEmail).focus() } else { $(eventEmail).css({ 'border-bottom-color': '#ccc', 'background-color': '#fff' }) }
-		if ($(eventLastName).val() === '') { $(eventLastName).css({ 'border-bottom-color': '#800000', 'background-color': '#fdd' }); $(eventLastName).focus() } else { $(eventLastName).css({ 'border-bottom-color': '#ccc', 'background-color': '#fff' }) }
-		if ($(eventFirstName).val() === '') { $(eventFirstName).css({ 'border-bottom-color': '#800000', 'background-color': '#fdd' }); $(eventFirstName).focus() } else { $(eventFirstName).css({ 'border-bottom-color': '#ccc', 'background-color': '#fff' }) }
-		// if ($(xxx).val() === '') { $(xxx).css({ 'border-bottom-color': '#800000', 'background-color': '#fdd' }); $(xxx).focus() } else { $(xxx).css({ 'border-bottom-color': '#ccc', 'background-color': '#fff' }) }
+		if ($(eventBirthdate).val() === '') { $(eventBirthdate).css({ 'border-color': '#800000', 'background-color': '#fdd' }); $(eventBirthdate).focus() }
+			else { $(eventBirthdate).css({ 'border-color': '#ccc', 'background-color': '#fff' }) }
+		if ($(eventMobile).val() === '') { $(eventMobile).css({ 'border-color': '#800000', 'background-color': '#fdd' }); $(eventMobile).focus() }
+			else { $(eventMobile).css({ 'border-color': '#ccc', 'background-color': '#fff' }) }
+		if ($(eventEmail).val() === '') { $(eventEmail).css({ 'border-color': '#800000', 'background-color': '#fdd' }); $(eventEmail).focus() }
+			else { $(eventEmail).css({ 'border-color': '#ccc', 'background-color': '#fff' }) }
+		if ($(eventLastName).val() === '') { $(eventLastName).css({ 'border-color': '#800000', 'background-color': '#fdd' }); $(eventLastName).focus() }
+			else { $(eventLastName).css({ 'border-color': '#ccc', 'background-color': '#fff' }) }
+		if ($(eventFirstName).val() === '') { $(eventFirstName).css({ 'border-color': '#800000', 'background-color': '#fdd' }); $(eventFirstName).focus() }
+			else { $(eventFirstName).css({ 'border-color': '#ccc', 'background-color': '#fff' }) }
+		// if ($(xxx).val() === '') { $(xxx).css({ 'border-color': '#800000', 'background-color': '#fdd' }); $(xxx).focus() }
+			// else { $(xxx).css({ 'border-bottom-color': '#ccc', 'background-color': '#fff' }) }
 	}
 }
 function personalValidation() {
