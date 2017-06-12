@@ -362,7 +362,7 @@ function eventValidation() {
 	}
 	if (payButtonClicked) {
 		// If there’s no Stripe error message
-		if ($('#card-errors').val() === '') {
+		if ($('#card-errors').text() === '') {
 			$('#card-errors').text('Oops! There’s some missing information.')
 		}
 		$('#card-errors').css({ 'border': '1px solid #800000', 'background-color': '#fdd' })
