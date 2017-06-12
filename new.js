@@ -684,7 +684,7 @@ if (page === 'Event' || page === 'Custom') {
 $(`${payButton}`).on('click', function(e) {
 	e.preventDefault()
 	if (!eventValidation()) {
-		// $('#card-errors').text('Please fill out missing information.')
+		$('#card-errors').text('Oops! There’s some missing information.')
 	}
 	$('.stripe.processing').show()
 	$('.stripe.error').hide()
