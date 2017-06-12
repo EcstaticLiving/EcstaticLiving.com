@@ -293,6 +293,7 @@ function eventCorrection() {
 		const clearInput = { 'border-color': '#ccc', 'background-color': '#fff' }
 		const errorRadio = { 'border': '1px solid #800000', 'background-color': '#fdd' }
 		const clearRadio = { 'border': 'none', 'background-color': 'transparent' }
+		$('#card-errors').text('')
 		$('#card-errors').css(clearRadio)
 		if (!$(eventTerms).is(':checked')) { $(eventTermsValidation).css(errorRadio); } else { $(eventTermsValidation).css(clearRadio); }
 		if ($(eventDepositContainer).is(':visible') && !$(eventDepositFull).is(':checked') && !$(eventDepositDeposit).is(':checked')) { $(eventDepositValidation).css(errorRadio); } else { $(eventDepositValidation).css(clearRadio); }
