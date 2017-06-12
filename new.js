@@ -324,12 +324,10 @@ function billingValidation() {
 }
 function eventValidation() {
 	if (personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && $(eventTerms).is(':checked') && billingValidation()) {
-		$(paymentButton).prop('disabled', false)
 		$(paymentButton).css({ 'background-color': '#800000' })
 		$(paymentButton).css({ 'color': '#ffffff' })
 		return true
 	}
-	$(paymentButton).prop('disabled', true)
 	$(paymentButton).css({ 'background-color': '#f5f5f5' })
 	$(paymentButton).css({ 'color': '#333333' })
 	return false
@@ -685,6 +683,7 @@ $(`${payButton}`).on('click', function(e) {
 	e.preventDefault()
 	if (!eventValidation()) {
 		$('#card-errors').text('Oops! There’s some missing information.')
+		return false
 	}
 	$('.stripe.processing').show()
 	$('.stripe.error').hide()
