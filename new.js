@@ -612,11 +612,11 @@ if (page === 'Event') {
 
 // STRIPE
 function paymentValidation(result) {
-	const displayError = document.getElementById('card-errors')
 	if (result.error) {
-		displayError.textContent = result.error.message
+		$('#card-errors').text(result.error.message)
+		$('#card-errors').css({ 'border': '1px solid #800000', 'background-color': '#fdd' })
 	} else {
-		displayError.textContent = ''
+		$('#card-errors').text('')
 		console.log(result);
 	}
 	if (result.complete) {
