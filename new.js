@@ -576,8 +576,20 @@ if (page === 'Event') {
 	const eventFieldsPartner = eventStatus + ',' + eventPartnerName + ',' + eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther
 	const eventFieldsOptions = eventSelect
 	const eventFieldsBilling = billingFirstName + ',' + billingLastName + ',' + billingStreet + ',' + billingCity + ',' + billingState + ',' + billingPostal + ',' + billingCountry
-	$(eventFieldsPersonal + ',' + eventFieldsDetails + ',' + eventFieldsPartner + ',' + eventFieldsOptions + ',' + eventTerms + ',' + eventFieldsBilling).on('change', function () {
+	$(eventFieldsPersonal + ',' + eventFieldsDetails + ',' + eventFieldsPartner + ',' + eventFieldsOptions + ',' + eventTerms + ',' + eventFieldsBilling).on('change', () => {
 		eventValidation()
+	})
+	$(eventFirstName + ',' + eventLastName + ',' + eventPartnerName).on('change', () => {
+		let qbRecord = ''
+		if (participants() === 1) { qbRecord = $(eventFirstName).val() + ' ' + $(eventLastName).val() }
+		if (participants() === 2) {
+			if ($(eventPartnerName).val().split(' ')[1] === $(eventLastName).val()) {
+				qbRecord = $(eventFirstName).val() + ' & ' + $(eventPartnerName).val()
+			} else {
+				qbRecord = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' & ' + $(eventPartnerName).val()
+			}
+		}
+		$('#qb-record').val(qbRecord)
 	})
 	resetEventForm()
 	if (localStorage.getItem(`EcstaticLiving:${page}`)) {
