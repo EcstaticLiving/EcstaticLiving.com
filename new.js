@@ -289,7 +289,7 @@ function personalValidation() {
 	if ($(eventMobile).val() !== '') { $(eventMobile).css('border', '1px solid #800000'); $(eventMobile).focus() }
 	if ($(eventEmail).val() !== '') { $(eventEmail).css('border', '1px solid #800000'); $(eventEmail).focus() }
 	if ($(eventLastName).val() !== '') { $(eventLastName).css('border', '1px solid #800000'); $(eventLastName).focus() }
-	if ($(eventFirstName).val() !== '') { $(eventFirstName).css('border', '1px solid #800000'); $(eventFirstName).focus() }
+	if ($(eventFirstName).val() !== '') { $(eventFirstName).css('border', '1px solid #800000'); console.log('hello'); $(eventFirstName).focus() }
 	// if ($(xxx).val() !== '') { $(xxx).css('border', '1px solid #800000'); $(xxx).focus() }
 	return false
 }
