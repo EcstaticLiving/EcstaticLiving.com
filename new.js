@@ -576,10 +576,10 @@ if (page === 'Event') {
 	const eventFieldsPartner = eventStatus + ',' + eventPartnerName + ',' + eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther
 	const eventFieldsOptions = eventSelect
 	const eventFieldsBilling = billingFirstName + ',' + billingLastName + ',' + billingStreet + ',' + billingCity + ',' + billingState + ',' + billingPostal + ',' + billingCountry
-	$(eventFieldsPersonal + ',' + eventFieldsDetails + ',' + eventFieldsPartner + ',' + eventFieldsOptions + ',' + eventTerms + ',' + eventFieldsBilling).on('change', () => {
+	$(eventFieldsPersonal + ',' + eventFieldsDetails + ',' + eventFieldsPartner + ',' + eventFieldsOptions + ',' + eventTerms + ',' + eventFieldsBilling).on('change', function() {
 		eventValidation()
 	})
-	$(eventFirstName + ',' + eventLastName + ',' + eventPartnerName).on('change', () => {
+	$(eventFirstName + ',' + eventLastName + ',' + eventPartnerName).on('change', function() {
 		let qbRecord = ''
 		if (participants() === 1) { qbRecord = $(eventFirstName).val() + ' ' + $(eventLastName).val() }
 		if (participants() === 2) {
