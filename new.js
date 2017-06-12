@@ -304,7 +304,6 @@ function eventCorrection() {
 		if ($(eventExperienceYes).is(':checked') && $(eventExperienceDetails).val() === '') { $(eventExperienceDetails).css(errorInput); } else { $(eventExperienceDetails).css(clearInput); }
 		if (!$(eventFemale).is(':checked') && !$(eventMale).is(':checked') && !$(eventOther).is(':checked')) { $(eventGenderValidation).css(errorRadio); } else { $(eventGenderValidation).css(clearRadio); }
 		$eventForm.parsley().validate()
-		console.log($('#card-element').val());
 		if ($('#card-element').val() === '') { $('#card-element').css(errorInput) } else { $('#card-element').css(clearInput) }
 		return false
 	}
@@ -363,7 +362,7 @@ function eventValidation() {
 	}
 	if (payButtonClicked) {
 		// If there’s no Stripe error message
-		if ($('#card-errors').val() !== '') {
+		if ($('#card-errors').val() === '') {
 			$('#card-errors').text('Oops! There’s some missing information.')
 		}
 		$('#card-errors').css({ 'border': '1px solid #800000', 'background-color': '#fdd' })
