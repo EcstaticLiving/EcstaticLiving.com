@@ -295,8 +295,8 @@ function eventCorrection() {
 		if ($(eventBirthdate).val() === '') { $(eventBirthdate).css(errorInput); $(eventBirthdate).focus() } else { $(eventBirthdate).css(clearInput) }
 		if ($(eventMobile).val() === '') { $(eventMobile).css(errorInput); $(eventMobile).focus() } else { $(eventMobile).css(clearInput) }
 		if ($(eventEmail).val() === '') { $(eventEmail).css(errorInput); $(eventEmail).focus() } else { $(eventEmail).css(clearInput) }
-		if ($(eventLastName).val() === '') { $(eventLastName).css(errorInput); $(eventLastName).focus() } else { $(eventLastName).css(clearInput) }
-		if ($(eventFirstName).val() === '') { $(eventFirstName).css(errorInput); $(eventFirstName).focus() } else { $(eventFirstName).css(clearInput) }
+		// if ($(eventLastName).val() === '') { $(eventLastName).css(errorInput); $(eventLastName).focus() } else { $(eventLastName).css(clearInput) }
+		// if ($(eventFirstName).val() === '') { $(eventFirstName).css(errorInput); $(eventFirstName).focus() } else { $(eventFirstName).css(clearInput) }
 		$eventForm.parsley().validate()
 		// if ($(xxx).val() === '') { $(xxx).css(errorInput); $(xxx).focus() } else { $(xxx).css(clearInput) }
 		// if (!$(xxx).is(':checked') && !$(xxx).is(':checked') && !$(xxx).is(':checked')) { $('#xxx').css(errorRadio); } else { $('#xxx').css(clearRadio); }
