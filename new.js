@@ -665,9 +665,6 @@ function stripeTokenHandler(token, data) {
 	.fail(function (err) {
 		$('.notification-modal.processing').hide()
 		$('.notification-modal.error').show()
-		$('#button-stripe-error').on('click', function() {
-			$('.notification-modal.error').hide()
-		})
 		if (page === 'Event') {
 			resetEventForm()
 		} else if (page === 'Custom') {
@@ -710,14 +707,15 @@ if (page === 'Event' || page === 'Custom') {
 	})
 }
 
+$('#button-stripe-error').on('click', function() {
+	$('.notification-modal.error').hide()
+})
+
 $(`${payButton}`).on('click', function(e) {
 	e.preventDefault()
 	payButtonClicked = true
 	eventCorrection()
 	if (!eventValidation()) { return false }
-	$('.stripe.processing').show()
-	$('.stripe.error').hide()
-	$('.notification-modal.processing').show()
 	saveForm(page)
 	var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0, count = 0
 	if (page === 'Event') {
@@ -755,18 +753,17 @@ $(`${payButton}`).on('click', function(e) {
 		console.log(result);
 		if (result.error) {
 			paymentValidation(result)
-			$('.notification-modal.processing').hide()
 			$('.notification-modal.error').show()
-			$('#button-stripe-error').on('click', function() {
-				$('.notification-modal.error').hide()
-			})
-			console.log(err)
+			console.log(result.error)
 		} else {
 			if (page === 'Event') {
 				$eventForm.submit()
 			} else if (page === 'Custom') {
 				$customForm.submit()
 			}
+			$('.stripe.processing').show()
+			$('.stripe.error').hide()
+			$('.notification-modal.processing').show()
 			stripeTokenHandler(result.token, serverData)
 		}
 	})
