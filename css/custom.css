@@ -74,6 +74,7 @@ a.w-dropdown-link.w--current {color:#800000;}
 .form-input::placeholder,
 .form-textarea::placeholder,
 .email-input-field::placeholder {
-	color: #666;
+	color: #333;
+	font-weight: 400;
 }
 </style>
