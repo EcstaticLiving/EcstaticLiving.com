@@ -293,8 +293,13 @@ function eventCorrection() {
 		const clearInput = { 'border-color': '#ccc', 'background-color': '#fff' }
 		const errorRadio = { 'border': '1px solid #800000', 'background-color': '#fdd' }
 		const clearRadio = { 'border': 'none', 'background-color': 'transparent' }
-		$('#card-errors').text('')
-		$('#card-errors').css(clearRadio)
+		if (!eventValidation()) {
+			$('#card-errors').text('Oops! There’s some missing information.')
+			$('#card-errors').css(errorRadio)
+		} else {
+			$('#card-errors').text('')
+			$('#card-errors').css(clearRadio)
+		}
 		if (!$(eventTerms).is(':checked')) { $(eventTermsValidation).css(errorRadio); } else { $(eventTermsValidation).css(clearRadio); }
 		if ($(eventDepositContainer).is(':visible') && !$(eventDepositFull).is(':checked') && !$(eventDepositDeposit).is(':checked')) { $(eventDepositValidation).css(errorRadio); } else { $(eventDepositValidation).css(clearRadio); }
 		if (participants() === 2 && !$(eventPayBoth).is(':checked') && !$(eventPayMe).is(':checked')) { $(eventPayValidation).css(errorRadio); } else { $(eventPayValidation).css(clearRadio); }
@@ -306,6 +311,7 @@ function eventCorrection() {
 		if ($(eventExperienceYes).is(':checked') && $(eventExperienceDetails).val() === '') { $(eventExperienceDetails).css(errorInput); } else { $(eventExperienceDetails).css(clearInput); }
 		if (!$(eventFemale).is(':checked') && !$(eventMale).is(':checked') && !$(eventOther).is(':checked')) { $(eventGenderValidation).css(errorRadio); } else { $(eventGenderValidation).css(clearRadio); }
 		$eventForm.parsley().validate()
+		return false
 		// if ($(xxx).val() === '') { $(xxx).css(errorInput); $(xxx).focus() } else { $(xxx).css(clearInput) }
 		// if (!$(xxx).is(':checked') && !$(xxx).is(':checked') && !$(xxx).is(':checked')) { $('#xxx').css(errorRadio); } else { $('#xxx').css(clearRadio); }
 	}
@@ -714,12 +720,7 @@ if (page === 'Event' || page === 'Custom') {
 $(`${payButton}`).on('click', function(e) {
 	e.preventDefault()
 	payButtonClicked = true
-	if (!eventValidation()) {
-		eventCorrection()
-		$('#card-errors').text('Oops! There’s some missing information.')
-		$('#card-errors').css({ 'border': '1px solid #800000', 'background-color': '#fdd' })
-		return false
-	}
+	eventCorrection()
 	$('.stripe.processing').show()
 	$('.stripe.error').hide()
 	$('.notification-modal.processing').show()
