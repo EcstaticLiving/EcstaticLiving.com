@@ -329,7 +329,6 @@ function eventValidation() {
 		$(paymentButton).css({ 'color': '#ffffff' })
 		return true
 	}
-	$('#card-errors').text('Please fill out missing information.')
 	$(paymentButton).prop('disabled', true)
 	$(paymentButton).css({ 'background-color': '#f5f5f5' })
 	$(paymentButton).css({ 'color': '#333333' })
@@ -684,6 +683,9 @@ if (page === 'Event' || page === 'Custom') {
 
 $(`${payButton}`).on('click', function(e) {
 	e.preventDefault()
+	if (!eventValidation()) {
+		$('#card-errors').text('Please fill out missing information.')
+	}
 	$('.stripe.processing').show()
 	$('.stripe.error').hide()
 	$('.notification-modal.processing').show()
