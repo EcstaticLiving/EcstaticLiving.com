@@ -664,7 +664,7 @@ function stripeTokenHandler(token, data) {
 			'stripeCharge': data.chargeDescription,
 			'stripeAmount': data.chargeAmount
 		},
-		timeout: 4000
+		timeout: 8000
 	})
 	.then(function (res) {
 		$('.notification-modal.processing').hide()
