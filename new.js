@@ -304,8 +304,9 @@ function eventCorrection() {
 		if ($(eventExperienceYes).is(':checked') && $(eventExperienceDetails).val() === '') { $(eventExperienceDetails).css(errorInput); } else { $(eventExperienceDetails).css(clearInput); }
 		if (!$(eventFemale).is(':checked') && !$(eventMale).is(':checked') && !$(eventOther).is(':checked')) { $(eventGenderValidation).css(errorRadio); } else { $(eventGenderValidation).css(clearRadio); }
 		$eventForm.parsley().validate()
-		console.log(document.getElementsByClassName('__PrivateStripeElement-input')[0].value)
-		if ($('#card-element').text() === '') { $('#card-element').css(errorInput) } else { $('#card-element').css(clearInput) }
+		card.addEventListener('change', (result) => {
+			paymentValidation(result)
+		})
 		return false
 	}
 }
