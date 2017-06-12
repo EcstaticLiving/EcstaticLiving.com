@@ -718,7 +718,7 @@ $(`${payButton}`).on('click', function(e) {
 	e.preventDefault()
 	payButtonClicked = true
 	eventCorrection()
-	// if (!eventValidation()) { return false }
+	if (!eventValidation()) { return false }
 	$('.stripe.processing').show()
 	$('.stripe.error').hide()
 	$('.notification-modal.processing').show()
