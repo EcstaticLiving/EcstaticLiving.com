@@ -707,7 +707,7 @@ $(`${payButton}`).on('click', function(e) {
 	if (!eventValidation()) {
 		eventCorrection()
 		$('#card-errors').text('Oops! There’s some missing information.')
-		$('#card-errors').css({ 'border-color': '#800000', 'background-color': '#fdd' })
+		$('#card-errors').css({ 'border': '1px solid #800000', 'background-color': '#fdd' })
 		return false
 	}
 	$('.stripe.processing').show()

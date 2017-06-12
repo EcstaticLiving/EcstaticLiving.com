@@ -39,8 +39,8 @@ input.parsley-error,
 select.parsley-error,
 textarea.parsley-error {
 	color: #800000;
-	background-color: #F2DEDE;
-	border: 1px solid #EED3D7;
+	background-color: #fdd;
+	border: 1px solid #800000;
 }
 .parsley-errors-list {
 	margin: 0px 0 10px;
@@ -56,7 +56,7 @@ textarea.parsley-error {
 	-webkit-transition: all .3s ease-in;
 }
 .parsley-errors-list.filled {
-	opacity: 1;
+	display: none;
 }
 a.w-dropdown-link.w--current {color:#800000;}
 
