@@ -583,7 +583,8 @@ if (page === 'Event') {
 		let qbRecord = ''
 		if (participants() === 1) { qbRecord = $(eventFirstName).val() + ' ' + $(eventLastName).val() }
 		if (participants() === 2) {
-			if ($(eventPartnerName).val().split(' ')[1] === $(eventLastName).val()) {
+			const partner = $(eventPartnerName).val().split(' ')
+			if (partner[partner.length-1] === $(eventLastName).val()) {
 				qbRecord = $(eventFirstName).val() + ' & ' + $(eventPartnerName).val()
 			} else {
 				qbRecord = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' & ' + $(eventPartnerName).val()
