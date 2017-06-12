@@ -618,9 +618,11 @@ if (page === 'Event') {
 // STRIPE
 function paymentValidation(result) {
 	if (result.error) {
+		$('#card-element').css({ 'border-color': '#800000', 'background-color': '#fdd' })
 		$('#card-errors').text(result.error.message)
 		$('#card-errors').css({ 'border': '1px solid #800000', 'background-color': '#fdd' })
 	} else {
+		$('#card-element').css({ 'border-color': '#ccc', 'background-color': '#fff' })
 		$('#card-errors').text('')
 		$('#card-errors').css({ 'border': 'none', 'background-color': 'transparent' })
 		console.log(result);
