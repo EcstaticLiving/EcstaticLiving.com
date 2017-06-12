@@ -715,7 +715,6 @@ $('#button-stripe-error').on('click', function() {
 $(`${payButton}`).on('click', function(e) {
 	e.preventDefault()
 	payButtonClicked = true
-	eventCorrection()
 	if (!eventValidation()) { return false }
 	saveForm(page)
 	var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0, count = 0
