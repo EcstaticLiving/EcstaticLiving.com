@@ -76,14 +76,14 @@ input[type=radio   ]{
 	font-size : 1em;
 	opacity   : 0;
 }
-input[type=checkbox] + label,
-input[type=radio   ] + label{
+input[type=checkbox],
+input[type=radio   ] {
 	display      : inline-block;
 	margin-left  : -2em;
 	line-height  : 1.5em;
 }
-input[type=checkbox] + label > span,
-input[type=radio   ] + label > span {
+input[type=checkbox],
+input[type=radio   ] {
 	display          : inline-block;
 	width            : 0.875em;
 	height           : 0.875em;
@@ -98,7 +98,7 @@ input[type=radio   ] + label > span {
 	background-image :         linear-gradient(rgb(240,240,240),rgb(224,224,224));
 	vertical-align   : bottom;
 }
-input[type=checkbox]:checked + label > span:before{
+input[type=checkbox]:checked:before{
   content     : '✓';
   display     : block;
   width       : 1em;
