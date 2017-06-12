@@ -67,6 +67,11 @@ a.w-dropdown-link.w--current {color:#800000;}
 	color: #555;
 }
 
+/* CUSTOM FORM SELECT */
+.form-select {
+	border-radius: 3px;
+}
+
 /* CUSTOM RADIO BUTTONS */
 @media only screen and (max-device-width: 984px) {
 	input[type=checkbox],
