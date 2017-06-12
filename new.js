@@ -304,9 +304,6 @@ function eventCorrection() {
 		if ($(eventExperienceYes).is(':checked') && $(eventExperienceDetails).val() === '') { $(eventExperienceDetails).css(errorInput); } else { $(eventExperienceDetails).css(clearInput); }
 		if (!$(eventFemale).is(':checked') && !$(eventMale).is(':checked') && !$(eventOther).is(':checked')) { $(eventGenderValidation).css(errorRadio); } else { $(eventGenderValidation).css(clearRadio); }
 		$eventForm.parsley().validate()
-		card.addEventListener('change', (result) => {
-			paymentValidation(result)
-		})
 		return false
 	}
 }
@@ -621,8 +618,6 @@ if (page === 'Event') {
 
 // STRIPE
 function paymentValidation(result) {
-	console.log('Payment validation');
-	console.log(result);
 	if (result.complete) {
 		if (page === 'Event') {
 			$(billingCard).prop('checked', true)
@@ -753,11 +748,8 @@ $(`${payButton}`).on('click', function(e) {
 	}
 	stripe.createToken(card, billingData)
 	.then((result) => {
-		console.log('Token created');
-		console.log(result);
 		if (result.error) {
 			paymentValidation(result)
-			$('.notification-modal.error').show()
 			console.log(result.error)
 		} else {
 			if (page === 'Event') {
