@@ -68,22 +68,22 @@ a.w-dropdown-link.w--current {color:#800000;}
 }
 
 /* CUSTOM RADIO BUTTONS */
-input[type=checkbox]:not(old),
-input[type=radio   ]:not(old){
+input[type=checkbox],
+input[type=radio   ]{
 	width     : 2em;
 	margin    : 0;
 	padding   : 0;
 	font-size : 1em;
 	opacity   : 0;
 }
-input[type=checkbox]:not(old) + label,
-input[type=radio   ]:not(old) + label{
+input[type=checkbox] + label,
+input[type=radio   ] + label{
 	display      : inline-block;
 	margin-left  : -2em;
 	line-height  : 1.5em;
 }
-input[type=checkbox]:not(old) + label > span,
-input[type=radio   ]:not(old) + label > span {
+input[type=checkbox] + label > span,
+input[type=radio   ] + label > span {
 	display          : inline-block;
 	width            : 0.875em;
 	height           : 0.875em;
@@ -98,7 +98,7 @@ input[type=radio   ]:not(old) + label > span {
 	background-image :         linear-gradient(rgb(240,240,240),rgb(224,224,224));
 	vertical-align   : bottom;
 }
-input[type=checkbox]:not(old):checked + label > span:before{
+input[type=checkbox]:checked + label > span:before{
   content     : '✓';
   display     : block;
   width       : 1em;
@@ -109,7 +109,7 @@ input[type=checkbox]:not(old):checked + label > span:before{
   text-shadow : 0 0 0.0714em #b00000;
   font-weight : bold;
 }
-input[type=radio]:not(old):checked + label > span > span{
+input[type=radio]:checked + label > span > span{
   display          : block;
   width            : 0.5em;
   height           : 0.5em;
