@@ -280,6 +280,17 @@ function participants() {
 }
 
 // FORM VALIDATION
+function eventCorrection() {
+	if (payButtonClicked) {
+		if (!$(eventFemale).is(':checked') && !$(eventMale).is(':checked') && !$(eventOther).is(':checked')) { $(eventFemale).focus() }
+		if ($(eventBirthdate).val() === '') { $(eventBirthdate).css({ 'border-bottom-color': '#800000', 'background-color': '#fdd' }); $(eventBirthdate).focus() } else { $(eventBirthdate).css({ 'border-bottom-color': '#ccc', 'background-color': '#fff' }) }
+		if ($(eventMobile).val() === '') { $(eventMobile).css({ 'border-bottom-color': '#800000', 'background-color': '#fdd' }); $(eventMobile).focus() } else { $(eventMobile).css({ 'border-bottom-color': '#ccc', 'background-color': '#fff' }) }
+		if ($(eventEmail).val() === '') { $(eventEmail).css({ 'border-bottom-color': '#800000', 'background-color': '#fdd' }); $(eventEmail).focus() } else { $(eventEmail).css({ 'border-bottom-color': '#ccc', 'background-color': '#fff' }) }
+		if ($(eventLastName).val() === '') { $(eventLastName).css({ 'border-bottom-color': '#800000', 'background-color': '#fdd' }); $(eventLastName).focus() } else { $(eventLastName).css({ 'border-bottom-color': '#ccc', 'background-color': '#fff' }) }
+		if ($(eventFirstName).val() === '') { $(eventFirstName).css({ 'border-bottom-color': '#800000', 'background-color': '#fdd' }); $(eventFirstName).focus() } else { $(eventFirstName).css({ 'border-bottom-color': '#ccc', 'background-color': '#fff' }) }
+		// if ($(xxx).val() === '') { $(xxx).css({ 'border-bottom-color': '#800000', 'background-color': '#fdd' }); $(xxx).focus() } else { $(xxx).css({ 'border-bottom-color': '#ccc', 'background-color': '#fff' }) }
+	}
+}
 function personalValidation() {
 	if ($(eventFirstName).val() !== '' && $(eventLastName).val() !== '' && $(eventEmail).val() !== '' && $(eventMobile).val() !== '' && $(eventBirthdate).val() !== '' &&
 		($(eventFemale).is(':checked') || $(eventMale).is(':checked') || $(eventOther).is(':checked'))) {
@@ -324,6 +335,7 @@ function billingValidation() {
 	return false
 }
 function eventValidation() {
+	eventCorrection()
 	if (personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && $(eventTerms).is(':checked') && billingValidation()) {
 		$(paymentButton).css({ 'background-color': '#800000' })
 		$(paymentButton).css({ 'color': '#ffffff' })
@@ -332,17 +344,6 @@ function eventValidation() {
 	$(paymentButton).css({ 'background-color': '#f5f5f5' })
 	$(paymentButton).css({ 'color': '#333333' })
 	return false
-}
-function eventCorrection() {
-	if (payButtonClicked) {
-		if (!$(eventFemale).is(':checked') && !$(eventMale).is(':checked') && !$(eventOther).is(':checked')) { $(eventFemale).focus() }
-		if ($(eventBirthdate).val() === '') { $(eventBirthdate).css({ 'border-bottom-color': '#800000', 'background-color': '#fdd' }); $(eventBirthdate).focus() } else { $(eventBirthdate).css({ 'border-bottom-color': '#ccc', 'background-color': '#fff' }) }
-		if ($(eventMobile).val() === '') { $(eventMobile).css({ 'border-bottom-color': '#800000', 'background-color': '#fdd' }); $(eventMobile).focus() } else { $(eventMobile).css({ 'border-bottom-color': '#ccc', 'background-color': '#fff' }) }
-		if ($(eventEmail).val() === '') { $(eventEmail).css({ 'border-bottom-color': '#800000', 'background-color': '#fdd' }); $(eventEmail).focus() } else { $(eventEmail).css({ 'border-bottom-color': '#ccc', 'background-color': '#fff' }) }
-		if ($(eventLastName).val() === '') { $(eventLastName).css({ 'border-bottom-color': '#800000', 'background-color': '#fdd' }); $(eventLastName).focus() } else { $(eventLastName).css({ 'border-bottom-color': '#ccc', 'background-color': '#fff' }) }
-		if ($(eventFirstName).val() === '') { $(eventFirstName).css({ 'border-bottom-color': '#800000', 'background-color': '#fdd' }); $(eventFirstName).focus() } else { $(eventFirstName).css({ 'border-bottom-color': '#ccc', 'background-color': '#fff' }) }
-		// if ($(xxx).val() === '') { $(xxx).css({ 'border-bottom-color': '#800000', 'background-color': '#fdd' }); $(xxx).focus() } else { $(xxx).css({ 'border-bottom-color': '#ccc', 'background-color': '#fff' }) }
-	}
 }
 
 // PARTNERSHIP
