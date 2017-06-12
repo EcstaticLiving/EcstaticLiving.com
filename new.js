@@ -293,13 +293,6 @@ function eventCorrection() {
 		const clearInput = { 'border-color': '#ccc', 'background-color': '#fff' }
 		const errorRadio = { 'border': '1px solid #800000', 'background-color': '#fdd' }
 		const clearRadio = { 'border': 'none', 'background-color': 'transparent' }
-		if (!eventValidation()) {
-			$('#card-errors').text('Oops! There’s some missing information.')
-			$('#card-errors').css(errorRadio)
-		} else {
-			$('#card-errors').text('')
-			$('#card-errors').css(clearRadio)
-		}
 		if (!$(eventTerms).is(':checked')) { $(eventTermsValidation).css(errorRadio); } else { $(eventTermsValidation).css(clearRadio); }
 		if ($(eventDepositContainer).is(':visible') && !$(eventDepositFull).is(':checked') && !$(eventDepositDeposit).is(':checked')) { $(eventDepositValidation).css(errorRadio); } else { $(eventDepositValidation).css(clearRadio); }
 		if (participants() === 2 && !$(eventPayBoth).is(':checked') && !$(eventPayMe).is(':checked')) { $(eventPayValidation).css(errorRadio); } else { $(eventPayValidation).css(clearRadio); }
@@ -360,11 +353,16 @@ function billingValidation() {
 	return false
 }
 function eventValidation() {
+	eventCorrection()
 	if (personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && $(eventTerms).is(':checked') && billingValidation()) {
+		$('#card-errors').text('Oops! There’s some missing information.')
+		$('#card-errors').css({ 'border': '1px solid #800000', 'background-color': '#fdd' })
 		$(paymentButton).css({ 'background-color': '#800000' })
 		$(paymentButton).css({ 'color': '#ffffff' })
 		return true
 	}
+	$('#card-errors').text('')
+	$('#card-errors').css({ 'border': 'none', 'background-color': 'transparent' })
 	$(paymentButton).css({ 'background-color': '#f5f5f5' })
 	$(paymentButton).css({ 'color': '#333333' })
 	return false
