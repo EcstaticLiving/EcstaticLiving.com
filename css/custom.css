@@ -74,7 +74,6 @@ input[type=radio   ]{
 	margin    : 0;
 	padding   : 0;
 	font-size : 1em;
-	opacity   : 0;
 }
 input[type=checkbox],
 input[type=radio   ] {
