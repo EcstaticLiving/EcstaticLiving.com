@@ -304,7 +304,7 @@ function eventCorrection() {
 		if ($(eventExperienceYes).is(':checked') && $(eventExperienceDetails).val() === '') { $(eventExperienceDetails).css(errorInput); } else { $(eventExperienceDetails).css(clearInput); }
 		if (!$(eventFemale).is(':checked') && !$(eventMale).is(':checked') && !$(eventOther).is(':checked')) { $(eventGenderValidation).css(errorRadio); } else { $(eventGenderValidation).css(clearRadio); }
 		$eventForm.parsley().validate()
-		console.log(document.getElementByClass('__PrivateStripeElement-input')[0])
+		console.log(document.getElementByClassName('__PrivateStripeElement-input')[0])
 		if ($('#card-element').text() === '') { $('#card-element').css(errorInput) } else { $('#card-element').css(clearInput) }
 		return false
 	}
