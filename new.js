@@ -758,7 +758,9 @@ $(`${payButton}`).on('click', function(e) {
 		chargeAmount
 	}
 	stripe.createToken(card, billingData)
-	.then(function(result) {
+	.then((result) => {
+		console.log('Token created');
+		console.log(result);
 		if (result.error) {
 			paymentValidation(result)
 		} else {
