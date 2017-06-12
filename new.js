@@ -463,12 +463,10 @@ customCard = '#billing-card'
 // CUSTOM AMOUNT
 function customValidation() {
 	if (billingValidation()) {
-		$(paymentButton).prop('disabled', false)
 		$(paymentButton).css({ 'background-color': '#800000' })
 		$(paymentButton).css({ 'color': '#ffffff' })
 		return true
 	}
-	$(paymentButton).prop('disabled', true)
 	$(paymentButton).css({ 'background-color': '#f5f5f5' })
 	$(paymentButton).css({ 'color': '#333333' })
 	return false
