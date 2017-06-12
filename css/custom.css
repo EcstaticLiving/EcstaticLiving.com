@@ -68,26 +68,28 @@ a.w-dropdown-link.w--current {color:#800000;}
 }
 
 /* CUSTOM RADIO BUTTONS */
-input[type=checkbox],
-input[type=radio   ] {
-	display          : inline-block;
-	width            : 1em;
-	height           : 1em;
-	border           : 0.0625em solid #333;
-	border-radius    : 0.25em;
-	background       : #FFF;
-}
-input[type=checkbox]:checked {
-  content     : '✓';
-  text-align  : center;
-  font-weight : bold;
-	display          : block;
-  border           : 0.0625em solid #800000;
-  background       : #800000;
-}
-input[type=radio]:checked {
-  display          : block;
-  border           : 0.0625em solid #800000;
-  background       : #800000;
+@media only screen and (max-device-width: 984px) {
+	input[type=checkbox],
+	input[type=radio   ] {
+		display          : inline-block;
+		width            : 1em;
+		height           : 1em;
+		border           : 0.0625em solid #333;
+		border-radius    : 0.25em;
+		background       : #FFF;
+	}
+	input[type=checkbox]:checked {
+	  content     : '✓';
+	  text-align  : center;
+	  font-weight : bold;
+		display          : block;
+	  border           : 0.0625em solid #800000;
+	  background       : #800000;
+	}
+	input[type=radio]:checked {
+	  display          : block;
+	  border           : 0.0625em solid #800000;
+	  background       : #800000;
+	}
 }
 </style>
