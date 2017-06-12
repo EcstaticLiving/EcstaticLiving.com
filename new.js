@@ -617,6 +617,7 @@ function paymentValidation(result) {
 		displayError.textContent = result.error.message
 	} else {
 		displayError.textContent = ''
+		console.log(result);
 	}
 	if (result.complete) {
 		if (page === 'Event') {
