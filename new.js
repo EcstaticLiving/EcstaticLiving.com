@@ -289,9 +289,9 @@ function participants() {
 // FORM VALIDATION
 function eventCorrection() {
 	if (payButtonClicked) {
-		const errorInput = { 'border-color': '#800000', 'background-color': '#fdd' }
+		const errorInput = { 'border-color': '#b00000', 'background-color': '#fdd' }
 		const clearInput = { 'border-color': '#ccc', 'background-color': '#fff' }
-		const errorRadio = { 'border': '1px solid #800000', 'background-color': '#fdd' }
+		const errorRadio = { 'border': '1px solid #b00000', 'background-color': '#fdd' }
 		const clearRadio = { 'border': 'none', 'background-color': 'transparent' }
 		if (!$(eventTerms).is(':checked')) { $(eventTermsValidation).css(errorRadio); } else { $(eventTermsValidation).css(clearRadio); }
 		if ($(eventDepositContainer).is(':visible') && !$(eventDepositFull).is(':checked') && !$(eventDepositDeposit).is(':checked')) { $(eventDepositValidation).css(errorRadio); } else { $(eventDepositValidation).css(clearRadio); }
@@ -364,7 +364,7 @@ function eventValidation() {
 		if ($('#card-errors').text() === '') {
 			$('#card-errors').text('Oops! There’s some missing information.')
 		}
-		$('#card-errors').css({ 'border': '1px solid #800000', 'background-color': '#fdd' })
+		$('#card-errors').css({ 'border': '1px solid #b00000', 'background-color': '#fdd' })
 	}
 	$(paymentButton).css({ 'background-color': '#f5f5f5' })
 	$(paymentButton).css({ 'color': '#333333' })
@@ -641,9 +641,9 @@ function paymentValidation(result) {
 		}
 	}
 	if (result.error) {
-		$('#card-element').css({ 'border-color': '#800000', 'background-color': '#fdd' })
+		$('#card-element').css({ 'border-color': '#b00000', 'background-color': '#fdd' })
 		$('#card-errors').text(result.error.message)
-		$('#card-errors').css({ 'border': '1px solid #800000', 'background-color': '#fdd' })
+		$('#card-errors').css({ 'border': '1px solid #b00000', 'background-color': '#fdd' })
 	} else {
 		$('#card-element').css({ 'border-color': '#ccc', 'background-color': '#fff' })
 		$('#card-errors').text('')
@@ -705,7 +705,7 @@ style = {
 	invalid: {
 		color: '#b00000',
 		':focus': {
-			color: '#800000'
+			color: '#b00000'
 		}
 	}
 }
