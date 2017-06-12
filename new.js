@@ -617,6 +617,7 @@ if (page === 'Event') {
 
 // STRIPE
 function paymentValidation(result) {
+	console.log(result);
 	if (result.error) {
 		$('#card-element').css({ 'border-color': '#800000', 'background-color': '#fdd' })
 		$('#card-errors').text(result.error.message)
@@ -625,7 +626,6 @@ function paymentValidation(result) {
 		$('#card-element').css({ 'border-color': '#ccc', 'background-color': '#fff' })
 		$('#card-errors').text('')
 		$('#card-errors').css({ 'border': 'none', 'background-color': 'transparent' })
-		console.log(result);
 	}
 	if (result.complete) {
 		if (page === 'Event') {
