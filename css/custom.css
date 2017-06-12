@@ -91,7 +91,6 @@ input[type=checkbox]:checked:before{
 input[type=radio]:checked {
   display          : block;
   border           : 0.0625em solid #800000;
-  border-radius    : 0.125em;
-  background       : #800000;
+  color            : #800000;
 }
 </style>
