@@ -87,7 +87,7 @@ input[type=radio   ] {
 	width            : 0.875em;
 	height           : 0.875em;
 	margin           : 0.25em 0.5em 0.25em 0.25em;
-	border           : 0.0625em solid #800000;
+	border           : 0.0625em solid #333;
 	border-radius    : 0.25em;
 	background       : #FFF;
 }
@@ -104,7 +104,6 @@ input[type=checkbox]:checked:before{
 }
 input[type=radio]:checked {
   display          : block;
-  margin           : 0.125em;
   border           : 0.0625em solid #800000;
   border-radius    : 0.125em;
   background       : #800000;
