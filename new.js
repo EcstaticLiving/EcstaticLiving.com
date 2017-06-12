@@ -283,7 +283,7 @@ function participants() {
 function eventCorrection() {
 	if (payButtonClicked) {
 		if (!$(eventFemale).is(':checked') && !$(eventMale).is(':checked') && !$(eventOther).is(':checked')) { $('#event-gender').css({ 'border': '1px solid #800000', 'background-color': '#fdd' }); }
-			else { $('#event-gender').css({ 'border': 'none', 'background-color': 'none' }); }
+			else { $('#event-gender').css({ 'border': 'none', 'background-color': 'transparent' }); }
 		if ($(eventBirthdate).val() === '') { $(eventBirthdate).css({ 'border-color': '#800000', 'background-color': '#fdd' }); $(eventBirthdate).focus() }
 			else { $(eventBirthdate).css({ 'border-color': '#ccc', 'background-color': '#fff' }) }
 		if ($(eventMobile).val() === '') { $(eventMobile).css({ 'border-color': '#800000', 'background-color': '#fdd' }); $(eventMobile).focus() }
