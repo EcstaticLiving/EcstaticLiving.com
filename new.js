@@ -355,14 +355,14 @@ function billingValidation() {
 function eventValidation() {
 	eventCorrection()
 	if (personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && $(eventTerms).is(':checked') && billingValidation()) {
-		$('#card-errors').text('Oops! There’s some missing information.')
-		$('#card-errors').css({ 'border': '1px solid #800000', 'background-color': '#fdd' })
+		$('#card-errors').text('')
+		$('#card-errors').css({ 'border': 'none', 'background-color': 'transparent' })
 		$(paymentButton).css({ 'background-color': '#800000' })
 		$(paymentButton).css({ 'color': '#ffffff' })
 		return true
 	}
-	$('#card-errors').text('')
-	$('#card-errors').css({ 'border': 'none', 'background-color': 'transparent' })
+	$('#card-errors').text('Oops! There’s some missing information.')
+	$('#card-errors').css({ 'border': '1px solid #800000', 'background-color': '#fdd' })
 	$(paymentButton).css({ 'background-color': '#f5f5f5' })
 	$(paymentButton).css({ 'color': '#333333' })
 	return false
