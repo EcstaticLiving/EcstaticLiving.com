@@ -359,12 +359,9 @@ function eventValidation() {
 		$(paymentButton).css({ 'color': '#ffffff' })
 		return true
 	}
-	if (payButtonClicked) {
+	if (payButtonClicked && $('#card-errors').text() === '') {
 		// If there’s no Stripe error message
-		if ($('#card-errors').text() === '') {
-			$('#card-errors').text('Oops! There’s some missing information.')
-		}
-		$('#card-errors').css({ 'border': '1px solid #b00000', 'background-color': '#fdd' })
+		$('#card-errors').text('Oops! There’s some missing information.')
 	}
 	$(paymentButton).css({ 'background-color': '#f5f5f5' })
 	$(paymentButton).css({ 'color': '#333333' })
