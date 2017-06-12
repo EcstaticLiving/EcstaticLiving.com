@@ -304,10 +304,8 @@ function eventCorrection() {
 		if ($(eventExperienceYes).is(':checked') && $(eventExperienceDetails).val() === '') { $(eventExperienceDetails).css(errorInput); } else { $(eventExperienceDetails).css(clearInput); }
 		if (!$(eventFemale).is(':checked') && !$(eventMale).is(':checked') && !$(eventOther).is(':checked')) { $(eventGenderValidation).css(errorRadio); } else { $(eventGenderValidation).css(clearRadio); }
 		$eventForm.parsley().validate()
-		$('#card-element').css({ 'border-color': '#800000', 'background-color': '#fdd' })
+		if ($('#card-element').val() === '') { $('#card-element').css(errorInput) } else { $('#card-element').css(clearInput) }
 		return false
-		// if ($(xxx).val() === '') { $(xxx).css(errorInput); $(xxx).focus() } else { $(xxx).css(clearInput) }
-		// if (!$(xxx).is(':checked') && !$(xxx).is(':checked') && !$(xxx).is(':checked')) { $('#xxx').css(errorRadio); } else { $('#xxx').css(clearRadio); }
 	}
 }
 function personalValidation() {
@@ -618,6 +616,7 @@ if (page === 'Event') {
 
 // STRIPE
 function paymentValidation(result) {
+	console.log('Payment validation');
 	console.log(result);
 	if (result.error) {
 		$('#card-element').css({ 'border-color': '#800000', 'background-color': '#fdd' })
