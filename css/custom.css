@@ -37,13 +37,13 @@ a {color: #800000; text-decoration:none;}
 /* FORM VALIDATION */
 input.parsley-error,
 textarea.parsley-error {
-	color: #b00000;
+	color: #FF0000;
 	background-color: #fdd;
-	border: 1px solid #b00000;
+	border: 1px solid #FF0000;
 }
 select.parsley-error {
-	color: #b00000;
-	border: 2px solid #b00000;
+	color: #FF0000;
+	border: 2px solid #FF0000;
 }
 .parsley-errors-list,
 .parsley-errors-list.filled {

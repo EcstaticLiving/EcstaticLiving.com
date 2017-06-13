@@ -299,8 +299,8 @@ function eventCorrection() {
 	if (payButtonClicked) {
 		const errorInput = { 'border-color': '#b00000', 'background-color': '#fdd' }
 		const clearInput = { 'border-color': '#ccc', 'background-color': '#fff' }
-		const errorRadio = { 'border': '1px solid #b00000', 'background-color': '#fdd' }
-		const clearRadio = { 'border': 'none', 'background-color': 'transparent' }
+		const errorRadio = { 'background-color': '#fdd' }
+		const clearRadio = { 'background-color': 'transparent' }
 		if (!$(eventTerms).is(':checked')) { $(eventTermsValidation).css(errorRadio); } else { $(eventTermsValidation).css(clearRadio); }
 		if ($(eventDepositContainer).is(':visible') && !$(eventDepositFull).is(':checked') && !$(eventDepositDeposit).is(':checked')) { $(eventDepositValidation).css(errorRadio); } else { $(eventDepositValidation).css(clearRadio); }
 		if (participants() === 2 && !$(eventPayBoth).is(':checked') && !$(eventPayMe).is(':checked')) { $(eventPayValidation).css(errorRadio); } else { $(eventPayValidation).css(clearRadio); }
@@ -581,6 +581,7 @@ if (page === 'Event') {
 	const eventFieldsOptions = eventSelect
 	const eventFieldsBilling = billingFirstName + ',' + billingLastName + ',' + billingStreet + ',' + billingCity + ',' + billingState + ',' + billingPostal + ',' + billingCountry
 	$(eventFieldsPersonal + ',' + eventFieldsDetails + ',' + eventFieldsPartner + ',' + eventFieldsOptions + ',' + eventTerms + ',' + eventFieldsBilling).on('change', function() {
+		saveForm(page)
 		eventValidation()
 	})
 	$(eventFirstName + ',' + eventLastName + ',' + eventPartnerName).on('change', function() {
