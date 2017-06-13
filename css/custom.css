@@ -9,7 +9,7 @@ body,
 .main-section,
 .modal-background,
 .registration-section,
-.modals.register-mobile {–webkit-overflow-scrolling: touch;}
+.modals.register-mobile {-webkit-overflow-scrolling: touch;}
 
 /* Rich-text formatting */
 .w-input.input-field, .w-input.email-signup-input-field {-webkit-appearance: none;}
