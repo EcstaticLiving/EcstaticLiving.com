@@ -142,9 +142,17 @@ var countriesfile = "United States, Canada, Afghanistan, Albania, Algeria, Andor
 var countries = countriesfile.split(', ');
 for(var i = 0; i < countries.length; i++) {
 	if (page === 'Event' || page === 'Custom') {
-		$('#billing-country').append('<option value="' + countries[i] + '">' + countries[i] + '</option>');
+		if (countries[i] === 'United States') {
+			$('#billing-country').append('<option value="' + countries[i] + '" selected>' + countries[i] + '</option>')
+		} else {
+			$('#billing-country').append('<option value="' + countries[i] + '">' + countries[i] + '</option>')
+		}
 	} else {
-		$('#country').append('<option value="' + countries[i] + '">' + countries[i] + '</option>');
+		if (countries[i] === 'United States') {
+			$('#country').append('<option value="' + countries[i] + '" selected>' + countries[i] + '</option>')
+		} else {
+			$('#country').append('<option value="' + countries[i] + '">' + countries[i] + '</option>')
+		}
 	}
 }
 
