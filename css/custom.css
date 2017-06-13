@@ -43,7 +43,7 @@ textarea.parsley-error {
 }
 select.parsley-error {
 	color: #800000;
-	border: 3px solid #800000;
+	border: 2px solid #800000;
 }
 .parsley-errors-list,
 .parsley-errors-list.filled {
