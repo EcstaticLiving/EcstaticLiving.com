@@ -286,8 +286,8 @@ billingCountry = '#billing-country',
 billingCard = '#billing-card'
 
 // Source
-console.log(window.location.search);
-$('#source').val(window.location.search)
+console.log(location.search);
+// $('#source').val(window.location.search)
 
 
 // PARTICIPANTS
