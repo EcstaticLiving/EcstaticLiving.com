@@ -285,6 +285,11 @@ billingPostal = '#billing-postal',
 billingCountry = '#billing-country',
 billingCard = '#billing-card'
 
+// Source
+console.log(window.location.search);
+$('#source').val(window.location.search)
+
+
 // PARTICIPANTS
 function participants() {
 	if (($(eventStatus).find('option:selected').val() === 'Couple') || ($(eventStatus).find('option:selected').val() === 'Two Singles (paired)')) {
@@ -595,8 +600,6 @@ if (page === 'Event') {
 				qbRecord = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' & ' + $(eventPartnerName).val()
 			}
 		}
-		console.log(window.location.search);
-		$('#source').val(window.location.search)
 		$('#qb-record').val(qbRecord)
 	})
 	resetEventForm()
