@@ -595,6 +595,8 @@ if (page === 'Event') {
 				qbRecord = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' & ' + $(eventPartnerName).val()
 			}
 		}
+		console.log(window.location.search);
+		$('#source').val(window.location.search)
 		$('#qb-record').val(qbRecord)
 	})
 	resetEventForm()
