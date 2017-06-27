@@ -286,7 +286,6 @@ billingCountry = '#billing-country',
 billingCard = '#billing-card'
 
 // Source
-console.log(window.location.search.split('=')[1]);
 if (window.location.search) {
 	$('#source').val(window.location.search.split('=')[1])
 }
