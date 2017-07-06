@@ -679,6 +679,9 @@ function stripeTokenHandler(token, data) {
 	})
 	.then(function (res) {
 		$('.notification-modal.processing').hide()
+		if (!confirm($eventForm)) {
+			debugger
+		}
 		if (page === 'Event') {
 			$eventForm.submit(function(event) {
 				if (!confirm(event)) {
