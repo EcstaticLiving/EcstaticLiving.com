@@ -766,27 +766,27 @@ $(`${payButton}`).on('click', function(e) {
 		chargeDescription,
 		chargeAmount
 	}
-	console.log('Button clicked');
 	stripe.createToken(card, billingData)
 	.then((result) => {
-		console.log('Token created');
 		if (page === 'Event') {
-			console.log('Submitting event');
 			$eventForm.submit(function (event) {
 				console.log('Event submitted');
-				confirm('Event submitted')
+				$('.stripe.processing').show()
+				$('.stripe.error').hide()
+				$('.notification-modal.processing').show()
+				stripeTokenHandler(result.token, serverData)
 			})
 		} else if (page === 'Custom') {
-			$customForm.submit()
+			$customForm.submit(function (event) {
+				$('.stripe.processing').show()
+				$('.stripe.error').hide()
+				$('.notification-modal.processing').show()
+				stripeTokenHandler(result.token, serverData)
+			})
 		}
 		if (result.error) {
 			paymentValidation(result)
 			console.log(result.error)
-		} else {
-			$('.stripe.processing').show()
-			$('.stripe.error').hide()
-			$('.notification-modal.processing').show()
-			stripeTokenHandler(result.token, serverData)
 		}
 	})
 })
