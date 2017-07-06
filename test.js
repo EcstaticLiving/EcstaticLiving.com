@@ -317,7 +317,7 @@ function eventCorrection() {
 		if (!$(eventExperienceYes).is(':checked') && !$(eventExperienceNo).is(':checked')) { $(eventExperienceValidation).css(errorRadio); } else { $(eventExperienceValidation).css(clearRadio); }
 		if ($(eventExperienceYes).is(':checked') && $(eventExperienceDetails).val() === '') { $(eventExperienceDetails).css(errorInput); } else { $(eventExperienceDetails).css(clearInput); }
 		if (!$(eventFemale).is(':checked') && !$(eventMale).is(':checked') && !$(eventOther).is(':checked')) { $(eventGenderValidation).css(errorRadio); } else { $(eventGenderValidation).css(clearRadio); }
-		$eventForm[0].parsley().validate()
+		$eventForm.parsley().validate()
 		return false
 	}
 }
@@ -488,7 +488,7 @@ function resetEventForm() {
 	} else {
 		$(eventDepositContainer).hide()
 	}
-	$eventForm[0].parsley()
+	$eventForm.parsley()
 	$eventForm[0].show()
 	$(eventTerms).attr('checked', false)
 	eventValidation()
@@ -543,7 +543,7 @@ function resetCustomForm() {
 	clearForm('Custom')
 	repopulateForm('Custom')
 	setCustomSelect()
-	$customForm[0].parsley()
+	$customForm.parsley()
 	$customForm[0].show()
 	$(customTerms).attr('checked', false)
 	customValidation()
