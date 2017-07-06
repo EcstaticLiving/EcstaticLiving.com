@@ -232,8 +232,6 @@ eventVenue = $('#event-venue').text(),
 eventDepositAmount = $('#event-deposit-amount').text(),
 eventDepositDate = $('#event-deposit-date').text()
 
-console.log($eventForm);
-
 // Event variables
 let payButtonClicked = false
 const payButton = '.button.pay',
@@ -682,7 +680,7 @@ function stripeTokenHandler(token, data) {
 	.then(function (res) {
 		$('.notification-modal.processing').hide()
 		if (page === 'Event') {
-			$eventForm.submit()
+			document.getElementById("wf-form-Event-Registration").submit()
 			window.location.href = `${siteUrl}registered`
 		} else if (page === 'Custom') {
 			$customForm.submit()
