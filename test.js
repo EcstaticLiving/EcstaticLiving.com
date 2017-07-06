@@ -194,9 +194,9 @@ function clearForm(formType) {
 	$('.w-form-done').hide()
 	$('.w-form-fail').hide()
 	if (formType === 'Event') {
-		$eventForm[0].reset()
+		$eventForm.reset()
 	} else if (formType === 'Custom') {
-		$customForm[0].reset()
+		$customForm.reset()
 	}
 }
 
@@ -223,7 +223,7 @@ if (window.location.href.indexOf('/forms/ctt-application') > -1) {
 
 
 // EVENT REGISTRATION
-$eventForm = $('.form.registration'),
+$eventForm = $('.form.registration')[0],
 eventCode = $('#event-code').text().toLowerCase(),
 eventTitle = $('#event-name').text(), // Stripe description
 eventStartDate = $('#event-start').text(),
@@ -499,7 +499,7 @@ function resetEventForm() {
 
 
 // CUSTOM CHARGE
-const $customForm = $('.form.custom-charge'),
+const $customForm = $('.form.custom-charge')[0],
 customCode = '#custom-code',
 customFirstName = '#custom-firstname',
 customLastName = '#custom-lastname',
