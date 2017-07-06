@@ -772,17 +772,10 @@ $(`${payButton}`).on('click', function(e) {
 			console.log('Submitting event')
 			$eventForm[0].submit(function (event) {
 				console.log('Event submitted')
-				$('.stripe.processing').show()
-				$('.stripe.error').hide()
-				$('.notification-modal.processing').show()
-				stripeTokenHandler(result.token, serverData)
 			})
 		} else if (page === 'Custom') {
 			$customForm[0].submit(function (event) {
-				$('.stripe.processing').show()
-				$('.stripe.error').hide()
-				$('.notification-modal.processing').show()
-				stripeTokenHandler(result.token, serverData)
+				console.log('Custom form submitted')
 			})
 		}
 		console.log('Result')
@@ -790,6 +783,11 @@ $(`${payButton}`).on('click', function(e) {
 		if (result.error) {
 			paymentValidation(result)
 			console.log(result.error)
+		} else {
+			$('.stripe.processing').show()
+			$('.stripe.error').hide()
+			$('.notification-modal.processing').show()
+			stripeTokenHandler(result.token, serverData)
 		}
 	})
 })
