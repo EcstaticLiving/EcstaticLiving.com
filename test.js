@@ -223,7 +223,7 @@ if (window.location.href.indexOf('/forms/ctt-application') > -1) {
 
 
 // EVENT REGISTRATION
-$eventForm = $('.form.registration'),
+$eventForm = $('#wf-form-Event-Registration'),
 eventCode = $('#event-code').text().toLowerCase(),
 eventTitle = $('#event-name').text(), // Stripe description
 eventStartDate = $('#event-start').text(),
@@ -775,7 +775,7 @@ $(`${payButton}`).on('click', function(e) {
 				$('.stripe.error').hide()
 				$('.notification-modal.processing').show()
 				stripeTokenHandler(result.token, serverData)
-				event.preventDefault();
+				event.preventDefault()
 			})
 		} else if (page === 'Custom') {
 			$customForm.submit(function (event) {
@@ -783,7 +783,7 @@ $(`${payButton}`).on('click', function(e) {
 				$('.stripe.error').hide()
 				$('.notification-modal.processing').show()
 				stripeTokenHandler(result.token, serverData)
-				event.preventDefault();
+				event.preventDefault()
 			})
 		}
 		console.log(result);
