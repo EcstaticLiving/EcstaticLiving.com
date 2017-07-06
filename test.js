@@ -489,7 +489,7 @@ function resetEventForm() {
 		$(eventDepositContainer).hide()
 	}
 	$eventForm.parsley()
-	$eventForm[0].show()
+	$eventForm.show()
 	$(eventTerms).attr('checked', false)
 	eventValidation()
 }
@@ -544,7 +544,7 @@ function resetCustomForm() {
 	repopulateForm('Custom')
 	setCustomSelect()
 	$customForm.parsley()
-	$customForm[0].show()
+	$customForm.show()
 	$(customTerms).attr('checked', false)
 	customValidation()
 }
