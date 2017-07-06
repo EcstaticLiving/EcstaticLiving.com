@@ -768,6 +768,7 @@ $(`${payButton}`).on('click', function(e) {
 	}
 	stripe.createToken(card, billingData)
 	.then((result) => {
+		console.log('|' + page + '|');
 		if (page === 'Event') {
 			console.log('|' + page + '|');
 			$eventForm.submit(function (event) {
