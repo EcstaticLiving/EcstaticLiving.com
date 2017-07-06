@@ -769,9 +769,9 @@ $(`${payButton}`).on('click', function(e) {
 	stripe.createToken(card, billingData)
 	.then((result) => {
 		if (page === 'Event') {
-			console.log($eventForm[0]);
+			console.log('Submitting event')
 			$eventForm[0].submit(function (event) {
-				console.log('Event submitted');
+				console.log('Event submitted')
 				$('.stripe.processing').show()
 				$('.stripe.error').hide()
 				$('.notification-modal.processing').show()
@@ -785,7 +785,8 @@ $(`${payButton}`).on('click', function(e) {
 				stripeTokenHandler(result.token, serverData)
 			})
 		}
-		console.log(result);
+		console.log('Result')
+		console.log(result)
 		if (result.error) {
 			paymentValidation(result)
 			console.log(result.error)
