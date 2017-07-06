@@ -194,9 +194,9 @@ function clearForm(formType) {
 	$('.w-form-done').hide()
 	$('.w-form-fail').hide()
 	if (formType === 'Event') {
-		$eventForm.reset()
+		$eventForm[0].reset()
 	} else if (formType === 'Custom') {
-		$customForm.reset()
+		$customForm[0].reset()
 	}
 }
 
