@@ -768,6 +768,7 @@ $(`${payButton}`).on('click', function(e) {
 	}
 	console.log(page);
 	if (page === 'Event') {
+		console.log($eventForm);
 		$eventForm.submit()
 	} else if (page === 'Custom') {
 		$customForm.submit()
