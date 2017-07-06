@@ -766,18 +766,15 @@ $(`${payButton}`).on('click', function(e) {
 		chargeDescription,
 		chargeAmount
 	}
-	console.log(page);
-	if (page === 'Event') {
-		console.log($eventForm);
-		$eventForm.submit()
-	} else if (page === 'Custom') {
-		$customForm.submit()
-	}
-	if (!confirm('ok')) {
-		debugger
-	}
 	stripe.createToken(card, billingData)
 	.then((result) => {
+		if (page === 'Event') {
+			$eventForm.submit(function (event) {
+				confirm('Event submitted')
+			})
+		} else if (page === 'Custom') {
+			$customForm.submit()
+		}
 		if (result.error) {
 			paymentValidation(result)
 			console.log(result.error)
