@@ -661,6 +661,15 @@ function paymentValidation(result) {
 // LIVE: https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe
 // TEST: https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test
 function stripeTokenHandler(token, data) {
+	$('.stripe.processing').show()
+	$('.stripe.error').hide()
+	$('.notification-modal.processing').show()
+	if (page === 'Event') {
+		console.log('Submitting event')
+		$eventForm[0].submit()
+	} else if (page === 'Custom') {
+		$customForm[0].submit()
+	}
 	$.ajax({
 		type: 'POST',
 		url: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test',
@@ -768,25 +777,12 @@ $(`${payButton}`).on('click', function(e) {
 	}
 	stripe.createToken(card, billingData)
 	.then((result) => {
-		if (page === 'Event') {
-			console.log('Submitting event')
-			$eventForm[0].submit(function (event) {
-				console.log('Event submitted')
-			})
-		} else if (page === 'Custom') {
-			$customForm[0].submit(function (event) {
-				console.log('Custom form submitted')
-			})
-		}
 		console.log('Result')
 		console.log(result)
 		if (result.error) {
 			paymentValidation(result)
 			console.log(result.error)
 		} else {
-			$('.stripe.processing').show()
-			$('.stripe.error').hide()
-			$('.notification-modal.processing').show()
 			stripeTokenHandler(result.token, serverData)
 		}
 	})
