@@ -223,7 +223,7 @@ if (window.location.href.indexOf('/forms/ctt-application') > -1) {
 
 
 // EVENT REGISTRATION
-$eventForm = $('#wf-form-Event-Registration'),
+$eventForm = $('.form.registration'),
 eventCode = $('#event-code').text().toLowerCase(),
 eventTitle = $('#event-name').text(), // Stripe description
 eventStartDate = $('#event-start').text(),
@@ -769,6 +769,7 @@ $(`${payButton}`).on('click', function(e) {
 	stripe.createToken(card, billingData)
 	.then((result) => {
 		if (page === 'Event') {
+			console.log('|' + page + '|');
 			$eventForm.submit(function (event) {
 				console.log('Event submitted');
 				$('.stripe.processing').show()
