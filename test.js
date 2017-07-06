@@ -194,9 +194,9 @@ function clearForm(formType) {
 	$('.w-form-done').hide()
 	$('.w-form-fail').hide()
 	if (formType === 'Event') {
-		$eventForm.reset()
+		$eventForm[0].reset()
 	} else if (formType === 'Custom') {
-		$customForm.reset()
+		$customForm[0].reset()
 	}
 }
 
@@ -223,7 +223,7 @@ if (window.location.href.indexOf('/forms/ctt-application') > -1) {
 
 
 // EVENT REGISTRATION
-$eventForm = $('.form.registration')[0],
+$eventForm = $('.form.registration'),
 eventCode = $('#event-code').text().toLowerCase(),
 eventTitle = $('#event-name').text(), // Stripe description
 eventStartDate = $('#event-start').text(),
@@ -317,7 +317,7 @@ function eventCorrection() {
 		if (!$(eventExperienceYes).is(':checked') && !$(eventExperienceNo).is(':checked')) { $(eventExperienceValidation).css(errorRadio); } else { $(eventExperienceValidation).css(clearRadio); }
 		if ($(eventExperienceYes).is(':checked') && $(eventExperienceDetails).val() === '') { $(eventExperienceDetails).css(errorInput); } else { $(eventExperienceDetails).css(clearInput); }
 		if (!$(eventFemale).is(':checked') && !$(eventMale).is(':checked') && !$(eventOther).is(':checked')) { $(eventGenderValidation).css(errorRadio); } else { $(eventGenderValidation).css(clearRadio); }
-		$eventForm.parsley().validate()
+		$eventForm[0].parsley().validate()
 		return false
 	}
 }
@@ -488,8 +488,8 @@ function resetEventForm() {
 	} else {
 		$(eventDepositContainer).hide()
 	}
-	$eventForm.parsley()
-	$eventForm.show()
+	$eventForm[0].parsley()
+	$eventForm[0].show()
 	$(eventTerms).attr('checked', false)
 	eventValidation()
 }
@@ -499,7 +499,7 @@ function resetEventForm() {
 
 
 // CUSTOM CHARGE
-const $customForm = $('.form.custom-charge')[0],
+const $customForm = $('.form.custom-charge'),
 customCode = '#custom-code',
 customFirstName = '#custom-firstname',
 customLastName = '#custom-lastname',
@@ -543,8 +543,8 @@ function resetCustomForm() {
 	clearForm('Custom')
 	repopulateForm('Custom')
 	setCustomSelect()
-	$customForm.parsley()
-	$customForm.show()
+	$customForm[0].parsley()
+	$customForm[0].show()
 	$(customTerms).attr('checked', false)
 	customValidation()
 }
@@ -769,8 +769,8 @@ $(`${payButton}`).on('click', function(e) {
 	stripe.createToken(card, billingData)
 	.then((result) => {
 		if (page === 'Event') {
-			console.log($eventForm);
-			$eventForm.submit(function (event) {
+			console.log($eventForm[0]);
+			$eventForm[0].submit(function (event) {
 				console.log('Event submitted');
 				$('.stripe.processing').show()
 				$('.stripe.error').hide()
@@ -779,7 +779,7 @@ $(`${payButton}`).on('click', function(e) {
 				event.preventDefault()
 			})
 		} else if (page === 'Custom') {
-			$customForm.submit(function (event) {
+			$customForm[0].submit(function (event) {
 				$('.stripe.processing').show()
 				$('.stripe.error').hide()
 				$('.notification-modal.processing').show()
