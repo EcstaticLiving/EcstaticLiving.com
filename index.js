@@ -672,7 +672,7 @@ function stripeTokenHandler(token, data) {
 			'stripeCharge': data.chargeDescription,
 			'stripeAmount': data.chargeAmount
 		},
-		timeout: 8000
+		timeout: 20000
 	})
 	.then(function (res) {
 		$('.notification-modal.processing').hide()
@@ -766,17 +766,17 @@ $(`${payButton}`).on('click', function(e) {
 		chargeDescription,
 		chargeAmount
 	}
+	if (page === 'Event') {
+		$eventForm.submit()
+	} else if (page === 'Custom') {
+		$customForm.submit()
+	}
 	stripe.createToken(card, billingData)
 	.then((result) => {
 		if (result.error) {
 			paymentValidation(result)
 			console.log(result.error)
 		} else {
-			if (page === 'Event') {
-				$eventForm.submit()
-			} else if (page === 'Custom') {
-				$customForm.submit()
-			}
 			$('.stripe.processing').show()
 			$('.stripe.error').hide()
 			$('.notification-modal.processing').show()
