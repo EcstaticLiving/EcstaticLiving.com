@@ -775,6 +775,7 @@ $(`${payButton}`).on('click', function(e) {
 				$('.stripe.error').hide()
 				$('.notification-modal.processing').show()
 				stripeTokenHandler(result.token, serverData)
+				event.preventDefault();
 			})
 		} else if (page === 'Custom') {
 			$customForm.submit(function (event) {
@@ -782,8 +783,10 @@ $(`${payButton}`).on('click', function(e) {
 				$('.stripe.error').hide()
 				$('.notification-modal.processing').show()
 				stripeTokenHandler(result.token, serverData)
+				event.preventDefault();
 			})
 		}
+		console.log(result);
 		if (result.error) {
 			paymentValidation(result)
 			console.log(result.error)
