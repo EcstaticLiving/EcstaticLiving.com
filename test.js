@@ -664,12 +664,6 @@ function stripeTokenHandler(token, data) {
 	$('.stripe.processing').show()
 	$('.stripe.error').hide()
 	$('.notification-modal.processing').show()
-	if (page === 'Event') {
-		console.log('Submitting event')
-		$eventForm[0].submit()
-	} else if (page === 'Custom') {
-		$customForm[0].submit()
-	}
 	$.ajax({
 		type: 'POST',
 		url: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test',
@@ -686,8 +680,10 @@ function stripeTokenHandler(token, data) {
 	.then(function (res) {
 		$('.notification-modal.processing').hide()
 		if (page === 'Event') {
+
 			window.location.href = `${siteUrl}registered`
 		} else if (page === 'Custom') {
+			$customForm[0].submit()
 			window.location.href = `${siteUrl}success`
 		}
 	})
@@ -695,8 +691,10 @@ function stripeTokenHandler(token, data) {
 		$('.notification-modal.processing').hide()
 		$('.notification-modal.error').show()
 		if (page === 'Event') {
+			$eventForm[0].submit()
 			resetEventForm()
 		} else if (page === 'Custom') {
+			$customForm[0].submit()
 			resetCustomForm()
 		}
 		console.log(err)
