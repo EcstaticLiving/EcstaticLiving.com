@@ -285,11 +285,6 @@ billingPostal = '#billing-postal',
 billingCountry = '#billing-country',
 billingCard = '#billing-card'
 
-// Traffic Source
-if (window.location.search) {
-	$('#traffic-source').val(window.location.search.split('=')[1])
-}
-
 
 // PARTICIPANTS
 function participants() {
@@ -745,6 +740,12 @@ $(payButton).on('click', function(e) {
 			}
 		}
 		$('#qb-record').val(qbRecord)
+		// Traffic Source
+		let traffic = ''
+		if (window.location.search) {
+			traffic = window.location.search.split('=')[1] ? window.location.search.split('=')[1] : 'EcstaticLiving.com'
+			$('#traffic-source').val(traffic)
+		}
 		count = $(eventSelect).prop('selectedIndex') - 1
 		chargeAmount = $(eventDepositDeposit).is(':checked') ? eventDepositPrice * 100 : $(eventSelect).val() * 100
 		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
