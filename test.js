@@ -234,7 +234,7 @@ eventDepositDate = $('#event-deposit-date').text()
 
 // Event variables
 let payButtonClicked = false
-const payButton = '.button.pay',
+const payButton = '#payment-button',
 eventFirstName = '#event-firstname',
 eventLastName = '#event-lastname',
 eventEmail = '#event-email',
