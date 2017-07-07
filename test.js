@@ -359,10 +359,15 @@ function eventOptionValidation() {
 }
 function billingValidation() {
 	if ($(billingFirstName).val() !== '' && $(billingLastName).val() !== '' && $(billingStreet).val() !== '' && $(billingCity).val() !== ''
-		&& $(billingState).val() !== '' && $(billingPostal).val() !== '' && $(billingCountry).val() !== '' && $(billingCard).is(':checked')) {
+		&& $(billingState).val() !== '' && $(billingPostal).val() !== '' && $(billingCountry).val() !== '') {
 		return true
 	}
 	return false
+	// if ($(billingFirstName).val() !== '' && $(billingLastName).val() !== '' && $(billingStreet).val() !== '' && $(billingCity).val() !== ''
+	// 	&& $(billingState).val() !== '' && $(billingPostal).val() !== '' && $(billingCountry).val() !== '' && $(billingCard).is(':checked')) {
+	// 	return true
+	// }
+	// return false
 }
 function eventValidation() {
 	eventCorrection()
@@ -738,7 +743,7 @@ function stripeTokenHandler(token, data) {
 // 	$('.notification-modal.error').hide()
 // })
 
-// $(`${payButton}`).on('click', function(e) {
+// $(payButton).on('click', function(e) {
 // 	// e.preventDefault()
 // 	payButtonClicked = true
 // 	if (!eventValidation()) { return false }
