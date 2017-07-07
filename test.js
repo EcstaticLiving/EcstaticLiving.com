@@ -738,52 +738,52 @@ $('#button-stripe-error').on('click', function() {
 	$('.notification-modal.error').hide()
 })
 
-$(`${payButton}`).on('click', function(e) {
-	// e.preventDefault()
-	payButtonClicked = true
-	if (!eventValidation()) { return false }
-	saveForm(page)
-	var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0, count = 0
-	if (page === 'Event') {
-		count = $(eventSelect).prop('selectedIndex') - 1
-		chargeAmount = $(eventDepositDeposit).is(':checked') ? eventDepositPrice * 100 : $(eventSelect).val() * 100
-		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
-		customerDescription = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' <' + $(eventEmail).val() + '>'
-		customerEmail = $(eventEmail).val()
-		chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(eventSelect + ' option:selected').text().substring(0, $(eventSelect + ' option:selected').text().length - 16)}, ${eventDeposit}`
-	} else if (page === 'Custom') {
-		count = $(customSelect).prop('selectedIndex') - 1
-		chargeAmount = $(customSelect).val() * 100
-		customerDescription = $(customFirstName).val() + ' ' + $(customLastName).val() + ' <' + $(customEmail).val() + '>'
-		customerEmail = $(customEmail).val()
-		chargeDescription = `Custom Charge: ${$(customSelect + ' option:selected').text().substring(0, $(customSelect + ' option:selected').text().length - 16)}`
-	}
-	const billingData = {
-		name: $(billingFirstName).val() + ' ' + $(billingLastName).val(),
-		address_line1: $(billingStreet).val(),
-		address_line2: '',
-		address_city: $(billingCity).val(),
-		address_state: $(billingState).val(),
-		address_zip: $(billingPostal).val(),
-		address_country: $(billingCountry).val()
-	}
-	const serverData = {
-		customerDescription,
-		customerEmail,
-		chargeDescription,
-		chargeAmount
-	}
-	stripe.createToken(card, billingData)
-	.then((result) => {
-		console.log('Result')
-		console.log(result)
-		if (result.error) {
-			paymentValidation(result)
-			console.log(result.error)
-		} else {
-			stripeTokenHandler(result.token, serverData)
-		}
-	})
-})
+// $(`${payButton}`).on('click', function(e) {
+// 	// e.preventDefault()
+// 	payButtonClicked = true
+// 	if (!eventValidation()) { return false }
+// 	saveForm(page)
+// 	var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0, count = 0
+// 	if (page === 'Event') {
+// 		count = $(eventSelect).prop('selectedIndex') - 1
+// 		chargeAmount = $(eventDepositDeposit).is(':checked') ? eventDepositPrice * 100 : $(eventSelect).val() * 100
+// 		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
+// 		customerDescription = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' <' + $(eventEmail).val() + '>'
+// 		customerEmail = $(eventEmail).val()
+// 		chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(eventSelect + ' option:selected').text().substring(0, $(eventSelect + ' option:selected').text().length - 16)}, ${eventDeposit}`
+// 	} else if (page === 'Custom') {
+// 		count = $(customSelect).prop('selectedIndex') - 1
+// 		chargeAmount = $(customSelect).val() * 100
+// 		customerDescription = $(customFirstName).val() + ' ' + $(customLastName).val() + ' <' + $(customEmail).val() + '>'
+// 		customerEmail = $(customEmail).val()
+// 		chargeDescription = `Custom Charge: ${$(customSelect + ' option:selected').text().substring(0, $(customSelect + ' option:selected').text().length - 16)}`
+// 	}
+// 	const billingData = {
+// 		name: $(billingFirstName).val() + ' ' + $(billingLastName).val(),
+// 		address_line1: $(billingStreet).val(),
+// 		address_line2: '',
+// 		address_city: $(billingCity).val(),
+// 		address_state: $(billingState).val(),
+// 		address_zip: $(billingPostal).val(),
+// 		address_country: $(billingCountry).val()
+// 	}
+// 	const serverData = {
+// 		customerDescription,
+// 		customerEmail,
+// 		chargeDescription,
+// 		chargeAmount
+// 	}
+// 	stripe.createToken(card, billingData)
+// 	.then((result) => {
+// 		console.log('Result')
+// 		console.log(result)
+// 		if (result.error) {
+// 			paymentValidation(result)
+// 			console.log(result.error)
+// 		} else {
+// 			stripeTokenHandler(result.token, serverData)
+// 		}
+// 	})
+// })
 
 })
