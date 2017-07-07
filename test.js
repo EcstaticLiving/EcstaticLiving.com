@@ -681,6 +681,7 @@ function stripeTokenHandler(token, data) {
 		$('.notification-modal.processing').hide()
 		if (page === 'Event') {
 			$eventForm.submit()
+			console.log('$eventForm.submit()');
 			// window.location.href = `${siteUrl}registered`
 		} else if (page === 'Custom') {
 			$customForm.submit()
@@ -740,6 +741,7 @@ $('#button-stripe-error').on('click', function() {
 
 $(payButton).on('click', function(e) {
 	// e.preventDefault()
+	console.log('Form submitted');
 	payButtonClicked = true
 	if (!eventValidation()) { return false }
 	saveForm(page)
