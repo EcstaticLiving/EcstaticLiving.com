@@ -730,7 +730,7 @@ const card = elements.create('card', {
 })
 if (page === 'Event' || page === 'Custom') {
 	card.mount('#card-element')
-	card.addEventListener('change', (result) => {
+	card.addEventListener('change', function (result) {
 		paymentValidation(result)
 	})
 }
