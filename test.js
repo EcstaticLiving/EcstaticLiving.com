@@ -680,10 +680,10 @@ function stripeTokenHandler(token, data) {
 	.then(function (res) {
 		$('.notification-modal.processing').hide()
 		if (page === 'Event') {
-			$eventForm[0].submit()
-			// window.location.href = `${siteUrl}registered`
+			$eventForm.submit()
+			window.location.href = `${siteUrl}registered`
 		} else if (page === 'Custom') {
-			$customForm[0].submit()
+			$customForm.submit()
 			window.location.href = `${siteUrl}success`
 		}
 	})
@@ -691,10 +691,10 @@ function stripeTokenHandler(token, data) {
 		$('.notification-modal.processing').hide()
 		$('.notification-modal.error').show()
 		if (page === 'Event') {
-			$eventForm[0].submit()
+			$eventForm.submit()
 			resetEventForm()
 		} else if (page === 'Custom') {
-			$customForm[0].submit()
+			$customForm.submit()
 			resetCustomForm()
 		}
 		console.log(err)
