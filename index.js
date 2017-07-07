@@ -774,12 +774,20 @@ $(payButton).on('click', function(e) {
 		chargeAmount
 	}
 	stripe.createToken(card, billingData)
-	.then((result) => {
+	.then(function (result) {
 		if (result.error) {
 			paymentValidation(result)
 			console.log(result.error)
 		} else {
 			stripeTokenHandler(result.token, serverData)
+		}
+	})
+	.catch(function (err) {
+		$('#card-errors').text('Oops! Something went wrong. Please call our office at 707-987-3456.')
+		if (page === 'Event') {
+			$eventForm.submit()
+		} else if (page === 'Custom') {
+			$customForm.submit()
 		}
 	})
 })
