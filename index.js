@@ -739,7 +739,7 @@ $('#button-stripe-error').on('click', function() {
 })
 
 $(payButton).on('click', function(e) {
-	// e.preventDefault()
+	e.preventDefault()
 	console.log('Form submitted');
 	payButtonClicked = true
 	if (!eventValidation()) { return false }
