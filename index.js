@@ -590,19 +590,6 @@ if (page === 'Event') {
 		saveForm(page)
 		eventValidation()
 	})
-	$(eventFirstName + ',' + eventLastName + ',' + eventPartnerName).on('change', function() {
-		let qbRecord = ''
-		if (participants() === 1) { qbRecord = $(eventFirstName).val() + ' ' + $(eventLastName).val() }
-		if (participants() === 2) {
-			const partner = $(eventPartnerName).val().split(' ')
-			if (partner[partner.length-1] === $(eventLastName).val()) {
-				qbRecord = $(eventFirstName).val() + ' & ' + $(eventPartnerName).val()
-			} else {
-				qbRecord = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' & ' + $(eventPartnerName).val()
-			}
-		}
-		$('#qb-record').val(qbRecord)
-	})
 	resetEventForm()
 	if (localStorage.getItem(`EcstaticLiving:${page}`)) {
 		$('#form-load').hide()
@@ -746,6 +733,18 @@ $(payButton).on('click', function(e) {
 	saveForm(page)
 	var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0, count = 0
 	if (page === 'Event') {
+		// QB Record
+		let qbRecord = ''
+		if (participants() === 1) { qbRecord = $(eventFirstName).val() + ' ' + $(eventLastName).val() }
+		if (participants() === 2) {
+			const partner = $(eventPartnerName).val().split(' ')
+			if (partner[partner.length-1] === $(eventLastName).val()) {
+				qbRecord = $(eventFirstName).val() + ' & ' + $(eventPartnerName).val()
+			} else {
+				qbRecord = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' & ' + $(eventPartnerName).val()
+			}
+		}
+		$('#qb-record').val(qbRecord)
 		count = $(eventSelect).prop('selectedIndex') - 1
 		chargeAmount = $(eventDepositDeposit).is(':checked') ? eventDepositPrice * 100 : $(eventSelect).val() * 100
 		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
