@@ -645,16 +645,19 @@ function paymentValidation(result) {
 	if (result.complete) {
 		if (page === 'Event') {
 			$(billingCard).prop('checked', true)
-			eventValidation()
 		} else if (page === 'Custom') {
 			$(customCard).prop('checked', true)
-			customValidation()
 		}
 	}
 	if (result.error) {
 		$('#card-errors').text(result.error.message)
 	} else {
 		$('#card-errors').text('')
+	}
+	if (page === 'Event') {
+		eventValidation()
+	} else if (page === 'Custom') {
+		customValidation()
 	}
 }
 
@@ -781,9 +784,6 @@ $(payButton).on('click', function(e) {
 		} else {
 			stripeTokenHandler(result.token, serverData)
 		}
-	})
-	.catch(function (err) {
-		$('#card-errors').text('Oops! Something went wrong. Please call our office at 707-987-3456.')
 	})
 })
 
