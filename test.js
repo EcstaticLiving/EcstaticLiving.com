@@ -287,7 +287,7 @@ billingCard = '#billing-card'
 
 // Source
 if (window.location.search) {
-	$('#source').val(window.location.search.split('=')[1])
+	$('#traffic-source').val(window.location.search.split('=')[1])
 }
 
 
