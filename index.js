@@ -680,8 +680,10 @@ function stripeTokenHandler(token, data) {
 	.then(function (res) {
 		$('.notification-modal.processing').hide()
 		if (page === 'Event') {
+			$eventForm.submit()
 			window.location.href = `${siteUrl}registered`
 		} else if (page === 'Custom') {
+			$customForm.submit()
 			window.location.href = `${siteUrl}success`
 		}
 	})
@@ -779,19 +781,9 @@ $(payButton).on('click', function(e) {
 		} else {
 			stripeTokenHandler(result.token, serverData)
 		}
-		if (page === 'Event') {
-			$eventForm.submit()
-		} else if (page === 'Custom') {
-			$customForm.submit()
-		}
 	})
 	.catch(function (err) {
 		$('#card-errors').text('Oops! Something went wrong. Please call our office at 707-987-3456.')
-		if (page === 'Event') {
-			$eventForm.submit()
-		} else if (page === 'Custom') {
-			$customForm.submit()
-		}
 	})
 })
 
