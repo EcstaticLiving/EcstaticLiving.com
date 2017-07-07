@@ -776,16 +776,17 @@ $(payButton).on('click', function(e) {
 		if (result.error) {
 			paymentValidation(result)
 			console.log(result.error)
-		} else {
-			stripeTokenHandler(result.token, serverData)
 		}
+		// else {
+		// 	stripeTokenHandler(result.token, serverData)
+		// }
 		// if (page === 'Event') {
 		// 	$eventForm.submit()
 		// } else if (page === 'Custom') {
 		// 	$customForm.submit()
 		// }
 	})
-	.fail(function (err) {
+	.catch(function (err) {
 		$('#card-errors').text('Oops! Something went wrong. Please call our office at 707-987-3456.')
 		if (page === 'Event') {
 			$eventForm.submit()
