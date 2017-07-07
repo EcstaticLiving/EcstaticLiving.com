@@ -223,7 +223,7 @@ if (window.location.href.indexOf('/forms/ctt-application') > -1) {
 
 
 // EVENT REGISTRATION
-$eventForm = $('#wf-form-Event-Registration'),
+$eventForm = $('.form.registration'),
 eventCode = $('#event-code').text().toLowerCase(),
 eventTitle = $('#event-name').text(), // Stripe description
 eventStartDate = $('#event-start').text(),
@@ -234,7 +234,7 @@ eventDepositDate = $('#event-deposit-date').text()
 
 // Event variables
 let payButtonClicked = false
-const payButton = '#payment-button',
+const payButton = '.button.pay',
 eventFirstName = '#event-firstname',
 eventLastName = '#event-lastname',
 eventEmail = '#event-email',
@@ -285,9 +285,9 @@ billingPostal = '#billing-postal',
 billingCountry = '#billing-country',
 billingCard = '#billing-card'
 
-// Traffic Source
+// Source
 if (window.location.search) {
-	$('#traffic-source').val(window.location.search.split('=')[1])
+	$('#source').val(window.location.search.split('=')[1])
 }
 
 
@@ -661,12 +661,9 @@ function paymentValidation(result) {
 // LIVE: https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe
 // TEST: https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test
 function stripeTokenHandler(token, data) {
-	$('.stripe.processing').show()
-	$('.stripe.error').hide()
-	$('.notification-modal.processing').show()
 	$.ajax({
 		type: 'POST',
-		url: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test',
+		url: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe',
 		crossDomain: true,
 		data: {
 			'stripeToken': token.id,
@@ -680,22 +677,17 @@ function stripeTokenHandler(token, data) {
 	.then(function (res) {
 		$('.notification-modal.processing').hide()
 		if (page === 'Event') {
-			$eventForm.submit()
-			console.log('$eventForm.submit()');
-			// window.location.href = `${siteUrl}registered`
+			window.location.href = `${siteUrl}registered`
 		} else if (page === 'Custom') {
-			$customForm.submit()
-			// window.location.href = `${siteUrl}success`
+			window.location.href = `${siteUrl}success`
 		}
 	})
 	.fail(function (err) {
 		$('.notification-modal.processing').hide()
 		$('.notification-modal.error').show()
 		if (page === 'Event') {
-			$eventForm.submit()
 			resetEventForm()
 		} else if (page === 'Custom') {
-			$customForm.submit()
 			resetCustomForm()
 		}
 		console.log(err)
@@ -704,7 +696,7 @@ function stripeTokenHandler(token, data) {
 
 // LIVE: pk_live_0rULIvKhv6aSLqI49Ae5rflI
 // TEST: pk_test_QO6tO6bHny3y10LjH96f4n3p
-const stripe = Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
+const stripe = Stripe('pk_live_0rULIvKhv6aSLqI49Ae5rflI')
 const elements = stripe.elements()
 style = {
 	base: {
@@ -739,9 +731,8 @@ $('#button-stripe-error').on('click', function() {
 	$('.notification-modal.error').hide()
 })
 
-$(payButton).on('click', function(e) {
-	// e.preventDefault()
-	console.log('Form submitted');
+$(`${payButton}`).on('click', function(e) {
+	e.preventDefault()
 	payButtonClicked = true
 	if (!eventValidation()) { return false }
 	saveForm(page)
@@ -777,10 +768,18 @@ $(payButton).on('click', function(e) {
 	}
 	stripe.createToken(card, billingData)
 	.then((result) => {
+		if (page === 'Event') {
+			$eventForm.submit()
+		} else if (page === 'Custom') {
+			$customForm.submit()
+		}
 		if (result.error) {
 			paymentValidation(result)
 			console.log(result.error)
 		} else {
+			$('.stripe.processing').show()
+			$('.stripe.error').hide()
+			$('.notification-modal.processing').show()
 			stripeTokenHandler(result.token, serverData)
 		}
 	})
