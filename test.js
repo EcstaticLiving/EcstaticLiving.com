@@ -468,7 +468,7 @@ function setEventSelect(people) {
 	$(eventDepositText).text(`Pay deposit only ($${eventDepositPrice}${spacer}${people})`)
 }
 
-function reset$eventForm() {
+function resetEventForm() {
 	clearForm('Event')
 	repopulateForm('Event')
 	if ($(eventPayBoth).is(':checked')) {
@@ -603,7 +603,7 @@ if (page === 'Event') {
 		}
 		$('#qb-record').val(qbRecord)
 	})
-	reset$eventForm()
+	resetEventForm()
 	if (localStorage.getItem(`EcstaticLiving:${page}`)) {
 		$('#form-load').hide()
 		$('#form-clear').show()
@@ -691,10 +691,10 @@ function stripeTokenHandler(token, data) {
 		$('.notification-modal.processing').hide()
 		$('.notification-modal.error').show()
 		if (page === 'Event') {
-			$eventForm[0].submit()
-			reset$eventForm()
+			$eventForm.submit()
+			resetEventForm()
 		} else if (page === 'Custom') {
-			$customForm[0].submit()
+			$customForm.submit()
 			resetCustomForm()
 		}
 		console.log(err)
