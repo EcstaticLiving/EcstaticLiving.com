@@ -285,7 +285,7 @@ billingPostal = '#billing-postal',
 billingCountry = '#billing-country',
 billingCard = '#billing-card'
 
-// Source
+// Traffic Source
 if (window.location.search) {
 	$('#traffic-source').val(window.location.search.split('=')[1])
 }
