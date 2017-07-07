@@ -223,7 +223,7 @@ if (window.location.href.indexOf('/forms/ctt-application') > -1) {
 
 
 // EVENT REGISTRATION
-$eventForm = $('.form.registration'),
+$eventForm = $('#wf-form-Event-Registration'),
 eventCode = $('#event-code').text().toLowerCase(),
 eventTitle = $('#event-name').text(), // Stripe description
 eventStartDate = $('#event-start').text(),
@@ -359,15 +359,10 @@ function eventOptionValidation() {
 }
 function billingValidation() {
 	if ($(billingFirstName).val() !== '' && $(billingLastName).val() !== '' && $(billingStreet).val() !== '' && $(billingCity).val() !== ''
-		&& $(billingState).val() !== '' && $(billingPostal).val() !== '' && $(billingCountry).val() !== '') {
+		&& $(billingState).val() !== '' && $(billingPostal).val() !== '' && $(billingCountry).val() !== '' && $(billingCard).is(':checked')) {
 		return true
 	}
 	return false
-	// if ($(billingFirstName).val() !== '' && $(billingLastName).val() !== '' && $(billingStreet).val() !== '' && $(billingCity).val() !== ''
-	// 	&& $(billingState).val() !== '' && $(billingPostal).val() !== '' && $(billingCountry).val() !== '' && $(billingCard).is(':checked')) {
-	// 	return true
-	// }
-	// return false
 }
 function eventValidation() {
 	eventCorrection()
@@ -473,7 +468,7 @@ function setEventSelect(people) {
 	$(eventDepositText).text(`Pay deposit only ($${eventDepositPrice}${spacer}${people})`)
 }
 
-function resetEventForm() {
+function reset$eventForm() {
 	clearForm('Event')
 	repopulateForm('Event')
 	if ($(eventPayBoth).is(':checked')) {
@@ -608,7 +603,7 @@ if (page === 'Event') {
 		}
 		$('#qb-record').val(qbRecord)
 	})
-	resetEventForm()
+	reset$eventForm()
 	if (localStorage.getItem(`EcstaticLiving:${page}`)) {
 		$('#form-load').hide()
 		$('#form-clear').show()
@@ -697,7 +692,7 @@ function stripeTokenHandler(token, data) {
 		$('.notification-modal.error').show()
 		if (page === 'Event') {
 			$eventForm[0].submit()
-			resetEventForm()
+			reset$eventForm()
 		} else if (page === 'Custom') {
 			$customForm[0].submit()
 			resetCustomForm()
@@ -708,87 +703,85 @@ function stripeTokenHandler(token, data) {
 
 // LIVE: pk_live_0rULIvKhv6aSLqI49Ae5rflI
 // TEST: pk_test_QO6tO6bHny3y10LjH96f4n3p
-// const stripe = Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
-// const elements = stripe.elements()
-// style = {
-// 	base: {
-// 		fontFamily: 'Lato',
-// 		fontWeight: 300,
-// 		color: '#333',
-// 		fontSize: '16px',
-// 		lineHeight: '24px',
-// 		'::placeholder': {
-// 			color: '#666',
-// 		}
-// 	},
-// 	invalid: {
-// 		color: '#b00000',
-// 		':focus': {
-// 			color: '#b00000'
-// 		}
-// 	}
-// }
-// const card = elements.create('card', {
-// 	hidePostalCode: true,
-// 	style
-// })
-// if (page === 'Event' || page === 'Custom') {
-// 	card.mount('#card-element')
-// 	card.addEventListener('change', (result) => {
-// 		paymentValidation(result)
-// 	})
-// }
-//
-// $('#button-stripe-error').on('click', function() {
-// 	$('.notification-modal.error').hide()
-// })
+const stripe = Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
+const elements = stripe.elements()
+style = {
+	base: {
+		fontFamily: 'Lato',
+		fontWeight: 300,
+		color: '#333',
+		fontSize: '16px',
+		lineHeight: '24px',
+		'::placeholder': {
+			color: '#666',
+		}
+	},
+	invalid: {
+		color: '#b00000',
+		':focus': {
+			color: '#b00000'
+		}
+	}
+}
+const card = elements.create('card', {
+	hidePostalCode: true,
+	style
+})
+if (page === 'Event' || page === 'Custom') {
+	card.mount('#card-element')
+	card.addEventListener('change', (result) => {
+		paymentValidation(result)
+	})
+}
 
-// $(payButton).on('click', function(e) {
-// 	// e.preventDefault()
-// 	payButtonClicked = true
-// 	if (!eventValidation()) { return false }
-// 	saveForm(page)
-// 	var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0, count = 0
-// 	if (page === 'Event') {
-// 		count = $(eventSelect).prop('selectedIndex') - 1
-// 		chargeAmount = $(eventDepositDeposit).is(':checked') ? eventDepositPrice * 100 : $(eventSelect).val() * 100
-// 		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
-// 		customerDescription = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' <' + $(eventEmail).val() + '>'
-// 		customerEmail = $(eventEmail).val()
-// 		chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(eventSelect + ' option:selected').text().substring(0, $(eventSelect + ' option:selected').text().length - 16)}, ${eventDeposit}`
-// 	} else if (page === 'Custom') {
-// 		count = $(customSelect).prop('selectedIndex') - 1
-// 		chargeAmount = $(customSelect).val() * 100
-// 		customerDescription = $(customFirstName).val() + ' ' + $(customLastName).val() + ' <' + $(customEmail).val() + '>'
-// 		customerEmail = $(customEmail).val()
-// 		chargeDescription = `Custom Charge: ${$(customSelect + ' option:selected').text().substring(0, $(customSelect + ' option:selected').text().length - 16)}`
-// 	}
-// 	const billingData = {
-// 		name: $(billingFirstName).val() + ' ' + $(billingLastName).val(),
-// 		address_line1: $(billingStreet).val(),
-// 		address_line2: '',
-// 		address_city: $(billingCity).val(),
-// 		address_state: $(billingState).val(),
-// 		address_zip: $(billingPostal).val(),
-// 		address_country: $(billingCountry).val()
-// 	}
-// 	const serverData = {
-// 		customerDescription,
-// 		customerEmail,
-// 		chargeDescription,
-// 		chargeAmount
-// 	}
-// 	stripe.createToken(card, billingData)
-// 	.then((result) => {
-// 		console.log('Result')
-// 		console.log(result)
-// 		if (result.error) {
-// 			paymentValidation(result)
-// 			console.log(result.error)
-// 		} else {
-// 			stripeTokenHandler(result.token, serverData)
-// 		}
-// 	})
-// })
+$('#button-stripe-error').on('click', function() {
+	$('.notification-modal.error').hide()
+})
+
+$(payButton).on('click', function(e) {
+	e.preventDefault()
+	payButtonClicked = true
+	if (!eventValidation()) { return false }
+	saveForm(page)
+	var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0, count = 0
+	if (page === 'Event') {
+		count = $(eventSelect).prop('selectedIndex') - 1
+		chargeAmount = $(eventDepositDeposit).is(':checked') ? eventDepositPrice * 100 : $(eventSelect).val() * 100
+		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
+		customerDescription = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' <' + $(eventEmail).val() + '>'
+		customerEmail = $(eventEmail).val()
+		chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(eventSelect + ' option:selected').text().substring(0, $(eventSelect + ' option:selected').text().length - 16)}, ${eventDeposit}`
+	} else if (page === 'Custom') {
+		count = $(customSelect).prop('selectedIndex') - 1
+		chargeAmount = $(customSelect).val() * 100
+		customerDescription = $(customFirstName).val() + ' ' + $(customLastName).val() + ' <' + $(customEmail).val() + '>'
+		customerEmail = $(customEmail).val()
+		chargeDescription = `Custom Charge: ${$(customSelect + ' option:selected').text().substring(0, $(customSelect + ' option:selected').text().length - 16)}`
+	}
+	const billingData = {
+		name: $(billingFirstName).val() + ' ' + $(billingLastName).val(),
+		address_line1: $(billingStreet).val(),
+		address_line2: '',
+		address_city: $(billingCity).val(),
+		address_state: $(billingState).val(),
+		address_zip: $(billingPostal).val(),
+		address_country: $(billingCountry).val()
+	}
+	const serverData = {
+		customerDescription,
+		customerEmail,
+		chargeDescription,
+		chargeAmount
+	}
+	stripe.createToken(card, billingData)
+	.then((result) => {
+		if (result.error) {
+			paymentValidation(result)
+			console.log(result.error)
+		} else {
+			stripeTokenHandler(result.token, serverData)
+		}
+	})
+})
 
 })
