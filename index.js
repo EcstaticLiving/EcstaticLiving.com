@@ -467,7 +467,7 @@ function resetEventForm() {
 	} else {
 		setEventSelect('')
 	}
-	$('#event').val(eventCode)
+	$('#eventcode').val(eventCode)
 	if (!$(eventExperienceYes).is(':checked')) hideExperience()
 	if (!$(eventDietYes).is(':checked')) hideDiet()
 	if (participants() !== 2) hidePartner()
@@ -743,14 +743,14 @@ $(payButton).on('click', function(e) {
 				qbRecord = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' & ' + $(eventPartnerName).val()
 			}
 		}
-		$('#qb-record').val(qbRecord)
+		$('#qbrecord').val(qbRecord)
 		console.log(qbRecord);
 		debugger
 		// Traffic Source
 		if (window.location.search) {
-			$('#traffic-source').val(window.location.search.split('=')[1])
+			$('#trafficsource').val(window.location.search.split('=')[1])
 		} else {
-			$('#traffic-source').val('EcstaticLiving.com')
+			$('#trafficsource').val('EcstaticLiving.com')
 		}
 		count = $(eventSelect).prop('selectedIndex') - 1
 		chargeAmount = $(eventDepositDeposit).is(':checked') ? eventDepositPrice * 100 : $(eventSelect).val() * 100
