@@ -6,6 +6,8 @@ var Webflow = Webflow || [];
 Webflow.push(function () {
 
 // DECLARATIONS
+clearForm('Event')
+
 // General
 const $main = $('.main'),
 $mainSection = $('.main-section'),
