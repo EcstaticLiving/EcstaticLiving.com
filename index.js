@@ -630,11 +630,6 @@ function paymentValidation(result) {
 	} else {
 		$('#card-errors').text('')
 	}
-	if (page === 'Event') {
-		eventValidation()
-	} else if (page === 'Custom') {
-		customValidation()
-	}
 }
 
 // LIVE: https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe
