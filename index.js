@@ -296,7 +296,7 @@ function participants() {
 }
 
 // FORM VALIDATION
-function eventCorrection() {
+function formValidation() {
 	let proceed = true
 	const errorInput = { 'border-color': '#b00000', 'background-color': '#fdd' }
 	const clearInput = { 'border-color': '#ccc', 'background-color': '#fff' }
@@ -717,11 +717,9 @@ $('#button-stripe-error').on('click', function() {
 
 $(payButton).on('click', function(e) {
 	e.preventDefault()
-	console.log(!eventCorrection());
-	if (!eventCorrection()) {
+	if (!formValidation()) {
 		return false
 	}
-	console.log(!eventValidation());
 	if (!eventValidation()) {
 		if ($('#card-errors').text() === '') {
 			// If there’s no Stripe error message
