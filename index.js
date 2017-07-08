@@ -358,14 +358,13 @@ function billingValidation() {
 	return false
 }
 function eventValidation() {
-	eventCorrection()
 	if (personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && $(eventTerms).is(':checked') && billingValidation()) {
 		$('#card-errors').text('')
 		$(paymentButton).css({ 'background-color': '#800000' })
 		$(paymentButton).css({ 'color': '#ffffff' })
 		return true
 	}
-	if (payButtonClicked && $('#card-errors').text() === '') {
+	if ($('#card-errors').text() === '') {
 		// If there’s no Stripe error message
 		$('#card-errors').text('Oops! There’s some missing information.')
 	}
@@ -721,7 +720,9 @@ $('#button-stripe-error').on('click', function() {
 
 $(payButton).on('click', function(e) {
 	e.preventDefault()
-	payButtonClicked = true
+	if (!eventCorrection()) {
+		return false
+	}
 	if (!eventValidation()) {
 		return false
 	}
