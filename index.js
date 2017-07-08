@@ -297,24 +297,22 @@ function participants() {
 
 // FORM VALIDATION
 function eventCorrection() {
-	if (payButtonClicked) {
-		const errorInput = { 'border-color': '#b00000', 'background-color': '#fdd' }
-		const clearInput = { 'border-color': '#ccc', 'background-color': '#fff' }
-		const errorRadio = { 'background-color': '#fdd' }
-		const clearRadio = { 'background-color': 'transparent' }
-		if (!$(eventTerms).is(':checked')) { $(eventTermsValidation).css(errorRadio); } else { $(eventTermsValidation).css(clearRadio); }
-		if ($(eventDepositContainer).is(':visible') && !$(eventDepositFull).is(':checked') && !$(eventDepositDeposit).is(':checked')) { $(eventDepositValidation).css(errorRadio); } else { $(eventDepositValidation).css(clearRadio); }
-		if (participants() === 2 && !$(eventPayBoth).is(':checked') && !$(eventPayMe).is(':checked')) { $(eventPayValidation).css(errorRadio); } else { $(eventPayValidation).css(clearRadio); }
-		if (participants() === 2 && !$(eventPartnerFemale).is(':checked') && !$(eventPartnerMale).is(':checked') && !$(eventPartnerOther).is(':checked')) { $(eventPartnerGenderValidation).css(errorRadio); } else { $(eventPartnerGenderValidation).css(clearRadio); }
-		if (participants() === 2 && $(eventPartnerName).val() === '') { $(eventPartnerName).css(errorInput); $(eventPartnerName).focus() } else { $(eventPartnerName).css(clearInput) }
-		if (!$(eventDietYes).is(':checked') && !$(eventDietNo).is(':checked')) { $(eventDietValidation).css(errorRadio); } else { $(eventDietValidation).css(clearRadio); }
-		if ($(eventDietYes).is(':checked') && $(eventDietDetails).val() === '') { $(eventDietDetails).css(errorInput); } else { $(eventDietDetails).css(clearInput); }
-		if (!$(eventExperienceYes).is(':checked') && !$(eventExperienceNo).is(':checked')) { $(eventExperienceValidation).css(errorRadio); } else { $(eventExperienceValidation).css(clearRadio); }
-		if ($(eventExperienceYes).is(':checked') && $(eventExperienceDetails).val() === '') { $(eventExperienceDetails).css(errorInput); } else { $(eventExperienceDetails).css(clearInput); }
-		if (!$(eventFemale).is(':checked') && !$(eventMale).is(':checked') && !$(eventOther).is(':checked')) { $(eventGenderValidation).css(errorRadio); } else { $(eventGenderValidation).css(clearRadio); }
-		$eventForm.parsley().validate()
-		return false
-	}
+	const errorInput = { 'border-color': '#b00000', 'background-color': '#fdd' }
+	const clearInput = { 'border-color': '#ccc', 'background-color': '#fff' }
+	const errorRadio = { 'background-color': '#fdd' }
+	const clearRadio = { 'background-color': 'transparent' }
+	if (!$(eventTerms).is(':checked')) { $(eventTermsValidation).css(errorRadio); } else { $(eventTermsValidation).css(clearRadio); }
+	if ($(eventDepositContainer).is(':visible') && !$(eventDepositFull).is(':checked') && !$(eventDepositDeposit).is(':checked')) { $(eventDepositValidation).css(errorRadio); } else { $(eventDepositValidation).css(clearRadio); }
+	if (participants() === 2 && !$(eventPayBoth).is(':checked') && !$(eventPayMe).is(':checked')) { $(eventPayValidation).css(errorRadio); } else { $(eventPayValidation).css(clearRadio); }
+	if (participants() === 2 && !$(eventPartnerFemale).is(':checked') && !$(eventPartnerMale).is(':checked') && !$(eventPartnerOther).is(':checked')) { $(eventPartnerGenderValidation).css(errorRadio); } else { $(eventPartnerGenderValidation).css(clearRadio); }
+	if (participants() === 2 && $(eventPartnerName).val() === '') { $(eventPartnerName).css(errorInput); $(eventPartnerName).focus() } else { $(eventPartnerName).css(clearInput) }
+	if (!$(eventDietYes).is(':checked') && !$(eventDietNo).is(':checked')) { $(eventDietValidation).css(errorRadio); } else { $(eventDietValidation).css(clearRadio); }
+	if ($(eventDietYes).is(':checked') && $(eventDietDetails).val() === '') { $(eventDietDetails).css(errorInput); } else { $(eventDietDetails).css(clearInput); }
+	if (!$(eventExperienceYes).is(':checked') && !$(eventExperienceNo).is(':checked')) { $(eventExperienceValidation).css(errorRadio); } else { $(eventExperienceValidation).css(clearRadio); }
+	if ($(eventExperienceYes).is(':checked') && $(eventExperienceDetails).val() === '') { $(eventExperienceDetails).css(errorInput); } else { $(eventExperienceDetails).css(clearInput); }
+	if (!$(eventFemale).is(':checked') && !$(eventMale).is(':checked') && !$(eventOther).is(':checked')) { $(eventGenderValidation).css(errorRadio); } else { $(eventGenderValidation).css(clearRadio); }
+	$eventForm.parsley().validate()
+	return false
 }
 function personalValidation() {
 	if ($(eventFirstName).val() !== '' && $(eventLastName).val() !== '' && $(eventEmail).val() !== '' && $(eventMobile).val() !== '' && $(eventBirthdate).val() !== '' &&
@@ -651,7 +649,7 @@ function stripeTokenHandler(token, data) {
 	$('.notification-modal.processing').show()
 	$.ajax({
 		type: 'POST',
-		url: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe',
+		url: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test',
 		crossDomain: true,
 		data: {
 			'stripeToken': token.id,
@@ -686,7 +684,7 @@ function stripeTokenHandler(token, data) {
 
 // LIVE: pk_live_0rULIvKhv6aSLqI49Ae5rflI
 // TEST: pk_test_QO6tO6bHny3y10LjH96f4n3p
-const stripe = Stripe('pk_live_0rULIvKhv6aSLqI49Ae5rflI')
+const stripe = Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
 const elements = stripe.elements()
 style = {
 	base: {
@@ -743,10 +741,10 @@ $(payButton).on('click', function(e) {
 		}
 		$('#qb-record').val(qbRecord)
 		// Traffic Source
-		let traffic = ''
 		if (window.location.search) {
-			traffic = window.location.search.split('=')[1] ? window.location.search.split('=')[1] : 'EcstaticLiving.com'
-			$('#traffic-source').val(traffic)
+			$('#traffic-source').val(window.location.search.split('=')[1])
+		} else {
+			$('#traffic-source').val('EcstaticLiving.com')
 		}
 		count = $(eventSelect).prop('selectedIndex') - 1
 		chargeAmount = $(eventDepositDeposit).is(':checked') ? eventDepositPrice * 100 : $(eventSelect).val() * 100
