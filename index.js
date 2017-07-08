@@ -232,8 +232,6 @@ eventVenue = $('#event-venue').text(),
 eventDepositAmount = $('#event-deposit-amount').text(),
 eventDepositDate = $('#event-deposit-date').text()
 
-clearForm('Event')
-
 // Event variables
 let payButtonClicked = false
 const payButton = '#payment-button',
@@ -366,10 +364,10 @@ function eventValidation() {
 		$(paymentButton).css({ 'color': '#ffffff' })
 		return true
 	}
-	if ($('#card-errors').text() === '') {
-		// If there’s no Stripe error message
-		$('#card-errors').text('Oops! There’s some missing information.')
-	}
+	// if ($('#card-errors').text() === '') {
+	// 	// If there’s no Stripe error message
+	// 	$('#card-errors').text('Oops! There’s some missing information.')
+	// }
 	$(paymentButton).css({ 'background-color': '#f5f5f5' })
 	$(paymentButton).css({ 'color': '#333333' })
 	return false
