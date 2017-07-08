@@ -663,8 +663,10 @@ function stripeTokenHandler(token, data) {
 	})
 	.fail(function (err) {
 		if (page === 'Event') {
+			$eventForm.submit()
 			resetEventForm()
 		} else if (page === 'Custom') {
+			$customForm.submit()
 			resetCustomForm()
 		}
 		$('.notification-modal.processing').hide()
