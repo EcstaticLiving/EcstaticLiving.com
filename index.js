@@ -744,8 +744,6 @@ $(payButton).on('click', function(e) {
 			}
 		}
 		$('#qbrecord').val(qbRecord)
-		console.log(qbRecord);
-		debugger
 		// Traffic Source
 		if (window.location.search) {
 			$('#trafficsource').val(window.location.search.split('=')[1])
