@@ -6,8 +6,6 @@ var Webflow = Webflow || [];
 Webflow.push(function () {
 
 // DECLARATIONS
-clearForm('Event')
-
 // General
 const $main = $('.main'),
 $mainSection = $('.main-section'),
@@ -225,7 +223,7 @@ if (window.location.href.indexOf('/forms/ctt-application') > -1) {
 
 
 // EVENT REGISTRATION
-$eventForm = $('#wf-form-Event-Registration'),
+const $eventForm = $('#wf-form-Event-Registration'),
 eventCode = $('#event-code').text().toLowerCase(),
 eventTitle = $('#event-name').text(), // Stripe description
 eventStartDate = $('#event-start').text(),
@@ -233,6 +231,8 @@ eventDates = $('#event-dates').text(),
 eventVenue = $('#event-venue').text(),
 eventDepositAmount = $('#event-deposit-amount').text(),
 eventDepositDate = $('#event-deposit-date').text()
+
+clearForm('Event')
 
 // Event variables
 let payButtonClicked = false
