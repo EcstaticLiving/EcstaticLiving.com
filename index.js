@@ -716,9 +716,11 @@ $('#button-stripe-error').on('click', function() {
 
 $(payButton).on('click', function(e) {
 	e.preventDefault()
+	console.log(!eventCorrection());
 	if (!eventCorrection()) {
 		return false
 	}
+	console.log(!eventValidation());
 	if (!eventValidation()) {
 		if ($('#card-errors').text() === '') {
 			// If there’s no Stripe error message
