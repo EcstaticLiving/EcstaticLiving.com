@@ -582,10 +582,10 @@ if (page === 'Event') {
 	})
 	// Abandoned reg
 	window.onbeforeunload = function(e) {
-		console.log('unload');
 		if (!eventValidation() && $(eventFirstName).val() !== 0 && $(eventLastName).val() !== 0 && ($(eventEmail).val() !== 0 || $(eventMobile).val() !== 0)) {
-			console.log('form submit');
-			$eventForm.submit()
+			setTimeout(function() {
+				$eventForm.submit()
+			}, 1000)
 		}
 		return null
 	}
