@@ -365,10 +365,6 @@ function eventValidation() {
 		$(paymentButton).css({ 'color': '#ffffff' })
 		return true
 	}
-	// If there’s no Stripe error message
-	if ($('#card-errors').text() === '') {
-		$('#card-errors').text('Oops! There’s some missing information.')
-	}
 	$(paymentButton).css({ 'background-color': '#f5f5f5' })
 	$(paymentButton).css({ 'color': '#333333' })
 	return false
@@ -724,6 +720,10 @@ $(payButton).on('click', function(e) {
 		return false
 	}
 	if (!eventValidation()) {
+		// If there’s no Stripe error message
+		if ($('#card-errors').text() === '') {
+			$('#card-errors').text('Oops! There’s some missing information.')
+		}
 		return false
 	}
 	saveForm(page)
