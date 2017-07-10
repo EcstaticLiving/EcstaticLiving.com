@@ -717,13 +717,13 @@ $('#button-stripe-error').on('click', function() {
 $(payButton).on('click', function(e) {
 	e.preventDefault()
 	if (!formValidation()) {
-		return false
-	}
-	if (!eventValidation()) {
 		// If there’s no Stripe error message
 		if ($('#card-errors').text() === '') {
 			$('#card-errors').text('Oops! There’s some missing information.')
 		}
+		return false
+	}
+	if (!eventValidation()) {
 		return false
 	}
 	saveForm(page)
