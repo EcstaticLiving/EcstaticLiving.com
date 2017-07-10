@@ -777,8 +777,10 @@ $(payButton).on('click', function(e) {
 	}
 	stripe.createToken(card, billingData)
 	.then(function (result) {
+		console.log(result);
 		if (result.error) {
 			$('#card-errors').text(result.error.message)
+			return false
 		} else {
 			stripeTokenHandler(result.token, serverData)
 		}
