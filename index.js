@@ -583,9 +583,10 @@ if (page === 'Event') {
 	// Abandoned reg
 	window.onbeforeunload = function(e) {
 		if (!eventValidation() && $(eventFirstName).val() !== 0 && $(eventLastName).val() !== 0 && ($(eventEmail).val() !== 0 || $(eventMobile).val() !== 0)) {
-			setTimeout(function() {
-				$eventForm.submit()
-			}, 1000)
+			$eventForm.submit()
+			var dialogText = 'Are you sure you want to leave?'
+			e.returnValue = dialogText
+			return dialogText
 		}
 		return null
 	}
