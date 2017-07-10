@@ -365,6 +365,10 @@ function eventValidation() {
 		$(paymentButton).css({ 'color': '#ffffff' })
 		return true
 	}
+	// If there’s no Stripe error message
+	if ($('#card-errors').text() === '') {
+		$('#card-errors').text('Oops! There’s some missing information.')
+	}
 	$(paymentButton).css({ 'background-color': '#f5f5f5' })
 	$(paymentButton).css({ 'color': '#333333' })
 	return false
@@ -480,7 +484,8 @@ function resetEventForm() {
 	$eventForm.parsley()
 	$eventForm.show()
 	$(eventTerms).attr('checked', false)
-	eventValidation()
+	$(paymentButton).css({ 'background-color': '#f5f5f5' })
+	$(paymentButton).css({ 'color': '#333333' })
 }
 
 
@@ -619,6 +624,7 @@ if (page === 'Event') {
 // STRIPE
 function paymentValidation(result) {
 	if (result.complete) {
+		// Check hidden field to enable eventValidation() or customValidation() to pass
 		if (page === 'Event') {
 			$(billingCard).prop('checked', true)
 		} else if (page === 'Custom') {
@@ -640,7 +646,7 @@ function stripeTokenHandler(token, data) {
 	$('.notification-modal.processing').show()
 	$.ajax({
 		type: 'POST',
-		url: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe',
+		url: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test',
 		crossDomain: true,
 		data: {
 			'stripeToken': token.id,
@@ -677,7 +683,7 @@ function stripeTokenHandler(token, data) {
 
 // LIVE: pk_live_0rULIvKhv6aSLqI49Ae5rflI
 // TEST: pk_test_QO6tO6bHny3y10LjH96f4n3p
-const stripe = Stripe('pk_live_0rULIvKhv6aSLqI49Ae5rflI')
+const stripe = Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
 const elements = stripe.elements()
 style = {
 	base: {
@@ -718,12 +724,6 @@ $(payButton).on('click', function(e) {
 		return false
 	}
 	if (!eventValidation()) {
-		if ($('#card-errors').text() === '') {
-			// If there’s no Stripe error message
-			$('#card-errors').text('Oops! There’s some missing information.')
-		}
-		$(paymentButton).css({ 'background-color': '#f5f5f5' })
-		$(paymentButton).css({ 'color': '#333333' })
 		return false
 	}
 	saveForm(page)
@@ -778,8 +778,7 @@ $(payButton).on('click', function(e) {
 	stripe.createToken(card, billingData)
 	.then(function (result) {
 		if (result.error) {
-			paymentValidation(result)
-			console.log(result.error)
+			$('#card-errors').text(result.error.message)
 		} else {
 			stripeTokenHandler(result.token, serverData)
 		}
