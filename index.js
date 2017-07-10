@@ -544,6 +544,31 @@ function resetCustomForm() {
 
 
 // EVENT or CUSTOM CHARGE mode
+
+// QB Record
+function qbrecord() {
+	let qbRecord = ''
+	if (participants() === 1) { qbRecord = $(eventFirstName).val() + ' ' + $(eventLastName).val() }
+	if (participants() === 2) {
+		const partner = $(eventPartnerName).val().split(' ')
+		if (partner[partner.length-1] === $(eventLastName).val()) {
+			qbRecord = $(eventFirstName).val() + ' & ' + $(eventPartnerName).val()
+		} else {
+			qbRecord = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' & ' + $(eventPartnerName).val()
+		}
+	}
+	$('#qbrecord').val(qbRecord)
+}
+
+// Traffic Source
+function trafficSource() {
+	if (window.location.search) {
+		$('#trafficsource').val(window.location.search.split('=')[1])
+	} else {
+		$('#trafficsource').val('ELI')
+	}
+}
+
 if (page === 'Event') {
 	$(eventFirstName).on('change', function () {
 		$(billingFirstName).val($(eventFirstName).val())
@@ -583,6 +608,8 @@ if (page === 'Event') {
 	// Abandoned reg
 	window.onbeforeunload = function(e) {
 		if (!eventValidation() && $(eventFirstName).val() !== '' && $(eventLastName).val() !== '' && ($(eventEmail).val() !== '' || $(eventMobile).val() !== '')) {
+			qbrecord()
+			trafficSource()
 			$eventForm.parsley().destroy()
 			$eventForm.submit()
 			setTimeout(function() {
@@ -739,24 +766,8 @@ $(payButton).on('click', function(e) {
 	saveForm(page)
 	var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0, count = 0
 	if (page === 'Event') {
-		// QB Record
-		let qbRecord = ''
-		if (participants() === 1) { qbRecord = $(eventFirstName).val() + ' ' + $(eventLastName).val() }
-		if (participants() === 2) {
-			const partner = $(eventPartnerName).val().split(' ')
-			if (partner[partner.length-1] === $(eventLastName).val()) {
-				qbRecord = $(eventFirstName).val() + ' & ' + $(eventPartnerName).val()
-			} else {
-				qbRecord = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' & ' + $(eventPartnerName).val()
-			}
-		}
-		$('#qbrecord').val(qbRecord)
-		// Traffic Source
-		if (window.location.search) {
-			$('#trafficsource').val(window.location.search.split('=')[1])
-		} else {
-			$('#trafficsource').val('ELI')
-		}
+		qbrecord()
+		trafficSource()
 		count = $(eventSelect).prop('selectedIndex') - 1
 		chargeAmount = $(eventDepositDeposit).is(':checked') ? eventDepositPrice * 100 : $(eventSelect).val() * 100
 		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
