@@ -584,11 +584,12 @@ if (page === 'Event') {
 	window.onbeforeunload = function(e) {
 		if (!eventValidation() && $(eventFirstName).val() !== 0 && $(eventLastName).val() !== 0 && ($(eventEmail).val() !== 0 || $(eventMobile).val() !== 0)) {
 			$eventForm.submit()
-			var dialogText = 'Are you sure you want to leave?'
-			e.returnValue = dialogText
-			return dialogText
+			setTimeout(function() {
+				var dialogText = 'Are you sure you want to leave?'
+				e.returnValue = dialogText
+				return dialogText
+			}, 1000)
 		}
-		return null
 	}
 	resetEventForm()
 	if (localStorage.getItem(`EcstaticLiving:${page}`)) {
