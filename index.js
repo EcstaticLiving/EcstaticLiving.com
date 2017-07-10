@@ -581,8 +581,10 @@ if (page === 'Event') {
 		eventValidation()
 	})
 	// Abandoned reg
-	window.onbeforeunload = function(e) {
+	window.unload = function(e) {
+		console.log('unload');
 		if (!eventValidation() && $(eventFirstName).val() !== 0 && $(eventLastName).val() !== 0 && ($(eventEmail).val() !== 0 || $(eventMobile).val() !== 0)) {
+			console.log('form submit');
 			$eventForm.submit()
 		}
 		return null
