@@ -580,6 +580,13 @@ if (page === 'Event') {
 		saveForm(page)
 		eventValidation()
 	})
+	// Abandoned reg
+	window.onbeforeunload = function(e) {
+		if (!eventValidation() && $(eventFirstName).val() !== 0 && $(eventLastName).val() !== 0 && ($(eventEmail).val() !== 0 || $(eventMobile).val() !== 0)) {
+			$eventForm.submit()
+		}
+		return null
+	}
 	resetEventForm()
 	if (localStorage.getItem(`EcstaticLiving:${page}`)) {
 		$('#form-load').hide()
@@ -652,7 +659,7 @@ function stripeTokenHandler(token, data) {
 			'stripeCharge': data.chargeDescription,
 			'stripeAmount': data.chargeAmount
 		},
-		timeout: 20000
+		timeout: 10000
 	})
 	.then(function (res) {
 		$('.notification-modal.processing').hide()
