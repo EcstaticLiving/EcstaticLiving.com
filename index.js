@@ -745,7 +745,7 @@ $(payButton).on('click', function(e) {
 		if (window.location.search) {
 			$('#trafficsource').val(window.location.search.split('=')[1])
 		} else {
-			$('#trafficsource').val('EcstaticLiving.com')
+			$('#trafficsource').val('ELI')
 		}
 		count = $(eventSelect).prop('selectedIndex') - 1
 		chargeAmount = $(eventDepositDeposit).is(':checked') ? eventDepositPrice * 100 : $(eventSelect).val() * 100
