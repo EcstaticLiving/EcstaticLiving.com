@@ -629,6 +629,7 @@ function paymentValidation(result) {
 	}
 	if (result.error) {
 		$('#card-errors').text(result.error.message)
+		return false
 	} else {
 		$('#card-errors').text('')
 	}
@@ -674,6 +675,7 @@ function stripeTokenHandler(token, data) {
 		$('.notification-modal.processing').hide()
 		$('.notification-modal.error').show()
 		console.log(err)
+		return false
 	})
 }
 
@@ -777,7 +779,7 @@ $(payButton).on('click', function(e) {
 	}
 	stripe.createToken(card, billingData)
 	.then(function (result) {
-		console.log(result);
+		paymentValidation(result)
 		if (result.error) {
 			$('#card-errors').text(result.error.message)
 			return false
