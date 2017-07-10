@@ -657,8 +657,10 @@ function stripeTokenHandler(token, data) {
 	.then(function (res) {
 		$('.notification-modal.processing').hide()
 		if (page === 'Event') {
+			$eventForm.submit()
 			window.location.href = `${siteUrl}registered`
 		} else if (page === 'Custom') {
+			$customForm.submit()
 			window.location.href = `${siteUrl}success`
 		}
 	})
@@ -773,11 +775,6 @@ $(payButton).on('click', function(e) {
 	}
 	stripe.createToken(card, billingData)
 	.then(function (result) {
-		if (page === 'Event') {
-			$eventForm.submit()
-		} else if (page === 'Custom') {
-			$customForm.submit()
-		}
 		paymentValidation(result)
 		if (result.error) {
 			$('#card-errors').text(result.error.message)
