@@ -544,31 +544,6 @@ function resetCustomForm() {
 
 
 // EVENT or CUSTOM CHARGE mode
-
-// QB Record
-function qbrecord() {
-	let qbRecord = ''
-	if (participants() === 1) { qbRecord = $(eventFirstName).val() + ' ' + $(eventLastName).val() }
-	if (participants() === 2) {
-		const partner = $(eventPartnerName).val().split(' ')
-		if (partner[partner.length-1] === $(eventLastName).val()) {
-			qbRecord = $(eventFirstName).val() + ' & ' + $(eventPartnerName).val()
-		} else {
-			qbRecord = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' & ' + $(eventPartnerName).val()
-		}
-	}
-	$('#qbrecord').val(qbRecord)
-}
-
-// Traffic Source
-function trafficSource() {
-	if (window.location.search) {
-		$('#trafficsource').val(window.location.search.split('=')[1])
-	} else {
-		$('#trafficsource').val('ELI')
-	}
-}
-
 if (page === 'Event') {
 	$(eventFirstName).on('change', function () {
 		$(billingFirstName).val($(eventFirstName).val())
@@ -605,20 +580,6 @@ if (page === 'Event') {
 		saveForm(page)
 		eventValidation()
 	})
-	// Abandoned reg
-	window.onbeforeunload = function(e) {
-		if (!eventValidation() && $(eventFirstName).val() !== '' && $(eventLastName).val() !== '' && ($(eventEmail).val() !== '' || $(eventMobile).val() !== '')) {
-			qbrecord()
-			trafficSource()
-			$eventForm.parsley().destroy()
-			$eventForm.submit()
-			setTimeout(function() {
-				var dialogText = 'Are you sure you want to leave?'
-				e.returnValue = dialogText
-				return dialogText
-			}, 1000)
-		}
-	}
 	resetEventForm()
 	if (localStorage.getItem(`EcstaticLiving:${page}`)) {
 		$('#form-load').hide()
@@ -766,8 +727,22 @@ $(payButton).on('click', function(e) {
 	saveForm(page)
 	var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0, count = 0
 	if (page === 'Event') {
-		qbrecord()
-		trafficSource()
+		let qbRecord = ''
+		if (participants() === 1) { qbRecord = $(eventFirstName).val() + ' ' + $(eventLastName).val() }
+		if (participants() === 2) {
+			const partner = $(eventPartnerName).val().split(' ')
+			if (partner[partner.length-1] === $(eventLastName).val()) {
+				qbRecord = $(eventFirstName).val() + ' & ' + $(eventPartnerName).val()
+			} else {
+				qbRecord = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' & ' + $(eventPartnerName).val()
+			}
+		}
+		$('#qbrecord').val(qbRecord)
+		if (window.location.search) {
+			$('#trafficsource').val(window.location.search.split('=')[1])
+		} else {
+			$('#trafficsource').val('ELI')
+		}
 		count = $(eventSelect).prop('selectedIndex') - 1
 		chargeAmount = $(eventDepositDeposit).is(':checked') ? eventDepositPrice * 100 : $(eventSelect).val() * 100
 		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
