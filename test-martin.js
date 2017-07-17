@@ -716,15 +716,17 @@ $('#button-stripe-error').on('click', function() {
 
 $(payButton).on('click', function(e) {
 	e.preventDefault()
-	if (!formValidation()) {
-		// If there’s no Stripe error message
-		if ($('#card-errors').text() === '') {
-			$('#card-errors').text('Oops! There’s some missing information.')
+	if (page === 'Event') {
+		if (!formValidation()) {
+			// If there’s no Stripe error message
+			if ($('#card-errors').text() === '') {
+				$('#card-errors').text('Oops! There’s some missing information.')
+			}
+			return false
 		}
-		return false
-	}
-	if (!eventValidation()) {
-		return false
+		if (!eventValidation()) {
+			return false
+		}
 	}
 	saveForm(page)
 	var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0, count = 0
