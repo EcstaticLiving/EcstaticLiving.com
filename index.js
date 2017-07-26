@@ -760,6 +760,9 @@ $(payButton).on('click', function(e) {
 		customerEmail = $(customEmail).val()
 		chargeDescription = `Custom Charge: ${$(customSelect + ' option:selected').text().substring(0, $(customSelect + ' option:selected').text().length - 16)}`
 	}
+	// Pass through amount and description to form, for Zapier automation
+	$('#stripe-amount').val(chargeAmount)
+	$('#stripe-description').val(chargeDescription)
 	const billingData = {
 		name: $(billingFirstName).val() + ' ' + $(billingLastName).val(),
 		address_line1: $(billingStreet).val(),
