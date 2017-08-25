@@ -359,12 +359,6 @@ function billingValidation() {
 	return false
 }
 function eventValidation() {
-	if (personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && $(eventTerms).is(':checked') && billingValidation()) {
-		$('#card-errors').text('')
-		$(paymentButton).css({ 'background-color': '#800000' })
-		$(paymentButton).css({ 'color': '#ffffff' })
-		return true
-	}
 	console.log(' ');
 	console.log('personal: ', personalValidation());
 	console.log('details: ', detailsValidation());
@@ -372,6 +366,12 @@ function eventValidation() {
 	console.log('event option: ', eventOptionValidation());
 	console.log('event terms: ', $(eventTerms).is(':checked'));
 	console.log('billing: ', billingValidation());
+	if (personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && $(eventTerms).is(':checked') && billingValidation()) {
+		$('#card-errors').text('')
+		$(paymentButton).css({ 'background-color': '#800000' })
+		$(paymentButton).css({ 'color': '#ffffff' })
+		return true
+	}
 	$(paymentButton).css({ 'background-color': '#f5f5f5' })
 	$(paymentButton).css({ 'color': '#333333' })
 	return false
