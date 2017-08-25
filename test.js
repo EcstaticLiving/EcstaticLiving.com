@@ -365,12 +365,13 @@ function eventValidation() {
 		$(paymentButton).css({ 'color': '#ffffff' })
 		return true
 	}
-	console.log(personalValidation());
-	console.log(detailsValidation());
-	console.log(partnerValidation());
-	console.log(eventOptionValidation());
-	console.log($(eventTerms).is(':checked'));
-	console.log(billingValidation());
+	console.log(' ');
+	console.log('personal: ', personalValidation());
+	console.log('details: ', detailsValidation());
+	console.log('partner: ', partnerValidation());
+	console.log('event option: ', eventOptionValidation());
+	console.log('event terms: ', $(eventTerms).is(':checked'));
+	console.log('billing: ', billingValidation());
 	$(paymentButton).css({ 'background-color': '#f5f5f5' })
 	$(paymentButton).css({ 'color': '#333333' })
 	return false
