@@ -626,6 +626,7 @@ if (page === 'Event') {
 
 // STRIPE
 function paymentValidation(result) {
+	console.log(result);
 	if (result.complete) {
 		// Check hidden field to enable eventValidation() or customValidation() to pass
 		if (page === 'Event') {
