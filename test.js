@@ -635,12 +635,14 @@ function paymentValidation(result) {
 			$(customCard).prop('checked', true)
 		}
 	}
-	if (result.error) {
+	if (!result.complete) {
 		if (page === 'Event') {
 			$(billingCard).prop('checked', false)
 		} else if (page === 'Custom') {
 			$(customCard).prop('checked', false)
 		}
+	}
+	if (result.error) {
 		$('#card-errors').text(result.error.message)
 		return false
 	} else {
