@@ -619,7 +619,7 @@ if (page === 'Event') {
 
 // STRIPE
 function paymentValidation(result) {
-	console.log(result);
+	eventValidation()
 	if (result.complete) {
 		// Check hidden field to enable eventValidation() or customValidation() to pass
 		if (page === 'Event') {
@@ -627,7 +627,6 @@ function paymentValidation(result) {
 		} else if (page === 'Custom') {
 			$(customCard).prop('checked', true)
 		}
-		eventValidation()
 	}
 	if (result.error) {
 		$('#card-errors').text(result.error.message)
