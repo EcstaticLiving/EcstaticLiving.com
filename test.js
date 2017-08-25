@@ -626,6 +626,7 @@ function paymentValidation(result) {
 		} else if (page === 'Custom') {
 			$(customCard).prop('checked', true)
 		}
+		eventValidation()
 	}
 	if (result.error) {
 		$('#card-errors').text(result.error.message)
