@@ -626,7 +626,6 @@ if (page === 'Event') {
 
 // STRIPE
 function paymentValidation(result) {
-	eventValidation()
 	if (result.complete) {
 		// Check hidden field to enable eventValidation() or customValidation() to pass
 		if (page === 'Event') {
@@ -714,6 +713,7 @@ const card = elements.create('card', {
 if (page === 'Event' || page === 'Custom') {
 	card.mount('#card-element')
 	card.addEventListener('change', function (result) {
+		eventValidation()
 		paymentValidation(result)
 	})
 }
