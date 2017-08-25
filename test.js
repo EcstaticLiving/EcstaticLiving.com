@@ -635,6 +635,11 @@ function paymentValidation(result) {
 		}
 	}
 	if (result.error) {
+		if (page === 'Event') {
+			$(billingCard).prop('checked', false)
+		} else if (page === 'Custom') {
+			$(customCard).prop('checked', false)
+		}
 		$('#card-errors').text(result.error.message)
 		return false
 	} else {
