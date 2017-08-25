@@ -642,6 +642,7 @@ function paymentValidation(result) {
 			$(customCard).prop('checked', false)
 		}
 	}
+	eventValidation()
 	if (result.error) {
 		$('#card-errors').text(result.error.message)
 		return false
@@ -721,7 +722,6 @@ const card = elements.create('card', {
 if (page === 'Event' || page === 'Custom') {
 	card.mount('#card-element')
 	card.addEventListener('change', function (result) {
-		eventValidation()
 		paymentValidation(result)
 	})
 }
