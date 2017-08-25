@@ -365,6 +365,12 @@ function eventValidation() {
 		$(paymentButton).css({ 'color': '#ffffff' })
 		return true
 	}
+	console.log(personalValidation());
+	console.log(detailsValidation());
+	console.log(partnerValidation());
+	console.log(eventOptionValidation());
+	console.log($(eventTerms).is(':checked'));
+	console.log(billingValidation());
 	$(paymentButton).css({ 'background-color': '#f5f5f5' })
 	$(paymentButton).css({ 'color': '#333333' })
 	return false
