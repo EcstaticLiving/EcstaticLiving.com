@@ -359,13 +359,6 @@ function billingValidation() {
 	return false
 }
 function eventValidation() {
-	console.log(' ');
-	console.log('personal: ', personalValidation());
-	console.log('details: ', detailsValidation());
-	console.log('partner: ', partnerValidation());
-	console.log('event option: ', eventOptionValidation());
-	console.log('event terms: ', $(eventTerms).is(':checked'));
-	console.log('billing: ', billingValidation());
 	if (personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && $(eventTerms).is(':checked') && billingValidation()) {
 		$('#card-errors').text('')
 		$(paymentButton).css({ 'background-color': '#800000' })
@@ -642,6 +635,7 @@ function paymentValidation(result) {
 			$(customCard).prop('checked', false)
 		}
 	}
+	// Validate event
 	eventValidation()
 	if (result.error) {
 		$('#card-errors').text(result.error.message)
