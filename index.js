@@ -233,7 +233,7 @@ eventDepositAmount = $('#event-deposit-amount').text(),
 eventDepositDate = $('#event-deposit-date').text()
 
 // Event variables
-let payButtonClicked = false;
+var payButtonClicked = false;
 const payButton = '#payment-button',
 eventFirstName = '#event-firstname',
 eventLastName = '#event-lastname',
@@ -297,7 +297,7 @@ function participants() {
 
 // FORM VALIDATION
 function formValidation() {
-	let proceed = true
+	var proceed = true;
 	const errorInput = { 'border-color': '#b00000', 'background-color': '#fdd' }
 	const clearInput = { 'border-color': '#ccc', 'background-color': '#fff' }
 	const errorRadio = { 'background-color': '#fdd' }
@@ -740,7 +740,7 @@ $(payButton).on('click', function(e) {
 	saveForm(page)
 	var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0, count = 0
 	if (page === 'Event') {
-		let qbRecord = ''
+		var qbRecord = '';
 		if (participants() === 1) { qbRecord = $(eventFirstName).val() + ' ' + $(eventLastName).val() }
 		if (participants() === 2) {
 			const partner = $(eventPartnerName).val().split(' ')
