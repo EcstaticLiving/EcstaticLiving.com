@@ -667,7 +667,7 @@ function stripeTokenHandler(token, data) {
 		$('.notification-modal.processing').hide()
 		if (page === 'Event') {
 			$eventForm.submit()
-			window.location.href = `${siteUrl}registered`
+			// window.location.href = `${siteUrl}registered`
 		} else if (page === 'Custom') {
 			$customForm.submit()
 			window.location.href = `${siteUrl}success`
