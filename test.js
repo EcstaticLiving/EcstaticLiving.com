@@ -647,13 +647,6 @@ function paymentValidation(result) {
 // LIVE: https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe
 // TEST: https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test
 
-// function conversion(eventForm) {
-// 	return Object.keys(eventForm).reduce((result, key) => {
-// 		result[key.replace('-', ' ')] = eventForm[key]
-// 		return result
-// 	}, {})
-// }
-
 function conversion(e, n) {
 		var i = null;
 		return n = n || {}, e.find(':input:not([type="submit"])').each(function(r, o) {

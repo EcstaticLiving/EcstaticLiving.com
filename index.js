@@ -646,13 +646,34 @@ function paymentValidation(result) {
 
 // LIVE: https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe
 // TEST: https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test
+
+function conversion(e, n) {
+		var i = null;
+		return n = n || {}, e.find(':input:not([type="submit"])').each(function(r, o) {
+				var a = $(o),
+						s = a.attr("type"),
+						u = a.attr("data-name") || a.attr("name") || "Field " + (r + 1),
+						l = a.val();
+				if ("checkbox" === s && (l = a.is(":checked")), "radio" === s) {
+						if (null === n[u] || "string" == typeof n[u]) return;
+						l = e.find('input[name="' + a.attr("name") + '"]:checked').val() || null
+				}
+				"string" == typeof l && (l = $.trim(l)), n[u] = l, i = i || verification(a, s, u, l)
+		}), i
+}
+
+function verification(t, e, n, i) {
+		var r = null, k = /e(-)?mail/i, _ = /^\S+@\S+$/;
+		return "password" === e ? r = "Passwords cannot be submitted." : t.attr("required") && (i ? (k.test(n) || k.test(t.attr("type"))) && (_.test(i) || (r = "Please enter a valid email address for: " + n)) : r = "Please fill out the required field: " + n), r
+}
+
 function stripeTokenHandler(token, data) {
 	$('.stripe.processing').show()
 	$('.stripe.error').hide()
 	$('.notification-modal.processing').show()
 	$.ajax({
 		type: 'POST',
-		url: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe',
+		url: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test',
 		crossDomain: true,
 		data: {
 			'stripeToken': token.id,
@@ -666,17 +687,29 @@ function stripeTokenHandler(token, data) {
 	.then(function (res) {
 		$('.notification-modal.processing').hide()
 		if (page === 'Event') {
+			var r = {
+				name: 'Event Registration',
+				source: window.location.href,
+				test: false,
+				fields: {},
+				dolphin: false
+			}
+			var error = conversion($eventForm, r.fields)
+			if (error) {
+				throw error
+			}
 			return $.ajax({
 				type: 'POST',
 				url: 'https://webflow.com/api/v1/form/564aac835a5735b1375b5cdf',
 				crossDomain: true,
-				data: $eventForm.serialize(),
+				data: r,
 				dataType: 'json'
 			})
 			.then(function(response) {
 				console.log(response);
 				window.location.href = `${siteUrl}registered`
 			})
+			// $eventForm.submit()
 		} else if (page === 'Custom') {
 			$customForm.submit()
 			window.location.href = `${siteUrl}success`
@@ -697,7 +730,7 @@ function stripeTokenHandler(token, data) {
 
 // LIVE: pk_live_0rULIvKhv6aSLqI49Ae5rflI
 // TEST: pk_test_QO6tO6bHny3y10LjH96f4n3p
-const stripe = Stripe('pk_live_0rULIvKhv6aSLqI49Ae5rflI')
+const stripe = Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
 const elements = stripe.elements()
 style = {
 	base: {
