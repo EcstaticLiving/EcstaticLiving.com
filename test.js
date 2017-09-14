@@ -233,7 +233,7 @@ eventDepositAmount = $('#event-deposit-amount').text(),
 eventDepositDate = $('#event-deposit-date').text()
 
 // Event variables
-let payButtonClicked = false;
+var payButtonClicked = false;
 const payButton = '#payment-button',
 eventFirstName = '#event-firstname',
 eventLastName = '#event-lastname',
@@ -297,7 +297,7 @@ function participants() {
 
 // FORM VALIDATION
 function formValidation() {
-	let proceed = true
+	var proceed = true;
 	const errorInput = { 'border-color': '#b00000', 'background-color': '#fdd' }
 	const clearInput = { 'border-color': '#ccc', 'background-color': '#fff' }
 	const errorRadio = { 'background-color': '#fdd' }
@@ -619,7 +619,6 @@ if (page === 'Event') {
 
 // STRIPE
 function paymentValidation(result) {
-	console.log(result);
 	if (result.complete) {
 		// Check hidden field to enable eventValidation() or customValidation() to pass
 		if (page === 'Event') {
@@ -653,7 +652,7 @@ function stripeTokenHandler(token, data) {
 	$('.notification-modal.processing').show()
 	$.ajax({
 		type: 'POST',
-		url: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test',
+		url: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe',
 		crossDomain: true,
 		data: {
 			'stripeToken': token.id,
@@ -667,8 +666,17 @@ function stripeTokenHandler(token, data) {
 	.then(function (res) {
 		$('.notification-modal.processing').hide()
 		if (page === 'Event') {
-			$eventForm.submit()
-			// window.location.href = `${siteUrl}registered`
+			return $.ajax({
+				type: 'POST',
+				url: 'https://webflow.com/api/v1/form/564aac835a5735b1375b5cdf',
+				crossDomain: true,
+				data: $eventForm.serialize(),
+				dataType: 'json'
+			})
+			.then(function(response) {
+				console.log(response);
+				window.location.href = `${siteUrl}registered`
+			})
 		} else if (page === 'Custom') {
 			$customForm.submit()
 			window.location.href = `${siteUrl}success`
@@ -689,7 +697,7 @@ function stripeTokenHandler(token, data) {
 
 // LIVE: pk_live_0rULIvKhv6aSLqI49Ae5rflI
 // TEST: pk_test_QO6tO6bHny3y10LjH96f4n3p
-const stripe = Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
+const stripe = Stripe('pk_live_0rULIvKhv6aSLqI49Ae5rflI')
 const elements = stripe.elements()
 style = {
 	base: {
@@ -741,7 +749,7 @@ $(payButton).on('click', function(e) {
 	saveForm(page)
 	var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0, count = 0
 	if (page === 'Event') {
-		let qbRecord = ''
+		var qbRecord = '';
 		if (participants() === 1) { qbRecord = $(eventFirstName).val() + ' ' + $(eventLastName).val() }
 		if (participants() === 2) {
 			const partner = $(eventPartnerName).val().split(' ')
