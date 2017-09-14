@@ -694,12 +694,16 @@ function stripeTokenHandler(token, data) {
 	.then(function (res) {
 		$('.notification-modal.processing').hide()
 		if (page === 'Event') {
-			r = {
+			var r = {
 				name: 'Event Registration',
 				source: window.location.href,
 				test: false,
-				fields: conversion($eventForm.serialize()),
+				fields: {},
 				dolphin: false
+			}
+			var error = conversion($eventForm, r.fields)
+			if (error) {
+				throw error
 			}
 			return $.ajax({
 				type: 'POST',
