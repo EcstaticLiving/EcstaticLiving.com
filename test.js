@@ -665,7 +665,7 @@ function conversion(e, n) {
 						if (null === n[u] || "string" == typeof n[u]) return;
 						l = e.find('input[name="' + a.attr("name") + '"]:checked').val() || null
 				}
-				"string" == typeof l && (l = t.trim(l)), n[u] = l, i = i || verification(a, s, u, l)
+				"string" == typeof l && (l = $.trim(l)), n[u] = l, i = i || verification(a, s, u, l)
 		}), i
 }
 
