@@ -669,10 +669,12 @@ function stripeTokenHandler(token, data) {
 			return $.ajax({
 				type: 'POST',
 				url: 'https://webflow.com/api/v1/form/564aac835a5735b1375b5cdf',
+				crossDomain: true,
 				data: $eventForm.serialize(),
 				dataType: 'json'
 			})
 			.then(function(response) {
+				console.log(response);
 				window.location.href = `${siteUrl}registered`
 			})
 		} else if (page === 'Custom') {
