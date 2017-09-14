@@ -666,17 +666,18 @@ function stripeTokenHandler(token, data) {
 	.then(function (res) {
 		$('.notification-modal.processing').hide()
 		if (page === 'Event') {
-			return $.ajax({
-				type: 'POST',
-				url: 'https://webflow.com/api/v1/form/564aac835a5735b1375b5cdf',
-				crossDomain: true,
-				data: $eventForm.serialize(),
-				dataType: 'json'
-			})
-			.then(function(response) {
-				console.log(response);
-				window.location.href = `${siteUrl}registered`
-			})
+			// return $.ajax({
+			// 	type: 'POST',
+			// 	url: 'https://webflow.com/api/v1/form/564aac835a5735b1375b5cdf',
+			// 	crossDomain: true,
+			// 	data: $eventForm.serialize(),
+			// 	dataType: 'json'
+			// })
+			// .then(function(response) {
+			// 	console.log(response);
+			// 	window.location.href = `${siteUrl}registered`
+			// })
+			$eventForm.submit()
 		} else if (page === 'Custom') {
 			$customForm.submit()
 			window.location.href = `${siteUrl}success`
