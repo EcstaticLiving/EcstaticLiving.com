@@ -648,23 +648,23 @@ function paymentValidation(result) {
 // TEST: https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test
 
 function conversion(e, n) {
-		var i = null;
-		return n = n || {}, e.find(':input:not([type="submit"])').each(function(r, o) {
-				var a = $(o),
-						s = a.attr("type"),
-						u = a.attr("data-name") || a.attr("name") || "Field " + (r + 1),
-						l = a.val();
-				if ("checkbox" === s && (l = a.is(":checked")), "radio" === s) {
-						if (null === n[u] || "string" == typeof n[u]) return;
-						l = e.find('input[name="' + a.attr("name") + '"]:checked').val() || null
-				}
-				"string" == typeof l && (l = $.trim(l)), n[u] = l, i = i || verification(a, s, u, l)
-		}), i
+	var i = null;
+	return n = n || {}, e.find(':input:not([type="submit"])').each(function(r, o) {
+		var a = $(o),
+			s = a.attr("type"),
+			u = a.attr("data-name") || a.attr("name") || "Field " + (r + 1),
+			l = a.val();
+		if ("checkbox" === s && (l = a.is(":checked")), "radio" === s) {
+			if (null === n[u] || "string" == typeof n[u]) return;
+			l = e.find('input[name="' + a.attr("name") + '"]:checked').val() || null
+		}
+		"string" == typeof l && (l = $.trim(l)), n[u] = l, i = i || verification(a, s, u, l)
+	}), i
 }
 
 function verification(t, e, n, i) {
-		var r = null, k = /e(-)?mail/i, _ = /^\S+@\S+$/;
-		return "password" === e ? r = "Passwords cannot be submitted." : t.attr("required") && (i ? (k.test(n) || k.test(t.attr("type"))) && (_.test(i) || (r = "Please enter a valid email address for: " + n)) : r = "Please fill out the required field: " + n), r
+	var r = null, k = /e(-)?mail/i, _ = /^\S+@\S+$/;
+	return "password" === e ? r = "Passwords cannot be submitted." : t.attr("required") && (i ? (k.test(n) || k.test(t.attr("type"))) && (_.test(i) || (r = "Please enter a valid email address for: " + n)) : r = "Please fill out the required field: " + n), r
 }
 
 function stripeTokenHandler(token, data) {
