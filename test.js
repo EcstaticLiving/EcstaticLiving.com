@@ -561,7 +561,7 @@ if (page === 'Event') {
 
 	// EVENT FORM INVITE CODE
 	if ($(eventInviteCodeBox).is(':visible')) {
-		console.log(luhn.calculate(11));
+		console.log(luhn.calculate('11'));
 		$(eventInviteCodeText).on('change', function () {
 			console.log($(eventInviteCodeText).val().length);
 			console.log(inviteCodeValidation());
