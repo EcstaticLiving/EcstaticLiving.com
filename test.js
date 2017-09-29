@@ -435,6 +435,8 @@ function eventInviteCodeFailShow() {
 		top: 40,
 		opacity: 1
 	}, 200)
+	$(eventInviteCodeText).val('')
+	$(eventInviteCodeText).focus()
 }
 function eventInviteCodeFailHide() {
 	$(eventInviteCodeFail).hide()
@@ -563,7 +565,6 @@ if (page === 'Event') {
 	if ($(eventInviteCodeBox).is(':visible')) {
 		$(eventInviteCodeText).on('change', function () {
 			if ($(eventInviteCodeText).val().length !== 3 || !inviteCodeValidation()) {
-				$(eventInviteCodeText).val('')
 				eventInviteCodePassHide()
 				eventInviteCodeFailShow()
 			} else {
