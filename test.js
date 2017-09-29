@@ -561,11 +561,8 @@ if (page === 'Event') {
 
 	// EVENT FORM INVITE CODE
 	if ($(eventInviteCodeBox).is(':visible')) {
-		console.log(luhn.calculate('11'));
 		$(eventInviteCodeText).on('change', function () {
-			console.log($(eventInviteCodeText).val().length);
-			console.log(inviteCodeValidation());
-			if ($(eventInviteCodeText).val().length !== '3' || !inviteCodeValidation()) {
+			if ($(eventInviteCodeText).val().length !== 3 || !inviteCodeValidation()) {
 				$(eventInviteCodeText).val('')
 				eventInviteCodePassHide()
 				eventInviteCodeFailShow()
