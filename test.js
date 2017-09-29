@@ -237,7 +237,7 @@ var payButtonClicked = false;
 const payButton = '#payment-button',
 eventInviteCodeBox = '#event-invitecode-box',
 eventInviteCodeText = '#event-invitecode-text',
-eventInviteCodeError = '#event-invitecode-error',
+eventInviteCodeFail = '#event-invitecode-error',
 eventFirstName = '#event-firstname',
 eventLastName = '#event-lastname',
 eventEmail = '#event-email',
@@ -289,23 +289,6 @@ billingCountry = '#billing-country',
 billingCard = '#billing-card'
 
 
-// EVENT INVITE CODE
-function luhnCheck() {
-	var luhnChk = (function (arr) {
-		return function (ccNum) {
-				var len = ccNum.length,
-					bit = 1,
-					sum = 0,
-					val
-				while (len) {
-						val = parseInt(ccNum.charAt(--len), 10)
-						sum += (bit ^= 1) ? arr[val] : val
-				}
-				return sum && sum % 10 === 0
-		}
-	}([0, 2, 4, 6, 8, 1, 3, 5, 7, 9]))
-}
-
 
 // PARTICIPANTS
 function participants() {
@@ -317,6 +300,30 @@ function participants() {
 }
 
 // FORM VALIDATION
+// Event Invite Code Validation
+function inviteCodeValidation() {
+	if ($(eventInviteCodeBox).is(':visible')) {
+		var luhnCheck = (function (arr) {
+			return function (ccNum) {
+					var len = ccNum.length,
+						bit = 1,
+						sum = 0,
+						val
+					while (len) {
+							val = parseInt(ccNum.charAt(--len), 10)
+							sum += (bit ^= 1) ? arr[val] : val
+					}
+					return sum && sum % 10 === 0
+			}
+		}([0, 2, 4, 6, 8, 1, 3, 5, 7, 9]))
+		if (luhnCheck($(eventInviteCodeText).val())) {
+			return true
+		}
+		return false
+	}
+	return true
+}
+// Name & Gender Validation
 function personalValidation() {
 	if ($(eventFirstName).val() !== '' && $(eventLastName).val() !== '' && $(eventEmail).val() !== '' && $(eventMobile).val() !== '' && $(eventBirthdate).val() !== '' &&
 		($(eventFemale).is(':checked') || $(eventMale).is(':checked') || $(eventOther).is(':checked'))) {
@@ -324,6 +331,7 @@ function personalValidation() {
 	}
 	return false
 }
+// Details Validation
 function detailsValidation() {
 	if ($(eventReferral).val() !== ''
 		&& (($(eventExperienceYes).is(':checked') && $(eventExperienceDetails).val() !== '') || $(eventExperienceNo).is(':checked'))
@@ -332,6 +340,7 @@ function detailsValidation() {
 	}
 	return false
 }
+// Partner Validatation
 function partnerValidation() {
 	if (
 		(participants() === 2
@@ -344,6 +353,7 @@ function partnerValidation() {
 	}
 	return false
 }
+// Event Options Validatation
 function eventOptionValidation() {
 	if ($(eventSelect).val() && (
 		($(eventDepositContainer).is(':visible') && ($(eventDepositFull).is(':checked') || $(eventDepositDeposit).is(':checked'))
@@ -353,6 +363,7 @@ function eventOptionValidation() {
 	}
 	return false
 }
+// Billing Validation
 function billingValidation() {
 	if ($(billingFirstName).val() !== '' && $(billingLastName).val() !== '' && $(billingStreet).val() !== '' && $(billingCity).val() !== ''
 		&& $(billingState).val() !== '' && $(billingPostal).val() !== '' && $(billingCountry).val() !== '' && $(billingCard).is(':checked')) {
@@ -360,8 +371,9 @@ function billingValidation() {
 	}
 	return false
 }
+// Complete Validation
 function eventFormValidation() {
-	if (personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && $(eventTerms).is(':checked') && billingValidation()) {
+	if (inviteCodeValidation() && personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && $(eventTerms).is(':checked') && billingValidation()) {
 		$('#card-errors').text('')
 		$(paymentButton).css({ 'background-color': '#800000' })
 		$(paymentButton).css({ 'color': '#ffffff' })
@@ -371,6 +383,7 @@ function eventFormValidation() {
 	$(paymentButton).css({ 'color': '#333333' })
 	return false
 }
+// Error indicators
 function showErrorsInForm() {
 	var proceed = true;
 	const errorInput = { 'border-color': '#b00000', 'background-color': '#fdd' }
@@ -512,7 +525,29 @@ function resetEventForm() {
 // EVENT FORM: BEGIN SEQUENCE
 if (page === 'Event') {
 
-	console.log($(eventInviteCodeBox).is(':visible'))
+	// EVENT FORM INVITE CODE
+	if ($(eventInviteCodeBox).is(':visible')) {
+		$(eventInviteCodeText).on('change', function () {
+			if ($(eventInviteCodeText).val().length === '3' && !inviteCodeValidation()) {
+				$(eventInviteCodeText).val('')
+				$(eventInviteCodePass).hide()
+				$(eventInviteCodeFail).show()
+				$(eventInviteCodeFail).animate({
+					top: 40,
+					opacity: 1
+				}, 200)
+			} else {
+				$(eventInviteCodeFail).hide()
+				$(eventInviteCodePass).show()
+				$(eventInviteCodePass).animate({
+					top: 40,
+					opacity: 1
+				}, 200)
+				saveForm(page)
+				eventFormValidation()
+			}
+		})
+	}
 
 	// EVENT FORM ONCHANGE EVENTS
 	$(eventFirstName).on('change', function () {
