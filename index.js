@@ -235,6 +235,10 @@ eventDepositDate = $('#event-deposit-date').text()
 // Event variables
 var payButtonClicked = false;
 const payButton = '#payment-button',
+eventInviteCodeBox = '#event-invitecode-box',
+eventInviteCodeText = '#event-invitecode-text',
+eventInviteCodePass = '#event-invitecode-pass',
+eventInviteCodeFail = '#event-invitecode-fail',
 eventFirstName = '#event-firstname',
 eventLastName = '#event-lastname',
 eventEmail = '#event-email',
@@ -286,6 +290,7 @@ billingCountry = '#billing-country',
 billingCard = '#billing-card'
 
 
+
 // PARTICIPANTS
 function participants() {
 	if (($(eventStatus).find('option:selected').val() === 'Couple') || ($(eventStatus).find('option:selected').val() === 'Two Singles (paired)')) {
@@ -296,12 +301,107 @@ function participants() {
 }
 
 // FORM VALIDATION
-function formValidation() {
+// Event Invite Code Validation
+var luhn = {
+	// Calculates the Luhn checksum
+	calculate: function(digits) {
+		var sum = this.sum(digits, false)
+		return (sum * 9) % 10
+	},
+	// Verifies if a number is a valid Luhn checksum
+	verify: function(digits) {
+		var sum = this.sum(digits, true)
+		return sum > 0 && sum % 10 === 0
+	},
+	// Sum each digit from right to left, and double every second digit. If the double exceeds 9, then sum its digits (i.e., 654321 -> 358341 -> 24)
+	sum: function(digits, even) {
+		var sum = 0, digit = 0, i = digits.length
+		while (i--) {
+			digit = Number(digits[i])
+			sum += (even = !even) ? this.computed[digit] : digit
+		}
+		return sum
+	},
+	// Create a precomputed list based on doubling each digit, as described in sum().
+	computed: [0, 2, 4, 6, 8, 1, 3, 5, 7, 9]
+}
+function inviteCodeValidation() {
+	if ($(eventInviteCodeBox).is(':visible')) {
+		if (luhn.verify($(eventInviteCodeText).val())) {
+			return true
+		}
+		return false
+	}
+	return true
+}
+// Name & Gender Validation
+function personalValidation() {
+	if ($(eventFirstName).val() !== '' && $(eventLastName).val() !== '' && $(eventEmail).val() !== '' && $(eventMobile).val() !== '' && $(eventBirthdate).val() !== '' &&
+		($(eventFemale).is(':checked') || $(eventMale).is(':checked') || $(eventOther).is(':checked'))) {
+		return true
+	}
+	return false
+}
+// Details Validation
+function detailsValidation() {
+	if ($(eventReferral).val() !== ''
+		&& (($(eventExperienceYes).is(':checked') && $(eventExperienceDetails).val() !== '') || $(eventExperienceNo).is(':checked'))
+		&& (($(eventDietYes).is(':checked') && $(eventDietDetails).val() !== '') || $(eventDietNo).is(':checked'))) {
+		return true
+	}
+	return false
+}
+// Partner Validatation
+function partnerValidation() {
+	if (
+		(participants() === 2
+			&& $(eventPartnerName).val() !== ''
+			&& ($(eventPartnerFemale).is(':checked') || $(eventPartnerMale).is(':checked') || $(eventPartnerOther).is(':checked'))
+			&& ($(eventPayBoth).is(':checked') || $(eventPayMe).is(':checked')))
+		|| participants() === 1
+	) {
+		return true
+	}
+	return false
+}
+// Event Options Validatation
+function eventOptionValidation() {
+	if ($(eventSelect).val() && (
+		($(eventDepositContainer).is(':visible') && ($(eventDepositFull).is(':checked') || $(eventDepositDeposit).is(':checked'))
+		|| $(eventDepositContainer).is(':hidden'))
+	)) {
+		return true
+	}
+	return false
+}
+// Billing Validation
+function billingValidation() {
+	if ($(billingFirstName).val() !== '' && $(billingLastName).val() !== '' && $(billingStreet).val() !== '' && $(billingCity).val() !== ''
+		&& $(billingState).val() !== '' && $(billingPostal).val() !== '' && $(billingCountry).val() !== '' && $(billingCard).is(':checked')) {
+		return true
+	}
+	return false
+}
+// Complete Validation
+function eventFormValidation() {
+	if (inviteCodeValidation() && personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && $(eventTerms).is(':checked') && billingValidation()) {
+		$('#card-errors').text('')
+		$(paymentButton).css({ 'background-color': '#800000' })
+		$(paymentButton).css({ 'color': '#ffffff' })
+		return true
+	}
+	$(paymentButton).css({ 'background-color': '#f5f5f5' })
+	$(paymentButton).css({ 'color': '#333333' })
+	return false
+}
+// Error indicators
+function showErrorsInForm() {
 	var proceed = true;
 	const errorInput = { 'border-color': '#b00000', 'background-color': '#fdd' }
 	const clearInput = { 'border-color': '#ccc', 'background-color': '#fff' }
 	const errorRadio = { 'background-color': '#fdd' }
 	const clearRadio = { 'background-color': 'transparent' }
+	if (!inviteCodeValidation()) { proceed = false; $(eventInviteCodeText).css(errorInput); } else { $(eventInviteCodeText).css(clearInput); }
 	if (!$(eventTerms).is(':checked')) { proceed = false; $(eventTermsValidation).css(errorRadio); } else { $(eventTermsValidation).css(clearRadio); }
 	if ($(eventDepositContainer).is(':visible') && !$(eventDepositFull).is(':checked') && !$(eventDepositDeposit).is(':checked')) { proceed = false; $(eventDepositValidation).css(errorRadio); } else { $(eventDepositValidation).css(clearRadio); }
 	if (participants() === 2 && !$(eventPayBoth).is(':checked') && !$(eventPayMe).is(':checked')) { proceed = false; $(eventPayValidation).css(errorRadio); } else { $(eventPayValidation).css(clearRadio); }
@@ -315,62 +415,33 @@ function formValidation() {
 	$eventForm.parsley().validate()
 	return proceed
 }
-function personalValidation() {
-	if ($(eventFirstName).val() !== '' && $(eventLastName).val() !== '' && $(eventEmail).val() !== '' && $(eventMobile).val() !== '' && $(eventBirthdate).val() !== '' &&
-		($(eventFemale).is(':checked') || $(eventMale).is(':checked') || $(eventOther).is(':checked'))) {
-		return true
-	}
-	return false
-}
-function detailsValidation() {
-	if ($(eventReferral).val() !== ''
-		&& (($(eventExperienceYes).is(':checked') && $(eventExperienceDetails).val() !== '') || $(eventExperienceNo).is(':checked'))
-		&& (($(eventDietYes).is(':checked') && $(eventDietDetails).val() !== '') || $(eventDietNo).is(':checked'))) {
-		return true
-	}
-	return false
-}
-function partnerValidation() {
-	if (
-		(participants() === 2
-			&& $(eventPartnerName).val() !== ''
-			&& ($(eventPartnerFemale).is(':checked') || $(eventPartnerMale).is(':checked') || $(eventPartnerOther).is(':checked'))
-			&& ($(eventPayBoth).is(':checked') || $(eventPayMe).is(':checked')))
-		|| participants() === 1
-	) {
-		return true
-	}
-	return false
-}
-function eventOptionValidation() {
-	if ($(eventSelect).val() && (
-		($(eventDepositContainer).is(':visible') && ($(eventDepositFull).is(':checked') || $(eventDepositDeposit).is(':checked'))
-		|| $(eventDepositContainer).is(':hidden'))
-	)) {
-		return true
-	}
-	return false
-}
-function billingValidation() {
-	if ($(billingFirstName).val() !== '' && $(billingLastName).val() !== '' && $(billingStreet).val() !== '' && $(billingCity).val() !== ''
-		&& $(billingState).val() !== '' && $(billingPostal).val() !== '' && $(billingCountry).val() !== '' && $(billingCard).is(':checked')) {
-		return true
-	}
-	return false
-}
-function eventValidation() {
-	if (personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && $(eventTerms).is(':checked') && billingValidation()) {
-		$('#card-errors').text('')
-		$(paymentButton).css({ 'background-color': '#800000' })
-		$(paymentButton).css({ 'color': '#ffffff' })
-		return true
-	}
-	$(paymentButton).css({ 'background-color': '#f5f5f5' })
-	$(paymentButton).css({ 'color': '#333333' })
-	return false
-}
 
-// PARTNERSHIP
+
+// SHOW/HIDE FORM ELEMENTS
+// Event Invite Code
+function eventInviteCodePassShow() {
+	$(eventInviteCodePass).show()
+	$(eventInviteCodePass).animate({
+		top: 40,
+		opacity: 1
+	}, 200)
+}
+function eventInviteCodePassHide() {
+	$(eventInviteCodePass).hide()
+}
+function eventInviteCodeFailShow() {
+	$(eventInviteCodeFail).show()
+	$(eventInviteCodeFail).animate({
+		top: 40,
+		opacity: 1
+	}, 200)
+	$(eventInviteCodeText).val('')
+	$(eventInviteCodeText).focus()
+}
+function eventInviteCodeFailHide() {
+	$(eventInviteCodeFail).hide()
+}
+// Partner
 function showPartner() {
 	$(eventPartnerContainer).show()
 	$(eventPartnerContainer).animate({
@@ -383,7 +454,6 @@ function showPartner() {
 		setEventSelect('per person')
 	}
 }
-
 function hidePartner() {
 	$(eventPartnerName).val('')
 	$(eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther + ',' + eventPayBoth + ',' + eventPayMe).prop('checked', false)
@@ -394,8 +464,7 @@ function hidePartner() {
 	$(eventPartnerContainer).hide()
 	setEventSelect()
 }
-
-// PREVIOUS EXPERIENCE
+// Previous Experience
 function showExperience() {
 	$(eventExperienceContainer).show()
 	$(eventExperienceContainer).animate({
@@ -403,7 +472,6 @@ function showExperience() {
 		opacity: 1
 	}, 200)
 }
-
 function hideExperience() {
 	$(eventExperienceDetails).val('')
 	$(eventExperienceContainer).animate({
@@ -412,8 +480,7 @@ function hideExperience() {
 	}, 200)
 	$(eventExperienceContainer).hide()
 }
-
-// DIETARY NEEDS
+// Dietary Needs
 function showDiet() {
 	$(eventDietContainer).show()
 	$(eventDietContainer).animate({
@@ -421,7 +488,6 @@ function showDiet() {
 		opacity: 1
 	}, 200)
 }
-
 function hideDiet() {
 	$(eventDietDetails).val('')
 	$(eventDietContainer).animate({
@@ -430,6 +496,7 @@ function hideDiet() {
 	}, 200)
 	$(eventDietContainer).hide()
 }
+
 
 // EVENT OPTIONS
 function setEventSelect(people) {
@@ -457,9 +524,15 @@ function setEventSelect(people) {
 	$(eventDepositText).text(`Pay deposit only ($${eventDepositPrice}${spacer}${people})`)
 }
 
+
+// EVENT FORM RESET
 function resetEventForm() {
 	clearForm('Event')
 	repopulateForm('Event')
+	if ($(eventInviteCodeBox).is(':visible')) {
+		eventInviteCodePassHide()
+		eventInviteCodeFailHide()
+	}
 	if ($(eventPayBoth).is(':checked')) {
 		setEventSelect('for both')
 	} else if (participants() === 2) {
@@ -485,66 +558,25 @@ function resetEventForm() {
 }
 
 
-
-
-
-// CUSTOM CHARGE
-const $customForm = $('.form.custom-charge'),
-customCode = '#custom-code',
-customFirstName = '#custom-firstname',
-customLastName = '#custom-lastname',
-customEmail = '#custom-email',
-customSelect = '#custom-select',
-customTerms = '#custom-terms',
-customCard = '#billing-card'
-
-// CUSTOM AMOUNT
-function customValidation() {
-	if (billingValidation()) {
-		$(paymentButton).css({ 'background-color': '#800000' })
-		$(paymentButton).css({ 'color': '#ffffff' })
-		return true
-	}
-	$(paymentButton).css({ 'background-color': '#f5f5f5' })
-	$(paymentButton).css({ 'color': '#333333' })
-	return false
-}
-
-function setCustomSelect() {
-	//	Adds options & prices based on CMS input
-	var customOptions = $('#custom-options').text().split(' | ')
-	var customPrices = $('#custom-prices').text().split(' | ')
-	$(customSelect).empty()
-	if (customOptions.length > 0) {
-		$(customSelect).append($('<option>', {
-			value: '',
-			text: 'Custom charge option...'
-		}))
-	}
-	for (var i = 0; i < customOptions.length; i++) {
-		$(customSelect).append($('<option>', {
-			value: customPrices[i],
-			text: customOptions[i] + ' - $' + customPrices[i]
-		}))
-	}
-}
-
-function resetCustomForm() {
-	clearForm('Custom')
-	repopulateForm('Custom')
-	setCustomSelect()
-	$customForm.parsley()
-	$customForm.show()
-	$(customTerms).attr('checked', false)
-	customValidation()
-}
-
-
-
-
-
-// EVENT or CUSTOM CHARGE mode
+// EVENT FORM: BEGIN SEQUENCE
 if (page === 'Event') {
+
+	// EVENT FORM INVITE CODE
+	if ($(eventInviteCodeBox).is(':visible')) {
+		$(eventInviteCodeText).on('change', function () {
+			if ($(eventInviteCodeText).val().length !== 4 || !inviteCodeValidation()) {
+				eventInviteCodePassHide()
+				eventInviteCodeFailShow()
+			} else {
+				eventInviteCodeFailHide()
+				eventInviteCodePassShow()
+				saveForm(page)
+			}
+			eventFormValidation()
+		})
+	}
+
+	// EVENT FORM ONCHANGE EVENTS
 	$(eventFirstName).on('change', function () {
 		$(billingFirstName).val($(eventFirstName).val())
 	})
@@ -578,8 +610,10 @@ if (page === 'Event') {
 	const eventFieldsBilling = billingFirstName + ',' + billingLastName + ',' + billingStreet + ',' + billingCity + ',' + billingState + ',' + billingPostal + ',' + billingCountry
 	$(eventFieldsPersonal + ',' + eventFieldsDetails + ',' + eventFieldsPartner + ',' + eventFieldsOptions + ',' + eventTerms + ',' + eventFieldsBilling).on('change', function() {
 		saveForm(page)
-		eventValidation()
+		eventFormValidation()
 	})
+
+	// RESET EVENT FORM
 	resetEventForm()
 	if (localStorage.getItem(`EcstaticLiving:${page}`)) {
 		$('#form-load').hide()
@@ -591,7 +625,69 @@ if (page === 'Event') {
 	$('#form-load').on('click', function () {
 		repopulateForm(page)
 	})
-} else if (page === 'Custom') {
+
+}
+
+
+
+
+
+// CUSTOM CHARGE
+const $customForm = $('.form.custom-charge'),
+customCode = '#custom-code',
+customFirstName = '#custom-firstname',
+customLastName = '#custom-lastname',
+customEmail = '#custom-email',
+customSelect = '#custom-select',
+customTerms = '#custom-terms',
+customCard = '#billing-card'
+
+// CUSTOM AMOUNT
+function customChargeValidation() {
+	if (billingValidation()) {
+		$(paymentButton).css({ 'background-color': '#800000' })
+		$(paymentButton).css({ 'color': '#ffffff' })
+		return true
+	}
+	$(paymentButton).css({ 'background-color': '#f5f5f5' })
+	$(paymentButton).css({ 'color': '#333333' })
+	return false
+}
+
+function setCustomChargeSelect() {
+	//	Adds options & prices based on CMS input
+	var customOptions = $('#custom-options').text().split(' | ')
+	var customPrices = $('#custom-prices').text().split(' | ')
+	$(customSelect).empty()
+	if (customOptions.length > 0) {
+		$(customSelect).append($('<option>', {
+			value: '',
+			text: 'Custom charge option...'
+		}))
+	}
+	for (var i = 0; i < customOptions.length; i++) {
+		$(customSelect).append($('<option>', {
+			value: customPrices[i],
+			text: customOptions[i] + ' - $' + customPrices[i]
+		}))
+	}
+}
+
+function resetCustomChargeForm() {
+	clearForm('Custom')
+	repopulateForm('Custom')
+	setCustomChargeSelect()
+	$customForm.parsley()
+	$customForm.show()
+	$(customTerms).attr('checked', false)
+	customChargeValidation()
+}
+
+
+// CUSTOM CHARGE FORM: BEGIN SEQUENCE
+if (page === 'Custom') {
+
+	// CUSTOM CHARGE ONCHANGE EVENTS
 	$(customFirstName).on('change', function () {
 		$(billingFirstName).val($(eventFirstName).val())
 	})
@@ -599,9 +695,11 @@ if (page === 'Event') {
 		$(billingLastName).val($(eventLastName).val())
 	})
 	$(billingFirstName + ',' + billingLastName + ',' + billingStreet + ',' + billingCity + ',' + billingState + ',' + billingPostal + ',' + billingCountry).on('change', function () {
-		customValidation()
+		customChargeValidation()
 	})
-	resetCustomForm()
+
+	// RESET CUSTOM CHARGE
+	resetCustomChargeForm()
 	if (localStorage.getItem(`EcstaticLiving:${page}`)) {
 		$('#form-load').hide()
 		$('#form-clear').show()
@@ -620,7 +718,7 @@ if (page === 'Event') {
 // STRIPE
 function paymentValidation(result) {
 	if (result.complete) {
-		// Check hidden field to enable eventValidation() or customValidation() to pass
+		// Check hidden field to enable eventFormValidation() or customChargeValidation() to pass
 		if (page === 'Event') {
 			$(billingCard).prop('checked', true)
 		} else if (page === 'Custom') {
@@ -635,7 +733,7 @@ function paymentValidation(result) {
 		}
 	}
 	// Validate event
-	eventValidation()
+	eventFormValidation()
 	if (result.error) {
 		$('#card-errors').text(result.error.message)
 		return false
@@ -673,7 +771,7 @@ function stripeTokenHandler(token, data) {
 	$('.notification-modal.processing').show()
 	$.ajax({
 		type: 'POST',
-		url: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe',
+		url: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test',
 		crossDomain: true,
 		data: {
 			'stripeToken': token.id,
@@ -719,7 +817,7 @@ function stripeTokenHandler(token, data) {
 		if (page === 'Event') {
 			resetEventForm()
 		} else if (page === 'Custom') {
-			resetCustomForm()
+			resetCustomChargeForm()
 		}
 		$('.notification-modal.processing').hide()
 		$('.notification-modal.error').show()
@@ -730,7 +828,7 @@ function stripeTokenHandler(token, data) {
 
 // LIVE: pk_live_0rULIvKhv6aSLqI49Ae5rflI
 // TEST: pk_test_QO6tO6bHny3y10LjH96f4n3p
-const stripe = Stripe('pk_live_0rULIvKhv6aSLqI49Ae5rflI')
+const stripe = Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
 const elements = stripe.elements()
 style = {
 	base: {
@@ -768,14 +866,14 @@ $('#button-stripe-error').on('click', function() {
 $(payButton).on('click', function(e) {
 	e.preventDefault()
 	if (page === 'Event') {
-		if (!formValidation()) {
+		if (!showErrorsInForm()) {
 			// If there’s no Stripe error message
 			if ($('#card-errors').text() === '') {
 				$('#card-errors').text('Oops! There’s some missing information.')
 			}
 			return false
 		}
-		if (!eventValidation()) {
+		if (!eventFormValidation()) {
 			return false
 		}
 	}
