@@ -237,7 +237,8 @@ var payButtonClicked = false;
 const payButton = '#payment-button',
 eventInviteCodeBox = '#event-invitecode-box',
 eventInviteCodeText = '#event-invitecode-text',
-eventInviteCodeFail = '#event-invitecode-error',
+eventInviteCodePass = '#event-invitecode-pass',
+eventInviteCodeFail = '#event-invitecode-fail',
 eventFirstName = '#event-firstname',
 eventLastName = '#event-lastname',
 eventEmail = '#event-email',
@@ -405,7 +406,29 @@ function showErrorsInForm() {
 }
 
 
-// PARTNERSHIP
+// SHOW/HIDE FORM ELEMENTS
+// Event Invite Code
+function eventInviteCodePassShow() {
+	$(eventInviteCodePass).show()
+	$(eventInviteCodePass).animate({
+		top: 40,
+		opacity: 1
+	}, 200)
+}
+function eventInviteCodePassHide() {
+	$(eventInviteCodePass).hide()
+}
+function eventInviteCodeFailShow() {
+	$(eventInviteCodeFail).show()
+	$(eventInviteCodeFail).animate({
+		top: 40,
+		opacity: 1
+	}, 200)
+}
+function eventInviteCodeFailHide() {
+	$(eventInviteCodeFail).hide()
+}
+// Partner
 function showPartner() {
 	$(eventPartnerContainer).show()
 	$(eventPartnerContainer).animate({
@@ -418,7 +441,6 @@ function showPartner() {
 		setEventSelect('per person')
 	}
 }
-
 function hidePartner() {
 	$(eventPartnerName).val('')
 	$(eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther + ',' + eventPayBoth + ',' + eventPayMe).prop('checked', false)
@@ -429,8 +451,7 @@ function hidePartner() {
 	$(eventPartnerContainer).hide()
 	setEventSelect()
 }
-
-// PREVIOUS EXPERIENCE
+// Previous Experience
 function showExperience() {
 	$(eventExperienceContainer).show()
 	$(eventExperienceContainer).animate({
@@ -438,7 +459,6 @@ function showExperience() {
 		opacity: 1
 	}, 200)
 }
-
 function hideExperience() {
 	$(eventExperienceDetails).val('')
 	$(eventExperienceContainer).animate({
@@ -447,8 +467,7 @@ function hideExperience() {
 	}, 200)
 	$(eventExperienceContainer).hide()
 }
-
-// DIETARY NEEDS
+// Dietary Needs
 function showDiet() {
 	$(eventDietContainer).show()
 	$(eventDietContainer).animate({
@@ -456,7 +475,6 @@ function showDiet() {
 		opacity: 1
 	}, 200)
 }
-
 function hideDiet() {
 	$(eventDietDetails).val('')
 	$(eventDietContainer).animate({
@@ -465,6 +483,7 @@ function hideDiet() {
 	}, 200)
 	$(eventDietContainer).hide()
 }
+
 
 // EVENT OPTIONS
 function setEventSelect(people) {
@@ -497,6 +516,10 @@ function setEventSelect(people) {
 function resetEventForm() {
 	clearForm('Event')
 	repopulateForm('Event')
+	if ($(eventInviteCodeBox).is(':visible')) {
+		eventInviteCodePassHide()
+		eventInviteCodeFailHide()
+	}
 	if ($(eventPayBoth).is(':checked')) {
 		setEventSelect('for both')
 	} else if (participants() === 2) {
@@ -530,22 +553,14 @@ if (page === 'Event') {
 		$(eventInviteCodeText).on('change', function () {
 			if ($(eventInviteCodeText).val().length === '3' && !inviteCodeValidation()) {
 				$(eventInviteCodeText).val('')
-				$(eventInviteCodePass).hide()
-				$(eventInviteCodeFail).show()
-				$(eventInviteCodeFail).animate({
-					top: 40,
-					opacity: 1
-				}, 200)
+				eventInviteCodePassHide()
+				eventInviteCodeFailShow()
 			} else {
-				$(eventInviteCodeFail).hide()
-				$(eventInviteCodePass).show()
-				$(eventInviteCodePass).animate({
-					top: 40,
-					opacity: 1
-				}, 200)
+				eventInviteCodeFailHide()
+				eventInviteCodePassShow()
 				saveForm(page)
-				eventFormValidation()
 			}
+			eventFormValidation()
 		})
 	}
 
