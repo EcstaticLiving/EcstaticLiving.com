@@ -304,20 +304,34 @@ function participants() {
 // Event Invite Code Validation
 function inviteCodeValidation() {
 	if ($(eventInviteCodeBox).is(':visible')) {
-		var luhnCheck = (function (arr) {
-			return function (ccNum) {
-					var len = ccNum.length,
-						bit = 1,
-						sum = 0,
-						val
-					while (len) {
-							val = parseInt(ccNum.charAt(--len), 10)
-							sum += (bit ^= 1) ? arr[val] : val
-					}
-					return sum && sum % 10 === 0
-			}
-		}([0, 2, 4, 6, 8, 1, 3, 5, 7, 9]))
-		if (luhnCheck($(eventInviteCodeText).val())) {
+
+
+		var luhn = {
+			// Calculates the Luhn checksum
+			calculate: function(digits) {
+				var sum = this.sum(digits, false)
+				return (sum * 9) % 10
+			},
+			// Verifies if a number is a valid Luhn checksum
+			verify: function(digits) {
+				var sum = this.sum(digits, true)
+				return sum > 0 && sum % 10 === 0
+			},
+			// Sum each digit from right to left, and double every second digit. If the double exceeds 9, then sum its digits (i.e., 654321 -> 358341 -> 24)
+			sum: function(digits, even) {
+				var sum = 0,
+						digit = 0,
+						i = digits.length
+				while (i--) {
+					digit = Number(digits[i])
+					sum += (even = !even) ? this.computed[digit] : digit
+				}
+				return sum
+			},
+			// Create a precomputed list based on doubling each digit, as described in sum().
+			computed: [0, 2, 4, 6, 8, 1, 3, 5, 7, 9]
+		}
+		if (luhn.verify($(eventInviteCodeText).val())) {
 			return true
 		}
 		return false
