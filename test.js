@@ -551,7 +551,7 @@ if (page === 'Event') {
 	// EVENT FORM INVITE CODE
 	if ($(eventInviteCodeBox).is(':visible')) {
 		$(eventInviteCodeText).on('change', function () {
-			if ($(eventInviteCodeText).val().length === '3' && !inviteCodeValidation()) {
+			if ($(eventInviteCodeText).val().length !== '3' || !inviteCodeValidation()) {
 				$(eventInviteCodeText).val('')
 				eventInviteCodePassHide()
 				eventInviteCodeFailShow()
