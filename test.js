@@ -513,7 +513,7 @@ function setEventSelect() {
 	const affiliateDiscount = eventInviteCodeValidation() ? affiliateCode.discount() : 0
 	for (var i = 0; i < eventOptions.length; i++) {
 		const eventPrice = eventPrices[i] * paymentFactor - affiliateDiscount > 0 ? eventPrices[i] * paymentFactor - affiliateDiscount : 0
-		const affiliateDiscountText = eventPrice > 0 ? ' discount included' : ''
+		const affiliateDiscountText = eventPrice > 0 ? ' with discount' : ''
 		$(eventSelect).append($('<option>', {
 			value: eventPrice,
 			text: eventOptions[i] + ' ($' + eventPrice + spacer + people + affiliateDiscountText + closer
