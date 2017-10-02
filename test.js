@@ -305,14 +305,14 @@ function participants() {
 var affiliateCode = {
 	verify: function(code) {
 		// MADA1710FS25
-		console.log(code.substr(4, 6).toLowerCase());
+		console.log($(eventInviteCodeText).val().substr(4, 6).toLowerCase());
 		console.log(eventCode.substr(2));
-		return code.substr(4, 6).toLowerCase() === eventCode.substr(2)
+		return $(eventInviteCodeText).val().substr(4, 6).toLowerCase() === eventCode.substr(2)
 	}
 }
 function inviteCodeValidation() {
 	if ($(eventInviteCodeBox).is(':visible')) {
-		if (affiliateCode.verify($(eventInviteCodeText).val())) {
+		if (affiliateCode.verify()) {
 			return true
 		}
 		return false
