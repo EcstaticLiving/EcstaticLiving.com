@@ -426,7 +426,7 @@ function showErrorsInForm() {
 // SHOW/HIDE FORM ELEMENTS
 // Event Invite Code
 function eventInviteCodePassShow() {
-	const text = eventInviteCodeValidation() && affiliateCode.discount() > 0 ? '<p>Your invitation code has been accepted.</p><p>$' + affiliateCode.discount() + ' discount has been applied.</p>' : 'Your invitation code has been accepted.'
+	const text = eventInviteCodeValidation() && affiliateCode.discount() > 0 ? '<p>Your invitation code has been accepted.</p><p>$' + affiliateCode.discount() + ' discount has been applied.</p>' : '<p>Your invitation code has been accepted.</p>'
 	$(eventInviteCodePass).html(text)
 	$(eventInviteCodePass).show()
 	$(eventInviteCodePass).animate({
