@@ -511,7 +511,7 @@ function setEventSelect() {
 	const spacer = people ? ' ' : ''
 	const closer = (people || people === '') ? ')' : ''
 	const affiliateDiscount = eventInviteCodeValidation() ? affiliateCode.discount() : 0
-	const affiliateDiscountText = eventInviteCodeValidation() ? ' $' + affiliateCode.discount() + ' discount included' : ''
+	const affiliateDiscountText = affiliateDiscount > 0 ? ' with a $' + affiliateCode.discount() + ' discount included' : ''
 	for (var i = 0; i < eventOptions.length; i++) {
 		const eventPrice = eventPrices[i] * paymentFactor - affiliateDiscount
 		$(eventSelect).append($('<option>', {
