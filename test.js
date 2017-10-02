@@ -289,17 +289,17 @@ billingPostal = '#billing-postal',
 billingCountry = '#billing-country',
 billingCard = '#billing-card'
 
-// Affiliate code, e.g. MADA1707BB25
+// Affiliate code, e.g. MADA25TM1710FS
 var affiliateCode = {
 	discount: function() {
-		const discount = 100 - parseInt($(eventInviteCodeText).val().substr($(eventInviteCodeText).val().length - 2), 10) === 90
-			// Assuming no discount, only to unlock event, e.g. ****1707BB10
+		const discount = 100 - parseInt($(eventInviteCodeText).val().substr(4, 2), 10) === 90
+			// Assuming no discount, only to unlock event, e.g. ****10********
 			? 0
-			: 100 - parseInt($(eventInviteCodeText).val().substr($(eventInviteCodeText).val().length - 2), 10)
+			: 100 - parseInt($(eventInviteCodeText).val().substr(4, 2), 10)
 		return (discount === 0 || discount === 25 || discount === 50 || discount === 75 || discount === 100) ? discount : null
 	},
 	verify: function() {
-		return $(eventInviteCodeText).val().substr(4, 6).toLowerCase() === eventCode.substr(2) && this.discount() >= 0
+		return $(eventInviteCodeText).val().substr($(eventInviteCodeText).val().length - 8).toLowerCase() === eventCode && this.discount() >= 0
 	}
 }
 
