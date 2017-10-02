@@ -296,7 +296,8 @@ var affiliateCode = {
 		return (discount === 0 || discount === 25 || discount === 50 || discount === 75 || discount === 100) ? discount : 0
 	},
 	verify: function() {
-		return $(eventInviteCodeText).val().substr(4, 6).toLowerCase() === eventCode.substr(2)
+		const discount = 100 - parseInt($(eventInviteCodeText).val().substr($(eventInviteCodeText).val().length - 2), 10)
+		return $(eventInviteCodeText).val().substr(4, 6).toLowerCase() === eventCode.substr(2) && (discount === 0 || discount === 25 || discount === 50 || discount === 75 || discount === 100)
 	}
 }
 
