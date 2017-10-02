@@ -510,13 +510,17 @@ function setEventSelect() {
 	const paymentFactor = (people === 'for both') ? 2 : 1
 	const spacer = people ? ' ' : ''
 	const closer = (people || people === '') ? ')' : ''
-	const affiliateDiscount = eventInviteCodeValidation() ? affiliateCode.discount() : 0
 	for (var i = 0; i < eventOptions.length; i++) {
-		const eventPrice = eventPrices[i] * paymentFactor - affiliateDiscount > 0 ? eventPrices[i] * paymentFactor - affiliateDiscount : 0
-		const affiliateDiscountText = eventPrice > 0 && eventInviteCodeValidation() ? ' incl. discount' : ''
+		const affiliateDiscount = eventInviteCodeValidation() ? affiliateCode.discount() : 0
+		const affiliateDiscountText = eventInviteCodeValidation() && eventSelectPrice > 0 ? ' including discount' : ''
+		const eventSelectPrice = eventPrices[i] * paymentFactor - affiliateDiscount > 0 ? eventPrices[i] * paymentFactor - affiliateDiscount : 0
+		// Affiliate discount only applies to first purchase, not to partner
+		const eventSelectText = eventInviteCodeValidation() && people === 'for both'
+			? eventOptions[i] + ' ($' + eventSelectPrice + ' for you including discount, $' + eventPrices[i] * paymentFactor + ' for your partner)'
+			: eventOptions[i] + ' ($' + eventSelectPrice + spacer + people + affiliateDiscountText + closer
 		$(eventSelect).append($('<option>', {
-			value: eventPrice,
-			text: eventOptions[i] + ' ($' + eventPrice + spacer + people + affiliateDiscountText + closer
+			value: eventSelectPrice,
+			text: eventSelectText
 		}))
 	}
 	const eventDepositPrice = parseInt(eventDepositAmount) * paymentFactor
