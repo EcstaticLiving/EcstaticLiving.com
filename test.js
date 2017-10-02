@@ -163,7 +163,7 @@ function saveForm(formType) {
 		if ($(this).is(':radio')) {
 			if ($(this).is(':checked')) { values[$(this).attr('name')] = $(this).val() }
 		}
-		else if ($(this).attr('name') !== 'Event Invite Code') {
+		else if ($(this).attr('name') !== 'Event-Invite-Code') {
 			console.log($(this).attr('name'));
 			values[$(this).attr('name')] = $(this).val()
 		}
@@ -408,7 +408,7 @@ function showErrorsInForm() {
 // SHOW/HIDE FORM ELEMENTS
 // Event Invite Code
 function eventInviteCodePassShow() {
-	const text = eventInviteCodeValidation() ? 'Your invitation code has been accepted and a $' + affiliateCode.discount() + ' discount has been applied.' : 'Your invitation code has been accepted.'
+	const text = eventInviteCodeValidation() && affiliateCode.discount() > 0 ? 'Your invitation code has been accepted and a $' + affiliateCode.discount() + ' discount has been applied.' : 'Your invitation code has been accepted.'
 	$(eventInviteCodePass).val(text)
 	$(eventInviteCodePass).show()
 	$(eventInviteCodePass).animate({
