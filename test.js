@@ -515,7 +515,7 @@ function setEventSelect() {
 	for (var i = 0; i < eventOptions.length; i++) {
 		const affiliateDiscount = eventInviteCodeValidation() ? affiliateCode.discount() : 0
 		const eventSelectPrice = eventPrices[i] * paymentFactor - affiliateDiscount > 0 ? eventPrices[i] * paymentFactor - affiliateDiscount : 0
-		const affiliateDiscountText = eventInviteCodeValidation() && eventSelectPrice > 0 ? ' including discount' : ''
+		const affiliateDiscountText = eventInviteCodeValidation() && affiliateCode.discount() > 0 && eventSelectPrice > 0 ? ' including discount' : ''
 		const eventSelectText = eventInviteCodeValidation() && affiliateCode.discount() > 0 && people === 'per person'
 			// Affiliate discount only applies to first purchase, not to partner
 			? eventOptions[i] + ' ($' + eventSelectPrice + ' for you including discount, $' + eventPrices[i] * paymentFactor + ' for your partner)'
