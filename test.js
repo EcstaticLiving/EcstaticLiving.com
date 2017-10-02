@@ -489,8 +489,14 @@ function hideDiet() {
 
 
 // EVENT OPTIONS
-function setEventSelect(people) {
+function setEventSelect() {
 	//	Adds event options & prices based on CMS input
+	var people = ''
+	if ($(eventPayBoth).is(':checked')) {
+		people = 'for both'
+	} else if (participants() === 2) {
+		people = 'per person'
+	}
 	var eventOptions = $('#event-options').text().split(' | ')
 	var eventPrices = $('#event-prices').text().split(' | ')
 	$(eventSelect).empty()
@@ -500,7 +506,6 @@ function setEventSelect(people) {
 			text: 'Event option...'
 		}))
 	}
-	people = people ? people : ''
 	const paymentFactor = (people === 'for both') ? 2 : 1
 	const spacer = people ? ' ' : ''
 	const closer = (people || people === '') ? ')' : ''
@@ -525,13 +530,7 @@ function resetEventForm() {
 		eventInviteCodePassHide()
 		eventInviteCodeFailHide()
 	}
-	if ($(eventPayBoth).is(':checked')) {
-		setEventSelect('for both')
-	} else if (participants() === 2) {
-		setEventSelect('per person')
-	} else {
-		setEventSelect('')
-	}
+	setEventSelect()
 	$('#eventcode').val(eventCode)
 	if (!$(eventExperienceYes).is(':checked')) hideExperience()
 	if (!$(eventDietYes).is(':checked')) hideDiet()
@@ -564,6 +563,7 @@ if (page === 'Event') {
 				eventInviteCodePassShow()
 				saveForm(page)
 			}
+			setEventSelect()
 			eventFormValidation()
 		})
 	}
@@ -587,13 +587,7 @@ if (page === 'Event') {
 		participants() === 2 ? showPartner() : hidePartner()
 	})
 	$(eventPayBoth + ',' + eventPayMe).on('change', function () {
-		if ($(eventPayBoth).is(':checked')) {
-			setEventSelect('for both')
-		} else if (participants() === 2) {
-			setEventSelect('per person')
-		} else {
-			setEventSelect('')
-		}
+		setEventSelect()
 	})
 	const eventFieldsPersonal = eventFirstName + ',' + eventLastName + ',' + eventEmail + ',' + eventMobile + ',' + eventBirthdate + ',' + eventFemale + ',' + eventMale + ',' + eventOther
 	const eventFieldsDetails = eventReferral + ',' + eventExperienceYes + ',' + eventExperienceNo + ',' + eventExperienceDetails + ',' + eventDietYes + ',' + eventDietNo + ',' + eventDietDetails
