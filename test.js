@@ -164,7 +164,6 @@ function saveForm(formType) {
 			if ($(this).is(':checked')) { values[$(this).attr('name')] = $(this).val() }
 		}
 		else if ($(this).attr('name') !== 'Event-Invite-Code') {
-			console.log($(this).attr('name'));
 			values[$(this).attr('name')] = $(this).val()
 		}
 	})
@@ -409,7 +408,7 @@ function showErrorsInForm() {
 // Event Invite Code
 function eventInviteCodePassShow() {
 	const text = eventInviteCodeValidation() && affiliateCode.discount() > 0 ? 'Your invitation code has been accepted and a $' + affiliateCode.discount() + ' discount has been applied.' : 'Your invitation code has been accepted.'
-	$(eventInviteCodePass).val(text)
+	$(eventInviteCodePass).text(text)
 	$(eventInviteCodePass).show()
 	$(eventInviteCodePass).animate({
 		top: 40,
@@ -417,7 +416,7 @@ function eventInviteCodePassShow() {
 	}, 200)
 }
 function eventInviteCodePassHide() {
-	$(eventInviteCodePass).val('')
+	$(eventInviteCodePass).text('')
 	$(eventInviteCodePass).hide()
 }
 function eventInviteCodeFailShow() {
