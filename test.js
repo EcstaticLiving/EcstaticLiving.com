@@ -163,7 +163,7 @@ function saveForm(formType) {
 		if ($(this).is(':radio')) {
 			if ($(this).is(':checked')) { values[$(this).attr('name')] = $(this).val() }
 		}
-		else {
+		else if ($(this).attr('name') !== 'Event Invite Code') { 
 			values[$(this).attr('name')] = $(this).val()
 		}
 	})
@@ -311,7 +311,7 @@ var affiliateCode = {
 		return $(eventInviteCodeText).val().substr(4, 6).toLowerCase() === eventCode.substr(2)
 	}
 }
-function inviteCodeValidation() {
+function eventInviteCodeValidation() {
 	if ($(eventInviteCodeBox).is(':visible')) {
 		if (affiliateCode.verify()) {
 			return true
@@ -550,7 +550,7 @@ if (page === 'Event') {
 	// EVENT FORM INVITE CODE
 	if ($(eventInviteCodeBox).is(':visible')) {
 		$(eventInviteCodeText).on('change', function () {
-			if (!inviteCodeValidation()) {
+			if (!eventInviteCodeValidation()) {
 				eventInviteCodePassHide()
 				eventInviteCodeFailShow()
 			} else {
