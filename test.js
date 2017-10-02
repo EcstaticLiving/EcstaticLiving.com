@@ -305,6 +305,7 @@ function participants() {
 var affiliateCode = {
 	verify: function(code) {
 		// MADA1710FS25
+		console.log($(eventInviteCodeText).val());
 		console.log($(eventInviteCodeText).val().substr(4, 6).toLowerCase());
 		console.log(eventCode.substr(2));
 		return $(eventInviteCodeText).val().substr(4, 6).toLowerCase() === eventCode.substr(2)
