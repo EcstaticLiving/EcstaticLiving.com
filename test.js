@@ -296,7 +296,6 @@ var affiliateCode = {
 			// Assuming no discount, only to unlock event, e.g. ****10********
 			? 0
 			: 100 - parseInt($(eventInviteCodeText).val().substr(4, 2), 10)
-		console.log((discount === 0 || discount === 25 || discount === 50 || discount === 75 || discount === 100) ? discount : null);
 		return (discount === 0 || discount === 25 || discount === 50 || discount === 75 || discount === 100) ? discount : null
 	},
 	verify: function() {
