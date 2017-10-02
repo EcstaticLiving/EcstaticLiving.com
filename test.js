@@ -325,12 +325,17 @@ function eventInviteCodeValidation() {
 	return true
 }
 function eventInviteCodeValidationUpdate() {
-	if (!eventInviteCodeValidation()) {
-		eventInviteCodePassHide()
-		eventInviteCodeFailShow()
+	if ($(eventInviteCodeText).val().length > 0) {
+		if (!eventInviteCodeValidation()) {
+			eventInviteCodePassHide()
+			eventInviteCodeFailShow()
+		} else {
+			eventInviteCodeFailHide()
+			eventInviteCodePassShow()
+		}
 	} else {
+		eventInviteCodePassHide()
 		eventInviteCodeFailHide()
-		eventInviteCodePassShow()
 	}
 	setEventSelect()
 	eventFormValidation()
