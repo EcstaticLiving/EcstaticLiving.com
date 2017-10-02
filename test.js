@@ -313,7 +313,6 @@ function participants() {
 // Event Invite Code Validation
 function eventInviteCodeValidation() {
 	if ($(eventInviteCodeBox).is(':visible')) {
-		console.log(affiliateCode.discount());
 		if (affiliateCode.verify()) {
 			return true
 		}
@@ -501,10 +500,12 @@ function setEventSelect(people) {
 	const paymentFactor = (people === 'for both') ? 2 : 1
 	const spacer = people ? ' ' : ''
 	const closer = (people || people === '') ? ')' : ''
+	const affiliateDiscount = eventInviteCodeValidation() ? affiliateCode.discount() : ''
+	const affiliateDiscountText = eventInviteCodeValidation() ? ' - $' + affiliateCode.discount() + ' discount' : ''
 	for (var i = 0; i < eventOptions.length; i++) {
 		$(eventSelect).append($('<option>', {
-			value: eventPrices[i] * paymentFactor,
-			text: eventOptions[i] + ' ($' + eventPrices[i] * paymentFactor + spacer + people + closer
+			value: eventPrices[i] * paymentFactor - affiliateDiscount,
+			text: eventOptions[i] + ' ($' + eventPrices[i] * paymentFactor + spacer + people + closer + affiliateDiscountText
 		}))
 	}
 	const eventDepositPrice = parseInt(eventDepositAmount) * paymentFactor
