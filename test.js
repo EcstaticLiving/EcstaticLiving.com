@@ -292,12 +292,15 @@ billingCard = '#billing-card'
 // Affiliate code, e.g. MADA1707BB25
 var affiliateCode = {
 	discount: function() {
-		const discount = 100 - parseInt($(eventInviteCodeText).val().substr($(eventInviteCodeText).val().length - 2), 10)
-		return (discount === 0 || discount === 25 || discount === 50 || discount === 75 || discount === 100) ? discount : 0
+		const discount = 100 - parseInt($(eventInviteCodeText).val().substr($(eventInviteCodeText).val().length - 2), 10) === 90
+			// Assuming no discount, only to unlock event, e.g. ****1707BB10
+			? 0
+			: 100 - parseInt($(eventInviteCodeText).val().substr($(eventInviteCodeText).val().length - 2), 10)
+		return (discount === 0 || discount === 25 || discount === 50 || discount === 75 || discount === 100) ? discount : null
 	},
 	verify: function() {
 		const discount = 100 - parseInt($(eventInviteCodeText).val().substr($(eventInviteCodeText).val().length - 2), 10)
-		return $(eventInviteCodeText).val().substr(4, 6).toLowerCase() === eventCode.substr(2) && (discount === 0 || discount === 25 || discount === 50 || discount === 75 || discount === 100)
+		return $(eventInviteCodeText).val().substr(4, 6).toLowerCase() === eventCode.substr(2) && this.discount >= 0
 	}
 }
 
