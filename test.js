@@ -302,32 +302,15 @@ function participants() {
 
 // FORM VALIDATION
 // Event Invite Code Validation
-var luhn = {
-	// Calculates the Luhn checksum
-	calculate: function(digits) {
-		var sum = this.sum(digits, false)
-		return (sum * 9) % 10
-	},
-	// Verifies if a number is a valid Luhn checksum
-	verify: function(digits) {
-		var sum = this.sum(digits, true)
-		return sum > 0 && sum % 10 === 0
-	},
-	// Sum each digit from right to left, and double every second digit. If the double exceeds 9, then sum its digits (i.e., 654321 -> 358341 -> 24)
-	sum: function(digits, even) {
-		var sum = 0, digit = 0, i = digits.length
-		while (i--) {
-			digit = Number(digits[i])
-			sum += (even = !even) ? this.computed[digit] : digit
-		}
-		return sum
-	},
-	// Create a precomputed list based on doubling each digit, as described in sum().
-	computed: [0, 2, 4, 6, 8, 1, 3, 5, 7, 9]
+var affiliateCode = {
+	verify: function(code) {
+		// MADA1710FS25
+		return code.substr(4, 6).toLowerCase() === eventCode.substr(2)
+	}
 }
 function inviteCodeValidation() {
 	if ($(eventInviteCodeBox).is(':visible')) {
-		if (luhn.verify($(eventInviteCodeText).val())) {
+		if (affiliateCode.verify($(eventInviteCodeText).val())) {
 			return true
 		}
 		return false
