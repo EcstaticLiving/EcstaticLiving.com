@@ -324,6 +324,17 @@ function eventInviteCodeValidation() {
 	}
 	return true
 }
+function eventInviteCodeValidationUpdate() {
+	if (!eventInviteCodeValidation()) {
+		eventInviteCodePassHide()
+		eventInviteCodeFailShow()
+	} else {
+		eventInviteCodeFailHide()
+		eventInviteCodePassShow()
+	}
+	setEventSelect()
+	eventFormValidation()
+}
 // Name & Gender Validation
 function personalValidation() {
 	if ($(eventFirstName).val() !== '' && $(eventLastName).val() !== '' && $(eventEmail).val() !== '' && $(eventMobile).val() !== '' && $(eventBirthdate).val() !== '' &&
@@ -558,6 +569,7 @@ function resetEventForm() {
 	console.log(affiliateString);
 	if (affiliateString[0] === 'affiliate') {
 		$(eventInviteCodeText).val(affiliateString[1])
+		eventInviteCodeValidationUpdate()
 	}
 }
 
@@ -568,16 +580,7 @@ if (page === 'Event') {
 	// EVENT FORM INVITE CODE
 	if ($(eventInviteCodeBox).is(':visible')) {
 		$(eventInviteCodeText).on('change', function () {
-			if (!eventInviteCodeValidation()) {
-				eventInviteCodePassHide()
-				eventInviteCodeFailShow()
-			} else {
-				eventInviteCodeFailHide()
-				eventInviteCodePassShow()
-				saveForm(page)
-			}
-			setEventSelect()
-			eventFormValidation()
+			eventInviteCodeValidationUpdate()
 		})
 	}
 
