@@ -554,6 +554,11 @@ function resetEventForm() {
 	$(eventTerms).attr('checked', false)
 	$(paymentButton).css({ 'background-color': '#f5f5f5' })
 	$(paymentButton).css({ 'color': '#333333' })
+	var affiliateString = window.location.search.slice(1).split('=')
+	console.log(affiliateString);
+	if (affiliateString[0] === 'affiliate') {
+		$(eventInviteCodeText).val(affiliateString[1])
+	}
 }
 
 
@@ -562,15 +567,6 @@ if (page === 'Event') {
 
 	// EVENT FORM INVITE CODE
 	if ($(eventInviteCodeBox).is(':visible')) {
-		var affiliateString = window.location.search.slice(1).split('=')
-		console.log(affiliateString);
-		if (affiliateString[0] === 'affiliate') {
-			$(eventInviteCodeText).val(affiliateString[1])
-		}
-		var query = Object.assign({}, ...window.location.search.slice(1).split('&').map(item => {
-			const property = item.split('=')[0]
-			return { [property]: item.split('=')[1] }
-		}))
 		$(eventInviteCodeText).on('change', function () {
 			if (!eventInviteCodeValidation()) {
 				eventInviteCodePassHide()
