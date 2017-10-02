@@ -509,12 +509,13 @@ function setEventSelect() {
 	const paymentFactor = (people === 'for both') ? 2 : 1
 	const spacer = people ? ' ' : ''
 	const closer = (people || people === '') ? ')' : ''
-	const affiliateDiscount = eventInviteCodeValidation() ? affiliateCode.discount() : ''
-	const affiliateDiscountText = eventInviteCodeValidation() ? ' - $' + affiliateCode.discount() + ' discount' : ''
+	const affiliateDiscount = eventInviteCodeValidation() ? affiliateCode.discount() : 0
+	const affiliateDiscountText = eventInviteCodeValidation() ? ' $' + affiliateCode.discount() + ' discount included' : ''
 	for (var i = 0; i < eventOptions.length; i++) {
+		const eventPrice = eventPrices[i] * paymentFactor - affiliateDiscount
 		$(eventSelect).append($('<option>', {
-			value: eventPrices[i] * paymentFactor - affiliateDiscount,
-			text: eventOptions[i] + ' ($' + eventPrices[i] * paymentFactor + spacer + people + closer + affiliateDiscountText
+			value: eventPrice,
+			text: eventOptions[i] + ' ($' + eventPrice + spacer + people + affiliateDiscountText + closer
 		}))
 	}
 	const eventDepositPrice = parseInt(eventDepositAmount) * paymentFactor
