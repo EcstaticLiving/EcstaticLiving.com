@@ -163,7 +163,7 @@ function saveForm(formType) {
 		if ($(this).is(':radio')) {
 			if ($(this).is(':checked')) { values[$(this).attr('name')] = $(this).val() }
 		}
-		else if ($(this).attr('name') !== 'Event Invite Code') { 
+		else if ($(this).attr('name') !== 'Event Invite Code') {
 			values[$(this).attr('name')] = $(this).val()
 		}
 	})
@@ -289,6 +289,15 @@ billingPostal = '#billing-postal',
 billingCountry = '#billing-country',
 billingCard = '#billing-card'
 
+// Affiliate code, e.g. MADA1707BB25
+var affiliateCode = {
+	discount: function() {
+		return 100 - parseInt($(eventInviteCodeText).val().substr($(eventInviteCodeText).val().length - 2), 10)
+	},
+	verify: function() {
+		return $(eventInviteCodeText).val().substr(4, 6).toLowerCase() === eventCode.substr(2)
+	}
+}
 
 
 // PARTICIPANTS
@@ -302,17 +311,9 @@ function participants() {
 
 // FORM VALIDATION
 // Event Invite Code Validation
-var affiliateCode = {
-	verify: function(code) {
-		// MADA1710FS25
-		console.log($(eventInviteCodeText).val());
-		console.log($(eventInviteCodeText).val().substr(4, 6).toLowerCase());
-		console.log(eventCode.substr(2));
-		return $(eventInviteCodeText).val().substr(4, 6).toLowerCase() === eventCode.substr(2)
-	}
-}
 function eventInviteCodeValidation() {
 	if ($(eventInviteCodeBox).is(':visible')) {
+		console.log(affiliateCode.discount());
 		if (affiliateCode.verify()) {
 			return true
 		}
