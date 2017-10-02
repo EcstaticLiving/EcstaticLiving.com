@@ -426,7 +426,7 @@ function showErrorsInForm() {
 // SHOW/HIDE FORM ELEMENTS
 // Event Invite Code
 function eventInviteCodePassShow() {
-	const text = eventInviteCodeValidation() && affiliateCode.discount() > 0 ? '<p>Your invitation code has been accepted</p><p>$' + affiliateCode.discount() + ' discount has been applied.</p>' : 'Your invitation code has been accepted.'
+	const text = eventInviteCodeValidation() && affiliateCode.discount() > 0 ? '<p>Your invitation code has been accepted.</p><p>$' + affiliateCode.discount() + ' discount has been applied.</p>' : 'Your invitation code has been accepted.'
 	$(eventInviteCodePass).html(text)
 	$(eventInviteCodePass).show()
 	$(eventInviteCodePass).animate({
@@ -532,10 +532,7 @@ function setEventSelect() {
 		const affiliateDiscount = eventInviteCodeValidation() ? affiliateCode.discount() : 0
 		const eventSelectPrice = eventPrices[i] * paymentFactor - affiliateDiscount > 0 ? eventPrices[i] * paymentFactor - affiliateDiscount : 0
 		const affiliateDiscountText = eventInviteCodeValidation() && affiliateCode.discount() > 0 && eventSelectPrice > 0 ? ' including discount' : ''
-		const eventSelectText = eventInviteCodeValidation() && affiliateCode.discount() > 0 && people === 'per person'
-			// Affiliate discount only applies to first purchase, not to partner
-			? eventOptions[i] + ' ($' + eventSelectPrice + ' for you including discount, $' + eventPrices[i] * paymentFactor + ' for your partner)'
-			: eventOptions[i] + ' ($' + eventSelectPrice + spacer + people + affiliateDiscountText + closer
+		const eventSelectText = eventOptions[i] + ' ($' + eventSelectPrice + spacer + people + affiliateDiscountText + closer
 		$(eventSelect).append($('<option>', {
 			value: eventSelectPrice,
 			text: eventSelectText
