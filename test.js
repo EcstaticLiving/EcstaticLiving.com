@@ -296,6 +296,7 @@ var affiliateCode = {
 			// Assuming no discount, only to unlock event, e.g. ****10********
 			? 0
 			: 100 - parseInt($(eventInviteCodeText).val().substr(4, 2), 10)
+		console.log(discount);
 		return (discount === 0 || discount === 25 || discount === 50 || discount === 75 || discount === 100) ? discount : null
 	},
 	verify: function() {
@@ -566,7 +567,6 @@ function resetEventForm() {
 	$(paymentButton).css({ 'background-color': '#f5f5f5' })
 	$(paymentButton).css({ 'color': '#333333' })
 	var affiliateString = window.location.search.slice(1).split('=')
-	console.log(affiliateString);
 	if (affiliateString[0] === 'affiliate') {
 		$(eventInviteCodeText).val(affiliateString[1])
 		eventInviteCodeValidationUpdate()
