@@ -163,7 +163,7 @@ function saveForm(formType) {
 		if ($(this).is(':radio')) {
 			if ($(this).is(':checked')) { values[$(this).attr('name')] = $(this).val() }
 		}
-		else {
+		else if ($(this).attr('name') !== 'Event-Invite-Code') {
 			values[$(this).attr('name')] = $(this).val()
 		}
 	})
@@ -289,6 +289,19 @@ billingPostal = '#billing-postal',
 billingCountry = '#billing-country',
 billingCard = '#billing-card'
 
+// Affiliate code, e.g. MADA25TM1710FS
+var affiliateCode = {
+	discount: function() {
+		const discount = 100 - parseInt($(eventInviteCodeText).val().substr(4, 2), 10) === 90
+			// Assuming no discount, only to unlock event, e.g. ****10********
+			? 0
+			: 100 - parseInt($(eventInviteCodeText).val().substr(4, 2), 10)
+		return (discount === 0 || discount === 25 || discount === 50 || discount === 75 || discount === 100) ? discount : null
+	},
+	verify: function() {
+		return $(eventInviteCodeText).val().substr($(eventInviteCodeText).val().length - 8).toLowerCase() === eventCode && this.discount() !== null
+	}
+}
 
 
 // PARTICIPANTS
@@ -302,37 +315,30 @@ function participants() {
 
 // FORM VALIDATION
 // Event Invite Code Validation
-var luhn = {
-	// Calculates the Luhn checksum
-	calculate: function(digits) {
-		var sum = this.sum(digits, false)
-		return (sum * 9) % 10
-	},
-	// Verifies if a number is a valid Luhn checksum
-	verify: function(digits) {
-		var sum = this.sum(digits, true)
-		return sum > 0 && sum % 10 === 0
-	},
-	// Sum each digit from right to left, and double every second digit. If the double exceeds 9, then sum its digits (i.e., 654321 -> 358341 -> 24)
-	sum: function(digits, even) {
-		var sum = 0, digit = 0, i = digits.length
-		while (i--) {
-			digit = Number(digits[i])
-			sum += (even = !even) ? this.computed[digit] : digit
-		}
-		return sum
-	},
-	// Create a precomputed list based on doubling each digit, as described in sum().
-	computed: [0, 2, 4, 6, 8, 1, 3, 5, 7, 9]
-}
-function inviteCodeValidation() {
+function eventInviteCodeValidation() {
 	if ($(eventInviteCodeBox).is(':visible')) {
-		if (luhn.verify($(eventInviteCodeText).val())) {
+		if (affiliateCode.verify()) {
 			return true
 		}
 		return false
 	}
 	return true
+}
+function eventInviteCodeValidationUpdate() {
+	if ($(eventInviteCodeText).val().length > 0) {
+		if (!eventInviteCodeValidation()) {
+			eventInviteCodePassHide()
+			eventInviteCodeFailShow()
+		} else {
+			eventInviteCodeFailHide()
+			eventInviteCodePassShow()
+		}
+	} else {
+		eventInviteCodePassHide()
+		eventInviteCodeFailHide()
+	}
+	setEventSelect()
+	eventFormValidation()
 }
 // Name & Gender Validation
 function personalValidation() {
@@ -384,7 +390,7 @@ function billingValidation() {
 }
 // Complete Validation
 function eventFormValidation() {
-	if (inviteCodeValidation() && personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && $(eventTerms).is(':checked') && billingValidation()) {
+	if (eventInviteCodeValidation() && personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && $(eventTerms).is(':checked') && billingValidation()) {
 		$('#card-errors').text('')
 		$(paymentButton).css({ 'background-color': '#800000' })
 		$(paymentButton).css({ 'color': '#ffffff' })
@@ -401,7 +407,7 @@ function showErrorsInForm() {
 	const clearInput = { 'border-color': '#ccc', 'background-color': '#fff' }
 	const errorRadio = { 'background-color': '#fdd' }
 	const clearRadio = { 'background-color': 'transparent' }
-	if (!inviteCodeValidation()) { proceed = false; $(eventInviteCodeText).css(errorInput); } else { $(eventInviteCodeText).css(clearInput); }
+	if (!eventInviteCodeValidation()) { proceed = false; $(eventInviteCodeText).css(errorInput); } else { $(eventInviteCodeText).css(clearInput); }
 	if (!$(eventTerms).is(':checked')) { proceed = false; $(eventTermsValidation).css(errorRadio); } else { $(eventTermsValidation).css(clearRadio); }
 	if ($(eventDepositContainer).is(':visible') && !$(eventDepositFull).is(':checked') && !$(eventDepositDeposit).is(':checked')) { proceed = false; $(eventDepositValidation).css(errorRadio); } else { $(eventDepositValidation).css(clearRadio); }
 	if (participants() === 2 && !$(eventPayBoth).is(':checked') && !$(eventPayMe).is(':checked')) { proceed = false; $(eventPayValidation).css(errorRadio); } else { $(eventPayValidation).css(clearRadio); }
@@ -420,6 +426,8 @@ function showErrorsInForm() {
 // SHOW/HIDE FORM ELEMENTS
 // Event Invite Code
 function eventInviteCodePassShow() {
+	const text = eventInviteCodeValidation() && affiliateCode.discount() > 0 ? 'Your invitation code has been accepted.<br />$' + affiliateCode.discount() + ' discount has been applied.' : 'Your invitation code has been accepted.'
+	$(eventInviteCodePass).html(text)
 	$(eventInviteCodePass).show()
 	$(eventInviteCodePass).animate({
 		top: 40,
@@ -427,6 +435,7 @@ function eventInviteCodePassShow() {
 	}, 200)
 }
 function eventInviteCodePassHide() {
+	$(eventInviteCodePass).text('')
 	$(eventInviteCodePass).hide()
 }
 function eventInviteCodeFailShow() {
@@ -499,8 +508,14 @@ function hideDiet() {
 
 
 // EVENT OPTIONS
-function setEventSelect(people) {
+function setEventSelect() {
 	//	Adds event options & prices based on CMS input
+	var people = ''
+	if ($(eventPayBoth).is(':checked')) {
+		people = 'for both'
+	} else if (participants() === 2) {
+		people = 'per person'
+	}
 	var eventOptions = $('#event-options').text().split(' | ')
 	var eventPrices = $('#event-prices').text().split(' | ')
 	$(eventSelect).empty()
@@ -510,14 +525,17 @@ function setEventSelect(people) {
 			text: 'Event option...'
 		}))
 	}
-	people = people ? people : ''
 	const paymentFactor = (people === 'for both') ? 2 : 1
 	const spacer = people ? ' ' : ''
 	const closer = (people || people === '') ? ')' : ''
 	for (var i = 0; i < eventOptions.length; i++) {
+		const affiliateDiscount = eventInviteCodeValidation() ? affiliateCode.discount() : 0
+		const eventSelectPrice = eventPrices[i] * paymentFactor - affiliateDiscount > 0 ? eventPrices[i] * paymentFactor - affiliateDiscount : 0
+		const affiliateDiscountText = eventInviteCodeValidation() && affiliateCode.discount() > 0 && eventSelectPrice > 0 ? ' including discount' : ''
+		const eventSelectText = eventOptions[i] + ' ($' + eventSelectPrice + spacer + people + affiliateDiscountText + closer
 		$(eventSelect).append($('<option>', {
-			value: eventPrices[i] * paymentFactor,
-			text: eventOptions[i] + ' ($' + eventPrices[i] * paymentFactor + spacer + people + closer
+			value: eventSelectPrice,
+			text: eventSelectText
 		}))
 	}
 	const eventDepositPrice = parseInt(eventDepositAmount) * paymentFactor
@@ -533,13 +551,7 @@ function resetEventForm() {
 		eventInviteCodePassHide()
 		eventInviteCodeFailHide()
 	}
-	if ($(eventPayBoth).is(':checked')) {
-		setEventSelect('for both')
-	} else if (participants() === 2) {
-		setEventSelect('per person')
-	} else {
-		setEventSelect('')
-	}
+	setEventSelect()
 	$('#eventcode').val(eventCode)
 	if (!$(eventExperienceYes).is(':checked')) hideExperience()
 	if (!$(eventDietYes).is(':checked')) hideDiet()
@@ -555,6 +567,11 @@ function resetEventForm() {
 	$(eventTerms).attr('checked', false)
 	$(paymentButton).css({ 'background-color': '#f5f5f5' })
 	$(paymentButton).css({ 'color': '#333333' })
+	var affiliateString = window.location.search.slice(1).split('=')
+	if (affiliateString[0] === 'affiliate') {
+		$(eventInviteCodeText).val(affiliateString[1])
+		eventInviteCodeValidationUpdate()
+	}
 }
 
 
@@ -564,15 +581,7 @@ if (page === 'Event') {
 	// EVENT FORM INVITE CODE
 	if ($(eventInviteCodeBox).is(':visible')) {
 		$(eventInviteCodeText).on('change', function () {
-			if ($(eventInviteCodeText).val().length !== 4 || !inviteCodeValidation()) {
-				eventInviteCodePassHide()
-				eventInviteCodeFailShow()
-			} else {
-				eventInviteCodeFailHide()
-				eventInviteCodePassShow()
-				saveForm(page)
-			}
-			eventFormValidation()
+			eventInviteCodeValidationUpdate()
 		})
 	}
 
@@ -595,13 +604,7 @@ if (page === 'Event') {
 		participants() === 2 ? showPartner() : hidePartner()
 	})
 	$(eventPayBoth + ',' + eventPayMe).on('change', function () {
-		if ($(eventPayBoth).is(':checked')) {
-			setEventSelect('for both')
-		} else if (participants() === 2) {
-			setEventSelect('per person')
-		} else {
-			setEventSelect('')
-		}
+		setEventSelect()
 	})
 	const eventFieldsPersonal = eventFirstName + ',' + eventLastName + ',' + eventEmail + ',' + eventMobile + ',' + eventBirthdate + ',' + eventFemale + ',' + eventMale + ',' + eventOther
 	const eventFieldsDetails = eventReferral + ',' + eventExperienceYes + ',' + eventExperienceNo + ',' + eventExperienceDetails + ',' + eventDietYes + ',' + eventDietNo + ',' + eventDietDetails
