@@ -623,6 +623,9 @@ function setEventSelect() {
 // EVENT FORM RESET
 function resetEventForm() {
 	clearForm('Event')
+	hideAffiliate()
+	hideExperience()
+	hideDiet()
 	repopulateForm('Event')
 	if ($(eventInviteBox).is(':visible')) {
 		eventInvitePassHide()
