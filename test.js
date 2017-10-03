@@ -650,8 +650,12 @@ function resetEventForm() {
 	// If URL contains affiliate code, add to invite and affiliate fields
 	var affiliateString = window.location.search.slice(1).split('=')
 	if (affiliateString[0] === 'affiliate') {
-		$(eventInviteCode).val(affiliateString[1])
-		$(eventAffiliateCode).val(affiliateString[1])
+		if ($(eventInviteBox).is(':visible')) {
+			$(eventInviteCode).val(affiliateString[1])
+		} else if ($(eventAffiliateYes).is(':checked')) {
+			showAffiliate()
+			$(eventAffiliateCode).val(affiliateString[1])
+		}
 		eventAffiliateShowErrors()
 	}
 }
