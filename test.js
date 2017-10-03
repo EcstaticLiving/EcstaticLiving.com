@@ -623,7 +623,6 @@ function setEventSelect() {
 // EVENT FORM RESET
 function resetEventForm() {
 	clearForm('Event')
-	console.log('hide');
 	hideAffiliate()
 	hideExperience()
 	hideDiet()
@@ -677,7 +676,7 @@ if (page === 'Event') {
 		if ($(eventAffiliateYes).is(':checked')) showAffiliate()
 		if ($(eventAffiliateNo).is(':checked')) hideAffiliate()
 	})
-	if ($(eventAffiliateYes).is(':checked') {
+	if ($(eventAffiliateYes).is(':checked')) {
 		$(eventAffiliateCode).on('change', function () {
 			eventAffiliateShowErrors()
 		})
