@@ -235,10 +235,10 @@ eventDepositDate = $('#event-deposit-date').text()
 // Event variables
 var payButtonClicked = false;
 const payButton = '#payment-button',
-eventInviteCodeBox = '#event-invitecode-box',
-eventInviteCodeText = '#event-invitecode-text',
-eventInviteCodePass = '#event-invitecode-pass',
-eventInviteCodeFail = '#event-invitecode-fail',
+eventInviteBox = '#event-invitecode-box',
+eventInviteCode = '#event-invitecode-code',
+eventInvitePass = '#event-invitecode-pass',
+eventInviteFail = '#event-invitecode-fail',
 eventFirstName = '#event-firstname',
 eventLastName = '#event-lastname',
 eventEmail = '#event-email',
@@ -258,7 +258,12 @@ eventDietContainer = '.event-container.diet',
 eventDietValidation = '#event-diet-validation',
 eventDietYes = '#event-diet-yes',
 eventDietNo = '#event-diet-no',
-eventDietDetails = '#event-diet-details'
+eventDietDetails = '#event-diet-details',
+eventAffiliateContainer = '.event-container.affiliate',
+eventAffiliateValidation = '#event-affiliatecode-validation',
+eventAffiliateYes = '#event-affiliatecode-yes',
+eventAffiliateNo = '#event-affiliatecode-no',
+eventAffiliateCode = '#event-affiliatecode-code',
 eventStatus = '#event-status',
 eventPartnerContainer = '.event-container.partner',
 eventPartnerName = '#event-partner-name'
@@ -291,15 +296,16 @@ billingCard = '#billing-card'
 
 // Affiliate code, e.g. MADA25TM1710FS
 var affiliateCode = {
-	discount: function() {
-		const discount = 100 - parseInt($(eventInviteCodeText).val().substr(4, 2), 10) === 90
+	discount: function(code) {
+		const discount = 100 - parseInt(code.substr(4, 2), 10) === 90
 			// Assuming no discount, only to unlock event, e.g. ****10********
 			? 0
-			: 100 - parseInt($(eventInviteCodeText).val().substr(4, 2), 10)
+			// With discount
+			: 100 - parseInt(code.substr(4, 2), 10)
 		return (discount === 0 || discount === 25 || discount === 50 || discount === 75 || discount === 100) ? discount : null
 	},
-	verify: function() {
-		return $(eventInviteCodeText).val().substr($(eventInviteCodeText).val().length - 8).toLowerCase() === eventCode && this.discount() !== null
+	verify: function(code) {
+		return code.substr(code.length - 8).toLowerCase() === eventCode && this.discount() !== null
 	}
 }
 
@@ -313,32 +319,16 @@ function participants() {
 	}
 }
 
+
 // FORM VALIDATION
 // Event Invite Code Validation
-function eventInviteCodeValidation() {
-	if ($(eventInviteCodeBox).is(':visible')) {
-		if (affiliateCode.verify()) {
-			return true
-		}
-		return false
+function eventAffiliateValidation() {
+	if ($(eventInviteBox).is(':visible')) {
+		return affiliateCode.verify($(eventInviteCode).val())
+	} else if ($(eventAffiliateYes).is(':checked')) {
+		return affiliateCode.verify($(eventAffiliateCode).val())
 	}
 	return true
-}
-function eventInviteCodeValidationUpdate() {
-	if ($(eventInviteCodeText).val().length > 0) {
-		if (!eventInviteCodeValidation()) {
-			eventInviteCodePassHide()
-			eventInviteCodeFailShow()
-		} else {
-			eventInviteCodeFailHide()
-			eventInviteCodePassShow()
-		}
-	} else {
-		eventInviteCodePassHide()
-		eventInviteCodeFailHide()
-	}
-	setEventSelect()
-	eventFormValidation()
 }
 // Name & Gender Validation
 function personalValidation() {
@@ -350,9 +340,11 @@ function personalValidation() {
 }
 // Details Validation
 function detailsValidation() {
-	if ($(eventReferral).val() !== ''
+	if (
+		$(eventReferral).val() !== ''
 		&& (($(eventExperienceYes).is(':checked') && $(eventExperienceDetails).val() !== '') || $(eventExperienceNo).is(':checked'))
-		&& (($(eventDietYes).is(':checked') && $(eventDietDetails).val() !== '') || $(eventDietNo).is(':checked'))) {
+		&& (($(eventDietYes).is(':checked') && $(eventDietDetails).val() !== '') || $(eventDietNo).is(':checked'))
+	) {
 		return true
 	}
 	return false
@@ -390,7 +382,7 @@ function billingValidation() {
 }
 // Complete Validation
 function eventFormValidation() {
-	if (eventInviteCodeValidation() && personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && $(eventTerms).is(':checked') && billingValidation()) {
+	if (eventAffiliateValidation() && personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && $(eventTerms).is(':checked') && billingValidation()) {
 		$('#card-errors').text('')
 		$(paymentButton).css({ 'background-color': '#800000' })
 		$(paymentButton).css({ 'color': '#ffffff' })
@@ -400,19 +392,53 @@ function eventFormValidation() {
 	$(paymentButton).css({ 'color': '#333333' })
 	return false
 }
-// Error indicators
+
+
+// VISUAL ERROR INDICATORS
+function eventAffiliateShowErrors() {
+	if ($(eventInviteBox).is(':visible')) {
+		if ($(eventInviteCode).val().length > 0) {
+			if (!eventAffiliateValidation()) {
+				eventInvitePassHide()
+				eventInviteFailShow()
+			} else {
+				eventInviteFailHide()
+				eventInvitePassShow()
+			}
+		} else {
+			eventInvitePassHide()
+			eventInviteFailHide()
+		}
+	} else if ($(eventAffiliateYes).is(':checked')) {
+		if ($(eventAffiliateCode).val().length > 0) {
+			if (!eventAffiliateValidation()) {
+				eventAffiliatePassHide()
+				eventAffiliateFailShow()
+			} else {
+				eventAffiliateFailHide()
+				eventAffiliatePassShow()
+			}
+		} else {
+			eventAffiliatePassHide()
+			eventAffiliateFailHide()
+		}
+	}
+	setEventSelect()
+	eventFormValidation()
+}
 function showErrorsInForm() {
 	var proceed = true;
 	const errorInput = { 'border-color': '#b00000', 'background-color': '#fdd' }
 	const clearInput = { 'border-color': '#ccc', 'background-color': '#fff' }
 	const errorRadio = { 'background-color': '#fdd' }
 	const clearRadio = { 'background-color': 'transparent' }
-	if (!eventInviteCodeValidation()) { proceed = false; $(eventInviteCodeText).css(errorInput); } else { $(eventInviteCodeText).css(clearInput); }
+	if (!eventAffiliateValidation()) { proceed = false; $(eventInviteCode).css(errorInput); } else { $(eventInviteCode).css(clearInput); }
 	if (!$(eventTerms).is(':checked')) { proceed = false; $(eventTermsValidation).css(errorRadio); } else { $(eventTermsValidation).css(clearRadio); }
 	if ($(eventDepositContainer).is(':visible') && !$(eventDepositFull).is(':checked') && !$(eventDepositDeposit).is(':checked')) { proceed = false; $(eventDepositValidation).css(errorRadio); } else { $(eventDepositValidation).css(clearRadio); }
 	if (participants() === 2 && !$(eventPayBoth).is(':checked') && !$(eventPayMe).is(':checked')) { proceed = false; $(eventPayValidation).css(errorRadio); } else { $(eventPayValidation).css(clearRadio); }
 	if (participants() === 2 && !$(eventPartnerFemale).is(':checked') && !$(eventPartnerMale).is(':checked') && !$(eventPartnerOther).is(':checked')) { proceed = false; $(eventPartnerGenderValidation).css(errorRadio); } else { $(eventPartnerGenderValidation).css(clearRadio); }
 	if (participants() === 2 && $(eventPartnerName).val() === '') { proceed = false; $(eventPartnerName).css(errorInput); $(eventPartnerName).focus() } else { $(eventPartnerName).css(clearInput) }
+	if ($(eventAffiliateYes).is(':checked') && $(eventAffiliateCode).val() === '') { proceed = false; $(eventAffiliateValidation).css(errorRadio); } else { $(eventAffiliateValidation).css(clearRadio); }
 	if (!$(eventDietYes).is(':checked') && !$(eventDietNo).is(':checked')) { proceed = false; $(eventDietValidation).css(errorRadio); } else { $(eventDietValidation).css(clearRadio); }
 	if ($(eventDietYes).is(':checked') && $(eventDietDetails).val() === '') { proceed = false; $(eventDietDetails).css(errorInput); } else { $(eventDietDetails).css(clearInput); }
 	if (!$(eventExperienceYes).is(':checked') && !$(eventExperienceNo).is(':checked')) { proceed = false; $(eventExperienceValidation).css(errorRadio); } else { $(eventExperienceValidation).css(clearRadio); }
@@ -425,30 +451,56 @@ function showErrorsInForm() {
 
 // SHOW/HIDE FORM ELEMENTS
 // Event Invite Code
-function eventInviteCodePassShow() {
-	const text = eventInviteCodeValidation() && affiliateCode.discount() > 0 ? 'Your invitation code has been accepted.<br />$' + affiliateCode.discount() + ' discount has been applied.' : 'Your invitation code has been accepted.'
-	$(eventInviteCodePass).html(text)
-	$(eventInviteCodePass).show()
-	$(eventInviteCodePass).animate({
+function eventInvitePassShow() {
+	const text = eventAffiliateValidation() && affiliateCode.discount($(eventInviteCode).val()) > 0 ? 'Your invitation code has been accepted.<br />$' + affiliateCode.discount($(eventInviteCode).val()) + ' discount has been applied.' : 'Your invitation code has been accepted.'
+	$(eventInvitePass).html(text)
+	$(eventInvitePass).show()
+	$(eventInvitePass).animate({
 		top: 40,
 		opacity: 1
 	}, 200)
 }
-function eventInviteCodePassHide() {
-	$(eventInviteCodePass).text('')
-	$(eventInviteCodePass).hide()
+function eventInvitePassHide() {
+	$(eventInvitePass).text('')
+	$(eventInvitePass).hide()
 }
-function eventInviteCodeFailShow() {
-	$(eventInviteCodeFail).show()
-	$(eventInviteCodeFail).animate({
+function eventInviteFailShow() {
+	$(eventInviteFail).show()
+	$(eventInviteFail).animate({
 		top: 40,
 		opacity: 1
 	}, 200)
-	$(eventInviteCodeText).val('')
-	$(eventInviteCodeText).focus()
+	$(eventInviteCode).val('')
+	$(eventInviteCode).focus()
 }
-function eventInviteCodeFailHide() {
-	$(eventInviteCodeFail).hide()
+function eventInviteFailHide() {
+	$(eventInviteFail).hide()
+}
+// Affiliate Code
+function eventAffiliatePassShow() {
+	const text = eventAffiliateValidation() && affiliateCode.discount($(eventAffiliateCode).val()) > 0 ? 'Your affiliate code has been accepted.<br />$' + affiliateCode.discount($(eventAffiliateCode).val()) + ' discount has been applied.' : 'Your affiliate code has been accepted.'
+	$(eventAffiliatePass).html(text)
+	$(eventAffiliatePass).show()
+	$(eventAffiliatePass).animate({
+		top: 40,
+		opacity: 1
+	}, 200)
+}
+function eventAffiliatePassHide() {
+	$(eventAffiliatePass).text('')
+	$(eventAffiliatePass).hide()
+}
+function eventAffiliateFailShow() {
+	$(eventAffiliateFail).show()
+	$(eventAffiliateFail).animate({
+		top: 40,
+		opacity: 1
+	}, 200)
+	$(eventAffiliateCode).val('')
+	$(eventAffiliateCode).focus()
+}
+function eventAffiliateFailHide() {
+	$(eventAffiliateFail).hide()
 }
 // Partner
 function showPartner() {
@@ -507,7 +559,15 @@ function hideDiet() {
 }
 
 
-// EVENT OPTIONS
+// EVENT OPTIONS AND PRICE CALCULATION
+function eventAffiliateDiscount() {
+	if (eventAffiliateValidation() && $(eventInviteBox).is(':visible')) {
+		return affiliateCode.discount($(eventInviteCode).val())
+	} else if (eventAffiliateValidation() && $(eventAffiliateYes).is(':checked')) {
+		return affiliateCode.discount($(eventAffiliateCode).val())
+	}
+	return null
+}
 function setEventSelect() {
 	//	Adds event options & prices based on CMS input
 	var people = ''
@@ -529,9 +589,9 @@ function setEventSelect() {
 	const spacer = people ? ' ' : ''
 	const closer = (people || people === '') ? ')' : ''
 	for (var i = 0; i < eventOptions.length; i++) {
-		const affiliateDiscount = eventInviteCodeValidation() ? affiliateCode.discount() : 0
-		const eventSelectPrice = eventPrices[i] * paymentFactor - affiliateDiscount > 0 ? eventPrices[i] * paymentFactor - affiliateDiscount : 0
-		const affiliateDiscountText = eventInviteCodeValidation() && affiliateCode.discount() > 0 && eventSelectPrice > 0 ? ' including discount' : ''
+		// Event price cannot be less than $0 after discount is applied
+		const eventSelectPrice = eventPrices[i] * paymentFactor - eventAffiliateDiscount() > 0 ? eventPrices[i] * paymentFactor - eventAffiliateDiscount() : 0
+		const affiliateDiscountText = eventAffiliateDiscount() > 0 ? ' including discount' : ''
 		const eventSelectText = eventOptions[i] + ' ($' + eventSelectPrice + spacer + people + affiliateDiscountText + closer
 		$(eventSelect).append($('<option>', {
 			value: eventSelectPrice,
@@ -547,9 +607,9 @@ function setEventSelect() {
 function resetEventForm() {
 	clearForm('Event')
 	repopulateForm('Event')
-	if ($(eventInviteCodeBox).is(':visible')) {
-		eventInviteCodePassHide()
-		eventInviteCodeFailHide()
+	if ($(eventInviteBox).is(':visible')) {
+		eventInvitePassHide()
+		eventInviteFailHide()
 	}
 	setEventSelect()
 	$('#eventcode').val(eventCode)
@@ -569,8 +629,8 @@ function resetEventForm() {
 	$(paymentButton).css({ 'color': '#333333' })
 	var affiliateString = window.location.search.slice(1).split('=')
 	if (affiliateString[0] === 'affiliate') {
-		$(eventInviteCodeText).val(affiliateString[1])
-		eventInviteCodeValidationUpdate()
+		$(eventInviteCode).val(affiliateString[1])
+		eventAffiliateShowErrors()
 	}
 }
 
@@ -579,9 +639,9 @@ function resetEventForm() {
 if (page === 'Event') {
 
 	// EVENT FORM INVITE CODE
-	if ($(eventInviteCodeBox).is(':visible')) {
-		$(eventInviteCodeText).on('change', function () {
-			eventInviteCodeValidationUpdate()
+	if ($(eventInviteBox).is(':visible')) {
+		$(eventInviteCode).on('change', function () {
+			eventAffiliateShowErrors()
 		})
 	}
 
