@@ -654,6 +654,7 @@ function resetEventForm() {
 			$(eventInviteCode).val(affiliateString[1])
 		} else {
 			$(eventAffiliateYes).prop('checked', true)
+			showAffiliate()
 			$(eventAffiliateCode).val(affiliateString[1])
 		}
 		eventAffiliateShowErrors()
