@@ -264,6 +264,8 @@ eventAffiliateValidation = '#event-affiliatecode-validation',
 eventAffiliateYes = '#event-affiliatecode-yes',
 eventAffiliateNo = '#event-affiliatecode-no',
 eventAffiliateCode = '#event-affiliatecode-code',
+eventAffiliatePass = '#event-affiliatecode-pass',
+eventAffiliateFail = '#event-affiliatecode-fail',
 eventStatus = '#event-status',
 eventPartnerContainer = '.event-container.partner',
 eventPartnerName = '#event-partner-name'
@@ -477,6 +479,21 @@ function eventInviteFailHide() {
 	$(eventInviteFail).hide()
 }
 // Affiliate Code
+function showAffiliate() {
+	$(eventAffiliateContainer).show()
+	$(eventAffiliateContainer).animate({
+		top: 40,
+		opacity: 1
+	}, 200)
+}
+function hideAffiliate() {
+	$(eventAffiliateCode).val('')
+	$(eventAffiliateContainer).animate({
+		top: 0,
+		opacity: 0
+	}, 200)
+	$(eventAffiliateContainer).hide()
+}
 function eventAffiliatePassShow() {
 	const text = eventAffiliateValidation() && affiliateCode.discount($(eventAffiliateCode).val()) > 0 ? 'Your affiliate code has been accepted.<br />$' + affiliateCode.discount($(eventAffiliateCode).val()) + ' discount has been applied.' : 'Your affiliate code has been accepted.'
 	$(eventAffiliatePass).html(text)
@@ -627,9 +644,11 @@ function resetEventForm() {
 	$(eventTerms).attr('checked', false)
 	$(paymentButton).css({ 'background-color': '#f5f5f5' })
 	$(paymentButton).css({ 'color': '#333333' })
+	// If URL contains affiliate code, add to invite and affiliate fields
 	var affiliateString = window.location.search.slice(1).split('=')
 	if (affiliateString[0] === 'affiliate') {
 		$(eventInviteCode).val(affiliateString[1])
+		$(eventAffiliateCode).val(affiliateString[1])
 		eventAffiliateShowErrors()
 	}
 }
@@ -638,19 +657,26 @@ function resetEventForm() {
 // EVENT FORM: BEGIN SEQUENCE
 if (page === 'Event') {
 
-	// EVENT FORM INVITE CODE
+	// EVENT FORM ONCHANGE EVENTS
 	if ($(eventInviteBox).is(':visible')) {
 		$(eventInviteCode).on('change', function () {
 			eventAffiliateShowErrors()
 		})
 	}
-
-	// EVENT FORM ONCHANGE EVENTS
 	$(eventFirstName).on('change', function () {
 		$(billingFirstName).val($(eventFirstName).val())
 	})
 	$(eventLastName).on('change', function () {
 		$(billingLastName).val($(eventLastName).val())
+	})
+	$(eventAffiliateNo + ',' + eventAffiliateYes).on('change', function () {
+		if ($(eventAffiliateYes).is(':checked')) showAffiliate()
+		if ($(eventAffiliateNo).is(':checked')) hideAffiliate()
+	})
+	if ($(eventAffiliateYes).is(':checked') {
+		$(eventAffiliateCode).on('change', function () {
+			eventAffiliateShowErrors()
+		})
 	})
 	$(eventDietNo + ',' + eventDietYes).on('change', function () {
 		if ($(eventDietYes).is(':checked')) showDiet()
