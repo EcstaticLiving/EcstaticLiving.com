@@ -332,9 +332,9 @@ function participants() {
 // Event Invite Code Validation
 function eventAffiliateValidation() {
 	if ($(eventInviteBox).is(':visible')) {
-		return affiliateCode().verify($(eventInviteCode).val())
+		return affiliateCode($(eventInviteCode).val()).verify()
 	} else if ($(eventAffiliateYes).is(':checked')) {
-		return affiliateCode().verify($(eventAffiliateCode).val())
+		return affiliateCode($(eventAffiliateCode).val()).verify()
 	}
 	return true
 }
@@ -460,7 +460,7 @@ function showErrorsInForm() {
 // SHOW/HIDE FORM ELEMENTS
 // Event Invite Code
 function eventInvitePassShow() {
-	const text = eventAffiliateValidation() && affiliateCode().discount($(eventInviteCode).val()) > 0 ? 'Your invitation code has been accepted.<br />$' + affiliateCode().discount($(eventInviteCode).val()) + ' discount has been applied.' : 'Your invitation code has been accepted.'
+	const text = eventAffiliateValidation() && affiliateCode($(eventInviteCode).val()).discount() > 0 ? 'Your invitation code has been accepted.<br />$' + affiliateCode($(eventInviteCode).val()).discount() + ' discount has been applied.' : 'Your invitation code has been accepted.'
 	$(eventInvitePass).html(text)
 	$(eventInvitePass).show()
 	$(eventInvitePass).animate({
@@ -501,7 +501,7 @@ function hideAffiliate() {
 	$(eventAffiliateContainer).hide()
 }
 function eventAffiliatePassShow() {
-	const text = eventAffiliateValidation() && affiliateCode().discount($(eventAffiliateCode).val()) > 0 ? 'Your affiliate code has been accepted.<br />$' + affiliateCode().discount($(eventAffiliateCode).val()) + ' discount has been applied.' : 'Your affiliate code has been accepted.'
+	const text = eventAffiliateValidation() && affiliateCode($(eventAffiliateCode).val()).discount() > 0 ? 'Your affiliate code has been accepted.<br />$' + affiliateCode($(eventAffiliateCode).val()).discount() + ' discount has been applied.' : 'Your affiliate code has been accepted.'
 	$(eventAffiliatePass).html(text)
 	$(eventAffiliatePass).show()
 	$(eventAffiliatePass).animate({
@@ -585,9 +585,9 @@ function hideDiet() {
 // EVENT OPTIONS AND PRICE CALCULATION
 function eventAffiliateDiscount() {
 	if (eventAffiliateValidation() && $(eventInviteBox).is(':visible')) {
-		return affiliateCode().discount($(eventInviteCode).val())
+		return affiliateCode($(eventInviteCode).val()).discount()
 	} else if (eventAffiliateValidation() && $(eventAffiliateYes).is(':checked')) {
-		return affiliateCode().discount($(eventAffiliateCode).val())
+		return affiliateCode($(eventAffiliateCode).val()).discount()
 	}
 	return null
 }
