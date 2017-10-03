@@ -623,6 +623,7 @@ function setEventSelect() {
 // EVENT FORM RESET
 function resetEventForm() {
 	clearForm('Event')
+	console.log('hide');
 	hideAffiliate()
 	hideExperience()
 	hideDiet()
