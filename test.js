@@ -298,16 +298,16 @@ billingCard = '#billing-card'
 
 // Affiliate code, e.g. MADA25TM1710FS
 var affiliateCode = {
-	discount: function(code) {
-		const discount = 100 - parseInt(code.substr(4, 2), 10) === 90
+	discount: function() {
+		const discount = 100 - parseInt(this.code.substr(4, 2), 10) === 90
 			// Assuming no discount, only to unlock event, e.g. ****10********
 			? 0
 			// With discount
-			: 100 - parseInt(code.substr(4, 2), 10)
+			: 100 - parseInt(this.code.substr(4, 2), 10)
 		return (discount === 0 || discount === 25 || discount === 50 || discount === 75 || discount === 100) ? discount : null
 	},
-	verify: function(code) {
-		return code.substr(code.length - 8).toLowerCase() === eventCode && this.discount() !== null
+	verify: function() {
+		return this.code.substr(this.code.length - 8).toLowerCase() === eventCode && this.discount() !== null
 	}
 }
 
@@ -326,9 +326,9 @@ function participants() {
 // Event Invite Code Validation
 function eventAffiliateValidation() {
 	if ($(eventInviteBox).is(':visible')) {
-		return affiliateCode.verify($(eventInviteCode).val())
+		return affiliateCode.verify.call({ code: $(eventInviteCode).val() })
 	} else if ($(eventAffiliateYes).is(':checked')) {
-		return affiliateCode.verify($(eventAffiliateCode).val())
+		return affiliateCode.verify.call({ code: $(eventAffiliateCode).val() })
 	}
 	return true
 }
@@ -454,7 +454,7 @@ function showErrorsInForm() {
 // SHOW/HIDE FORM ELEMENTS
 // Event Invite Code
 function eventInvitePassShow() {
-	const text = eventAffiliateValidation() && affiliateCode.discount($(eventInviteCode).val()) > 0 ? 'Your invitation code has been accepted.<br />$' + affiliateCode.discount($(eventInviteCode).val()) + ' discount has been applied.' : 'Your invitation code has been accepted.'
+	const text = eventAffiliateValidation() && affiliateCode.discount.call({ code: $(eventInviteCode).val() }) > 0 ? 'Your invitation code has been accepted.<br />$' + affiliateCode.discount.call({ code: $(eventInviteCode).val() }) + ' discount has been applied.' : 'Your invitation code has been accepted.'
 	$(eventInvitePass).html(text)
 	$(eventInvitePass).show()
 	$(eventInvitePass).animate({
@@ -495,7 +495,7 @@ function hideAffiliate() {
 	$(eventAffiliateContainer).hide()
 }
 function eventAffiliatePassShow() {
-	const text = eventAffiliateValidation() && affiliateCode.discount($(eventAffiliateCode).val()) > 0 ? 'Your affiliate code has been accepted.<br />$' + affiliateCode.discount($(eventAffiliateCode).val()) + ' discount has been applied.' : 'Your affiliate code has been accepted.'
+	const text = eventAffiliateValidation() && affiliateCode.discount.call({ code: $(eventAffiliateCode).val() }) > 0 ? 'Your affiliate code has been accepted.<br />$' + affiliateCode.discount.call({ code: $(eventAffiliateCode).val() }) + ' discount has been applied.' : 'Your affiliate code has been accepted.'
 	$(eventAffiliatePass).html(text)
 	$(eventAffiliatePass).show()
 	$(eventAffiliatePass).animate({
@@ -579,9 +579,9 @@ function hideDiet() {
 // EVENT OPTIONS AND PRICE CALCULATION
 function eventAffiliateDiscount() {
 	if (eventAffiliateValidation() && $(eventInviteBox).is(':visible')) {
-		return affiliateCode.discount($(eventInviteCode).val())
+		return affiliateCode.discount.call({ code: $(eventInviteCode).val() })
 	} else if (eventAffiliateValidation() && $(eventAffiliateYes).is(':checked')) {
-		return affiliateCode.discount($(eventAffiliateCode).val())
+		return affiliateCode.discount.call({ code: $(eventAffiliateCode).val() })
 	}
 	return null
 }
