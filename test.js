@@ -680,7 +680,7 @@ if (page === 'Event') {
 		$(eventAffiliateCode).on('change', function () {
 			eventAffiliateShowErrors()
 		})
-	})
+	}
 	$(eventDietNo + ',' + eventDietYes).on('change', function () {
 		if ($(eventDietYes).is(':checked')) showDiet()
 		if ($(eventDietNo).is(':checked')) hideDiet()
