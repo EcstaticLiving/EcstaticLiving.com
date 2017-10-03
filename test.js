@@ -250,17 +250,17 @@ eventMale = '#event-gender-male',
 eventOther = '#event-gender-other',
 eventReferral = '#event-referral',
 eventExperienceContainer = '.event-container.experience',
-eventExperienceValidation = '#event-experience-validation',
+eventExperienceParsleyError = '#event-experience-validation',
 eventExperienceYes = '#event-experience-yes',
 eventExperienceNo = '#event-experience-no',
 eventExperienceDetails = '#event-experience-details',
 eventDietContainer = '.event-container.diet',
-eventDietValidation = '#event-diet-validation',
+eventDietParsleyError = '#event-diet-validation',
 eventDietYes = '#event-diet-yes',
 eventDietNo = '#event-diet-no',
 eventDietDetails = '#event-diet-details',
 eventAffiliateContainer = '.event-container.affiliate',
-eventAffiliateValidation = '#event-affiliatecode-validation',
+eventAffiliateParsleyError = '#event-affiliatecode-validation',
 eventAffiliateYes = '#event-affiliatecode-yes',
 eventAffiliateNo = '#event-affiliatecode-no',
 eventAffiliateCode = '#event-affiliatecode-code',
@@ -440,10 +440,10 @@ function showErrorsInForm() {
 	if (participants() === 2 && !$(eventPayBoth).is(':checked') && !$(eventPayMe).is(':checked')) { proceed = false; $(eventPayValidation).css(errorRadio); } else { $(eventPayValidation).css(clearRadio); }
 	if (participants() === 2 && !$(eventPartnerFemale).is(':checked') && !$(eventPartnerMale).is(':checked') && !$(eventPartnerOther).is(':checked')) { proceed = false; $(eventPartnerGenderValidation).css(errorRadio); } else { $(eventPartnerGenderValidation).css(clearRadio); }
 	if (participants() === 2 && $(eventPartnerName).val() === '') { proceed = false; $(eventPartnerName).css(errorInput); $(eventPartnerName).focus() } else { $(eventPartnerName).css(clearInput) }
-	if ($(eventAffiliateYes).is(':checked') && $(eventAffiliateCode).val() === '') { proceed = false; $(eventAffiliateValidation).css(errorRadio); } else { $(eventAffiliateValidation).css(clearRadio); }
-	if (!$(eventDietYes).is(':checked') && !$(eventDietNo).is(':checked')) { proceed = false; $(eventDietValidation).css(errorRadio); } else { $(eventDietValidation).css(clearRadio); }
+	if ($(eventAffiliateYes).is(':checked') && $(eventAffiliateCode).val() === '') { proceed = false; $(eventAffiliateParsleyError).css(errorRadio); } else { $(eventAffiliateParsleyError).css(clearRadio); }
+	if (!$(eventDietYes).is(':checked') && !$(eventDietNo).is(':checked')) { proceed = false; $(eventDietParsleyError).css(errorRadio); } else { $(eventDietParsleyError).css(clearRadio); }
 	if ($(eventDietYes).is(':checked') && $(eventDietDetails).val() === '') { proceed = false; $(eventDietDetails).css(errorInput); } else { $(eventDietDetails).css(clearInput); }
-	if (!$(eventExperienceYes).is(':checked') && !$(eventExperienceNo).is(':checked')) { proceed = false; $(eventExperienceValidation).css(errorRadio); } else { $(eventExperienceValidation).css(clearRadio); }
+	if (!$(eventExperienceYes).is(':checked') && !$(eventExperienceNo).is(':checked')) { proceed = false; $(eventExperienceParsleyError).css(errorRadio); } else { $(eventExperienceParsleyError).css(clearRadio); }
 	if ($(eventExperienceYes).is(':checked') && $(eventExperienceDetails).val() === '') { proceed = false; $(eventExperienceDetails).css(errorInput); } else { $(eventExperienceDetails).css(clearInput); }
 	if (!$(eventFemale).is(':checked') && !$(eventMale).is(':checked') && !$(eventOther).is(':checked')) { proceed = false; $(eventGenderValidation).css(errorRadio); } else { $(eventGenderValidation).css(clearRadio); }
 	$eventForm.parsley().validate()
