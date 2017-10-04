@@ -585,6 +585,8 @@ function eventAffiliateDiscount() {
 	if (eventAffiliateValidation() && $(eventInviteBox).is(':visible')) {
 		return affiliateCode($(eventInviteCode).val()).discount()
 	} else if (eventAffiliateValidation() && $(eventAffiliateYes).is(':checked')) {
+		console.log($(eventAffiliateCode).val());
+		console.log(affiliateCode($(eventAffiliateCode).val()).discount());
 		return affiliateCode($(eventAffiliateCode).val()).discount()
 	}
 	return null
