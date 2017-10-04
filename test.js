@@ -587,8 +587,6 @@ function eventAffiliateDiscount() {
 		if ($(eventInviteBox).is(':visible')) {
 			return affiliateCode($(eventInviteCode).val()).discount()
 		} else if ($(eventAffiliateYes).is(':checked')) {
-			console.log($(eventAffiliateCode).val());
-			console.log(affiliateCode($(eventAffiliateCode).val()).discount());
 			return affiliateCode($(eventAffiliateCode).val()).discount()
 		}
 	}
@@ -668,6 +666,8 @@ function resetEventForm() {
 			$(eventInviteCode).val(affiliateString[1])
 			// Verify affiliate code
 			eventAffiliateShowErrors()
+			// Adjust prices
+			setEventSelect()
 		}
 	}
 	// If public event...
@@ -685,6 +685,8 @@ function resetEventForm() {
 			$(eventAffiliateCode).val(affiliateString[1])
 			// Verify affiliate code
 			eventAffiliateShowErrors()
+			// Adjust prices
+			setEventSelect()
 		}
 	}
 }
