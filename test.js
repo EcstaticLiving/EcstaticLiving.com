@@ -259,6 +259,7 @@ eventDietParsleyError = '#event-diet-validation',
 eventDietYes = '#event-diet-yes',
 eventDietNo = '#event-diet-no',
 eventDietDetails = '#event-diet-details',
+eventAffiliateSelectionContainer = '.event-container.affiliate-selection',
 eventAffiliateContainer = '.event-container.affiliate',
 eventAffiliateParsleyError = '#event-affiliatecode-validation',
 eventAffiliateYes = '#event-affiliatecode-yes',
@@ -669,6 +670,7 @@ if (page === 'Event') {
 
 	// EVENT FORM ONCHANGE EVENTS
 	if ($(eventInviteBox).is(':visible')) {
+		$(eventAffiliateSelectionContainer).hide()
 		$(eventInviteCode).on('change', function () {
 			eventAffiliateShowErrors()
 		})
