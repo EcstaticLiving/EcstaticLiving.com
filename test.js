@@ -582,6 +582,7 @@ function hideDiet() {
 
 // EVENT OPTIONS AND PRICE CALCULATION
 function eventAffiliateDiscount() {
+	// Test if discount even applies
 	if (eventAffiliateValidation()) {
 		if ($(eventInviteBox).is(':visible')) {
 			return affiliateCode($(eventInviteCode).val()).discount()
