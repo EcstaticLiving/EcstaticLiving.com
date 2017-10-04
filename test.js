@@ -1013,6 +1013,7 @@ $(payButton).on('click', function(e) {
 		$('#qbrecord').val(qbRecord)
 		if (window.location.search) {
 			var trafficSource = window.location.search.slice(1).split('=')
+			console.log(trafficSource);
 			if (trafficSource[0] === 'source') {
 				$('#trafficsource').val(trafficSource[1])
 			} else {
