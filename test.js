@@ -1021,7 +1021,7 @@ $(payButton).on('click', function(e) {
 		}
 		$('#qbrecord').val(qbRecord)
 		var trafficSource = window.location.search.slice(1).split('=')
-		if (trafficSource[0] === 'source') {
+		if (window.location.search && trafficSource[0] === 'source') {
 			$('#trafficsource').val(trafficSource[1])
 		} else {
 			$('#trafficsource').val('ELI')
