@@ -430,7 +430,6 @@ function eventAffiliateShowErrors() {
 			eventAffiliateFailHide()
 		}
 	}
-	setEventSelect()
 }
 function showErrorsInForm() {
 	const errorInput = { 'border-color': '#b00000', 'background-color': '#fdd' }
@@ -692,7 +691,12 @@ if (page === 'Event') {
 	// EVENT FORM ONCHANGE EVENTS
 	if ($(eventInviteBox).is(':visible')) {
 		$(eventInviteCode).on('change', function () {
+			// Show errors, if any
 			eventAffiliateShowErrors()
+			// Adjust prices
+			setEventSelect()
+			// Validate form
+			eventFormValidation()
 		})
 	}
 	$(eventFirstName).on('change', function () {
@@ -702,7 +706,12 @@ if (page === 'Event') {
 		$(billingLastName).val($(eventLastName).val())
 	})
 	$(eventAffiliateNo + ',' + eventAffiliateYes).on('change', function () {
+		// Show errors, if any
 		eventAffiliateShowErrors()
+		// Adjust prices
+		setEventSelect()
+		// Validate form
+		eventFormValidation()
 		if ($(eventAffiliateYes).is(':checked')) showAffiliate()
 		if ($(eventAffiliateNo).is(':checked')) hideAffiliate()
 	})
