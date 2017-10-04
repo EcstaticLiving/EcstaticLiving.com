@@ -689,11 +689,11 @@ if (page === 'Event') {
 		if ($(eventAffiliateYes).is(':checked')) showAffiliate()
 		if ($(eventAffiliateNo).is(':checked')) hideAffiliate()
 	})
-	if ($(eventAffiliateYes).is(':checked')) {
-		$(eventAffiliateCode).on('change', function () {
+	$(eventAffiliateCode).on('change', function () {
+		if ($(eventAffiliateYes).is(':checked')) {
 			eventAffiliateShowErrors()
-		})
-	}
+		}
+	})
 	$(eventDietNo + ',' + eventDietYes).on('change', function () {
 		if ($(eventDietYes).is(':checked')) showDiet()
 		if ($(eventDietNo).is(':checked')) hideDiet()
