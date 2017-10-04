@@ -1012,9 +1012,12 @@ $(payButton).on('click', function(e) {
 		}
 		$('#qbrecord').val(qbRecord)
 		if (window.location.search) {
-			$('#trafficsource').val(window.location.search.split('=')[1])
-		} else {
-			$('#trafficsource').val('ELI')
+			var trafficSource = window.location.search.slice(1).split('=')
+			if (trafficSource[0] === 'source') {
+				$('#trafficsource').val(trafficSource[1])
+			} else {
+				$('#trafficsource').val('ELI')
+			}
 		}
 		count = $(eventSelect).prop('selectedIndex') - 1
 		chargeAmount = $(eventDepositDeposit).is(':checked') ? eventDepositPrice * 100 : $(eventSelect).val() * 100
