@@ -431,7 +431,6 @@ function eventAffiliateShowErrors() {
 		}
 	}
 	setEventSelect()
-	eventFormValidation()
 }
 function showErrorsInForm() {
 	const errorInput = { 'border-color': '#b00000', 'background-color': '#fdd' }
