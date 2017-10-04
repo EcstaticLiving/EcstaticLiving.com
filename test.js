@@ -654,8 +654,10 @@ function resetEventForm() {
 	var affiliateString = window.location.search.slice(1).split('=')
 	if (affiliateString[0] === 'affiliate') {
 		if ($(eventInviteBox).is(':visible')) {
+			$(eventAffiliateSelectionContainer).hide()
 			$(eventInviteCode).val(affiliateString[1])
 		} else {
+			$(eventAffiliateSelectionContainer).show()
 			$(eventAffiliateYes).prop('checked', true)
 			showAffiliate()
 			$(eventAffiliateCode).val(affiliateString[1])
@@ -670,8 +672,6 @@ if (page === 'Event') {
 
 	// EVENT FORM ONCHANGE EVENTS
 	if ($(eventInviteBox).is(':visible')) {
-		console.log(eventAffiliateSelectionContainer);
-		$(eventAffiliateSelectionContainer).hide()
 		$(eventInviteCode).on('change', function () {
 			eventAffiliateShowErrors()
 		})
