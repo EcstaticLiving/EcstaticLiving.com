@@ -404,6 +404,8 @@ function eventFormValidation() {
 
 // VISUAL ERROR INDICATORS
 function eventAffiliateShowErrors() {
+	console.log($(eventAffiliateYes).is(':checked'));
+	console.log(eventAffiliateValidation());
 	if ($(eventInviteBox).is(':visible')) {
 		if ($(eventInviteCode).val().length > 0) {
 			if (!eventAffiliateValidation()) {
@@ -419,7 +421,6 @@ function eventAffiliateShowErrors() {
 		}
 	} else if ($(eventAffiliateYes).is(':checked')) {
 		if ($(eventAffiliateCode).val().length > 0) {
-			console.log(eventAffiliateValidation());
 			if (!eventAffiliateValidation()) {
 				eventAffiliatePassHide()
 				eventAffiliateFailShow()
