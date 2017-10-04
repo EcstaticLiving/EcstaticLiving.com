@@ -296,11 +296,20 @@ billingPostal = '#billing-postal',
 billingCountry = '#billing-country',
 billingCard = '#billing-card'
 
-// Affiliate code, e.g. MADA25TM1710FS
-function affiliateDiscount(code) {
 
+
+// PARTICIPANTS
+function participants() {
+	if (($(eventStatus).find('option:selected').val() === 'Couple') || ($(eventStatus).find('option:selected').val() === 'Two Singles (paired)')) {
+		return 2
+	} else if ($(eventStatus).find('option:selected').val() === 'Single') {
+		return 1
+	}
 }
 
+
+// FORM VALIDATION
+// Affiliate code, e.g. MADA25TM1710FS
 function affiliateCode(code) {
 	var obj = new Object()
 	obj.discount = function() {
@@ -316,20 +325,7 @@ function affiliateCode(code) {
 	}
 	return obj
 }
-
-
-// PARTICIPANTS
-function participants() {
-	if (($(eventStatus).find('option:selected').val() === 'Couple') || ($(eventStatus).find('option:selected').val() === 'Two Singles (paired)')) {
-		return 2
-	} else if ($(eventStatus).find('option:selected').val() === 'Single') {
-		return 1
-	}
-}
-
-
-// FORM VALIDATION
-// Event Invite Code Validation
+// Affiliate Code Validation
 function eventAffiliateValidation() {
 	if ($(eventInviteBox).is(':visible')) {
 		return affiliateCode($(eventInviteCode).val()).verify()
@@ -404,8 +400,6 @@ function eventFormValidation() {
 
 // VISUAL ERROR INDICATORS
 function eventAffiliateShowErrors() {
-	console.log($(eventAffiliateYes).is(':checked'));
-	console.log(eventAffiliateValidation());
 	if ($(eventInviteBox).is(':visible')) {
 		if ($(eventInviteCode).val().length > 0) {
 			if (!eventAffiliateValidation()) {
@@ -686,6 +680,7 @@ if (page === 'Event') {
 		$(billingLastName).val($(eventLastName).val())
 	})
 	$(eventAffiliateNo + ',' + eventAffiliateYes).on('change', function () {
+		eventAffiliateShowErrors()
 		if ($(eventAffiliateYes).is(':checked')) showAffiliate()
 		if ($(eventAffiliateNo).is(':checked')) hideAffiliate()
 	})
