@@ -650,19 +650,36 @@ function resetEventForm() {
 	$(eventTerms).attr('checked', false)
 	$(paymentButton).css({ 'background-color': '#f5f5f5' })
 	$(paymentButton).css({ 'color': '#333333' })
-	// If URL contains affiliate code, add to invite and affiliate fields
-	var affiliateString = window.location.search.slice(1).split('=')
-	if (affiliateString[0] === 'affiliate') {
-		if ($(eventInviteBox).is(':visible')) {
-			$(eventAffiliateSelectionContainer).hide()
+
+	// If private event...
+	if ($(eventInviteBox).is(':visible')) {
+		// Hide the affiliate code box
+		$(eventAffiliateSelectionContainer).hide()
+		// If URL contains affiliate code, add to invite field
+		var affiliateString = window.location.search.slice(1).split('=')
+		if (affiliateString[0] === 'affiliate') {
+			// Add the affiliate code from the URL into the invite code box
 			$(eventInviteCode).val(affiliateString[1])
-		} else {
-			$(eventAffiliateSelectionContainer).show()
-			$(eventAffiliateYes).prop('checked', true)
-			showAffiliate()
-			$(eventAffiliateCode).val(affiliateString[1])
+			// Verify affiliate code
+			eventAffiliateShowErrors()
 		}
-		eventAffiliateShowErrors()
+	}
+	// If public event...
+	else {
+		// Show the affiliate code box
+		$(eventAffiliateSelectionContainer).show()
+		// If URL contains affiliate code, add to affiliate field
+		var affiliateString = window.location.search.slice(1).split('=')
+		if (affiliateString[0] === 'affiliate') {
+			// Check the affiliate radio button
+			$(eventAffiliateYes).prop('checked', true)
+			// Show whether the affiliate code is valid or invalid
+			showAffiliate()
+			// Add the affiliate code from the URL into the affiliate code box
+			$(eventAffiliateCode).val(affiliateString[1])
+			// Verify affiliate code
+			eventAffiliateShowErrors()
+		}
 	}
 }
 
