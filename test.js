@@ -419,6 +419,7 @@ function eventAffiliateShowErrors() {
 		}
 	} else if ($(eventAffiliateYes).is(':checked')) {
 		if ($(eventAffiliateCode).val().length > 0) {
+			console.log(eventAffiliateValidation());
 			if (!eventAffiliateValidation()) {
 				eventAffiliatePassHide()
 				eventAffiliateFailShow()
