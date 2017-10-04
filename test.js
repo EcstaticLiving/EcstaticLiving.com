@@ -1026,6 +1026,7 @@ $(payButton).on('click', function(e) {
 		} else {
 			$('#trafficsource').val('ELI')
 		}
+		console.log($('#trafficsource').val());
 		count = $(eventSelect).prop('selectedIndex') - 1
 		chargeAmount = $(eventDepositDeposit).is(':checked') ? eventDepositPrice * 100 : $(eventSelect).val() * 100
 		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
