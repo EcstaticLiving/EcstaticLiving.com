@@ -332,6 +332,8 @@ function eventAffiliateValidation() {
 		return affiliateCode($(eventInviteCode).val()).verify()
 	} else if ($(eventAffiliateYes).is(':checked')) {
 		return affiliateCode($(eventAffiliateCode).val()).verify()
+	} else if (!$(eventAffiliateNo).is(':checked') && !$(eventAffiliateYes).is(':checked')) {
+		return false
 	}
 	return true
 }
@@ -349,6 +351,7 @@ function detailsValidation() {
 		$(eventReferral).val() !== ''
 		&& (($(eventExperienceYes).is(':checked') && $(eventExperienceDetails).val() !== '') || $(eventExperienceNo).is(':checked'))
 		&& (($(eventDietYes).is(':checked') && $(eventDietDetails).val() !== '') || $(eventDietNo).is(':checked'))
+		&& ()
 	) {
 		return true
 	}
