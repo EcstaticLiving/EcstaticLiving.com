@@ -614,7 +614,6 @@ function setEventSelect() {
 	const closer = (people || people === '') ? ')' : ''
 	for (var i = 0; i < eventOptions.length; i++) {
 		// Event price cannot be less than $0 after discount is applied
-		console.log(eventAffiliateDiscount());
 		const eventSelectPrice = (eventPrices[i] - eventAffiliateDiscount()) * paymentFactor > 0 ? (eventPrices[i] - eventAffiliateDiscount()) * paymentFactor : 0
 		const affiliateDiscountText = eventAffiliateDiscount() > 0 ? ' including discount' : ''
 		const eventSelectText = eventOptions[i] + ' ($' + eventSelectPrice + spacer + people + affiliateDiscountText + closer
@@ -725,7 +724,10 @@ if (page === 'Event') {
 	})
 	$(eventAffiliateCode).on('change', function () {
 		if ($(eventAffiliateYes).is(':checked')) {
+			// Show errors, if any
 			eventAffiliateShowErrors()
+			// Adjust prices
+			setEventSelect()
 		}
 	})
 	$(eventDietNo + ',' + eventDietYes).on('change', function () {
