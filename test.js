@@ -670,6 +670,7 @@ if (page === 'Event') {
 
 	// EVENT FORM ONCHANGE EVENTS
 	if ($(eventInviteBox).is(':visible')) {
+		console.log(eventAffiliateSelectionContainer);
 		$(eventAffiliateSelectionContainer).hide()
 		$(eventInviteCode).on('change', function () {
 			eventAffiliateShowErrors()
