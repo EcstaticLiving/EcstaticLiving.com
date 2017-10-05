@@ -458,7 +458,7 @@ function showErrorsInForm() {
 // SHOW/HIDE FORM ELEMENTS
 // Event Invite Code
 function eventInvitePassShow() {
-	const text = eventAffiliateValidation() && affiliateCode($(eventInviteCode).val()).discount() > 0 ? 'Your invitation code has been accepted.<br />$' + affiliateCode($(eventInviteCode).val()).discount() + ' discount has been applied.' : 'Your invitation code has been accepted.'
+	const text = eventAffiliateValidation() && affiliateCode($(eventInviteCode).val()).discount() > 0 ? 'Congrats! Invite code accepted!<br />$' + affiliateCode($(eventInviteCode).val()).discount() + ' discount applied! Continue below.' : 'Congrats! Invite code accepted! Continue below.'
 	$(eventInvitePass).html(text)
 	$(eventInvitePass).show()
 	$(eventInvitePass).animate({
@@ -499,7 +499,7 @@ function hideAffiliate() {
 	$(eventAffiliateContainer).hide()
 }
 function eventAffiliatePassShow() {
-	const text = eventAffiliateValidation() && affiliateCode($(eventAffiliateCode).val()).discount() > 0 ? 'Your affiliate code has been accepted.<br />$' + affiliateCode($(eventAffiliateCode).val()).discount() + ' discount has been applied.' : 'Your affiliate code has been accepted.'
+	const text = eventAffiliateValidation() && affiliateCode($(eventAffiliateCode).val()).discount() > 0 ? 'Congrats! Code accepted!<br />$' + affiliateCode($(eventAffiliateCode).val()).discount() + ' discount applied!' : 'Congrats! Code accepted!'
 	$(eventAffiliatePass).html(text)
 	$(eventAffiliatePass).show()
 	$(eventAffiliatePass).animate({
