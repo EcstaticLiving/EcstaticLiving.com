@@ -322,6 +322,7 @@ function affiliateCode(code) {
 		return (discount === 0 || discount === 25 || discount === 50 || discount === 75 || discount === 100) ? discount : null
 	},
 	obj.verify = function() {
+		console.log(code.substr(code.length - eventCode.length).toLowerCase());
 		return code.substr(code.length - eventCode.length).toLowerCase() === eventCode && this.discount() !== null
 	}
 	return obj
