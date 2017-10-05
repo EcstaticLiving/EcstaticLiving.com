@@ -2,8 +2,6 @@
 Code ©2017 Ecstatic Living Institute All rights reserved.
 Created by Conscious Apps Inc. www.consciousapps.com
 */
-var Webflow = Webflow || [];
-Webflow.push(function () {
 
 console.log('Welcome to EcstaticLiving.com')
 
@@ -1080,6 +1078,4 @@ $(payButton).on('click', function(e) {
 			stripeTokenHandler(result.token, serverData)
 		}
 	})
-})
-
 })
