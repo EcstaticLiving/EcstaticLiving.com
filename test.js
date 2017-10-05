@@ -195,8 +195,10 @@ function clearForm(formType) {
 	$('.w-form-fail').hide()
 	if (formType === 'Event') {
 		$eventForm[0].reset()
+		resetEventForm()
 	} else if (formType === 'Custom') {
 		$customForm[0].reset()
+		resetCustomChargeForm()
 	}
 }
 
