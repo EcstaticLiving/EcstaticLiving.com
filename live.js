@@ -2,8 +2,7 @@
 Code ©2017 Ecstatic Living Institute All rights reserved.
 Created by Conscious Apps Inc. www.consciousapps.com
 */
-
-console.log('Welcome to EcstaticLiving.com')
+console.log('TEST code at ecstaticliving.webflow.io')
 
 // DECLARATIONS
 // General
@@ -239,6 +238,7 @@ eventInviteBox = '#event-invitecode-box',
 eventInviteCode = '#event-invitecode-code',
 eventInvitePass = '#event-invitecode-pass',
 eventInviteFail = '#event-invitecode-fail',
+eventSpecialRegistration = '#event-special-options',
 eventFirstName = '#event-firstname',
 eventLastName = '#event-lastname',
 eventEmail = '#event-email',
@@ -531,9 +531,9 @@ function showPartner() {
 		opacity: 1
 	}, 200)
 	if ($(eventPayBoth).is(':checked')) {
-		setEventSelect('for both')
+		setEventPrices('for both')
 	} else {
-		setEventSelect('per person')
+		setEventPrices('per person')
 	}
 }
 function hidePartner() {
@@ -544,7 +544,7 @@ function hidePartner() {
 		opacity: 0
 	}, 200)
 	$(eventPartnerContainer).hide()
-	setEventSelect()
+	setEventPrices()
 }
 // Previous Experience
 function showExperience() {
@@ -581,19 +581,65 @@ function hideDiet() {
 
 
 // EVENT OPTIONS AND PRICE CALCULATION
+// Calculates affiliate code discount
 function eventAffiliateDiscount() {
 	// Test if discount even applies
 	if (eventAffiliateValidation()) {
+		// Invite Code
 		if ($(eventInviteBox).is(':visible')) {
 			return affiliateCode($(eventInviteCode).val()).discount()
-		} else if ($(eventAffiliateYes).is(':checked')) {
+		} else
+		// Affiliate Code
+		if ($(eventAffiliateYes).is(':checked')) {
 			return affiliateCode($(eventAffiliateCode).val()).discount()
 		}
 	}
 	return null
 }
-function setEventSelect() {
-	//	Adds event options & prices based on CMS input
+// Determines whether event is for both couples & singles, couples-only, or singles-only
+function setEventStatus() {
+	$(eventStatus).empty()
+	console.log($(eventSpecialRegistration).text());
+	if ($(eventSpecialRegistration).text() === 'Couples only') {
+		$(eventStatus).append($('<option>', {
+			value: '',
+			text: 'Register as...'
+		}))
+		$(eventStatus).append($('<option>', {
+			value: 'Couple',
+			text: 'Couple'
+		}))
+		$(eventStatus).append($('<option>', {
+			value: 'Two Singles (paired)',
+			text: 'Two Singles (paired)'
+		}))
+	} else
+	if ($(eventSpecialRegistration).text() === 'Singles only') {
+		$(eventStatus).append($('<option>', {
+			value: 'Singles-only event',
+			text: 'Single'
+		}))
+	} else {
+		$(eventStatus).append($('<option>', {
+			value: '',
+			text: 'Register as...'
+		}))
+		$(eventStatus).append($('<option>', {
+			value: 'Couple',
+			text: 'Couple'
+		}))
+		$(eventStatus).append($('<option>', {
+			value: 'Single',
+			text: 'Single'
+		}))
+		$(eventStatus).append($('<option>', {
+			value: 'Two Singles (paired)',
+			text: 'Two Singles (paired)'
+		}))
+	}
+}
+//	Adds event options & prices based on CMS input
+function setEventPrices() {
 	var people = ''
 	if ($(eventPayBoth).is(':checked')) {
 		people = 'for both'
@@ -638,7 +684,8 @@ function resetEventForm() {
 		eventInvitePassHide()
 		eventInviteFailHide()
 	}
-	setEventSelect()
+	setEventStatus()
+	setEventPrices()
 	$('#eventcode').val(eventCode)
 	if (!$(eventExperienceYes).is(':checked')) hideExperience()
 	if (!$(eventDietYes).is(':checked')) hideDiet()
@@ -667,7 +714,7 @@ function resetEventForm() {
 			// Verify affiliate code
 			eventAffiliateShowErrors()
 			// Adjust prices
-			setEventSelect()
+			setEventPrices()
 		}
 	}
 	// If public event...
@@ -686,7 +733,7 @@ function resetEventForm() {
 			// Verify affiliate code
 			eventAffiliateShowErrors()
 			// Adjust prices
-			setEventSelect()
+			setEventPrices()
 		}
 	}
 }
@@ -701,7 +748,7 @@ if (page === 'Event') {
 			// Show errors, if any
 			eventAffiliateShowErrors()
 			// Adjust prices
-			setEventSelect()
+			setEventPrices()
 			// Validate form
 			eventFormValidation()
 		})
@@ -716,7 +763,7 @@ if (page === 'Event') {
 		// Show errors, if any
 		eventAffiliateShowErrors()
 		// Adjust prices
-		setEventSelect()
+		setEventPrices()
 		// Validate form
 		eventFormValidation()
 		if ($(eventAffiliateYes).is(':checked')) showAffiliate()
@@ -727,7 +774,7 @@ if (page === 'Event') {
 			// Show errors, if any
 			eventAffiliateShowErrors()
 			// Adjust prices
-			setEventSelect()
+			setEventPrices()
 		}
 	})
 	$(eventDietNo + ',' + eventDietYes).on('change', function () {
@@ -742,7 +789,7 @@ if (page === 'Event') {
 		participants() === 2 ? showPartner() : hidePartner()
 	})
 	$(eventPayBoth + ',' + eventPayMe).on('change', function () {
-		setEventSelect()
+		setEventPrices()
 	})
 	const eventFieldsPersonal = eventFirstName + ',' + eventLastName + ',' + eventEmail + ',' + eventMobile + ',' + eventBirthdate + ',' + eventFemale + ',' + eventMale + ',' + eventOther
 	const eventFieldsDetails = eventReferral + ',' + eventExperienceYes + ',' + eventExperienceNo + ',' + eventExperienceDetails + ',' + eventDietYes + ',' + eventDietNo + ',' + eventDietDetails
