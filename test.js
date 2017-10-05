@@ -599,6 +599,7 @@ function eventAffiliateDiscount() {
 // Determines whether event is for both couples & singles, couples-only, or singles-only
 function setEventStatus() {
 	$(eventStatus).empty()
+	console.log($(eventSpecialRegistration).val());
 	if ($(eventSpecialRegistration).val() === 'Couples only') {
 		$(eventStatus).append($('<option>', {
 			value: '',
