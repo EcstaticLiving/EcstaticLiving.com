@@ -5,6 +5,8 @@ Created by Conscious Apps Inc. www.consciousapps.com
 var Webflow = Webflow || [];
 Webflow.push(function () {
 
+console.log('TEST code at ecstaticliving.webflow.io')
+
 // DECLARATIONS
 // General
 const $main = $('.main'),
