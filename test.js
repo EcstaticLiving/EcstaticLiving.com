@@ -600,7 +600,7 @@ function eventAffiliateDiscount() {
 function setEventStatus() {
 	$(eventStatus).empty()
 	console.log($(eventSpecialRegistration).text());
-	if ($(eventSpecialRegistration).val() === 'Couples only') {
+	if ($(eventSpecialRegistration).text() === 'Couples only') {
 		$(eventStatus).append($('<option>', {
 			value: '',
 			text: 'Register as...'
@@ -614,7 +614,7 @@ function setEventStatus() {
 			text: 'Two Singles (paired)'
 		}))
 	} else
-	if ($(eventSpecialRegistration).val() === 'Singles only') {
+	if ($(eventSpecialRegistration).text() === 'Singles only') {
 		$(eventStatus).append($('<option>', {
 			value: 'Singles-only event',
 			text: 'Single'
