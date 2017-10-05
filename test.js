@@ -599,23 +599,22 @@ function eventAffiliateDiscount() {
 // Determines whether event is for both couples & singles, couples-only, or singles-only
 function setEventStatus() {
 	$(eventStatus).empty()
-	console.log($(eventSpecialRegistration).val());
 	if ($(eventSpecialRegistration).val() === 'Couples only') {
 		$(eventStatus).append($('<option>', {
 			value: '',
 			text: 'Register as...'
 		}))
-		$(eventSelect).append($('<option>', {
+		$(eventStatus).append($('<option>', {
 			value: 'Couple',
 			text: 'Couple'
 		}))
-		$(eventSelect).append($('<option>', {
+		$(eventStatus).append($('<option>', {
 			value: 'Two Singles (paired)',
 			text: 'Two Singles (paired)'
 		}))
 	} else
 	if ($(eventSpecialRegistration).val() === 'Singles only') {
-		$(eventSelect).append($('<option>', {
+		$(eventStatus).append($('<option>', {
 			value: 'Singles-only event',
 			text: 'Single'
 		}))
@@ -624,15 +623,15 @@ function setEventStatus() {
 			value: '',
 			text: 'Register as...'
 		}))
-		$(eventSelect).append($('<option>', {
+		$(eventStatus).append($('<option>', {
 			value: 'Couple',
 			text: 'Couple'
 		}))
-		$(eventSelect).append($('<option>', {
+		$(eventStatus).append($('<option>', {
 			value: 'Single',
 			text: 'Single'
 		}))
-		$(eventSelect).append($('<option>', {
+		$(eventStatus).append($('<option>', {
 			value: 'Two Singles (paired)',
 			text: 'Two Singles (paired)'
 		}))
