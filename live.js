@@ -2,7 +2,7 @@
 Code ©2017 Ecstatic Living Institute All rights reserved.
 Created by Conscious Apps Inc. www.consciousapps.com
 */
-console.log('TEST code at ecstaticliving.webflow.io')
+console.log('Welcome to EcstaticLiving.com')
 
 // DECLARATIONS
 // General
@@ -599,7 +599,6 @@ function eventAffiliateDiscount() {
 // Determines whether event is for both couples & singles, couples-only, or singles-only
 function setEventStatus() {
 	$(eventStatus).empty()
-	console.log($(eventSpecialRegistration).text());
 	if ($(eventSpecialRegistration).text() === 'Couples only') {
 		$(eventStatus).append($('<option>', {
 			value: '',
