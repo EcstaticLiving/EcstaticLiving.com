@@ -921,6 +921,8 @@ if (page === 'Custom') {
 	resetCustomChargeForm()
 }
 
+
+
 // Show / hide populate and clear forms
 if (localStorage.getItem(`EcstaticLiving:${page}`)) {
 	$('#form-load').hide()
