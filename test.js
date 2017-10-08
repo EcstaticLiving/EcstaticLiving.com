@@ -773,14 +773,6 @@ if (page === 'Event') {
 			// Validate form
 			eventFormValidation()
 		})
-		$(eventInviteCode).on('change', function () {
-			// Show errors, if any
-			eventAffiliateShowErrors()
-			// Adjust prices
-			setEventPrices()
-			// Validate form
-			eventFormValidation()
-		})
 	} else {
 		// Make sure event reg form is shown if not private event
 		$(eventRegForm).show()
