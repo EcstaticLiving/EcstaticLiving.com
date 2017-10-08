@@ -831,17 +831,6 @@ if (page === 'Event') {
 
 	// RESET EVENT FORM
 	resetEventForm()
-	if (localStorage.getItem(`EcstaticLiving:${page}`)) {
-		$('#form-load').hide()
-		$('#form-clear').show()
-	}
-	$('#form-clear').on('click', function () {
-		clearForm(page)
-	})
-	$('#form-load').on('click', function () {
-		repopulateForm(page)
-	})
-
 }
 
 
@@ -930,18 +919,22 @@ if (page === 'Custom') {
 
 	// RESET CUSTOM CHARGE
 	resetCustomChargeForm()
-	if (localStorage.getItem(`EcstaticLiving:${page}`)) {
-		$('#form-load').hide()
-		$('#form-clear').show()
-	}
-	$('#form-clear').on('click', function () {
-		clearForm(page)
-	})
-	$('#form-load').on('click', function () {
-		repopulateForm(page)
-	})
 }
 
+// Show / hide populate and clear forms
+if (localStorage.getItem(`EcstaticLiving:${page}`)) {
+	$('#form-load').hide()
+	$('#form-clear').show()
+} else {
+	$('#form-load').hide()
+	$('#form-clear').hide()
+}
+$('#form-clear').on('click', function () {
+	clearForm(page)
+})
+$('#form-load').on('click', function () {
+	repopulateForm(page)
+})
 
 
 
