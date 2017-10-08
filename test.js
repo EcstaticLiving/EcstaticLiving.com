@@ -753,7 +753,9 @@ if (page === 'Event' || page === 'Custom') {
 
 	// Prevent accidental submission of form through 'enter' key
 	$('.input').keypress(function (e) {
+		console.log(e);
 		if (e.which === 13) {
+			e.preventDefault()
 			return false
 		}
 	})
@@ -1028,7 +1030,6 @@ function stripeTokenHandler(token, data) {
 				console.log(response);
 				window.location.href = `${siteUrl}registered`
 			})
-			// $eventForm.submit()
 		} else if (page === 'Custom') {
 			$customForm.submit()
 			window.location.href = `${siteUrl}success`
@@ -1084,7 +1085,6 @@ $('#button-stripe-error').on('click', function() {
 
 $(payButton).on('click', function(e) {
 	// Prevent accidental submission of form through 'enter' key
-	console.log(e);
 	if (e.which === 13) {
 		return false
 	}
