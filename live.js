@@ -445,7 +445,7 @@ function eventAffiliateShowErrors() {
 		}
 	}
 }
-function showErrorsInForm() {
+function showErrorsInEventForm() {
 	const errorInput = { 'border-color': '#b00000', 'background-color': '#fdd' }
 	const clearInput = { 'border-color': '#ccc', 'background-color': '#fff' }
 	const errorRadio = { 'background-color': '#fdd' }
@@ -854,13 +854,16 @@ customCode = '#custom-code',
 customFirstName = '#custom-firstname',
 customLastName = '#custom-lastname',
 customEmail = '#custom-email',
+customMobile = '#custom-mobile',
 customSelect = '#custom-select',
 customTerms = '#custom-terms',
-customCard = '#billing-card'
+customTermsValidation = '#custom-terms-validation'
 
 // CUSTOM AMOUNT
+// Complete Validation
 function customChargeValidation() {
-	if (billingValidation()) {
+	if ($(customFirstName).val() !== '' && $(customLastName).val() !== '' && $(customEmail).val() !== '' && $(customMobile).val() !== '' && $(customSelect).val() && $(customTerms).is(':checked') && billingValidation()) {
+		$('#card-errors').text('')
 		$(paymentButton).css({ 'background-color': '#800000' })
 		$(paymentButton).css({ 'color': '#ffffff' })
 		return true
@@ -868,6 +871,15 @@ function customChargeValidation() {
 	$(paymentButton).css({ 'background-color': '#f5f5f5' })
 	$(paymentButton).css({ 'color': '#333333' })
 	return false
+}
+
+function showErrorsInCustomForm() {
+	const errorInput = { 'border-color': '#b00000', 'background-color': '#fdd' }
+	const clearInput = { 'border-color': '#ccc', 'background-color': '#fff' }
+	const errorRadio = { 'background-color': '#fdd' }
+	const clearRadio = { 'background-color': 'transparent' }
+	if (!$(customTerms).is(':checked')) { $(customTermsValidation).css(errorRadio); } else { $(customTermsValidation).css(clearRadio); }
+	$customForm.parsley().validate()
 }
 
 function setCustomChargeSelect() {
@@ -897,6 +909,8 @@ function resetCustomChargeForm() {
 	$customForm.show()
 	$(customTerms).attr('checked', false)
 	customChargeValidation()
+	$(paymentButton).css({ 'background-color': '#f5f5f5' })
+	$(paymentButton).css({ 'color': '#333333' })
 }
 
 
@@ -910,7 +924,7 @@ if (page === 'Custom') {
 	$(customLastName).on('change', function () {
 		$(billingLastName).val($(eventLastName).val())
 	})
-	$(billingFirstName + ',' + billingLastName + ',' + billingStreet + ',' + billingCity + ',' + billingState + ',' + billingPostal + ',' + billingCountry).on('change', function () {
+	$(customFirstName + ',' + customLastName + ',' + customEmail + ',' + customMobile + ',' + customSelect + ',' + customTerms + ',' + billingFirstName + ',' + billingLastName + ',' + billingStreet + ',' + billingCity + ',' + billingState + ',' + billingPostal + ',' + billingCountry).on('change', function () {
 		customChargeValidation()
 	})
 
@@ -935,21 +949,17 @@ if (page === 'Custom') {
 function paymentValidation(result) {
 	if (result.complete) {
 		// Check hidden field to enable eventFormValidation() or customChargeValidation() to pass
-		if (page === 'Event') {
-			$(billingCard).prop('checked', true)
-		} else if (page === 'Custom') {
-			$(customCard).prop('checked', true)
-		}
+		$(billingCard).prop('checked', true)
 	}
 	if (!result.complete) {
-		if (page === 'Event') {
-			$(billingCard).prop('checked', false)
-		} else if (page === 'Custom') {
-			$(customCard).prop('checked', false)
-		}
+		$(billingCard).prop('checked', false)
 	}
 	// Validate event
-	eventFormValidation()
+	if (page === 'Event') {
+		eventFormValidation()
+	} else if (page === 'Custom') {
+		customChargeValidation()
+	}
 	if (result.error) {
 		$('#card-errors').text(result.error.message)
 		return false
@@ -1036,8 +1046,9 @@ function stripeTokenHandler(token, data) {
 		})
 	})
 	.fail(function (err) {
+		console.log(err)
 		// $0 charge to save credit card details on custom charge form
-		if (err.responseJSON.message === 'Invalid positive integer' && page === 'Custom') {
+		if (err.responseJSON && err.responseJSON.message === 'Invalid positive integer' && page === 'Custom') {
 			window.location.href = `${siteUrl}success`
 		} else {
 			if (page === 'Event') {
@@ -1048,7 +1059,6 @@ function stripeTokenHandler(token, data) {
 			$('.notification-modal.processing').hide()
 			$('.notification-modal.error').show()
 		}
-		console.log(err)
 		return false
 	})
 }
@@ -1096,7 +1106,16 @@ $(payButton).on('click', function(e) {
 	e.preventDefault()
 	if (page === 'Event') {
 		if (!eventFormValidation()) {
-			showErrorsInForm()
+			showErrorsInEventForm()
+			// If there’s no Stripe error message
+			if ($('#card-errors').text() === '') {
+				$('#card-errors').text('Oops! There’s some missing information.')
+			}
+			return false
+		}
+	} else if (page === 'Custom') {
+		if (!customChargeValidation()) {
+			showErrorsInCustomForm()
 			// If there’s no Stripe error message
 			if ($('#card-errors').text() === '') {
 				$('#card-errors').text('Oops! There’s some missing information.')
