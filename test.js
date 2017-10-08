@@ -143,7 +143,7 @@ $('.button.contact').on('click', function() {
 
 // Countries
 var countriesfile = "United States, Canada, Afghanistan, Albania, Algeria, Andorra, Angola, Antigua & Deps, Argentina, Armenia, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bhutan, Bolivia, Bosnia Herzegovina, Botswana, Brazil, Brunei, Bulgaria, Burkina, Burma, Burundi, Cambodia, Cameroon, Cape Verde, Central African Rep, Chad, Chile, People's Republic of China, Republic of China, Colombia, Comoros, Democratic Republic of the Congo, Republic of the Congo, Costa Rica, Croatia, Cuba, Cyprus, Czech Republic, Danzig, Denmark, Djibouti, Dominica, Dominican Republic, East Timor, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, Gabon, Gaza Strip, The Gambia, Georgia, Germany, Ghana, Greece, Grenada, Guatemala, Guinea, Guinea-Bissau, Guyana, Haiti, Holy Roman Empire, Honduras, Hungary, Iceland, India, Indonesia, Iran, Iraq, Republic of Ireland, Israel, Italy, Ivory Coast, Jamaica, Japan, Jonathanland, Jordan, Kazakhstan, Kenya, Kiribati, North Korea, South Korea, Kosovo, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Marshall Islands, Mauritania, Mauritius, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Morocco, Mount Athos, Mozambique, Namibia, Nauru, Nepal, Newfoundland, Netherlands, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Ottoman Empire, Pakistan, Palau, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Prussia, Qatar, Romania, Rome, Russian Federation, Rwanda, St Kitts & Nevis, St Lucia, Saint Vincent & the, Grenadines, Samoa, San Marino, Sao Tome & Principe, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Solomon Islands, Somalia, South Africa, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Tajikistan, Tanzania, Thailand, Togo, Tonga, Trinidad & Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom, Uruguay, Uzbekistan, Vanuatu, Vatican City, Venezuela, Vietnam, Yemen, Zambia, Zimbabwe";
-var countries = countriesfile.split(', ');
+var countries = countriesfile.split(', ')
 for(var i = 0; i < countries.length; i++) {
 	if (page === 'Event' || page === 'Custom') {
 		if (countries[i] === 'United States') {
@@ -753,7 +753,6 @@ if (page === 'Event' || page === 'Custom') {
 
 	// Prevent accidental submission of form through 'enter' key
 	$('.input').keypress(function (e) {
-		console.log(e);
 		if (e.which === 13) {
 			e.preventDefault()
 			return false
@@ -972,7 +971,7 @@ function conversion(e, n) {
 		var a = $(o),
 			s = a.attr("type"),
 			u = a.attr("data-name") || a.attr("name") || "Field " + (r + 1),
-			l = a.val();
+			l = a.val()
 		if ("checkbox" === s && (l = a.is(":checked")), "radio" === s) {
 			if (null === n[u] || "string" == typeof n[u]) return;
 			l = e.find('input[name="' + a.attr("name") + '"]:checked').val() || null
@@ -1029,7 +1028,7 @@ function stripeTokenHandler(token, data) {
 				dataType: 'json'
 			})
 			.then(function(response) {
-				console.log(response);
+				console.log(response)
 				window.location.href = `${siteUrl}registered`
 			})
 		} else if (page === 'Custom') {
@@ -1121,7 +1120,7 @@ $(payButton).on('click', function(e) {
 		} else {
 			$('#trafficsource').val('ELI')
 		}
-		console.log($('#trafficsource').val());
+		console.log($('#trafficsource').val())
 		count = $(eventSelect).prop('selectedIndex') - 1
 		chargeAmount = $(eventDepositDeposit).is(':checked') ? eventDepositPrice * 100 : $(eventSelect).val() * 100
 		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
