@@ -445,7 +445,7 @@ function eventAffiliateShowErrors() {
 		}
 	}
 }
-function showErrorsInForm() {
+function showErrorsInEventForm() {
 	const errorInput = { 'border-color': '#b00000', 'background-color': '#fdd' }
 	const clearInput = { 'border-color': '#ccc', 'background-color': '#fff' }
 	const errorRadio = { 'background-color': '#fdd' }
@@ -861,8 +861,14 @@ customTerms = '#custom-terms'
 // CUSTOM AMOUNT
 // Complete Validation
 function customChargeValidation() {
-	console.log($(customSelect).val());
 	if ($(customFirstName).val() !== '' && $(customLastName).val() !== '' && $(customEmail).val() !== '' && $(customMobile).val() !== '' && ($(customSelect).val() || $(customSelect).val() === 0) && $(customTerms).is(':checked') && billingValidation()) {
+		return true
+	}
+	return false
+}
+
+function showErrorsInCustomForm() {
+	if (customChargeValidation()) {
 		$('#card-errors').text('')
 		$(paymentButton).css({ 'background-color': '#800000' })
 		$(paymentButton).css({ 'color': '#ffffff' })
@@ -1091,7 +1097,16 @@ $(payButton).on('click', function(e) {
 	e.preventDefault()
 	if (page === 'Event') {
 		if (!eventFormValidation()) {
-			showErrorsInForm()
+			showErrorsInEventForm()
+			// If there’s no Stripe error message
+			if ($('#card-errors').text() === '') {
+				$('#card-errors').text('Oops! There’s some missing information.')
+			}
+			return false
+		}
+	} else if (page === 'Custom') {
+		if (!customChargeValidation()) {
+			showErrorsInCustomForm()
 			// If there’s no Stripe error message
 			if ($('#card-errors').text() === '') {
 				$('#card-errors').text('Oops! There’s some missing information.')
