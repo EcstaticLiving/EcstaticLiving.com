@@ -769,7 +769,8 @@ if (page === 'Event') {
 	if ($(eventInviteBox).is(':visible')) {
 		// If private event, hide registration form until successful invite code has been entered
 		$(eventRegForm).hide()
-		$(eventInviteButton).on('click', function () {
+		$(eventInviteButton).on('click', function (e) {
+			e.preventDefault()
 			// Show errors, if any
 			eventAffiliateShowErrors()
 			// Adjust prices
@@ -1092,7 +1093,6 @@ $(payButton).on('click', function(e) {
 	if (e.which === 13) {
 		return false
 	}
-	console.log(e);
 	e.preventDefault()
 	if (page === 'Event') {
 		if (!eventFormValidation()) {
