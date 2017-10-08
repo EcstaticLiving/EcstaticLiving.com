@@ -862,7 +862,7 @@ customTerms = '#custom-terms'
 // Complete Validation
 function customChargeValidation() {
 	console.log($(customSelect).val());
-	if ($(customFirstName).val() !== '' && $(customLastName).val() !== '' && $(customEmail).val() !== '' && $(customMobile).val() !== '' && $(customSelect).val() && $(customTerms).is(':checked') && billingValidation()) {
+	if ($(customFirstName).val() !== '' && $(customLastName).val() !== '' && $(customEmail).val() !== '' && $(customMobile).val() !== '' && ($(customSelect).val() || $(customSelect).val() === '0') && $(customTerms).is(':checked') && billingValidation()) {
 		$('#card-errors').text('')
 		$(paymentButton).css({ 'background-color': '#800000' })
 		$(paymentButton).css({ 'color': '#ffffff' })
