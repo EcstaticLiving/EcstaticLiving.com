@@ -239,6 +239,7 @@ eventDepositDate = $('#event-deposit-date').text()
 // Event variables
 var payButtonClicked = false;
 const payButton = '#payment-button',
+eventRegForm = '.event-container.reg-form',
 eventInviteBox = '#event-invitecode-box',
 eventInviteCode = '#event-invitecode-code',
 eventInvitePass = '#event-invitecode-pass',
@@ -411,13 +412,16 @@ function eventAffiliateShowErrors() {
 	if ($(eventInviteBox).is(':visible')) {
 		if ($(eventInviteCode).val().length > 0) {
 			if (!eventAffiliateValidation()) {
+				$(eventRegForm).hide()
 				eventInvitePassHide()
 				eventInviteFailShow()
 			} else {
+				$(eventRegForm).show()
 				eventInviteFailHide()
 				eventInvitePassShow()
 			}
 		} else {
+			$(eventRegForm).hide()
 			eventInvitePassHide()
 			eventInviteFailHide()
 		}
@@ -748,6 +752,8 @@ if (page === 'Event') {
 
 	// EVENT FORM ONCHANGE EVENTS
 	if ($(eventInviteBox).is(':visible')) {
+		// If private event, hide registration form until successful invite code has been entered
+		$(eventRegForm).hide()
 		$(eventInviteCode).on('change', function () {
 			// Show errors, if any
 			eventAffiliateShowErrors()
@@ -756,6 +762,9 @@ if (page === 'Event') {
 			// Validate form
 			eventFormValidation()
 		})
+	} else {
+		// Make sure event reg form is shown if not private event
+		$(eventRegForm).show()
 	}
 	$(eventFirstName).on('change', function () {
 		$(billingFirstName).val($(eventFirstName).val())
