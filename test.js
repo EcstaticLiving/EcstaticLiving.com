@@ -855,7 +855,7 @@ if (page === 'Event') {
 
 
 // CUSTOM CHARGE
-const $customForm = $('.form.custom-charge'),
+const $customForm = $('#wf-form-Custom-Charge'),
 customCode = '#custom-code',
 customFirstName = '#custom-firstname',
 customLastName = '#custom-lastname',
@@ -987,7 +987,7 @@ function verification(t, e, n, i) {
 
 // Payment
 function stripeTokenHandler(token, data) {
-	const url = window.location.href.indexOf('ecstaticliving.com') > -1
+	const stripeURL = window.location.href.indexOf('ecstaticliving.com') > -1
 		? 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe'
 		: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test'
 	$('.stripe.processing').show()
@@ -995,7 +995,7 @@ function stripeTokenHandler(token, data) {
 	$('.notification-modal.processing').show()
 	$.ajax({
 		type: 'POST',
-		url,
+		url: stripeURL,
 		crossDomain: true,
 		data: {
 			'stripeToken': token.id,
@@ -1008,42 +1008,52 @@ function stripeTokenHandler(token, data) {
 	})
 	.then(function (res) {
 		$('.notification-modal.processing').hide()
+		var name = '', formSubmit = '', success = ''
 		if (page === 'Event') {
-			var r = {
-				name: 'Event Registration',
-				source: window.location.href,
-				test: false,
-				fields: {},
-				dolphin: false
-			}
-			var error = conversion($eventForm, r.fields)
-			if (error) {
-				throw error
-			}
-			return $.ajax({
-				type: 'POST',
-				url: 'https://webflow.com/api/v1/form/564aac835a5735b1375b5cdf',
-				crossDomain: true,
-				data: r,
-				dataType: 'json'
-			})
-			.then(function(response) {
-				console.log(response)
-				window.location.href = `${siteUrl}registered`
-			})
+			name = 'Event Registration'
+			formSubmit = $eventForm
+			success = `${siteUrl}registered`
 		} else if (page === 'Custom') {
-			$customForm.submit()
-			window.location.href = `${siteUrl}success`
+			name = 'Custom Charge'
+			formSubmit = $customForm
+			success = `${siteUrl}success`
 		}
+		var r = {
+			name,
+			source: window.location.href,
+			test: false,
+			fields: {},
+			dolphin: false
+		}
+		var error = conversion(formSubmit, r.fields)
+		if (error) {
+			throw error
+		}
+		return $.ajax({
+			type: 'POST',
+			url: 'https://webflow.com/api/v1/form/564aac835a5735b1375b5cdf',
+			crossDomain: true,
+			data: r,
+			dataType: 'json'
+		})
+		.then(function(response) {
+			console.log(response)
+			window.location.href = success
+		})
 	})
 	.fail(function (err) {
-		if (page === 'Event') {
-			resetEventForm()
-		} else if (page === 'Custom') {
-			resetCustomChargeForm()
+		// $0 charge to save credit card details on custom charge form
+		if (err.responseJSON.message === 'Invalid positive integer' && page === 'Custom') {
+			window.location.href = `${siteUrl}success`
+		} else {
+			if (page === 'Event') {
+				resetEventForm()
+			} else if (page === 'Custom') {
+				resetCustomChargeForm()
+			}
+			$('.notification-modal.processing').hide()
+			$('.notification-modal.error').show()
 		}
-		$('.notification-modal.processing').hide()
-		$('.notification-modal.error').show()
 		console.log(err)
 		return false
 	})
