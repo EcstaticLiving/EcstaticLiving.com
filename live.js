@@ -2,7 +2,12 @@
 Code ©2017 Ecstatic Living Institute All rights reserved.
 Created by Conscious Apps Inc. www.consciousapps.com
 */
-console.log('Welcome to EcstaticLiving.com')
+if (window.location.href.indexOf('ecstaticliving.com') > -1) {
+	console.log('Welcome to EcstaticLiving.com')
+} else {
+	console.log('TEST code at ', window.location.href)
+}
+
 
 // DECLARATIONS
 // General
@@ -929,9 +934,7 @@ function paymentValidation(result) {
 	}
 }
 
-// LIVE: https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe
-// TEST: https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test
-
+// Webflow code to submit form
 function conversion(e, n) {
 	var i = null;
 	return n = n || {}, e.find(':input:not([type="submit"])').each(function(r, o) {
@@ -952,6 +955,7 @@ function verification(t, e, n, i) {
 	return "password" === e ? r = "Passwords cannot be submitted." : t.attr("required") && (i ? (k.test(n) || k.test(t.attr("type"))) && (_.test(i) || (r = "Please enter a valid email address for: " + n)) : r = "Please fill out the required field: " + n), r
 }
 
+// Payment
 function stripeTokenHandler(token, data) {
 	const url = window.location.href.indexOf('ecstaticliving.com') > -1
 		? 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe'
@@ -1016,8 +1020,6 @@ function stripeTokenHandler(token, data) {
 	})
 }
 
-// LIVE: pk_live_0rULIvKhv6aSLqI49Ae5rflI
-// TEST: pk_test_QO6tO6bHny3y10LjH96f4n3p
 const stripe = window.location.href.indexOf('ecstaticliving.com') > -1 ? Stripe('pk_live_0rULIvKhv6aSLqI49Ae5rflI') : Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
 const elements = stripe.elements()
 style = {
