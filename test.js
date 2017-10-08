@@ -861,6 +861,7 @@ customTerms = '#custom-terms'
 // CUSTOM AMOUNT
 // Complete Validation
 function customChargeValidation() {
+	console.log($(customSelect).val());
 	if ($(customFirstName).val() !== '' && $(customLastName).val() !== '' && $(customEmail).val() !== '' && $(customMobile).val() !== '' && $(customSelect).val() && $(customTerms).is(':checked') && billingValidation()) {
 		$('#card-errors').text('')
 		$(paymentButton).css({ 'background-color': '#800000' })
