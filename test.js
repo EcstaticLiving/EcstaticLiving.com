@@ -749,17 +749,7 @@ function resetEventForm() {
 
 
 // EVENT FORM: BEGIN SEQUENCE
-if (page === 'Event' || page === 'Custom') {
-
-	// Prevent accidental submission of form through 'enter' key
-	$('.input').keypress(function (e) {
-		if (e.which === 13) {
-			e.preventDefault()
-			return false
-		}
-	})
-
-} else if (page === 'Event') {
+if (page === 'Event') {
 
 	// EVENT FORM ONCHANGE EVENTS
 	if ($(eventInviteBox).is(':visible')) {
@@ -1084,6 +1074,10 @@ $('#button-stripe-error').on('click', function() {
 })
 
 $(payButton).on('click', function(e) {
+	// Prevent accidental submission of form through 'enter' key
+	if (e.which === 13) {
+		return false
+	}
 	e.preventDefault()
 	if (page === 'Event') {
 		if (!eventFormValidation()) {
