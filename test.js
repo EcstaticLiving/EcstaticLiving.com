@@ -1092,6 +1092,7 @@ $(payButton).on('click', function(e) {
 	if (e.which === 13) {
 		return false
 	}
+	console.log(e);
 	e.preventDefault()
 	if (page === 'Event') {
 		if (!eventFormValidation()) {
