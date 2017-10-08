@@ -955,7 +955,11 @@ function paymentValidation(result) {
 		$(billingCard).prop('checked', false)
 	}
 	// Validate event
-	eventFormValidation()
+	if (page === 'Event') {
+		eventFormValidation()
+	} else if (page === 'Custom') {
+		customChargeValidation()
+	}
 	if (result.error) {
 		$('#card-errors').text(result.error.message)
 		return false
