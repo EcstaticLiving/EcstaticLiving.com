@@ -862,13 +862,6 @@ customTerms = '#custom-terms'
 // Complete Validation
 function customChargeValidation() {
 	if ($(customFirstName).val() !== '' && $(customLastName).val() !== '' && $(customEmail).val() !== '' && $(customMobile).val() !== '' && $(customSelect).val() && $(customTerms).is(':checked') && billingValidation()) {
-		return true
-	}
-	return false
-}
-
-function showErrorsInCustomForm() {
-	if (customChargeValidation()) {
 		$('#card-errors').text('')
 		$(paymentButton).css({ 'background-color': '#800000' })
 		$(paymentButton).css({ 'color': '#ffffff' })
