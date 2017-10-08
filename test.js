@@ -771,7 +771,7 @@ if (page === 'Event') {
 			// Adjust prices
 			setEventPrices()
 			// Validate form
-			eventFormValidation()
+			eventAffiliateValidation()
 		})
 	} else {
 		// Make sure event reg form is shown if not private event
