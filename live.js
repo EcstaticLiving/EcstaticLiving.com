@@ -831,17 +831,6 @@ if (page === 'Event') {
 
 	// RESET EVENT FORM
 	resetEventForm()
-	if (localStorage.getItem(`EcstaticLiving:${page}`)) {
-		$('#form-load').hide()
-		$('#form-clear').show()
-	}
-	$('#form-clear').on('click', function () {
-		clearForm(page)
-	})
-	$('#form-load').on('click', function () {
-		repopulateForm(page)
-	})
-
 }
 
 
@@ -930,18 +919,24 @@ if (page === 'Custom') {
 
 	// RESET CUSTOM CHARGE
 	resetCustomChargeForm()
-	if (localStorage.getItem(`EcstaticLiving:${page}`)) {
-		$('#form-load').hide()
-		$('#form-clear').show()
-	}
-	$('#form-clear').on('click', function () {
-		clearForm(page)
-	})
-	$('#form-load').on('click', function () {
-		repopulateForm(page)
-	})
 }
 
+
+
+// Show / hide populate and clear forms
+if (localStorage.getItem(`EcstaticLiving:${page}`)) {
+	$('#form-load').hide()
+	$('#form-clear').show()
+} else {
+	$('#form-load').hide()
+	$('#form-clear').hide()
+}
+$('#form-clear').on('click', function () {
+	clearForm(page)
+})
+$('#form-load').on('click', function () {
+	repopulateForm(page)
+})
 
 
 
@@ -1049,7 +1044,7 @@ function stripeTokenHandler(token, data) {
 		console.log(err)
 		// $0 charge to save credit card details on custom charge form
 		if (err.responseJSON && err.responseJSON.message === 'Invalid positive integer' && page === 'Custom') {
-			window.location.href = `${siteUrl}success`
+			window.location.href = `${siteUrl}card-saved`
 		} else {
 			if (page === 'Event') {
 				resetEventForm()
