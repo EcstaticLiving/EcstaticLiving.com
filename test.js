@@ -906,6 +906,8 @@ function resetCustomChargeForm() {
 	$customForm.show()
 	$(customTerms).attr('checked', false)
 	customChargeValidation()
+	$(paymentButton).css({ 'background-color': '#f5f5f5' })
+	$(paymentButton).css({ 'color': '#333333' })
 }
 
 
