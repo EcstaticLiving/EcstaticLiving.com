@@ -1046,6 +1046,7 @@ function stripeTokenHandler(token, data) {
 		})
 	})
 	.fail(function (err) {
+		console.log(err)
 		// $0 charge to save credit card details on custom charge form
 		if (err.responseJSON.message === 'Invalid positive integer' && page === 'Custom') {
 			window.location.href = `${siteUrl}success`
@@ -1058,7 +1059,6 @@ function stripeTokenHandler(token, data) {
 			$('.notification-modal.processing').hide()
 			$('.notification-modal.error').show()
 		}
-		console.log(err)
 		return false
 	})
 }
