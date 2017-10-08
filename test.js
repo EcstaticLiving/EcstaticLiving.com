@@ -749,7 +749,17 @@ function resetEventForm() {
 
 
 // EVENT FORM: BEGIN SEQUENCE
-if (page === 'Event') {
+if (page === 'Event' || page === 'Custom') {
+
+	// Prevent accidental submission of form through 'enter' key
+	$('.input').keypress(function (e) {
+		if (e.which === 13) {
+			e.preventDefault()
+			return false
+		}
+	})
+
+} else if (page === 'Event') {
 
 	// EVENT FORM ONCHANGE EVENTS
 	if ($(eventInviteBox).is(':visible')) {
