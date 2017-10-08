@@ -857,7 +857,7 @@ customEmail = '#custom-email',
 customMobile = '#custom-mobile',
 customSelect = '#custom-select',
 customTerms = '#custom-terms',
-customTermsValidation = '#custom-terms-validation',
+customTermsValidation = '#custom-terms-validation'
 
 // CUSTOM AMOUNT
 // Complete Validation
