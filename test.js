@@ -856,7 +856,8 @@ customLastName = '#custom-lastname',
 customEmail = '#custom-email',
 customMobile = '#custom-mobile',
 customSelect = '#custom-select',
-customTerms = '#custom-terms'
+customTerms = '#custom-terms',
+customTermsValidation = '#custom-terms-validation',
 
 // CUSTOM AMOUNT
 // Complete Validation
@@ -870,6 +871,15 @@ function customChargeValidation() {
 	$(paymentButton).css({ 'background-color': '#f5f5f5' })
 	$(paymentButton).css({ 'color': '#333333' })
 	return false
+}
+
+function showErrorsInCustomForm() {
+	const errorInput = { 'border-color': '#b00000', 'background-color': '#fdd' }
+	const clearInput = { 'border-color': '#ccc', 'background-color': '#fff' }
+	const errorRadio = { 'background-color': '#fdd' }
+	const clearRadio = { 'background-color': 'transparent' }
+	if (!$(customTerms).is(':checked')) { $(customTermsValidation).css(errorRadio); } else { $(customTermsValidation).css(clearRadio); }
+	$customForm.parsley().validate()
 }
 
 function setCustomChargeSelect() {
