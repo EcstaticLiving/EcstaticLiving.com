@@ -760,7 +760,9 @@ if (page === 'Event' || page === 'Custom') {
 		}
 	})
 
-} else if (page === 'Event') {
+}
+
+if (page === 'Event') {
 
 	// EVENT FORM ONCHANGE EVENTS
 	if ($(eventInviteBox).is(':visible')) {
