@@ -240,6 +240,7 @@ eventDepositDate = $('#event-deposit-date').text()
 var payButtonClicked = false;
 const payButton = '#payment-button',
 eventRegForm = '.event-container.reg-form',
+eventInviteButton = '#event-invitecode-button',
 eventInviteBox = '#event-invitecode-box',
 eventInviteCode = '#event-invitecode-code',
 eventInvitePass = '#event-invitecode-pass',
@@ -754,6 +755,14 @@ if (page === 'Event') {
 	if ($(eventInviteBox).is(':visible')) {
 		// If private event, hide registration form until successful invite code has been entered
 		$(eventRegForm).hide()
+		$(eventInviteButton).on('click', function () {
+			// Show errors, if any
+			eventAffiliateShowErrors()
+			// Adjust prices
+			setEventPrices()
+			// Validate form
+			eventFormValidation()
+		})
 		$(eventInviteCode).on('change', function () {
 			// Show errors, if any
 			eventAffiliateShowErrors()
