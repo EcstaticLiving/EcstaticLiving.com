@@ -861,7 +861,7 @@ customTerms = '#custom-terms'
 // CUSTOM AMOUNT
 // Complete Validation
 function customChargeValidation() {
-	if ($(customFirstName).val() !== '' && $(customLastName).val() !== '' && $(customEmail).val() !== '' && $(customMobile).val() !== '' && ($(customSelect).val() || $(customSelect).val() === 0) && $(customTerms).is(':checked') && billingValidation()) {
+	if ($(customFirstName).val() !== '' && $(customLastName).val() !== '' && $(customEmail).val() !== '' && $(customMobile).val() !== '' && ($(customSelect).val() || $(customSelect).val() === '0') && $(customTerms).is(':checked') && billingValidation()) {
 		return true
 	}
 	return false
