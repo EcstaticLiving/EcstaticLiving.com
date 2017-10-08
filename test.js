@@ -752,7 +752,7 @@ function resetEventForm() {
 if (page === 'Event' || page === 'Custom') {
 
 	// Prevent accidental submission of form through 'enter' key
-	$('.input').keypress(function (e) {
+	$('.form-input').keypress(function (e) {
 		if (e.which === 13) {
 			e.preventDefault()
 			return false
