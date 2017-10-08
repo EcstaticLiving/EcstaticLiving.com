@@ -336,11 +336,15 @@ function affiliateCode(code) {
 // Affiliate Code Validation
 function eventAffiliateValidation() {
 	if ($(eventInviteBox).is(':visible')) {
+		// Private event
 		return affiliateCode($(eventInviteCode).val()).verify()
-	} else if ($(eventAffiliateYes).is(':checked')) {
-		return affiliateCode($(eventAffiliateCode).val()).verify()
-	} else if (!$(eventAffiliateNo).is(':checked') && !$(eventAffiliateYes).is(':checked')) {
-		return false
+	} else {
+		// Public event
+		if ($(eventAffiliateYes).is(':checked')) {
+			return affiliateCode($(eventAffiliateCode).val()).verify()
+		} else if (!$(eventAffiliateNo).is(':checked') && !$(eventAffiliateYes).is(':checked')) {
+			return false
+		}
 	}
 	return true
 }
@@ -486,7 +490,6 @@ function eventInviteFailShow() {
 		top: 40,
 		opacity: 1
 	}, 200)
-	$(eventInviteCode).val('')
 	$(eventInviteCode).focus()
 }
 function eventInviteFailHide() {
@@ -527,7 +530,6 @@ function eventAffiliateFailShow() {
 		top: 40,
 		opacity: 1
 	}, 200)
-	$(eventAffiliateCode).val('')
 	$(eventAffiliateCode).focus()
 }
 function eventAffiliateFailHide() {
@@ -767,49 +769,41 @@ if (page === 'Event') {
 	if ($(eventInviteBox).is(':visible')) {
 		// If private event, hide registration form until successful invite code has been entered
 		$(eventRegForm).hide()
-		$(eventInviteButton).on('click', function () {
+		$(eventInviteButton).on('click', function (e) {
+			e.preventDefault()
 			// Show errors, if any
 			eventAffiliateShowErrors()
 			// Adjust prices
 			setEventPrices()
-			// Validate form
-			eventFormValidation()
-		})
-		$(eventInviteCode).on('change', function () {
-			// Show errors, if any
-			eventAffiliateShowErrors()
-			// Adjust prices
-			setEventPrices()
-			// Validate form
-			eventFormValidation()
 		})
 	} else {
 		// Make sure event reg form is shown if not private event
 		$(eventRegForm).show()
+		// Affiliate code shown on public events, not private events
+		$(eventAffiliateNo + ',' + eventAffiliateYes).on('change', function () {
+			// Show errors, if any
+			eventAffiliateShowErrors()
+			// Adjust prices
+			setEventPrices()
+			// Validate form
+			eventFormValidation()
+			if ($(eventAffiliateYes).is(':checked')) showAffiliate()
+			if ($(eventAffiliateNo).is(':checked')) hideAffiliate()
+		})
+		$(eventAffiliateCode).on('change', function () {
+			if ($(eventAffiliateYes).is(':checked')) {
+				// Show errors, if any
+				eventAffiliateShowErrors()
+				// Adjust prices
+				setEventPrices()
+			}
+		})
 	}
 	$(eventFirstName).on('change', function () {
 		$(billingFirstName).val($(eventFirstName).val())
 	})
 	$(eventLastName).on('change', function () {
 		$(billingLastName).val($(eventLastName).val())
-	})
-	$(eventAffiliateNo + ',' + eventAffiliateYes).on('change', function () {
-		// Show errors, if any
-		eventAffiliateShowErrors()
-		// Adjust prices
-		setEventPrices()
-		// Validate form
-		eventFormValidation()
-		if ($(eventAffiliateYes).is(':checked')) showAffiliate()
-		if ($(eventAffiliateNo).is(':checked')) hideAffiliate()
-	})
-	$(eventAffiliateCode).on('change', function () {
-		if ($(eventAffiliateYes).is(':checked')) {
-			// Show errors, if any
-			eventAffiliateShowErrors()
-			// Adjust prices
-			setEventPrices()
-		}
 	})
 	$(eventDietNo + ',' + eventDietYes).on('change', function () {
 		if ($(eventDietYes).is(':checked')) showDiet()
@@ -855,7 +849,7 @@ if (page === 'Event') {
 
 
 // CUSTOM CHARGE
-const $customForm = $('.form.custom-charge'),
+const $customForm = $('#wf-form-Custom-Charge'),
 customCode = '#custom-code',
 customFirstName = '#custom-firstname',
 customLastName = '#custom-lastname',
@@ -987,7 +981,7 @@ function verification(t, e, n, i) {
 
 // Payment
 function stripeTokenHandler(token, data) {
-	const url = window.location.href.indexOf('ecstaticliving.com') > -1
+	const stripeURL = window.location.href.indexOf('ecstaticliving.com') > -1
 		? 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe'
 		: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test'
 	$('.stripe.processing').show()
@@ -995,7 +989,7 @@ function stripeTokenHandler(token, data) {
 	$('.notification-modal.processing').show()
 	$.ajax({
 		type: 'POST',
-		url,
+		url: stripeURL,
 		crossDomain: true,
 		data: {
 			'stripeToken': token.id,
@@ -1008,42 +1002,52 @@ function stripeTokenHandler(token, data) {
 	})
 	.then(function (res) {
 		$('.notification-modal.processing').hide()
+		var name = '', formSubmit = '', success = ''
 		if (page === 'Event') {
-			var r = {
-				name: 'Event Registration',
-				source: window.location.href,
-				test: false,
-				fields: {},
-				dolphin: false
-			}
-			var error = conversion($eventForm, r.fields)
-			if (error) {
-				throw error
-			}
-			return $.ajax({
-				type: 'POST',
-				url: 'https://webflow.com/api/v1/form/564aac835a5735b1375b5cdf',
-				crossDomain: true,
-				data: r,
-				dataType: 'json'
-			})
-			.then(function(response) {
-				console.log(response)
-				window.location.href = `${siteUrl}registered`
-			})
+			name = 'Event Registration'
+			formSubmit = $eventForm
+			success = `${siteUrl}registered`
 		} else if (page === 'Custom') {
-			$customForm.submit()
-			window.location.href = `${siteUrl}success`
+			name = 'Custom Charge'
+			formSubmit = $customForm
+			success = `${siteUrl}success`
 		}
+		var r = {
+			name,
+			source: window.location.href,
+			test: false,
+			fields: {},
+			dolphin: false
+		}
+		var error = conversion(formSubmit, r.fields)
+		if (error) {
+			throw error
+		}
+		return $.ajax({
+			type: 'POST',
+			url: 'https://webflow.com/api/v1/form/564aac835a5735b1375b5cdf',
+			crossDomain: true,
+			data: r,
+			dataType: 'json'
+		})
+		.then(function(response) {
+			console.log(response)
+			window.location.href = success
+		})
 	})
 	.fail(function (err) {
-		if (page === 'Event') {
-			resetEventForm()
-		} else if (page === 'Custom') {
-			resetCustomChargeForm()
+		// $0 charge to save credit card details on custom charge form
+		if (err.responseJSON.message === 'Invalid positive integer' && page === 'Custom') {
+			window.location.href = `${siteUrl}success`
+		} else {
+			if (page === 'Event') {
+				resetEventForm()
+			} else if (page === 'Custom') {
+				resetCustomChargeForm()
+			}
+			$('.notification-modal.processing').hide()
+			$('.notification-modal.error').show()
 		}
-		$('.notification-modal.processing').hide()
-		$('.notification-modal.error').show()
 		console.log(err)
 		return false
 	})
