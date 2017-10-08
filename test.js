@@ -336,11 +336,15 @@ function affiliateCode(code) {
 // Affiliate Code Validation
 function eventAffiliateValidation() {
 	if ($(eventInviteBox).is(':visible')) {
+		// Private event
 		return affiliateCode($(eventInviteCode).val()).verify()
-	} else if ($(eventAffiliateYes).is(':checked')) {
-		return affiliateCode($(eventAffiliateCode).val()).verify()
-	} else if (!$(eventAffiliateNo).is(':checked') && !$(eventAffiliateYes).is(':checked')) {
-		return false
+	} else {
+		// Public event
+		if ($(eventAffiliateYes).is(':checked')) {
+			return affiliateCode($(eventAffiliateCode).val()).verify()
+		} else if (!$(eventAffiliateNo).is(':checked') && !$(eventAffiliateYes).is(':checked')) {
+			return false
+		}
 	}
 	return true
 }
@@ -770,8 +774,6 @@ if (page === 'Event') {
 			eventAffiliateShowErrors()
 			// Adjust prices
 			setEventPrices()
-			// Validate code
-			eventAffiliateValidation()
 		})
 	} else {
 		// Make sure event reg form is shown if not private event
