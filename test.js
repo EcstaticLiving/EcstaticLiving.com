@@ -1048,7 +1048,7 @@ function stripeTokenHandler(token, data) {
 	.fail(function (err) {
 		console.log(err)
 		// $0 charge to save credit card details on custom charge form
-		if (err.responseJSON.message === 'Invalid positive integer' && page === 'Custom') {
+		if (err.responseJSON && err.responseJSON.message === 'Invalid positive integer' && page === 'Custom') {
 			window.location.href = `${siteUrl}success`
 		} else {
 			if (page === 'Event') {
