@@ -486,7 +486,6 @@ function eventInviteFailShow() {
 		top: 40,
 		opacity: 1
 	}, 200)
-	$(eventInviteCode).val('')
 	$(eventInviteCode).focus()
 }
 function eventInviteFailHide() {
@@ -527,7 +526,6 @@ function eventAffiliateFailShow() {
 		top: 40,
 		opacity: 1
 	}, 200)
-	$(eventAffiliateCode).val('')
 	$(eventAffiliateCode).focus()
 }
 function eventAffiliateFailHide() {
