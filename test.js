@@ -854,13 +854,15 @@ customCode = '#custom-code',
 customFirstName = '#custom-firstname',
 customLastName = '#custom-lastname',
 customEmail = '#custom-email',
+customMobile = '#custom-mobile',
 customSelect = '#custom-select',
-customTerms = '#custom-terms',
-customCard = '#billing-card'
+customTerms = '#custom-terms'
 
 // CUSTOM AMOUNT
+// Complete Validation
 function customChargeValidation() {
-	if (billingValidation()) {
+	if ($(customFirstName).val() !== '' && $(customLastName).val() !== '' && $(customEmail).val() !== '' && $(customMobile).val() !== '' && $(customSelect).val() && $(customTerms).is(':checked') && billingValidation()) {
+		$('#card-errors').text('')
 		$(paymentButton).css({ 'background-color': '#800000' })
 		$(paymentButton).css({ 'color': '#ffffff' })
 		return true
@@ -910,7 +912,7 @@ if (page === 'Custom') {
 	$(customLastName).on('change', function () {
 		$(billingLastName).val($(eventLastName).val())
 	})
-	$(billingFirstName + ',' + billingLastName + ',' + billingStreet + ',' + billingCity + ',' + billingState + ',' + billingPostal + ',' + billingCountry).on('change', function () {
+	$(customFirstName + ',' + customLastName + ',' + customEmail + ',' + customMobile + ',' + customSelect + ',' + customTerms + ',' + billingFirstName + ',' + billingLastName + ',' + billingStreet + ',' + billingCity + ',' + billingState + ',' + billingPostal + ',' + billingCountry).on('change', function () {
 		customChargeValidation()
 	})
 
@@ -935,18 +937,10 @@ if (page === 'Custom') {
 function paymentValidation(result) {
 	if (result.complete) {
 		// Check hidden field to enable eventFormValidation() or customChargeValidation() to pass
-		if (page === 'Event') {
-			$(billingCard).prop('checked', true)
-		} else if (page === 'Custom') {
-			$(customCard).prop('checked', true)
-		}
+		$(billingCard).prop('checked', true)
 	}
 	if (!result.complete) {
-		if (page === 'Event') {
-			$(billingCard).prop('checked', false)
-		} else if (page === 'Custom') {
-			$(customCard).prop('checked', false)
-		}
+		$(billingCard).prop('checked', false)
 	}
 	// Validate event
 	eventFormValidation()
