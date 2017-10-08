@@ -770,36 +770,37 @@ if (page === 'Event') {
 			eventAffiliateShowErrors()
 			// Adjust prices
 			setEventPrices()
-			// Validate form
+			// Validate code
 			eventAffiliateValidation()
 		})
 	} else {
 		// Make sure event reg form is shown if not private event
 		$(eventRegForm).show()
+		// Affiliate code shown on public events, not private events
+		$(eventAffiliateNo + ',' + eventAffiliateYes).on('change', function () {
+			// Show errors, if any
+			eventAffiliateShowErrors()
+			// Adjust prices
+			setEventPrices()
+			// Validate form
+			eventFormValidation()
+			if ($(eventAffiliateYes).is(':checked')) showAffiliate()
+			if ($(eventAffiliateNo).is(':checked')) hideAffiliate()
+		})
+		$(eventAffiliateCode).on('change', function () {
+			if ($(eventAffiliateYes).is(':checked')) {
+				// Show errors, if any
+				eventAffiliateShowErrors()
+				// Adjust prices
+				setEventPrices()
+			}
+		})
 	}
 	$(eventFirstName).on('change', function () {
 		$(billingFirstName).val($(eventFirstName).val())
 	})
 	$(eventLastName).on('change', function () {
 		$(billingLastName).val($(eventLastName).val())
-	})
-	$(eventAffiliateNo + ',' + eventAffiliateYes).on('change', function () {
-		// Show errors, if any
-		eventAffiliateShowErrors()
-		// Adjust prices
-		setEventPrices()
-		// Validate form
-		eventFormValidation()
-		if ($(eventAffiliateYes).is(':checked')) showAffiliate()
-		if ($(eventAffiliateNo).is(':checked')) hideAffiliate()
-	})
-	$(eventAffiliateCode).on('change', function () {
-		if ($(eventAffiliateYes).is(':checked')) {
-			// Show errors, if any
-			eventAffiliateShowErrors()
-			// Adjust prices
-			setEventPrices()
-		}
 	})
 	$(eventDietNo + ',' + eventDietYes).on('change', function () {
 		if ($(eventDietYes).is(':checked')) showDiet()
