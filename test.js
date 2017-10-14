@@ -97,7 +97,7 @@ if (window.location.href.indexOf('/contact') > -1) {
 
 // Browser detection courtesy of: https://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
 const ua = window.navigator.userAgent
-console.log(Number.parseInt(ua.split('Opera/')[1], 10));
+console.log(ua);
 const chromeVersion = Number.parseInt(ua.split('Chrome/')[1], 10)
 const firefoxVersion = Number.parseInt(ua.split('Firefox/')[1], 10)
 const isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification))
