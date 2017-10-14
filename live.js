@@ -24,7 +24,9 @@ $contactSection = $('.contact-section'),
 $receivedSection = $('.received-section')
 
 // Initialization Module
-const siteUrl = 'https://www.ecstaticliving.com/'
+const siteUrl = window.location.href.indexOf('ecstaticliving.com') > -1
+	? 'https://www.ecstaticliving.com/'
+	: 'https://ecstaticliving.webflow.io'
 
 //	INITIALIZE
 function initialize() {
@@ -74,11 +76,11 @@ if (window.location.href.indexOf('/contact') > -1) {
 	page = 'Contact'
 }
 
-if ((page === 'Event' || page === 'Custom') && (/MSIE 10/i.test(navigator.userAgent) || /MSIE 9/i.test(navigator.userAgent) || /rv:11.0/i.test(navigator.userAgent))) {
+const ua = navigator.userAgent
+const isKindle = /Kindle/i.test(ua) || /Silk/i.test(ua) || /KFTT/i.test(ua) || /KFOT/i.test(ua) || /KFJWA/i.test(ua) || /KFJWI/i.test(ua) || /KFSOWI/i.test(ua) || /KFTHWA/i.test(ua) || /KFTHWI/i.test(ua) || /KFAPWA/i.test(ua) || /KFAPWI/i.test(ua)
+const isIE = /MSIE 10/i.test(ua) || /MSIE 9/i.test(ua) || /rv:11.0/i.test(ua)
+if ((page === 'Event' || page === 'Custom') && (isKindle || isIE)) {
 	window.alert('This page does not work on Internet Explorer. Please use a different browser.')
-}
-if (/\bSilk/.test(navigator.userAgent) || /MSIE 10/i.test(navigator.userAgent) || /MSIE 9/i.test(navigator.userAgent) || /rv:11.0/i.test(navigator.userAgent)) {
-  document.write("<div style=\"width:360px; margin:auto; border:3px solid maroon; border-radius:10px; padding: 0px 20px 20px 20px; font-size: 18px;\"><h3>Please use a different browser</h3>In order to register online, you will need to use a different browser. Otherwise, feel free to call us at 707-987-3456 to register by phone. For download links to usable browsers, click the appropriate link below:<br /><br /><strong>PC</strong>: <a href=\"https://www.microsoft.com/en-us/windows/microsoft-edge\" target=\"_blank\">Microsoft Edge</a> | <a href=\"https://www.google.com/chrome/index.html\" target=\"_blank\">Google Chrome</a> | <a href=\"https://www.mozilla.org/en-US/firefox/new/\" target=\"_blank\">Firefox</a><br /><br /><strong>Mac</strong>: Safari | <a href=\"https://www.google.com/chrome/index.html\" target=\"_blank\">Google Chrome</a> | <a href=\"https://www.mozilla.org/en-US/firefox/new/\" target=\"_blank\">Firefox</a></div>")
 }
 
 
