@@ -93,7 +93,7 @@ if (window.location.href.indexOf('/contact') > -1) {
 		document.write("<div style=\"width:100%; max-width:400px; margin:auto; border:3px solid maroon; border-radius:10px; padding: 0px 20px 20px 20px; font-size: 18px;\"><h3>Please use a different browser</h3>In order to register online, you will need to use a different browser. Otherwise, feel free to call us at 707-987-3456 to register by phone. For download links to usable browsers, click the appropriate link below:<br /><br /><strong>PC</strong>: <a href=\"https://www.microsoft.com/en-us/windows/microsoft-edge\" target=\"_blank\">Edge</a> | <a href=\"https://www.google.com/chrome/index.html\" target=\"_blank\">Google Chrome</a> | <a href=\"https://www.mozilla.org/en-US/firefox/new/\" target=\"_blank\">Firefox</a><br /><br /><strong>Mac</strong>: Safari | <a href=\"https://www.google.com/chrome/index.html\" target=\"_blank\">Google Chrome</a> | <a href=\"https://www.mozilla.org/en-US/firefox/new/\" target=\"_blank\">Firefox</a></div>")
 	}
 </script> */}
-if ((page === 'Event' || page === 'Custom') && (!is.edge() && !is.chrome() && !is.firefox() && !is.opera() && !is.safari())) {
+if ((page === 'Event' || page === 'Custom') && !is.edge() && !is.chrome() && !is.firefox() && !is.opera() && !is.safari()) {
 	window.alert('This page does not work on this browser. Please use a different browser.')
 }
 
