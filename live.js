@@ -5,20 +5,20 @@ Created by Conscious Apps Inc. www.consciousapps.com
 
 // DECLARATIONS
 // General
-const $main = $('.main')
-const $mainSection = $('.main-section')
+var $main = $('.main')
+var $mainSection = $('.main-section')
 
 // Nav Menu
-const $navMenu = $('.navigation-menu')
-const $navContainer = $('.nav-container')
+var $navMenu = $('.navigation-menu')
+var $navContainer = $('.nav-container')
 
 // Contact
-const $contactForm = $('.contact-form')
-const $contactSection = $('.contact-section')
-const $receivedSection = $('.received-section')
+var $contactForm = $('.contact-form')
+var $contactSection = $('.contact-section')
+var $receivedSection = $('.received-section')
 
 // Initialization Module
-const siteUrl = window.location.href.indexOf('ecstaticliving.com') > -1
+var siteUrl = window.location.href.indexOf('ecstaticliving.com') > -1
 	? 'https://www.ecstaticliving.com/'
 	: 'https://ecstaticliving.webflow.io/'
 
@@ -71,18 +71,18 @@ if (window.location.href.indexOf('/contact') > -1) {
 }
 
 // Browser validation
-const eliUserAgent = navigator.userAgent
-const eliKindle1 = /Kindle/i.test(eliUserAgent) || /Silk/i.test(eliUserAgent) || /KFTT/i.test(eliUserAgent) || /KFOT/i.test(eliUserAgent) || /KFJWA/i.test(eliUserAgent) || /KFJWI/i.test(eliUserAgent)
-const eliKindle2 = /KFSOWI/i.test(eliUserAgent) || /KFTHWA/i.test(eliUserAgent) || /KFTHWI/i.test(eliUserAgent) || /KFAPWA/i.test(eliUserAgent) || /KFAPWI/i.test(eliUserAgent)
-const eliIE1 = /MSIE 10/i.test(eliUserAgent) || /MSIE 9/i.test(eliUserAgent) || /rv:11.0/i.test(eliUserAgent)
+var eliUserAgent = navigator.userAgent
+var eliKindle1 = /Kindle/i.test(eliUserAgent) || /Silk/i.test(eliUserAgent) || /KFTT/i.test(eliUserAgent) || /KFOT/i.test(eliUserAgent) || /KFJWA/i.test(eliUserAgent) || /KFJWI/i.test(eliUserAgent)
+var eliKindle2 = /KFSOWI/i.test(eliUserAgent) || /KFTHWA/i.test(eliUserAgent) || /KFTHWI/i.test(eliUserAgent) || /KFAPWA/i.test(eliUserAgent) || /KFAPWI/i.test(eliUserAgent)
+var eliIE1 = /MSIE 10/i.test(eliUserAgent) || /MSIE 9/i.test(eliUserAgent) || /rv:11.0/i.test(eliUserAgent)
 if ((page === 'Event' || page === 'Custom') && (eliKindle1 || eliKindle2 || eliIE1)) {
 	window.alert('This page does not work on this browser. Please use a different browser.')
 }
 
 
 // NAV MENU
-const $navButton = $('.menu-icon')
-const $navClose = $('.nav-close')
+var $navButton = $('.menu-icon')
+var $navClose = $('.nav-close')
 // If nav menu is opened
 $navButton.on('click', function() {
 	//	If nav menu is opened
@@ -231,82 +231,82 @@ if (window.location.href.indexOf('/forms/ctt-application') > -1) {
 
 
 // EVENT REGISTRATION
-const $eventForm = $('#wf-form-Event-Registration')
-const eventCode = $('#event-code').text().toLowerCase()
-const eventTitle = $('#event-name').text() // Stripe description
-const eventStartDate = $('#event-start').text()
-const eventDates = $('#event-dates').text()
-const eventVenue = $('#event-venue').text()
-const eventDepositAmount = $('#event-deposit-amount').text()
-const eventDepositDate = $('#event-deposit-date').text()
+var $eventForm = $('#wf-form-Event-Registration')
+var eventCode = $('#event-code').text().toLowerCase()
+var eventTitle = $('#event-name').text() // Stripe description
+var eventStartDate = $('#event-start').text()
+var eventDates = $('#event-dates').text()
+var eventVenue = $('#event-venue').text()
+var eventDepositAmount = $('#event-deposit-amount').text()
+var eventDepositDate = $('#event-deposit-date').text()
 
 // Event variables
 var payButtonClicked = false
-const payButton = '#payment-button'
-const eventRegForm = '.event-container.reg-form'
-const eventInviteButton = '#event-invitecode-button'
-const eventInviteBox = '#event-invitecode-box'
-const eventInviteCode = '#event-invitecode-code'
-const eventInvitePass = '#event-invitecode-pass'
-const eventInviteFail = '#event-invitecode-fail'
-const eventSpecialRegistration = '#event-special-options'
-const eventFirstName = '#event-firstname'
-const eventLastName = '#event-lastname'
-const eventEmail = '#event-email'
-const eventMobile = '#event-mobile'
-const eventBirthdate = '#event-birthdate'
-const eventGenderValidation = '#event-gender-validation'
-const eventFemale = '#event-gender-female'
-const eventMale = '#event-gender-male'
-const eventOther = '#event-gender-other'
-const eventReferral = '#event-referral'
-const eventExperienceContainer = '.event-container.experience'
-const eventExperienceParsleyError = '#event-experience-validation'
-const eventExperienceYes = '#event-experience-yes'
-const eventExperienceNo = '#event-experience-no'
-const eventExperienceDetails = '#event-experience-details'
-const eventDietContainer = '.event-container.diet'
-const eventDietParsleyError = '#event-diet-validation'
-const eventDietYes = '#event-diet-yes'
-const eventDietNo = '#event-diet-no'
-const eventDietDetails = '#event-diet-details'
-const eventAffiliateSelectionContainer = '.event-container.affiliate-selection'
-const eventAffiliateContainer = '.event-container.affiliate'
-const eventAffiliateParsleyError = '#event-affiliate-validation'
-const eventAffiliateYes = '#event-affiliate-yes'
-const eventAffiliateNo = '#event-affiliate-no'
-const eventAffiliateCode = '#event-affiliate-code'
-const eventAffiliatePass = '#event-affiliate-pass'
-const eventAffiliateFail = '#event-affiliate-fail'
-const eventStatus = '#event-status'
-const eventPartnerContainer = '.event-container.partner'
-const eventPartnerName = '#event-partner-name'
-const eventPartnerGenderValidation = '#event-partner-gender-validation'
-const eventPartnerFemale = '#event-partner-gender-female'
-const eventPartnerMale = '#event-partner-gender-male'
-const eventPartnerOther = '#event-partner-gender-other'
-const eventPayValidation = '#event-pay-validation'
-const eventPayBoth = '#event-pay-both'
-const eventPayMe = '#event-pay-me'
-const eventSelect = '#event-option'
-const eventDepositContainer = '.event-container.deposit'
-const eventDepositValidation = '#event-deposit-validation'
-const eventDepositText = '#event-deposit-text'
-const eventDepositFull = '#event-deposit-full'
-const eventDepositDeposit = '#event-deposit-deposit'
-const eventTermsValidation = '#event-terms-validation'
-const eventTerms = '#event-terms'
-const paymentButton = '#payment-button'
+var payButton = '#payment-button'
+var eventRegForm = '.event-container.reg-form'
+var eventInviteButton = '#event-invitecode-button'
+var eventInviteBox = '#event-invitecode-box'
+var eventInviteCode = '#event-invitecode-code'
+var eventInvitePass = '#event-invitecode-pass'
+var eventInviteFail = '#event-invitecode-fail'
+var eventSpecialRegistration = '#event-special-options'
+var eventFirstName = '#event-firstname'
+var eventLastName = '#event-lastname'
+var eventEmail = '#event-email'
+var eventMobile = '#event-mobile'
+var eventBirthdate = '#event-birthdate'
+var eventGenderValidation = '#event-gender-validation'
+var eventFemale = '#event-gender-female'
+var eventMale = '#event-gender-male'
+var eventOther = '#event-gender-other'
+var eventReferral = '#event-referral'
+var eventExperienceContainer = '.event-container.experience'
+var eventExperienceParsleyError = '#event-experience-validation'
+var eventExperienceYes = '#event-experience-yes'
+var eventExperienceNo = '#event-experience-no'
+var eventExperienceDetails = '#event-experience-details'
+var eventDietContainer = '.event-container.diet'
+var eventDietParsleyError = '#event-diet-validation'
+var eventDietYes = '#event-diet-yes'
+var eventDietNo = '#event-diet-no'
+var eventDietDetails = '#event-diet-details'
+var eventAffiliateSelectionContainer = '.event-container.affiliate-selection'
+var eventAffiliateContainer = '.event-container.affiliate'
+var eventAffiliateParsleyError = '#event-affiliate-validation'
+var eventAffiliateYes = '#event-affiliate-yes'
+var eventAffiliateNo = '#event-affiliate-no'
+var eventAffiliateCode = '#event-affiliate-code'
+var eventAffiliatePass = '#event-affiliate-pass'
+var eventAffiliateFail = '#event-affiliate-fail'
+var eventStatus = '#event-status'
+var eventPartnerContainer = '.event-container.partner'
+var eventPartnerName = '#event-partner-name'
+var eventPartnerGenderValidation = '#event-partner-gender-validation'
+var eventPartnerFemale = '#event-partner-gender-female'
+var eventPartnerMale = '#event-partner-gender-male'
+var eventPartnerOther = '#event-partner-gender-other'
+var eventPayValidation = '#event-pay-validation'
+var eventPayBoth = '#event-pay-both'
+var eventPayMe = '#event-pay-me'
+var eventSelect = '#event-option'
+var eventDepositContainer = '.event-container.deposit'
+var eventDepositValidation = '#event-deposit-validation'
+var eventDepositText = '#event-deposit-text'
+var eventDepositFull = '#event-deposit-full'
+var eventDepositDeposit = '#event-deposit-deposit'
+var eventTermsValidation = '#event-terms-validation'
+var eventTerms = '#event-terms'
+var paymentButton = '#payment-button'
 
 // Stripe billing variables
-const billingFirstName = '#billing-firstname'
-const billingLastName = '#billing-lastname'
-const billingStreet = '#billing-street'
-const billingCity = '#billing-city'
-const billingState = '#billing-state'
-const billingPostal = '#billing-postal'
-const billingCountry = '#billing-country'
-const billingCard = '#billing-card'
+var billingFirstName = '#billing-firstname'
+var billingLastName = '#billing-lastname'
+var billingStreet = '#billing-street'
+var billingCity = '#billing-city'
+var billingState = '#billing-state'
+var billingPostal = '#billing-postal'
+var billingCountry = '#billing-country'
+var billingCard = '#billing-card'
 
 
 
@@ -325,7 +325,7 @@ function participants() {
 function affiliateCode(code) {
 	var obj = new Object()
 	obj.discount = function() {
-		const discount = 100 - parseInt(code.substr(4, 2), 10) === 90
+		var discount = 100 - parseInt(code.substr(4, 2), 10) === 90
 			// Assuming no discount, only to unlock event, e.g. ****10********
 			? 0
 			// With discount
@@ -450,10 +450,10 @@ function eventAffiliateShowErrors() {
 	}
 }
 function showErrorsInEventForm() {
-	const errorInput = { 'border-color': '#b00000', 'background-color': '#fdd' }
-	const clearInput = { 'border-color': '#ccc', 'background-color': '#fff' }
-	const errorRadio = { 'background-color': '#fdd' }
-	const clearRadio = { 'background-color': 'transparent' }
+	var errorInput = { 'border-color': '#b00000', 'background-color': '#fdd' }
+	var clearInput = { 'border-color': '#ccc', 'background-color': '#fff' }
+	var errorRadio = { 'background-color': '#fdd' }
+	var clearRadio = { 'background-color': 'transparent' }
 	if (!eventAffiliateValidation()) { $(eventInviteCode).css(errorInput); } else { $(eventInviteCode).css(clearInput); }
 	if (!$(eventTerms).is(':checked')) { $(eventTermsValidation).css(errorRadio); } else { $(eventTermsValidation).css(clearRadio); }
 	if ($(eventDepositContainer).is(':visible') && !$(eventDepositFull).is(':checked') && !$(eventDepositDeposit).is(':checked')) { $(eventDepositValidation).css(errorRadio); } else { $(eventDepositValidation).css(clearRadio); }
@@ -476,7 +476,7 @@ function showErrorsInEventForm() {
 // SHOW/HIDE FORM ELEMENTS
 // Event Invite Code
 function eventInvitePassShow() {
-	const text = eventAffiliateValidation() && affiliateCode($(eventInviteCode).val()).discount() > 0 ? 'Congrats! Invite code accepted!<br />$' + affiliateCode($(eventInviteCode).val()).discount() + ' discount applied! Continue below.' : 'Congrats! Invite code accepted!<br />Continue below.'
+	var text = eventAffiliateValidation() && affiliateCode($(eventInviteCode).val()).discount() > 0 ? 'Congrats! Invite code accepted!<br />$' + affiliateCode($(eventInviteCode).val()).discount() + ' discount applied! Continue below.' : 'Congrats! Invite code accepted!<br />Continue below.'
 	$(eventInvitePass).html(text)
 	$(eventInvitePass).show()
 	$(eventInvitePass).animate({
@@ -516,7 +516,7 @@ function hideAffiliate() {
 	$(eventAffiliateContainer).hide()
 }
 function eventAffiliatePassShow() {
-	const text = eventAffiliateValidation() && affiliateCode($(eventAffiliateCode).val()).discount() > 0 ? 'Congrats! Code accepted!<br />$' + affiliateCode($(eventAffiliateCode).val()).discount() + ' discount applied!' : 'Congrats! Code accepted!'
+	var text = eventAffiliateValidation() && affiliateCode($(eventAffiliateCode).val()).discount() > 0 ? 'Congrats! Code accepted!<br />$' + affiliateCode($(eventAffiliateCode).val()).discount() + ' discount applied!' : 'Congrats! Code accepted!'
 	$(eventAffiliatePass).html(text)
 	$(eventAffiliatePass).show()
 	$(eventAffiliatePass).animate({
@@ -670,20 +670,20 @@ function setEventPrices() {
 			text: 'Event option...'
 		}))
 	}
-	const paymentFactor = (people === 'for both') ? 2 : 1
-	const spacer = people ? ' ' : ''
-	const closer = (people || people === '') ? ')' : ''
+	var paymentFactor = (people === 'for both') ? 2 : 1
+	var spacer = people ? ' ' : ''
+	var closer = (people || people === '') ? ')' : ''
 	for (var i = 0; i < eventOptions.length; i++) {
 		// Event price cannot be less than $0 after discount is applied
-		const eventSelectPrice = (eventPrices[i] - eventAffiliateDiscount()) * paymentFactor > 0 ? (eventPrices[i] - eventAffiliateDiscount()) * paymentFactor : 0
-		const affiliateDiscountText = eventAffiliateDiscount() > 0 ? ' including discount' : ''
-		const eventSelectText = eventOptions[i] + ' ($' + eventSelectPrice + spacer + people + affiliateDiscountText + closer
+		var eventSelectPrice = (eventPrices[i] - eventAffiliateDiscount()) * paymentFactor > 0 ? (eventPrices[i] - eventAffiliateDiscount()) * paymentFactor : 0
+		var affiliateDiscountText = eventAffiliateDiscount() > 0 ? ' including discount' : ''
+		var eventSelectText = eventOptions[i] + ' ($' + eventSelectPrice + spacer + people + affiliateDiscountText + closer
 		$(eventSelect).append($('<option>', {
 			value: eventSelectPrice,
 			text: eventSelectText
 		}))
 	}
-	const eventDepositPrice = parseInt(eventDepositAmount) * paymentFactor
+	var eventDepositPrice = parseInt(eventDepositAmount) * paymentFactor
 	$(eventDepositText).text(`Pay deposit only ($${eventDepositPrice}${spacer}${people})`)
 }
 
@@ -823,11 +823,11 @@ if (page === 'Event') {
 	$(eventPayBoth + ',' + eventPayMe).on('change', function () {
 		setEventPrices()
 	})
-	const eventFieldsPersonal = eventFirstName + ',' + eventLastName + ',' + eventEmail + ',' + eventMobile + ',' + eventBirthdate + ',' + eventFemale + ',' + eventMale + ',' + eventOther
-	const eventFieldsDetails = eventReferral + ',' + eventExperienceYes + ',' + eventExperienceNo + ',' + eventExperienceDetails + ',' + eventDietYes + ',' + eventDietNo + ',' + eventDietDetails
-	const eventFieldsPartner = eventStatus + ',' + eventPartnerName + ',' + eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther + ',' + eventPayBoth + ',' + eventPayMe
-	const eventFieldsOptions = eventSelect
-	const eventFieldsBilling = billingFirstName + ',' + billingLastName + ',' + billingStreet + ',' + billingCity + ',' + billingState + ',' + billingPostal + ',' + billingCountry
+	var eventFieldsPersonal = eventFirstName + ',' + eventLastName + ',' + eventEmail + ',' + eventMobile + ',' + eventBirthdate + ',' + eventFemale + ',' + eventMale + ',' + eventOther
+	var eventFieldsDetails = eventReferral + ',' + eventExperienceYes + ',' + eventExperienceNo + ',' + eventExperienceDetails + ',' + eventDietYes + ',' + eventDietNo + ',' + eventDietDetails
+	var eventFieldsPartner = eventStatus + ',' + eventPartnerName + ',' + eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther + ',' + eventPayBoth + ',' + eventPayMe
+	var eventFieldsOptions = eventSelect
+	var eventFieldsBilling = billingFirstName + ',' + billingLastName + ',' + billingStreet + ',' + billingCity + ',' + billingState + ',' + billingPostal + ',' + billingCountry
 	$(eventFieldsPersonal + ',' + eventFieldsDetails + ',' + eventFieldsPartner + ',' + eventFieldsOptions + ',' + eventTerms + ',' + eventFieldsBilling).on('change', function() {
 		saveForm(page)
 		eventFormValidation()
@@ -842,15 +842,15 @@ if (page === 'Event') {
 
 
 // CUSTOM CHARGE
-const $customForm = $('#wf-form-Custom-Charge')
-const customCode = '#custom-code'
-const customFirstName = '#custom-firstname'
-const customLastName = '#custom-lastname'
-const customEmail = '#custom-email'
-const customMobile = '#custom-mobile'
-const customSelect = '#custom-select'
-const customTerms = '#custom-terms'
-const customTermsValidation = '#custom-terms-validation'
+var $customForm = $('#wf-form-Custom-Charge')
+var customCode = '#custom-code'
+var customFirstName = '#custom-firstname'
+var customLastName = '#custom-lastname'
+var customEmail = '#custom-email'
+var customMobile = '#custom-mobile'
+var customSelect = '#custom-select'
+var customTerms = '#custom-terms'
+var customTermsValidation = '#custom-terms-validation'
 
 // CUSTOM AMOUNT
 // Complete Validation
@@ -867,10 +867,10 @@ function customChargeValidation() {
 }
 
 function showErrorsInCustomForm() {
-	const errorInput = { 'border-color': '#b00000', 'background-color': '#fdd' }
-	const clearInput = { 'border-color': '#ccc', 'background-color': '#fff' }
-	const errorRadio = { 'background-color': '#fdd' }
-	const clearRadio = { 'background-color': 'transparent' }
+	var errorInput = { 'border-color': '#b00000', 'background-color': '#fdd' }
+	var clearInput = { 'border-color': '#ccc', 'background-color': '#fff' }
+	var errorRadio = { 'background-color': '#fdd' }
+	var clearRadio = { 'background-color': 'transparent' }
 	if (!$(customTerms).is(':checked')) { $(customTermsValidation).css(errorRadio); } else { $(customTermsValidation).css(clearRadio); }
 	$customForm.parsley().validate()
 }
@@ -990,7 +990,7 @@ function verification(t, e, n, i) {
 
 // Payment
 function stripeTokenHandler(token, data) {
-	const stripeURL = window.location.href.indexOf('ecstaticliving.com') > -1
+	var stripeURL = window.location.href.indexOf('ecstaticliving.com') > -1
 		? 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe'
 		: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test'
 	$('.stripe.processing').show()
@@ -1062,8 +1062,8 @@ function stripeTokenHandler(token, data) {
 	})
 }
 
-const stripe = window.location.href.indexOf('ecstaticliving.com') > -1 ? Stripe('pk_live_0rULIvKhv6aSLqI49Ae5rflI') : Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
-const elements = stripe.elements()
+var stripe = window.location.href.indexOf('ecstaticliving.com') > -1 ? Stripe('pk_live_0rULIvKhv6aSLqI49Ae5rflI') : Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
+var elements = stripe.elements()
 style = {
 	base: {
 		fontFamily: 'Lato',
@@ -1082,7 +1082,7 @@ style = {
 		}
 	}
 }
-const card = elements.create('card', {
+var card = elements.create('card', {
 	hidePostalCode: true,
 	style
 })
@@ -1128,7 +1128,7 @@ $(payButton).on('click', function(e) {
 		var qbRecord = '';
 		if (participants() === 1) { qbRecord = $(eventFirstName).val() + ' ' + $(eventLastName).val() }
 		if (participants() === 2) {
-			const partner = $(eventPartnerName).val().split(' ')
+			var partner = $(eventPartnerName).val().split(' ')
 			if (partner[partner.length-1] === $(eventLastName).val()) {
 				qbRecord = $(eventFirstName).val() + ' & ' + $(eventPartnerName).val()
 			} else {
@@ -1144,7 +1144,7 @@ $(payButton).on('click', function(e) {
 		}
 		count = $(eventSelect).prop('selectedIndex') - 1
 		chargeAmount = $(eventDepositDeposit).is(':checked') ? eventDepositPrice * 100 : $(eventSelect).val() * 100
-		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
+		var eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
 		customerDescription = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' <' + $(eventEmail).val() + '>'
 		customerEmail = $(eventEmail).val()
 		chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(eventSelect + ' option:selected').text().substring(0, $(eventSelect + ' option:selected').text().length - 16)}, ${eventDeposit}`
@@ -1158,7 +1158,7 @@ $(payButton).on('click', function(e) {
 	// Pass through amount and description to form, for Zapier automation
 	$('#stripe-amount').val(chargeAmount)
 	$('#stripe-description').val(chargeDescription)
-	const billingData = {
+	var billingData = {
 		name: $(billingFirstName).val() + ' ' + $(billingLastName).val(),
 		address_line1: $(billingStreet).val(),
 		address_line2: '',
@@ -1167,7 +1167,7 @@ $(payButton).on('click', function(e) {
 		address_zip: $(billingPostal).val(),
 		address_country: $(billingCountry).val()
 	}
-	const serverData = {
+	var serverData = {
 		customerDescription,
 		customerEmail,
 		chargeDescription,
