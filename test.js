@@ -77,10 +77,10 @@ if (window.location.href.indexOf('/contact') > -1) {
 }
 
 const ua = navigator.userAgent
-const isKindle = /Kindle/i.test(ua) || /Silk/i.test(ua) || /KFTT/i.test(ua) || /KFOT/i.test(ua) || /KFJWA/i.test(ua) || /KFJWI/i.test(ua) || /KFSOWI/i.test(ua) || /KFTHWA/i.test(ua) || /KFTHWI/i.test(ua) || /KFAPWA/i.test(ua) || /KFAPWI/i.test(ua)
+const isKindle = /Kindle|Silk|KFAPW|KFARWI|KFASWI|KFFOWI|KFJW|KFMEWI|KFOT|KFS‌​AW|KFSOWI|KFTBW|KFTH‌​W|KFTT|WFFOWI/i.test‌​(ua)
 const isIE = /MSIE 10/i.test(ua) || /MSIE 9/i.test(ua) || /rv:11.0/i.test(ua)
 if ((page === 'Event' || page === 'Custom') && (isKindle || isIE)) {
-	window.alert('This page does not work on Internet Explorer. Please use a different browser.')
+	window.alert('This page does not work on this browser. Please use a different browser.')
 }
 
 
