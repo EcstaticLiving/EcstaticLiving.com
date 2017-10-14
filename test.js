@@ -76,9 +76,9 @@ if (window.location.href.indexOf('/contact') > -1) {
 	page = 'Contact'
 }
 
-const userAgent = navigator.userAgent
-const browserKindle = /Kindle|Silk|KFAPW|KFARWI|KFASWI|KFFOWI|KFJW|KFMEWI|KFOT|KFS‌​AW|KFSOWI|KFTBW|KFTH‌​W|KFTT|WFFOWI/i.test‌​(userAgent)
-const browserIE = /MSIE 10/i.test(userAgent) || /MSIE 9/i.test(userAgent) || /rv:11.0/i.test(userAgent)
+const browserUserAgent = navigator.userAgent
+const browserKindle = /Kindle|Silk|KFAPW|KFARWI|KFASWI|KFFOWI|KFJW|KFMEWI|KFOT|KFS‌​AW|KFSOWI|KFTBW|KFTH‌​W|KFTT|WFFOWI/i.test‌​(browserUserAgent)
+const browserIE = /MSIE 10/i.test(browserUserAgent) || /MSIE 9/i.test(browserUserAgent) || /rv:11.0/i.test(browserUserAgent)
 if ((page === 'Event' || page === 'Custom') && (browserKindle || browserIE)) {
 	window.alert('This page does not work on this browser. Please use a different browser.')
 }
