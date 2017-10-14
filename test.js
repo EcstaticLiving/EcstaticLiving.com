@@ -199,15 +199,15 @@ function saveForm(formType) {
 			values[$(this).attr('name')] = $(this).val()
 		}
 	})
-	localStorage.setItem(`EcstaticLiving:${formType}`, JSON.stringify(values))
+	localStorage.setItem('EcstaticLiving:' + formType, JSON.stringify(values))
 }
 
 // Repopulate Saved Form
 function repopulateForm(formType) {
-	if (localStorage.getItem(`EcstaticLiving:${formType}`)) {
+	if (localStorage.getItem('EcstaticLiving:' + formType)) {
 		$('#form-load').hide()
 		$('#form-clear').show()
-		var values = JSON.parse(localStorage.getItem(`EcstaticLiving:${formType}`))
+		var values = JSON.parse(localStorage.getItem('EcstaticLiving:' + formType))
 		for (var item in values) {
 			if ($('*[name=' + item + ']').is(':radio')) {
 				$('input[name=' + item + '][value="' + values[item] + '"]').prop('checked', true)
@@ -707,7 +707,7 @@ function setEventPrices() {
 		}))
 	}
 	const eventDepositPrice = parseInt(eventDepositAmount) * paymentFactor
-	$(eventDepositText).text(`Pay deposit only ($${eventDepositPrice}${spacer}${people})`)
+	$(eventDepositText).text('Pay deposit only ($' + eventDepositPrice + spacer + people + ')')
 }
 
 
@@ -951,7 +951,7 @@ if (page === 'Custom') {
 
 
 // Show / hide populate and clear forms
-if (localStorage.getItem(`EcstaticLiving:${page}`)) {
+if (localStorage.getItem('EcstaticLiving:' + page)) {
 	$('#form-load').hide()
 	$('#form-clear').show()
 } else {
@@ -1038,11 +1038,11 @@ function stripeTokenHandler(token, data) {
 		if (page === 'Event') {
 			name = 'Event Registration'
 			formSubmit = $eventForm
-			success = `${siteUrl}registered`
+			success = siteUrl + 'registered'
 		} else if (page === 'Custom') {
 			name = 'Custom Charge'
 			formSubmit = $customForm
-			success = `${siteUrl}success`
+			success = siteUrl + 'success'
 		}
 		var r = {
 			name,
@@ -1071,7 +1071,7 @@ function stripeTokenHandler(token, data) {
 		console.log(err)
 		// $0 charge to save credit card details on custom charge form
 		if (err.responseJSON && err.responseJSON.message === 'Invalid positive integer' && page === 'Custom') {
-			window.location.href = `${siteUrl}card-saved`
+			window.location.href = siteUrl + 'card-saved'
 		} else {
 			if (page === 'Event') {
 				resetEventForm()
@@ -1170,13 +1170,13 @@ $(payButton).on('click', function(e) {
 		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
 		customerDescription = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' <' + $(eventEmail).val() + '>'
 		customerEmail = $(eventEmail).val()
-		chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(eventSelect + ' option:selected').text().substring(0, $(eventSelect + ' option:selected').text().length - 16)}, ${eventDeposit}`
+		chargeDescription = eventTitle + ' ' + eventDates + ', ' + eventVenue + ', ' + $(eventSelect + ' option:selected').text().substring(0, $(eventSelect + ' option:selected').text().length - 16) + ', ' + eventDeposit
 	} else if (page === 'Custom') {
 		count = $(customSelect).prop('selectedIndex') - 1
 		chargeAmount = $(customSelect).val() * 100
 		customerDescription = $(customFirstName).val() + ' ' + $(customLastName).val() + ' <' + $(customEmail).val() + '>'
 		customerEmail = $(customEmail).val()
-		chargeDescription = `Custom Charge: ${$(customSelect + ' option:selected').text().substring(0, $(customSelect + ' option:selected').text().length - 16)}`
+		chargeDescription = 'Custom Charge: ' + $(customSelect + ' option:selected').text().substring(0, $(customSelect + ' option:selected').text().length - 16)
 	}
 	// Pass through amount and description to form, for Zapier automation
 	$('#stripe-amount').val(chargeAmount)
