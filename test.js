@@ -76,10 +76,11 @@ if (window.location.href.indexOf('/contact') > -1) {
 	page = 'Contact'
 }
 
-const browserUserAgent = navigator.userAgent
-const browserKindle = /Kindle|Silk|KFAPW|KFARWI|KFASWI|KFFOWI|KFJW|KFMEWI|KFOT|KFS‌​AW|KFSOWI|KFTBW|KFTH‌​W|KFTT|WFFOWI/i.test‌​(browserUserAgent)
-const browserIE = /MSIE 10/i.test(browserUserAgent) || /MSIE 9/i.test(browserUserAgent) || /rv:11.0/i.test(browserUserAgent)
-if ((page === 'Event' || page === 'Custom') && (browserKindle || browserIE)) {
+const browserUA1 = navigator.userAgent
+const browserKindle1 = /Kindle/i.test(browserUA1) || /Silk/i.test(browserUA1) || /KFTT/i.test(browserUA1) || /KFOT/i.test(browserUA1) || /KFJWA/i.test(browserUA1) || /KFJWI/i.test(browserUA1)
+const browserKindle2 = /KFSOWI/i.test(browserUA1) || /KFTHWA/i.test(browserUA1) || /KFTHWI/i.test(browserUA1) || /KFAPWA/i.test(browserUA1) || /KFAPWI/i.test(browserUA1)
+const browserIE1 = /MSIE 10/i.test(browserUA1) || /MSIE 9/i.test(browserUA1) || /rv:11.0/i.test(browserUA1)
+if ((page === 'Event' || page === 'Custom') && (browserKindle1 || browserKindle2 || browserIE1)) {
 	window.alert('This page does not work on this browser. Please use a different browser.')
 }
 
