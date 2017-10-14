@@ -100,9 +100,10 @@ const ua = window.navigator.userAgent
 console.log(Number.parseInt(ua.split('OPR/')[1], 10));
 const chromeVersion = Number.parseInt(ua.split('Chrome/')[1], 10)
 const firefoxVersion = Number.parseInt(ua.split('Firefox/')[1], 10)
+const operaVersion = Number.parseInt(ua.split('OPR/')[1], 10)
 const isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification))
 const safariVersion = Number.parseInt(ua.split('Safari/')[1], 10)
-if ((page === 'Event' || page === 'Custom') && !is.edge() && (!is.chrome() || chromeVersion <= 41) && (!is.firefox() || firefoxVersion <= 32) && !is.opera() && (!isSafari || safariVersion <= 600)) {
+if ((page === 'Event' || page === 'Custom') && !is.edge() && (!is.chrome() || chromeVersion <= 41) && (!is.firefox() || firefoxVersion <= 32) && (!is.opera() || operaVersion <= 40) && (!isSafari || safariVersion <= 600)) {
 	window.alert('This page does not work on this browser. Please use a different browser.')
 }
 
