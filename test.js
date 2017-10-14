@@ -78,36 +78,21 @@ if (window.location.href.indexOf('/contact') > -1) {
 
 // Browser validation
 // The following code is embedded into EcstaticLiving.com. Make changes here, then insert into 'Events' template page on EcstaticLiving.com
-// <noscript>
-// 	<div style="width:100%; max-width:400px; margin:auto; border:3px solid maroon; border-radius:10px; padding: 0px 20px 20px 20px; font-size: 18px;">
-// 		<h3>Please enable JavaScript</h3>
-// 		In order to register online, you will need to enable JavaScript. Otherwise, feel free to call us at 707-987-3456 to register by phone. For instructions on how to enable JavaScript on your browser, click the appropriate link below:<br /><br />
-// 		<strong>Mobile</strong>: <a href="http://activatejavascript.org/en/instructions/ios#instructions" target="_blank" class="lpa-link">iOS</a> | <a href="http://activatejavascript.org/en/instructions/android#instructions" target="_blank" class="lpa-link">Android</a>
-// 		<br /><br />
-// 		<strong>Web</strong>: <a href="http://activatejavascript.org/en/instructions/chrome#instructions" target="_blank" class="lpa-link">Chrome</a> | <a href="http://activatejavascript.org/en/instructions/firefox#instructions" target="_blank" class="lpa-link">Firefox</a> | <a href="http://activatejavascript.org/en/instructions/safari#instructions" target="_blank" class="lpa-link">Safari</a> | <a href="http://activatejavascript.org/en/instructions/opera#instructions" target="_blank" class="lpa-link">Opera</a>
-// 	</div>
-// </noscript>
-// <script type="text/javascript">
-// 	const isBrowserOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0
-// 	const isBrowserFirefox = typeof InstallTrigger !== 'undefined'
-// 	const isBrowserSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification))
-// 	const isBrowserIE = /*@cc_on!@*/false || !!document.documentMode
-// 	const isBrowserEdge = !isIE && !!window.StyleMedia
-// 	const isBrowserChrome = !!window.chrome && !!window.chrome.webstore
-// 	const isBrowserBlink = (isChrome || isOpera) && !!window.CSS
-// 	if (!isBrowserOpera && !isBrowserFirefox && !isBrowserSafari && !isBrowserEdge && !isBrowserChrome) {
-// 		document.write("<div style=\"width:100%; max-width:400px; margin:auto; border:3px solid maroon; border-radius:10px; padding: 0px 20px 20px 20px; font-size: 18px;\"><h3>Please use a different browser</h3>In order to register online, you will need to use a different browser. Otherwise, feel free to call us at 707-987-3456 to register by phone. For download links to usable browsers, click the appropriate link below:<br /><br /><strong>PC</strong>: <a href=\"https://www.microsoft.com/en-us/windows/microsoft-edge\" target=\"_blank\">Microsoft Edge</a> | <a href=\"https://www.google.com/chrome/index.html\" target=\"_blank\">Google Chrome</a> | <a href=\"https://www.mozilla.org/en-US/firefox/new/\" target=\"_blank\">Firefox</a><br /><br /><strong>Mac</strong>: Safari | <a href=\"https://www.google.com/chrome/index.html\" target=\"_blank\">Google Chrome</a> | <a href=\"https://www.mozilla.org/en-US/firefox/new/\" target=\"_blank\">Firefox</a></div>")
-// 	}
-// </script>
-// Browser detection courtesy of: https://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
-const isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0
-const isFirefox = typeof InstallTrigger !== 'undefined'
-const isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification))
-const isIE = /*@cc_on!@*/false || !!document.documentMode
-const isEdge = !isIE && !!window.StyleMedia
-const isChrome = !!window.chrome && !!window.chrome.webstore
-const isBlink = (isChrome || isOpera) && !!window.CSS
-if ((page === 'Event' || page === 'Custom') && !isOpera && !isFirefox && !isSafari && !isEdge && !isChrome) {
+{/* <noscript>
+	<div style="width:100%; max-width:400px; margin:auto; border:3px solid maroon; border-radius:10px; padding: 0px 20px 20px 20px; font-size: 18px;">
+		<h3>Please enable JavaScript</h3>
+		In order to register online, you will need to enable JavaScript. Otherwise, feel free to call us at 707-987-3456 to register by phone. For instructions on how to enable JavaScript on your browser, click the appropriate link below:<br /><br />
+		<strong>Mobile</strong>: <a href="http://activatejavascript.org/en/instructions/ios#instructions" target="_blank" class="lpa-link">iOS</a> | <a href="http://activatejavascript.org/en/instructions/android#instructions" target="_blank" class="lpa-link">Android</a>
+		<br /><br />
+		<strong>Web</strong>: <a href="http://activatejavascript.org/en/instructions/chrome#instructions" target="_blank" class="lpa-link">Chrome</a> | <a href="http://activatejavascript.org/en/instructions/firefox#instructions" target="_blank" class="lpa-link">Firefox</a> | <a href="http://activatejavascript.org/en/instructions/safari#instructions" target="_blank" class="lpa-link">Safari</a> | <a href="http://activatejavascript.org/en/instructions/opera#instructions" target="_blank" class="lpa-link">Opera</a>
+	</div>
+</noscript>
+<script type="text/javascript">
+	if (is.edge() || is.chrome() || is.firefox() || is.opera() || is.safari()) {
+		document.write("<div style=\"width:100%; max-width:400px; margin:auto; border:3px solid maroon; border-radius:10px; padding: 0px 20px 20px 20px; font-size: 18px;\"><h3>Please use a different browser</h3>In order to register online, you will need to use a different browser. Otherwise, feel free to call us at 707-987-3456 to register by phone. For download links to usable browsers, click the appropriate link below:<br /><br /><strong>PC</strong>: <a href=\"https://www.microsoft.com/en-us/windows/microsoft-edge\" target=\"_blank\">Microsoft Edge</a> | <a href=\"https://www.google.com/chrome/index.html\" target=\"_blank\">Google Chrome</a> | <a href=\"https://www.mozilla.org/en-US/firefox/new/\" target=\"_blank\">Firefox</a><br /><br /><strong>Mac</strong>: Safari | <a href=\"https://www.google.com/chrome/index.html\" target=\"_blank\">Google Chrome</a> | <a href=\"https://www.mozilla.org/en-US/firefox/new/\" target=\"_blank\">Firefox</a></div>")
+	}
+</script> */}
+if ((page === 'Event' || page === 'Custom') && (is.edge() || is.chrome() || is.firefox() || is.opera() || is.safari()))  {
 	window.alert('This page does not work on this browser. Please use a different browser.')
 }
 
