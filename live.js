@@ -26,7 +26,7 @@ $receivedSection = $('.received-section')
 // Initialization Module
 const siteUrl = window.location.href.indexOf('ecstaticliving.com') > -1
 	? 'https://www.ecstaticliving.com/'
-	: 'https://ecstaticliving.webflow.io'
+	: 'https://ecstaticliving.webflow.io/'
 
 //	INITIALIZE
 function initialize() {
