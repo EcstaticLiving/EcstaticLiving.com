@@ -1047,7 +1047,7 @@ function stripeTokenHandler(token, data) {
 			success = siteUrl + 'success'
 		}
 		var r = {
-			name,
+			name: name,
 			source: window.location.href,
 			test: false,
 			fields: {},
