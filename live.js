@@ -76,11 +76,11 @@ if (window.location.href.indexOf('/contact') > -1) {
 	page = 'Contact'
 }
 
-const browserUA1 = navigator.userAgent
-const browserKindle1 = /Kindle/i.test(browserUA1) || /Silk/i.test(browserUA1) || /KFTT/i.test(browserUA1) || /KFOT/i.test(browserUA1) || /KFJWA/i.test(browserUA1) || /KFJWI/i.test(browserUA1)
-const browserKindle2 = /KFSOWI/i.test(browserUA1) || /KFTHWA/i.test(browserUA1) || /KFTHWI/i.test(browserUA1) || /KFAPWA/i.test(browserUA1) || /KFAPWI/i.test(browserUA1)
-const browserIE1 = /MSIE 10/i.test(browserUA1) || /MSIE 9/i.test(browserUA1) || /rv:11.0/i.test(browserUA1)
-if ((page === 'Event' || page === 'Custom') && (browserKindle1 || browserKindle2 || browserIE1)) {
+const eliUserAgent = navigator.userAgent
+const eliKindle1 = /Kindle/i.test(eliUserAgent) || /Silk/i.test(eliUserAgent) || /KFTT/i.test(eliUserAgent) || /KFOT/i.test(eliUserAgent) || /KFJWA/i.test(eliUserAgent) || /KFJWI/i.test(eliUserAgent)
+const eliKindle2 = /KFSOWI/i.test(eliUserAgent) || /KFTHWA/i.test(eliUserAgent) || /KFTHWI/i.test(eliUserAgent) || /KFAPWA/i.test(eliUserAgent) || /KFAPWI/i.test(eliUserAgent)
+const eliIE1 = /MSIE 10/i.test(eliUserAgent) || /MSIE 9/i.test(eliUserAgent) || /rv:11.0/i.test(eliUserAgent)
+if ((page === 'Event' || page === 'Custom') && (eliKindle1 || eliKindle2 || eliIE1)) {
 	window.alert('This page does not work on this browser. Please use a different browser.')
 }
 
