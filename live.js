@@ -89,15 +89,25 @@ if (window.location.href.indexOf('/contact') > -1) {
 </noscript>
 <script src="https://ecstaticliving.github.io/ecstaticliving.com/is.js"></script>
 <script type="text/javascript">
-	const isSafariBrowser = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification))
-	if (!is.edge() && !is.chrome() && !is.firefox() && !is.opera() && !isSafariBrowser) {
+	const siteUA = window.navigator.userAgent
+	const siteChromeVersion = Number.parseInt(siteUA.split('Chrome/')[1], 10)
+	const siteFirefoxVersion = Number.parseInt(siteUA.split('Firefox/')[1], 10)
+	const siteOperaVersion = Number.parseInt(siteUA.split('OPR/')[1], 10)
+	const siteIsSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification))
+	const siteSafariVersion = Number.parseInt(siteUA.split('Safari/')[1], 10)
+	if (!is.edge() && (!is.chrome() || siteChromeVersion <= 41) && (!is.firefox() || siteFirefoxVersion <= 32) && (!is.opera() || siteOperaVersion <= 28) && (!siteIsSafari || siteSafariVersion <= 600)) {
 		document.write("<div style=\"width:100%; max-width:400px; margin:auto; border:3px solid maroon; border-radius:10px; padding: 0px 20px 20px 20px; font-size: 18px;\"><h3>Please use a different browser</h3>In order to register online, you will need to use a different browser. Otherwise, feel free to call us at 707-987-3456 to register by phone. For download links to usable browsers, click the appropriate link below:<br /><br /><strong>PC</strong>: <a href=\"https://www.microsoft.com/en-us/windows/microsoft-edge\" target=\"_blank\">Edge</a> | <a href=\"https://www.google.com/chrome/index.html\" target=\"_blank\">Google Chrome</a> | <a href=\"https://www.mozilla.org/en-US/firefox/new/\" target=\"_blank\">Firefox</a><br /><br /><strong>Mac</strong>: Safari | <a href=\"https://www.google.com/chrome/index.html\" target=\"_blank\">Google Chrome</a> | <a href=\"https://www.mozilla.org/en-US/firefox/new/\" target=\"_blank\">Firefox</a><br /><br /><strong>Mobile</strong>: Safari (for iOS) | <a href=\"https://www.google.com/chrome/index.html\" target=\"_blank\">Google Chrome</a> | <a href=\"https://www.mozilla.org/en-US/firefox/new/\" target=\"_blank\">Firefox</a></div>")
 	}
 </script> */}
 
-// Browser detection courtesy of: https://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
+const ua = window.navigator.userAgent
+const chromeVersion = Number.parseInt(ua.split('Chrome/')[1], 10)
+const firefoxVersion = Number.parseInt(ua.split('Firefox/')[1], 10)
+const operaVersion = Number.parseInt(ua.split('OPR/')[1], 10)
+// Safari browser detection courtesy of: https://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
 const isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification))
-if ((page === 'Event' || page === 'Custom') && !is.edge() && !is.chrome() && !is.firefox() && !is.opera() && !isSafari) {
+const safariVersion = Number.parseInt(ua.split('Safari/')[1], 10)
+if ((page === 'Event' || page === 'Custom') && !is.edge() && (!is.chrome() || chromeVersion <= 41) && (!is.firefox() || firefoxVersion <= 32) && (!is.opera() || operaVersion <= 28) && (!isSafari || safariVersion <= 600)) {
 	window.alert('This page does not work on this browser. Please use a different browser.')
 }
 
@@ -197,15 +207,15 @@ function saveForm(formType) {
 			values[$(this).attr('name')] = $(this).val()
 		}
 	})
-	localStorage.setItem(`EcstaticLiving:${formType}`, JSON.stringify(values))
+	localStorage.setItem('EcstaticLiving:' + formType, JSON.stringify(values))
 }
 
 // Repopulate Saved Form
 function repopulateForm(formType) {
-	if (localStorage.getItem(`EcstaticLiving:${formType}`)) {
+	if (localStorage.getItem('EcstaticLiving:' + formType)) {
 		$('#form-load').hide()
 		$('#form-clear').show()
-		var values = JSON.parse(localStorage.getItem(`EcstaticLiving:${formType}`))
+		var values = JSON.parse(localStorage.getItem('EcstaticLiving:' + formType))
 		for (var item in values) {
 			if ($('*[name=' + item + ']').is(':radio')) {
 				$('input[name=' + item + '][value="' + values[item] + '"]').prop('checked', true)
@@ -705,7 +715,7 @@ function setEventPrices() {
 		}))
 	}
 	const eventDepositPrice = parseInt(eventDepositAmount) * paymentFactor
-	$(eventDepositText).text(`Pay deposit only ($${eventDepositPrice}${spacer}${people})`)
+	$(eventDepositText).text('Pay deposit only ($' + eventDepositPrice + spacer + people + ')')
 }
 
 
@@ -949,7 +959,7 @@ if (page === 'Custom') {
 
 
 // Show / hide populate and clear forms
-if (localStorage.getItem(`EcstaticLiving:${page}`)) {
+if (localStorage.getItem('EcstaticLiving:' + page)) {
 	$('#form-load').hide()
 	$('#form-clear').show()
 } else {
@@ -1036,14 +1046,14 @@ function stripeTokenHandler(token, data) {
 		if (page === 'Event') {
 			name = 'Event Registration'
 			formSubmit = $eventForm
-			success = `${siteUrl}registered`
+			success = siteUrl + 'registered'
 		} else if (page === 'Custom') {
 			name = 'Custom Charge'
 			formSubmit = $customForm
-			success = `${siteUrl}success`
+			success = siteUrl + 'success'
 		}
 		var r = {
-			name,
+			name: name,
 			source: window.location.href,
 			test: false,
 			fields: {},
@@ -1069,7 +1079,7 @@ function stripeTokenHandler(token, data) {
 		console.log(err)
 		// $0 charge to save credit card details on custom charge form
 		if (err.responseJSON && err.responseJSON.message === 'Invalid positive integer' && page === 'Custom') {
-			window.location.href = `${siteUrl}card-saved`
+			window.location.href = siteUrl + 'card-saved'
 		} else {
 			if (page === 'Event') {
 				resetEventForm()
@@ -1168,13 +1178,13 @@ $(payButton).on('click', function(e) {
 		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
 		customerDescription = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' <' + $(eventEmail).val() + '>'
 		customerEmail = $(eventEmail).val()
-		chargeDescription = `${eventTitle} ${eventDates}, ${eventVenue}, ${$(eventSelect + ' option:selected').text().substring(0, $(eventSelect + ' option:selected').text().length - 16)}, ${eventDeposit}`
+		chargeDescription = eventTitle + ' ' + eventDates + ', ' + eventVenue + ', ' + $(eventSelect + ' option:selected').text().substring(0, $(eventSelect + ' option:selected').text().length - 16) + ', ' + eventDeposit
 	} else if (page === 'Custom') {
 		count = $(customSelect).prop('selectedIndex') - 1
 		chargeAmount = $(customSelect).val() * 100
 		customerDescription = $(customFirstName).val() + ' ' + $(customLastName).val() + ' <' + $(customEmail).val() + '>'
 		customerEmail = $(customEmail).val()
-		chargeDescription = `Custom Charge: ${$(customSelect + ' option:selected').text().substring(0, $(customSelect + ' option:selected').text().length - 16)}`
+		chargeDescription = 'Custom Charge: ' + $(customSelect + ' option:selected').text().substring(0, $(customSelect + ' option:selected').text().length - 16)
 	}
 	// Pass through amount and description to form, for Zapier automation
 	$('#stripe-amount').val(chargeAmount)
