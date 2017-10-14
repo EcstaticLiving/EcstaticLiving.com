@@ -96,7 +96,6 @@ if (window.location.href.indexOf('/contact') > -1) {
 		document.write("<div style=\"width:100%; max-width:400px; margin:auto; border:3px solid maroon; border-radius:10px; padding: 0px 20px 20px 20px; font-size: 18px;\"><h3>Please use a different browser</h3>In order to register online, you will need to use a different browser. Otherwise, feel free to call us at 707-987-3456 to register by phone. For download links to usable browsers, click the appropriate link below:<br /><br /><strong>PC</strong>: <a href=\"https://www.microsoft.com/en-us/windows/microsoft-edge\" target=\"_blank\">Microsoft Edge</a> | <a href=\"https://www.google.com/chrome/index.html\" target=\"_blank\">Google Chrome</a> | <a href=\"https://www.mozilla.org/en-US/firefox/new/\" target=\"_blank\">Firefox</a><br /><br /><strong>Mac</strong>: Safari | <a href=\"https://www.google.com/chrome/index.html\" target=\"_blank\">Google Chrome</a> | <a href=\"https://www.mozilla.org/en-US/firefox/new/\" target=\"_blank\">Firefox</a></div>")
 	}
 </script> */}
-console.log(navigator.userAgent);
 const codeUA = navigator.userAgent
 const codeKindle1 = /Kindle/i.test(codeUA) || /Silk/i.test(codeUA) || /KFTT/i.test(codeUA) || /KFOT/i.test(codeUA) || /KFJWA/i.test(codeUA) || /KFJWI/i.test(codeUA)
 const codeKindle2 = /KFSOWI/i.test(codeUA) || /KFTHWA/i.test(codeUA) || /KFTHWI/i.test(codeUA) || /KFAPWA/i.test(codeUA) || /KFAPWI/i.test(codeUA)
