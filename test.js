@@ -96,7 +96,9 @@ if (window.location.href.indexOf('/contact') > -1) {
 </script> */}
 
 // Browser detection courtesy of: https://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
-console.log(window.navigator.userAgent);
+const userAgent = window.navigator.userAgent
+ua.split('Firefox/')[1]
+console.log(ua.split('Firefox/')[1]);
 const isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification))
 if ((page === 'Event' || page === 'Custom') && !is.edge() && !is.chrome() && !is.firefox() && !is.opera() && !isSafari) {
 	window.alert('This page does not work on this browser. Please use a different browser.')
