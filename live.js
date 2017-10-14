@@ -2,6 +2,7 @@
 Code ©2017 Ecstatic Living Institute All rights reserved.
 Created by Conscious Apps Inc. www.consciousapps.com
 */
+
 if (window.location.href.indexOf('ecstaticliving.com') > -1) {
 	console.log('Welcome to EcstaticLiving.com')
 } else {
@@ -76,6 +77,8 @@ if (window.location.href.indexOf('/contact') > -1) {
 	page = 'Contact'
 }
 
+// Browser validation
+// Replaced const with var due to MS Edge explorer incompatibility (get with the program, MS!)
 var eliUserAgent = navigator.userAgent
 var eliKindle1 = /Kindle/i.test(eliUserAgent) || /Silk/i.test(eliUserAgent) || /KFTT/i.test(eliUserAgent) || /KFOT/i.test(eliUserAgent) || /KFJWA/i.test(eliUserAgent) || /KFJWI/i.test(eliUserAgent)
 var eliKindle2 = /KFSOWI/i.test(eliUserAgent) || /KFTHWA/i.test(eliUserAgent) || /KFTHWI/i.test(eliUserAgent) || /KFAPWA/i.test(eliUserAgent) || /KFAPWI/i.test(eliUserAgent)
