@@ -76,10 +76,11 @@ if (window.location.href.indexOf('/contact') > -1) {
 	page = 'Contact'
 }
 
-var browserUA = navigator.userAgent
-var browserKindle = /Kindle/i.test(browserUA) || /Silk/i.test(browserUA) || /KFTT/i.test(browserUA) || /KFOT/i.test(browserUA) || /KFJWA/i.test(browserUA) || /KFJWI/i.test(browserUA) || /KFSOWI/i.test(browserUA) || /KFTHWA/i.test(browserUA) || /KFTHWI/i.test(browserUA) || /KFAPWA/i.test(browserUA) || /KFAPWI/i.test(browserUA)
-var browserIE = /MSIE 10/i.test(browserUA) || /MSIE 9/i.test(browserUA) || /rv:11.0/i.test(browserUA)
-if ((page === 'Event' || page === 'Custom') && (browserKindle || browserIE)) {
+const browserUA = navigator.userAgent
+const browserKindle1 = /Kindle/i.test(browserUA) || /Silk/i.test(browserUA) || /KFTT/i.test(browserUA) || /KFOT/i.test(browserUA) || /KFJWA/i.test(browserUA) || /KFJWI/i.test(browserUA)
+const browserKindle2 = /KFSOWI/i.test(browserUA) || /KFTHWA/i.test(browserUA) || /KFTHWI/i.test(browserUA) || /KFAPWA/i.test(browserUA) || /KFAPWI/i.test(browserUA)
+const browserIE = /MSIE 10/i.test(browserUA) || /MSIE 9/i.test(browserUA) || /rv:11.0/i.test(browserUA)
+if ((page === 'Event' || page === 'Custom') && (browserKindle1 || browserKindle2 || browserIE)) {
 	window.alert('This page does not work on this browser. Please use a different browser.')
 }
 
