@@ -100,7 +100,7 @@ const ua = window.navigator.userAgent
 const isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification))
 const safariVersion = Number.parseInt(ua.split('Safari/')[1], 10)
 const firefoxVersion = Number.parseInt(ua.split('Firefox/')[1], 10)
-if ((page === 'Event' || page === 'Custom') && !is.edge() && !is.chrome() && (!is.firefox() || firefoxVersion <= 32) && !is.opera() && (!isSafari || safariVersion <= 601)) {
+if ((page === 'Event' || page === 'Custom') && !is.edge() && !is.chrome() && (!is.firefox() || firefoxVersion <= 32) && !is.opera() && (!isSafari || safariVersion <= 600)) {
 	window.alert('This page does not work on this browser. Please use a different browser.')
 }
 
