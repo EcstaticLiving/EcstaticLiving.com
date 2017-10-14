@@ -5,17 +5,17 @@ Created by Conscious Apps Inc. www.consciousapps.com
 
 // DECLARATIONS
 // General
-const $main = $('.main'),
-$mainSection = $('.main-section'),
+const $main = $('.main')
+const $mainSection = $('.main-section')
 
 // Nav Menu
-$navMenu = $('.navigation-menu'),
-$navContainer = $('.nav-container'),
+const $navMenu = $('.navigation-menu')
+const $navContainer = $('.nav-container')
 
 // Contact
-$contactForm = $('.contact-form'),
-$contactSection = $('.contact-section'),
-$receivedSection = $('.received-section')
+const $contactForm = $('.contact-form')
+const $contactSection = $('.contact-section')
+const $receivedSection = $('.received-section')
 
 // Initialization Module
 const siteUrl = window.location.href.indexOf('ecstaticliving.com') > -1
@@ -231,82 +231,82 @@ if (window.location.href.indexOf('/forms/ctt-application') > -1) {
 
 
 // EVENT REGISTRATION
-const $eventForm = $('#wf-form-Event-Registration'),
-eventCode = $('#event-code').text().toLowerCase(),
-eventTitle = $('#event-name').text(), // Stripe description
-eventStartDate = $('#event-start').text(),
-eventDates = $('#event-dates').text(),
-eventVenue = $('#event-venue').text(),
-eventDepositAmount = $('#event-deposit-amount').text(),
-eventDepositDate = $('#event-deposit-date').text()
+const $eventForm = $('#wf-form-Event-Registration')
+const eventCode = $('#event-code').text().toLowerCase()
+const eventTitle = $('#event-name').text() // Stripe description
+const eventStartDate = $('#event-start').text()
+const eventDates = $('#event-dates').text()
+const eventVenue = $('#event-venue').text()
+const eventDepositAmount = $('#event-deposit-amount').text()
+const eventDepositDate = $('#event-deposit-date').text()
 
 // Event variables
-var payButtonClicked = false;
-const payButton = '#payment-button',
-eventRegForm = '.event-container.reg-form',
-eventInviteButton = '#event-invitecode-button',
-eventInviteBox = '#event-invitecode-box',
-eventInviteCode = '#event-invitecode-code',
-eventInvitePass = '#event-invitecode-pass',
-eventInviteFail = '#event-invitecode-fail',
-eventSpecialRegistration = '#event-special-options',
-eventFirstName = '#event-firstname',
-eventLastName = '#event-lastname',
-eventEmail = '#event-email',
-eventMobile = '#event-mobile',
-eventBirthdate = '#event-birthdate',
-eventGenderValidation = '#event-gender-validation',
-eventFemale = '#event-gender-female',
-eventMale = '#event-gender-male',
-eventOther = '#event-gender-other',
-eventReferral = '#event-referral',
-eventExperienceContainer = '.event-container.experience',
-eventExperienceParsleyError = '#event-experience-validation',
-eventExperienceYes = '#event-experience-yes',
-eventExperienceNo = '#event-experience-no',
-eventExperienceDetails = '#event-experience-details',
-eventDietContainer = '.event-container.diet',
-eventDietParsleyError = '#event-diet-validation',
-eventDietYes = '#event-diet-yes',
-eventDietNo = '#event-diet-no',
-eventDietDetails = '#event-diet-details',
-eventAffiliateSelectionContainer = '.event-container.affiliate-selection',
-eventAffiliateContainer = '.event-container.affiliate',
-eventAffiliateParsleyError = '#event-affiliate-validation',
-eventAffiliateYes = '#event-affiliate-yes',
-eventAffiliateNo = '#event-affiliate-no',
-eventAffiliateCode = '#event-affiliate-code',
-eventAffiliatePass = '#event-affiliate-pass',
-eventAffiliateFail = '#event-affiliate-fail',
-eventStatus = '#event-status',
-eventPartnerContainer = '.event-container.partner',
-eventPartnerName = '#event-partner-name'
-eventPartnerGenderValidation = '#event-partner-gender-validation',
-eventPartnerFemale = '#event-partner-gender-female',
-eventPartnerMale = '#event-partner-gender-male',
-eventPartnerOther = '#event-partner-gender-other',
-eventPayValidation = '#event-pay-validation',
-eventPayBoth = '#event-pay-both',
-eventPayMe = '#event-pay-me',
-eventSelect = '#event-option',
-eventDepositContainer = '.event-container.deposit',
-eventDepositValidation = '#event-deposit-validation',
-eventDepositText = '#event-deposit-text',
-eventDepositFull = '#event-deposit-full',
-eventDepositDeposit = '#event-deposit-deposit',
-eventTermsValidation = '#event-terms-validation',
-eventTerms = '#event-terms',
-paymentButton = '#payment-button'
+var payButtonClicked = false
+const payButton = '#payment-button'
+const eventRegForm = '.event-container.reg-form'
+const eventInviteButton = '#event-invitecode-button'
+const eventInviteBox = '#event-invitecode-box'
+const eventInviteCode = '#event-invitecode-code'
+const eventInvitePass = '#event-invitecode-pass'
+const eventInviteFail = '#event-invitecode-fail'
+const eventSpecialRegistration = '#event-special-options'
+const eventFirstName = '#event-firstname'
+const eventLastName = '#event-lastname'
+const eventEmail = '#event-email'
+const eventMobile = '#event-mobile'
+const eventBirthdate = '#event-birthdate'
+const eventGenderValidation = '#event-gender-validation'
+const eventFemale = '#event-gender-female'
+const eventMale = '#event-gender-male'
+const eventOther = '#event-gender-other'
+const eventReferral = '#event-referral'
+const eventExperienceContainer = '.event-container.experience'
+const eventExperienceParsleyError = '#event-experience-validation'
+const eventExperienceYes = '#event-experience-yes'
+const eventExperienceNo = '#event-experience-no'
+const eventExperienceDetails = '#event-experience-details'
+const eventDietContainer = '.event-container.diet'
+const eventDietParsleyError = '#event-diet-validation'
+const eventDietYes = '#event-diet-yes'
+const eventDietNo = '#event-diet-no'
+const eventDietDetails = '#event-diet-details'
+const eventAffiliateSelectionContainer = '.event-container.affiliate-selection'
+const eventAffiliateContainer = '.event-container.affiliate'
+const eventAffiliateParsleyError = '#event-affiliate-validation'
+const eventAffiliateYes = '#event-affiliate-yes'
+const eventAffiliateNo = '#event-affiliate-no'
+const eventAffiliateCode = '#event-affiliate-code'
+const eventAffiliatePass = '#event-affiliate-pass'
+const eventAffiliateFail = '#event-affiliate-fail'
+const eventStatus = '#event-status'
+const eventPartnerContainer = '.event-container.partner'
+const eventPartnerName = '#event-partner-name'
+const eventPartnerGenderValidation = '#event-partner-gender-validation'
+const eventPartnerFemale = '#event-partner-gender-female'
+const eventPartnerMale = '#event-partner-gender-male'
+const eventPartnerOther = '#event-partner-gender-other'
+const eventPayValidation = '#event-pay-validation'
+const eventPayBoth = '#event-pay-both'
+const eventPayMe = '#event-pay-me'
+const eventSelect = '#event-option'
+const eventDepositContainer = '.event-container.deposit'
+const eventDepositValidation = '#event-deposit-validation'
+const eventDepositText = '#event-deposit-text'
+const eventDepositFull = '#event-deposit-full'
+const eventDepositDeposit = '#event-deposit-deposit'
+const eventTermsValidation = '#event-terms-validation'
+const eventTerms = '#event-terms'
+const paymentButton = '#payment-button'
 
 // Stripe billing variables
-const billingFirstName = '#billing-firstname',
-billingLastName = '#billing-lastname',
-billingStreet = '#billing-street',
-billingCity = '#billing-city',
-billingState = '#billing-state',
-billingPostal = '#billing-postal',
-billingCountry = '#billing-country',
-billingCard = '#billing-card'
+const billingFirstName = '#billing-firstname'
+const billingLastName = '#billing-lastname'
+const billingStreet = '#billing-street'
+const billingCity = '#billing-city'
+const billingState = '#billing-state'
+const billingPostal = '#billing-postal'
+const billingCountry = '#billing-country'
+const billingCard = '#billing-card'
 
 
 
@@ -331,7 +331,7 @@ function affiliateCode(code) {
 			// With discount
 			: 100 - parseInt(code.substr(4, 2), 10)
 		return (discount === 0 || discount === 25 || discount === 50 || discount === 75 || discount === 100) ? discount : null
-	},
+	}
 	obj.verify = function() {
 		return code.substr(code.length - eventCode.length).toLowerCase() === eventCode && this.discount() !== null
 	}
@@ -842,15 +842,15 @@ if (page === 'Event') {
 
 
 // CUSTOM CHARGE
-const $customForm = $('#wf-form-Custom-Charge'),
-customCode = '#custom-code',
-customFirstName = '#custom-firstname',
-customLastName = '#custom-lastname',
-customEmail = '#custom-email',
-customMobile = '#custom-mobile',
-customSelect = '#custom-select',
-customTerms = '#custom-terms',
-customTermsValidation = '#custom-terms-validation'
+const $customForm = $('#wf-form-Custom-Charge')
+const customCode = '#custom-code'
+const customFirstName = '#custom-firstname'
+const customLastName = '#custom-lastname'
+const customEmail = '#custom-email'
+const customMobile = '#custom-mobile'
+const customSelect = '#custom-select'
+const customTerms = '#custom-terms'
+const customTermsValidation = '#custom-terms-validation'
 
 // CUSTOM AMOUNT
 // Complete Validation
