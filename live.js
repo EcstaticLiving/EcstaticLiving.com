@@ -734,9 +734,10 @@ function resetEventForm() {
 	setEventStatus()
 	setEventPrices()
 	$('#eventcode').val(eventCode)
-	if (!$(eventExperienceYes).is(':checked')) hideExperience()
-	if (!$(eventDietYes).is(':checked')) hideDiet()
-	if (participants() !== 2) hidePartner()
+	if ($(eventAffiliateYes).is(':checked')) { showAffiliate() } else { hideAffiliate() }
+	if ($(eventExperienceYes).is(':checked')) { showExperience() } else { hideExperience() }
+	if ($(eventDietYes).is(':checked')) { showDiet() } else { hideDiet() }
+	if (participants() !== 2) { hidePartner() } else { showPartner() }
 	if (new Date() < new Date(eventDepositDate)) {
 		$(eventDepositContainer).show()
 		$(eventDepositFull).prop('checked', true)
