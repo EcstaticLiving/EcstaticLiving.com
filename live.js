@@ -428,14 +428,6 @@ function billingValidation() {
 }
 // Complete Validation
 function eventFormValidation() {
-	console.log('affiliate: ', eventAffiliateValidation());
-	console.log('personal: ', personalValidation());
-	console.log('details: ', detailsValidation());
-	console.log('partner: ', partnerValidation());
-	console.log('option: ', eventOptionValidation());
-	console.log('terms: ', $(eventTerms).is(':checked'));
-	console.log('billing: ', billingValidation());
-	console.log('card: ', $(billingCard).is(':checked'));
 	if (eventAffiliateValidation() && personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && $(eventTerms).is(':checked') && billingValidation()) {
 		$('#card-errors').text('')
 		$(paymentButton).css({ 'background-color': '#800000' })
