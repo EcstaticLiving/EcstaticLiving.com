@@ -1073,7 +1073,7 @@ function stripeTokenHandler(token, data) {
 		console.log(err)
 		// $0 charge to save credit card details on custom charge form
 		if (err.responseJSON && err.responseJSON.message === 'Invalid positive integer' && page === 'Custom') {
-			window.location.href = siteUrl + 'card-saved'
+			window.location.href = siteUrl + 'card-updated'
 		} else {
 			if (page === 'Event') {
 				resetEventForm()
