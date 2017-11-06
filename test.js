@@ -69,7 +69,7 @@ var page
 if (window.location.href.indexOf('/events/') > -1) {
 	page = 'Event'
 }
-if (window.location.href.indexOf('/charge') > -1) {
+if (window.location.href.indexOf('/update') > -1) {
 	page = 'Custom'
 }
 if (window.location.href.indexOf('/contact') > -1) {
