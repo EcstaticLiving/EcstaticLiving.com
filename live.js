@@ -78,7 +78,7 @@ if (window.location.href.indexOf('/contact') > -1) {
 
 // Browser validation
 // The following code is embedded into ecstaticLiving.com/events. Make changes here, then insert into 'Events' template page on EcstaticLiving.com
-{/* <noscript>
+/* <noscript>
 	<div style="width:100%; max-width:400px; margin:auto; border:3px solid maroon; border-radius:10px; padding: 0px 20px 20px 20px; font-size: 18px;">
 		<h3>Please enable JavaScript</h3>
 		In order to register online, you will need to enable JavaScript. Otherwise, feel free to call us at 707-987-3456 to register by phone. For instructions on how to enable JavaScript on your browser, click the appropriate link below:<br /><br />
@@ -87,22 +87,26 @@ if (window.location.href.indexOf('/contact') > -1) {
 		<strong>Web</strong>: <a href="http://activatejavascript.org/en/instructions/chrome#instructions" target="_blank" class="lpa-link">Chrome</a> | <a href="http://activatejavascript.org/en/instructions/firefox#instructions" target="_blank" class="lpa-link">Firefox</a> | <a href="http://activatejavascript.org/en/instructions/safari#instructions" target="_blank" class="lpa-link">Safari</a> | <a href="http://activatejavascript.org/en/instructions/opera#instructions" target="_blank" class="lpa-link">Opera</a>
 	</div>
 </noscript>
-<script src="https://ecstaticliving.github.io/ecstaticliving.com/is.js"></script>
+<script src="https://ecstaticliving.github.io/ecstaticliving.com/platform.js"></script>
 <script type="text/javascript">
-	const ua = window.navigator.userAgent
-	const isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification))
-	const isUCBrowser = ua.indexOf('UCBrowser/') > -1
-	if (!is.edge() && !is.chrome() && !is.firefox() && !is.opera() && (!isSafari || isUCBrowser)) {
+	const isEdge = platform.name === 'Microsoft Edge'
+	const isChrome = platform.name === 'Chrome' || platform.name === 'Chrome Mobile'
+	const isFirefox = platform.name === 'Firefox' || platform.name === 'Firefox for iOS' || platform.name === 'Firefox Mobile'
+	const isOpera = platform.name === 'Opera' || platform.name === 'Opera Mini' || platform.name === 'Opera Mobile'
+	const isSafari = platform.name === 'Safari'
+	if (!isEdge && !isChrome && !isFirefox && !isOpera && !isSafari) {
 		document.write("<div style=\"width:100%; max-width:450px; margin:auto; border:3px solid maroon; border-radius:10px; padding: 0px 20px 20px 20px; font-size: 18px;\"><center><h3>Please use a different browser</h3></center>In order to register online, you will need to use a different browser. Otherwise, feel free to call us at 707-987-3456 to register by phone. For download links to usable browsers, click the appropriate link below:<br /><br /><strong>PC</strong>: <a href=\"https://www.microsoft.com/en-us/windows/microsoft-edge\" target=\"_blank\">Edge</a> | <a href=\"https://www.google.com/chrome/index.html\" target=\"_blank\">Chrome</a> | <a href=\"https://www.mozilla.org/en-US/firefox/new/\" target=\"_blank\">Firefox</a> | <a href=\"http://www.opera.com/download\" target=\"_blank\">Opera</a><br /><br /><strong>Mac</strong>: <a href=\"https://www.google.com/chrome/index.html\" target=\"_blank\">Chrome</a> | Safari | <a href=\"https://www.mozilla.org/en-US/firefox/new/\" target=\"_blank\">Firefox</a> | <a href=\"http://www.opera.com/download\" target=\"_blank\">Opera</a><br /><br /><strong>Mobile</strong>: <a href=\"https://www.google.com/chrome/index.html\" target=\"_blank\">Chrome</a> | Safari | <a href=\"https://www.mozilla.org/en-US/firefox/new/\" target=\"_blank\">Firefox</a> | <a href=\"http://www.opera.com/download\" target=\"_blank\">Opera</a></div>")
 	}
+	const ua = window.navigator.userAgent
 	const chromeVersion = parseInt(ua.split('Chrome/')[1], 10)
 	const firefoxVersion = parseInt(ua.split('Firefox/')[1], 10)
 	const operaVersion = parseInt(ua.split('OPR/')[1], 10)
 	const safariVersion = parseInt(ua.split('Safari/')[1], 10)
-	if ((is.chrome() && chromeVersion <= 41) || (is.firefox() && firefoxVersion <= 32) || (is.opera() && operaVersion <= 28) || (isSafari && safariVersion === 6533)) {
+	const isUCBrowser = ua.indexOf('UCBrowser/') > -1
+	if ((isChrome && chromeVersion <= 41) || (isFirefox && firefoxVersion <= 32) || (isOpera && operaVersion <= 28) || (isSafari && !isUCBrowser && safariVersion === 6533)) {
 		document.write("<div style=\"width:100%; max-width:450px; margin:auto; border:3px solid maroon; border-radius:10px; padding: 0px 20px 20px 20px; font-size: 18px;\"><center><h3>Please update your browser</h3></center>In order to register online, you will need to update your browser to its latest version. Otherwise, feel free to call us at 707-987-3456 to register by phone. For download links to the most up to date browsers, click the appropriate link below:<br /><br /><strong>PC</strong>: <a href=\"https://www.microsoft.com/en-us/windows/microsoft-edge\" target=\"_blank\">Edge</a> | <a href=\"https://www.google.com/chrome/index.html\" target=\"_blank\">Chrome</a> | <a href=\"https://www.mozilla.org/en-US/firefox/new/\" target=\"_blank\">Firefox</a> | <a href=\"http://www.opera.com/download\" target=\"_blank\">Opera</a><br /><br /><strong>Mac</strong>: <a href=\"https://www.google.com/chrome/index.html\" target=\"_blank\">Chrome</a> | Safari | <a href=\"https://www.mozilla.org/en-US/firefox/new/\" target=\"_blank\">Firefox</a> | <a href=\"http://www.opera.com/download\" target=\"_blank\">Opera</a><br /><br /><strong>Mobile</strong>: <a href=\"https://www.google.com/chrome/index.html\" target=\"_blank\">Chrome</a> | Safari | <a href=\"https://www.mozilla.org/en-US/firefox/new/\" target=\"_blank\">Firefox</a> | <a href=\"http://www.opera.com/download\" target=\"_blank\">Opera</a></div>")
 	}
-</script> */}
+</script> */
 
 
 // NAV MENU
