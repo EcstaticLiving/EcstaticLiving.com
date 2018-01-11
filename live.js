@@ -423,9 +423,10 @@ function eventOptionValidation() {
 	return false
 }
 // Billing Validation
+// Removed for testing purposes:  && $(billingCard).is(':checked')
 function billingValidation() {
 	if ($(billingFirstName).val() !== '' && $(billingLastName).val() !== '' && $(billingStreet).val() !== '' && $(billingCity).val() !== ''
-		&& $(billingState).val() !== '' && $(billingPostal).val() !== '' && $(billingCountry).val() !== '' && $(billingCard).is(':checked')) {
+		&& $(billingState).val() !== '' && $(billingPostal).val() !== '' && $(billingCountry).val() !== '') {
 		return true
 	}
 	return false
