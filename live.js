@@ -361,7 +361,7 @@ function affiliateCode(code) {
 		return (discount === 0 || discount === 25 || discount === 50 || discount === 75 || discount === 100) ? discount : null
 	},
 	obj.verify = function() {
-		return code.substr(code.length - eventCode.length).toLowerCase() === eventCode && this.discount() !== null
+		return code.substr(code.length - eventCode.length).toLowerCase() === eventCode.toLowerCase() && this.discount() !== null
 	}
 	return obj
 }

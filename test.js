@@ -361,7 +361,7 @@ function affiliateCode(code) {
 		return (discount === 0 || discount === 25 || discount === 50 || discount === 75 || discount === 100) ? discount : null
 	},
 	obj.verify = function() {
-		return code.substr(code.length - eventCode.length).toLowerCase() === eventCode && this.discount() !== null
+		return code.substr(code.length - eventCode.length).toLowerCase() === eventCode.toLowerCase() && this.discount() !== null
 	}
 	return obj
 }
@@ -423,9 +423,10 @@ function eventOptionValidation() {
 	return false
 }
 // Billing Validation
+// Removed for testing purposes:  && $(billingCard).is(':checked')
 function billingValidation() {
 	if ($(billingFirstName).val() !== '' && $(billingLastName).val() !== '' && $(billingStreet).val() !== '' && $(billingCity).val() !== ''
-		&& $(billingState).val() !== '' && $(billingPostal).val() !== '' && $(billingCountry).val() !== '' && $(billingCard).is(':checked')) {
+		&& $(billingState).val() !== '' && $(billingPostal).val() !== '' && $(billingCountry).val() !== '') {
 		return true
 	}
 	return false
