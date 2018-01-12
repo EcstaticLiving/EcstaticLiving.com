@@ -1118,12 +1118,7 @@ const card = elements.create('card', {
 })
 if (page === 'Event' || page === 'Custom') {
 	card.mount('#card-element')
-	card.addEventListener('keydown', function(e) {
-		console.log(e);
-		debugger
-	}, false)
 	card.addEventListener('change', function(result) {
-		console.log(result);
 		paymentValidation(result)
 	})
 }
@@ -1132,6 +1127,9 @@ $('#button-stripe-error').on('click', function() {
 	$('.notification-modal.error').hide()
 })
 
+$(payButton).addEventListener('click', function(e) {
+	console.log(e);
+})
 
 $(payButton).on('click', function(e) {
 	// Prevent accidental submission of form through 'enter' key
