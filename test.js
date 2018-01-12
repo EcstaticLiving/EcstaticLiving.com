@@ -1131,6 +1131,7 @@ $(payButton).on('click', function(e) {
 	// Prevent accidental submission of form through 'enter' key
 	console.log(e);
 	console.log(e.which);
+	debugger;
 	if (e.which === 13) {
 		return false
 	}
