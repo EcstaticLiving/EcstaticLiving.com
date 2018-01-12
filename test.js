@@ -1127,6 +1127,7 @@ $('#button-stripe-error').on('click', function() {
 	$('.notification-modal.error').hide()
 })
 
+// Prevent form from being submitted. This is being done manually in stripeTokenHandler()
 $($eventForm).on('submit', function(e) {
 	return false
 })
