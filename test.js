@@ -1123,6 +1123,7 @@ if (page === 'Event' || page === 'Custom') {
 		debugger
 	}, false)
 	card.addEventListener('change', function(result) {
+		console.log(result);
 		paymentValidation(result)
 	})
 }
