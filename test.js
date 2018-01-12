@@ -1130,6 +1130,8 @@ $('#button-stripe-error').on('click', function() {
 $($eventForm).on('submit', function(e) {
 	console.log(e);
 	console.log('form submitted');
+	debugger
+	return false
 })
 
 $(payButton).on('click', function(e) {
