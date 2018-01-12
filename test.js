@@ -1120,6 +1120,7 @@ if (page === 'Event' || page === 'Custom') {
 	card.mount('#card-element')
 	card.addEventListener('keydown', function(e) {
 		console.log(e);
+		debugger
 	})
 	card.addEventListener('change', function (result) {
 		paymentValidation(result)
