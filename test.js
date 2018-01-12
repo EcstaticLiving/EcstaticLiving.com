@@ -1127,10 +1127,6 @@ $('#button-stripe-error').on('click', function() {
 	$('.notification-modal.error').hide()
 })
 
-$(payButton).addEventListener('click', function(e) {
-	console.log(e);
-})
-
 $(payButton).on('click', function(e) {
 	// Prevent accidental submission of form through 'enter' key
 	if (e.which === 13) {
