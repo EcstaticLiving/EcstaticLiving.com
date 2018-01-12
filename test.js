@@ -1134,13 +1134,18 @@ $(payButton).on('click', function(e) {
 	}
 	e.preventDefault()
 	if (page === 'Event') {
-		if (!eventFormValidation()) {
-			showErrorsInEventForm()
-			// If there’s no Stripe error message
-			if ($('#card-errors').text() === '') {
-				$('#card-errors').text('Oops! There’s some missing information.')
+		try {
+			if (!eventFormValidation()) {
+				showErrorsInEventForm()
+				// If there’s no Stripe error message
+				if ($('#card-errors').text() === '') {
+					$('#card-errors').text('Oops! There’s some missing information.')
+				}
+				return false
 			}
-			return false
+		}
+		catch(err) {
+			alert(err)
 		}
 	} else if (page === 'Custom') {
 		if (!customChargeValidation()) {
