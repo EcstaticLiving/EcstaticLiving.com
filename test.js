@@ -1020,7 +1020,6 @@ function verification(t, e, n, i) {
 
 // Payment
 function stripeTokenHandler(token, data) {
-	console.log('stripeTokenHandler');
 	const stripeURL = window.location.href.indexOf('ecstaticliving.com') > -1
 		? 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe'
 		: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test'
@@ -1120,6 +1119,8 @@ const card = elements.create('card', {
 if (page === 'Event' || page === 'Custom') {
 	card.mount('#card-element')
 	card.addEventListener('change', function(result) {
+		console.log(result);
+		debugger
 		paymentValidation(result)
 	})
 }
