@@ -1,5 +1,5 @@
 /*
-Code ©2017 Ecstatic Living Institute All rights reserved.
+Code ©2018 Ecstatic Living Institute. All rights reserved.
 Created by Conscious Apps Inc. www.consciousapps.com
 */
 if (window.location.href.indexOf('ecstaticliving.com') > -1) {
@@ -1133,7 +1133,6 @@ $($eventForm).on('submit', function(e) {
 })
 
 $(payButton).on('click', function(e) {
-	console.log(e);
 	// Prevent accidental submission of form through 'enter' key
 	if (e.which === 13) {
 		return false
