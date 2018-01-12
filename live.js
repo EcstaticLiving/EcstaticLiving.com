@@ -1118,7 +1118,7 @@ const card = elements.create('card', {
 })
 if (page === 'Event' || page === 'Custom') {
 	card.mount('#card-element')
-	card.addEventListener('change', function (result) {
+	card.addEventListener('change', function(result) {
 		paymentValidation(result)
 	})
 }
@@ -1127,20 +1127,31 @@ $('#button-stripe-error').on('click', function() {
 	$('.notification-modal.error').hide()
 })
 
+// Prevent form from being submitted. This is being done manually in stripeTokenHandler()
+$($eventForm).on('submit', function(e) {
+	return false
+})
+
 $(payButton).on('click', function(e) {
+	console.log(e);
 	// Prevent accidental submission of form through 'enter' key
 	if (e.which === 13) {
 		return false
 	}
 	e.preventDefault()
 	if (page === 'Event') {
-		if (!eventFormValidation()) {
-			showErrorsInEventForm()
-			// If there’s no Stripe error message
-			if ($('#card-errors').text() === '') {
-				$('#card-errors').text('Oops! There’s some missing information.')
+		try {
+			if (!eventFormValidation()) {
+				showErrorsInEventForm()
+				// If there’s no Stripe error message
+				if ($('#card-errors').text() === '') {
+					$('#card-errors').text('Oops! There’s some missing information.')
+				}
+				return false
 			}
-			return false
+		}
+		catch(err) {
+			alert(err)
 		}
 	} else if (page === 'Custom') {
 		if (!customChargeValidation()) {
