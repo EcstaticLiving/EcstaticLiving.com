@@ -1129,6 +1129,8 @@ $('#button-stripe-error').on('click', function() {
 
 $(payButton).on('click', function(e) {
 	// Prevent accidental submission of form through 'enter' key
+	console.log(e);
+	console.log(e.which);
 	if (e.which === 13) {
 		return false
 	}
