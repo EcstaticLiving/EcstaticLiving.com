@@ -1127,16 +1127,15 @@ $('#button-stripe-error').on('click', function() {
 	$('.notification-modal.error').hide()
 })
 
-window.onkeyup = function(e) {
-	var key = e.keyCode ? e.keyCode : e.which
-	console.log(key);
-}
+$('.input').keypress(function(e) {
+	console.log(e);
+	if (e.which == 13) {
+		return false
+	}
+});
 
 $(payButton).on('click', function(e) {
 	// Prevent accidental submission of form through 'enter' key
-	console.log(e);
-	console.log(e.which);
-	debugger;
 	if (e.which === 13) {
 		return false
 	}
