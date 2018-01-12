@@ -1121,8 +1121,8 @@ if (page === 'Event' || page === 'Custom') {
 	card.addEventListener('keydown', function(e) {
 		console.log(e);
 		debugger
-	})
-	card.addEventListener('change', function (result) {
+	}, false)
+	card.addEventListener('change', function(result) {
 		paymentValidation(result)
 	})
 }
