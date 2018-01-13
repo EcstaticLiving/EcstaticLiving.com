@@ -1214,13 +1214,16 @@ $(payButton).on('click', function(e) {
 		chargeAmount
 	}
 	stripe.createToken(card, billingData)
-	.then(function (result) {
-		paymentValidation(result)
-		if (result.error) {
-			$('#card-errors').text(result.error.message)
-			return false
-		} else {
-			stripeTokenHandler(result.token, serverData)
-		}
-	})
+		.then(function (result) {
+			paymentValidation(result)
+			if (result.error) {
+				$('#card-errors').text(result.error.message)
+				return false
+			} else {
+				stripeTokenHandler(result.token, serverData)
+			}
+		})
+		.catch(function (error) {
+			alert(error)
+		})
 })
