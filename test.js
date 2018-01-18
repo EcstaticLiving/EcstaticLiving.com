@@ -1060,6 +1060,7 @@ function stripeTokenHandler(token, data) {
 		}
 		var error = conversion(formSubmit, r.fields)
 		if (error) {
+			alert(error)
 			throw error
 		}
 		return $.ajax({
