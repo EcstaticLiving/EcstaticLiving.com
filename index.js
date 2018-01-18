@@ -2,6 +2,9 @@
 Code ©2018 Ecstatic Living Institute. All rights reserved.
 Created by Conscious Apps Inc. www.consciousapps.com
 */
+window.onerror = function(msg) {
+	alert(msg)
+}
 var Webflow = Webflow || [];
 Webflow.push(function () {
 	try {
