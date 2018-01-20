@@ -1184,6 +1184,20 @@ $(payButton).on('click', function(e) {
 			$('#trafficsource').val('ELI')
 		}
 		count = $(eventSelect).prop('selectedIndex') - 1
+
+
+
+		var people = ''
+		if ($(eventPayBoth).is(':checked')) {
+			people = 'for both'
+		} else if (participants() === 2) {
+			people = 'per person'
+		}
+		const paymentFactor = (people === 'for both') ? 2 : 1
+		const eventDepositPrice = parseInt(eventDepositAmount) * paymentFactor
+
+
+
 		chargeAmount = $(eventDepositDeposit).is(':checked') ? eventDepositPrice * 100 : $(eventSelect).val() * 100
 		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
 		customerDescription = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' <' + $(eventEmail).val() + '>'
