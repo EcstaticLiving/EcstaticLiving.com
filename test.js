@@ -1184,12 +1184,15 @@ $(payButton).on('click', function(e) {
 			$('#trafficsource').val('ELI')
 		}
 		count = $(eventSelect).prop('selectedIndex') - 1
+		const paymentFactor = ($(eventPayBoth).is(':checked')) ? 2 : 1
+		const eventDepositPrice = parseInt(eventDepositAmount) * paymentFactor
 		chargeAmount = $(eventDepositDeposit).is(':checked') ? eventDepositPrice * 100 : $(eventSelect).val() * 100
 		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
 		customerDescription = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' <' + $(eventEmail).val() + '>'
 		customerEmail = $(eventEmail).val()
 		chargeDescription = eventTitle + ' ' + eventDates + ', ' + eventVenue + ', ' + $(eventSelect + ' option:selected').text().substring(0, $(eventSelect + ' option:selected').text().length - 16) + ', ' + eventDeposit
-	} else if (page === 'Custom') {
+	}
+	else if (page === 'Custom') {
 		count = $(customSelect).prop('selectedIndex') - 1
 		chargeAmount = $(customSelect).val() * 100
 		customerDescription = $(customFirstName).val() + ' ' + $(customLastName).val() + ' <' + $(customEmail).val() + '>'
