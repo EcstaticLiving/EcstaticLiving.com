@@ -595,14 +595,14 @@ function hidePartner() {
 function showExperience() {
 	$(eventExperienceContainer).show()
 	$(eventExperienceContainer).animate({
-		top: 40,
+		top: 0,
 		opacity: 1
 	}, 200)
 }
 function hideExperience() {
 	$(eventExperienceDetails).val('')
 	$(eventExperienceContainer).animate({
-		top: 0,
+		top: -40,
 		opacity: 0
 	}, 200)
 	$(eventExperienceContainer).hide()
