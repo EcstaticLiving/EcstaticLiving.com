@@ -562,10 +562,12 @@ function hidePartner() {
 // Previous Experience
 function showExperience() {
 	$(eventExperienceContainer).show()
+	$(eventExperienceContainer).css('opacity') = '1'
 }
 function hideExperience() {
 	$(eventExperienceDetails).val('')
 	$(eventExperienceContainer).hide()
+	$(eventExperienceContainer).css('opacity') = '0'
 }
 // Dietary Needs
 function showDiet() {
