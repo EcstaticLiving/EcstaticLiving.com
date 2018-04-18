@@ -508,10 +508,6 @@ function eventInvitePassShow() {
 	const text = eventAffiliateValidation() && affiliateCode($(eventInviteCode).val()).discount() > 0 ? 'Congrats! Invite code accepted!<br />$' + affiliateCode($(eventInviteCode).val()).discount() + ' discount applied! Continue below.' : 'Congrats! Invite code accepted!<br />Continue below.'
 	$(eventInvitePass).html(text)
 	$(eventInvitePass).show()
-	$(eventInvitePass).animate({
-		top: 40,
-		opacity: 1
-	}, 200)
 }
 function eventInvitePassHide() {
 	$(eventInvitePass).text('')
@@ -519,10 +515,6 @@ function eventInvitePassHide() {
 }
 function eventInviteFailShow() {
 	$(eventInviteFail).show()
-	$(eventInviteFail).animate({
-		top: 40,
-		opacity: 1
-	}, 200)
 	$(eventInviteCode).focus()
 }
 function eventInviteFailHide() {
@@ -531,27 +523,15 @@ function eventInviteFailHide() {
 // Affiliate Code
 function showAffiliate() {
 	$(eventAffiliateContainer).show()
-	$(eventAffiliateContainer).animate({
-		top: 40,
-		opacity: 1
-	}, 200)
 }
 function hideAffiliate() {
 	$(eventAffiliateCode).val('')
-	$(eventAffiliateContainer).animate({
-		top: 0,
-		opacity: 0
-	}, 200)
 	$(eventAffiliateContainer).hide()
 }
 function eventAffiliatePassShow() {
 	const text = eventAffiliateValidation() && affiliateCode($(eventAffiliateCode).val()).discount() > 0 ? 'Congrats! Code accepted!<br />$' + affiliateCode($(eventAffiliateCode).val()).discount() + ' discount applied!' : 'Congrats! Code accepted!'
 	$(eventAffiliatePass).html(text)
 	$(eventAffiliatePass).show()
-	$(eventAffiliatePass).animate({
-		top: 40,
-		opacity: 1
-	}, 200)
 }
 function eventAffiliatePassHide() {
 	$(eventAffiliatePass).text('')
@@ -559,10 +539,6 @@ function eventAffiliatePassHide() {
 }
 function eventAffiliateFailShow() {
 	$(eventAffiliateFail).show()
-	$(eventAffiliateFail).animate({
-		top: 40,
-		opacity: 1
-	}, 200)
 	$(eventAffiliateCode).focus()
 }
 function eventAffiliateFailHide() {
@@ -571,10 +547,6 @@ function eventAffiliateFailHide() {
 // Partner
 function showPartner() {
 	$(eventPartnerContainer).show()
-	$(eventPartnerContainer).animate({
-		top: 0,
-		opacity: 1
-	}, 200)
 	if ($(eventPayBoth).is(':checked')) {
 		setEventPrices('for both')
 	} else {
@@ -584,43 +556,23 @@ function showPartner() {
 function hidePartner() {
 	$(eventPartnerName).val('')
 	$(eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther + ',' + eventPayBoth + ',' + eventPayMe).prop('checked', false)
-	$(eventPartnerContainer).animate({
-		top: -40,
-		opacity: 0
-	}, 200)
 	$(eventPartnerContainer).hide()
 	setEventPrices()
 }
 // Previous Experience
 function showExperience() {
 	$(eventExperienceContainer).show()
-	$(eventExperienceContainer).animate({
-		top: 0,
-		opacity: 1
-	}, 200)
 }
 function hideExperience() {
 	$(eventExperienceDetails).val('')
-	$(eventExperienceContainer).animate({
-		top: -40,
-		opacity: 0
-	}, 200)
 	$(eventExperienceContainer).hide()
 }
 // Dietary Needs
 function showDiet() {
 	$(eventDietContainer).show()
-	$(eventDietContainer).animate({
-		top: 0,
-		opacity: 1
-	}, 200)
 }
 function hideDiet() {
 	$(eventDietDetails).val('')
-	$(eventDietContainer).animate({
-		top: -40,
-		opacity: 0
-	}, 200)
 	$(eventDietContainer).hide()
 }
 
