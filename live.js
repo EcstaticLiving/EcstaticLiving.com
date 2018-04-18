@@ -566,8 +566,8 @@ function showExperience() {
 }
 function hideExperience() {
 	$(eventExperienceDetails).val('')
-	$(eventExperienceContainer).hide()
 	$(eventExperienceContainer).fadeTo(100, 0)
+	$(eventExperienceContainer).hide()
 }
 // Dietary Needs
 function showDiet() {
