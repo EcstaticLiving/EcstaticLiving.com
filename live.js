@@ -561,13 +561,11 @@ function hidePartner() {
 }
 // Previous Experience
 function showExperience() {
-	$(eventExperienceContainer).show()
-	$(eventExperienceContainer).fadeTo(100, 1)
+	$(eventExperienceContainer).slideDown()
 }
 function hideExperience() {
 	$(eventExperienceDetails).val('')
-	$(eventExperienceContainer).fadeTo(100, 0)
-	$(eventExperienceContainer).hide()
+	$(eventExperienceContainer).slideUp()
 }
 // Dietary Needs
 function showDiet() {
