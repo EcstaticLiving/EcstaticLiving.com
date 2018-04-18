@@ -562,13 +562,13 @@ function hidePartner() {
 // Previous Experience
 function showExperience() {
 	// $(eventExperienceContainer).show()
-	$(eventExperienceContainer).toggle('visually-hidden')
+	$(eventExperienceContainer).removeClass('visually-hidden')
 	// document.getElementsByClassName(eventExperienceContainer.substr(1).replace('.', ' '))[0].style.display = 'block'
 }
 function hideExperience() {
 	$(eventExperienceDetails).val('')
 	// $(eventExperienceContainer).hide()
-	$(eventExperienceContainer).toggle('visually-hidden')
+	$(eventExperienceContainer).addClass('visually-hidden')
 	// document.getElementsByClassName(eventExperienceContainer.substr(1).replace('.', ' '))[0].style.display = 'none'
 }
 // Dietary Needs
