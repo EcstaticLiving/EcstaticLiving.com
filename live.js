@@ -562,12 +562,14 @@ function hidePartner() {
 // Previous Experience
 function showExperience() {
 	// $(eventExperienceContainer).show()
-	document.getElementsByClassName(eventExperienceContainer.substr(1).replace('.', ' '))[0].style.display = 'block'
+	$(eventExperienceContainer).toggle('visually-hidden')
+	// document.getElementsByClassName(eventExperienceContainer.substr(1).replace('.', ' '))[0].style.display = 'block'
 }
 function hideExperience() {
 	$(eventExperienceDetails).val('')
 	// $(eventExperienceContainer).hide()
-	document.getElementsByClassName(eventExperienceContainer.substr(1).replace('.', ' '))[0].style.display = 'none'
+	$(eventExperienceContainer).toggle('visually-hidden')
+	// document.getElementsByClassName(eventExperienceContainer.substr(1).replace('.', ' '))[0].style.display = 'none'
 }
 // Dietary Needs
 function showDiet() {
