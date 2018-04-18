@@ -561,15 +561,11 @@ function hidePartner() {
 }
 // Previous Experience
 function showExperience() {
-	// $(eventExperienceContainer).show()
-	$(eventExperienceContainer).removeClass('visually-hidden')
-	// document.getElementsByClassName(eventExperienceContainer.substr(1).replace('.', ' '))[0].style.display = 'block'
+	$(eventExperienceContainer).show()
 }
 function hideExperience() {
 	$(eventExperienceDetails).val('')
-	// $(eventExperienceContainer).hide()
-	$(eventExperienceContainer).addClass('visually-hidden')
-	// document.getElementsByClassName(eventExperienceContainer.substr(1).replace('.', ' '))[0].style.display = 'none'
+	$(eventExperienceContainer).hide()
 }
 // Dietary Needs
 function showDiet() {
