@@ -561,12 +561,12 @@ function hidePartner() {
 }
 // Previous Experience
 function showExperience() {
-	$(eventExperienceContainer).show()
+	// $(eventExperienceContainer).show()
 	document.getElementsByClassName(eventExperienceContainer.substr(1).replace('.', ' '))[0].style.display = 'block'
 }
 function hideExperience() {
 	$(eventExperienceDetails).val('')
-	$(eventExperienceContainer).hide()
+	// $(eventExperienceContainer).hide()
 	document.getElementsByClassName(eventExperienceContainer.substr(1).replace('.', ' '))[0].style.display = 'none'
 }
 // Dietary Needs
