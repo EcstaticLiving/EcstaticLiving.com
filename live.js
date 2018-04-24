@@ -562,7 +562,7 @@ function hidePartner() {
 // Previous Experience
 function showExperience() {
 	$(eventExperienceContainer).show()
-	const top = (window.pageYOffset || doc.scrollTop)  - (doc.clientTop || 0)
+	const top = (window.pageYOffset || document.documentElement.scrollTop)  - (document.documentElement.clientTop || 0)
 	window.scrollTo(0, top + 10)
 }
 function hideExperience() {
