@@ -562,6 +562,7 @@ function hidePartner() {
 // Previous Experience
 function showExperience() {
 	$(eventExperienceContainer).show()
+	window.scrollTo(0, 10)
 }
 function hideExperience() {
 	$(eventExperienceDetails).val('')
