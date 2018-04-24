@@ -711,6 +711,8 @@ function resetEventForm() {
 	$(paymentButton).css({ 'background-color': '#f5f5f5' })
 	$(paymentButton).css({ 'color': '#333333' })
 
+	$(eventAffiliateNo).prop('checked', true)
+
 	// If private event...
 	if ($(eventInviteBox).is(':visible')) {
 		// Hide the affiliate code box
