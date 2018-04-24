@@ -337,6 +337,10 @@ billingCountry = '#billing-country',
 billingCard = '#billing-card'
 
 
+// SCROLL BUGFIX
+function scrollPosition() {
+	return (window.pageYOffset || document.documentElement.scrollTop)  - (document.documentElement.clientTop || 0)
+}
 
 // PARTICIPANTS
 function participants() {
@@ -562,8 +566,7 @@ function hidePartner() {
 // Previous Experience
 function showExperience() {
 	$(eventExperienceContainer).show()
-	const top = (window.pageYOffset || document.documentElement.scrollTop)  - (document.documentElement.clientTop || 0)
-	window.scrollTo(0, top + 1)
+	window.scrollTo(0, scrollPosition() + 1)
 }
 function hideExperience() {
 	$(eventExperienceDetails).val('')
