@@ -337,6 +337,10 @@ billingCountry = '#billing-country',
 billingCard = '#billing-card'
 
 
+// SCROLL BUGFIX
+function scrollPosition() {
+	return (window.pageYOffset || document.documentElement.scrollTop)  - (document.documentElement.clientTop || 0)
+}
 
 // PARTICIPANTS
 function participants() {
@@ -508,10 +512,7 @@ function eventInvitePassShow() {
 	const text = eventAffiliateValidation() && affiliateCode($(eventInviteCode).val()).discount() > 0 ? 'Congrats! Invite code accepted!<br />$' + affiliateCode($(eventInviteCode).val()).discount() + ' discount applied! Continue below.' : 'Congrats! Invite code accepted!<br />Continue below.'
 	$(eventInvitePass).html(text)
 	$(eventInvitePass).show()
-	$(eventInvitePass).animate({
-		top: 40,
-		opacity: 1
-	}, 200)
+	window.scrollTo(0, scrollPosition() + 1)
 }
 function eventInvitePassHide() {
 	$(eventInvitePass).text('')
@@ -519,10 +520,6 @@ function eventInvitePassHide() {
 }
 function eventInviteFailShow() {
 	$(eventInviteFail).show()
-	$(eventInviteFail).animate({
-		top: 40,
-		opacity: 1
-	}, 200)
 	$(eventInviteCode).focus()
 }
 function eventInviteFailHide() {
@@ -531,27 +528,17 @@ function eventInviteFailHide() {
 // Affiliate Code
 function showAffiliate() {
 	$(eventAffiliateContainer).show()
-	$(eventAffiliateContainer).animate({
-		top: 40,
-		opacity: 1
-	}, 200)
+	window.scrollTo(0, scrollPosition() + 1)
 }
 function hideAffiliate() {
 	$(eventAffiliateCode).val('')
-	$(eventAffiliateContainer).animate({
-		top: 0,
-		opacity: 0
-	}, 200)
 	$(eventAffiliateContainer).hide()
 }
 function eventAffiliatePassShow() {
 	const text = eventAffiliateValidation() && affiliateCode($(eventAffiliateCode).val()).discount() > 0 ? 'Congrats! Code accepted!<br />$' + affiliateCode($(eventAffiliateCode).val()).discount() + ' discount applied!' : 'Congrats! Code accepted!'
 	$(eventAffiliatePass).html(text)
 	$(eventAffiliatePass).show()
-	$(eventAffiliatePass).animate({
-		top: 40,
-		opacity: 1
-	}, 200)
+	window.scrollTo(0, scrollPosition() + 1)
 }
 function eventAffiliatePassHide() {
 	$(eventAffiliatePass).text('')
@@ -559,10 +546,7 @@ function eventAffiliatePassHide() {
 }
 function eventAffiliateFailShow() {
 	$(eventAffiliateFail).show()
-	$(eventAffiliateFail).animate({
-		top: 40,
-		opacity: 1
-	}, 200)
+	window.scrollTo(0, scrollPosition() + 1)
 	$(eventAffiliateCode).focus()
 }
 function eventAffiliateFailHide() {
@@ -571,10 +555,7 @@ function eventAffiliateFailHide() {
 // Partner
 function showPartner() {
 	$(eventPartnerContainer).show()
-	$(eventPartnerContainer).animate({
-		top: 0,
-		opacity: 1
-	}, 200)
+	window.scrollTo(0, scrollPosition() + 1)
 	if ($(eventPayBoth).is(':checked')) {
 		setEventPrices('for both')
 	} else {
@@ -584,43 +565,25 @@ function showPartner() {
 function hidePartner() {
 	$(eventPartnerName).val('')
 	$(eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther + ',' + eventPayBoth + ',' + eventPayMe).prop('checked', false)
-	$(eventPartnerContainer).animate({
-		top: -40,
-		opacity: 0
-	}, 200)
 	$(eventPartnerContainer).hide()
 	setEventPrices()
 }
 // Previous Experience
 function showExperience() {
 	$(eventExperienceContainer).show()
-	$(eventExperienceContainer).animate({
-		top: 40,
-		opacity: 1
-	}, 200)
+	window.scrollTo(0, scrollPosition() + 1)
 }
 function hideExperience() {
 	$(eventExperienceDetails).val('')
-	$(eventExperienceContainer).animate({
-		top: 0,
-		opacity: 0
-	}, 200)
 	$(eventExperienceContainer).hide()
 }
 // Dietary Needs
 function showDiet() {
 	$(eventDietContainer).show()
-	$(eventDietContainer).animate({
-		top: 0,
-		opacity: 1
-	}, 200)
+	window.scrollTo(0, scrollPosition() + 1)
 }
 function hideDiet() {
 	$(eventDietDetails).val('')
-	$(eventDietContainer).animate({
-		top: -40,
-		opacity: 0
-	}, 200)
 	$(eventDietContainer).hide()
 }
 
@@ -723,7 +686,12 @@ function resetEventForm() {
 	hideAffiliate()
 	hideExperience()
 	hideDiet()
+	$(eventExperienceNo).prop('checked', true)
+	$(eventDietNo).prop('checked', true)
+	$(eventAffiliateNo).prop('checked', true)
+
 	repopulateForm('Event')
+
 	if ($(eventInviteBox).is(':visible')) {
 		eventInvitePassHide()
 		eventInviteFailHide()
@@ -737,6 +705,7 @@ function resetEventForm() {
 	if (participants() !== 2) { hidePartner() } else { showPartner() }
 	if (new Date() < new Date(eventDepositDate)) {
 		$(eventDepositContainer).show()
+		window.scrollTo(0, scrollPosition() + 1)
 		$(eventDepositFull).prop('checked', true)
 	} else {
 		$(eventDepositContainer).hide()
@@ -766,6 +735,7 @@ function resetEventForm() {
 	else {
 		// Show the affiliate code box
 		$(eventAffiliateSelectionContainer).show()
+		window.scrollTo(0, scrollPosition() + 1)
 		// If URL contains affiliate code, add to affiliate field
 		var affiliateString = window.location.search.slice(1).split('=')
 		if (affiliateString[0] === 'affiliate') {

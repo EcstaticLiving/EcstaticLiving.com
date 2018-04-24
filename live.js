@@ -686,7 +686,12 @@ function resetEventForm() {
 	hideAffiliate()
 	hideExperience()
 	hideDiet()
+	$(eventExperienceNo).prop('checked', true)
+	$(eventDietNo).prop('checked', true)
+	$(eventAffiliateNo).prop('checked', true)
+
 	repopulateForm('Event')
+
 	if ($(eventInviteBox).is(':visible')) {
 		eventInvitePassHide()
 		eventInviteFailHide()
@@ -710,8 +715,6 @@ function resetEventForm() {
 	$(eventTerms).attr('checked', false)
 	$(paymentButton).css({ 'background-color': '#f5f5f5' })
 	$(paymentButton).css({ 'color': '#333333' })
-
-	$(eventAffiliateNo).prop('checked', true)
 
 	// If private event...
 	if ($(eventInviteBox).is(':visible')) {
