@@ -4,6 +4,7 @@
 // Then add the resulting URL to the Stripe url in the index.js file.
 module.exports = function (body, callback) {
   var stripe = require('stripe')(body.secrets.elistripelive)
+  console.log(body.data)
   stripe.customers.create({
     email: body.data.stripeCustomer,
     source: body.data.stripeToken,

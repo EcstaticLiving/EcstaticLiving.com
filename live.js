@@ -999,7 +999,7 @@ function verification(t, e, n, i) {
 // Payment
 function stripeTokenHandler(token, data) {
 	const stripeURL = window.location.href.indexOf('ecstaticliving.com') > -1
-		? 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe'
+		? 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.sandbox.auth0-extend.com/stripe'
 		: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test'
 	$('.stripe.processing').show()
 	$('.stripe.error').hide()
