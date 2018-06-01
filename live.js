@@ -545,11 +545,14 @@ function eventAffiliatePassHide() {
 	$(eventAffiliatePass).hide()
 }
 function eventAffiliateFailShow() {
+	const text = 'Sorry, you’ve entered an invalid affiliate code.'
+	$(eventAffiliateFail).html(text)
 	$(eventAffiliateFail).show()
 	window.scrollTo(0, scrollPosition() + 1)
 	$(eventAffiliateCode).focus()
 }
 function eventAffiliateFailHide() {
+	$(eventAffiliateFail).text('')
 	$(eventAffiliateFail).hide()
 }
 // Partner
