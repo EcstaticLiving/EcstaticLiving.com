@@ -836,7 +836,7 @@ if (page === 'Event') {
 		eventFormValidation()
 	})
 	$(billingState).keypress(function(e) {
-		if (this.value.length > 2) {
+		if (this.value.length >= 2) {
 			e.preventDefault()
 		}
 	})
