@@ -835,9 +835,10 @@ if (page === 'Event') {
 		saveForm(page)
 		eventFormValidation()
 	})
-	$(billingState).on('change', function() {
-		var value = $(billingState).val()
-		if ( value.length > 2) return false
+	$(billingState).keypress(function(e) {
+		if (this.value.length > 2) {
+			e.preventDefault()
+		}
 	})
 
 	// RESET EVENT FORM
