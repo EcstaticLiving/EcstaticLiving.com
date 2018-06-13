@@ -673,7 +673,8 @@ function setEventPrices() {
 		// Event price cannot be less than $0 after discount is applied
 		const eventSelectPrice = (eventPrices[i] - eventAffiliateDiscount()) * paymentFactor > 0 ? (eventPrices[i] - eventAffiliateDiscount()) * paymentFactor : 0
 		const affiliateDiscountText = eventAffiliateDiscount() > 0 ? ' including discount' : ''
-		const eventSelectText = eventOptions[i] + ' ($' + eventSelectPrice + spacer + people + affiliateDiscountText + closer + eventNotes[i]
+		const eventNote = eventNotes[i] ? eventNotes[i] : ''
+		const eventSelectText = eventOptions[i] + ' ($' + eventSelectPrice + spacer + people + affiliateDiscountText + closer + eventNote
 		$(eventSelect).append($('<option>', {
 			value: eventSelectPrice,
 			text: eventSelectText
