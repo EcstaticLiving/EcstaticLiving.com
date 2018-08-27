@@ -261,7 +261,7 @@ if (window.location.href.indexOf('/forms/ctt-application') > -1) {
 
 // EVENT REGISTRATION
 const $eventForm = $('#wf-form-Event-Registration'),
-eventCode = $('#event-code').text().toLowerCase(),
+eventCode = $('#event-code').text().toUpperCase(),
 eventTitle = $('#event-name').text(), // Stripe description
 eventStartDate = $('#event-start').text(),
 eventDates = $('#event-dates').text(),
@@ -298,6 +298,11 @@ eventDietParsleyError = '#event-diet-validation',
 eventDietYes = '#event-diet-yes',
 eventDietNo = '#event-diet-no',
 eventDietDetails = '#event-diet-details',
+eventSpecialContainer = '.event-container.special',
+eventSpecialParsleyError = '#event-special-validation',
+eventSpecialYes = '#event-special-yes',
+eventSpecialNo = '#event-special-no',
+eventSpecialDetails = '#event-special-details',
 eventAffiliateSelectionContainer = '.event-container.affiliate-selection',
 eventAffiliateContainer = '.event-container.affiliate',
 eventAffiliateParsleyError = '#event-affiliate-validation',
@@ -386,8 +391,10 @@ function eventAffiliateValidation() {
 }
 // Name & Gender Validation
 function personalValidation() {
-	if ($(eventFirstName).val() !== '' && $(eventLastName).val() !== '' && $(eventEmail).val() !== '' && $(eventMobile).val() !== '' && $(eventBirthdate).val() !== '' &&
-		($(eventFemale).is(':checked') || $(eventMale).is(':checked') || $(eventOther).is(':checked'))) {
+	if (
+		$(eventFirstName).val() !== '' && !$(eventFirstName).val().includes(' ') && $(eventLastName).val() !== '' && !$(eventLastName).val().includes(' ') && $(eventEmail).val() !== '' && $(eventMobile).val() !== '' && $(eventBirthdate).val() !== '' &&
+		($(eventFemale).is(':checked') || $(eventMale).is(':checked') || $(eventOther).is(':checked'))
+	) {
 		return true
 	}
 	return false
@@ -398,6 +405,7 @@ function detailsValidation() {
 		$(eventReferral).val() !== ''
 		&& (($(eventExperienceYes).is(':checked') && $(eventExperienceDetails).val() !== '') || $(eventExperienceNo).is(':checked'))
 		&& (($(eventDietYes).is(':checked') && $(eventDietDetails).val() !== '') || $(eventDietNo).is(':checked'))
+		&& (($(eventSpecialYes).is(':checked') && $(eventSpecialDetails).val() !== '') || $(eventSpecialNo).is(':checked'))
 	) {
 		return true
 	}
@@ -497,6 +505,8 @@ function showErrorsInEventForm() {
 		($(eventAffiliateYes).is(':checked') && $(eventAffiliateCode).val() === '')
 		|| (!$(eventAffiliateNo).is(':checked') && !$(eventAffiliateYes).is(':checked'))
 	) { $(eventAffiliateParsleyError).css(errorRadio); } else { $(eventAffiliateParsleyError).css(clearRadio); }
+	if (!$(eventSpecialYes).is(':checked') && !$(eventSpecialNo).is(':checked')) { $(eventSpecialParsleyError).css(errorRadio); } else { $(eventSpecialParsleyError).css(clearRadio); }
+	if ($(eventSpecialYes).is(':checked') && $(eventSpecialDetails).val() === '') { $(eventSpecialDetails).css(errorInput); } else { $(eventSpecialDetails).css(clearInput); }
 	if (!$(eventDietYes).is(':checked') && !$(eventDietNo).is(':checked')) { $(eventDietParsleyError).css(errorRadio); } else { $(eventDietParsleyError).css(clearRadio); }
 	if ($(eventDietYes).is(':checked') && $(eventDietDetails).val() === '') { $(eventDietDetails).css(errorInput); } else { $(eventDietDetails).css(clearInput); }
 	if (!$(eventExperienceYes).is(':checked') && !$(eventExperienceNo).is(':checked')) { $(eventExperienceParsleyError).css(errorRadio); } else { $(eventExperienceParsleyError).css(clearRadio); }
@@ -588,6 +598,15 @@ function showDiet() {
 function hideDiet() {
 	$(eventDietDetails).val('')
 	$(eventDietContainer).hide()
+}
+// Special Question
+function showSpecial() {
+	$(eventSpecialContainer).show()
+	window.scrollTo(0, scrollPosition() + 1)
+}
+function hideSpecial() {
+	$(eventSpecialDetails).val('')
+	$(eventSpecialContainer).hide()
 }
 
 
@@ -705,6 +724,7 @@ function resetEventForm() {
 	if ($(eventAffiliateYes).is(':checked')) { showAffiliate() } else { hideAffiliate() }
 	if ($(eventExperienceYes).is(':checked')) { showExperience() } else { hideExperience() }
 	if ($(eventDietYes).is(':checked')) { showDiet() } else { hideDiet() }
+	if ($(eventSpecialYes).is(':checked')) { showSpecial() } else { hideSpecial() }
 	if (participants() !== 2) { hidePartner() } else { showPartner() }
 	if (new Date() < new Date(eventDepositDate)) {
 		$(eventDepositContainer).show()
@@ -812,13 +832,17 @@ if (page === 'Event') {
 	$(eventLastName).on('change', function () {
 		$(billingLastName).val($(eventLastName).val())
 	})
+	$(eventExperienceNo + ',' + eventExperienceYes).on('change', function () {
+		if ($(eventExperienceYes).is(':checked')) showExperience()
+		if ($(eventExperienceNo).is(':checked')) hideExperience()
+	})
 	$(eventDietNo + ',' + eventDietYes).on('change', function () {
 		if ($(eventDietYes).is(':checked')) showDiet()
 		if ($(eventDietNo).is(':checked')) hideDiet()
 	})
-	$(eventExperienceNo + ',' + eventExperienceYes).on('change', function () {
-		if ($(eventExperienceYes).is(':checked')) showExperience()
-		if ($(eventExperienceNo).is(':checked')) hideExperience()
+	$(eventSpecialNo + ',' + eventSpecialYes).on('change', function () {
+		if ($(eventSpecialYes).is(':checked')) showSpecial()
+		if ($(eventSpecialNo).is(':checked')) hideSpecial()
 	})
 	$(eventStatus).on('change', function () {
 		participants() === 2 ? showPartner() : hidePartner()
@@ -827,7 +851,7 @@ if (page === 'Event') {
 		setEventPrices()
 	})
 	const eventFieldsPersonal = eventFirstName + ',' + eventLastName + ',' + eventEmail + ',' + eventMobile + ',' + eventBirthdate + ',' + eventFemale + ',' + eventMale + ',' + eventOther
-	const eventFieldsDetails = eventReferral + ',' + eventExperienceYes + ',' + eventExperienceNo + ',' + eventExperienceDetails + ',' + eventDietYes + ',' + eventDietNo + ',' + eventDietDetails
+	const eventFieldsDetails = eventReferral + ',' + eventExperienceYes + ',' + eventExperienceNo + ',' + eventExperienceDetails + ',' + eventDietYes + ',' + eventDietNo + ',' + eventDietDetails + ',' + eventSpecialYes + ',' + eventSpecialNo + ',' + eventSpecialDetails
 	const eventFieldsPartner = eventStatus + ',' + eventPartnerName + ',' + eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther + ',' + eventPayBoth + ',' + eventPayMe
 	const eventFieldsOptions = eventSelect
 	const eventFieldsBilling = billingFirstName + ',' + billingLastName + ',' + billingStreet + ',' + billingCity + ',' + billingState + ',' + billingPostal + ',' + billingCountry
@@ -999,7 +1023,7 @@ function verification(t, e, n, i) {
 // Payment
 function stripeTokenHandler(token, data) {
 	const stripeURL = window.location.href.indexOf('ecstaticliving.com') > -1
-		? 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe'
+		? 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.sandbox.auth0-extend.com/stripe'
 		: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test'
 	$('.stripe.processing').show()
 	$('.stripe.error').hide()
@@ -1071,7 +1095,9 @@ function stripeTokenHandler(token, data) {
 	})
 }
 
-const stripe = window.location.href.indexOf('ecstaticliving.com') > -1 ? Stripe('pk_live_0rULIvKhv6aSLqI49Ae5rflI') : Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
+const stripe = window.location.href.indexOf('ecstaticliving.com') > -1
+	? Stripe('pk_live_0rULIvKhv6aSLqI49Ae5rflI')
+	: Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
 const elements = stripe.elements()
 style = {
 	base: {
@@ -1142,44 +1168,63 @@ $(payButton).on('click', function(e) {
 		}
 	}
 	saveForm(page)
-	var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0, count = 0
+	var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0
 	if (page === 'Event') {
-		var qbRecord = '';
-		if (participants() === 1) { qbRecord = $(eventFirstName).val() + ' ' + $(eventLastName).val() }
+		// Variables
+		const paymentFactor = ($(eventPayBoth).is(':checked'))
+			? 2
+			: 1
+		const eventDepositPrice = parseInt(eventDepositAmount) * paymentFactor
+		chargeAmount = $(eventDepositDeposit).is(':checked')
+			? eventDepositPrice * 100
+			: $(eventSelect).val() * 100
+		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
+		customerDescription = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' <' + $(eventEmail).val() + '>'
+		customerEmail = $(eventEmail).val()
+		chargeDescription = eventTitle + ' ' + eventDates + ', ' + eventVenue + ', ' + $(eventSelect + ' option:selected').text().substring(0, $(eventSelect + ' option:selected').text().length - 16) + ', ' + eventDeposit
+		// Form Variable: Record QB
+		var recordQB = '';
+		if (participants() === 1) { recordQB = $(eventFirstName).val() + ' ' + $(eventLastName).val() }
 		if (participants() === 2) {
 			const partner = $(eventPartnerName).val().split(' ')
 			if (partner[partner.length-1] === $(eventLastName).val()) {
-				qbRecord = $(eventFirstName).val() + ' & ' + $(eventPartnerName).val()
+				recordQB = $(eventFirstName).val() + ' & ' + $(eventPartnerName).val()
 			} else {
-				qbRecord = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' & ' + $(eventPartnerName).val()
+				recordQB = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' & ' + $(eventPartnerName).val()
 			}
 		}
-		$('#qbrecord').val(qbRecord)
+		$('#recordqb').val(recordQB)
+		// Form Variable: Traffic Source
 		var trafficSource = window.location.search.slice(1).split('=')
 		if (window.location.search && trafficSource[0] === 'source') {
 			$('#trafficsource').val(trafficSource[1])
 		} else {
 			$('#trafficsource').val('ELI')
 		}
-		count = $(eventSelect).prop('selectedIndex') - 1
-		const paymentFactor = ($(eventPayBoth).is(':checked')) ? 2 : 1
-		const eventDepositPrice = parseInt(eventDepositAmount) * paymentFactor
-		chargeAmount = $(eventDepositDeposit).is(':checked') ? eventDepositPrice * 100 : $(eventSelect).val() * 100
-		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
-		customerDescription = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' <' + $(eventEmail).val() + '>'
-		customerEmail = $(eventEmail).val()
-		chargeDescription = eventTitle + ' ' + eventDates + ', ' + eventVenue + ', ' + $(eventSelect + ' option:selected').text().substring(0, $(eventSelect + ' option:selected').text().length - 16) + ', ' + eventDeposit
+		// Form Variable: Record Email
+		$('#recordemail').val(customerDescription)
+		// Form Variable: Record Mobile
+		$('#recordmobile').val($(eventMobile).val())
 	}
 	else if (page === 'Custom') {
-		count = $(customSelect).prop('selectedIndex') - 1
+		// Stripe variables
 		chargeAmount = $(customSelect).val() * 100
 		customerDescription = $(customFirstName).val() + ' ' + $(customLastName).val() + ' <' + $(customEmail).val() + '>'
 		customerEmail = $(customEmail).val()
 		chargeDescription = 'Custom Charge: ' + $(customSelect + ' option:selected').text().substring(0, $(customSelect + ' option:selected').text().length - 16)
 	}
-	// Pass through amount and description to form, for Zapier automation
-	$('#stripe-amount').val(chargeAmount)
-	$('#stripe-description').val(chargeDescription)
+	// Form Variable: Charge Description
+	$('#charge-description').val(chargeDescription)
+	// Form Variable: Charge Amount
+	$('#charge-amount').val(parseInt(chargeAmount, 10))
+	// Form Variable: Event Option Total
+	$('#event-option-total').val($(eventSelect).val() * 100)
+	// Form Variable: Event Affiliate Code
+	$('#event-affiliate').val($(eventAffiliateCode).val())
+	// Form Variable: Question Diet
+	$('#question-diet').val($(eventDietDetails).val())
+	// Form Variable: Question Special
+	$('#question-special').val($(eventSpecialDetails).val())
 	const billingData = {
 		name: $(billingFirstName).val() + ' ' + $(billingLastName).val(),
 		address_line1: $(billingStreet).val(),
