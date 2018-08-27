@@ -1204,7 +1204,8 @@ $(payButton).on('click', function(e) {
 			$('#trafficsource').val('ELI')
 		}
 		// Form Variable: Record Email
-		$('#recordemail').val(customerDescription)
+		const recordEmail = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' (' + $(eventEmail).val() + ')'
+		$('#recordemail').val(recordEmail)
 		// Form Variable: Record Mobile
 		$('#recordmobile').val($(eventMobile).val())
 	}
