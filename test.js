@@ -1222,11 +1222,20 @@ $(payButton).on('click', function(e) {
 	// Form Variable: Event Option Total
 	$('#event-option-total').val($(eventSelect).val() * 100)
 	// Form Variable: Event Affiliate Code
-	$('#event-affiliate').val($(eventAffiliateCode).val())
+	const affiliateCodeValue = $(eventAffiliateCode).val()
+		? $(eventAffiliateCode).val()
+		: '- none -'
+	$('#event-affiliate').val(affiliateCodeValue)
 	// Form Variable: Question Diet
-	$('#question-diet').val($(eventDietDetails).val())
+	const dietValue = $(eventDietDetails).val()
+		? $(eventDietDetails).val()
+		: '- none -'
+	$('#question-diet').val(dietValue)
 	// Form Variable: Question Special
-	$('#question-special').val($(eventSpecialDetails).val())
+	const specialValue = $(eventSpecialDetails).val()
+		? $(eventSpecialDetails).val()
+		: '- none -'
+	$('#question-special').val(specialValue)
 	const billingData = {
 		name: $(billingFirstName).val() + ' ' + $(billingLastName).val(),
 		address_line1: $(billingStreet).val(),
