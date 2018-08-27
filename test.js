@@ -708,8 +708,10 @@ function resetEventForm() {
 	hideAffiliate()
 	hideExperience()
 	hideDiet()
+	hideSpecial()
 	$(eventExperienceNo).prop('checked', true)
 	$(eventDietNo).prop('checked', true)
+	$(eventSpecialNo).prop('checked', true)
 	$(eventAffiliateNo).prop('checked', true)
 
 	repopulateForm('Event')
