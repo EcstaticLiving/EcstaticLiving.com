@@ -1051,11 +1051,11 @@ function stripeTokenHandler(token, data) {
 		if (page === 'Event') {
 			name = 'Event Registration'
 			formSubmit = $eventForm
-			success = siteUrl + 'registered'
+			success = siteUrl + 'registration'
 		} else if (page === 'Custom') {
 			name = 'Custom Charge'
 			formSubmit = $customForm
-			success = siteUrl + 'success'
+			success = siteUrl + 'updated-card-changed'
 		}
 		var r = {
 			name: name,
@@ -1085,7 +1085,7 @@ function stripeTokenHandler(token, data) {
 		console.log(err)
 		// $0 charge to save credit card details on custom charge form
 		if (err.responseJSON && err.responseJSON.message === 'Invalid positive integer' && page === 'Custom') {
-			window.location.href = siteUrl + 'card-updated'
+			window.location.href = siteUrl + 'updated-card'
 		} else {
 			if (page === 'Event') {
 				resetEventForm()
