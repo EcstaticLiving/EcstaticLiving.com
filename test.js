@@ -509,7 +509,9 @@ function showErrorsInEventForm() {
 // SHOW/HIDE FORM ELEMENTS
 // Event Invite Code
 function eventInvitePassShow() {
-	const text = eventAffiliateValidation() && affiliateCode($(eventInviteCode).val()).discount() > 0 ? 'Congrats! Invite code accepted!<br />$' + affiliateCode($(eventInviteCode).val()).discount() + ' discount applied! Continue below.' : 'Congrats! Invite code accepted!<br />Continue below.'
+	const text = eventAffiliateValidation() && affiliateCode($(eventInviteCode).val()).discount() > 0
+		? 'Congrats! Invite code accepted!<br />$' + affiliateCode($(eventInviteCode).val()).discount() + ' per person discount applied! Continue below.'
+		: 'Congrats! Invite code accepted!<br />Continue below.'
 	$(eventInvitePass).html(text)
 	$(eventInvitePass).show()
 	window.scrollTo(0, scrollPosition() + 1)
@@ -535,7 +537,9 @@ function hideAffiliate() {
 	$(eventAffiliateContainer).hide()
 }
 function eventAffiliatePassShow() {
-	const text = eventAffiliateValidation() && affiliateCode($(eventAffiliateCode).val()).discount() > 0 ? 'Congrats! Code accepted!<br />$' + affiliateCode($(eventAffiliateCode).val()).discount() + ' discount applied!' : 'Congrats! Code accepted!'
+	const text = eventAffiliateValidation() && affiliateCode($(eventAffiliateCode).val()).discount() > 0
+		? 'Congrats! Code accepted!<br />$' + affiliateCode($(eventAffiliateCode).val()).discount() + ' per person discount applied!'
+		: 'Congrats! Code accepted!'
 	$(eventAffiliatePass).html(text)
 	$(eventAffiliatePass).show()
 	window.scrollTo(0, scrollPosition() + 1)
@@ -658,6 +662,7 @@ function setEventPrices() {
 	}
 	var eventOptions = $('#event-options').text().split(' | ')
 	var eventPrices = $('#event-prices').text().split(' | ')
+	var eventNotes = $('#event-notes').text().split('|')
 	$(eventSelect).empty()
 	if (eventOptions.length > 0) {
 		$(eventSelect).append($('<option>', {
@@ -672,7 +677,8 @@ function setEventPrices() {
 		// Event price cannot be less than $0 after discount is applied
 		const eventSelectPrice = (eventPrices[i] - eventAffiliateDiscount()) * paymentFactor > 0 ? (eventPrices[i] - eventAffiliateDiscount()) * paymentFactor : 0
 		const affiliateDiscountText = eventAffiliateDiscount() > 0 ? ' including discount' : ''
-		const eventSelectText = eventOptions[i] + ' ($' + eventSelectPrice + spacer + people + affiliateDiscountText + closer
+		const eventNote = eventNotes[i] ? eventNotes[i] : ''
+		const eventSelectText = eventOptions[i] + ' ($' + eventSelectPrice + spacer + people + affiliateDiscountText + closer + eventNote
 		$(eventSelect).append($('<option>', {
 			value: eventSelectPrice,
 			text: eventSelectText
@@ -999,7 +1005,7 @@ function verification(t, e, n, i) {
 // Payment
 function stripeTokenHandler(token, data) {
 	const stripeURL = window.location.href.indexOf('ecstaticliving.com') > -1
-		? 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe'
+		? 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.sandbox.auth0-extend.com/stripe'
 		: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.run.webtask.io/stripe-test'
 	$('.stripe.processing').show()
 	$('.stripe.error').hide()
