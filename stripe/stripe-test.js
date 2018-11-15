@@ -1,9 +1,10 @@
 // Uses webtask.io
 // To create a server, enter the following code on the CLI:
-// wt create stripe-test.js --secret elistripetest=STRIPETESTSECRET --parse-body
+// wt create stripe-test.js --secret elistripetest=STRIPETESTSECRET --parse-body --meta 'wt-node-dependencies'='{"stripe":"6.1.0"}'
 // Then add the resulting URL to the Stripe url in the index.js file.
 module.exports = function (body, callback) {
   var stripe = require('stripe')(body.secrets.elistripetest)
+  console.log(body.data)
   stripe.customers.create({
     email: body.data.stripeCustomer,
     source: body.data.stripeToken,
