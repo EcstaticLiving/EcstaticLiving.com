@@ -4,30 +4,37 @@
 // Then add the resulting URL to the Stripe url in the index.js file.
 module.exports = (body, callback) => {
 
-  var stripe = require('stripe')(body.secrets.elistripelive)
+	var stripe = require('stripe')(body.secrets.elistripelive)
 
-  console.log(body.data)
+	const email = body.data.stripeEmail
 
-  let existingCustomers = await stripe.customers.list({ email : body.data.stripeCustomer })
+	stripe.customers.list({ email })
+		.then(list => {
+			// Customer already exists...
+			if (list.data) {
+				// ...so create charge using existing customer.
+				stripe.charges.create({
+					amount: body.data.stripeAmount,
+					currency: 'usd',
+					customer: list.data[0].id,
+					description: body.data.stripeCharge
+				}, callback)
+			}
+			// Create new customer...
+			else {
+				stripe.customers.create({
+					email,
+					source: body.data.stripeToken,
+					description: body.data.stripeCustomer
+				})
+				// ...and create charge using new customer data.
+				.then(customer => stripe.charges.create({
+					amount: body.data.stripeAmount,
+					currency: 'usd',
+					customer: customer.id,
+					description: body.data.stripeCharge
+				}, callback))
+			}
+		})
 
-  console.log(existingCustomers)
-
-  // Customer already exists
-  if (existingCustomers.data.length) {
-    console.log(existingCustomers.data[0])
-  }
-  // Create new customer
-  else {
-    stripe.customers.create({
-      email: body.data.stripeCustomer,
-      source: body.data.stripeToken,
-      description: body.data.stripeCustomer
-    })
-    .then(customer => stripe.charges.create({
-      amount: body.data.stripeAmount,
-      currency: 'usd',
-      customer: customer.id,
-      description: body.data.stripeCharge
-    }, callback))
-  }
 }

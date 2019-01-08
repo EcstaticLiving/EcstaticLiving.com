@@ -1041,11 +1041,12 @@ function stripeTokenHandler(token, data) {
 		url: stripeURL,
 		crossDomain: true,
 		data: {
-			'stripeToken': token.id,
-			'stripeEmail': data.customerEmail,
-			'stripeCustomer': data.customerDescription,
+			'stripeAmount': data.chargeAmount,
 			'stripeCharge': data.chargeDescription,
-			'stripeAmount': data.chargeAmount
+			'stripeCustomer': data.customerDescription,
+			'stripeEmail': data.customerEmail,
+			'stripeProduct': data.eventCode,
+			'stripeToken': token.id,
 		},
 		timeout: 10000
 	})
@@ -1253,10 +1254,11 @@ $(payButton).on('click', function(e) {
 		address_country: $(billingCountry).val()
 	}
 	const serverData = {
+		chargeAmount,
+		chargeDescription,
 		customerDescription,
 		customerEmail,
-		chargeDescription,
-		chargeAmount
+		eventCode
 	}
 	stripe.createToken(card, billingData)
 		.then(function (result) {
