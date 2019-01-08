@@ -19,8 +19,10 @@ module.exports = (body, callback) => {
 
 	stripe.customers.list({ email })
 		.then(customerList => {
+
+			console.log(customerList)
 			// Customer already exists...
-			if (customerList.data) {
+			if (customerList.data.length > 0) {
         // ...so create charge using existing customer.
         chargeCreate({ customer: customerList.data[0].id })
 			}
