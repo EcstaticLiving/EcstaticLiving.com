@@ -6,19 +6,20 @@ module.exports = (body, callback) => {
 
 	var stripe = require('stripe')(body.secrets.elistripelive)
 
+  const amount = body.data.stripeAmount
+  const currency = 'usd'
+  const description = body.data.stripeCharge
 	const email = body.data.stripeEmail
+	const event = body.data.stripeProduct
+	
+  const chargeCreate = ({ customer }) => stripe.charges.create({ amount, currency, customer, description }, callback)
 
 	stripe.customers.list({ email })
-		.then(list => {
+		.then(customerList => {
 			// Customer already exists...
-			if (list.data) {
-				// ...so create charge using existing customer.
-				stripe.charges.create({
-					amount: body.data.stripeAmount,
-					currency: 'usd',
-					customer: list.data[0].id,
-					description: body.data.stripeCharge
-				}, callback)
+			if (customerList.data) {
+        // ...so create charge using existing customer.
+        chargeCreate({ customer: customerList.data[0].id })
 			}
 			// Create new customer...
 			else {
@@ -28,12 +29,7 @@ module.exports = (body, callback) => {
 					description: body.data.stripeCustomer
 				})
 				// ...and create charge using new customer data.
-				.then(customer => stripe.charges.create({
-					amount: body.data.stripeAmount,
-					currency: 'usd',
-					customer: customer.id,
-					description: body.data.stripeCharge
-				}, callback))
+				.then(customer => chargeCreate({ customer: customer.id }))
 			}
 		})
 

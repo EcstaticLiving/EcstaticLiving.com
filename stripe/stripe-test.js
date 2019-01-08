@@ -7,38 +7,119 @@ module.exports = (body, callback) => {
 
 	var stripe = require('stripe')(body.secrets.elistripetest)
 
-	console.log(body.data)
-  const email = body.data.stripeEmail
+  console.log(body.data)
+  const amount = body.data.stripeAmount
+  const currency = 'usd'
+  const description = body.data.stripeCharge
+	const email = body.data.stripeEmail
+  const event = body.data.stripeProduct
   
-  const createCharge = ({ amount, currency, customer, description }) => stripe.charges.create({ amount, currency, customer, description }, callback)
+  /* CURRENT VERSION */
+  const chargeCreate = ({ customer }) => stripe.charges.create({ amount, currency, customer, description }, callback)
 
-  // STEP 1: find out if customer already exists
-	// stripe.customers.list({ email })
-	// 	.then(list => {
+	stripe.customers.list({ email })
+		.then(customerList => {
+			// Customer already exists...
+			if (customerList.data) {
+        // ...so create charge using existing customer.
+        chargeCreate({ customer: customerList.data[0].id })
+			}
+			// Create new customer...
+			else {
+				stripe.customers.create({
+					email,
+					source: body.data.stripeToken,
+					description: body.data.stripeCustomer
+				})
+				// ...and create charge using new customer data.
+				.then(customer => chargeCreate({ customer: customer.id }))
+			}
+		})
 
-	// 		// #1 Customer already exists...
-	// 		if (list.data) {
+  /* NEW VERSION - NOT WORKING
+  const chargeCreate = ({ customer }) => stripe.charges.create({ amount, currency, customer, description }, callback)
+  const orderCreate = ({ productId }) => stripe.orders.create({
+    currency: 'usd',
+    items: [{
+      amount,
+      currency,
+      description,
+      // in Stripe, `parent` is the ID of the product SKU
+      parent: productId,
+      quantity: 1,
+      type: 'sku'
+    }]
+  })
 
-  //       // STEP 2: find out if event already exists as product
-  //       // stripe.products.list({ name })
+	// STEP 1: find out if customer already exists
+	stripe.customers.list({ email })
+		.then(customerList => {
 
-	// 			// ...so create charge using existing customer.
-	// 			createCharge({ amount: body.data.stripeAmount , currency: 'usd', customer: list.data[0].id , description: body.data.stripeCharge })
+			console.log('************')
+			console.log('CUSTOMER LIST')
+			console.log('************')
+			console.log(customerList)
 
-  //     }
-	// 		// #1 Create new customer...
-	// 		else {
-	// 			stripe.customers.create({
-	// 				email,
-	// 				source: body.data.stripeToken,
-	// 				description: body.data.stripeCustomer
-	// 			})
-	// 			// ...and create charge using new customer data.
-  //       .then(customer => {
-  //         createCharge({ amount: body.data.stripeAmount , currency: 'usd', customer: customer.id , description: body.data.stripeCharge })
-  //       })
-  //     }
+			// #1 Customer already exists...
+			if (customerList.data) {
 
-	// 	})
+				// STEP 2: find out if event already exists as product
+				stripe.products.list({ active: true })
+					.then(productList => {
 
+						console.log('************')
+						console.log('PRODUCT LIST')
+						console.log('************')
+						console.log(productList)
+
+						const productSkus = productList.data && productList.data.filter(product => product.name.toUpperCase() === event.toUpperCase())
+							? productList.data.filter(product => product.name.toUpperCase() === event.toUpperCase())[0].skus
+							: null
+
+						console.log('************')
+						console.log('SKU LIST')
+						console.log('************')
+						console.log(productSkus)
+
+						const productId = productSkus.data
+							? productSkus.data[0].id
+							: null
+            
+            console.log('************')
+            console.log('PRODUCT ID')
+            console.log('************')
+            console.log(productId)
+  
+						
+						// #2 Product already exists
+						if (productId) {
+              orderCreate({ productId })
+                .then(order => console.log(order))
+						}
+						// #2 Product doesn’t yet exist
+						else {
+
+						}
+					
+					})
+
+				// ...so create charge using existing customer.
+				// chargeCreate({ customer: customerList.data[0].id })
+
+			}
+			// #1 Create new customer...
+			else {
+				stripe.customers.create({
+					email,
+					source: body.data.stripeToken,
+					description: body.data.stripeCustomer
+				})
+				// ...and create charge using new customer data.
+				.then(customer => {
+					chargeCreate({ customer: customer.id })
+				})
+			}
+
+		})
+  */
 }
