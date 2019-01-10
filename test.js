@@ -209,7 +209,6 @@ function saveForm(formType) {
 
 // Repopulate Saved Form
 function repopulateForm(formType) {
-	localStorage.removeItem('EcstaticLiving:' + formType)
 	if (localStorage.getItem('EcstaticLiving:' + formType)) {
 		$('#form-load').hide()
 		$('#form-clear').show()
