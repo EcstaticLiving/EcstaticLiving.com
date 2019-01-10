@@ -1046,6 +1046,7 @@ function stripeTokenHandler(token, data) {
 			'stripeCustomer': data.customerDescription,
 			'stripeEmail': data.customerEmail,
 			'stripeProduct': data.eventCode,
+			'stripeQuantity': data.quantity,
 			'stripeToken': token.id,
 		},
 		timeout: 10000
@@ -1258,7 +1259,8 @@ $(payButton).on('click', function(e) {
 		chargeDescription,
 		customerDescription,
 		customerEmail,
-		eventCode
+		eventCode,
+		quantity: participants() === 2 && $(eventPayBoth).is(':checked') ? 2 : 1
 	}
 	stripe.createToken(card, billingData)
 		.then(function (result) {
