@@ -214,11 +214,15 @@ function repopulateForm(formType) {
 		$('#form-clear').show()
 		var values = JSON.parse(localStorage.getItem('EcstaticLiving:' + formType))
 		for (var item in values) {
-			if ($('*[name=' + item + ']').is(':radio')) {
-				$('input[name=' + item + '][value="' + values[item] + '"]').prop('checked', true)
-			}
-			else {
-				$('*[name=' + item + ']').val(values[item])
+			try {
+				if ($('*[name=' + item + ']').is(':radio')) {
+					$('input[name=' + item + '][value="' + values[item] + '"]').prop('checked', true)
+				}
+				else {
+					$('*[name=' + item + ']').val(values[item])
+				}	
+			} catch (error) {
+				localStorage.removeItem('EcstaticLiving:' + formType)
 			}
 		}
 	}
