@@ -23,6 +23,7 @@ module.exports = (body, callback) => {
 			customerQuickBooks,
 			event,
 			quantity,
+			rate: ((amount/quantity)/100).toFixed(2)
 		}
 	}, callback)
 
