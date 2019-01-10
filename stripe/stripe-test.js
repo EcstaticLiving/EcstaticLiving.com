@@ -1,26 +1,30 @@
 // Uses webtask.io
 // To create a server, navigate to the /stripe folder and enter the following code on the CLI:
 // wt create stripe-test.js --secret elistripetest=STRIPETESTSECRET --parse-body --meta 'wt-node-dependencies'='{"stripe":"6.1.0"}'
-// wt create stripe-test.js --secret elistripetest=rk_test_PdsZhAN5dhZmudrHiosmRaDh --parse-body --meta 'wt-node-dependencies'='{"stripe":"6.1.0"}'
 // Then add the resulting URL to the Stripe url in the index.js file.
 module.exports = (body, callback) => {
 
 	var stripe = require('stripe')(body.secrets.elistripetest)
 
-  console.log(body.data)
   const amount = body.data.stripeAmount
   const currency = 'usd'
   const description = body.data.stripeCharge
 	const email = body.data.stripeEmail
   const event = body.data.stripeProduct
   
-  /* CURRENT VERSION */
-  const chargeCreate = ({ customer }) => stripe.charges.create({ amount, currency, customer, description }, callback)
+	const chargeCreate = ({ customer }) => stripe.charges.create({
+		amount,
+		currency,
+		customer,
+		description,
+		metadata: {
+			event
+		}
+	}, callback)
 
 	stripe.customers.list({ email })
 		.then(customerList => {
 
-			console.log(customerList)
 			// Customer already exists...
 			if (customerList.data.length > 0) {
         // ...so create charge using existing customer.

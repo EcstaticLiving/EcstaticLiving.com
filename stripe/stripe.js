@@ -12,12 +12,19 @@ module.exports = (body, callback) => {
 	const email = body.data.stripeEmail
 	const event = body.data.stripeProduct
 	
-  const chargeCreate = ({ customer }) => stripe.charges.create({ amount, currency, customer, description }, callback)
+  const chargeCreate = ({ customer }) => stripe.charges.create({
+		amount,
+		currency,
+		customer,
+		description,
+		metadata: {
+			event
+		}
+	}, callback)
 
 	stripe.customers.list({ email })
 		.then(customerList => {
 
-			console.log(customerList)
 			// Customer already exists...
 			if (customerList.data.length > 0) {
         // ...so create charge using existing customer.
