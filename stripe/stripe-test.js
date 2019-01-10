@@ -10,15 +10,19 @@ module.exports = (body, callback) => {
   const currency = 'usd'
   const description = body.data.stripeCharge
 	const email = body.data.stripeEmail
-  const event = body.data.stripeProduct
-  
-	const chargeCreate = ({ customer }) => stripe.charges.create({
+	const event = body.data.stripeProduct
+	const quantity = body.data.stripeQuantity
+	const customerQuickBooks = body.data.customerQuickBooks
+	
+  const chargeCreate = ({ customer }) => stripe.charges.create({
 		amount,
 		currency,
 		customer,
 		description,
 		metadata: {
-			event
+			customerQuickBooks,
+			event,
+			quantity,
 		}
 	}, callback)
 
