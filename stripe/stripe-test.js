@@ -24,7 +24,8 @@ module.exports = (body, callback) => {
 			event,
 			quantity,
 			rate: ((amount/quantity)/100).toFixed(2)
-		}
+		},
+		statement_descriptor: 'ECST LVNG ' + event
 	}, callback)
 
 	stripe.customers.list({ email })
