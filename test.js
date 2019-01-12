@@ -1048,7 +1048,7 @@ function stripeTokenHandler(token, data) {
 			'stripeAmount': data.chargeAmount,
 			'stripeCharge': data.chargeDescription,
 			'stripeCustomer': data.customerDescription,
-			'stripeCustomerQuickBooks': data.customerQuickBooks,
+			'stripeQbCustomer': data.qbCustomer,
 			'stripeEmail': data.customerEmail,
 			'stripeProduct': data.eventCode,
 			'stripeQuantity': data.quantity,
@@ -1198,17 +1198,17 @@ $(payButton).on('click', function(e) {
 		customerEmail = $(eventEmail).val()
 		chargeDescription = eventTitle + ' ' + eventDates + ', ' + eventVenue + ', ' + $(eventSelect + ' option:selected').text().substring(0, $(eventSelect + ' option:selected').text().length - 16) + ', ' + eventDeposit
 		// Form Variable: Record QB
-		var customerQuickBooks = '';
-		if (participants() === 1) { customerQuickBooks = $(eventFirstName).val() + ' ' + $(eventLastName).val() }
+		var qbCustomer = '';
+		if (participants() === 1) { qbCustomer = $(eventFirstName).val() + ' ' + $(eventLastName).val() }
 		if (participants() === 2) {
 			const partner = $(eventPartnerName).val().split(' ')
 			if (partner[partner.length-1] === $(eventLastName).val()) {
-				customerQuickBooks = $(eventFirstName).val() + ' & ' + $(eventPartnerName).val()
+				qbCustomer = $(eventFirstName).val() + ' & ' + $(eventPartnerName).val()
 			} else {
-				customerQuickBooks = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' & ' + $(eventPartnerName).val()
+				qbCustomer = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' & ' + $(eventPartnerName).val()
 			}
 		}
-		$('#recordqb').val(customerQuickBooks)
+		$('#recordqb').val(qbCustomer)
 		// Form Variable: Traffic Source
 		var trafficSource = window.location.search.slice(1).split('=')
 		if (window.location.search && trafficSource[0] === 'source') {
@@ -1263,7 +1263,7 @@ $(payButton).on('click', function(e) {
 		chargeAmount,
 		chargeDescription,
 		customerDescription,
-		customerQuickBooks,
+		qbCustomer,
 		customerEmail,
 		eventCode,
 		quantity: participants() === 2 && $(eventPayBoth).is(':checked') ? 2 : 1

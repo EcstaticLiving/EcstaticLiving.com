@@ -12,7 +12,7 @@ module.exports = (body, callback) => {
 	const email = body.data.stripeEmail
 	const event = body.data.stripeProduct
 	const quantity = body.data.stripeQuantity
-	const customerQuickBooks = body.data.customerQuickBooks
+	const qbCustomer = body.data.stripeQbCustomer
 	
   const chargeCreate = ({ customer }) => stripe.charges.create({
 		amount,
@@ -20,7 +20,7 @@ module.exports = (body, callback) => {
 		customer,
 		description,
 		metadata: {
-			customerQuickBooks,
+			qbCustomer,
 			event,
 			quantity,
 			rate: ((amount/quantity)/100).toFixed(2)
