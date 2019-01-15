@@ -6,15 +6,15 @@ module.exports = (body, callback) => {
 
 	var stripe = require('stripe')(body.secrets.elistripetest)
 
-  const amount = body.data.stripeAmount
-  const currency = 'usd'
-  const description = body.data.stripeCharge
-	const email = body.data.stripeEmail
+	const amount = body.data.stripeAmount
+	const currency = 'usd'
+	const description = body.data.stripeCharge
+	const email = body.data.stripeEmail.toLowerCase()
 	const event = body.data.stripeProduct
 	const quantity = body.data.stripeQuantity
 	const qbCustomer = body.data.stripeQbCustomer
 	
-  const chargeCreate = ({ customer }) => stripe.charges.create({
+	const chargeCreate = ({ customer }) => stripe.charges.create({
 		amount,
 		currency,
 		customer,
@@ -33,8 +33,8 @@ module.exports = (body, callback) => {
 
 			// Customer already exists...
 			if (customerList.data.length > 0) {
-        // ...so create charge using existing customer.
-        chargeCreate({ customer: customerList.data[0].id })
+				// ...so create charge using existing customer.
+				chargeCreate({ customer: customerList.data[0].id })
 			}
 			// Create new customer...
 			else {
@@ -48,20 +48,20 @@ module.exports = (body, callback) => {
 			}
 		})
 
-  /* NEW VERSION - NOT WORKING
-  const chargeCreate = ({ customer }) => stripe.charges.create({ amount, currency, customer, description }, callback)
-  const orderCreate = ({ productId }) => stripe.orders.create({
-    currency: 'usd',
-    items: [{
-      amount,
-      currency,
-      description,
-      // in Stripe, `parent` is the ID of the product SKU
-      parent: productId,
-      quantity: 1,
-      type: 'sku'
-    }]
-  })
+	/* NEW VERSION - NOT WORKING
+	const chargeCreate = ({ customer }) => stripe.charges.create({ amount, currency, customer, description }, callback)
+	const orderCreate = ({ productId }) => stripe.orders.create({
+		currency: 'usd',
+		items: [{
+			amount,
+			currency,
+			description,
+			// in Stripe, `parent` is the ID of the product SKU
+			parent: productId,
+			quantity: 1,
+			type: 'sku'
+		}]
+	})
 
 	// STEP 1: find out if customer already exists
 	stripe.customers.list({ email })
@@ -96,17 +96,17 @@ module.exports = (body, callback) => {
 						const productId = productSkus.data
 							? productSkus.data[0].id
 							: null
-            
-            console.log('************')
-            console.log('PRODUCT ID')
-            console.log('************')
-            console.log(productId)
-  
+						
+						console.log('************')
+						console.log('PRODUCT ID')
+						console.log('************')
+						console.log(productId)
+	
 						
 						// #2 Product already exists
 						if (productId) {
-              orderCreate({ productId })
-                .then(order => console.log(order))
+							orderCreate({ productId })
+								.then(order => console.log(order))
 						}
 						// #2 Product doesn’t yet exist
 						else {
@@ -133,5 +133,5 @@ module.exports = (body, callback) => {
 			}
 
 		})
-  */
+	*/
 }

@@ -6,15 +6,15 @@ module.exports = (body, callback) => {
 
 	var stripe = require('stripe')(body.secrets.elistripelive)
 
-  const amount = body.data.stripeAmount
-  const currency = 'usd'
-  const description = body.data.stripeCharge
-	const email = body.data.stripeEmail
+	const amount = body.data.stripeAmount
+	const currency = 'usd'
+	const description = body.data.stripeCharge
+	const email = body.data.stripeEmail.toLowerCase()
 	const event = body.data.stripeProduct
 	const quantity = body.data.stripeQuantity
 	const qbCustomer = body.data.stripeQbCustomer
 	
-  const chargeCreate = ({ customer }) => stripe.charges.create({
+	const chargeCreate = ({ customer }) => stripe.charges.create({
 		amount,
 		currency,
 		customer,
@@ -33,8 +33,8 @@ module.exports = (body, callback) => {
 
 			// Customer already exists...
 			if (customerList.data.length > 0) {
-        // ...so create charge using existing customer.
-        chargeCreate({ customer: customerList.data[0].id })
+				// ...so create charge using existing customer.
+				chargeCreate({ customer: customerList.data[0].id })
 			}
 			// Create new customer...
 			else {
