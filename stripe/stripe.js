@@ -1,34 +1,30 @@
 // Uses webtask.io
 // To create a server, navigate to the /stripe folder and enter the following code on the CLI:
-// wt create stripe.js --secret elistripelive=STRIPESECRET --parse-body --meta 'wt-node-dependencies'='{"stripe":"6.1.0"}'
+// wt create stripe.js --secret elistripelive=STRIPETESTSECRET --parse-body --meta 'wt-node-dependencies'='{"stripe":"6.20.0"}'
 // Then add the resulting URL to the Stripe url in the index.js file.
 module.exports = (body, callback) => {
 
 	var stripe = require('stripe')(body.secrets.elistripelive)
 
-	const amount = body.data.stripeAmount
-	const currency = 'usd'
-	const description = body.data.stripeCharge
-	const email = body.data.stripeEmail.toLowerCase()
-	const event = body.data.stripeProduct
-	const quantity = body.data.stripeQuantity
-	const qbCustomer = body.data.stripeQbCustomer
+	const { chargeAmount, chargeDescription, customerDescription, customerEmail, event, firstName, lastName, quantity, party, token } = body.data
 	
 	const chargeCreate = ({ customer }) => stripe.charges.create({
-		amount,
-		currency,
+		amount: chargeAmount,
+		currency: 'usd',
 		customer,
-		description,
+		description: chargeDescription,
 		metadata: {
-			qbCustomer,
-			event,
-			quantity,
-			rate: ((amount/quantity)/100).toFixed(2)
+			'First Name': firstName,
+			'Last Name': lastName,
+			Event: event,
+			Party: party,
+			Quantity: quantity,
+			Rate: ((chargeAmount/quantity)/100).toFixed(2)
 		},
 		statement_descriptor: 'ECST LVNG ' + event
 	}, callback)
 
-	stripe.customers.list({ email })
+	stripe.customers.list({ email: customerEmail })
 		.then(customerList => {
 
 			// Customer already exists...
@@ -39,9 +35,9 @@ module.exports = (body, callback) => {
 			// Create new customer...
 			else {
 				stripe.customers.create({
-					email,
-					source: body.data.stripeToken,
-					description: body.data.stripeCustomer
+					email: customerEmail.toLowerCase(),
+					source: token,
+					description: customerDescription
 				})
 				// ...and create charge using new customer data.
 				.then(customer => chargeCreate({ customer: customer.id }))

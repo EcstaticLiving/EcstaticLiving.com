@@ -1069,6 +1069,8 @@ function stripeTokenHandler({
 			'customerDescription': customerDescription,
 			'customerEmail': customerEmail,
 			'event': event,
+			'firstName': eventFirstName,
+			'lastName': eventLastName,
 			'party': party,
 			'quantity': quantity,
 			'token': token

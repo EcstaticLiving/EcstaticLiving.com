@@ -1,12 +1,12 @@
 // Uses webtask.io
 // To create a server, navigate to the /stripe folder and enter the following code on the CLI:
-// wt create stripe-test.js --secret elistripetest=STRIPETESTSECRET --parse-body --meta 'wt-node-dependencies'='{"stripe":"6.1.0"}'
+// wt create stripe-test.js --secret elistripetest=STRIPETESTSECRET --parse-body --meta 'wt-node-dependencies'='{"stripe":"6.20.0"}'
 // Then add the resulting URL to the Stripe url in the index.js file.
 module.exports = (body, callback) => {
 
 	var stripe = require('stripe')(body.secrets.elistripetest)
 
-	const { chargeAmount, chargeDescription, customerDescription, customerEmail, event, quantity, party, token } = body.data
+	const { chargeAmount, chargeDescription, customerDescription, customerEmail, event, firstName, lastName, quantity, party, token } = body.data
 	
 	const chargeCreate = ({ customer }) => stripe.charges.create({
 		amount: chargeAmount,
@@ -14,10 +14,12 @@ module.exports = (body, callback) => {
 		customer,
 		description: chargeDescription,
 		metadata: {
+			'First Name': firstName,
+			'Last Name': lastName,
 			Event: event,
 			Party: party,
 			Quantity: quantity,
-			Rate: ((amount/quantity)/100).toFixed(2)
+			Rate: ((chargeAmount/quantity)/100).toFixed(2)
 		},
 		statement_descriptor: 'ECST LVNG ' + event
 	}, callback)
@@ -42,90 +44,4 @@ module.exports = (body, callback) => {
 			}
 		})
 
-	/* NEW VERSION - NOT WORKING
-	const chargeCreate = ({ customer }) => stripe.charges.create({ amount, currency, customer, description }, callback)
-	const orderCreate = ({ productId }) => stripe.orders.create({
-		currency: 'usd',
-		items: [{
-			amount,
-			currency,
-			description,
-			// in Stripe, `parent` is the ID of the product SKU
-			parent: productId,
-			quantity: 1,
-			type: 'sku'
-		}]
-	})
-
-	// STEP 1: find out if customer already exists
-	stripe.customers.list({ email })
-		.then(customerList => {
-
-			console.log('************')
-			console.log('CUSTOMER LIST')
-			console.log('************')
-			console.log(customerList)
-
-			// #1 Customer already exists...
-			if (customerList.data) {
-
-				// STEP 2: find out if event already exists as product
-				stripe.products.list({ active: true })
-					.then(productList => {
-
-						console.log('************')
-						console.log('PRODUCT LIST')
-						console.log('************')
-						console.log(productList)
-
-						const productSkus = productList.data && productList.data.filter(product => product.name.toUpperCase() === event.toUpperCase())
-							? productList.data.filter(product => product.name.toUpperCase() === event.toUpperCase())[0].skus
-							: null
-
-						console.log('************')
-						console.log('SKU LIST')
-						console.log('************')
-						console.log(productSkus)
-
-						const productId = productSkus.data
-							? productSkus.data[0].id
-							: null
-						
-						console.log('************')
-						console.log('PRODUCT ID')
-						console.log('************')
-						console.log(productId)
-	
-						
-						// #2 Product already exists
-						if (productId) {
-							orderCreate({ productId })
-								.then(order => console.log(order))
-						}
-						// #2 Product doesn’t yet exist
-						else {
-
-						}
-					
-					})
-
-				// ...so create charge using existing customer.
-				// chargeCreate({ customer: customerList.data[0].id })
-
-			}
-			// #1 Create new customer...
-			else {
-				stripe.customers.create({
-					email,
-					source: body.data.stripeToken,
-					description: body.data.stripeCustomer
-				})
-				// ...and create charge using new customer data.
-				.then(customer => {
-					chargeCreate({ customer: customer.id })
-				})
-			}
-
-		})
-	*/
 }
