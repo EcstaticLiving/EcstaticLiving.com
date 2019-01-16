@@ -20,6 +20,8 @@ module.exports = (body, callback) => {
 		quantity,
 		token
 	} = body.data
+
+	console.log(body.data)
 	
 	const chargeCreate = ({ customer }) => stripe.charges.create({
 		amount: chargeAmount,
