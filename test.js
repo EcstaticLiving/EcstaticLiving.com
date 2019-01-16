@@ -1043,16 +1043,7 @@ function verification(t, e, n, i) {
 }
 
 // Payment
-function stripeTokenHandler({
-	chargeAmount,
-	chargeDescription,
-	customerDescription,
-	customerEmail,
-	event,
-	party,
-	quantity,
-	token
-}) {
+function stripeTokenHandler(token) {
 	const stripeURL = window.location.href.indexOf('ecstaticliving.com') > -1
 		? 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.sandbox.auth0-extend.com/stripe'
 		: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.sandbox.auth0-extend.com/stripe-test'
@@ -1068,11 +1059,13 @@ function stripeTokenHandler({
 			'chargeDescription': chargeDescription,
 			'customerDescription': customerDescription,
 			'customerEmail': customerEmail,
-			'event': event,
-			'firstName': eventFirstName,
-			'lastName': eventLastName,
+			'event': eventCode,
 			'party': party,
-			'quantity': quantity,
+			'participantFirstName': eventFirstName,
+			'participantLastName': eventLastName,
+			'partnerFirstName': partnerFirstName,
+			'partnerLastName': partnerLastName,
+			'quantity': participants() === 2 && $(eventPayBoth).is(':checked') ? 2 : 1,
 			'token': token
 		},
 		timeout: 10000
@@ -1284,16 +1277,7 @@ $(payButton).on('click', function(e) {
 				return false
 			}
 			else {
-				stripeTokenHandler({
-					chargeAmount,
-					chargeDescription,
-					customerDescription,
-					customerEmail,
-					event: eventCode,
-					party,
-					quantity: participants() === 2 && $(eventPayBoth).is(':checked') ? 2 : 1,
-					token: result.token.id
-				})
+				stripeTokenHandler(result.token.id)
 			}
 		})
 		.catch(function (error) {

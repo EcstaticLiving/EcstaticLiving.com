@@ -6,7 +6,20 @@ module.exports = (body, callback) => {
 
 	var stripe = require('stripe')(body.secrets.elistripelive)
 
-	const { chargeAmount, chargeDescription, customerDescription, customerEmail, event, firstName, lastName, quantity, party, token } = body.data
+	const {
+		chargeAmount,
+		chargeDescription,
+		customerDescription,
+		customerEmail,
+		event,
+		party,
+		participantFirstName,
+		participantLastName,
+		partnerFirstName,
+		partnerLastName,
+		quantity,
+		token
+	} = body.data
 	
 	const chargeCreate = ({ customer }) => stripe.charges.create({
 		amount: chargeAmount,
@@ -14,12 +27,14 @@ module.exports = (body, callback) => {
 		customer,
 		description: chargeDescription,
 		metadata: {
-			'First Name': firstName,
-			'Last Name': lastName,
-			Event: event,
-			Party: party,
-			Quantity: quantity,
-			Rate: ((chargeAmount/quantity)/100).toFixed(2)
+			...participantFirstName && { 'Participant First Name': participantFirstName },
+			...participantLastName && { 'Participant Last Name': participantLastName },
+			...partnerFirstName && { 'Partner First Name': partnerFirstName },
+			...partnerLastName && { 'Partner Last Name': partnerLastName },
+			...event && { Event: event },
+			...party && { Party: party },
+			...quantity && { Quantity: quantity },
+			...(chargeAmount && quantity) && { Rate: ((chargeAmount/quantity)/100).toFixed(2) }
 		},
 		statement_descriptor: 'ECST LVNG ' + event
 	}, callback)
