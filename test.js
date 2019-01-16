@@ -1063,8 +1063,8 @@ function stripeTokenHandler(data) {
 			'party': data.party,
 			'participantFirstName': data.eventFirstName,
 			'participantLastName': data.eventLastName,
-			'partnerFirstName': data.partnerFirstName,
-			'partnerLastName': data.partnerLastName,
+			'partnerFirstName': data.eventPartnerFirstName,
+			'partnerLastName': data.eventPartnerFirstName,
 			'quantity': data.quantity,
 			'token': data.token
 		},
@@ -1286,8 +1286,8 @@ $(payButton).on('click', function(e) {
 					'party': party,
 					'participantFirstName': eventFirstName,
 					'participantLastName': eventLastName,
-					'partnerFirstName': partnerFirstName,
-					'partnerLastName': partnerLastName,
+					'partnerFirstName': eventPartnerFirstName,
+					'partnerLastName': eventPartnerFirstName,
 					'quantity': participants() === 2 && $(eventPayBoth).is(':checked') ? 2 : 1,
 					'token': result.token.id
 				})
