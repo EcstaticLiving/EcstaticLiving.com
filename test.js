@@ -317,7 +317,8 @@ eventAffiliatePass = '#event-affiliate-pass',
 eventAffiliateFail = '#event-affiliate-fail',
 eventStatus = '#event-status',
 eventPartnerContainer = '.event-container.partner',
-eventPartnerName = '#event-partner-name',
+eventPartnerFirstName = '#event-partner-firstname',
+eventPartnerLastName = '#event-partner-lastname',
 eventPartnerGenderValidation = '#event-partner-gender-validation',
 eventPartnerFemale = '#event-partner-gender-female',
 eventPartnerMale = '#event-partner-gender-male',
@@ -419,7 +420,7 @@ function detailsValidation() {
 function partnerValidation() {
 	if (
 		(participants() === 2
-			&& $(eventPartnerName).val() !== ''
+			&& $(eventPartnerFirstName).val() !== '' && $(eventPartnerLastName).val() !== ''
 			&& ($(eventPartnerFemale).is(':checked') || $(eventPartnerMale).is(':checked') || $(eventPartnerOther).is(':checked'))
 			&& ($(eventPayBoth).is(':checked') || $(eventPayMe).is(':checked')))
 		|| participants() === 1
@@ -504,7 +505,15 @@ function showErrorsInEventForm() {
 	if ($(eventDepositContainer).is(':visible') && !$(eventDepositFull).is(':checked') && !$(eventDepositDeposit).is(':checked')) { $(eventDepositValidation).css(errorRadio); } else { $(eventDepositValidation).css(clearRadio); }
 	if (participants() === 2 && !$(eventPayBoth).is(':checked') && !$(eventPayMe).is(':checked')) { $(eventPayValidation).css(errorRadio); } else { $(eventPayValidation).css(clearRadio); }
 	if (participants() === 2 && !$(eventPartnerFemale).is(':checked') && !$(eventPartnerMale).is(':checked') && !$(eventPartnerOther).is(':checked')) { $(eventPartnerGenderValidation).css(errorRadio); } else { $(eventPartnerGenderValidation).css(clearRadio); }
-	if (participants() === 2 && $(eventPartnerName).val() === '') { $(eventPartnerName).css(errorInput); $(eventPartnerName).focus() } else { $(eventPartnerName).css(clearInput) }
+	if (participants() === 2 && ($(eventPartnerFirstName).val() !== '' || $(eventPartnerLastName).val() !== '')) {
+		$(eventPartnerFirstName).css(errorInput)
+		$(eventPartnerLastName).css(errorInput)
+		$(eventPartnerFirstName).focus()
+	}
+	else {
+		$(eventPartnerFirstName).css(clearInput)
+		$(eventPartnerLastName).css(clearInput)
+	}
 	if (
 		($(eventAffiliateYes).is(':checked') && $(eventAffiliateCode).val() === '')
 		|| (!$(eventAffiliateNo).is(':checked') && !$(eventAffiliateYes).is(':checked'))
@@ -584,7 +593,8 @@ function showPartner() {
 	}
 }
 function hidePartner() {
-	$(eventPartnerName).val('')
+	$(eventPartnerFirstName).val('')
+	$(eventPartnerLastName).val('')
 	$(eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther + ',' + eventPayBoth + ',' + eventPayMe).prop('checked', false)
 	$(eventPartnerContainer).hide()
 	setEventPrices()
@@ -864,7 +874,7 @@ if (page === 'Event') {
 	})
 	const eventFieldsPersonal = eventFirstName + ',' + eventLastName + ',' + eventEmail + ',' + eventMobile + ',' + eventBirthdate + ',' + eventFemale + ',' + eventMale + ',' + eventOther
 	const eventFieldsDetails = eventReferral + ',' + eventExperienceYes + ',' + eventExperienceNo + ',' + eventExperienceDetails + ',' + eventDietYes + ',' + eventDietNo + ',' + eventDietDetails + ',' + eventSpecialYes + ',' + eventSpecialNo + ',' + eventSpecialDetails
-	const eventFieldsPartner = eventStatus + ',' + eventPartnerName + ',' + eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther + ',' + eventPayBoth + ',' + eventPayMe
+	const eventFieldsPartner = eventStatus + ',' + eventPartnerFirstName + ',' + eventPartnerLastName + ',' + eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther + ',' + eventPayBoth + ',' + eventPayMe
 	const eventFieldsOptions = eventSelect
 	const eventFieldsBilling = billingFirstName + ',' + billingLastName + ',' + billingStreet + ',' + billingCity + ',' + billingState + ',' + billingPostal + ',' + billingCountry
 	$(eventFieldsPersonal + ',' + eventFieldsDetails + ',' + eventFieldsPartner + ',' + eventFieldsOptions + ',' + eventTerms + ',' + eventFieldsBilling).on('change', function() {
@@ -1033,7 +1043,16 @@ function verification(t, e, n, i) {
 }
 
 // Payment
-function stripeTokenHandler(token, data) {
+function stripeTokenHandler({
+	chargeAmount,
+	chargeDescription,
+	customerDescription,
+	customerEmail,
+	event,
+	party,
+	quantity,
+	token
+}) {
 	const stripeURL = window.location.href.indexOf('ecstaticliving.com') > -1
 		? 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.sandbox.auth0-extend.com/stripe'
 		: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.sandbox.auth0-extend.com/stripe-test'
@@ -1045,14 +1064,14 @@ function stripeTokenHandler(token, data) {
 		url: stripeURL,
 		crossDomain: true,
 		data: {
-			'stripeAmount': data.chargeAmount,
-			'stripeCharge': data.chargeDescription,
-			'stripeCustomer': data.customerDescription,
-			'stripeQbCustomer': data.qbCustomer,
-			'stripeEmail': data.customerEmail,
-			'stripeProduct': data.eventCode,
-			'stripeQuantity': data.quantity,
-			'stripeToken': token.id
+			'chargeAmount': chargeAmount,
+			'chargeDescription': chargeDescription,
+			'customerDescription': customerDescription,
+			'customerEmail': customerEmail,
+			'event': event,
+			'party': party,
+			'quantity': quantity,
+			'token': token
 		},
 		timeout: 10000
 	})
@@ -1197,18 +1216,19 @@ $(payButton).on('click', function(e) {
 		customerDescription = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' <' + $(eventEmail).val() + '>'
 		customerEmail = $(eventEmail).val()
 		chargeDescription = eventTitle + ' ' + eventDates + ', ' + eventVenue + ', ' + $(eventSelect + ' option:selected').text().substring(0, $(eventSelect + ' option:selected').text().length - 16) + ', ' + eventDeposit
-		// Form Variable: Record QB
-		var qbCustomer = '';
-		if (participants() === 1) { qbCustomer = $(eventFirstName).val() + ' ' + $(eventLastName).val() }
-		if (participants() === 2) {
-			const partner = $(eventPartnerName).val().split(' ')
-			if (partner[partner.length-1] === $(eventLastName).val()) {
-				qbCustomer = $(eventFirstName).val() + ' & ' + $(eventPartnerName).val()
+		// Form Variable: Party
+		var party = ''
+		if (participants() === 1) {
+			party = $(eventFirstName).val() + ' ' + $(eventLastName).val()
+		}
+		else if (participants() === 2) {
+			if ($(eventLastName).val() === $(eventPartnerLastName).val()) {
+				party = $(eventFirstName).val() + ' & ' + $(eventPartnerFirstName).val() + ' ' + $(eventLastName).val()
 			} else {
-				qbCustomer = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' & ' + $(eventPartnerName).val()
+				party = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' & ' + $(eventPartnerFirstName).val() + ' ' + $(eventPartnerLastName).val()
 			}
 		}
-		$('#recordqb').val(qbCustomer)
+		$('#party').val(party)
 		// Form Variable: Traffic Source
 		var trafficSource = window.location.search.slice(1).split('=')
 		if (window.location.search && trafficSource[0] === 'source') {
@@ -1216,11 +1236,6 @@ $(payButton).on('click', function(e) {
 		} else {
 			$('#trafficsource').val('ELI')
 		}
-		// Form Variable: Record Email
-		const recordEmail = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' (' + $(eventEmail).val() + ')'
-		$('#recordemail').val(recordEmail)
-		// Form Variable: Record Mobile
-		$('#recordmobile').val($(eventMobile).val())
 	}
 	else if (page === 'Custom') {
 		// Stripe variables
@@ -1259,23 +1274,24 @@ $(payButton).on('click', function(e) {
 		address_zip: $(billingPostal).val(),
 		address_country: $(billingCountry).val()
 	}
-	const serverData = {
-		chargeAmount,
-		chargeDescription,
-		customerDescription,
-		qbCustomer,
-		customerEmail,
-		eventCode,
-		quantity: participants() === 2 && $(eventPayBoth).is(':checked') ? 2 : 1
-	}
 	stripe.createToken(card, billingData)
 		.then(function (result) {
 			paymentValidation(result)
 			if (result.error) {
 				$('#card-errors').text(result.error.message)
 				return false
-			} else {
-				stripeTokenHandler(result.token, serverData)
+			}
+			else {
+				stripeTokenHandler({
+					chargeAmount,
+					chargeDescription,
+					customerDescription,
+					customerEmail,
+					event: eventCode,
+					party,
+					quantity: participants() === 2 && $(eventPayBoth).is(':checked') ? 2 : 1,
+					token: result.token.id
+				})
 			}
 		})
 		.catch(function (error) {
