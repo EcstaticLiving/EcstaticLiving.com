@@ -1284,10 +1284,10 @@ $(payButton).on('click', function(e) {
 					'customerEmail': customerEmail,
 					'event': eventCode,
 					'party': party,
-					'participantFirstName': eventFirstName,
-					'participantLastName': eventLastName,
-					'partnerFirstName': eventPartnerFirstName,
-					'partnerLastName': eventPartnerFirstName,
+					'participantFirstName': $(eventFirstName).val(),
+					'participantLastName': $(eventLastName).val(),
+					'partnerFirstName': $(eventPartnerFirstName).val(),
+					'partnerLastName': $(eventPartnerFirstName).val(),
 					'quantity': participants() === 2 && $(eventPayBoth).is(':checked') ? 2 : 1,
 					'token': result.token.id
 				})
