@@ -423,14 +423,14 @@ var countries = [
   { value: 'ZW', label: 'Zimbabwe' }
 ]
 for(var i = 0; i < countries.length; i++) {
-	const option = countries[i] === 'United States'
+	const country = countries[i] === 'United States'
 		? '<option value="' + countries[i].value + '" selected>' + countries[i].label + '</option>'
 		: '<option value="' + countries[i].value + '"' + countries[i].label + '</option>'
 	if (page === 'Event' || page === 'Custom') {
-		$('#billing-country').append(option)
+		$('#billing-country').append(country)
 	}
 	else {
-		$('#country').append(option)
+		$('#country').append(country)
 	}
 }
 
