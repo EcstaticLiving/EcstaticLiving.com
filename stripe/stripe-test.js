@@ -13,6 +13,7 @@ module.exports = (body, callback) => {
 		customerEmail,
 		event,
 		party,
+		phone,
 		participantFirstName,
 		participantLastName,
 		partnerFirstName,
@@ -38,6 +39,7 @@ module.exports = (body, callback) => {
 		metadata: {
 			...event && { Event: event },
 			...party && { Party: party },
+			...phone && { Phone: phone },
 			...participantFirstName && { 'Participant First Name': participantFirstName },
 			...participantLastName && { 'Participant Last Name': participantLastName },
 			...partnerFirstName && { 'Partner First Name': partnerFirstName },
@@ -65,8 +67,16 @@ module.exports = (body, callback) => {
 				stripe.customers.createSource(customerId, {
 					source
 				})
-					// ...then create charge using existing customer.
-					.then(source => createCharge({ customer: customerId }))				
+					.then(res => {
+						// ...make new source default payment source...
+						stripe.customers.update(customerId, {
+							default_source: source
+						})
+							// ...then create charge using existing customer.
+							.then(res => createCharge({ customer: customerId }))
+							.catch(err => console.error(err))
+					})
+					.catch(err => console.error(err))
 			}
 			// Create new customer...
 			else {
@@ -77,6 +87,7 @@ module.exports = (body, callback) => {
 				})
 				// ...and create charge using new customer data.
 				.then(customer => createCharge({ customer: customer.id }))
+				.catch(err => console.error(err))
 			}
 		})
 
