@@ -1303,8 +1303,8 @@ $(payButton).on('click', function(e) {
 					'quantity': paymentQty(),
 					'rate': ((chargeAmount/paymentQty())/100).toFixed(2),
 					'priceFull': (eventPrices[selected] * paymentQty()).toFixed(2),
-					'priceDiscount': eventAffiliateDiscount().toFixed(2),
-					'priceBase': (eventBasePrice * paymentQty()).toFixed(2),
+					'priceDiscount': eventAffiliateDiscount(),
+					'priceBase': eventBasePrice * paymentQty(),
 					'priceDeposit': $(eventDepositDeposit).is(':checked') ? (chargeAmount/100).toFixed(2) : 0,
 					'lodging': eventOptions[selected],
 					'token': result.token.id
