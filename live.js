@@ -956,7 +956,9 @@ function setEventPrices() {
 	}
 	var eventOptions = $('#event-options').text().split(' | ')
 	var eventPrices = $('#event-prices').text().split(' | ')
-	var eventNotes = $('#event-notes').text().split('|')
+	var eventNotes = $('#event-notes').text().includes('|')
+		? $('#event-notes').text().split('|')
+		: $('#event-notes').text().split(',')
 	$(eventSelect).empty()
 	if (eventOptions.length > 0) {
 		$(eventSelect).append($('<option>', {
