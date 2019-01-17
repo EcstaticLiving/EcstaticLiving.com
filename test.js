@@ -1299,7 +1299,7 @@ $(payButton).on('click', function(e) {
 					'partnerFirstName': $(eventPartnerFirstName).val(),
 					'partnerLastName': $(eventPartnerLastName).val(),
 					'quantity': paymentQty(),
-					'rate': ((chargeAmount/quantity)/100).toFixed(2),
+					'rate': ((chargeAmount/paymentQty())/100).toFixed(2),
 					'priceFull': (eventPrices[selected] * paymentQty()).toFixed(2),
 					'priceDiscount': eventAffiliateDiscount().toFixed(2),
 					'priceBase': (eventBasePrice * paymentQty()).toFixed(2),
