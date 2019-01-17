@@ -335,6 +335,8 @@ eventDepositValidation = '#event-deposit-validation',
 eventDepositText = '#event-deposit-text',
 eventDepositFull = '#event-deposit-full',
 eventDepositDeposit = '#event-deposit-deposit',
+eventAmountContainer = '.event-container.amount',
+eventAmountDisplay = '#event-amount-display',
 eventTermsValidation = '#event-terms-validation',
 eventTerms = '#event-terms',
 paymentButton = '#payment-button'
@@ -633,6 +635,15 @@ function hideSpecial() {
 	$(eventSpecialDetails).val('')
 	$(eventSpecialContainer).hide()
 }
+function showAmount() {
+	$(eventAmountContainer).show()
+	window.scrollTo(0, scrollPosition() + 1)
+}
+function hideAmount() {
+	$(eventAmountDisplay).val('')
+	$(eventAmountContainer).hide()
+}
+
 
 
 // EVENT OPTIONS AND PRICE CALCULATION
@@ -694,6 +705,7 @@ function setEventStatus() {
 }
 //	Adds event options & prices based on CMS input
 function setEventPrices() {
+	hideAmount()
 	var people = ''
 	if (paymentQty() === 2) {
 		people = 'for both'
@@ -891,6 +903,13 @@ if (page === 'Event') {
 		if (this.value.length >= 2) {
 			e.preventDefault()
 		}
+	})
+	$(eventSelect + ',' + eventDepositFull + ',' + eventDepositDeposit).on('change', function() {
+		const amount = $(eventDepositDeposit).is(':checked')
+			? parseInt(eventDepositAmount) * paymentQty()
+			: $(eventSelect).val()
+		$(eventAmountDisplay).val(amount)
+		showAmount()
 	})
 
 	// RESET EVENT FORM
