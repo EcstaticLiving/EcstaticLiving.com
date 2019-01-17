@@ -13,6 +13,7 @@ module.exports = (body, callback) => {
 		customerEmail,
 		event,
 		party,
+		phone,
 		participantFirstName,
 		participantLastName,
 		partnerFirstName,
@@ -25,12 +26,12 @@ module.exports = (body, callback) => {
 		priceDeposit,
 		priceBalanceDate,
 		lodging,
-		token
+		source
 	} = body.data
 
 	console.log(body.data)
 	
-	const chargeCreate = ({ customer }) => stripe.charges.create({
+	const createCharge = ({ customer }) => stripe.charges.create({
 		amount: chargeAmount,
 		currency: 'usd',
 		customer,
@@ -38,6 +39,7 @@ module.exports = (body, callback) => {
 		metadata: {
 			...event && { Event: event },
 			...party && { Party: party },
+			...phone && { Phone: phone },
 			...participantFirstName && { 'Participant First Name': participantFirstName },
 			...participantLastName && { 'Participant Last Name': participantLastName },
 			...partnerFirstName && { 'Partner First Name': partnerFirstName },
@@ -51,6 +53,7 @@ module.exports = (body, callback) => {
 			...priceBalanceDate && { 'Balance Due Date': priceBalanceDate },
 			...lodging && { 'Lodging Option': lodging }
 		},
+		source,
 		statement_descriptor: 'ECST LVNG ' + event
 	}, callback)
 
@@ -59,18 +62,32 @@ module.exports = (body, callback) => {
 
 			// Customer already exists...
 			if (customerList.data.length > 0) {
-				// ...so create charge using existing customer.
-				chargeCreate({ customer: customerList.data[0].id })
+				const customerId = customerList.data[0].id
+				// ...update existing customer with new source...
+				stripe.customers.createSource(customerId, {
+					source
+				})
+					.then(res => {
+						// ...make new source default payment source...
+						stripe.customers.update(customerId, {
+							default_source: source
+						})
+							// ...then create charge using existing customer.
+							.then(res => createCharge({ customer: customerId }))
+							.catch(err => console.error(err))
+					})
+					.catch(err => console.error(err))
 			}
 			// Create new customer...
 			else {
 				stripe.customers.create({
 					email: customerEmail.toLowerCase(),
-					source: token,
+					source: source,
 					description: customerDescription
 				})
 				// ...and create charge using new customer data.
-				.then(customer => chargeCreate({ customer: customer.id }))
+				.then(customer => createCharge({ customer: customer.id }))
+				.catch(err => console.error(err))
 			}
 		})
 
