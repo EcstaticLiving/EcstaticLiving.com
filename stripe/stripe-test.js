@@ -23,6 +23,8 @@ module.exports = (body, callback) => {
 		priceDiscount,
 		priceBase,
 		priceDeposit,
+		priceBalanceDate,
+		lodging,
 		token
 	} = body.data
 
@@ -46,6 +48,7 @@ module.exports = (body, callback) => {
 			...priceDiscount && { Discount: priceDiscount },
 			...priceBase && { 'Base Price': priceBase },
 			...priceDeposit && { Deposit: priceDeposit },
+			...priceBalanceDate && { 'Balance Due Date': priceBalanceDate },
 			...lodging && { 'Lodging Option': lodging }
 		},
 		statement_descriptor: 'ECST LVNG ' + event

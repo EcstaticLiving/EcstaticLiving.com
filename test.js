@@ -1077,6 +1077,7 @@ function stripeTokenHandler(data) {
 			'priceDiscount': data.priceDiscount,
 			'priceBase': data.priceBase,
 			'priceDeposit': data.priceDeposit,
+			'priceBalanceDate': data.priceBalanceDate,
 			'lodging': data.lodging,
 			'token': data.token
 		},
@@ -1288,7 +1289,7 @@ $(payButton).on('click', function(e) {
 			else {
 				var eventOptions = $('#event-options').text().split(' | ')
 				var eventPrices = $('#event-prices').text().split(' | ')
-				const selected = $(eventSelect + ' option:selected').index()
+				const selected = $(eventSelect + ' option:selected').index() - 1
 				stripeTokenHandler({
 					'chargeAmount': chargeAmount,
 					'chargeDescription': chargeDescription,
@@ -1304,8 +1305,9 @@ $(payButton).on('click', function(e) {
 					'rate': ((chargeAmount/paymentQty())/100).toFixed(2),
 					'priceFull': (eventPrices[selected] * paymentQty()).toFixed(2),
 					'priceDiscount': eventAffiliateDiscount(),
-					'priceBase': eventBasePrice * paymentQty(),
+					'priceBase': !isNaN(eventBasePrice) ? (eventBasePrice * paymentQty()).toFixed(2) : 0,
 					'priceDeposit': $(eventDepositDeposit).is(':checked') ? (chargeAmount/100).toFixed(2) : 0,
+					'priceBalanceDate': eventDepositDate,
 					'lodging': eventOptions[selected],
 					'token': result.token.id
 				})
