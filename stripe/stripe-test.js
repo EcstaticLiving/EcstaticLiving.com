@@ -23,13 +23,12 @@ module.exports = (body, callback) => {
 		priceFull,
 		priceDiscount,
 		priceBase,
+		costBase,
 		priceDeposit,
 		priceBalanceDate,
 		lodging,
 		source
 	} = body.data
-
-	console.log(body.data)
 	
 	const createCharge = ({ customer }) => stripe.charges.create({
 		amount: chargeAmount,
@@ -49,6 +48,7 @@ module.exports = (body, callback) => {
 			...priceFull && { 'Full Price': priceFull },
 			...priceDiscount && { Discount: priceDiscount },
 			...priceBase && { 'Base Price': priceBase },
+			...costBase && { 'Base Cost': costBase },
 			...priceDeposit && { Deposit: priceDeposit },
 			...priceBalanceDate && { 'Balance Due Date': priceBalanceDate },
 			...lodging && { 'Lodging Option': lodging }
