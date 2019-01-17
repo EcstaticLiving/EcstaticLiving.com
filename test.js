@@ -908,7 +908,7 @@ if (page === 'Event') {
 		const amount = $(eventDepositDeposit).is(':checked')
 			? parseInt(eventDepositAmount) * paymentQty()
 			: $(eventSelect).val()
-		$(eventAmountDisplay).val(amount)
+		$(eventAmountDisplay).text('Total amount: $' + amount)
 		showAmount()
 	})
 
