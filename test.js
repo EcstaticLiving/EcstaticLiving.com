@@ -906,7 +906,7 @@ if (page === 'Event') {
 		}
 	})
 	$(eventSelect + ',' + eventDepositFull + ',' + eventDepositDeposit).on('change', function() {
-		const amount = $(eventDepositDeposit).is(':checked')
+		const amount = $(eventDepositDeposit).is(':checked') && new Date() < new Date(eventDepositDate)
 			? parseInt(eventDepositAmount) * paymentQty()
 			: $(eventSelect).val()
 		$(eventAmountDisplay).text('Total: $' + amount)
