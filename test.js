@@ -910,7 +910,7 @@ if (page === 'Event') {
 			? parseInt(eventDepositAmount) * paymentQty()
 			: $(eventSelect).val()
 		$(eventAmountDisplay).text('Total: $' + amount)
-		if (eventAmountShow.text() === 'Yes') { showAmount() }
+		if ($(eventAmountShow).text() === 'Yes') { showAmount() }
 	})
 
 	// RESET EVENT FORM
