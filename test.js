@@ -1286,6 +1286,8 @@ $(payButton).on('click', function(e) {
 				return false
 			}
 			else {
+				var eventOptions = $('#event-options').text().split(' | ')
+				var eventPrices = $('#event-prices').text().split(' | ')
 				const selected = $(eventSelect + ' option:selected').index()
 				stripeTokenHandler({
 					'chargeAmount': chargeAmount,
