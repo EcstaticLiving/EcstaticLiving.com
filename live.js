@@ -264,14 +264,17 @@ if (window.location.href.indexOf('/forms/ctt-application') > -1) {
 
 
 // EVENT REGISTRATION
-const $eventForm = $('#wf-form-Event-Registration'),
-eventCode = $('#event-code').text().toUpperCase(),
+const $eventForm = $('#wf-form-Event-Registration')
+
+// Hidden fields
+const eventCode = $('#event-code').text().toUpperCase(),
 eventTitle = $('#event-name').text(), // Stripe description
 eventStartDate = $('#event-start').text(),
 eventDates = $('#event-dates').text(),
 eventVenue = $('#event-venue').text(),
-eventDepositAmount = $('#event-deposit-amount').text(),
-eventDepositDate = $('#event-deposit-date').text()
+eventDepositAmount = parseFloat($('#event-deposit-amount').text()).toFixed(2),
+eventDepositDate = $('#event-deposit-date').text(),
+eventBasePrice = parseFloat($('#event-base-price').text()).toFixed(2)
 
 // Event variables
 const payButton = '#payment-button',
@@ -332,6 +335,9 @@ eventDepositValidation = '#event-deposit-validation',
 eventDepositText = '#event-deposit-text',
 eventDepositFull = '#event-deposit-full',
 eventDepositDeposit = '#event-deposit-deposit',
+eventAmountContainer = '.event-container.amount',
+eventAmountDisplay = '#event-amount-display',
+eventAmountShow = '#event-amount-show',
 eventTermsValidation = '#event-terms-validation',
 eventTerms = '#event-terms',
 paymentButton = '#payment-button'
@@ -359,6 +365,10 @@ function participants() {
 	} else if ($(eventStatus).find('option:selected').val() === 'Single') {
 		return 1
 	}
+}
+
+function paymentQty() {
+	return participants() === 2 && $(eventPayBoth).is(':checked') ? 2 : 1
 }
 
 
@@ -626,6 +636,15 @@ function hideSpecial() {
 	$(eventSpecialDetails).val('')
 	$(eventSpecialContainer).hide()
 }
+function showAmount() {
+	$(eventAmountContainer).show()
+	window.scrollTo(0, scrollPosition() + 1)
+}
+function hideAmount() {
+	$(eventAmountDisplay).val('')
+	$(eventAmountContainer).hide()
+}
+
 
 
 // EVENT OPTIONS AND PRICE CALCULATION
@@ -687,10 +706,11 @@ function setEventStatus() {
 }
 //	Adds event options & prices based on CMS input
 function setEventPrices() {
+	hideAmount()
 	var people = ''
-	if ($(eventPayBoth).is(':checked')) {
+	if (paymentQty() === 2) {
 		people = 'for both'
-	} else if (participants() === 2) {
+	} else if (paymentQty() === 1 && participants() === 2) {
 		people = 'per person'
 	}
 	var eventOptions = $('#event-options').text().split(' | ')
@@ -703,12 +723,11 @@ function setEventPrices() {
 			text: 'Event option...'
 		}))
 	}
-	const paymentFactor = (people === 'for both') ? 2 : 1
 	const spacer = people ? ' ' : ''
 	const closer = (people || people === '') ? ')' : ''
 	for (var i = 0; i < eventOptions.length; i++) {
 		// Event price cannot be less than $0 after discount is applied
-		const eventSelectPrice = (eventPrices[i] - eventAffiliateDiscount()) * paymentFactor > 0 ? (eventPrices[i] - eventAffiliateDiscount()) * paymentFactor : 0
+		const eventSelectPrice = (eventPrices[i] - eventAffiliateDiscount()) * paymentQty() > 0 ? (eventPrices[i] - eventAffiliateDiscount()) * paymentQty() : 0
 		const affiliateDiscountText = eventAffiliateDiscount() > 0 ? ' including discount' : ''
 		const eventNote = eventNotes[i] ? eventNotes[i] : ''
 		const eventSelectText = eventOptions[i] + ' ($' + eventSelectPrice + spacer + people + affiliateDiscountText + closer + eventNote
@@ -717,7 +736,7 @@ function setEventPrices() {
 			text: eventSelectText
 		}))
 	}
-	const eventDepositPrice = parseInt(eventDepositAmount) * paymentFactor
+	const eventDepositPrice = parseInt(eventDepositAmount, 10) * paymentQty()
 	$(eventDepositText).text('Pay deposit only ($' + eventDepositPrice + spacer + people + ')')
 }
 
@@ -886,6 +905,14 @@ if (page === 'Event') {
 			e.preventDefault()
 		}
 	})
+	$(eventSelect + ',' + eventDepositFull + ',' + eventDepositDeposit).on('change', function() {
+		const amount = $(eventDepositDeposit).is(':checked') && new Date() < new Date(eventDepositDate)
+			? parseInt(eventDepositAmount) * paymentQty()
+			: $(eventSelect).val()
+		$(eventAmountDisplay).text('Total: $' + amount)
+		console.log($(eventAmountShow).text())
+		if ($(eventAmountShow).text() === 'Yes') { showAmount() }
+	})
 
 	// RESET EVENT FORM
 	resetEventForm()
@@ -1043,16 +1070,7 @@ function verification(t, e, n, i) {
 }
 
 // Payment
-function stripeTokenHandler({
-	chargeAmount,
-	chargeDescription,
-	customerDescription,
-	customerEmail,
-	event,
-	party,
-	quantity,
-	token
-}) {
+function stripeTokenHandler(data) {
 	const stripeURL = window.location.href.indexOf('ecstaticliving.com') > -1
 		? 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.sandbox.auth0-extend.com/stripe'
 		: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.sandbox.auth0-extend.com/stripe-test'
@@ -1064,16 +1082,25 @@ function stripeTokenHandler({
 		url: stripeURL,
 		crossDomain: true,
 		data: {
-			'chargeAmount': chargeAmount,
-			'chargeDescription': chargeDescription,
-			'customerDescription': customerDescription,
-			'customerEmail': customerEmail,
-			'event': event,
-			'firstName': eventFirstName,
-			'lastName': eventLastName,
-			'party': party,
-			'quantity': quantity,
-			'token': token
+			'chargeAmount': data.chargeAmount,
+			'chargeDescription': data.chargeDescription,
+			'customerDescription': data.customerDescription,
+			'customerEmail': data.customerEmail,
+			'event': data.event,
+			'party': data.party,
+			'participantFirstName': data.participantFirstName,
+			'participantLastName': data.participantLastName,
+			'partnerFirstName': data.partnerFirstName,
+			'partnerLastName': data.partnerLastName,
+			'quantity': data.quantity,
+			'rate': data.rate,
+			'priceFull': data.priceFull,
+			'priceDiscount': data.priceDiscount,
+			'priceBase': data.priceBase,
+			'priceDeposit': data.priceDeposit,
+			'priceBalanceDate': data.priceBalanceDate,
+			'lodging': data.lodging,
+			'token': data.token
 		},
 		timeout: 10000
 	})
@@ -1207,10 +1234,7 @@ $(payButton).on('click', function(e) {
 	var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0
 	if (page === 'Event') {
 		// Variables
-		const paymentFactor = ($(eventPayBoth).is(':checked'))
-			? 2
-			: 1
-		const eventDepositPrice = parseInt(eventDepositAmount) * paymentFactor
+		const eventDepositPrice = parseInt(eventDepositAmount) * paymentQty()
 		chargeAmount = $(eventDepositDeposit).is(':checked')
 			? eventDepositPrice * 100
 			: $(eventSelect).val() * 100
@@ -1284,15 +1308,29 @@ $(payButton).on('click', function(e) {
 				return false
 			}
 			else {
+				var eventOptions = $('#event-options').text().split(' | ')
+				var eventPrices = $('#event-prices').text().split(' | ')
+				const selected = $(eventSelect + ' option:selected').index() - 1
 				stripeTokenHandler({
-					chargeAmount,
-					chargeDescription,
-					customerDescription,
-					customerEmail,
-					event: eventCode,
-					party,
-					quantity: participants() === 2 && $(eventPayBoth).is(':checked') ? 2 : 1,
-					token: result.token.id
+					'chargeAmount': chargeAmount,
+					'chargeDescription': chargeDescription,
+					'customerDescription': customerDescription,
+					'customerEmail': customerEmail,
+					'event': eventCode,
+					'party': party,
+					'participantFirstName': $(eventFirstName).val(),
+					'participantLastName': $(eventLastName).val(),
+					'partnerFirstName': $(eventPartnerFirstName).val(),
+					'partnerLastName': $(eventPartnerLastName).val(),
+					'quantity': paymentQty(),
+					'rate': ((chargeAmount/paymentQty())/100).toFixed(2),
+					'priceFull': (eventPrices[selected] * paymentQty()).toFixed(2),
+					'priceDiscount': eventAffiliateDiscount(),
+					'priceBase': !isNaN(eventBasePrice) ? (eventBasePrice * paymentQty()).toFixed(2) : 0,
+					'priceDeposit': $(eventDepositDeposit).is(':checked') ? (chargeAmount/100).toFixed(2) : 0,
+					'priceBalanceDate': eventDepositDate,
+					'lodging': eventOptions[selected],
+					'token': result.token.id
 				})
 			}
 		})
