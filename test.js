@@ -264,14 +264,17 @@ if (window.location.href.indexOf('/forms/ctt-application') > -1) {
 
 
 // EVENT REGISTRATION
-const $eventForm = $('#wf-form-Event-Registration'),
-eventCode = $('#event-code').text().toUpperCase(),
+const $eventForm = $('#wf-form-Event-Registration')
+
+// Hidden fields
+const eventCode = $('#event-code').text().toUpperCase(),
 eventTitle = $('#event-name').text(), // Stripe description
 eventStartDate = $('#event-start').text(),
 eventDates = $('#event-dates').text(),
 eventVenue = $('#event-venue').text(),
-eventDepositAmount = $('#event-deposit-amount').text(),
-eventDepositDate = $('#event-deposit-date').text()
+eventDepositAmount = parseFloat($('#event-deposit-amount').text()).toFixed(2),
+eventDepositDate = $('#event-deposit-date').text(),
+eventBasePrice = parseFloat($('#event-base-price').text()).toFixed(2)
 
 // Event variables
 const payButton = '#payment-button',
@@ -359,6 +362,10 @@ function participants() {
 	} else if ($(eventStatus).find('option:selected').val() === 'Single') {
 		return 1
 	}
+}
+
+function paymentQty() {
+	return participants() === 2 && $(eventPayBoth).is(':checked') ? 2 : 1
 }
 
 
@@ -688,9 +695,9 @@ function setEventStatus() {
 //	Adds event options & prices based on CMS input
 function setEventPrices() {
 	var people = ''
-	if ($(eventPayBoth).is(':checked')) {
+	if (paymentQty() === 2) {
 		people = 'for both'
-	} else if (participants() === 2) {
+	} else if (paymentQty() === 1 && participants() === 2) {
 		people = 'per person'
 	}
 	var eventOptions = $('#event-options').text().split(' | ')
@@ -703,12 +710,11 @@ function setEventPrices() {
 			text: 'Event option...'
 		}))
 	}
-	const paymentFactor = (people === 'for both') ? 2 : 1
 	const spacer = people ? ' ' : ''
 	const closer = (people || people === '') ? ')' : ''
 	for (var i = 0; i < eventOptions.length; i++) {
 		// Event price cannot be less than $0 after discount is applied
-		const eventSelectPrice = (eventPrices[i] - eventAffiliateDiscount()) * paymentFactor > 0 ? (eventPrices[i] - eventAffiliateDiscount()) * paymentFactor : 0
+		const eventSelectPrice = (eventPrices[i] - eventAffiliateDiscount()) * paymentQty() > 0 ? (eventPrices[i] - eventAffiliateDiscount()) * paymentQty() : 0
 		const affiliateDiscountText = eventAffiliateDiscount() > 0 ? ' including discount' : ''
 		const eventNote = eventNotes[i] ? eventNotes[i] : ''
 		const eventSelectText = eventOptions[i] + ' ($' + eventSelectPrice + spacer + people + affiliateDiscountText + closer + eventNote
@@ -717,7 +723,7 @@ function setEventPrices() {
 			text: eventSelectText
 		}))
 	}
-	const eventDepositPrice = parseInt(eventDepositAmount) * paymentFactor
+	const eventDepositPrice = parseInt(eventDepositAmount, 10) * paymentQty()
 	$(eventDepositText).text('Pay deposit only ($' + eventDepositPrice + spacer + people + ')')
 }
 
@@ -1067,6 +1073,11 @@ function stripeTokenHandler(data) {
 			'partnerLastName': data.partnerLastName,
 			'quantity': data.quantity,
 			'rate': data.rate,
+			'priceFull': data.priceFull,
+			'priceDiscount': data.priceDiscount,
+			'priceBase': data.priceBase,
+			'priceDeposit': data.priceDeposit,
+			'lodging': data.lodging,
 			'token': data.token
 		},
 		timeout: 10000
@@ -1201,10 +1212,7 @@ $(payButton).on('click', function(e) {
 	var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0
 	if (page === 'Event') {
 		// Variables
-		const paymentFactor = ($(eventPayBoth).is(':checked'))
-			? 2
-			: 1
-		const eventDepositPrice = parseInt(eventDepositAmount) * paymentFactor
+		const eventDepositPrice = parseInt(eventDepositAmount) * paymentQty()
 		chargeAmount = $(eventDepositDeposit).is(':checked')
 			? eventDepositPrice * 100
 			: $(eventSelect).val() * 100
@@ -1278,7 +1286,7 @@ $(payButton).on('click', function(e) {
 				return false
 			}
 			else {
-				const quantity = participants() === 2 && $(eventPayBoth).is(':checked') ? 2 : 1
+				const selected = $(eventSelect + ' option:selected').index()
 				stripeTokenHandler({
 					'chargeAmount': chargeAmount,
 					'chargeDescription': chargeDescription,
@@ -1290,9 +1298,13 @@ $(payButton).on('click', function(e) {
 					'participantLastName': $(eventLastName).val(),
 					'partnerFirstName': $(eventPartnerFirstName).val(),
 					'partnerLastName': $(eventPartnerLastName).val(),
-					'quantity': quantity,
+					'quantity': paymentQty(),
 					'rate': ((chargeAmount/quantity)/100).toFixed(2),
-					'deposit': eventDepositPrice.toFixed(2),
+					'priceFull': (eventPrices[selected] * paymentQty()).toFixed(2),
+					'priceDiscount': eventAffiliateDiscount().toFixed(2),
+					'priceBase': eventBasePrice,
+					'priceDeposit': $(eventDepositDeposit).is(':checked') ? (chargeAmount/100).toFixed(2) : 0,
+					'lodging': eventOptions[selected],
 					'token': result.token.id
 				})
 			}

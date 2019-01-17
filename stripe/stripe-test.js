@@ -19,7 +19,10 @@ module.exports = (body, callback) => {
 		partnerLastName,
 		quantity,
 		rate,
-		deposit,
+		priceFull,
+		priceDiscount,
+		priceBase,
+		priceDeposit,
 		token
 	} = body.data
 	
@@ -37,7 +40,11 @@ module.exports = (body, callback) => {
 			...partnerLastName && { 'Partner Last Name': partnerLastName },
 			...quantity && { Quantity: quantity },
 			...(chargeAmount && quantity) && { Rate: rate },
-			...deposit && { Deposit: deposit },
+			...priceFull && { 'Full Price': priceFull },
+			...priceDiscount && { Discount: priceDiscount },
+			...priceBase && { 'Base Price': priceBase },
+			...priceDeposit && { Deposit: priceDeposit },
+			...lodging && { 'Lodging Option': lodging }
 		},
 		statement_descriptor: 'ECST LVNG ' + event
 	}, callback)
