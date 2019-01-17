@@ -910,6 +910,7 @@ if (page === 'Event') {
 			? parseInt(eventDepositAmount) * paymentQty()
 			: $(eventSelect).val()
 		$(eventAmountDisplay).text('Total: $' + amount)
+		console.log($(eventAmountShow).text())
 		if ($(eventAmountShow).text() === 'Yes') { showAmount() }
 	})
 
