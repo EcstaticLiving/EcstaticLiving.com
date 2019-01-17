@@ -425,7 +425,7 @@ var countries = [
 for(var i = 0; i < countries.length; i++) {
 	const country = countries[i] === 'United States'
 		? '<option value="' + countries[i].value + '" selected>' + countries[i].label + '</option>'
-		: '<option value="' + countries[i].value + '"' + countries[i].label + '</option>'
+		: '<option value="' + countries[i].value + '">' + countries[i].label + '</option>'
 	if (page === 'Event' || page === 'Custom') {
 		$('#billing-country').append(country)
 	}
