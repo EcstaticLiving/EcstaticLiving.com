@@ -1066,6 +1066,7 @@ function stripeTokenHandler(data) {
 			'partnerFirstName': data.partnerFirstName,
 			'partnerLastName': data.partnerLastName,
 			'quantity': data.quantity,
+			'rate': data.rate,
 			'token': data.token
 		},
 		timeout: 10000
@@ -1277,6 +1278,7 @@ $(payButton).on('click', function(e) {
 				return false
 			}
 			else {
+				const quantity = participants() === 2 && $(eventPayBoth).is(':checked') ? 2 : 1
 				stripeTokenHandler({
 					'chargeAmount': chargeAmount,
 					'chargeDescription': chargeDescription,
@@ -1287,8 +1289,10 @@ $(payButton).on('click', function(e) {
 					'participantFirstName': $(eventFirstName).val(),
 					'participantLastName': $(eventLastName).val(),
 					'partnerFirstName': $(eventPartnerFirstName).val(),
-					'partnerLastName': $(eventPartnerFirstName).val(),
-					'quantity': participants() === 2 && $(eventPayBoth).is(':checked') ? 2 : 1,
+					'partnerLastName': $(eventPartnerLastName).val(),
+					'quantity': quantity,
+					'rate': ((chargeAmount/quantity)/100).toFixed(2),
+					'deposit': eventDepositPrice.toFixed(2),
 					'token': result.token.id
 				})
 			}
