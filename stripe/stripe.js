@@ -18,8 +18,17 @@ module.exports = (body, callback) => {
 		partnerFirstName,
 		partnerLastName,
 		quantity,
+		rate,
+		priceFull,
+		priceDiscount,
+		priceBase,
+		priceDeposit,
+		priceBalanceDate,
+		lodging,
 		token
 	} = body.data
+
+	console.log(body.data)
 	
 	const chargeCreate = ({ customer }) => stripe.charges.create({
 		amount: chargeAmount,
@@ -27,14 +36,20 @@ module.exports = (body, callback) => {
 		customer,
 		description: chargeDescription,
 		metadata: {
+			...event && { Event: event },
+			...party && { Party: party },
 			...participantFirstName && { 'Participant First Name': participantFirstName },
 			...participantLastName && { 'Participant Last Name': participantLastName },
 			...partnerFirstName && { 'Partner First Name': partnerFirstName },
 			...partnerLastName && { 'Partner Last Name': partnerLastName },
-			...event && { Event: event },
-			...party && { Party: party },
 			...quantity && { Quantity: quantity },
-			...(chargeAmount && quantity) && { Rate: ((chargeAmount/quantity)/100).toFixed(2) }
+			...(chargeAmount && quantity) && { Rate: rate },
+			...priceFull && { 'Full Price': priceFull },
+			...priceDiscount && { Discount: priceDiscount },
+			...priceBase && { 'Base Price': priceBase },
+			...priceDeposit && { Deposit: priceDeposit },
+			...priceBalanceDate && { 'Balance Due Date': priceBalanceDate },
+			...lodging && { 'Lodging Option': lodging }
 		},
 		statement_descriptor: 'ECST LVNG ' + event
 	}, callback)

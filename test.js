@@ -337,6 +337,7 @@ eventDepositFull = '#event-deposit-full',
 eventDepositDeposit = '#event-deposit-deposit',
 eventAmountContainer = '.event-container.amount',
 eventAmountDisplay = '#event-amount-display',
+eventAmountShow = '#event-amount-show',
 eventTermsValidation = '#event-terms-validation',
 eventTerms = '#event-terms',
 paymentButton = '#payment-button'
@@ -908,8 +909,8 @@ if (page === 'Event') {
 		const amount = $(eventDepositDeposit).is(':checked')
 			? parseInt(eventDepositAmount) * paymentQty()
 			: $(eventSelect).val()
-		$(eventAmountDisplay).text('Total amount: $' + amount)
-		showAmount()
+		$(eventAmountDisplay).text('Total: $' + amount)
+		if (eventAmountShow.text() === 'Yes') { showAmount() }
 	})
 
 	// RESET EVENT FORM
