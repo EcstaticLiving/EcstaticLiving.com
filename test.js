@@ -1317,6 +1317,23 @@ function verification(t, e, n, i) {
 }
 
 // Payment
+function failed(err) {
+	console.error(err)
+	// $0 charge to save credit card details on custom charge form
+	if (err.responseJSON && err.responseJSON.message === 'Invalid positive integer' && page === 'Custom') {
+		window.location.href = siteUrl + 'updated-card'
+	}
+	else {
+		if (page === 'Event') {
+			resetEventForm()
+		} else if (page === 'Custom') {
+			resetCustomChargeForm()
+		}
+		$('.notification-modal.processing').hide()
+		$('.notification-modal.error').show()
+	}
+	return false
+}
 function stripeSourceHandler(data) {
 	const stripeURL = window.location.href.indexOf('ecstaticliving.com') > -1
 		? 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.sandbox.auth0-extend.com/stripe'
@@ -1324,87 +1341,77 @@ function stripeSourceHandler(data) {
 	$('.stripe.processing').show()
 	$('.stripe.error').hide()
 	$('.notification-modal.processing').show()
+	// Webflow submission
+	var name = '', formSubmit = '', success = ''
+	if (page === 'Event') {
+		name = 'Event Registration'
+		formSubmit = $eventForm
+		success = siteUrl + 'registration'
+	} else if (page === 'Custom') {
+		name = 'Custom Charge'
+		formSubmit = $customForm
+		success = siteUrl + 'updated-card-changed'
+	}
+	var r = {
+		name: name,
+		source: window.location.href,
+		test: false,
+		fields: {},
+		dolphin: false
+	}
+	var error = conversion(formSubmit, r.fields)
+	if (error) {
+		alert(error)
+		throw error
+	}
 	$.ajax({
 		type: 'POST',
-		url: stripeURL,
+		url: 'https://webflow.com/api/v1/form/564aac835a5735b1375b5cdf',
 		crossDomain: true,
-		data: {
-			'chargeAmount': data.chargeAmount,
-			'chargeDescription': data.chargeDescription,
-			'customerDescription': data.customerDescription,
-			'customerEmail': data.customerEmail,
-			'event': data.event,
-			'party': data.party,
-			'phone': data.phone,
-			'participantFirstName': data.participantFirstName,
-			'participantLastName': data.participantLastName,
-			'partnerFirstName': data.partnerFirstName,
-			'partnerLastName': data.partnerLastName,
-			'quantity': data.quantity,
-			'rate': data.rate,
-			'priceFull': data.priceFull,
-			'priceDiscount': data.priceDiscount,
-			'priceBase': data.priceBase,
-			'costBase': data.costBase,
-			'priceDeposit': data.priceDeposit,
-			'priceBalanceDate': data.priceBalanceDate,
-			'lodging': data.lodging,
-			'source': data.source
-		},
-		timeout: 10000
+		data: r,
+		dataType: 'json'
 	})
-		.then(function (res) {
-			$('.notification-modal.processing').hide()
-			var name = '', formSubmit = '', success = ''
-			if (page === 'Event') {
-				name = 'Event Registration'
-				formSubmit = $eventForm
-				success = siteUrl + 'registration'
-			} else if (page === 'Custom') {
-				name = 'Custom Charge'
-				formSubmit = $customForm
-				success = siteUrl + 'updated-card-changed'
-			}
-			var r = {
-				name: name,
-				source: window.location.href,
-				test: false,
-				fields: {},
-				dolphin: false
-			}
-			var error = conversion(formSubmit, r.fields)
-			if (error) {
-				alert(error)
-				throw error
-			}
+		// Stripe submission
+		.then(res => {
 			return $.ajax({
 				type: 'POST',
-				url: 'https://webflow.com/api/v1/form/564aac835a5735b1375b5cdf',
+				url: stripeURL,
 				crossDomain: true,
-				data: r,
-				dataType: 'json'
+				data: {
+					'chargeAmount': data.chargeAmount,
+					'chargeDescription': data.chargeDescription,
+					'customerDescription': data.customerDescription,
+					'customerEmail': data.customerEmail,
+					'event': data.event,
+					'party': data.party,
+					'phone': data.phone,
+					'participantFirstName': data.participantFirstName,
+					'participantLastName': data.participantLastName,
+					'partnerFirstName': data.partnerFirstName,
+					'partnerLastName': data.partnerLastName,
+					'quantity': data.quantity,
+					'rate': data.rate,
+					'priceFull': data.priceFull,
+					'priceDiscount': data.priceDiscount,
+					'priceBase': data.priceBase,
+					'costBase': data.costBase,
+					'priceDeposit': data.priceDeposit,
+					'priceBalanceDate': data.priceBalanceDate,
+					'lodging': data.lodging,
+					'source': data.source
+				},
+				timeout: 15000
 			})
-			.then(function(response) {
-				console.log(response)
-				window.location.href = success
-			})
+				// Stripe charge succeeded
+				.then(res => {
+					$('.notification-modal.processing').hide()
+					window.location.href = success
+				})
+				// Stripe charge failed or timed out
+				.catch(err => failed(err))
 		})
-		.fail(function (err) {
-			console.log(err)
-			// $0 charge to save credit card details on custom charge form
-			if (err.responseJSON && err.responseJSON.message === 'Invalid positive integer' && page === 'Custom') {
-				window.location.href = siteUrl + 'updated-card'
-			} else {
-				if (page === 'Event') {
-					resetEventForm()
-				} else if (page === 'Custom') {
-					resetCustomChargeForm()
-				}
-				$('.notification-modal.processing').hide()
-				$('.notification-modal.error').show()
-			}
-			return false
-		})
+		// Webflow form failed or timed out
+		.catch(err => failed(err))
 }
 
 const stripe = window.location.href.indexOf('ecstaticliving.com') > -1
