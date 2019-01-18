@@ -513,10 +513,10 @@ eventTitle = $('#event-name').text(), // Stripe description
 eventStartDate = $('#event-start').text(),
 eventDates = $('#event-dates').text(),
 eventVenue = $('#event-venue').text(),
-eventDepositAmount = $('#event-deposit-amount').val(),
+eventDepositAmount = parseFloat($('#event-deposit-amount').text()).toFixed(2),
 eventDepositDate = $('#event-deposit-date').text(),
-eventBasePrice = $('#event-base-price').val(),
-eventBaseCost = $('#event-base-cost').val()
+eventBasePrice = parseFloat($('#event-base-price').text()).toFixed(2),
+eventBaseCost = parseFloat($('#event-base-cost').text()).toFixed(2)
 
 // Event variables
 const payButton = '#payment-button',
