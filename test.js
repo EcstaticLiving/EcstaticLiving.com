@@ -1329,7 +1329,7 @@ function failedStripe({ err, successUrl }) {
 	}
 	// On timeout, it’s possible that Stripe charge went through, but too late. So we want to prevent customer from being told that it didn’t work, even though payment went through.
 	else if (err.statusText === 'timeout') {
-		successfulSubmission(successUrl)
+		// successfulSubmission(successUrl)
 		var formData = {
 			name: name,
 			source: window.location.href,
