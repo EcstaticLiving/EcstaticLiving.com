@@ -1317,11 +1317,36 @@ function verification(t, e, n, i) {
 }
 
 // Payment
-function failed(err) {
+const successfulSubmission = (successUrl) => {
+	$('.notification-modal.processing').hide()
+	window.location.href = successUrl
+}
+function failedStripe({ err, successUrl }) {
 	console.error(err)
 	// $0 charge to save credit card details on custom charge form
 	if (err.responseJSON && err.responseJSON.message === 'Invalid positive integer' && page === 'Custom') {
 		window.location.href = siteUrl + 'updated-card'
+	}
+	// On timeout, it’s possible that Stripe charge went through, but too late. So we want to prevent customer from being told that it didn’t work, even though payment went through.
+	else if (err.statusText === 'timeout') {
+		successfulSubmission(successUrl)
+		var formData = {
+			name: name,
+			source: window.location.href,
+			test: false,
+			fields: {},
+			dolphin: false
+		}
+		$.ajax({
+			type: 'POST',
+			url: 'https://webflow.com/api/v1/form/564aac835a5735b1375b5cdf',
+			crossDomain: true,
+			data: formData,
+			dataType: 'json'
+		})
+			// Stripe submission
+			.then(res => console.log(res))
+			.catch(err => console.error(err))
 	}
 	else {
 		if (page === 'Event') {
@@ -1334,6 +1359,10 @@ function failed(err) {
 	}
 	return false
 }
+const failedForm = (err) => {
+	console.error(err)
+	return false
+}
 function stripeSourceHandler(data) {
 	const stripeURL = window.location.href.indexOf('ecstaticliving.com') > -1
 		? 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.sandbox.auth0-extend.com/stripe'
@@ -1342,24 +1371,24 @@ function stripeSourceHandler(data) {
 	$('.stripe.error').hide()
 	$('.notification-modal.processing').show()
 	// Webflow submission
-	var name = '', formSubmit = '', success = ''
+	var formName = '', formSubmit = '', successUrl = ''
 	if (page === 'Event') {
-		name = 'Event Registration'
+		formName = 'Event Registration'
 		formSubmit = $eventForm
-		success = siteUrl + 'registration'
+		successUrl = siteUrl + 'registration'
 	} else if (page === 'Custom') {
-		name = 'Custom Charge'
+		formName = 'Custom Charge'
 		formSubmit = $customForm
-		success = siteUrl + 'updated-card-changed'
+		successUrl = siteUrl + 'updated-card-changed'
 	}
-	var r = {
-		name: name,
+	var formData = {
+		name: formName,
 		source: window.location.href,
 		test: false,
 		fields: {},
 		dolphin: false
 	}
-	var error = conversion(formSubmit, r.fields)
+	var error = conversion(formSubmit, formData.fields)
 	if (error) {
 		alert(error)
 		throw error
@@ -1368,7 +1397,7 @@ function stripeSourceHandler(data) {
 		type: 'POST',
 		url: 'https://webflow.com/api/v1/form/564aac835a5735b1375b5cdf',
 		crossDomain: true,
-		data: r,
+		data: formData,
 		dataType: 'json'
 	})
 		// Stripe submission
@@ -1403,15 +1432,12 @@ function stripeSourceHandler(data) {
 				timeout: 15000
 			})
 				// Stripe charge succeeded
-				.then(res => {
-					$('.notification-modal.processing').hide()
-					window.location.href = success
-				})
+				.then(res => successfulSubmission(successUrl))
 				// Stripe charge failed or timed out
-				.catch(err => failed(err))
+				.catch(err => failedStripe({ err, formName, successUrl }))
 		})
 		// Webflow form failed or timed out
-		.catch(err => failed(err))
+		.catch(err => failedForm(err))
 }
 
 const stripe = window.location.href.indexOf('ecstaticliving.com') > -1

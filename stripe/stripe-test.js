@@ -57,6 +57,7 @@ module.exports = (body, callback) => {
 		statement_descriptor: 'ECST LVNG ' + event
 	}, callback)
 
+	/*
 	stripe.customers.list({ email: customerEmail })
 		.then(customerList => {
 
@@ -90,5 +91,6 @@ module.exports = (body, callback) => {
 				.catch(err => console.error(err))
 			}
 		})
+	*/
 
 }
