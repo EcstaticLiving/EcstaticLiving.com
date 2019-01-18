@@ -1350,6 +1350,9 @@ function failedStripe(err) {
 			alert(error)
 			throw error
 		}
+		formData.fields = {
+			ERROR: 'Did not receive successful payment confirmation from Stripe. Please verify that payment went through.'
+		}
 		console.log(formData.fields)
 		// successfulSubmission(successUrl)
 		$.ajax({
