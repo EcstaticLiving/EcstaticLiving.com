@@ -515,8 +515,8 @@ eventDates = $('#event-dates').text(),
 eventVenue = $('#event-venue').text(),
 eventDepositAmount = parseFloat($('#event-deposit-amount').text()).toFixed(2),
 eventDepositDate = $('#event-deposit-date').text(),
-eventBasePrice = parseFloat($('#event-base-price').text()).toFixed(2),
-eventBaseCost = parseFloat($('#event-base-cost').text()).toFixed(2)
+eventBasePrice = $('#event-base-price').val(),
+eventBaseCost = $('#event-base-cost').val()
 
 // Event variables
 const payButton = '#payment-button',
