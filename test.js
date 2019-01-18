@@ -1351,9 +1351,8 @@ function failedStripe(err) {
 			throw error
 		}
 		formData.fields = {
-			ERROR: 'Did not receive successful payment confirmation from Stripe. Please verify that payment went through.'
+			ERROR: 'Did not receive successful payment confirmation from Stripe on previous registration made by ' + formData.fields.Party + '. Please verify that payment went through. Customer was informed that registration successfully occurred.'
 		}
-		console.log(formData.fields)
 		// successfulSubmission(successUrl)
 		$.ajax({
 			type: 'POST',
