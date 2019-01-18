@@ -1320,7 +1320,7 @@ const successfulSubmission = (successUrl) => {
 	$('.notification-modal.processing').hide()
 	window.location.href = successUrl
 }
-function failedStripe({ err, successUrl }) {
+function failedStripe(err) {
 	console.error(err)
 	// $0 charge to save credit card details on custom charge form
 	if (err.responseJSON && err.responseJSON.message === 'Invalid positive integer' && page === 'Custom') {
@@ -1328,9 +1328,18 @@ function failedStripe({ err, successUrl }) {
 	}
 	// On timeout, it’s possible that Stripe charge went through, but too late. So we want to prevent customer from being told that it didn’t work, even though payment went through.
 	else if (err.statusText === 'timeout') {
-		// successfulSubmission(successUrl)
+		var formName = '', formSubmit = '', successUrl = ''
+		if (page === 'Event') {
+			formName = 'Event Registration'
+			formSubmit = $eventForm
+			successUrl = siteUrl + 'registration'
+		} else if (page === 'Custom') {
+			formName = 'Custom Charge'
+			formSubmit = $customForm
+			successUrl = siteUrl + 'updated-card-changed'
+		}
 		var formData = {
-			name: name,
+			name: formName,
 			source: window.location.href,
 			test: false,
 			fields: {},
@@ -1342,6 +1351,7 @@ function failedStripe({ err, successUrl }) {
 			throw error
 		}
 		console.log(formData.fields)
+		// successfulSubmission(successUrl)
 		$.ajax({
 			type: 'POST',
 			url: 'https://webflow.com/api/v1/form/564aac835a5735b1375b5cdf',
@@ -1439,7 +1449,7 @@ function stripeSourceHandler(data) {
 				// Stripe charge succeeded
 				.then(res => successfulSubmission(successUrl))
 				// Stripe charge failed or timed out
-				.catch(err => failedStripe({ err, formName, successUrl }))
+				.catch(err => failedStripe(err))
 		})
 		// Webflow form failed or timed out
 		.catch(err => failedForm(err))
