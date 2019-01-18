@@ -513,7 +513,7 @@ eventTitle = $('#event-name').text(), // Stripe description
 eventStartDate = $('#event-start').text(),
 eventDates = $('#event-dates').text(),
 eventVenue = $('#event-venue').text(),
-eventDepositAmount = parseFloat($('#event-deposit-amount').text()).toFixed(2),
+eventDepositAmount = $('#event-deposit-amount').val(),
 eventDepositDate = $('#event-deposit-date').text(),
 eventBasePrice = $('#event-base-price').val(),
 eventBaseCost = $('#event-base-cost').val()
@@ -611,6 +611,10 @@ function participants() {
 
 function paymentQty() {
 	return participants() === 2 && $(eventPayBoth).is(':checked') ? 2 : 1
+}
+
+function depositAmount() {
+	return parseFloat(eventDepositAmount * paymentQty()).toFixed(2)
 }
 
 
@@ -980,8 +984,7 @@ function setEventPrices() {
 			text: eventSelectText
 		}))
 	}
-	const eventDepositPrice = parseInt(eventDepositAmount, 10) * paymentQty()
-	$(eventDepositText).text('Pay deposit only ($' + eventDepositPrice + spacer + people + ')')
+	$(eventDepositText).text('Pay deposit only ($' + depositAmount() + spacer + people + ')')
 }
 
 
@@ -1151,7 +1154,7 @@ if (page === 'Event') {
 	})
 	$(eventSelect + ',' + eventDepositFull + ',' + eventDepositDeposit).on('change', function() {
 		const amount = $(eventDepositDeposit).is(':checked') && new Date() < new Date(eventDepositDate)
-			? parseInt(eventDepositAmount) * paymentQty()
+			? depositAmount()
 			: $(eventSelect).val()
 		$(eventAmountDisplay).text('Total: $' + amount)
 		console.log($(eventAmountShow).text())
@@ -1480,9 +1483,8 @@ $(payButton).on('click', function(e) {
 	var customerDescription = '', customerEmail = '', chargeDescription = '', chargeAmount = 0
 	if (page === 'Event') {
 		// Variables
-		const eventDepositPrice = parseInt(eventDepositAmount) * paymentQty()
 		chargeAmount = $(eventDepositDeposit).is(':checked')
-			? eventDepositPrice * 100
+			? depositAmount() * 100
 			: $(eventSelect).val() * 100
 		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
 		customerDescription = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' <' + $(eventEmail).val() + '>'
