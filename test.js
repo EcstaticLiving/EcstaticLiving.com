@@ -1157,7 +1157,6 @@ if (page === 'Event') {
 			? depositAmount()
 			: $(eventSelect).val()
 		$(eventAmountDisplay).text('Total: $' + amount)
-		console.log($(eventAmountShow).text())
 		if ($(eventAmountShow).text() === 'Yes') { showAmount() }
 	})
 
@@ -1337,6 +1336,12 @@ function failedStripe({ err, successUrl }) {
 			fields: {},
 			dolphin: false
 		}
+		var error = conversion(formSubmit, formData.fields)
+		if (error) {
+			alert(error)
+			throw error
+		}
+		console.log(formData.fields)
 		$.ajax({
 			type: 'POST',
 			url: 'https://webflow.com/api/v1/form/564aac835a5735b1375b5cdf',
