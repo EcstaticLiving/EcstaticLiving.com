@@ -1577,7 +1577,7 @@ $(payButton).on('click', function(e) {
 					'priceFull': (eventPrices[selected] * paymentQty()).toFixed(2),
 					'priceDiscount': eventAffiliateDiscount(),
 					'priceBase': !isNaN(eventBasePrice) ? (eventBasePrice * paymentQty()).toFixed(2) : 0,
-					'priceCost': !isNaN(eventBaseCost) ? (eventBaseCost * paymentQty()).toFixed(2) : 0,
+					'costBase': !isNaN(eventBaseCost) ? (eventBaseCost * paymentQty()).toFixed(2) : 0,
 					'priceDeposit': $(eventDepositDeposit).is(':checked') ? (chargeAmount/100).toFixed(2) : 0,
 					'priceBalanceDate': eventDepositDate,
 					'lodging': eventOptions[selected],
