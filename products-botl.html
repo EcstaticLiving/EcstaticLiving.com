@@ -1,8 +1,8 @@
 <script src="https://checkout.stripe.com/checkout.js"></script>
 <script>
-const name = 'Chakra Wisdom Meditation'
-const description = 'CWM download'
-const amount = 2000
+const name = 'Breath of Tantric Love'
+const description = 'BOTL download'
+const amount = 3000
 const mainSiteUrl = window.location.href.indexOf('ecstaticliving.com') > -1
 	? 'https://www.ecstaticliving.com/'
   : 'https://ecstaticliving.webflow.io/'
@@ -16,7 +16,7 @@ var handler = StripeCheckout.configure({
   key,
   image: 'https://uploads-ssl.webflow.com/564aac835a5735b1375b5cdf/5acde13bc0db4a029f0646c0_ELI%202018%20red%20heart%20alpha%20no%20shadow.png',
   locale: 'auto',
-  token: token => {
+  source: source => {
     xhr = new XMLHttpRequest()
     xhr.open('POST', server)
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
@@ -27,7 +27,7 @@ var handler = StripeCheckout.configure({
          console.log('failed')
       }
     }
-    const uri = 'stripeToken=' + token.id + '&stripeEmail=' + token.email + '&stripeCustomer=' + token.email + '&stripeCharge=' + name + '&stripeAmount=' + amount
+    const uri = 'source=' + source.id + '&customerEmail=' + source.owner.email + '&chargeDescription=' + name + '&chargeAmount=' + amount
 		xhr.send(encodeURI(uri))
   }
 })
