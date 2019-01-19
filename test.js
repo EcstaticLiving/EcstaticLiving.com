@@ -1086,6 +1086,7 @@ if (page === 'Event') {
 	// EVENT FORM ONCHANGE EVENTS
 	if (isPrivateEvent()) {
 		// If private event, hide registration form until successful invite code has been entered
+		console.log('hidden')
 		$(eventRegForm).hide()
 		$(eventInviteButton).on('click', function (e) {
 			e.preventDefault()
