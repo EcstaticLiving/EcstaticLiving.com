@@ -1314,7 +1314,7 @@ function verification(t, e, n, i) {
 	var r = null, k = /e(-)?mail/i, _ = /^\S+@\S+$/;
 	return "password" === e ? r = "Passwords cannot be submitted." : t.attr("required") && (i ? (k.test(n) || k.test(t.attr("type"))) && (_.test(i) || (r = "Please enter a valid email address for: " + n)) : r = "Please fill out the required field: " + n), r
 }
-const createForm = () => {
+function createForm() {
 	var formName = '', formSubmit = ''
 	if (page === 'Event') {
 		formName = 'Event Registration'
@@ -1339,11 +1339,11 @@ const createForm = () => {
 }
 
 // Payment
-const successfulSubmission = () => {
+function successfulSubmission() {
 	$('.notification-modal.processing').hide()
 	window.location.href = page === 'Event' ? siteUrl + 'registration' : siteUrl + 'updated-card-changed'
 }
-const indicateFailedSubmission = (type) => {
+function indicateFailedSubmission(type) {
 	if (page === 'Event') {
 		resetEventForm()
 	}
@@ -1351,13 +1351,15 @@ const indicateFailedSubmission = (type) => {
 		resetCustomChargeForm()
 	}
 	$('.notification-modal.processing').hide()
+	// Show card error notification
 	if (type === 'stripe') {
 		console.error('Stripe error')
-		$('.notification-modal.error').show()
+		$('.notification-modal.card-error').show()
 	}
+	// Show form error notification. TODO: create form error notification
 	else if (type === 'webflow') {
 		console.error('Form error')
-		$('.notification-modal.error').show()
+		$('.notification-modal.form-error').show()
 	}
 }
 
@@ -1377,7 +1379,7 @@ function stripeSourceHandler(data) {
 		dataType: 'json'
 	})
 		// Stripe submission
-		.then(res => {
+		.then(function(res) {
 			return $.ajax({
 				type: 'POST',
 				url: stripeURL,
@@ -1410,7 +1412,7 @@ function stripeSourceHandler(data) {
 				// Stripe charge succeeded
 				.then(res => successfulSubmission())
 				// Stripe charge failed or timed out
-				.catch(err => {
+				.catch(function(err) {
 					console.error(err)
 					// $0 charge to save credit card details on custom charge form
 					if (err.responseJSON && err.responseJSON.message === 'Invalid positive integer' && page === 'Custom') {
@@ -1433,7 +1435,7 @@ function stripeSourceHandler(data) {
 							dataType: 'json'
 						})
 							// Redirect customer to successful event.
-							.then(res => {
+							.then(function(res) {
 								// On timeout, it’s possible that Stripe charge went through, but too late. So we want to prevent customer from being told that it didn’t work, even though payment went through.
 								if (err.statusText === 'timeout') {
 									successfulSubmission()
@@ -1485,7 +1487,7 @@ if (page === 'Event' || page === 'Custom') {
 }
 
 $('#button-stripe-error').on('click', function() {
-	$('.notification-modal.error').hide()
+	$('.notification-modal.card-error').hide()
 })
 
 // Prevent form from being submitted. This is being done manually in stripeSourceHandler()
