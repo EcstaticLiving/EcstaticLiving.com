@@ -1,0 +1,47 @@
+<script src="https://checkout.stripe.com/checkout.js"></script>
+<script>
+const name = 'Chakra Wisdom Meditation'
+const description = 'CWM download'
+const amount = 2000
+const mainSiteUrl = window.location.href.indexOf('ecstaticliving.com') > -1
+	? 'https://www.ecstaticliving.com/'
+  : 'https://ecstaticliving.webflow.io/'
+const key = window.location.href.indexOf('ecstaticliving.com') > -1
+  ? 'pk_live_0rULIvKhv6aSLqI49Ae5rflI'
+  : 'pk_test_QO6tO6bHny3y10LjH96f4n3p'
+const server = window.location.href.indexOf('ecstaticliving.com') > -1
+  ? 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.sandbox.auth0-extend.com/stripe'
+  : 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.sandbox.auth0-extend.com/stripe-test'
+var handler = StripeCheckout.configure({
+  key,
+  image: 'https://uploads-ssl.webflow.com/564aac835a5735b1375b5cdf/5acde13bc0db4a029f0646c0_ELI%202018%20red%20heart%20alpha%20no%20shadow.png',
+  locale: 'auto',
+  token: token => {
+    xhr = new XMLHttpRequest()
+    xhr.open('POST', server)
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    xhr.onreadystatechange = res => {
+      if (xhr.status === 200) {
+        window.location.href = mainSiteUrl + 'online-purchase'
+      } else {
+         console.log('failed')
+      }
+    }
+    const uri = 'stripeToken=' + token.id + '&stripeEmail=' + token.email + '&stripeCustomer=' + token.email + '&stripeCharge=' + name + '&stripeAmount=' + amount
+		xhr.send(encodeURI(uri))
+  }
+})
+
+document.getElementById('purchase').addEventListener('click', e => {
+  handler.open({
+    name,
+    description,
+    amount
+  })
+  e.preventDefault()
+})
+
+window.addEventListener('popstate', () => {
+  handler.close()
+})
+</script>

@@ -637,7 +637,7 @@ function affiliateCode(code) {
 }
 // Affiliate Code Validation
 function eventAffiliateValidation() {
-	if ($(eventInviteBox).is(':visible')) {
+	if (isPrivateEvent()) {
 		// Private event
 		return affiliateCode($(eventInviteCode).val()).verify()
 	} else {
@@ -720,7 +720,7 @@ function eventFormValidation() {
 
 // VISUAL ERROR INDICATORS
 function eventAffiliateShowErrors() {
-	if ($(eventInviteBox).is(':visible')) {
+	if (isPrivateEvent()) {
 		if ($(eventInviteCode).val().length > 0) {
 			if (!eventAffiliateValidation()) {
 				$(eventRegForm).hide()
@@ -786,6 +786,9 @@ function showErrorsInEventForm() {
 
 
 // SHOW/HIDE FORM ELEMENTS
+function isPrivateEvent() {
+	return $(eventInviteBox).is(':visible')
+}
 // Event Invite Code
 function eventInvitePassShow() {
 	const text = eventAffiliateValidation() && affiliateCode($(eventInviteCode).val()).discount() > 0
@@ -899,7 +902,7 @@ function eventAffiliateDiscount() {
 	// Test if discount even applies
 	if (eventAffiliateValidation()) {
 		// Invite Code
-		if ($(eventInviteBox).is(':visible')) {
+		if (isPrivateEvent()) {
 			return affiliateCode($(eventInviteCode).val()).discount()
 		} else
 		// Affiliate Code
@@ -1002,7 +1005,7 @@ function resetEventForm() {
 
 	repopulateForm('Event')
 
-	if ($(eventInviteBox).is(':visible')) {
+	if (isPrivateEvent()) {
 		eventInvitePassHide()
 		eventInviteFailHide()
 	}
@@ -1028,7 +1031,7 @@ function resetEventForm() {
 	$(paymentButton).css({ 'color': '#333333' })
 
 	// If private event...
-	if ($(eventInviteBox).is(':visible')) {
+	if (isPrivateEvent()) {
 		// Hide the affiliate code box
 		$(eventAffiliateSelectionContainer).hide()
 		// If URL contains affiliate code, add to invite field
@@ -1081,7 +1084,7 @@ if (page === 'Event' || page === 'Custom') {
 if (page === 'Event') {
 
 	// EVENT FORM ONCHANGE EVENTS
-	if ($(eventInviteBox).is(':visible')) {
+	if (isPrivateEvent()) {
 		// If private event, hide registration form until successful invite code has been entered
 		$(eventRegForm).hide()
 		$(eventInviteButton).on('click', function (e) {
@@ -1091,7 +1094,8 @@ if (page === 'Event') {
 			// Adjust prices
 			setEventPrices()
 		})
-	} else {
+	}
+	else {
 		// Make sure event reg form is shown if not private event
 		$(eventRegForm).show()
 		// Affiliate code shown on public events, not private events
