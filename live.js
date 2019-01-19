@@ -69,44 +69,12 @@ var page
 if (window.location.href.indexOf('/events/') > -1) {
 	page = 'Event'
 }
-if (window.location.href.endsWith('/update') > -1) {
+if (window.location.href.endsWith('/update')) {
 	page = 'Custom'
 }
-if (window.location.href.endsWith('/contact') > -1) {
+if (window.location.href.endsWith('/contact')) {
 	page = 'Contact'
 }
-
-// Browser validation
-// The following code is embedded into ecstaticLiving.com/events. Make changes here, then insert into 'Events' template page on EcstaticLiving.com
-/* <noscript>
-	<div style="width:100%; max-width:400px; margin:auto; border:3px solid maroon; border-radius:10px; padding: 0px 20px 20px 20px; font-size: 18px;">
-		<h3>Please enable JavaScript</h3>
-		In order to register online, you will need to enable JavaScript. Otherwise, feel free to call us at 707-987-3456 to register by phone. For instructions on how to enable JavaScript on your browser, click the appropriate link below:<br /><br />
-		<strong>Mobile</strong>: <a href="http://activatejavascript.org/en/instructions/ios#instructions" target="_blank" class="lpa-link">iOS</a> | <a href="http://activatejavascript.org/en/instructions/android#instructions" target="_blank" class="lpa-link">Android</a>
-		<br /><br />
-		<strong>Web</strong>: <a href="http://activatejavascript.org/en/instructions/chrome#instructions" target="_blank" class="lpa-link">Chrome</a> | <a href="http://activatejavascript.org/en/instructions/firefox#instructions" target="_blank" class="lpa-link">Firefox</a> | <a href="http://activatejavascript.org/en/instructions/safari#instructions" target="_blank" class="lpa-link">Safari</a> | <a href="http://activatejavascript.org/en/instructions/opera#instructions" target="_blank" class="lpa-link">Opera</a>
-	</div>
-</noscript>
-<script src="https://ecstaticliving.github.io/ecstaticliving.com/platform.js"></script>
-<script type="text/javascript">
-	const isEdge = platform.name === 'Microsoft Edge'
-	const isChrome = platform.name === 'Chrome' || platform.name === 'Chrome Mobile'
-	const isFirefox = platform.name === 'Firefox' || platform.name === 'Firefox for iOS' || platform.name === 'Firefox Mobile'
-	const isOpera = platform.name === 'Opera' || platform.name === 'Opera Mini' || platform.name === 'Opera Mobile'
-	const isSafari = platform.name === 'Safari'
-	if (!isEdge && !isChrome && !isFirefox && !isOpera && !isSafari) {
-		document.write("<div style=\"width:100%; max-width:450px; margin:auto; border:3px solid maroon; border-radius:10px; padding: 0px 20px 20px 20px; font-size: 18px;\"><center><h3>Please use a different browser</h3></center>In order to register online, you will need to use a different browser. Otherwise, feel free to call us at 707-987-3456 to register by phone. For download links to usable browsers, click the appropriate link below:<br /><br /><strong>PC</strong>: <a href=\"https://www.microsoft.com/en-us/windows/microsoft-edge\" target=\"_blank\">Edge</a> | <a href=\"https://www.google.com/chrome/index.html\" target=\"_blank\">Chrome</a> | <a href=\"https://www.mozilla.org/en-US/firefox/new/\" target=\"_blank\">Firefox</a> | <a href=\"http://www.opera.com/download\" target=\"_blank\">Opera</a><br /><br /><strong>Mac</strong>: <a href=\"https://www.google.com/chrome/index.html\" target=\"_blank\">Chrome</a> | Safari | <a href=\"https://www.mozilla.org/en-US/firefox/new/\" target=\"_blank\">Firefox</a> | <a href=\"http://www.opera.com/download\" target=\"_blank\">Opera</a><br /><br /><strong>Mobile</strong>: <a href=\"https://www.google.com/chrome/index.html\" target=\"_blank\">Chrome</a> | Safari | <a href=\"https://www.mozilla.org/en-US/firefox/new/\" target=\"_blank\">Firefox</a> | <a href=\"http://www.opera.com/download\" target=\"_blank\">Opera</a></div>")
-	}
-	const ua = window.navigator.userAgent
-	const chromeVersion = parseInt(ua.split('Chrome/')[1], 10)
-	const firefoxVersion = parseInt(ua.split('Firefox/')[1], 10)
-	const operaVersion = parseInt(ua.split('OPR/')[1], 10)
-	const safariVersion = parseInt(ua.split('Safari/')[1], 10)
-	const isUCBrowser = ua.indexOf('UCBrowser/') > -1
-	if ((isChrome && chromeVersion <= 41) || (isFirefox && firefoxVersion <= 32) || (isOpera && operaVersion <= 28) || (isSafari && !isUCBrowser && safariVersion === 6533)) {
-		document.write("<div style=\"width:100%; max-width:450px; margin:auto; border:3px solid maroon; border-radius:10px; padding: 0px 20px 20px 20px; font-size: 18px;\"><center><h3>Please update your browser</h3></center>In order to register online, you will need to update your browser to its latest version. Otherwise, feel free to call us at 707-987-3456 to register by phone. For download links to the most up to date browsers, click the appropriate link below:<br /><br /><strong>PC</strong>: <a href=\"https://www.microsoft.com/en-us/windows/microsoft-edge\" target=\"_blank\">Edge</a> | <a href=\"https://www.google.com/chrome/index.html\" target=\"_blank\">Chrome</a> | <a href=\"https://www.mozilla.org/en-US/firefox/new/\" target=\"_blank\">Firefox</a> | <a href=\"http://www.opera.com/download\" target=\"_blank\">Opera</a><br /><br /><strong>Mac</strong>: <a href=\"https://www.google.com/chrome/index.html\" target=\"_blank\">Chrome</a> | Safari | <a href=\"https://www.mozilla.org/en-US/firefox/new/\" target=\"_blank\">Firefox</a> | <a href=\"http://www.opera.com/download\" target=\"_blank\">Opera</a><br /><br /><strong>Mobile</strong>: <a href=\"https://www.google.com/chrome/index.html\" target=\"_blank\">Chrome</a> | Safari | <a href=\"https://www.mozilla.org/en-US/firefox/new/\" target=\"_blank\">Firefox</a> | <a href=\"http://www.opera.com/download\" target=\"_blank\">Opera</a></div>")
-	}
-</script> */
 
 
 // NAV MENU
@@ -637,7 +605,7 @@ function affiliateCode(code) {
 }
 // Affiliate Code Validation
 function eventAffiliateValidation() {
-	if ($(eventInviteBox).is(':visible')) {
+	if (isPrivateEvent()) {
 		// Private event
 		return affiliateCode($(eventInviteCode).val()).verify()
 	} else {
@@ -720,7 +688,7 @@ function eventFormValidation() {
 
 // VISUAL ERROR INDICATORS
 function eventAffiliateShowErrors() {
-	if ($(eventInviteBox).is(':visible')) {
+	if (isPrivateEvent()) {
 		if ($(eventInviteCode).val().length > 0) {
 			if (!eventAffiliateValidation()) {
 				$(eventRegForm).hide()
@@ -786,6 +754,11 @@ function showErrorsInEventForm() {
 
 
 // SHOW/HIDE FORM ELEMENTS
+function isPrivateEvent() {
+	console.log('Testing for private event')
+	console.log($(eventInviteBox).is(':visible'))
+	return $(eventInviteBox).is(':visible')
+}
 // Event Invite Code
 function eventInvitePassShow() {
 	const text = eventAffiliateValidation() && affiliateCode($(eventInviteCode).val()).discount() > 0
@@ -899,11 +872,11 @@ function eventAffiliateDiscount() {
 	// Test if discount even applies
 	if (eventAffiliateValidation()) {
 		// Invite Code
-		if ($(eventInviteBox).is(':visible')) {
+		if (isPrivateEvent()) {
 			return affiliateCode($(eventInviteCode).val()).discount()
-		} else
+		}
 		// Affiliate Code
-		if ($(eventAffiliateYes).is(':checked')) {
+		else if ($(eventAffiliateYes).is(':checked')) {
 			return affiliateCode($(eventAffiliateCode).val()).discount()
 		}
 	}
@@ -1002,7 +975,7 @@ function resetEventForm() {
 
 	repopulateForm('Event')
 
-	if ($(eventInviteBox).is(':visible')) {
+	if (isPrivateEvent()) {
 		eventInvitePassHide()
 		eventInviteFailHide()
 	}
@@ -1028,7 +1001,7 @@ function resetEventForm() {
 	$(paymentButton).css({ 'color': '#333333' })
 
 	// If private event...
-	if ($(eventInviteBox).is(':visible')) {
+	if (isPrivateEvent()) {
 		// Hide the affiliate code box
 		$(eventAffiliateSelectionContainer).hide()
 		// If URL contains affiliate code, add to invite field
@@ -1078,10 +1051,12 @@ if (page === 'Event' || page === 'Custom') {
 
 }
 
+console.log(page)
 if (page === 'Event') {
 
 	// EVENT FORM ONCHANGE EVENTS
-	if ($(eventInviteBox).is(':visible')) {
+	console.log('Loading')
+	if (isPrivateEvent()) {
 		// If private event, hide registration form until successful invite code has been entered
 		$(eventRegForm).hide()
 		$(eventInviteButton).on('click', function (e) {
@@ -1091,7 +1066,8 @@ if (page === 'Event') {
 			// Adjust prices
 			setEventPrices()
 		})
-	} else {
+	}
+	else {
 		// Make sure event reg form is shown if not private event
 		$(eventRegForm).show()
 		// Affiliate code shown on public events, not private events
