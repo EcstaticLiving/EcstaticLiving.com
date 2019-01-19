@@ -1157,7 +1157,6 @@ if (page === 'Event') {
 			? depositAmount()
 			: $(eventSelect).val()
 		$(eventAmountDisplay).text('Total: $' + amount)
-		console.log($(eventAmountShow).text())
 		if ($(eventAmountShow).text() === 'Yes') { showAmount() }
 	})
 
@@ -1315,8 +1314,55 @@ function verification(t, e, n, i) {
 	var r = null, k = /e(-)?mail/i, _ = /^\S+@\S+$/;
 	return "password" === e ? r = "Passwords cannot be submitted." : t.attr("required") && (i ? (k.test(n) || k.test(t.attr("type"))) && (_.test(i) || (r = "Please enter a valid email address for: " + n)) : r = "Please fill out the required field: " + n), r
 }
+function createForm() {
+	var formName = '', formSubmit = ''
+	if (page === 'Event') {
+		formName = 'Event Registration'
+		formSubmit = $eventForm
+	} else if (page === 'Custom') {
+		formName = 'Custom Charge'
+		formSubmit = $customForm
+	}
+	var formData = {
+		name: formName,
+		source: window.location.href,
+		test: false,
+		fields: {},
+		dolphin: false
+	}
+	var error = conversion(formSubmit, formData.fields)
+	if (error) {
+		alert(error)
+		throw error
+	}
+	return formData
+}
 
 // Payment
+function successfulSubmission() {
+	$('.notification-modal.processing').hide()
+	window.location.href = page === 'Event' ? siteUrl + 'registration' : siteUrl + 'updated-card-changed'
+}
+function indicateFailedSubmission(type) {
+	if (page === 'Event') {
+		resetEventForm()
+	}
+	else if (page === 'Custom') {
+		resetCustomChargeForm()
+	}
+	$('.notification-modal.processing').hide()
+	// Show card error notification
+	if (type === 'stripe') {
+		console.error('Stripe error')
+		$('.notification-modal.card-error').show()
+	}
+	// Show form error notification. TODO: create form error notification
+	else if (type === 'webflow') {
+		console.error('Form error')
+		$('.notification-modal.form-error').show()
+	}
+}
+
 function stripeSourceHandler(data) {
 	const stripeURL = window.location.href.indexOf('ecstaticliving.com') > -1
 		? 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.sandbox.auth0-extend.com/stripe'
@@ -1324,87 +1370,87 @@ function stripeSourceHandler(data) {
 	$('.stripe.processing').show()
 	$('.stripe.error').hide()
 	$('.notification-modal.processing').show()
+	// Webflow submission
 	$.ajax({
 		type: 'POST',
-		url: stripeURL,
+		url: 'https://webflow.com/api/v1/form/564aac835a5735b1375b5cdf',
 		crossDomain: true,
-		data: {
-			'chargeAmount': data.chargeAmount,
-			'chargeDescription': data.chargeDescription,
-			'customerDescription': data.customerDescription,
-			'customerEmail': data.customerEmail,
-			'event': data.event,
-			'party': data.party,
-			'phone': data.phone,
-			'participantFirstName': data.participantFirstName,
-			'participantLastName': data.participantLastName,
-			'partnerFirstName': data.partnerFirstName,
-			'partnerLastName': data.partnerLastName,
-			'quantity': data.quantity,
-			'rate': data.rate,
-			'priceFull': data.priceFull,
-			'priceDiscount': data.priceDiscount,
-			'priceBase': data.priceBase,
-			'costBase': data.costBase,
-			'priceDeposit': data.priceDeposit,
-			'priceBalanceDate': data.priceBalanceDate,
-			'lodging': data.lodging,
-			'source': data.source
-		},
-		timeout: 10000
+		data: createForm(),
+		dataType: 'json'
 	})
-		.then(function (res) {
-			$('.notification-modal.processing').hide()
-			var name = '', formSubmit = '', success = ''
-			if (page === 'Event') {
-				name = 'Event Registration'
-				formSubmit = $eventForm
-				success = siteUrl + 'registration'
-			} else if (page === 'Custom') {
-				name = 'Custom Charge'
-				formSubmit = $customForm
-				success = siteUrl + 'updated-card-changed'
-			}
-			var r = {
-				name: name,
-				source: window.location.href,
-				test: false,
-				fields: {},
-				dolphin: false
-			}
-			var error = conversion(formSubmit, r.fields)
-			if (error) {
-				alert(error)
-				throw error
-			}
+		// Stripe submission
+		.then(function(res) {
 			return $.ajax({
 				type: 'POST',
-				url: 'https://webflow.com/api/v1/form/564aac835a5735b1375b5cdf',
+				url: stripeURL,
 				crossDomain: true,
-				data: r,
-				dataType: 'json'
+				data: {
+					'chargeAmount': data.chargeAmount,
+					'chargeDescription': data.chargeDescription,
+					'customerDescription': data.customerDescription,
+					'customerEmail': data.customerEmail,
+					'event': data.event,
+					'party': data.party,
+					'phone': data.phone,
+					'participantFirstName': data.participantFirstName,
+					'participantLastName': data.participantLastName,
+					'partnerFirstName': data.partnerFirstName,
+					'partnerLastName': data.partnerLastName,
+					'quantity': data.quantity,
+					'rate': data.rate,
+					'priceFull': data.priceFull,
+					'priceDiscount': data.priceDiscount,
+					'priceBase': data.priceBase,
+					'costBase': data.costBase,
+					'priceDeposit': data.priceDeposit,
+					'priceBalanceDate': data.priceBalanceDate,
+					'lodging': data.lodging,
+					'source': data.source
+				},
+				timeout: 15000
 			})
-			.then(function(response) {
-				console.log(response)
-				window.location.href = success
-			})
+				// Stripe charge succeeded
+				.then(res => successfulSubmission())
+				// Stripe charge failed or timed out
+				.catch(function(err) {
+					console.error(err)
+					// $0 charge to save credit card details on custom charge form
+					if (err.responseJSON && err.responseJSON.message === 'Invalid positive integer' && page === 'Custom') {
+						window.location.href = siteUrl + 'updated-card'
+					}
+					else {
+						const formData = createForm()
+						formData.fields = err.statusText === 'timeout'
+							? {
+								ERROR: 'Did not receive successful payment confirmation from Stripe on previous registration made by ' + formData.fields.Party + '. Staff, please verify that payment went through. Customer was informed that registration completed successfully. If Stripe payment exists, no further action has to be taken; if Stripe payment is missing, please reach out to customer for payment.'
+							}
+							: {
+								ERROR: 'The following error occurred on the previous registration made by ' + formData.fields.Party + '. Customer was notified of error, and payment likely did not go through. Error: ' + err
+							}
+						$.ajax({
+							type: 'POST',
+							url: 'https://webflow.com/api/v1/form/564aac835a5735b1375b5cdf',
+							crossDomain: true,
+							data: formData,
+							dataType: 'json'
+						})
+							// Redirect customer to successful event.
+							.then(function(res) {
+								// On timeout, it’s possible that Stripe charge went through, but too late. So we want to prevent customer from being told that it didn’t work, even though payment went through.
+								if (err.statusText === 'timeout') {
+									successfulSubmission()
+								}
+								else {
+									indicateFailedSubmission('stripe')
+								}
+							})
+							.catch(() => indicateFailedSubmission('stripe'))
+					}
+					return false
+				})
 		})
-		.fail(function (err) {
-			console.log(err)
-			// $0 charge to save credit card details on custom charge form
-			if (err.responseJSON && err.responseJSON.message === 'Invalid positive integer' && page === 'Custom') {
-				window.location.href = siteUrl + 'updated-card'
-			} else {
-				if (page === 'Event') {
-					resetEventForm()
-				} else if (page === 'Custom') {
-					resetCustomChargeForm()
-				}
-				$('.notification-modal.processing').hide()
-				$('.notification-modal.error').show()
-			}
-			return false
-		})
+		// Webflow form failed or timed out
+		.catch(err => indicateFailedSubmission('webflow'))
 }
 
 const stripe = window.location.href.indexOf('ecstaticliving.com') > -1
@@ -1441,7 +1487,7 @@ if (page === 'Event' || page === 'Custom') {
 }
 
 $('#button-stripe-error').on('click', function() {
-	$('.notification-modal.error').hide()
+	$('.notification-modal.card-error').hide()
 })
 
 // Prevent form from being submitted. This is being done manually in stripeSourceHandler()
