@@ -787,6 +787,8 @@ function showErrorsInEventForm() {
 
 // SHOW/HIDE FORM ELEMENTS
 function isPrivateEvent() {
+	console.log('Testing for private event')
+	console.log($(eventInviteBox).is(':visible'))
 	return $(eventInviteBox).is(':visible')
 }
 // Event Invite Code
@@ -1086,7 +1088,6 @@ if (page === 'Event') {
 	// EVENT FORM ONCHANGE EVENTS
 	if (isPrivateEvent()) {
 		// If private event, hide registration form until successful invite code has been entered
-		console.log('hidden')
 		$(eventRegForm).hide()
 		$(eventInviteButton).on('click', function (e) {
 			e.preventDefault()
