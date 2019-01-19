@@ -477,7 +477,7 @@ function clearForm(formType) {
 	$('.w-form-fail').hide()
 	if (formType === 'Event') {
 		$eventForm[0].reset()
-	} else if (formType === 'Custom') {
+	} else if (formType === 'Custom' && $customForm[0]) {
 		$customForm[0].reset()
 	}
 }
@@ -1341,7 +1341,7 @@ function createForm() {
 // Payment
 function successfulSubmission() {
 	$('.notification-modal.processing').hide()
-	window.location.href = page === 'Event' ? siteUrl + 'registration' : siteUrl + 'updated-card-changed'
+	window.location.href = page === 'Event' ? siteUrl + 'registration' : siteUrl + 'updated-card-charged'
 }
 function indicateFailedSubmission(type) {
 	if (page === 'Event') {
