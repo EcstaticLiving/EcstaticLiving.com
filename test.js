@@ -69,10 +69,10 @@ var page
 if (window.location.href.indexOf('/events/') > -1) {
 	page = 'Event'
 }
-if (window.location.href.indexOf('/update') > -1) {
+if (window.location.href.endsWith('/update') > -1) {
 	page = 'Custom'
 }
-if (window.location.href.indexOf('/contact') > -1) {
+if (window.location.href.endsWith('/contact') > -1) {
 	page = 'Contact'
 }
 
@@ -475,7 +475,7 @@ function clearForm(formType) {
 	$('#form-clear').hide()
 	$('.w-form-done').hide()
 	$('.w-form-fail').hide()
-	if (formType === 'Event') {
+	if (formType === 'Event' && $eventForm[0]) {
 		$eventForm[0].reset()
 	} else if (formType === 'Custom' && $customForm[0]) {
 		$customForm[0].reset()
