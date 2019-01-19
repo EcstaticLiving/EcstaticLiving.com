@@ -69,10 +69,10 @@ var page
 if (window.location.href.indexOf('/events/') > -1) {
 	page = 'Event'
 }
-if (window.location.href.endsWith('/update') > -1) {
+if (window.location.href.endsWith('/update')) {
 	page = 'Custom'
 }
-if (window.location.href.endsWith('/contact') > -1) {
+if (window.location.href.endsWith('/contact')) {
 	page = 'Contact'
 }
 
@@ -1051,6 +1051,7 @@ if (page === 'Event' || page === 'Custom') {
 
 }
 
+console.log(page)
 if (page === 'Event') {
 
 	// EVENT FORM ONCHANGE EVENTS
