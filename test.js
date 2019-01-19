@@ -1410,7 +1410,9 @@ function stripeSourceHandler(data) {
 				timeout: 15000
 			})
 				// Stripe charge succeeded
-				.then(res => successfulSubmission())
+				.then(function(res) {
+					successfulSubmission()
+				})
 				// Stripe charge failed or timed out
 				.catch(function(err) {
 					console.error(err)
@@ -1444,13 +1446,17 @@ function stripeSourceHandler(data) {
 									indicateFailedSubmission('stripe')
 								}
 							})
-							.catch(() => indicateFailedSubmission('stripe'))
+							.catch(function() {
+								indicateFailedSubmission('stripe')
+							})
 					}
 					return false
 				})
 		})
 		// Webflow form failed or timed out
-		.catch(err => indicateFailedSubmission('webflow'))
+		.catch(function(err) {
+			indicateFailedSubmission('webflow')
+		})
 }
 
 const stripe = window.location.href.indexOf('ecstaticliving.com') > -1
