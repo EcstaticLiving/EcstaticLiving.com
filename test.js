@@ -554,7 +554,7 @@ billingStreet = '#billing-street',
 billingCity = '#billing-city',
 billingState = '#billing-state',
 billingPostal = '#billing-postal',
-billingCountry = '#billing-country',
+billingCountry = '#country',
 billingCard = '#billing-card'
 
 
