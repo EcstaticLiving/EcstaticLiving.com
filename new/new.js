@@ -1,44 +1,18 @@
-// Code ©2017 - 2019 Ecstatic Life Inc. All rights reserved.
-// Urls
-const containsUrl = (str) => window.location.href.indexOf(str) > -1
-const endsWithUrl = (str) => window.location.href.endsWith(str)
-// Values
-const getValue = elem => $(elem).val()
-const emptyValue = elem => $(elem).val('')
-const setValue = (elem, val) => $(elem).val(val)
-// Text
-const getText = elem => $(elem).text()
-const setText = (elem, val) => $(elem).text(val)
-const emptyText = elem => $(elem).text('')
-// HTML
-const setHtml = (elem, val) => $(elem).html(val)
-// Element Conditions
-const isRadio = elem => $(elem).is(':radio')
-const isBlank = elem => getText(elem) === '' && getValue(elem) === ''
-const isChecked = elem => $(elem).is(':checked')
-const isVisible = elem => $(elem).is(':visible')
-// Element Behaviours
-const show = elem => $(elem).show()
-const hide = elem => $(elem).hide()
-const focus = elem => $(elem).focus()
-
-console.log(containsUrl('ecstaticliving.com') ? 'Welcome to EcstaticLiving.com' : 'TEST code at ', window.location.href)
-
-
-
 // 1. CONSTANTS
-const siteUrl = containsUrl('ecstaticliving.com')
-	? 'https://www.ecstaticliving.com/'
-	: 'https://ecstaticliving.webflow.io/'
-
 const page = () => {
   if (containsUrl('/events/'))  return 'Event'
   if (endsWithUrl('/update'))   return 'Custom'
-  if (endsWithUrl('/contact'))  return 'Contact'
   return null
 }
 
 let countries = [{value:'AF',label:'Afghanistan'},{value:'AX',label:'Åland Islands'},{value:'AL',label:'Albania'},{value:'DZ',label:'Algeria'},{value:'AS',label:'American Samoa'},{value:'AD',label:'Andorra'},{value:'AO',label:'Angola'},{value:'AI',label:'Anguilla'},{value:'AQ',label:'Antarctica'},{value:'AG',label:'Antigua and Barbuda'},{value:'AR',label:'Argentina'},{value:'AM',label:'Armenia'},{value:'AW',label:'Aruba'},{value:'AU',label:'Australia'},{value:'AT',label:'Austria'},{value:'AZ',label:'Azerbaijan'},{value:'BS',label:'Bahamas'},{value:'BH',label:'Bahrain'},{value:'BD',label:'Bangladesh'},{value:'BB',label:'Barbados'},{value:'BY',label:'Belarus'},{value:'BE',label:'Belgium'},{value:'BZ',label:'Belize'},{value:'BJ',label:'Benin'},{value:'BM',label:'Bermuda'},{value:'BT',label:'Bhutan'},{value:'BO',label:'Bolivia'},{value:'BA',label:'Bosnia and Herzegovina'},{value:'BW',label:'Botswana'},{value:'BV',label:'Bouvet Island'},{value:'BR',label:'Brazil'},{value:'IO',label:'British Indian Ocean Territory'},{value:'BN',label:'Brunei Darussalam'},{value:'BG',label:'Bulgaria'},{value:'BF',label:'Burkina Faso'},{value:'BI',label:'Burundi'},{value:'KH',label:'Cambodia'},{value:'CM',label:'Cameroon'},{value:'CA',label:'Canada'},{value:'CV',label:'Cape Verde'},{value:'KY',label:'Cayman Islands'},{value:'CF',label:'Central African Republic'},{value:'TD',label:'Chad'},{value:'CL',label:'Chile'},{value:'CN',label:'China, People’s Republic of'},{value:'CX',label:'Christmas Island'},{value:'CC',label:'Cocos (Keeling) Islands'},{value:'CO',label:'Colombia'},{value:'KM',label:'Comoros'},{value:'CG',label:'Congo'},{value:'CD',label:'Congo, The Democratic Republic of the'},{value:'CK',label:'Cook Islands'},{value:'CR',label:'Costa Rica'},{value:'CI',label:'Cote D’Ivoire'},{value:'HR',label:'Croatia'},{value:'CU',label:'Cuba'},{value:'CY',label:'Cyprus'},{value:'CZ',label:'Czech Republic'},{value:'DK',label:'Denmark'},{value:'DJ',label:'Djibouti'},{value:'DM',label:'Dominica'},{value:'DO',label:'Dominican Republic'},{value:'EC',label:'Ecuador'},{value:'EG',label:'Egypt'},{value:'SV',label:'El Salvador'},{value:'GQ',label:'Equatorial Guinea'},{value:'ER',label:'Eritrea'},{value:'EE',label:'Estonia'},{value:'ET',label:'Ethiopia'},{value:'FK',label:'Falkland Islands (Malvinas)'},{value:'FO',label:'Faroe Islands'},{value:'FJ',label:'Fiji'},{value:'FI',label:'Finland'},{value:'FR',label:'France'},{value:'GF',label:'French Guiana'},{value:'PF',label:'French Polynesia'},{value:'TF',label:'French Southern Territories'},{value:'GA',label:'Gabon'},{value:'GM',label:'Gambia'},{value:'GE',label:'Georgia'},{value:'DE',label:'Germany'},{value:'GH',label:'Ghana'},{value:'GI',label:'Gibraltar'},{value:'GR',label:'Greece'},{value:'GL',label:'Greenland'},{value:'GD',label:'Grenada'},{value:'GP',label:'Guadeloupe'},{value:'GU',label:'Guam'},{value:'GT',label:'Guatemala'},{value:'GG',label:'Guernsey'},{value:'GN',label:'Guinea'},{value:'GW',label:'Guinea-Bissau'},{value:'GY',label:'Guyana'},{value:'HT',label:'Haiti'},{value:'HM',label:'Heard Island and Mcdonald Islands'},{value:'VA',label:'Holy See (Vatican City State)'},{value:'HN',label:'Honduras'},{value:'HK',label:'Hong Kong'},{value:'HU',label:'Hungary'},{value:'IS',label:'Iceland'},{value:'IN',label:'India'},{value:'ID',label:'Indonesia'},{value:'IR',label:'Iran, Islamic Republic Of'},{value:'IQ',label:'Iraq'},{value:'IE',label:'Ireland'},{value:'IM',label:'Isle of Man'},{value:'IL',label:'Israel'},{value:'IT',label:'Italy'},{value:'JM',label:'Jamaica'},{value:'JP',label:'Japan'},{value:'JE',label:'Jersey'},{value:'JO',label:'Jordan'},{value:'KZ',label:'Kazakhstan'},{value:'KE',label:'Kenya'},{value:'KI',label:'Kiribati'},{value:'KP',label:'Democratic People’s Republic of Korea'},{value:'KR',label:'Korea, Republic of'},{value:'XK',label:'Kosovo'},{value:'KW',label:'Kuwait'},{value:'KG',label:'Kyrgyzstan'},{value:'LA',label:'Lao People’s Democratic Republic'},{value:'LV',label:'Latvia'},{value:'LB',label:'Lebanon'},{value:'LS',label:'Lesotho'},{value:'LR',label:'Liberia'},{value:'LY',label:'Libyan Arab Jamahiriya'},{value:'LI',label:'Liechtenstein'},{value:'LT',label:'Lithuania'},{value:'LU',label:'Luxembourg'},{value:'MO',label:'Macao'},{value:'MK',label:'Macedonia, The Former Yugoslav Republic of'},{value:'MG',label:'Madagascar'},{value:'MW',label:'Malawi'},{value:'MY',label:'Malaysia'},{value:'MV',label:'Maldives'},{value:'ML',label:'Mali'},{value:'MT',label:'Malta'},{value:'MH',label:'Marshall Islands'},{value:'MQ',label:'Martinique'},{value:'MR',label:'Mauritania'},{value:'MU',label:'Mauritius'},{value:'YT',label:'Mayotte'},{value:'MX',label:'Mexico'},{value:'FM',label:'Micronesia, Federated States of'},{value:'MD',label:'Moldova, Republic of'},{value:'MC',label:'Monaco'},{value:'MN',label:'Mongolia'},{value:'ME',label:'Montenegro'},{value:'MS',label:'Montserrat'},{value:'MA',label:'Morocco'},{value:'MZ',label:'Mozambique'},{value:'MM',label:'Myanmar'},{value:'NA',label:'Namibia'},{value:'NR',label:'Nauru'},{value:'NP',label:'Nepal'},{value:'NL',label:'Netherlands'},{value:'AN',label:'Netherlands Antilles'},{value:'NC',label:'New Caledonia'},{value:'NZ',label:'New Zealand'},{value:'NI',label:'Nicaragua'},{value:'NE',label:'Niger'},{value:'NG',label:'Nigeria'},{value:'NU',label:'Niue'},{value:'NF',label:'Norfolk Island'},{value:'MP',label:'Northern Mariana Islands'},{value:'NO',label:'Norway'},{value:'OM',label:'Oman'},{value:'PK',label:'Pakistan'},{value:'PW',label:'Palau'},{value:'PS',label:'Palestine, State of'},{value:'PA',label:'Panama'},{value:'PG',label:'Papua New Guinea'},{value:'PY',label:'Paraguay'},{value:'PE',label:'Peru'},{value:'PH',label:'Philippines'},{value:'PN',label:'Pitcairn'},{value:'PL',label:'Poland'},{value:'PT',label:'Portugal'},{value:'PR',label:'Puerto Rico'},{value:'QA',label:'Qatar'},{value:'RE',label:'Reunion'},{value:'RO',label:'Romania'},{value:'RU',label:'Russian Federation'},{value:'RW',label:'Rwanda'},{value:'SH',label:'Saint Helena'},{value:'KN',label:'Saint Kitts and Nevis'},{value:'LC',label:'Saint Lucia'},{value:'PM',label:'Saint Pierre and Miquelon'},{value:'VC',label:'Saint Vincent and the Grenadines'},{value:'WS',label:'Samoa'},{value:'SM',label:'San Marino'},{value:'ST',label:'Sao Tome and Principe'},{value:'SA',label:'Saudi Arabia'},{value:'SN',label:'Senegal'},{value:'RS',label:'Serbia'},{value:'SC',label:'Seychelles'},{value:'SL',label:'Sierra Leone'},{value:'SG',label:'Singapore'},{value:'SK',label:'Slovakia'},{value:'SI',label:'Slovenia'},{value:'SB',label:'Solomon Islands'},{value:'SO',label:'Somalia'},{value:'ZA',label:'South Africa'},{value:'GS',label:'South Georgia and the South Sandwich Islands'},{value:'ES',label:'Spain'},{value:'LK',label:'Sri Lanka'},{value:'SD',label:'Sudan'},{value:'SR',label:'Suriname'},{value:'SJ',label:'Svalbard and Jan Mayen'},{value:'SZ',label:'Swaziland'},{value:'SE',label:'Sweden'},{value:'CH',label:'Switzerland'},{value:'SY',label:'Syrian Arab Republic'},{value:'TW',label:'Taiwan, Republic of China'},{value:'TJ',label:'Tajikistan'},{value:'TZ',label:'Tanzania, United Republic of'},{value:'TH',label:'Thailand'},{value:'TL',label:'Timor-Leste'},{value:'TG',label:'Togo'},{value:'TK',label:'Tokelau'},{value:'TO',label:'Tonga'},{value:'TT',label:'Trinidad and Tobago'},{value:'TN',label:'Tunisia'},{value:'TR',label:'Turkey'},{value:'TM',label:'Turkmenistan'},{value:'TC',label:'Turks and Caicos Islands'},{value:'TV',label:'Tuvalu'},{value:'UG',label:'Uganda'},{value:'UA',label:'Ukraine'},{value:'AE',label:'United Arab Emirates'},{value:'GB',label:'United Kingdom'},{value:'US',label:'United States'},{value:'UM',label:'United States Minor Outlying Islands'},{value:'UY',label:'Uruguay'},{value:'UZ',label:'Uzbekistan'},{value:'VU',label:'Vanuatu'},{value:'VE',label:'Venezuela'},{value:'VN',label:'Viet Nam'},{value:'VG',label:'Virgin Islands, British'},{value:'VI',label:'Virgin Islands, U.S.'},{value:'WF',label:'Wallis and Futuna'},{value:'EH',label:'Western Sahara'},{value:'YE',label:'Yemen'},{value:'ZM',label:'Zambia'},{value:'ZW',label:'Zimbabwe'}]
+// Countries
+for(let i in countries) {
+	const country = countries[i] === 'United States'
+		? '<option value="' + countries[i].value + '" selected>' + countries[i].label + '</option>'
+		: '<option value="' + countries[i].value + '">' + countries[i].label + '</option>'
+  $('#country').append(country)
+}
 
 // Event Reg Form
 const eventForm = '#wf-form-Event-Registration'
@@ -139,8 +113,6 @@ customTermsValidation = '#custom-terms-validation'
 
 
 
-// 2. FUNCTIONS
-
 // Save reg form
 const saveForm = formType => {
 	let values = {}
@@ -204,6 +176,7 @@ const depositAmount = () => parseFloat(eventDepositAmount * paymentQty()).toFixe
 // Private event
 const isPrivateEvent = () => isVisible(eventInviteBox)
 
+// Create name of party
 const partyName = () => {
   if (participants() === 2) {
     return getValue(eventLastName) === getValue(eventPartnerLastName)
@@ -213,145 +186,24 @@ const partyName = () => {
   return getValue(eventFirstName) + ' ' + getValue(eventLastName)
 }
 
-
-// 3. ONLOAD
-// If window orientation changes
-$(window).on('load orientationchange', () => {
-  let device = 'mobile'
-	if (Math.min($(window).width(), $(window).height()) >= 641) {
-		device = 'tablet'
-	}
-	//	Some large tablets exist, but for all intents and purposes, we’ll treat them as desktops.
-	if (Math.max($(window).width(), $(window).height()) >= 1025) {
-		device = 'desktop'
-  }
-  let deviceOrientation = $(window).width() > $(window).height()
-    ? 'landscape'
-    : 'portrait'
-	if (device === 'tablet') {
-		if (deviceOrientation === 'landscape') {
-			//	Increase side padding for small screen
-			$('.main-section').css({ 'padding-left': '100px', 'padding-right': '100px' })
-    }
-    else {
-			$('.main-section').css({ 'padding-left': '30px', 'padding-right': '30px' })
-		}
-	}
-})
-
-// NAV MENU
-// If nav menu is opened
-$('.menu-icon').on('click', () => {
-	//	If nav menu is opened
-	if (!isVisible('.nav-close')) {
-		$('.nav-container').show().animate({ marginLeft: '0%' }, 500)
-		$('.nav-close').fadeTo(1000, 1).show()
-  }
-  else {
-		$('.nav-container').animate({ marginLeft: '100%' }, 500)
-		$('.nav-close').fadeTo(1000, 0).hide()
-	}
-})
-// If nav menu is closed
-$('.nav-close').on('click', () => $('.menu-icon').trigger('click'))
-
-// SOCIAL SHARE KIT
-SocialShareKit.init({ title: document.title })
-
-// BACK BUTTON
-$('.navigate-back').on('click', () => {
-	if (document.referrer === '') {
-		window.location.href = '/'
-  }
-  else {
-		parent.history.back()
-	}
-	return false
-})
-
-
-//	CONTACT
-if (page() === 'Contact') {
-	$('.received-section').fadeTo(500, 0)
-	hide('.received-section')
-	$('.contact-section').fadeTo(500, 1)
-	show('.contact-section')
-	hide('.w-form-done')
-	hide('.w-form-fail')
-	show('.contact-form')
-}
-//	Contact form complete, send user to confirmation
-$('.button.contact').on('click', () => {
-	$('.contact-form').parsley()
-	if ($('.contact-form').parsley().validate()) {
-		$('.contact-form').submit()
-		$('.contact-section').fadeTo(500, 0)
-		hide('.contact-section')
-		show('.received-section')
-		$('.received-section').fadeTo(500, 1)
-	}
-})
-
-// Countries
-for(let i in countries) {
-	const country = countries[i] === 'United States'
-		? '<option value="' + countries[i].value + '" selected>' + countries[i].label + '</option>'
-		: '<option value="' + countries[i].value + '">' + countries[i].label + '</option>'
-  $('#country').append(country)
-}
-
-
-
-
-
-
-// AFFILIATE CODE DISCOUNT
-// Affiliate code, e.g. MADA25TM1710FS
-const affiliateCodeDiscount = code => {
-  const discount = 100 - parseInt(code.substr(4, 2), 10) === 90
+// Calculate discount based on discount code
+const calculateDiscount = discountCode => { // Affiliate code, e.g. MADA25TM1710FS
+  const discount = 100 - parseInt(discountCode.substr(4, 2), 10) === 90
     // Assuming no discount, only to unlock event, e.g. ****10********
     ? 0
     // With discount
-    : 100 - parseInt(code.substr(4, 2), 10)
+    : 100 - parseInt(discountCode.substr(4, 2), 10)
   return (discount === 0 || discount === 25 || discount === 50 || discount === 75 || discount === 100) ? discount : null
 }
-const affiliateCodeVerify = code => code.substr(code.length - eventCode.length).toLowerCase() === eventCode.toLowerCase() && affiliateCodeDiscount(code)
 
-// Affiliate Code Validation
-const eventAffiliateValidation = () => {
-	if (isPrivateEvent()) {
-		// Private event
-		return affiliateCodeVerify(getValue(eventInviteCode))
-  }
-  else {
-		// Public event
-		if (isChecked(eventAffiliateYes)) {
-			return affiliateCodeVerify(getValue(eventAffiliateCode))
-    }
-    else if (!isChecked(eventAffiliateNo) && !isChecked(eventAffiliateYes)) {
-			return false
-		}
-	}
-	return true
+// Check to see if discount code applies to this event
+const discountCodeValidation = () => {
+	const discountCode = isPrivateEvent() ? getValue(eventInviteCode) : getValue(eventAffiliateCode)
+	return discountCode.substr(discountCode.length - eventCode.length).toLowerCase() === eventCode.toLowerCase() && calculateDiscount(discountCode)
 }
 
-// Calculates affiliate code discount
-const eventAffiliateDiscount = () => {
-	// Test if discount even applies
-	if (eventAffiliateValidation()) {
-		// Invite Code
-		if (isPrivateEvent()) {
-			return affiliateCodeDiscount(getValue(eventInviteCode))
-		}
-		// Affiliate Code
-		else if (isChecked(eventAffiliateYes)) {
-			return affiliateCodeDiscount(getValue(eventAffiliateCode))
-		}
-	}
-	return null
-}
-
-
+// Get discount amount based on either invite field or affiliate code field
+const getDiscount = () => discountCodeValidation() && calculateDiscount(isPrivateEvent() ? getValue(eventInviteCode) : getValue(eventAffiliateCode))
 
 // Name & Gender Validation
 const personalValidation = () => {
@@ -363,106 +215,109 @@ const personalValidation = () => {
 	}
 	return false
 }
+
 // Details Validation
 const detailsValidation = () => {
-	if (
+	return (
 		!isBlank(eventReferral)
 		&& ((isChecked(eventExperienceYes) && !isBlank(eventExperienceDetails)) || isChecked(eventExperienceNo))
 		&& ((isChecked(eventDietYes) && !isBlank(eventDietDetails)) || isChecked(eventDietNo))
 		&& ((isChecked(eventSpecialYes) && !isBlank(eventSpecialDetails)) || isChecked(eventSpecialNo))
-	) {
-		return true
-	}
-	return false
-}
-// Partner Validatation
-const partnerValidation = () => {
-	if (
-		(participants() === 2
-			&& !isBlank(eventPartnerFirstName) && !isBlank(eventPartnerLastName)
-			&& (isChecked(eventPartnerFemale) || isChecked(eventPartnerMale) || isChecked(eventPartnerOther))
-			&& (isChecked(eventPayBoth) || isChecked(eventPayMe)))
-		|| participants() === 1
-	) {
-		return true
-	}
-	return false
-}
-// Event Options Validatation
-const eventOptionValidation = () => {
-	if (getValue(eventSelect) && (
-    (isVisible(eventDepositContainer) && (isChecked(eventDepositFull) || isChecked(eventDepositDeposit))) || !isVisible(eventDepositContainer)
-    )
-	) {
-		return true
-	}
-	return false
-}
-// Billing Validation
-// Removed for testing purposes:  && isChecked(billingCard)
-const billingValidation = () => {
-	if (!isBlank(billingFirstName) && !isBlank(billingLastName) && !isBlank(billingStreet) && !isBlank(billingCity)
-		&& !isBlank(billingState) && !isBlank(billingPostal) && !isBlank(billingCountry)) {
-		return true
-	}
-	return false
-}
-// Complete Validation
-const eventFormValidation = () => {
-	if (eventAffiliateValidation() && personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && isChecked(eventTerms) && billingValidation()) {
-		emptyText('#card-errors')
-		$(paymentButton).css({ 'background-color': '#800000' })
-		$(paymentButton).css({ 'color': '#ffffff' })
-		return true
-	}
-	$(paymentButton).css({ 'background-color': '#f5f5f5' })
-	$(paymentButton).css({ 'color': '#333333' })
-	return false
+	)
 }
 
+// Partner Validatation
+const partnerValidation = () => {
+	return (
+		(
+			participants() === 2
+			&& !isBlank(eventPartnerFirstName) && !isBlank(eventPartnerLastName)
+			&& (isChecked(eventPartnerFemale) || isChecked(eventPartnerMale) || isChecked(eventPartnerOther))
+			&& (isChecked(eventPayBoth) || isChecked(eventPayMe))
+		)
+		|| participants() === 1
+	)
+}
+
+// Event Options Validatation
+const eventOptionValidation = () => {
+	return (
+		getValue(eventSelect) && (
+    	(
+				isVisible(eventDepositContainer)
+				&& (isChecked(eventDepositFull) || isChecked(eventDepositDeposit))
+			)
+			|| !isVisible(eventDepositContainer)
+    )
+	)
+}
+
+// Billing Validation
+const billingValidation = () => {
+	// TODO: removed for testing purposes:  `&& isChecked(billingCard)`
+	return (
+		!isBlank(billingFirstName) && !isBlank(billingLastName) && !isBlank(billingStreet) && !isBlank(billingCity)
+		&& !isBlank(billingState) && !isBlank(billingPostal) && !isBlank(billingCountry)
+	)
+}
+
+// Complete Validation
+const eventFormValidation = () => {
+	if (
+		discountCodeValidation() && personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && isChecked(eventTerms) && billingValidation()
+	) {
+		emptyText('#card-errors')
+		setCss(paymentButton, { 'background-color': '#800000' })
+		setCss(paymentButton, { 'color': '#ffffff' })
+		return true
+	}
+	setCss(paymentButton, { 'background-color': '#f5f5f5' })
+	setCss(paymentButton, { 'color': '#333333' })
+	return false
+}
 
 // VISUAL ERROR INDICATORS
 const eventAffiliateShowErrors = () => {
 	if (isPrivateEvent()) {
 		if (getValue(eventInviteCode).length > 0) {
-			if (!eventAffiliateValidation()) {
+			if (!discountCodeValidation()) {
 				hide(eventRegForm)
-				eventInvitePassHide()
+				emptyHideText(eventInvitePass)
 				eventInviteFailShow()
       }
       else {
 				show(eventRegForm)
-				eventInviteFailHide()
+				hide(eventInviteFail)
 				eventInvitePassShow()
 			}
     }
     else {
 			hide(eventRegForm)
-			eventInvitePassHide()
-			eventInviteFailHide()
+			emptyHideText(eventInvitePass)
+			hide(eventInviteFail)
 		}
 	} else if (isChecked(eventAffiliateYes)) {
 		if (getValue(eventAffiliateCode).length > 0) {
-			if (!eventAffiliateValidation()) {
-				eventAffiliatePassHide()
+			if (!discountCodeValidation()) {
+				emptyHideText(eventAffiliatePass)
 				eventAffiliateFailShow()
 			} else {
-				eventAffiliateFailHide()
+				emptyHideText(eventAffiliateFail)
 				eventAffiliatePassShow()
 			}
 		} else {
-			eventAffiliatePassHide()
-			eventAffiliateFailHide()
+			emptyHideText(eventAffiliatePass)
+			emptyHideText(eventAffiliateFail)
 		}
 	}
 }
 const showErrorsInEventForm = () => {
   const showError = element => isRadio(element)
-    ? $(element).css({ 'background-color': '#fdd' })
-    : $(element).css({ 'border-color': '#b00000', 'background-color': '#fdd' })
+    ? setCss(element, { 'background-color': '#fdd' })
+    : setCss(element, { 'border-color': '#b00000', 'background-color': '#fdd' })
   const clearError = element => isRadio(element)
-    ? $(element).css({ 'background-color': 'transparent' })
-    : $(element).css({ 'border-color': '#ccc', 'background-color': '#fff' })
+    ? setCss(element, { 'background-color': 'transparent' })
+    : setCss(element, { 'border-color': '#ccc', 'background-color': '#fff' })
   const indicateError = ({ condition, element }) => {
     if (condition) {
       showError(element)
@@ -471,7 +326,7 @@ const showErrorsInEventForm = () => {
       clearError(element)
     }
   }
-  indicateError({ condition: !eventAffiliateValidation(), element: eventInviteCode })
+  indicateError({ condition: !discountCodeValidation(), element: eventInviteCode })
   indicateError({ condition: !isChecked(eventTerms), element: eventTermsValidation })
   indicateError({ condition: isVisible(eventDepositContainer) && !isChecked(eventDepositFull) && !isChecked(eventDepositDeposit), element: 'eventDepositValidation' })
   indicateError({ condition: participants() === 2 && !isChecked(eventPayBoth) && !isChecked(eventPayMe), element: eventPayValidation })
@@ -499,45 +354,43 @@ const showErrorsInEventForm = () => {
 
 // SHOW/HIDE FORM ELEMENTS
 // Event Invite Code
+const emptyHideText = elem => {
+	emptyText(elem)
+	hide(elem)
+}
+const emptyHideValue = elem => {
+	emptyValue(elem)
+	hide(elem)
+}
+const showScroll = elem => {
+	show(elem)
+	scrollToPosition()
+}
+
 const eventInvitePassShow = () => {
-	const text = eventAffiliateValidation() && affiliateCodeDiscount(getValue(eventInviteCode)) > 0
-		? 'Congrats! Invite code accepted!<br />$' + affiliateCodeDiscount(getValue(eventInviteCode)) + ' per person discount applied! Continue below.'
+	const text = calculateDiscount(getValue(eventInviteCode)) > 0
+		? 'Congrats! Invite code accepted!<br />$' + calculateDiscount(getValue(eventInviteCode)) + ' per person discount applied! Continue below.'
     : 'Congrats! Invite code accepted!<br />Continue below.'
 	setHtml(eventInvitePass, text)
 	show(eventInvitePass)
 	scrollToPosition()
 }
-const eventInvitePassHide = () => {
-	emptyText(eventInvitePass)
-	hide(eventInvitePass)
-}
 const eventInviteFailShow = () => {
 	show(eventInviteFail)
 	focus(eventInviteCode)
 }
-const eventInviteFailHide = () => {
-	hide(eventInviteFail)
-}
 // Affiliate Code
-const showAffiliate = () => {
-	show(eventAffiliateContainer)
-	scrollToPosition()
-}
 const hideAffiliate = () => {
 	emptyValue(eventAffiliateCode)
 	hide(eventAffiliateContainer)
 }
 const eventAffiliatePassShow = () => {
-	const text = eventAffiliateValidation() && affiliateCodeDiscount(getValue(eventAffiliateCode)) > 0
-		? 'Congrats! Code accepted!<br />$' + affiliateCodeDiscount(getValue(eventAffiliateCode)) + ' per person discount applied!'
+	const text = calculateDiscount(getValue(eventAffiliateCode)) > 0
+		? 'Congrats! Code accepted!<br />$' + calculateDiscount(getValue(eventAffiliateCode)) + ' per person discount applied!'
 		: 'Congrats! Code accepted!'
   setHtml(eventAffiliatePass, text)
 	show(eventAffiliatePass)
 	scrollToPosition()
-}
-const eventAffiliatePassHide = () => {
-	emptyText(eventAffiliatePass)
-	hide(eventAffiliatePass)
 }
 const eventAffiliateFailShow = () => {
 	const text = 'Sorry, you’ve entered an invalid affiliate code.'
@@ -546,10 +399,7 @@ const eventAffiliateFailShow = () => {
 	scrollToPosition()
 	focus(eventAffiliateCode)
 }
-const eventAffiliateFailHide = () => {
-	emptyText(eventAffiliateFail)
-	hide(eventAffiliateFail)
-}
+
 // Partner
 const showPartner = () => {
 	show(eventPartnerContainer)
@@ -567,36 +417,18 @@ const hidePartner = () => {
 	hide(eventPartnerContainer)
 	setEventPrices()
 }
-// Previous Experience
-const showExperience = () => {
-	show(eventExperienceContainer)
-	scrollToPosition()
-}
 const hideExperience = () => {
 	emptyValue(eventExperienceDetails)
 	hide(eventExperienceContainer)
-}
-// Dietary Needs
-const showDiet = () => {
-	show(eventDietContainer)
-	scrollToPosition()
 }
 const hideDiet = () => {
 	emptyValue(eventDietDetails)
 	hide(eventDietContainer)
 }
 // Special Question
-const showSpecial = () => {
-	show(eventSpecialContainer)
-	scrollToPosition()
-}
 const hideSpecial = () => {
 	emptyValue(eventSpecialDetails)
 	hide(eventSpecialContainer)
-}
-const showAmount = () => {
-	show(eventAmountContainer)
-	scrollToPosition()
 }
 const hideAmount = () => {
 	emptyValue(eventAmountDisplay)
@@ -646,8 +478,8 @@ const setEventPrices = () => {
 	const closer = (people || people === '') ? ')' : ''
 	for (let i = 0; i < eventOptions.length; i++) {
 		// Event price cannot be less than $0 after discount is applied
-		const eventSelectPrice = (eventPrices[i] - eventAffiliateDiscount()) * paymentQty() > 0 ? (eventPrices[i] - eventAffiliateDiscount()) * paymentQty() : 0
-		const affiliateDiscountText = eventAffiliateDiscount() > 0 ? ' including discount' : ''
+		const eventSelectPrice = (eventPrices[i] - getDiscount()) * paymentQty() > 0 ? (eventPrices[i] - getDiscount()) * paymentQty() : 0
+		const affiliateDiscountText = getDiscount() > 0 ? ' including discount' : ''
 		const eventNote = eventNotes[i] ? eventNotes[i] : ''
 		const eventSelectText = eventOptions[i] + ' ($' + eventSelectPrice + spacer + people + affiliateDiscountText + closer + eventNote
 		$(eventSelect).append($('<option>', {
@@ -674,32 +506,32 @@ const resetEventForm = () => {
 	repopulateForm('Event')
 
 	if (isPrivateEvent()) {
-		eventInvitePassHide()
-		eventInviteFailHide()
+		emptyHideText(eventInvitePass)
+		hide(eventInviteFail)
 	}
 	setEventStatus()
 	setEventPrices()
 	setValue('#eventcode', eventCode)
 	if (isChecked(eventAffiliateYes)) {
-    showAffiliate()
+    showScroll(eventAffiliateContainer)
   }
   else {
     hideAffiliate()
   }
 	if (isChecked(eventExperienceYes)) {
-    showExperience()
+    showScroll(eventExperienceContainer)
   }
   else {
     hideExperience()
   }
 	if (isChecked(eventDietYes)) {
-    showDiet()
+    showScroll(eventDietContainer)
   }
   else {
     hideDiet()
   }
 	if (isChecked(eventSpecialYes)) {
-    showSpecial()
+    showScroll(eventSpecialContainer)
   }
   else {
     hideSpecial()
@@ -721,8 +553,8 @@ const resetEventForm = () => {
 	$(eventForm).parsley()
 	show(eventForm)
 	$(eventTerms).attr('checked', false)
-	$(paymentButton).css({ 'background-color': '#f5f5f5' })
-	$(paymentButton).css({ 'color': '#333333' })
+	setCss(paymentButton, { 'background-color': '#f5f5f5' })
+	setCss(paymentButton, { 'color': '#333333' })
 
 	// If private event...
 	if (isPrivateEvent()) {
@@ -750,7 +582,7 @@ const resetEventForm = () => {
 			// Check the affiliate radio button
 			$(eventAffiliateYes).prop('checked', true)
 			// Show whether the affiliate code is valid or invalid
-			showAffiliate()
+			showScroll(eventAffiliateContainer)
 			// Add the affiliate code from the URL into the affiliate code box
 			setValue(eventAffiliateCode, affiliateString[1])
 			// Verify affiliate code
@@ -800,7 +632,7 @@ if (page() === 'Event') {
 			setEventPrices()
 			// Validate form
 			eventFormValidation()
-			if (isChecked(eventAffiliateYes)) showAffiliate()
+			if (isChecked(eventAffiliateYes)) showScroll(eventAffiliateContainer)
 			if (isChecked(eventAffiliateNo)) hideAffiliate()
 		})
 		$(eventAffiliateCode).on('change', () => {
@@ -815,15 +647,15 @@ if (page() === 'Event') {
 	$(eventFirstName).on('change', () => setValue(billingFirstName, getValue(eventFirstName)))
 	$(eventLastName).on('change', () => setValue(billingLastName, getValue(eventLastName)))
 	$(eventExperienceNo + ',' + eventExperienceYes).on('change', () => {
-		if (isChecked(eventExperienceYes)) showExperience()
+		if (isChecked(eventExperienceYes)) showScroll(eventExperienceContainer)
 		if (isChecked(eventExperienceNo)) hideExperience()
 	})
 	$(eventDietNo + ',' + eventDietYes).on('change', () => {
-		if (isChecked(eventDietYes)) showDiet()
+		if (isChecked(eventDietYes)) showScroll(eventDietContainer)
 		if (isChecked(eventDietNo)) hideDiet()
 	})
 	$(eventSpecialNo + ',' + eventSpecialYes).on('change', () => {
-		if (isChecked(eventSpecialYes)) showSpecial()
+		if (isChecked(eventSpecialYes)) showScroll(eventSpecialContainer)
 		if (isChecked(eventSpecialNo)) hideSpecial()
 	})
 	$(eventStatus).on('change', () => participants() === 2 ? showPartner() : hidePartner())
@@ -847,7 +679,7 @@ if (page() === 'Event') {
 			? depositAmount()
 			: getValue(eventSelect)
 		setText(eventAmountDisplay, 'Total: $' + amount)
-		if (getText(eventAmountShow) === 'Yes') { showAmount() }
+		if (getText(eventAmountShow) === 'Yes') { showScroll(eventAmountContainer) }
 	})
 
 	// RESET EVENT FORM
@@ -864,21 +696,21 @@ if (page() === 'Event') {
 const customChargeValidation = () => {
 	if (!isBlank(customFirstName) && !isBlank(customLastName) && !isBlank(customEmail) && !isBlank(customMobile) && getValue(customSelect) && isChecked(customTerms) && billingValidation()) {
 		emptyText('#card-errors')
-		$(paymentButton).css({ 'background-color': '#800000' })
-		$(paymentButton).css({ 'color': '#ffffff' })
+		setCss(paymentButton, { 'background-color': '#800000' })
+		setCss(paymentButton, { 'color': '#ffffff' })
 		return true
 	}
-	$(paymentButton).css({ 'background-color': '#f5f5f5' })
-	$(paymentButton).css({ 'color': '#333333' })
+	setCss(paymentButton, { 'background-color': '#f5f5f5' })
+	setCss(paymentButton, { 'color': '#333333' })
 	return false
 }
 
 const showErrorsInCustomForm = () => {
 	if (!isChecked(customTerms)) {
-    $(customTermsValidation).css({ 'background-color': '#fdd' })
+    setCss(customTermsValidation, { 'background-color': '#fdd' })
   }
   else {
-    $(customTermsValidation).css({ 'background-color': 'transparent' })
+    setCss(customTermsValidation, { 'background-color': 'transparent' })
   }
 	$(customForm).parsley().validate()
 }
@@ -904,8 +736,8 @@ const resetCustomChargeForm = () => {
 	show(customForm)
 	$(customTerms).attr('checked', false)
 	customChargeValidation()
-	$(paymentButton).css({ 'background-color': '#f5f5f5' })
-	$(paymentButton).css({ 'color': '#333333' })
+	setCss(paymentButton, { 'background-color': '#f5f5f5' })
+	setCss(paymentButton, { 'color': '#333333' })
 }
 
 
@@ -1000,7 +832,12 @@ const createForm = () => {
 // Payment
 const successfulSubmission = () => {
 	hide('.notification-modal.processing')
-	window.location.href = page() === 'Event' ? siteUrl + 'registration' : siteUrl + 'updated-card-charged'
+	const siteUrl = containsUrl('ecstaticliving.com')
+		? 'https://www.ecstaticliving.com/'
+		: 'https://ecstaticliving.webflow.io/'
+	window.location.href = page() === 'Event'
+		? siteUrl + 'registration'
+		: siteUrl + 'updated-card-charged'
 }
 const indicateFailedSubmission = (type) => {
 	if (page() === 'Event') {
@@ -1076,7 +913,9 @@ const stripeSourceHandler = (data) => {
 					console.error(err)
 					// $0 charge to save credit card details on custom charge form
 					if (err.responseJSON && err.responseJSON.message === 'Invalid positive integer' && page() === 'Custom') {
-						window.location.href = siteUrl + 'updated-card'
+						window.location.href = containsUrl('ecstaticliving.com')
+							? 'https://www.ecstaticliving.com/updated-card'
+							: 'https://ecstaticliving.webflow.io/updated-card'
 					}
 					else {
 						const formData = createForm()
@@ -1260,7 +1099,7 @@ $(paymentButton).on('click', (e) => {
 					'quantity': paymentQty(),
 					'rate': ((chargeAmount/paymentQty())/100).toFixed(2),
 					'priceFull': (eventPrices[selected] * paymentQty()).toFixed(2),
-					'priceDiscount': eventAffiliateDiscount(),
+					'priceDiscount': getDiscount(),
 					'priceBase': !isNaN(eventBasePrice) ? (eventBasePrice * paymentQty()).toFixed(2) : 0,
 					'costBase': !isNaN(eventBaseCost) ? (eventBaseCost * paymentQty()).toFixed(2) : 0,
 					'priceDeposit': isChecked(eventDepositDeposit) ? (chargeAmount/100).toFixed(2) : 0,
