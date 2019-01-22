@@ -1,9 +1,11 @@
 // Code ©2017 - 2019 Ecstatic Life Inc. All rights reserved.
 console.log(window.location.href.indexOf('ecstaticliving.com') > -1 ? 'Welcome to EcstaticLiving.com' : 'TEST code at ', window.location.href)
 
+// CONSTANTS
+
 // Window
-const width = $(window).width()
-const height = $(window).height()
+const windowWidth = $(window).width()
+const windowHeight = $(window).height()
 // Urls
 const containsUrl = (str) => window.location.href.indexOf(str) > -1
 const endsWithUrl = (str) => window.location.href.endsWith(str)
@@ -15,9 +17,15 @@ const setValue = (elem, val) => $(elem).val(val)
 const getText = elem => $(elem).text()
 const setText = (elem, val) => $(elem).text(val)
 const emptyText = elem => $(elem).text('')
+// Select
+const emptySelect = elem => $(elem).empty()
+const appendSelect = (elem, option) => $(elem).append(option)
 // HTML
 const setHtml = (elem, val) => $(elem).html(val)
 const setCss = (elem, css) => $(elem).css(css)
+// Check radio
+const checkElement = elem => $(elem).prop('checked', true)
+const unCheckElement = elem => $(elem).prop('checked', false)
 // Element Conditions
 const isRadio = elem => $(elem).is(':radio')
 const isBlank = elem => getText(elem) === '' && getValue(elem) === ''
@@ -26,22 +34,41 @@ const isVisible = elem => $(elem).is(':visible')
 // Element Behaviours
 const animate = (elem, style, time) => $(elem).animate(style, time)
 const click = (elem) => $(elem).trigger('click')
-const focus = elem => $(elem).focus()
+const focusElement = elem => $(elem).focus()
 const fadeTo = (elem, time, opacity) => $(elem).fadeTo(time, opacity)
-const hide = elem => $(elem).hide()
-const show = elem => $(elem).show()
+const hideElement = elem => $(elem).hide()
+const showElement = elem => $(elem).show()
+// Combined Behaviours
+const emptyHideText = elem => {
+	emptyText(elem)
+	hideElement(elem)
+}
+const emptyHideValue = elem => {
+	emptyValue(elem)
+	hideElement(elem)
+}
+const showAndScrollTo = elem => {
+	showElement(elem)
+	window.scrollTo(0, (window.pageYOffset || document.documentElement.scrollTop)  - (document.documentElement.clientTop || 0) + 1)
+}
 
+
+const page = () => {
+  if (containsUrl('/events/'))  return 'Event'
+  if (endsWithUrl('/update'))   return 'Custom'
+  return null
+}
 
 const setOrientation = () => {
   let device = 'mobile'
-	if (Math.min(width, height) >= 641) {
+	if (Math.min(windowWidth, windowHeight) >= 641) {
 		device = 'tablet'
 	}
 	//	Some large tablets exist, but for all intents and purposes, we’ll treat them as desktops.
-	if (Math.max(width, height) >= 1025) {
+	if (Math.max(windowWidth, windowHeight) >= 1025) {
 		device = 'desktop'
   }
-  const deviceOrientation = width > height
+  const deviceOrientation = windowWidth > windowHeight
     ? 'landscape'
     : 'portrait'
 	if (device === 'tablet' && deviceOrientation === 'landscape') {
@@ -56,15 +83,15 @@ const setOrientation = () => {
 const openCloseNavMenu = () => {
 	//	If nav menu is opened
 	if (!isVisible('.nav-close')) {
-		show('.nav-container')
+		showElement('.nav-container')
 		animate('.nav-container', { marginLeft: '0%' }, 500)
-		show('.nav-close')
+		showElement('.nav-close')
 		fadeTo('.nav-close', 1000, 1)
   }
   else {
 		animate('.nav-container', { marginLeft: '100%' }, 500)
 		fadeTo('.nav-close', 1000, 0)
-		setTimeout(1000, () => hide('.nav-close'))
+		setTimeout(1000, () => hideElement('.nav-close'))
 	}
 }
 
