@@ -1,33 +1,45 @@
+// Prevent form from being submitted. This is being done manually in on click paymentButton
+$(eventForm).on('submit', () => false)
+
+// Clear form
 $('#form-clear').on('click', () => clearForm(page()))
+
+// Load form
 $('#form-load').on('click', () => repopulateForm(page()))
 
+// Invite-only
 $(eventInviteButton).on('click', e => {
 	e.preventDefault()
 	// Show errors, if any
-	eventAffiliateShowErrors()
+	inviteOnlyCodeVerification()
 	// Adjust prices
 	setEventPrices()
 })
+
+// Affiliate yes/no?
 $(eventAffiliateNo + ',' + eventAffiliateYes).on('change', () => {
-	// Show errors, if any
-	eventAffiliateShowErrors()
-	// Adjust prices
-	setEventPrices()
-	// Validate form
-	eventFormValidation()
-	if (isChecked(eventAffiliateYes)) showAndScrollTo(eventAffiliateContainer)
-	if (isChecked(eventAffiliateNo)) hideAffiliate()
-})
-$(eventAffiliateCode).on('change', () => {
-	if (isChecked(eventAffiliateYes)) {
-		// Show errors, if any
-		eventAffiliateShowErrors()
-		// Adjust prices
-		setEventPrices()
+	// If affiliate code, show code input field...
+	if (isChecked(eventAffiliateYes)) showAndScrollTo(eventAffiliateCodeContainer)
+	// ...otherwise, hide it.
+	else {
+		emptyValue(eventAffiliateCodeContainer)
+		hideElement(eventAffiliateCodeContainer)
 	}
 })
+
+// Affiliate box
+$(eventAffiliateCode).on('change', () => {
+	// Show errors, if any
+	affiliateCodeVerification()
+	// Adjust prices
+	setEventPrices()
+})
+
+// Personal
 $(eventFirstName).on('change', () => setValue(billingFirstName, getValue(eventFirstName)))
 $(eventLastName).on('change', () => setValue(billingLastName, getValue(eventLastName)))
+
+// Details
 $(eventExperienceNo + ',' + eventExperienceYes).on('change', () => {
 	if (isChecked(eventExperienceYes)) showAndScrollTo(eventExperienceContainer)
 	if (isChecked(eventExperienceNo)) {
@@ -49,18 +61,21 @@ $(eventSpecialNo + ',' + eventSpecialYes).on('change', () => {
 		hideElement(eventSpecialContainer)
 	}
 })
+
+// Partner
 $(eventStatus).on('change', () => participants() === 2 ? showPartner() : hidePartner())
 $(eventPayBoth + ',' + eventPayMe).on('change', () => setEventPrices())
 
-$(eventFirstName + ',' + eventLastName + ',' + eventEmail + ',' + eventMobile + ',' + eventBirthdate + ',' + eventFemale + ',' + eventMale + ',' + eventOther + ',' + eventReferral + ',' + eventExperienceYes + ',' + eventExperienceNo + ',' + eventExperienceDetails + ',' + eventDietYes + ',' + eventDietNo + ',' + eventDietDetails + ',' + eventSpecialYes + ',' + eventSpecialNo + ',' + eventSpecialDetails + ',' + eventStatus + ',' + eventPartnerFirstName + ',' + eventPartnerLastName + ',' + eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther + ',' + eventPayBoth + ',' + eventPayMe + ',' + eventSelect + ',' + eventTerms + ',' + billingFirstName + ',' + billingLastName + ',' + billingStreet + ',' + billingCity + ',' + billingState + ',' + billingPostal + ',' + billingCountry).on('change', () => {
-	saveForm(page)
-	eventFormValidation()
+// All fields
+$(eventAllFields).on('change', () => {
+	// Save form whenever a single field has changed...
+	saveForm(page())
+	// ...and keep validating form to either activate or deactivate Pay Now button.
+	formValidation()
 })
 
+// To display grand total (optional feature)
 $(eventSelect + ',' + eventDepositFull + ',' + eventDepositDeposit).on('change', () => {
-	const amount = isChecked(eventDepositDeposit) && new Date() < new Date(eventDepositDate)
-		? depositAmount()
-		: getValue(eventSelect)
-	setText(eventAmountDisplay, 'Total: $' + amount)
-	if (getText(eventAmountShow) === 'Yes') { showAndScrollTo(eventAmountContainer) }
+	setText(eventAmountDisplay, 'Total: $' + finalAmount())
+	if (getText(eventAmountShow) === 'Yes') showAndScrollTo(eventAmountContainer)
 })

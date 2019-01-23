@@ -23,7 +23,7 @@ const formValidation = () => {
 	return false
 }
 
-const showErrorsInCustomForm = () => {
+const showErrorsInForm = () => {
 	if (!isChecked(customTerms)) {
     setCss(customTermsValidation, { 'background-color': '#fdd' })
   }
@@ -69,7 +69,7 @@ resetForm()
 $(paymentButton).on('click', (e) => {
 
 	if (!formValidation()) {
-		showErrorsInCustomForm()
+		showErrorsInForm()
 		// If there’s no Stripe error message
 		if (isBlank('#card-errors')) {
 			setText('#card-errors', 'Oops! There’s some missing information.')

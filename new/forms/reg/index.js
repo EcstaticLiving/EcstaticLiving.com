@@ -10,7 +10,7 @@ eventDepositAmount = parseFloat(getText('#event-deposit-amount')).toFixed(2),
 eventDepositDate = getText('#event-deposit-date'),
 eventBasePrice = parseFloat(getText('#event-base-price')).toFixed(2),
 eventBaseCost = parseFloat(getText('#event-base-cost')).toFixed(2),
-eventStatusRestriction = '#event-status-restriction',
+eventStatusRestriction = getText('#event-status-restriction'),
 
 // Event form
 const eventRegForm = '.event-container.reg-form',
@@ -112,16 +112,18 @@ billingCard = '#billing-card',
 billingCardError = '#billing-card-error'
 
 // Pay now
-const paymentButton = '#payment-button',
+const paymentButton = '#payment-button'
+
+const eventAllFields = eventFirstName + ',' + eventLastName + ',' + eventEmail + ',' + eventMobile + ',' + eventBirthdate + ',' + eventFemale + ',' + eventMale + ',' + eventOther + ',' + eventReferral + ',' + eventExperienceYes + ',' + eventExperienceNo + ',' + eventExperienceDetails + ',' + eventDietYes + ',' + eventDietNo + ',' + eventDietDetails + ',' + eventSpecialYes + ',' + eventSpecialNo + ',' + eventSpecialDetails + ',' + eventStatus + ',' + eventPartnerFirstName + ',' + eventPartnerLastName + ',' + eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther + ',' + eventPayBoth + ',' + eventPayMe + ',' + eventSelect + ',' + eventTerms + ',' + billingFirstName + ',' + billingLastName + ',' + billingStreet + ',' + billingCity + ',' + billingState + ',' + billingPostal + ',' + billingCountry
 
 
-const paymentButtonClear = () => {
+const paymentButtonContinue = () => {
 	emptyText(billingCardError)
 	setCss(paymentButton, { 'background-color': '#800000' })
 	setCss(paymentButton, { 'color': '#ffffff' })
 }
 
-const paymentButtonReset = () => {
+const paymentButtonDisabled = () => {
 	setCss(paymentButton, { 'background-color': '#f5f5f5' })
 	setCss(paymentButton, { 'color': '#333333' })
 }
@@ -138,14 +140,31 @@ const paymentQty = () => participants() === 2 && isChecked(eventPayBoth) ? 2 : 1
 // Deposit amount
 const depositAmount = () => parseFloat(eventDepositAmount * paymentQty()).toFixed(2)
 
+// Final amount
+const finalAmount = () => isChecked(eventDepositDeposit) && new Date() < new Date(eventDepositDate) ? depositAmount().toFixed(2) : getValue(eventSelect).toFixed(2)
+
 // Create name of party
 const partyName = () => {
-  if (participants() === 2) {
-    return getValue(eventLastName) === getValue(eventPartnerLastName)
-      ? getValue(eventFirstName) + ' & ' + getValue(eventPartnerFirstName) + ' ' + getValue(eventLastName)
-      : getValue(eventFirstName) + ' ' + getValue(eventLastName) + ' & ' + getValue(eventPartnerFirstName) + ' ' + getValue(eventPartnerLastName)
-  }
-  return getValue(eventFirstName) + ' ' + getValue(eventLastName)
+	if (participants() === 2) {
+		return getValue(eventLastName) === getValue(eventPartnerLastName)
+			? getValue(eventFirstName) + ' & ' + getValue(eventPartnerFirstName) + ' ' + getValue(eventLastName)
+			: getValue(eventFirstName) + ' ' + getValue(eventLastName) + ' & ' + getValue(eventPartnerFirstName) + ' ' + getValue(eventPartnerLastName)
+	}
+	return getValue(eventFirstName) + ' ' + getValue(eventLastName)
+}
+
+const showPartner = () => {
+	showAndScrollTo(eventPartnerContainer)
+}
+const hidePartner = () => {
+	emptyValue(eventPartnerFirstName)
+	emptyValue(eventPartnerLastName)
+	unCheckElement(eventPartnerFemale)
+	unCheckElement(eventPartnerMale)
+	unCheckElement(eventPartnerOther)
+	unCheckElement(eventPayBoth)
+	unCheckElement(eventPayMe)
+	hideElement(eventPartnerContainer)
 }
 
 // Calculate discount based on discount code
@@ -178,7 +197,7 @@ const calculateDiscount = discountCode => {
 			? 0
 			// With discount
 			: 100 - parseInt(discountCode.substr(4, 2), 10)
-	  return (discount === 0 || discount === 25 || discount === 50 || discount === 75 || discount === 100) ? discount : null
+		return (discount === 0 || discount === 25 || discount === 50 || discount === 75 || discount === 100) ? discount : null
 	}
 }
 
@@ -222,7 +241,7 @@ const setEventPrices = () => {
 		appendSelect(eventSelect, '<option value=\'' + eventSelectPrice + '\'>' + eventSelectText + '</option>')
 	}
 	// Update `Pay deposit only` field with actual deposit amount: `Pay deposit only ($...)`
-  setText(eventDepositText, 'Pay deposit only ($' + depositAmount() + paymentClarification + ')')
+	setText(eventDepositText, 'Pay deposit only ($' + depositAmount() + paymentClarification + ')')
 }
 
 // Complete validation
@@ -286,72 +305,48 @@ const formValidation = () => {
 	if (
 		discountCodeValidation() && personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && termsValidation() && billingValidation()
 	) {
-		paymentButtonClear()
+		paymentButtonContinue()
 		return true
 	}
-	paymentButtonReset()
+	paymentButtonDisabled()
 	return false
 }
 
 // Show errors for affiliate code or invite code
 const inviteOnlyCodeVerification = () => {
-	// If private event...
-	if (isInviteOnlyEvent()) {
-		// Hide pass/fail text
-		emptyHideText(eventInvitePass)
-		emptyHideText(eventInviteFail)
-		// Hide the affiliate code box
-		hideElement(eventAffiliateContainer)
-		// If the URL has a discount code...
-		if (urlDiscountCode) {
-			// ...add the discount code from the URL into the invite code box
-			setValue(eventInviteCode, urlDiscountCode)
-		}
-		// If the code exists, i.e. has either been entered manually or gotten from URL...
-		if (getValue(eventInviteCode).length > 0) {
-			// ...but if not valid...
-			if (!discountCodeValidation()) {
-				// ...hide reg form and indicate error.
-				hideElement(eventRegForm)
-				emptyHideText(eventInvitePass)
-				const text = 'The invitation code you entered is invalid.\nFor assistance, please call us at 707-987-3456.'
-				setHtml(eventInviteFail, text)
-				showElement(eventInviteFail)
-				focusElement(eventInviteCode)
-			}
-			// ...if code is valid...
-      else {
-				// ...show reg form and indicate pass.
-				showElement(eventRegForm)
-				emptyHideText(eventInviteFail)
-				const text = calculateDiscount(getValue(eventInviteCode)) > 0
-					? 'Congrats! Invite code accepted!<br />$' + calculateDiscount(getValue(eventInviteCode)) + ' per person discount applied! Continue below.'
-					: 'Congrats! Invite code accepted!<br />Continue below.'
-				setHtml(eventInvitePass, text)
-				showAndScrollTo(eventInvitePass)
-			}
-		}
-		// If code doesn’t exist, hide reg form.
-    else {
+	// If the code exists, i.e. has either been entered manually or gotten from URL...
+	if (getValue(eventInviteCode).length > 0) {
+		// ...but if not valid...
+		if (!discountCodeValidation()) {
+			// ...hide reg form and indicate error.
 			hideElement(eventRegForm)
 			emptyHideText(eventInvitePass)
-			emptyHideText(eventInviteFail)
+			const text = 'The invitation code you entered is invalid.\nFor assistance, please call us at 707-987-3456.'
+			setHtml(eventInviteFail, text)
+			showElement(eventInviteFail)
+			focusElement(eventInviteCode)
 		}
+		// ...if code is valid...
+		else {
+			// ...show reg form and indicate pass.
+			showElement(eventRegForm)
+			emptyHideText(eventInviteFail)
+			const text = calculateDiscount(getValue(eventInviteCode)) > 0
+				? 'Congrats! Invite code accepted!<br />$' + calculateDiscount(getValue(eventInviteCode)) + ' per person discount applied! Continue below.'
+				: 'Congrats! Invite code accepted!<br />Continue below.'
+			setHtml(eventInvitePass, text)
+			showAndScrollTo(eventInvitePass)
+		}
+	}
+	// If code doesn’t exist, hide reg form.
+	else {
+		hideElement(eventRegForm)
+		emptyHideText(eventInvitePass)
+		emptyHideText(eventInviteFail)
 	}
 }
 
 const affiliateCodeVerification = () => {
-	// Show the affiliate code box
-	showAndScrollTo(eventAffiliateContainer)
-	// If the URL has a discount code...
-	if (urlDiscountCode) {
-		// ...check the affiliate radio button...
-		checkElement(eventAffiliateYes)
-		// ...show whether the affiliate code is valid or invalid
-		showAndScrollTo(eventAffiliateCodeContainer)
-		// ...and add the discount code from the URL into the affiliate code box.
-		setValue(eventAffiliateCode, urlDiscountCode)
-	}
 	// If `Do you have an affiliate code?` is checked...
 	if (isChecked(eventAffiliateYes)) {
 		// If the code exists, i.e. has either been entered manually or gotten from URL...
@@ -366,7 +361,7 @@ const affiliateCodeVerification = () => {
 				focusElement(eventAffiliateCode)
 			}
 			// ...if code is valid...
-      else {
+			else {
 				// ...indicate pass.
 				emptyHideText(eventAffiliateFail)
 				const text = calculateDiscount(getValue(eventAffiliateCode)) > 0
@@ -384,41 +379,43 @@ const affiliateCodeVerification = () => {
 	}
 }
 
-const showErrorsInEventForm = () => {
+const showErrorsInForm = () => {
 	// Set CSS for errors and no errors
-  const showError = element => isRadio(element)
-    ? setCss(element, { 'background-color': '#fdd' })
-    : setCss(element, { 'border-color': '#b00000', 'background-color': '#fdd' })
-  const clearError = element => isRadio(element)
-    ? setCss(element, { 'background-color': 'transparent' })
-    : setCss(element, { 'border-color': '#ccc', 'background-color': '#fff' })
-  const showClearError = ({ condition, element }) => {
-    if (condition) {
+	const showError = element => isRadio(element)
+		? setCss(element, { 'background-color': '#fdd' })
+		: setCss(element, { 'border-color': '#b00000', 'background-color': '#fdd' })
+	const clearError = element => isRadio(element)
+		? setCss(element, { 'background-color': 'transparent' })
+		: setCss(element, { 'border-color': '#ccc', 'background-color': '#fff' })
+	const showClearError = ({ condition, element }) => {
+		if (condition) {
 			showError(element)
 			if (!isRadio(element)) focusElement(element)
 		}
-    else clearError(element)
+		else clearError(element)
 	}
 	// Cycle through each element based on particular conditions
-  showClearError({ condition: !discountCodeValidation(), element: eventInviteCode })
-  showClearError({ condition: !isChecked(eventTerms), element: eventTermsValidation })
-  showClearError({ condition: isVisible(eventDepositContainer) && !isChecked(eventDepositFull) && !isChecked(eventDepositDeposit), element: 'eventDepositValidation' })
-  showClearError({ condition: participants() === 2 && !isChecked(eventPayBoth) && !isChecked(eventPayMe), element: eventPayValidation })
+	showClearError({ condition: !discountCodeValidation(), element: eventInviteCode })
+	showClearError({ condition: !isChecked(eventTerms), element: eventTermsValidation })
+	showClearError({ condition: isVisible(eventDepositContainer) && !isChecked(eventDepositFull) && !isChecked(eventDepositDeposit), element: 'eventDepositValidation' })
+	showClearError({ condition: participants() === 2 && !isChecked(eventPayBoth) && !isChecked(eventPayMe), element: eventPayValidation })
 	showClearError({ condition: participants() === 2 && !isChecked(eventPartnerFemale) && !isChecked(eventPartnerMale) && !isChecked(eventPartnerOther), element: eventPartnerGenderValidation })
 	showClearError({ condition: participants() === 2 && isBlank(eventPartnerFirstName), element: eventPartnerFirstName })
 	showClearError({ condition: participants() === 2 && isBlank(eventPartnerLastName), element: eventPartnerLastName })
-  showClearError({ condition: (isChecked(eventAffiliateYes) && isBlank(eventAffiliateCode)) || (!isChecked(eventAffiliateNo) && !isChecked(eventAffiliateYes)), element: eventAffiliateValidation })
-  showClearError({ condition: !isChecked(eventSpecialYes) && !isChecked(eventSpecialNo), element: eventSpecialValidation })
-  showClearError({ condition: isChecked(eventSpecialYes) && isBlank(eventSpecialDetails), element: eventSpecialDetails })
-  showClearError({ condition: !isChecked(eventDietYes) && !isChecked(eventDietNo), element: eventDietValidation })
-  showClearError({ condition: isChecked(eventDietYes) && isBlank(eventDietDetails), element: eventDietDetails })
-  showClearError({ condition: !isChecked(eventExperienceYes) && !isChecked(eventExperienceNo), element: eventExperienceValidation })
-  showClearError({ condition: isChecked(eventExperienceYes) && isBlank(eventExperienceDetails), element: eventExperienceDetails })
-  showClearError({ condition: !isChecked(eventFemale) && !isChecked(eventMale) && !isChecked(eventOther), element: eventGenderValidation })
+	showClearError({ condition: (isChecked(eventAffiliateYes) && isBlank(eventAffiliateCode)) || (!isChecked(eventAffiliateNo) && !isChecked(eventAffiliateYes)), element: eventAffiliateValidation })
+	showClearError({ condition: !isChecked(eventSpecialYes) && !isChecked(eventSpecialNo), element: eventSpecialValidation })
+	showClearError({ condition: isChecked(eventSpecialYes) && isBlank(eventSpecialDetails), element: eventSpecialDetails })
+	showClearError({ condition: !isChecked(eventDietYes) && !isChecked(eventDietNo), element: eventDietValidation })
+	showClearError({ condition: isChecked(eventDietYes) && isBlank(eventDietDetails), element: eventDietDetails })
+	showClearError({ condition: !isChecked(eventExperienceYes) && !isChecked(eventExperienceNo), element: eventExperienceValidation })
+	showClearError({ condition: isChecked(eventExperienceYes) && isBlank(eventExperienceDetails), element: eventExperienceDetails })
+	showClearError({ condition: !isChecked(eventFemale) && !isChecked(eventMale) && !isChecked(eventOther), element: eventGenderValidation })
 	$(eventForm).parsley().validate()
 }
 
-// Reset Event Form
+
+
+// RESET EVENT FORM
 const resetForm = () => {
 
 	// Reset all radio buttons
@@ -430,77 +427,56 @@ const resetForm = () => {
 	// Clear and repopulate form
 	clearForm(page())
 	repopulateForm(page())
+
+	// Set event code for form submission
+	setValue('#eventcode', eventCode)
 	
 	// Determines whether event is for both couples & singles, couples-only, or singles-only
 	emptySelect(eventStatus)
-	if (getText(eventStatusRestriction) === 'Couples only') {
+	if (eventStatusRestriction === 'Couples only') {
 		appendSelect(eventStatus, '<option value:\'\'>Register as...</option>')
 		appendSelect(eventStatus, '<option value:\'Couple\'>Couple</option>')
 		appendSelect(eventStatus, '<option value:\'Two Singles (paired)\'>Two Singles (paired)</option>')
-  }
-  else if (getText(eventStatusRestriction) === 'Singles only') {
+	}
+	else if (eventStatusRestriction === 'Singles only') {
 		appendSelect(eventStatus, '<option value:\'Singles-only event\'>Single</option>')
-  }
-  else {
+	}
+	else {
 		appendSelect(eventStatus, '<option value:\'\'>Register as...</option>')
 		appendSelect(eventStatus, '<option value:\'Couple\'>Couple</option>')
 		appendSelect(eventStatus, '<option value:\'Single\'>Single</option>')
 		appendSelect(eventStatus, '<option value:\'Two Singles (paired)\'>Two Singles (paired)</option>')
 	}
 
+	// Reset event prices
 	setEventPrices()
-	setValue('#eventcode', eventCode)
 
-	if (isChecked(eventAffiliateYes)) {
-    showAndScrollTo(eventAffiliateCodeContainer)
-  }
-  else {
-    hideAffiliate()
-  }
-	if (isChecked(eventExperienceYes)) {
-    showAndScrollTo(eventExperienceContainer)
-  }
-  else {
-    emptyValue(eventExperienceDetails)
+	// Show or hide containers based on previous selection from repopulateForm()
+	if (isChecked(eventAffiliateYes)) showAndScrollTo(eventAffiliateCodeContainer)
+	else {
+		emptyValue(eventAffiliateCode)
+		hideElement(eventAffiliateCodeContainer)
+	}
+	if (isChecked(eventExperienceYes)) showAndScrollTo(eventExperienceContainer)
+	else {
+		emptyValue(eventExperienceDetails)
 		hideElement(eventExperienceContainer)
-  }
-	if (isChecked(eventDietYes)) {
-    showAndScrollTo(eventDietContainer)
-  }
-  else {
-    emptyValue(eventDietDetails)
+	}
+	if (isChecked(eventDietYes)) showAndScrollTo(eventDietContainer)
+	else {
+		emptyValue(eventDietDetails)
 		hideElement(eventDietContainer)
-  }
-	if (isChecked(eventSpecialYes)) {
-    showAndScrollTo(eventSpecialContainer)
-  }
-  else {
-    emptyValue(eventSpecialDetails)
+	}
+	if (isChecked(eventSpecialYes)) showAndScrollTo(eventSpecialContainer)
+	else {
+		emptyValue(eventSpecialDetails)
 		hideElement(eventSpecialContainer)
 	}
 	
-	// Hide partner
-	if (participants() !== 2) {
-    emptyValue(eventPartnerFirstName)
-		emptyValue(eventPartnerLastName)
-		unCheckElement(eventPartnerFemale)
-		unCheckElement(eventPartnerMale)
-		unCheckElement(eventPartnerOther)
-		unCheckElement(eventPayBoth)
-		unCheckElement(eventPayMe)
-		hideElement(eventPartnerContainer)
-		setEventPrices()
-	}
 	// Show partner
-  else {
-    showAndScrollTo(eventPartnerContainer)
-		if (isChecked(eventPayBoth)) {
-			setEventPrices('for both')
-		}
-		else {
-			setEventPrices('per person')
-		}
-	}
+	if (participants() === 2) showPartner()
+	// Hide partner
+	else hidePartner()
 
 	// If event still lets registrant pay deposit, show deposit option...
 	if (new Date() < new Date(eventDepositDate)) {
@@ -508,41 +484,56 @@ const resetForm = () => {
 		checkElement(eventDepositFull)
 	}
 	// ...otherwise hide deposit option.
-  else {
-		hideElement(eventDepositContainer)
+	else hideElement(eventDepositContainer)
+
+	// If invite-only event...
+	if (isInviteOnlyEvent()) {
+		// ...hide pass/fail text
+		emptyHideText(eventInvitePass)
+		emptyHideText(eventInviteFail)
+		// Hide the affiliate code box
+		hideElement(eventAffiliateContainer)
+		// If the URL has a discount code...
+		if (urlDiscountCode) {
+			// ...add the discount code from the URL into the invite code box
+			setValue(eventInviteCode, urlDiscountCode)
+		}
+		// If invite-only event, hide registration form until successful invite code has been entered.
+		inviteOnlyCodeVerification()
+	}
+	// Else, if event is open to anyone...
+	else {
+		// ...show the affiliate code box
+		showAndScrollTo(eventAffiliateContainer)
+		// If the URL has a discount code...
+		if (urlDiscountCode) {
+			// ...check the affiliate radio button...
+			checkElement(eventAffiliateYes)
+			// ...show whether the affiliate code is valid or invalid...
+			showAndScrollTo(eventAffiliateCodeContainer)
+			// ...and add the discount code from the URL into the affiliate code box.
+			setValue(eventAffiliateCode, urlDiscountCode)
+		}
+		// Make sure event reg form is shown if public event, and verify affiliate code, if any.
+		affiliateCodeVerification()
 	}
 
-	$(eventForm).parsley()
-	showElement(eventForm)
-	unCheckElement(eventTerms)
-	paymentButtonReset()
-
-	inviteOnlyCodeVerification()
-	affiliateCodeVerification()
 	// Adjust prices
 	setEventPrices()
+
+	// Make sure Terms and Conditions is unchecked
+	unCheckElement(eventTerms)
+
+	// And reset Pay Now button.
+	paymentButtonDisabled()
+
+	// Connect the error checking function to the form...
+	$(eventForm).parsley()
+	// ...and show it.
+	showElement(eventForm)
+
 }
 
 
-// EVENT FORM: BEGIN SEQUENCE
-if (isInviteOnlyEvent()) {
-	// If private event, hide registration form until successful invite code has been entered
-	hideElement(eventRegForm)
-}
-else {
-	// Make sure event reg form is shown if not private event
-	showElement(eventRegForm)
-}
-
-// RESET EVENT FORM
+// BEGIN
 resetForm()
-
-// Show / hide populate and clear forms
-if (localStorage.getItem('EcstaticLiving:' + page())) {
-	hideElement('#form-load')
-	showElement('#form-clear')
-}
-else {
-	hideElement('#form-load')
-	hideElement('#form-clear')
-}
