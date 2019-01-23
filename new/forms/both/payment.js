@@ -111,7 +111,7 @@ $(paymentButton).on('click', e => {
 	// Form Variable: Charge Description
 	setValue('#charge-description', chargeDescription)
 	// Form Variable: Charge Amount
-	setValue('#charge-amount', finalAmount()
+	setValue('#charge-amount', finalAmount())
 	// Form Variable: Event Option Total
 	setValue('#event-option-total', getValue(eventSelect) * 100)
 	// Form Variable: Event Affiliate Code
