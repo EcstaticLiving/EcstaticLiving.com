@@ -1,24 +1,29 @@
 // Event Reg Form
 const eventForm = '#wf-form-Event-Registration'
+
 // Hidden fields
 const eventCode = getText('#event-code').toUpperCase(),
 eventTitle = getText('#event-name'),
-eventStartDate = getText('#event-start'),
 eventDates = getText('#event-dates'),
 eventVenue = getText('#event-venue'),
 eventDepositAmount = parseFloat(getText('#event-deposit-amount')).toFixed(2),
 eventDepositDate = getText('#event-deposit-date'),
 eventBasePrice = parseFloat(getText('#event-base-price')).toFixed(2),
-eventBaseCost = parseFloat(getText('#event-base-cost')).toFixed(2)
-// Event variables
+eventBaseCost = parseFloat(getText('#event-base-cost')).toFixed(2),
+eventStatusRestriction = '#event-status-restriction',
+
+// Event form
 const eventRegForm = '.event-container.reg-form',
-eventInviteButton = '#event-invitecode-button',
+
+// Invite-only
+const eventInviteButton = '#event-invitecode-button',
 eventInviteBox = '#event-invitecode-box',
 eventInviteCode = '#event-invitecode-code',
 eventInvitePass = '#event-invitecode-pass',
 eventInviteFail = '#event-invitecode-fail',
-eventSpecialRegistration = '#event-special-options',
-eventFirstName = '#event-firstname',
+
+// Personal
+const eventFirstName = '#event-firstname',
 eventLastName = '#event-lastname',
 eventEmail = '#event-email',
 eventMobile = '#event-mobile',
@@ -27,31 +32,41 @@ eventGenderValidation = '#event-gender-validation',
 eventFemale = '#event-gender-female',
 eventMale = '#event-gender-male',
 eventOther = '#event-gender-other',
-eventReferral = '#event-referral',
+
+// Details
+const eventReferral = '#event-referral',
 eventExperienceContainer = '.event-container.experience',
-eventExperienceParsleyError = '#event-experience-validation',
+eventExperienceValidation = '#event-experience-validation',
 eventExperienceYes = '#event-experience-yes',
 eventExperienceNo = '#event-experience-no',
 eventExperienceDetails = '#event-experience-details',
 eventDietContainer = '.event-container.diet',
-eventDietParsleyError = '#event-diet-validation',
+eventDietValidation = '#event-diet-validation',
 eventDietYes = '#event-diet-yes',
 eventDietNo = '#event-diet-no',
 eventDietDetails = '#event-diet-details',
 eventSpecialContainer = '.event-container.special',
-eventSpecialParsleyError = '#event-special-validation',
+eventSpecialValidation = '#event-special-validation',
 eventSpecialYes = '#event-special-yes',
 eventSpecialNo = '#event-special-no',
-eventSpecialDetails = '#event-special-details',
-eventAffiliateSelectionContainer = '.event-container.affiliate-selection',
-eventAffiliateContainer = '.event-container.affiliate',
-eventAffiliateParsleyError = '#event-affiliate-validation',
+eventSpecialDetails = '#event-special-details'
+
+// Affiliate Code
+const eventAffiliateContainer = '.event-container.affiliate',
+eventAffiliateCodeContainer = '.event-container.affiliate-code',
+eventAffiliateValidation = '#event-affiliate-validation',
 eventAffiliateYes = '#event-affiliate-yes',
 eventAffiliateNo = '#event-affiliate-no',
 eventAffiliateCode = '#event-affiliate-code',
 eventAffiliatePass = '#event-affiliate-pass',
-eventAffiliateFail = '#event-affiliate-fail',
-eventStatus = '#event-status',
+eventAffiliateFail = '#event-affiliate-fail'
+const urlString = window.location.search.slice(1).split('=')
+const urlDiscountCode = urlString[0] === 'affiliate'
+	? urlString[1]
+	: null
+
+// Event Status: Couples, Singles, Both
+const eventStatus = '#event-status',
 eventPartnerContainer = '.event-container.partner',
 eventPartnerFirstName = '#event-partner-firstname',
 eventPartnerLastName = '#event-partner-lastname',
@@ -62,7 +77,16 @@ eventPartnerOther = '#event-partner-gender-other',
 eventPayValidation = '#event-pay-validation',
 eventPayBoth = '#event-pay-both',
 eventPayMe = '#event-pay-me',
-eventSelect = '#event-option', // TODO: change to `#event-select`
+
+// Registration options
+const eventSelect = '#event-select',
+eventOptions = getText('#event-options').split(' | '),
+eventNotes = getText('#event-notes').includes('|')
+	? getText('#event-notes').split('|')
+	: getText('#event-notes').split(',')
+
+// Pricing
+const eventPrices = getText('#event-prices').split(' | '),
 eventDepositContainer = '.event-container.deposit',
 eventDepositValidation = '#event-deposit-validation',
 eventDepositText = '#event-deposit-text',
@@ -71,14 +95,10 @@ eventDepositDeposit = '#event-deposit-deposit',
 eventAmountContainer = '.event-container.amount',
 eventAmountDisplay = '#event-amount-display',
 eventAmountShow = '#event-amount-show',
-eventTermsValidation = '#event-terms-validation',
+
+// Terms
+const eventTermsValidation = '#event-terms-validation',
 eventTerms = '#event-terms',
-paymentButton = '#payment-button',
-eventOptions = getText('#event-options').split(' | '),
-eventPrices = getText('#event-prices').split(' | '),
-eventNotes = getText('#event-notes').includes('|')
-	? getText('#event-notes').split('|')
-	: getText('#event-notes').split(',')
 
 // Stripe billing variables
 const billingFirstName = '#billing-firstname',
@@ -88,8 +108,23 @@ billingCity = '#billing-city',
 billingState = '#billing-state',
 billingPostal = '#billing-postal',
 billingCountry = '#country',
-billingCard = '#billing-card'
+billingCard = '#billing-card',
+billingCardError = '#billing-card-error'
 
+// Pay now
+const paymentButton = '#payment-button',
+
+
+const paymentButtonClear = () => {
+	emptyText(billingCardError)
+	setCss(paymentButton, { 'background-color': '#800000' })
+	setCss(paymentButton, { 'color': '#ffffff' })
+}
+
+const paymentButtonReset = () => {
+	setCss(paymentButton, { 'background-color': '#f5f5f5' })
+	setCss(paymentButton, { 'color': '#333333' })
+}
 
 // Invite-only event
 const isInviteOnlyEvent = () => isVisible(eventInviteBox)
@@ -138,7 +173,7 @@ const calculateDiscount = discountCode => {
 	}
 	// Old system, e.g. MADA25TM1710FS
 	else {
-		const discount = 100 - parseInt(discountCode.substr(4, 2), 10) === 90
+		const discount = parseInt(discountCode.substr(4, 2), 10) === 10
 			// Assuming no discount, only to unlock event, e.g. ****10********
 			? 0
 			// With discount
@@ -154,134 +189,19 @@ const discountCodeValidation = () => {
 }
 
 // Get discount amount based on either invite field or affiliate code field
-const getDiscount = () => discountCodeValidation() && calculateDiscount(isInviteOnlyEvent() ? getValue(eventInviteCode) : getValue(eventAffiliateCode))
-
-// Name & Gender Validation
-const personalValidation = () => {
-	return (
-		!isBlank(eventFirstName) && !getValue(eventFirstName).includes(' ') && !isBlank(eventLastName) && !getValue(eventLastName).includes(' ') && !isBlank(eventEmail) && !isBlank(eventMobile) && !isBlank(eventBirthdate) &&
-		(isChecked(eventFemale) || isChecked(eventMale) || isChecked(eventOther))
-	)
-}
-
-// Details Validation
-const detailsValidation = () => {
-	return (
-		!isBlank(eventReferral)
-		&& ((isChecked(eventExperienceYes) && !isBlank(eventExperienceDetails)) || isChecked(eventExperienceNo))
-		&& ((isChecked(eventDietYes) && !isBlank(eventDietDetails)) || isChecked(eventDietNo))
-		&& ((isChecked(eventSpecialYes) && !isBlank(eventSpecialDetails)) || isChecked(eventSpecialNo))
-	)
-}
-
-// Partner Validatation
-const partnerValidation = () => {
-	return (
-		(
-			participants() === 2
-			&& !isBlank(eventPartnerFirstName) && !isBlank(eventPartnerLastName)
-			&& (isChecked(eventPartnerFemale) || isChecked(eventPartnerMale) || isChecked(eventPartnerOther))
-			&& (isChecked(eventPayBoth) || isChecked(eventPayMe))
-		)
-		|| participants() === 1
-	)
-}
-
-// Event Options Validatation
-const eventOptionValidation = () => {
-	return (
-		getValue(eventSelect) && (
-    	(
-				isVisible(eventDepositContainer)
-				&& (isChecked(eventDepositFull) || isChecked(eventDepositDeposit))
-			)
-			|| !isVisible(eventDepositContainer)
-    )
-	)
-}
-
-// Billing Validation
-const billingValidation = () => {
-	return (
-		!isBlank(billingFirstName) && !isBlank(billingLastName) && !isBlank(billingStreet) && !isBlank(billingCity)
-		&& !isBlank(billingState) && !isBlank(billingPostal) && !isBlank(billingCountry) && isChecked(billingCard)
-	)
-}
-
-// Complete Validation
-const formValidation = () => {
-	if (
-		discountCodeValidation() && personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && isChecked(eventTerms) && billingValidation()
-	) {
-		emptyText('#card-errors')
-		setCss(paymentButton, { 'background-color': '#800000' })
-		setCss(paymentButton, { 'color': '#ffffff' })
-		return true
-	}
-	setCss(paymentButton, { 'background-color': '#f5f5f5' })
-	setCss(paymentButton, { 'color': '#333333' })
-	return false
-}
-
-// Show partner
-const showPartner = () => {
-	showAndScrollTo(eventPartnerContainer)
-	if (isChecked(eventPayBoth)) {
-		setEventPrices('for both')
-	}
-	else {
-		setEventPrices('per person')
-	}
-}
-
-// Hide partner
-const hidePartner = () => {
-	emptyValue(eventPartnerFirstName)
-	emptyValue(eventPartnerLastName)
-	unCheckElement(eventPartnerFemale)
-	unCheckElement(eventPartnerMale)
-	unCheckElement(eventPartnerOther)
-	unCheckElement(eventPayBoth)
-	unCheckElement(eventPayMe)
-	hideElement(eventPartnerContainer)
-	setEventPrices()
-}
-
-// EVENT OPTIONS AND PRICE CALCULATION
-// Determines whether event is for both couples & singles, couples-only, or singles-only
-const setEventStatus = () => {
-	emptySelect(eventStatus)
-	if (getText(eventSpecialRegistration) === 'Couples only') {
-		appendSelect(eventStatus, '<option value:\'\'>Register as...</option>')
-		appendSelect(eventStatus, '<option value:\'Couple\'>Couple</option>')
-		appendSelect(eventStatus, '<option value:\'Two Singles (paired)\'>Two Singles (paired)</option>')
-  }
-  else if (getText(eventSpecialRegistration) === 'Singles only') {
-		appendSelect(eventStatus, '<option value:\'Singles-only event\'>Single</option>')
-  }
-  else {
-		appendSelect(eventStatus, '<option value:\'\'>Register as...</option>')
-		appendSelect(eventStatus, '<option value:\'Couple\'>Couple</option>')
-		appendSelect(eventStatus, '<option value:\'Single\'>Single</option>')
-		appendSelect(eventStatus, '<option value:\'Two Singles (paired)\'>Two Singles (paired)</option>')
-	}
-}
+const getDiscount = () => discountCodeValidation() ? calculateDiscount(isInviteOnlyEvent() ? getValue(eventInviteCode) : getValue(eventAffiliateCode)) : null
 
 //	Adds event options & prices based on CMS input
 const setEventPrices = () => {
+	// Remove final amount display
 	emptyValue(eventAmountDisplay)
 	hideElement(eventAmountContainer)
-	let people = ''
-	if (paymentQty() === 2) {
-		people = 'for both'
-	}
-	else if (paymentQty() === 1 && participants() === 2) {
-		people = 'per person'
-	}
+	// Reset event options
 	emptySelect(eventSelect)
 	if (eventOptions.length > 0) {
 		appendSelect(eventSelect, '<option value=\'\'>Event option...</option>')
 	}
+	// Create dropdown
 	for (let i = 0; i < eventOptions.length; i++) {
 		// Event price cannot be less than $0 after discount is applied
 		const eventSelectPrice = (eventPrices[i] - getDiscount()) * paymentQty() > 0
@@ -293,48 +213,161 @@ const setEventPrices = () => {
 		const eventNote = eventNotes[i]
 			? eventNotes[i]
 			: ''
-		const eventSelectText = eventOptions[i] + ' ($' + eventSelectPrice + participants() === 2 ? ' ' : '' + people + affiliateDiscountText + ')' + eventNote
+		// only applies to `participants() === 2`
+		const people = paymentQty() === 2
+			? 'for both'
+			: 'per person'
+		const paymentClarification = participants() === 2 ? ' ' + people : ''
+		const eventSelectText = eventOptions[i] + ' ($' + eventSelectPrice + paymentClarification + affiliateDiscountText + ')' + eventNote
 		appendSelect(eventSelect, '<option value=\'' + eventSelectPrice + '\'>' + eventSelectText + '</option>')
-  }
-  setText(eventDepositText, 'Pay deposit only ($' + depositAmount() + participants() === 2 ? ' ' : '' + people + ')')
+	}
+	// Update `Pay deposit only` field with actual deposit amount: `Pay deposit only ($...)`
+  setText(eventDepositText, 'Pay deposit only ($' + depositAmount() + paymentClarification + ')')
 }
 
-// VISUAL ERROR INDICATORS
-const eventAffiliateShowErrors = () => {
+// Complete validation
+const formValidation = () => {
+
+	// Name & Gender validation
+	const personalValidation = () => {
+		return (
+			!isBlank(eventFirstName) && !getValue(eventFirstName).includes(' ') && !isBlank(eventLastName) && !getValue(eventLastName).includes(' ') && !isBlank(eventEmail) && !isBlank(eventMobile) && !isBlank(eventBirthdate) &&
+			(isChecked(eventFemale) || isChecked(eventMale) || isChecked(eventOther))
+		)
+	}
+
+	// Details validation
+	const detailsValidation = () => {
+		return (
+			!isBlank(eventReferral)
+			&& ((isChecked(eventExperienceYes) && !isBlank(eventExperienceDetails)) || isChecked(eventExperienceNo))
+			&& ((isChecked(eventDietYes) && !isBlank(eventDietDetails)) || isChecked(eventDietNo))
+			&& ((isChecked(eventSpecialYes) && !isBlank(eventSpecialDetails)) || isChecked(eventSpecialNo))
+		)
+	}
+
+	// Partner validation
+	const partnerValidation = () => {
+		return (
+			(
+				participants() === 2
+				&& !isBlank(eventPartnerFirstName) && !isBlank(eventPartnerLastName)
+				&& (isChecked(eventPartnerFemale) || isChecked(eventPartnerMale) || isChecked(eventPartnerOther))
+				&& (isChecked(eventPayBoth) || isChecked(eventPayMe))
+			)
+			|| participants() === 1
+		)
+	}
+
+	// Event Options validation
+	const eventOptionValidation = () => {
+		return (
+			getValue(eventSelect) && (
+				(
+					isVisible(eventDepositContainer)
+					&& (isChecked(eventDepositFull) || isChecked(eventDepositDeposit))
+				)
+				|| !isVisible(eventDepositContainer)
+			)
+		)
+	}
+
+	// Terms validation
+	const termsValidation = () => isChecked(eventTerms)
+
+	// Billing validation
+	const billingValidation = () => {
+		return (
+			!isBlank(billingFirstName) && !isBlank(billingLastName) && !isBlank(billingStreet) && !isBlank(billingCity)
+			&& !isBlank(billingState) && !isBlank(billingPostal) && !isBlank(billingCountry) && isChecked(billingCard)
+		)
+	}
+
+	if (
+		discountCodeValidation() && personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && termsValidation() && billingValidation()
+	) {
+		paymentButtonClear()
+		return true
+	}
+	paymentButtonReset()
+	return false
+}
+
+// Show errors for affiliate code or invite code
+const inviteOnlyCodeVerification = () => {
+	// If private event...
 	if (isInviteOnlyEvent()) {
+		// Hide pass/fail text
+		emptyHideText(eventInvitePass)
+		emptyHideText(eventInviteFail)
+		// Hide the affiliate code box
+		hideElement(eventAffiliateContainer)
+		// If the URL has a discount code...
+		if (urlDiscountCode) {
+			// ...add the discount code from the URL into the invite code box
+			setValue(eventInviteCode, urlDiscountCode)
+		}
+		// If the code exists, i.e. has either been entered manually or gotten from URL...
 		if (getValue(eventInviteCode).length > 0) {
+			// ...but if not valid...
 			if (!discountCodeValidation()) {
+				// ...hide reg form and indicate error.
 				hideElement(eventRegForm)
 				emptyHideText(eventInvitePass)
+				const text = 'The invitation code you entered is invalid.\nFor assistance, please call us at 707-987-3456.'
+				setHtml(eventInviteFail, text)
 				showElement(eventInviteFail)
 				focusElement(eventInviteCode)
-      }
+			}
+			// ...if code is valid...
       else {
+				// ...show reg form and indicate pass.
 				showElement(eventRegForm)
-				hideElement(eventInviteFail)
+				emptyHideText(eventInviteFail)
 				const text = calculateDiscount(getValue(eventInviteCode)) > 0
 					? 'Congrats! Invite code accepted!<br />$' + calculateDiscount(getValue(eventInviteCode)) + ' per person discount applied! Continue below.'
 					: 'Congrats! Invite code accepted!<br />Continue below.'
 				setHtml(eventInvitePass, text)
 				showAndScrollTo(eventInvitePass)
 			}
-    }
+		}
+		// If code doesn’t exist, hide reg form.
     else {
 			hideElement(eventRegForm)
 			emptyHideText(eventInvitePass)
-			hideElement(eventInviteFail)
+			emptyHideText(eventInviteFail)
 		}
 	}
-	else if (isChecked(eventAffiliateYes)) {
+}
+
+const affiliateCodeVerification = () => {
+	// Show the affiliate code box
+	showAndScrollTo(eventAffiliateContainer)
+	// If the URL has a discount code...
+	if (urlDiscountCode) {
+		// ...check the affiliate radio button...
+		checkElement(eventAffiliateYes)
+		// ...show whether the affiliate code is valid or invalid
+		showAndScrollTo(eventAffiliateCodeContainer)
+		// ...and add the discount code from the URL into the affiliate code box.
+		setValue(eventAffiliateCode, urlDiscountCode)
+	}
+	// If `Do you have an affiliate code?` is checked...
+	if (isChecked(eventAffiliateYes)) {
+		// If the code exists, i.e. has either been entered manually or gotten from URL...
 		if (getValue(eventAffiliateCode).length > 0) {
+			// ...but if not valid...
 			if (!discountCodeValidation()) {
+				// ...indicate error.
 				emptyHideText(eventAffiliatePass)
 				const text = 'Sorry, you’ve entered an invalid affiliate code.'
 				setHtml(eventAffiliateFail, text)
 				showAndScrollTo(eventAffiliateFail)
 				focusElement(eventAffiliateCode)
 			}
-			else {
+			// ...if code is valid...
+      else {
+				// ...indicate pass.
 				emptyHideText(eventAffiliateFail)
 				const text = calculateDiscount(getValue(eventAffiliateCode)) > 0
 					? 'Congrats! Code accepted!<br />$' + calculateDiscount(getValue(eventAffiliateCode)) + ' per person discount applied!'
@@ -343,6 +376,7 @@ const eventAffiliateShowErrors = () => {
 				showAndScrollTo(eventAffiliatePass)
 			}
 		}
+		// If code doesn’t exist, hide pass/fail messages.
 		else {
 			emptyHideText(eventAffiliatePass)
 			emptyHideText(eventAffiliateFail)
@@ -351,7 +385,7 @@ const eventAffiliateShowErrors = () => {
 }
 
 const showErrorsInEventForm = () => {
-
+	// Set CSS for errors and no errors
   const showError = element => isRadio(element)
     ? setCss(element, { 'background-color': '#fdd' })
     : setCss(element, { 'border-color': '#b00000', 'background-color': '#fdd' })
@@ -365,7 +399,7 @@ const showErrorsInEventForm = () => {
 		}
     else clearError(element)
 	}
-
+	// Cycle through each element based on particular conditions
   showClearError({ condition: !discountCodeValidation(), element: eventInviteCode })
   showClearError({ condition: !isChecked(eventTerms), element: eventTermsValidation })
   showClearError({ condition: isVisible(eventDepositContainer) && !isChecked(eventDepositFull) && !isChecked(eventDepositDeposit), element: 'eventDepositValidation' })
@@ -373,20 +407,18 @@ const showErrorsInEventForm = () => {
 	showClearError({ condition: participants() === 2 && !isChecked(eventPartnerFemale) && !isChecked(eventPartnerMale) && !isChecked(eventPartnerOther), element: eventPartnerGenderValidation })
 	showClearError({ condition: participants() === 2 && isBlank(eventPartnerFirstName), element: eventPartnerFirstName })
 	showClearError({ condition: participants() === 2 && isBlank(eventPartnerLastName), element: eventPartnerLastName })
-  showClearError({ condition: (isChecked(eventAffiliateYes) && isBlank(eventAffiliateCode)) || (!isChecked(eventAffiliateNo) && !isChecked(eventAffiliateYes)), element: eventAffiliateParsleyError })
-  showClearError({ condition: !isChecked(eventSpecialYes) && !isChecked(eventSpecialNo), element: eventSpecialParsleyError })
+  showClearError({ condition: (isChecked(eventAffiliateYes) && isBlank(eventAffiliateCode)) || (!isChecked(eventAffiliateNo) && !isChecked(eventAffiliateYes)), element: eventAffiliateValidation })
+  showClearError({ condition: !isChecked(eventSpecialYes) && !isChecked(eventSpecialNo), element: eventSpecialValidation })
   showClearError({ condition: isChecked(eventSpecialYes) && isBlank(eventSpecialDetails), element: eventSpecialDetails })
-  showClearError({ condition: !isChecked(eventDietYes) && !isChecked(eventDietNo), element: eventDietParsleyError })
+  showClearError({ condition: !isChecked(eventDietYes) && !isChecked(eventDietNo), element: eventDietValidation })
   showClearError({ condition: isChecked(eventDietYes) && isBlank(eventDietDetails), element: eventDietDetails })
-  showClearError({ condition: !isChecked(eventExperienceYes) && !isChecked(eventExperienceNo), element: eventExperienceParsleyError })
+  showClearError({ condition: !isChecked(eventExperienceYes) && !isChecked(eventExperienceNo), element: eventExperienceValidation })
   showClearError({ condition: isChecked(eventExperienceYes) && isBlank(eventExperienceDetails), element: eventExperienceDetails })
   showClearError({ condition: !isChecked(eventFemale) && !isChecked(eventMale) && !isChecked(eventOther), element: eventGenderValidation })
 	$(eventForm).parsley().validate()
-
 }
 
-
-// EVENT FORM RESET
+// Reset Event Form
 const resetForm = () => {
 
 	// Reset all radio buttons
@@ -399,16 +431,28 @@ const resetForm = () => {
 	clearForm(page())
 	repopulateForm(page())
 	
-
-	if (isInviteOnlyEvent()) {
-		emptyHideText(eventInvitePass)
-		hideElement(eventInviteFail)
+	// Determines whether event is for both couples & singles, couples-only, or singles-only
+	emptySelect(eventStatus)
+	if (getText(eventStatusRestriction) === 'Couples only') {
+		appendSelect(eventStatus, '<option value:\'\'>Register as...</option>')
+		appendSelect(eventStatus, '<option value:\'Couple\'>Couple</option>')
+		appendSelect(eventStatus, '<option value:\'Two Singles (paired)\'>Two Singles (paired)</option>')
+  }
+  else if (getText(eventStatusRestriction) === 'Singles only') {
+		appendSelect(eventStatus, '<option value:\'Singles-only event\'>Single</option>')
+  }
+  else {
+		appendSelect(eventStatus, '<option value:\'\'>Register as...</option>')
+		appendSelect(eventStatus, '<option value:\'Couple\'>Couple</option>')
+		appendSelect(eventStatus, '<option value:\'Single\'>Single</option>')
+		appendSelect(eventStatus, '<option value:\'Two Singles (paired)\'>Two Singles (paired)</option>')
 	}
-	setEventStatus()
+
 	setEventPrices()
 	setValue('#eventcode', eventCode)
+
 	if (isChecked(eventAffiliateYes)) {
-    showAndScrollTo(eventAffiliateContainer)
+    showAndScrollTo(eventAffiliateCodeContainer)
   }
   else {
     hideAffiliate()
@@ -433,60 +477,50 @@ const resetForm = () => {
   else {
     emptyValue(eventSpecialDetails)
 		hideElement(eventSpecialContainer)
-  }
+	}
+	
+	// Hide partner
 	if (participants() !== 2) {
-    hidePartner()
-  }
+    emptyValue(eventPartnerFirstName)
+		emptyValue(eventPartnerLastName)
+		unCheckElement(eventPartnerFemale)
+		unCheckElement(eventPartnerMale)
+		unCheckElement(eventPartnerOther)
+		unCheckElement(eventPayBoth)
+		unCheckElement(eventPayMe)
+		hideElement(eventPartnerContainer)
+		setEventPrices()
+	}
+	// Show partner
   else {
-    showPartner()
-  }
+    showAndScrollTo(eventPartnerContainer)
+		if (isChecked(eventPayBoth)) {
+			setEventPrices('for both')
+		}
+		else {
+			setEventPrices('per person')
+		}
+	}
+
+	// If event still lets registrant pay deposit, show deposit option...
 	if (new Date() < new Date(eventDepositDate)) {
 		showAndScrollTo(eventDepositContainer)
-		$(eventDepositFull).prop('checked', true)
-  }
+		checkElement(eventDepositFull)
+	}
+	// ...otherwise hide deposit option.
   else {
 		hideElement(eventDepositContainer)
 	}
+
 	$(eventForm).parsley()
 	showElement(eventForm)
 	unCheckElement(eventTerms)
-	setCss(paymentButton, { 'background-color': '#f5f5f5' })
-	setCss(paymentButton, { 'color': '#333333' })
+	paymentButtonReset()
 
-	// If private event...
-	if (isInviteOnlyEvent()) {
-		// Hide the affiliate code box
-		hideElement(eventAffiliateSelectionContainer)
-		// If URL contains affiliate code, add to invite field
-		let affiliateString = window.location.search.slice(1).split('=')
-		if (affiliateString[0] === 'affiliate') {
-			// Add the affiliate code from the URL into the invite code box
-			setValue(eventInviteCode, affiliateString[1])
-			// Verify affiliate code
-			eventAffiliateShowErrors()
-			// Adjust prices
-			setEventPrices()
-		}
-	}
-	// If public event...
-	else {
-		// Show the affiliate code box
-		showAndScrollTo(eventAffiliateSelectionContainer)
-		// If URL contains affiliate code, add to affiliate field
-		let affiliateString = window.location.search.slice(1).split('=')
-		if (affiliateString[0] === 'affiliate') {
-			// Check the affiliate radio button
-			$(eventAffiliateYes).prop('checked', true)
-			// Show whether the affiliate code is valid or invalid
-			showAndScrollTo(eventAffiliateContainer)
-			// Add the affiliate code from the URL into the affiliate code box
-			setValue(eventAffiliateCode, affiliateString[1])
-			// Verify affiliate code
-			eventAffiliateShowErrors()
-			// Adjust prices
-			setEventPrices()
-		}
-	}
+	inviteOnlyCodeVerification()
+	affiliateCodeVerification()
+	// Adjust prices
+	setEventPrices()
 }
 
 
