@@ -60,9 +60,8 @@ eventAffiliateNo = '#event-affiliate-no',
 eventAffiliateCode = '#event-affiliate-code',
 eventAffiliatePass = '#event-affiliate-pass',
 eventAffiliateFail = '#event-affiliate-fail'
-const urlString = window.location.search.slice(1).split('=')
-const urlDiscountCode = urlString[0] === 'affiliate'
-	? urlString[1]
+const urlDiscountCode = urlString && urlString.affiliate
+	? urlString.affiliate
 	: null
 
 // Event Status: Couples, Singles, Both
@@ -113,8 +112,6 @@ billingCardError = '#billing-card-error'
 
 // Pay now
 const paymentButton = '#payment-button'
-
-const eventAllFields = eventFirstName + ',' + eventLastName + ',' + eventEmail + ',' + eventMobile + ',' + eventBirthdate + ',' + eventFemale + ',' + eventMale + ',' + eventOther + ',' + eventReferral + ',' + eventExperienceYes + ',' + eventExperienceNo + ',' + eventExperienceDetails + ',' + eventDietYes + ',' + eventDietNo + ',' + eventDietDetails + ',' + eventSpecialYes + ',' + eventSpecialNo + ',' + eventSpecialDetails + ',' + eventStatus + ',' + eventPartnerFirstName + ',' + eventPartnerLastName + ',' + eventPartnerFemale + ',' + eventPartnerMale + ',' + eventPartnerOther + ',' + eventPayBoth + ',' + eventPayMe + ',' + eventSelect + ',' + eventTerms + ',' + billingFirstName + ',' + billingLastName + ',' + billingStreet + ',' + billingCity + ',' + billingState + ',' + billingPostal + ',' + billingCountry
 
 
 const paymentButtonContinue = () => {
@@ -305,9 +302,11 @@ const formValidation = () => {
 	if (
 		discountCodeValidation() && personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && termsValidation() && billingValidation()
 	) {
+		// Change color of pay now button to red
 		paymentButtonContinue()
 		return true
 	}
+	// Change color of pay now button to grey
 	paymentButtonDisabled()
 	return false
 }

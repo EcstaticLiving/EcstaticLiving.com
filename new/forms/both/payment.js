@@ -33,12 +33,16 @@ const card = elements.create('card', {
 	}
 })
 
+// Stripe Charge Description
+const chargeDescription = eventTitle + ' ' + eventDates + ', ' + eventVenue + ', ' + getText(eventSelect).substring(0, getText(eventSelect).length - 16) + ', ' + isChecked(eventDepositDeposit) ? 'DEPOSIT' : 'FULL'
+
+
 const paymentValidation = result => {
-	// Check hidden field to enable formValidation() to pass
+	// If payment validates, check hidden field to enable `formValidation()` to pass
 	if (result.complete) {
 		checkElement(billingCard)
 	}
-	// ...otherwise, uncheck hidden field and deactivate pay now button.
+	// ...otherwise, uncheck hidden field and deactivate pay now button via `formValidation()`.
 	else if (!result.complete) {
 		unCheckElement(billingCard)
 	}
@@ -77,58 +81,42 @@ const indicateFailedSubmission = type => {
 // Begin
 card.mount('#card-element')
 card.addEventListener('change', result => paymentValidation(result))
-$('#button-stripe-error').on('click', () => hideElement('.notification-modal.card-error'))
+onClick('#button-stripe-error', () => hideElement('.notification-modal.card-error'))
 
-$(paymentButton).on('click', e => {
+
+// Always allow pay now button to be clicked
+onClick(paymentButton, e => {
+
 	// Prevent accidental submission of form through 'enter' key
 	e.preventDefault()
 	if (e.which === 13) return false
-	try {
-		if (!formValidation()) {
-			showErrorsInForm()
-			// If there’s no Stripe error message
-			if (isBlank('#card-errors')) {
-				setText('#card-errors', 'Oops! There’s some missing information.')
-			}
-			return false
+
+	// If form hasn’t correctly been filled out...
+	if (!formValidation()) {
+		// ...show where there are errors...
+		showErrorsInForm()
+		// ...and as long as there is no Stripe error message, fill in the error box with a pointer for customer to look for missing information...
+		if (isBlank('#card-errors')) {
+			setText('#card-errors', 'Oops! There’s some missing information.')
 		}
+		// ...and interrupt payment process.
+		return false
 	}
-	catch(err) {
-		alert(err)
-	}	
+
+	// If all has been correctly filled out, save form.
 	saveForm(page())
-	let customerDescription = '', customerEmail = '', chargeDescription = ''
-	// Variables
-	customerDescription = getValue(eventFirstName) + ' ' + getValue(eventLastName) + ' <' + getValue(eventEmail) + '>'
-	customerEmail = getValue(eventEmail)
-	chargeDescription = eventTitle + ' ' + eventDates + ', ' + eventVenue + ', ' + getText(eventSelect + ' option:selected').substring(0, getText(eventSelect + ' option:selected').length - 16) + ', ' + isChecked(eventDepositDeposit) ? 'DEPOSIT' : 'FULL'
-	// Form Variable: Party
+
+	// Form submission fields
 	setValue('#party', partyName())
-	// Form Variable: Traffic Source
-	let trafficSource = window.location.search.slice(1).split('=')
-	setValue('#trafficsource', window.location.search && trafficSource[0] === 'source' ? trafficSource[1] : 'ELI')
-	
-	// Form Variable: Charge Description
+	setValue('#trafficsource', urlString && urlString.source ? urlString.source : 'ELI')
 	setValue('#charge-description', chargeDescription)
-	// Form Variable: Charge Amount
 	setValue('#charge-amount', finalAmount())
-	// Form Variable: Event Option Total
 	setValue('#event-option-total', getValue(eventSelect) * 100)
-	// Form Variable: Event Affiliate Code
-	const affiliateCodeValue = getValue(eventAffiliateCode)
-		? getValue(eventAffiliateCode)
-		: '- none -'
-	setValue('#event-affiliate', affiliateCodeValue)
-	// Form Variable: Question Diet
-	const dietValue = getValue(eventDietDetails)
-		? getValue(eventDietDetails)
-		: '- none -'
-	setValue('#question-diet', dietValue)
-	// Form Variable: Question Special
-	const specialValue = getValue(eventSpecialDetails)
-		? getValue(eventSpecialDetails)
-		: '- none -'
-	setValue('#question-special', specialValue)
+	setValue('#event-affiliate', getValue(eventAffiliateCode) ? getValue(eventAffiliateCode) : '- none -')
+	setValue('#question-diet', getValue(eventDietDetails) ? getValue(eventDietDetails) : '- none -')
+	setValue('#question-special', getValue(eventSpecialDetails) ? getValue(eventSpecialDetails) : '- none -')
+
+	// Initiate payment: first, check to see if card is valid.
 	stripe.createSource(card, {
 		owner: {
 			name: getValue(billingFirstName) + ' ' + getValue(billingLastName),
@@ -139,7 +127,7 @@ $(paymentButton).on('click', e => {
 				postal_code: getValue(billingPostal),
 				country: getValue(billingCountry)
 			},
-			email: customerEmail
+			email: getValue(eventEmail)
 		}
 	})
 		.then(result => {
@@ -149,7 +137,7 @@ $(paymentButton).on('click', e => {
 				return false
 			}
 			else {
-				const selected = $(eventSelect + ' option:selected').index() - 1
+				const selected = $(eventSelect).index() - 1
 
 
 				showElement('.stripe.processing')
@@ -172,8 +160,8 @@ $(paymentButton).on('click', e => {
 							data: {
 								'chargeAmount': finalAmount() * 100,
 								'chargeDescription': chargeDescription,
-								'customerDescription': customerDescription,
-								'customerEmail': customerEmail,
+								'customerDescription': getValue(eventFirstName) + ' ' + getValue(eventLastName) + ' <' + getValue(eventEmail) + '>',
+								'customerEmail': getValue(eventEmail),
 								'event': eventCode,
 								'party': partyName(),
 								'phone': getValue(eventMobile),

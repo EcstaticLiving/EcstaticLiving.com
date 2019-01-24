@@ -66,7 +66,7 @@ $(customFirstName + ',' + customLastName + ',' + customEmail + ',' + customMobil
 // RESET CUSTOM CHARGE
 resetForm()
 
-$(paymentButton).on('click', (e) => {
+$(paymentButton).on('click', e => {
 
 	if (!formValidation()) {
 		showErrorsInForm()
@@ -81,6 +81,6 @@ $(paymentButton).on('click', (e) => {
 	chargeAmount = getValue(customSelect) * 100
 	customerDescription = getValue(customFirstName) + ' ' + getValue(customLastName) + ' <' + getValue(customEmail) + '>'
 	customerEmail = getValue(customEmail)
-	chargeDescription = 'Custom Charge: ' + getText(customSelect + ' option:selected').substring(0, getText(customSelect + ' option:selected').length - 16)
+	chargeDescription = 'Custom Charge: ' + getText(customSelect).substring(0, getText(customSelect).length - 16)
 
 })

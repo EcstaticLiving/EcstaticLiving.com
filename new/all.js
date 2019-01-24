@@ -7,8 +7,13 @@ console.log(window.location.href.indexOf('ecstaticliving.com') > -1 ? 'Welcome t
 const windowWidth = $(window).width()
 const windowHeight = $(window).height()
 // Urls
-const containsUrl = (str) => window.location.href.indexOf(str) > -1
-const endsWithUrl = (str) => window.location.href.endsWith(str)
+const containsUrl = str => window.location.href.indexOf(str) > -1
+const endsWithUrl = str => window.location.href.endsWith(str)
+// Return url search keys and values
+const urlString = Object.assign({}, ...window.location.search.slice(1).split('&').map((item) => {
+	const property = item.split('=')[0]
+	return { [property]: item.split('=')[1] }
+}))
 // Values
 const getValue = elem => $(elem).val()
 const emptyValue = elem => $(elem).val('')
@@ -26,6 +31,9 @@ const setCss = (elem, css) => $(elem).css(css)
 // Check radio
 const checkElement = elem => $(elem).prop('checked', true)
 const unCheckElement = elem => $(elem).prop('checked', false)
+// Element Events
+const onClick = (elem, f) => $(elem).on('click', f)
+const onChange = (elem, f) => $(elem).on('change', f)
 // Element Conditions
 const isRadio = elem => $(elem).is(':radio')
 const isBlank = elem => getText(elem) === '' && getValue(elem) === ''
