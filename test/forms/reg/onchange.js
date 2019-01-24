@@ -1,5 +1,5 @@
 // Prevent form from being submitted. This is being done manually in on click paymentButton
-$(eventForm).on('submit', () => false)
+onSubmit(eventForm, () => null)
 
 // Clear form
 onClick('#form-clear', () => clearForm(page()))

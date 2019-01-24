@@ -34,6 +34,7 @@ const unCheckElement = elem => $(elem).prop('checked', false)
 // Element Event Listeners
 const onClick = (elem, f) => $(elem).on('click', f) // elem.addEventListener('click', f)
 const onChange = (elem, f) => $(elem).on('change', f) // elem.addEventListener('change', f)
+const onSubmit = (elem, f) => $(elem).on('submit', f) // elem.addEventListener('submit', f)
 // Element Conditions
 const isRadio = elem => $(elem).is(':radio')
 const isBlank = elem => getText(elem) === '' && getValue(elem) === ''

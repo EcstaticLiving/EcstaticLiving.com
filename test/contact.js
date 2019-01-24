@@ -1,11 +1,11 @@
 const initiateContactForm = () => {
 	fadeTo('.received-section', 500, 0)
-	hide('.received-section')
+	hideElement('.received-section')
 	fadeTo('.contact-section', 500, 1)
-	show('.contact-section')
-	hide('.w-form-done')
-	hide('.w-form-fail')
-	show('.contact-form')
+	showElement('.contact-section')
+	hideElement('.w-form-done')
+	hideElement('.w-form-fail')
+	showElement('.contact-form')
 }
 
 const submitContactForm = () => {
@@ -13,8 +13,8 @@ const submitContactForm = () => {
 	if ($('.contact-form').parsley().validate()) {
 		$('.contact-form').submit()
 		fadeTo('.contact-section', 500, 0)
-		hide('.contact-section')
-		show('.received-section')
+		hideElement('.contact-section')
+		showElement('.received-section')
 		fadeTo('.received-section', 500, 1)
 	}
 }
