@@ -31,9 +31,9 @@ const setCss = (elem, css) => $(elem).css(css)
 // Check radio
 const checkElement = elem => $(elem).prop('checked', true)
 const unCheckElement = elem => $(elem).prop('checked', false)
-// Element Events
-const onClick = (elem, f) => $(elem).on('click', f)
-const onChange = (elem, f) => $(elem).on('change', f)
+// Element Event Listeners
+const onClick = (elem, f) => $(elem).on('click', f) // elem.addEventListener('click', f)
+const onChange = (elem, f) => $(elem).on('change', f) // elem.addEventListener('change', f)
 // Element Conditions
 const isRadio = elem => $(elem).is(':radio')
 const isBlank = elem => getText(elem) === '' && getValue(elem) === ''
