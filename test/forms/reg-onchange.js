@@ -85,17 +85,17 @@ onChange(eventPayMe, () => setEventPrices())
 for (elem of [eventFirstName, eventLastName, eventEmail, eventMobile, eventBirthdate, eventFemale, eventMale, eventOther, eventReferral, eventExperienceYes, eventExperienceNo, eventExperienceDetails, eventDietYes, eventDietNo, eventDietDetails, eventSpecialYes, eventSpecialNo, eventSpecialDetails, eventStatus, eventPartnerFirstName, eventPartnerLastName, eventPartnerFemale, eventPartnerMale, eventPartnerOther, eventPayBoth, eventPayMe, eventSelect, eventTerms, billingFirstName, billingLastName, billingStreet, billingCity, billingState, billingPostal, billingCountry]) {
 	console.log('loop:', elem)
 	onChange(elem, e => {
-		console.log(e.target)
+		const target = '#' + e.target.id
 		// All non-discount code input fields: make proper case
-		if ([eventFirstName, eventLastName, eventPartnerFirstName, eventPartnerLastName, billingFirstName, billingLastName, billingStreet, billingCity, billingPostal].includes(e.target)) {
-			console.log(e.target)
+		if ([eventFirstName, eventLastName, eventPartnerFirstName, eventPartnerLastName, billingFirstName, billingLastName, billingStreet, billingCity, billingPostal].includes(target)) {
+			console.log(target)
 			// Proper case
-			let value = properCase(getValue(e.target))
+			let value = properCase(getValue(target))
 			// Remove empty spaces
-			if (value.includes(' ') && e.target !== billingStreet && e.target !== billingCity && e.target !== billingPostal) {
+			if (value.includes(' ') && target !== billingStreet && target !== billingCity && target !== billingPostal) {
 				value = value.replace(' ', '')
 			}
-			setValue(e.target, value)
+			setValue(target, value)
 		}
 		// Save form whenever a single field has changed...
 		saveForm(page())
