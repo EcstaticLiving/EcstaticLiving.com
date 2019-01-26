@@ -201,8 +201,8 @@ const calculateDiscount = discountCode => {
 // Check to see if discount code applies to this event
 const discountCodeValidation = () => {
 	const discountCode = isInviteOnlyEvent() ? getValue(eventInviteCode) : getValue(eventAffiliateCode)
-	const regex = new RegExp("([a-zA-Z0-9]){16,17}$")
-	return discountCode && discountCode.test(regex) ? discountCode.substr(discountCode.length - eventCode.length).toLowerCase() === eventCode.toLowerCase() && calculateDiscount(discountCode) : null
+	// const regex = new RegExp("([a-zA-Z0-9]){16,17}$")
+	return discountCode ? discountCode.substr(discountCode.length - eventCode.length).toLowerCase() === eventCode.toLowerCase() && calculateDiscount(discountCode) : null
 }
 
 // Get discount amount based on either invite field or affiliate code field
