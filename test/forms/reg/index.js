@@ -10,17 +10,17 @@ eventDepositAmount = parseFloat(getText('#event-deposit-amount')).toFixed(2),
 eventDepositDate = getText('#event-deposit-date'),
 eventBasePrice = parseFloat(getText('#event-base-price')).toFixed(2),
 eventBaseCost = parseFloat(getText('#event-base-cost')).toFixed(2),
-eventStatusRestriction = getText('#event-status-restriction'),
+eventStatusRestriction = getText('#event-status-restriction')
 
 // Event form
-const eventRegForm = '.event-container.reg-form',
+const eventRegForm = '.event-container.reg-form'
 
 // Invite-only
 const eventInviteButton = '#event-invitecode-button',
 eventInviteBox = '#event-invitecode-box',
 eventInviteCode = '#event-invitecode-code',
 eventInvitePass = '#event-invitecode-pass',
-eventInviteFail = '#event-invitecode-fail',
+eventInviteFail = '#event-invitecode-fail'
 
 // Personal
 const eventFirstName = '#event-firstname',
@@ -31,7 +31,7 @@ eventBirthdate = '#event-birthdate',
 eventGenderValidation = '#event-gender-validation',
 eventFemale = '#event-gender-female',
 eventMale = '#event-gender-male',
-eventOther = '#event-gender-other',
+eventOther = '#event-gender-other'
 
 // Details
 const eventReferral = '#event-referral',
@@ -75,7 +75,7 @@ eventPartnerMale = '#event-partner-gender-male',
 eventPartnerOther = '#event-partner-gender-other',
 eventPayValidation = '#event-pay-validation',
 eventPayBoth = '#event-pay-both',
-eventPayMe = '#event-pay-me',
+eventPayMe = '#event-pay-me'
 
 // Registration options
 const eventSelect = '#event-select',
@@ -93,11 +93,11 @@ eventDepositFull = '#event-deposit-full',
 eventDepositDeposit = '#event-deposit-deposit',
 eventAmountContainer = '.event-container.amount',
 eventAmountDisplay = '#event-amount-display',
-eventAmountShow = '#event-amount-show',
+eventAmountShow = '#event-amount-show'
 
 // Terms
 const eventTermsValidation = '#event-terms-validation',
-eventTerms = '#event-terms',
+eventTerms = '#event-terms'
 
 // Stripe billing variables
 const billingFirstName = '#billing-firstname',
