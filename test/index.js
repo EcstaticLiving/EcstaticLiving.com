@@ -25,6 +25,8 @@ const formSubmit = elem => $(elem).submit()
 const formErrorInit = elem => $(elem).parsley()
 const formErrorValidation = elem => $(elem).parsley().validate()
 const formReset = elem => $(elem)[0].reset()
+// Element Collections
+const getAttribute = (elem, attribute) => elem.getAttribute(attribute)
 const getElementsByTag = tag => document.getElementsByTagName(tag)
 // Element Conditions
 const isInput = elem => $(elem).is('input')

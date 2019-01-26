@@ -34,9 +34,8 @@ const clearForm = formType => {
 const saveForm = formType => {
 	let values = {}
 	const elements = [...getElementsByTag('input'), ...getElementsByTag('textarea'), ...getElementsByTag('select')]
-	console.log(elements)
 	elements.forEach(element => {
-		const name = element.attr('name')
+		const name = getAttribute(element, 'name')
 		if (
 			isRadio(isChecked(element))
 			|| (name && name !== '#event-invitecode-code' && name !== '#event-affiliate-code')
