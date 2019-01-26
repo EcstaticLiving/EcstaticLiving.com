@@ -17,7 +17,7 @@ for(let i in countries) {
 
 // Clear reg form
 const clearForm = formType => {
-	showElement('#form-load')
+	if (localStorage.getItem('EcstaticLiving:' + formType)) showElement('#form-load')
 	hideElement('#form-clear')
 	hideElement('.w-form-done')
 	hideElement('.w-form-fail')
