@@ -35,7 +35,7 @@ const isVisible = elem => $(elem).is(':visible')
 const animateElement = (elem, style, time) => $(elem).animate(style, time)
 const clickElement = elem => $(elem).trigger('click')
 const focusElement = elem => $(elem).focus()
-const fadeElement = (elem, time, opacity) => $(elem).fadeElement(time, opacity)
+const fadeElement = (elem, time, opacity) => $(elem).fadeTo(time, opacity)
 const hideElement = elem => $(elem).hide()
 const showElement = elem => $(elem).show()
 // Values
