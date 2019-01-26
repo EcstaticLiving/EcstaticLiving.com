@@ -1,12 +1,7 @@
-/*
-Code ©2018 Ecstatic Living Institute. All rights reserved.
-Created by Conscious Apps Inc. www.consciousapps.com
-*/
-window.onerror = function(msg) {
-	alert(msg)
-}
-var Webflow = Webflow || [];
-Webflow.push(function () {
+// Code ©2019 Ecstatic Life Inc. All rights reserved.
+window.onerror = msg => console.error(msg)
+var Webflow = Webflow || []
+Webflow.push(() => {
 	try {
 		var script = document.createElement('script')
 		script.type = 'text/javascript'
@@ -20,7 +15,7 @@ Webflow.push(function () {
 		}
 		document.getElementsByTagName('head')[0].appendChild(script)
 	}
-	catch(err) {
-		alert(err)
+	catch (err) {
+		console.error(err)
 	}
 })
