@@ -24,11 +24,9 @@ const clearForm = formType => {
 	hideElement('.w-form-fail')
 	if (formType === 'Event' && $(eventForm)[0]) {
 		$(eventForm)[0].reset()
-		resetForm()
 	}
 	else if (formType === 'Update' && $(customForm)[0]) {
 		$(customForm)[0].reset()
-		resetForm()
 	}
 }
 
