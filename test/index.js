@@ -16,7 +16,7 @@ const urlString = Object.assign({}, ...window.location.search.slice(1).split('&'
 }))
 // Element Event Listeners
 const onClick = (elem, f) => $(elem).on('click', f) // elem.addEventListener('click', f)
-const onChange = (elem, f) => $(elem).on('change', f) // elem.addEventListener('change', f)
+const onChange = (elem, f) => document[elem].addEventListener('change', f)
 const onSubmit = (elem, f) => $(elem).on('submit', f) // elem.addEventListener('submit', f)
 // Values
 const getValue = elem => $(elem).val()
