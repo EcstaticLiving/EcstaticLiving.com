@@ -28,6 +28,7 @@ const clearForm = formType => {
 	else if (formType === 'Update' && $(customForm)[0]) {
 		$(customForm)[0].reset()
 	}
+	resetForm()
 }
 
 // Save reg form
