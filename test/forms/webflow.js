@@ -1,22 +1,24 @@
 // Webflow code to submit form
 const conversion = (e, n) => {
 	let i = null;
-	return n = n || {}, e.find(':input:not([type="submit"])').each((r, o) => {
-		let a = $(o),
-			s = a.attr("type"),
-			u = a.attr("data-name") || a.attr("name") || "Field " + (r + 1),
-			l = a.val()
-		if ("checkbox" === s && (l = a.is(":checked")), "radio" === s) {
-			if (null === n[u] || "string" == typeof n[u]) return;
-			l = e.find('input[name="' + a.attr("name") + '"]:checked').val() || null
+	console.log(e.querySelectorAll(':input:not([type="submit"])'))
+	return n = n || {}, e.querySelectorAll(':input:not([type="submit"])').each((r, o) => {
+		let a = getElementById(o)
+		const name = getAttribute(a,'name')
+		let s = getAttribute(a,'type'),
+			u = getAttribute(a,'data-name') || name || "Field " + (r + 1),
+			l = getValue(a)
+		if (s === 'checkbox' && (l = isChecked(a)), s === 'radio') {
+			if (null === n[u] || typeof n[u] == 'string') return;
+			l = getValue(e.querySelectorAll('input[name="' + name + '"]:checked')) || null
 		}
-		"string" == typeof l && (l = $.trim(l)), n[u] = l, i = i || verification(a, s, u, l)
+		typeof l == 'string' && (l = $.trim(l)), n[u] = l, i = i || verification(a, s, u, l)
 	}), i
 }
 
 const verification = (t, e, n, i) => {
 	let r = null, k = /e(-)?mail/i, _ = /^\S+@\S+$/;
-	return "password" === e ? r = "Passwords cannot be submitted." : t.attr("required") && (i ? (k.test(n) || k.test(t.attr("type"))) && (_.test(i) || (r = "Please enter a valid email address for: " + n)) : r = "Please fill out the required field: " + n), r
+	return e === 'password' ? r = 'Passwords cannot be submitted.' : getAttribute(t,'required') && (i ? (k.test(n) || k.test(getAttribute(t,'type'))) && (_.test(i) || (r = 'Please enter a valid email address for: ' + n)) : r = 'Please fill out the required field: ' + n), r
 }
 
 const createForm = () => {
