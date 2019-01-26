@@ -36,7 +36,7 @@ for (elem of [eventAffiliateYes, eventAffiliateNo]) {
 // Affiliate box
 onChange(eventAffiliateCode, () => {
 	// Set uppercase
-	setValue(eventInviteCode, eventInviteCode.toUpperCase())
+	setValue(eventAffiliateCode, eventAffiliateCode.toUpperCase())
 	// Show errors, if any
 	affiliateCodeVerification()
 	// Adjust prices
@@ -83,17 +83,15 @@ onChange(eventPayMe, () => setEventPrices())
 
 // All reg fields
 for (elem of [eventFirstName, eventLastName, eventEmail, eventMobile, eventBirthdate, eventFemale, eventMale, eventOther, eventReferral, eventExperienceYes, eventExperienceNo, eventExperienceDetails, eventDietYes, eventDietNo, eventDietDetails, eventSpecialYes, eventSpecialNo, eventSpecialDetails, eventStatus, eventPartnerFirstName, eventPartnerLastName, eventPartnerFemale, eventPartnerMale, eventPartnerOther, eventPayBoth, eventPayMe, eventSelect, eventTerms, billingFirstName, billingLastName, billingStreet, billingCity, billingState, billingPostal, billingCountry]) {
-	console.log('loop:', elem)
 	onChange(elem, e => {
-		const target = '#' + e.target.id
 		// All non-discount code input fields: make proper case
+		const target = '#' + e.target.id
 		if ([eventFirstName, eventLastName, eventPartnerFirstName, eventPartnerLastName, billingFirstName, billingLastName, billingStreet, billingCity, billingPostal].includes(target)) {
-			console.log(target)
 			// Proper case
 			let value = properCase(getValue(target))
 			// Remove empty spaces
 			if (value.includes(' ') && target !== billingStreet && target !== billingCity && target !== billingPostal) {
-				value = value.replace(' ', '')
+				value = value.split(' ').join('-')
 			}
 			setValue(target, value)
 		}
