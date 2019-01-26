@@ -47,32 +47,34 @@ const stripeData = result => ({
 })
 
 // Stripe Elements
-const elements = containsUrl('ecstaticliving.com')
+const elements = (page() === 'Event' || page() === 'Update') && containsUrl('ecstaticliving.com')
 	? Stripe('pk_live_0rULIvKhv6aSLqI49Ae5rflI').elements()
 	: Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p').elements()
 
 // Stripe Card
-const card = elements.create('card', {
-	hidePostalCode: true,
-	style: {
-		base: {
-			fontFamily: 'Lato',
-			fontWeight: 300,
-			color: '#333',
-			fontSize: '16px',
-			lineHeight: '24px',
-			'::placeholder': {
-				color: '#666',
+const card = page() === 'Event' || page() === 'Update'
+	? elements.create('card', {
+			hidePostalCode: true,
+			style: {
+				base: {
+					fontFamily: 'Lato',
+					fontWeight: 300,
+					color: '#333',
+					fontSize: '16px',
+					lineHeight: '24px',
+					'::placeholder': {
+						color: '#666',
+					}
+				},
+				invalid: {
+					color: '#b00000',
+					':focus': {
+						color: '#b00000'
+					}
+				}
 			}
-		},
-		invalid: {
-			color: '#b00000',
-			':focus': {
-				color: '#b00000'
-			}
-		}
-	}
-})
+		})
+	: null
 
 // Payment validation called on form submission, or when `Billing Card` field is changed
 const paymentValidation = result => {
@@ -119,8 +121,10 @@ const indicateFailedSubmission = type => {
 
 
 // Begin
-card.mount('#card-element')
-card.addEventListener('change', result => paymentValidation(result))
+if (page() === 'Event' || page() === 'Update') {
+	card.mount('#card-element')
+	card.addEventListener('change', result => paymentValidation(result))	
+}
 onClick('#button-stripe-error', () => hideElement('.notification-modal.card-error'))
 
 
