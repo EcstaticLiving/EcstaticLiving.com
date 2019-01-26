@@ -157,7 +157,7 @@ onClick(paymentButton, e => {
 	setValue('#question-special', getValue(eventSpecialDetails) ? getValue(eventSpecialDetails) : '- none -')
 
 	// Initiate payment: first, check to see if card is valid.
-	const stripeCard = await stripe.createSource(card, {
+	const stripeCard = stripe.createSource(card, {
 		owner: {
 			name: getValue(billingFirstName) + ' ' + getValue(billingLastName),
 			address: {
@@ -170,6 +170,8 @@ onClick(paymentButton, e => {
 			email: getValue(eventEmail)
 		}
 	})
+
+	console.log(stripeCard)
 
 	// Send result to be validated
 	if (paymentValidation(stripeCard)) {
