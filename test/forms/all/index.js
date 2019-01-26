@@ -36,6 +36,7 @@ const saveForm = formType => {
 	$('input, textarea, select').each(() => {
 		const name = $(this).attr('name')
 		if ((isRadio(isChecked(this)) && $(this)) || name !== 'Event-Invite-Code') {
+			console.log(this)
 			values[name] = getValue(this)
 		}
 	})
