@@ -78,14 +78,12 @@ onChange(eventStatus, () => participants() === 2 ? showPartner() : hidePartner()
 onChange(eventPayBoth, () => setEventPrices())
 onChange(eventPayMe, () => setEventPrices())
 
-// All non-discount code input fields: check for title capitalization
+// All non-discount code input fields: make proper case
 for (elem of [eventFirstName, eventLastName, eventPartnerFirstName, eventPartnerLastName, billingFirstName, billingLastName, billingStreet, billingCity, billingPostal]) {
 	onChange(elem, () => {
-		// Prevent ALL CAPS
-		let value = getValue(elem).toLowerCase()
-		// Title case
-		value = value.charAt(0).toUpperCase() + value.slice(1)
-		// No empty spaces
+		// Proper case
+		let value = properCase(getValue(elem))
+		// Remove empty spaces
 		if (value.includes(' ') && elem !== billingStreet && elem !== billingCity && elem !== billingPostal) {
 			value = value.replace(' ', '')
 		}
