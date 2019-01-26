@@ -14,6 +14,10 @@ const urlString = Object.assign({}, ...window.location.search.slice(1).split('&'
 	const property = item.split('=')[0]
 	return { [property]: item.split('=')[1] }
 }))
+// Element Event Listeners
+const onClick = (elem, f) => $(elem).on('click', f) // elem.addEventListener('click', f)
+const onChange = (elem, f) => $(elem).on('change', f) // elem.addEventListener('change', f)
+const onSubmit = (elem, f) => $(elem).on('submit', f) // elem.addEventListener('submit', f)
 // Values
 const getValue = elem => $(elem).val()
 const emptyValue = elem => $(elem).val('')
@@ -32,10 +36,6 @@ const setCss = (elem, css) => $(elem).css(css)
 // Check radio
 const checkElement = elem => $(elem).prop('checked', true)
 const unCheckElement = elem => $(elem).prop('checked', false)
-// Element Event Listeners
-const onClick = (elem, f) => $(elem).on('click', f) // elem.addEventListener('click', f)
-const onChange = (elem, f) => $(elem).on('change', f) // elem.addEventListener('change', f)
-const onSubmit = (elem, f) => $(elem).on('submit', f) // elem.addEventListener('submit', f)
 // Element Conditions
 const isRadio = elem => $(elem).is(':radio')
 const isBlank = elem => getText(elem) === '' && getValue(elem) === ''
