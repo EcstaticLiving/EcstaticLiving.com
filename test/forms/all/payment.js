@@ -21,8 +21,8 @@ const stripeUrl = containsUrl('ecstaticliving.com')
 // Stripe charge description
 const chargeDescription = eventTitle + ' ' + eventDates + ', ' + eventVenue + ', ' + getText(eventSelect).substring(0, getText(eventSelect).length - 16) + ', ' + isChecked(eventDepositDeposit) ? 'DEPOSIT' : 'FULL'
 
-// Stripe data
-const stripeData = {
+// Stripe data: pass result from stripeCard into `source`
+const stripeData = result => ({
 	'chargeAmount': finalAmount() * 100,
 	'chargeDescription': chargeDescription,
 	'customerDescription': getValue(eventFirstName) + ' ' + getValue(eventLastName) + ' <' + getValue(eventEmail) + '>',
@@ -44,7 +44,7 @@ const stripeData = {
 	'priceBalanceDate': eventDepositDate,
 	'lodging': eventOptions[$(eventSelect).index() - 1],
 	'source': result.source.id
-}
+})
 
 // Stripe Elements
 const elements = containsUrl('ecstaticliving.com')
@@ -171,8 +171,6 @@ onClick(paymentButton, async e => {
 		}
 	})
 
-	console.log(stripeCard)
-
 	// Send result to be validated
 	if (paymentValidation(stripeCard)) {
 
@@ -190,7 +188,7 @@ onClick(paymentButton, async e => {
 				try {
 
 					// On successful payment submission, hide processing and redirect to success page.
-					return await formSubmission({ data: stripeData, url: stripeUrl }) ? successfulSubmission() : false
+					return await formSubmission({ data: stripeData(stripeCard), url: stripeUrl }) ? successfulSubmission() : false
 
 				}
 				// ...on Stripe error...
