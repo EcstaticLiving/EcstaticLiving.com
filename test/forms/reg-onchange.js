@@ -18,7 +18,7 @@ onClick(eventInviteButton, () => e => {
 	// Adjust prices
 	setEventPrices()
 })
-onChange(eventInviteCode, () => setValue(eventInviteCode, getValue(eventInviteCode).toUpperCase()))
+onInput(eventInviteCode, () => setValue(eventInviteCode, getValue(eventInviteCode).toUpperCase()))
 
 // Affiliate yes/no?
 for (elem of [eventAffiliateYes, eventAffiliateNo]) {
@@ -35,13 +35,13 @@ for (elem of [eventAffiliateYes, eventAffiliateNo]) {
 
 // Affiliate box
 onChange(eventAffiliateCode, () => {
-	// Set uppercase
-	setValue(eventAffiliateCode, getValue(eventAffiliateCode).toUpperCase())
 	// Show errors, if any
 	affiliateCodeVerification()
 	// Adjust prices
 	setEventPrices()
 })
+// Set uppercase
+onInput(eventAffiliateCode, () => setValue(eventAffiliateCode, getValue(eventAffiliateCode).toUpperCase()))
 
 // Personal
 onChange(eventFirstName, () => setValue(billingFirstName, getValue(eventFirstName)))
