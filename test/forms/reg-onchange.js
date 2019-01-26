@@ -18,6 +18,7 @@ onClick(eventInviteButton, () => e => {
 	// Adjust prices
 	setEventPrices()
 })
+onChange(eventInviteCode, () => setValue(eventInviteCode, eventInviteCode.toUpperCase()))
 
 // Affiliate yes/no?
 for (elem of [eventAffiliateYes, eventAffiliateNo]) {
@@ -34,6 +35,8 @@ for (elem of [eventAffiliateYes, eventAffiliateNo]) {
 
 // Affiliate box
 onChange(eventAffiliateCode, () => {
+	// Set uppercase
+	setValue(eventInviteCode, eventInviteCode.toUpperCase())
 	// Show errors, if any
 	affiliateCodeVerification()
 	// Adjust prices
@@ -81,8 +84,10 @@ onChange(eventPayMe, () => setEventPrices())
 // All reg fields
 for (elem of [eventFirstName, eventLastName, eventEmail, eventMobile, eventBirthdate, eventFemale, eventMale, eventOther, eventReferral, eventExperienceYes, eventExperienceNo, eventExperienceDetails, eventDietYes, eventDietNo, eventDietDetails, eventSpecialYes, eventSpecialNo, eventSpecialDetails, eventStatus, eventPartnerFirstName, eventPartnerLastName, eventPartnerFemale, eventPartnerMale, eventPartnerOther, eventPayBoth, eventPayMe, eventSelect, eventTerms, billingFirstName, billingLastName, billingStreet, billingCity, billingState, billingPostal, billingCountry]) {
 	onChange(elem, () => {
+		console.log(elem)
 		// All non-discount code input fields: make proper case
 		if ([eventFirstName, eventLastName, eventPartnerFirstName, eventPartnerLastName, billingFirstName, billingLastName, billingStreet, billingCity, billingPostal].includes(elem)) {
+			console.log(elem)
 			// Proper case
 			let value = properCase(getValue(elem))
 			// Remove empty spaces
