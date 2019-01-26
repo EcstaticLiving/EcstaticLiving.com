@@ -125,7 +125,7 @@ onClick('#button-stripe-error', () => hideElement('.notification-modal.card-erro
 
 
 // Always allow pay now button to be clicked
-onClick(paymentButton, e => {
+onClick(paymentButton, async e => {
 
 	// Prevent accidental submission of form through 'enter' key
 	e.preventDefault()
@@ -157,7 +157,7 @@ onClick(paymentButton, e => {
 	setValue('#question-special', getValue(eventSpecialDetails) ? getValue(eventSpecialDetails) : '- none -')
 
 	// Initiate payment: first, check to see if card is valid.
-	const stripeCard = stripe.createSource(card, {
+	const stripeCard = await stripe.createSource(card, {
 		owner: {
 			name: getValue(billingFirstName) + ' ' + getValue(billingLastName),
 			address: {
