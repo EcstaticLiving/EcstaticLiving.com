@@ -138,7 +138,7 @@ const paymentQty = () => participants() === 2 && isChecked(eventPayBoth) ? 2 : 1
 const depositAmount = () => eventDepositAmount ? parseFloat(eventDepositAmount * paymentQty()).toFixed(2) : 0
 
 // Final amount
-const finalAmount = () => isChecked(eventDepositDeposit) && new Date() < new Date(eventDepositDate) ? depositAmount() : getValue(eventSelect).toFixed(2)
+const finalAmount = () => isChecked(eventDepositDeposit) && new Date() < new Date(eventDepositDate) ? depositAmount() : getValue(eventSelect)
 
 // Create name of party
 const partyName = () => {
