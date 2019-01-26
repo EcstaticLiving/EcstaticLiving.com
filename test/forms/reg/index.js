@@ -135,7 +135,7 @@ const participants = () => ((getValue($(eventStatus).find('option:selected')) ==
 const paymentQty = () => participants() === 2 && isChecked(eventPayBoth) ? 2 : 1
 
 // Deposit amount
-const depositAmount = () => parseFloat(eventDepositAmount * paymentQty()).toFixed(2)
+const depositAmount = () => eventDepositAmount ? parseFloat(eventDepositAmount * paymentQty()).toFixed(2) : 0
 
 // Final amount
 const finalAmount = () => isChecked(eventDepositDeposit) && new Date() < new Date(eventDepositDate) ? depositAmount() : getValue(eventSelect).toFixed(2)
