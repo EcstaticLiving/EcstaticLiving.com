@@ -26,7 +26,7 @@ const setValue = (elem, val) => $(elem).val(val)
 const getText = elem => $(elem).text()
 const setText = (elem, val) => $(elem).text(val)
 const emptyText = elem => $(elem).text('')
-const properCase = text => text.toLowerCase().charAt(0).toUpperCase() + value.slice(1)
+const properCase = text => text.toLowerCase().charAt(0).toUpperCase() + text.slice(1)
 // Select
 const emptySelect = elem => $(elem).empty()
 const appendSelect = (elem, option) => $(elem).append(option)
