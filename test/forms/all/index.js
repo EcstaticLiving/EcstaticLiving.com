@@ -24,7 +24,7 @@ const clearForm = formType => {
 	if (formType === 'Event' && $(eventForm)[0]) {
 		$(eventForm)[0].reset()
 	}
-	else if (formType === 'Custom' && $(customForm)[0]) {
+	else if (formType === 'Update' && $(customForm)[0]) {
 		$(customForm)[0].reset()
 	}
 }

@@ -195,7 +195,7 @@ onClick(paymentButton, async e => {
 				catch (err) {
 
 					// ...if `update card`, $0 charge to save credit card details will cause error; do not indicate as error.
-					if (page() === 'Custom' && err.responseJSON && err.responseJSON.message === 'Invalid positive integer') {
+					if (page() === 'Update' && err.responseJSON && err.responseJSON.message === 'Invalid positive integer') {
 						window.location.href = containsUrl('ecstaticliving.com')
 							? 'https://www.ecstaticliving.com/updated-card'
 							: 'https://ecstaticliving.webflow.io/updated-card'

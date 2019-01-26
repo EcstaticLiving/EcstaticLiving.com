@@ -64,7 +64,7 @@ const showAndScrollTo = elem => {
 
 const page = () => {
   if (containsUrl('/events/'))  return 'Event'
-  if (endsWithUrl('/update'))   return 'Custom'
+  if (endsWithUrl('/update'))   return 'Update'
   return null
 }
 

@@ -534,4 +534,6 @@ const resetForm = () => {
 
 
 // BEGIN
-resetForm()
+if (page() === 'Event' || page() === 'Update') {
+	resetForm()
+}
