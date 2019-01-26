@@ -37,10 +37,10 @@ const setCustomChargeSelect = () => {
 	//	Adds options & prices based on CMS input
 	emptySelect(customSelect)
 	if (customOptions.length > 0) {
-		$(customSelect).append($('<option>', { text: 'Custom charge option...', value: '' }))
+		appendSelect(customSelect, { text: 'Custom charge option...', value: '' })
 	}
 	for (let i = 0; i < customOptions.length; i++) {
-		$(customSelect).append($('<option>', { text: customOptions[i] + ' - $' + customPrices[i], value: customPrices[i] }))
+		appendSelect(customSelect, { text: customOptions[i] + ' - $' + customPrices[i], value: customPrices[i] })
 	}
 }
 
@@ -50,18 +50,21 @@ const resetForm = () => {
 	setCustomChargeSelect()
 	formErrorInit(customForm)
 	showElement(customForm)
-	$(customTerms).attr('checked', false)
+	unCheckElement(customTerms)
 	formValidation()
 	setCss(paymentButton, { 'background-color': '#f5f5f5' })
 	setCss(paymentButton, { 'color': '#333333' })
 }
 
 // CUSTOM CHARGE ONCHANGE EVENTS
-$(customFirstName).on('change', () => setValue(billingFirstName, getValue(eventFirstName)))
-$(customLastName).on('change', () => setValue(billingLastName, getValue(eventLastName)))
-$(customFirstName + ',' + customLastName + ',' + customEmail + ',' + customMobile + ',' + customSelect + ',' + customTerms + ',' + billingFirstName + ',' + billingLastName + ',' + billingStreet + ',' + billingCity + ',' + billingState + ',' + billingPostal + ',' + billingCountry).on('change', () => {
-	formValidation()
-})
+onChange(customFirstName, () => setValue(billingFirstName, getValue(eventFirstName)))
+onChange(customLastName, () => setValue(billingLastName, getValue(eventLastName)))
+
+// If any fields have changed...
+for (elem of [customFirstName, customLastName, customEmail, customMobile, customSelect, customTerms, billingFirstName, billingLastName, billingStreet, billingCity, billingState, billingPostal, billingCountry]) {
+	// ...validate form to either activate or deactivate Pay Now button.
+	onChange(elem, () => formValidation())
+}
 
 // RESET CUSTOM CHARGE
 resetForm()

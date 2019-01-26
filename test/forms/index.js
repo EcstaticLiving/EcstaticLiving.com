@@ -33,13 +33,15 @@ const clearForm = formType => {
 // Save reg form
 const saveForm = formType => {
 	let values = {}
-	$('input, textarea, select').each(() => {
-		const name = $(this).attr('name')
+	const elements = [...getElementsByTag('input'), ...getElementsByTag('textarea'), ...getElementsByTag('select')]
+	console.log(elements)
+	elements.forEach(element => {
+		const name = element.attr('name')
 		if (
-			isRadio(isChecked(this))
+			isRadio(isChecked(element))
 			|| (name && name !== '#event-invitecode-code' && name !== '#event-affiliate-code')
 		) {
-			values[name] = getValue(this)
+			values[name] = getValue(element)
 		}
 	})
 	localStorage.setItem('EcstaticLiving:' + formType, JSON.stringify(values))
