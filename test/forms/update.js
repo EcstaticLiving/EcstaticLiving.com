@@ -66,7 +66,7 @@ $(customFirstName + ',' + customLastName + ',' + customEmail + ',' + customMobil
 // RESET CUSTOM CHARGE
 resetForm()
 
-$(paymentButton).on('click', e => {
+onClick(paymentButton, e => {
 
 	if (!formValidation()) {
 		showErrorsInForm()

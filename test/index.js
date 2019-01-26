@@ -31,6 +31,13 @@ const isRadio = elem => $(elem).is(':radio')
 const isBlank = elem => getText(elem) === '' && getValue(elem) === ''
 const isChecked = elem => $(elem).is(':checked')
 const isVisible = elem => $(elem).is(':visible')
+// Element Behaviours
+const animateElement = (elem, style, time) => $(elem).animate(style, time)
+const clickElement = elem => $(elem).trigger('click')
+const focusElement = elem => $(elem).focus()
+const fadeElement = (elem, time, opacity) => $(elem).fadeElement(time, opacity)
+const hideElement = elem => $(elem).hide()
+const showElement = elem => $(elem).show()
 // Values
 const getValue = elem => $(elem).val()
 const emptyValue = elem => $(elem).val('')
@@ -50,13 +57,6 @@ const setCss = (elem, css) => $(elem).css(css)
 // Check radio
 const checkElement = elem => $(elem).prop('checked', true)
 const unCheckElement = elem => $(elem).prop('checked', false)
-// Element Behaviours
-const animate = (elem, style, time) => $(elem).animate(style, time)
-const click = elem => $(elem).trigger('click')
-const focusElement = elem => $(elem).focus()
-const fadeTo = (elem, time, opacity) => $(elem).fadeTo(time, opacity)
-const hideElement = elem => $(elem).hide()
-const showElement = elem => $(elem).show()
 // Combined Behaviours
 const emptyHideText = elem => {
 	emptyText(elem)
@@ -103,13 +103,13 @@ const openCloseNavMenu = () => {
 	//	If nav menu is opened
 	if (!isVisible('.nav-close')) {
 		showElement('.nav-container')
-		animate('.nav-container', { marginLeft: '0%' }, 500)
+		animateElement('.nav-container', { marginLeft: '0%' }, 500)
 		showElement('.nav-close')
-		fadeTo('.nav-close', 1000, 1)
+		fadeElement('.nav-close', 1000, 1)
   }
   else {
-		animate('.nav-container', { marginLeft: '100%' }, 500)
-		fadeTo('.nav-close', 1000, 0)
+		animateElement('.nav-container', { marginLeft: '100%' }, 500)
+		fadeElement('.nav-close', 1000, 0)
 		setTimeout(1000, () => hideElement('.nav-close'))
 	}
 }
@@ -127,9 +127,9 @@ const goToLastPage = () => {
 // If window orientation changes
 $(window).on('load orientationchange', () => setOrientation())
 // If nav menu is opened
-$('.menu-icon').on('click', () => openCloseNavMenu())
+onClick('.menu-icon', () => openCloseNavMenu())
 // If nav menu is closed
-$('.nav-close').on('click', () => click('.menu-icon'))
+onClick('.nav-close', () => clickElement('.menu-icon'))
 // Social Share Kit
 SocialShareKit.init({ title: document.title })
 // Back Button
