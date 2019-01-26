@@ -40,6 +40,7 @@ const saveForm = formType => {
 		}
 	})
 	localStorage.setItem('EcstaticLiving:' + formType, JSON.stringify(values))
+	showElement('#form-load')
 }
 
 // Repopulate saved reg form
