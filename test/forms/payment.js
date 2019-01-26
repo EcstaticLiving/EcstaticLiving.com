@@ -42,7 +42,7 @@ const stripeData = result => ({
 	'costBase': !isNaN(eventBaseCost) ? (eventBaseCost * paymentQty()).toFixed(2) : 0,
 	'priceDeposit': isChecked(eventDepositDeposit) ? finalAmount() : 0,
 	'priceBalanceDate': eventDepositDate,
-	'lodging': eventOptions[$(eventSelect).index() - 1],
+	'lodging': eventOptions[getIndex(eventSelect) - 1],
 	'source': result.source.id
 })
 

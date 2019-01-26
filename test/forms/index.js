@@ -1,6 +1,6 @@
 // Prevent accidental submission of form through 'enter' key
-$(document).on('keypress', e => {
-	if ($(e.target).is('input') && e.which === 13) {
+onKeyPress(document, e => {
+	if (isInput(e.target) && e.which === 13) {
 		e.preventDefault()
 		return false
 	}
@@ -22,11 +22,11 @@ const clearForm = formType => {
 	hideElement('#form-clear')
 	hideElement('.w-form-done')
 	hideElement('.w-form-fail')
-	if (formType === 'Event' && $(eventForm)[0]) {
-		$(eventForm)[0].reset()
+	if (formType === 'Event') {
+		formReset(eventForm)
 	}
-	else if (formType === 'Update' && $(customForm)[0]) {
-		$(customForm)[0].reset()
+	else if (formType === 'Update') {
+		formReset(customForm)
 	}
 }
 

@@ -9,9 +9,9 @@ const initiateContactForm = () => {
 }
 
 const submitContactForm = () => {
-	$('.contact-form').parsley()
-	if ($('.contact-form').parsley().validate()) {
-		$('.contact-form').submit()
+	formErrorInitialization('.contact-form')
+	if (formErrorValidation('.contact-form')) {
+		formSubmit('.contact-form')
 		fadeTo('.contact-section', 500, 0)
 		hideElement('.contact-section')
 		showElement('.received-section')
@@ -20,4 +20,4 @@ const submitContactForm = () => {
 }
 initiateContactForm()
 //	Contact form complete, send user to confirmation
-$('.button.contact').on('click', () => submitContactForm())
+onClick('.button.contact', () => submitContactForm())

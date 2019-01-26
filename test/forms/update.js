@@ -30,7 +30,7 @@ const showErrorsInForm = () => {
   else {
     setCss(customTermsValidation, { 'background-color': 'transparent' })
   }
-	$(customForm).parsley().validate()
+	formErrorValidation(customForm)
 }
 
 const setCustomChargeSelect = () => {
@@ -48,7 +48,7 @@ const resetForm = () => {
 	clearForm(page())
 	repopulateForm(page())
 	setCustomChargeSelect()
-	$(customForm).parsley()
+	formErrorInit(customForm)
 	showElement(customForm)
 	$(customTerms).attr('checked', false)
 	formValidation()

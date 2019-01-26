@@ -129,7 +129,7 @@ const paymentButtonDisabled = () => {
 const isInviteOnlyEvent = () => isVisible(eventInviteBox)
 
 // # of participants
-const participants = () => ((getValue($(eventStatus).find('option:selected')) === 'Couple') || (getValue($(eventStatus).find('option:selected')) === 'Two Singles (paired)')) ? 2 : 1
+const participants = () => ((getValue(eventStatus) === 'Couple') || (getValue(eventStatus) === 'Two Singles (paired)')) ? 2 : 1
 
 // # of people paid for
 const paymentQty = () => participants() === 2 && isChecked(eventPayBoth) ? 2 : 1
@@ -409,7 +409,7 @@ const showErrorsInForm = () => {
 	showClearError({ condition: !isChecked(eventExperienceYes) && !isChecked(eventExperienceNo), element: eventExperienceValidation })
 	showClearError({ condition: isChecked(eventExperienceYes) && isBlank(eventExperienceDetails), element: eventExperienceDetails })
 	showClearError({ condition: !isChecked(eventFemale) && !isChecked(eventMale) && !isChecked(eventOther), element: eventGenderValidation })
-	$(eventForm).parsley().validate()
+	formErrorValidation(eventForm)
 }
 
 
@@ -527,7 +527,7 @@ const resetForm = () => {
 	paymentButtonDisabled()
 
 	// Connect the error checking function to the form...
-	$(eventForm).parsley()
+	formErrorInit(eventForm)
 	// ...and show it.
 	showElement(eventForm)
 

@@ -19,6 +19,18 @@ const onClick = (elem, f) => $(elem).on('click', e => f(e)) // elem.addEventList
 const onChange = (elem, f) => $(elem).on('change', e => f(e))
 const onInput = (elem, f) => $(elem).on('input', f)
 const onSubmit = (elem, f) => $(elem).on('submit', f)
+const onKeyPress = (elem, f) => $(elem).on('keypress', e => f(e))
+// Form behaviours
+const formSubmit = elem => $(elem).submit()
+const formErrorInit = elem => $(elem).parsley()
+const formErrorValidation = elem => $(elem).parsley().validate()
+const formReset = elem => $(elem)[0].reset()
+// Element Conditions
+const isInput = elem => $(elem).is('input')
+const isRadio = elem => $(elem).is(':radio')
+const isBlank = elem => getText(elem) === '' && getValue(elem) === ''
+const isChecked = elem => $(elem).is(':checked')
+const isVisible = elem => $(elem).is(':visible')
 // Values
 const getValue = elem => $(elem).val()
 const emptyValue = elem => $(elem).val('')
@@ -31,20 +43,16 @@ const properCase = text => text.toLowerCase().charAt(0).toUpperCase() + text.sli
 // Select
 const emptySelect = elem => $(elem).empty()
 const appendSelect = (elem, option) => $(elem).append(option)
+const getIndex = elem => $(elem).index()
 // HTML
 const setHtml = (elem, val) => $(elem).html(val)
 const setCss = (elem, css) => $(elem).css(css)
 // Check radio
 const checkElement = elem => $(elem).prop('checked', true)
 const unCheckElement = elem => $(elem).prop('checked', false)
-// Element Conditions
-const isRadio = elem => $(elem).is(':radio')
-const isBlank = elem => getText(elem) === '' && getValue(elem) === ''
-const isChecked = elem => $(elem).is(':checked')
-const isVisible = elem => $(elem).is(':visible')
 // Element Behaviours
 const animate = (elem, style, time) => $(elem).animate(style, time)
-const click = (elem) => $(elem).trigger('click')
+const click = elem => $(elem).trigger('click')
 const focusElement = elem => $(elem).focus()
 const fadeTo = (elem, time, opacity) => $(elem).fadeTo(time, opacity)
 const hideElement = elem => $(elem).hide()
