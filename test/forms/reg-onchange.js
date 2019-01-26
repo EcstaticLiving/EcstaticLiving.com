@@ -2,7 +2,10 @@
 onSubmit(eventForm, () => null)
 
 // Clear form
-onClick('#form-clear', () => clearForm(page()))
+onClick('#form-clear', () => {
+	clearForm(page())
+	resetForm()
+})
 
 // Load form
 onClick('#form-load', () => repopulateForm(page()))
