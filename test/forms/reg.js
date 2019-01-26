@@ -299,6 +299,7 @@ const formValidation = () => {
 		)
 	}
 
+	console.log(discountCodeValidation() && personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && termsValidation() && billingValidation())
 	if (
 		discountCodeValidation() && personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && termsValidation() && billingValidation()
 	) {
