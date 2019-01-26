@@ -201,6 +201,7 @@ const calculateDiscount = discountCode => {
 // Check to see if discount code applies to this event
 const discountCodeValidation = () => {
 	const discountCode = isInviteOnlyEvent() ? getValue(eventInviteCode) : getValue(eventAffiliateCode)
+	console.log('yo')
 	return null
 }
 
