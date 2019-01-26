@@ -217,6 +217,10 @@ const setEventPrices = () => {
 	if (eventOptions.length > 0) {
 		appendSelect(eventSelect, '<option value=\'\'>Event option...</option>')
 	}
+	const people = paymentQty() === 2
+			? 'for both'
+			: 'per person'
+	const paymentClarification = participants() === 2 ? ' ' + people : ''
 	// Create dropdown
 	for (let i = 0; i < eventOptions.length; i++) {
 		// Event price cannot be less than $0 after discount is applied
@@ -229,11 +233,6 @@ const setEventPrices = () => {
 		const eventNote = eventNotes[i]
 			? eventNotes[i]
 			: ''
-		// only applies to `participants() === 2`
-		const people = paymentQty() === 2
-			? 'for both'
-			: 'per person'
-		const paymentClarification = participants() === 2 ? ' ' + people : ''
 		const eventSelectText = eventOptions[i] + ' ($' + eventSelectPrice + paymentClarification + affiliateDiscountText + ')' + eventNote
 		appendSelect(eventSelect, '<option value=\'' + eventSelectPrice + '\'>' + eventSelectText + '</option>')
 	}

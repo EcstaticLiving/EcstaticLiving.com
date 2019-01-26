@@ -17,15 +17,17 @@ onClick(eventInviteButton, () => e => {
 })
 
 // Affiliate yes/no?
-[eventAffiliateYes, eventAffiliateNo].forEach(elem => onChange(elem, () => {
-	// If affiliate code, show code input field...
-	if (isChecked(eventAffiliateYes)) showAndScrollTo(eventAffiliateCodeContainer)
-	// ...otherwise, hide it.
-	else {
-		emptyValue(eventAffiliateCodeContainer)
-		hideElement(eventAffiliateCodeContainer)
-	}
-}))
+for (elem of [eventAffiliateYes, eventAffiliateNo]) {
+	onChange(elem, () => {
+		// If affiliate code, show code input field...
+		if (isChecked(eventAffiliateYes)) showAndScrollTo(eventAffiliateCodeContainer)
+		// ...otherwise, hide it.
+		else {
+			emptyValue(eventAffiliateCodeContainer)
+			hideElement(eventAffiliateCodeContainer)
+		}
+	})
+}
 
 // Affiliate box
 onChange(eventAffiliateCode, () => {
