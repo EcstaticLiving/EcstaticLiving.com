@@ -78,11 +78,23 @@ onChange(eventStatus, () => participants() === 2 ? showPartner() : hidePartner()
 onChange(eventPayBoth, () => setEventPrices())
 onChange(eventPayMe, () => setEventPrices())
 
+// All non-discount code input fields: check for title capitalization
+for (elem of [eventFirstName, eventLastName, eventPartnerFirstName, eventPartnerLastName, billingFirstName, billingLastName, billingStreet, billingCity, billingPostal]) {
+	onChange(elem, () => {
+		// Prevent ALL CAPS
+		let value = getValue(elem).toLowerCase()
+		// Title case
+		value = value.charAt(0).toUpperCase() + value.slice(1)
+		// No empty spaces
+		if (value.includes(' ') && elem !== billingStreet && elem !== billingCity && elem !== billingPostal) {
+			value = value.replace(' ', '')
+		}
+		setValue(elem, value)
+	})
+}
+
 // All reg fields
-for (elem of
-[
-	eventFirstName, eventLastName, eventEmail, eventMobile, eventBirthdate, eventFemale, eventMale, eventOther, eventReferral, eventExperienceYes, eventExperienceNo, eventExperienceDetails, eventDietYes, eventDietNo, eventDietDetails, eventSpecialYes, eventSpecialNo, eventSpecialDetails, eventStatus, eventPartnerFirstName, eventPartnerLastName, eventPartnerFemale, eventPartnerMale, eventPartnerOther, eventPayBoth, eventPayMe, eventSelect, eventTerms, billingFirstName, billingLastName, billingStreet, billingCity, billingState, billingPostal, billingCountry
-]) {
+for (elem of [eventFirstName, eventLastName, eventEmail, eventMobile, eventBirthdate, eventFemale, eventMale, eventOther, eventReferral, eventExperienceYes, eventExperienceNo, eventExperienceDetails, eventDietYes, eventDietNo, eventDietDetails, eventSpecialYes, eventSpecialNo, eventSpecialDetails, eventStatus, eventPartnerFirstName, eventPartnerLastName, eventPartnerFemale, eventPartnerMale, eventPartnerOther, eventPayBoth, eventPayMe, eventSelect, eventTerms, billingFirstName, billingLastName, billingStreet, billingCity, billingState, billingPostal, billingCountry]) {
 	onChange(elem, () => {
 		// Save form whenever a single field has changed...
 		saveForm(page())
