@@ -201,8 +201,7 @@ const calculateDiscount = discountCode => {
 // Check to see if discount code applies to this event
 const discountCodeValidation = () => {
 	const discountCode = isInviteOnlyEvent() ? getValue(eventInviteCode) : getValue(eventAffiliateCode)
-	console.log(discountCode)
-	return discountCode.substr(discountCode.length - eventCode.length).toLowerCase() === eventCode.toLowerCase() && calculateDiscount(discountCode)
+	return discountCode ? discountCode.substr(discountCode.length - eventCode.length).toLowerCase() === eventCode.toLowerCase() && calculateDiscount(discountCode) : null
 }
 
 // Get discount amount based on either invite field or affiliate code field
