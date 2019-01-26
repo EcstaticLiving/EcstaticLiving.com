@@ -78,22 +78,19 @@ onChange(eventStatus, () => participants() === 2 ? showPartner() : hidePartner()
 onChange(eventPayBoth, () => setEventPrices())
 onChange(eventPayMe, () => setEventPrices())
 
-// All non-discount code input fields: make proper case
-for (elem of [eventFirstName, eventLastName, eventPartnerFirstName, eventPartnerLastName, billingFirstName, billingLastName, billingStreet, billingCity, billingPostal]) {
-	onChange(elem, () => {
-		// Proper case
-		let value = properCase(getValue(elem))
-		// Remove empty spaces
-		if (value.includes(' ') && elem !== billingStreet && elem !== billingCity && elem !== billingPostal) {
-			value = value.replace(' ', '')
-		}
-		setValue(elem, value)
-	})
-}
-
 // All reg fields
 for (elem of [eventFirstName, eventLastName, eventEmail, eventMobile, eventBirthdate, eventFemale, eventMale, eventOther, eventReferral, eventExperienceYes, eventExperienceNo, eventExperienceDetails, eventDietYes, eventDietNo, eventDietDetails, eventSpecialYes, eventSpecialNo, eventSpecialDetails, eventStatus, eventPartnerFirstName, eventPartnerLastName, eventPartnerFemale, eventPartnerMale, eventPartnerOther, eventPayBoth, eventPayMe, eventSelect, eventTerms, billingFirstName, billingLastName, billingStreet, billingCity, billingState, billingPostal, billingCountry]) {
 	onChange(elem, () => {
+		// All non-discount code input fields: make proper case
+		if ([eventFirstName, eventLastName, eventPartnerFirstName, eventPartnerLastName, billingFirstName, billingLastName, billingStreet, billingCity, billingPostal].includes(elem)) {
+			// Proper case
+			let value = properCase(getValue(elem))
+			// Remove empty spaces
+			if (value.includes(' ') && elem !== billingStreet && elem !== billingCity && elem !== billingPostal) {
+				value = value.replace(' ', '')
+			}
+			setValue(elem, value)
+		}
 		// Save form whenever a single field has changed...
 		saveForm(page())
 		// ...and keep validating form to either activate or deactivate Pay Now button.
