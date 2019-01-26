@@ -39,12 +39,10 @@ const saveForm = formType => {
 			isRadio(isChecked(this))
 			|| (name && name !== '#event-invitecode-code' && name !== '#event-affiliate-code')
 		) {
-			console.log(name)
 			values[name] = getValue(this)
 		}
 	})
 	localStorage.setItem('EcstaticLiving:' + formType, JSON.stringify(values))
-	showElement('#form-load')
 }
 
 // Repopulate saved reg form

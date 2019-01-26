@@ -15,10 +15,7 @@ const urlString = Object.assign({}, ...window.location.search.slice(1).split('&'
 	return { [property]: item.split('=')[1] }
 }))
 // Values
-const getValue = elem => {
-	console.log(elem)
-	$(elem).val()
-}
+const getValue = elem => $(elem).val()
 const emptyValue = elem => $(elem).val('')
 const setValue = (elem, val) => $(elem).val(val)
 // Text
