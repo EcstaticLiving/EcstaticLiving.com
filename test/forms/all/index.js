@@ -35,9 +35,9 @@ const saveForm = formType => {
 	let values = {}
 	$('input, textarea, select').each(() => {
 		const name = $(this).attr('name')
-		if ((isRadio(isChecked(this)) && $(this)) || name !== 'Event-Invite-Code') {
-			console.log(this)
-			// values[name] = getValue(this)
+		if (isRadio(isChecked(this)) || name !== 'Event-Invite-Code') {
+			console.log(name)
+			values[name] = getValue(this)
 		}
 	})
 	localStorage.setItem('EcstaticLiving:' + formType, JSON.stringify(values))
