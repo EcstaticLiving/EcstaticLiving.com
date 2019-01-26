@@ -28,13 +28,15 @@
 				const complete = inputFields.every(inputField => {
 					const field = document.getElementById(inputCategory + '_' + inputField)
 					if (inputField === 'first_name' || inputField === 'last_name') {
-						// Prevent ALL CAPS
-						field.value = field.value.toLowerCase()
-						// Title case
-						field.value = field.value.charAt(0).toUpperCase() + field.value.slice(1)
-						// No empty spaces
-						if (field.value.includes(' ')) {
-							field.value = field.value.replace(' ', '')
+						if (field.value) {
+							// Prevent ALL CAPS
+							field.value = field.value.toLowerCase()
+							// Title case
+							field.value = field.value.charAt(0).toUpperCase() + field.value.slice(1)
+							// No empty spaces
+							if (field.value.includes(' ')) {
+								field.value = field.value.replace(' ', '')
+							}
 						}
 					}
 					const emailRegex = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm
