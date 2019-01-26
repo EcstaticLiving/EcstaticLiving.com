@@ -35,7 +35,7 @@ const saveForm = formType => {
 	let values = {}
 	$('input, textarea, select').each(() => {
 		const name = $(this).attr('name')
-		if (isRadio(isChecked(this)) || name !== 'Event-Invite-Code') {
+		if (isRadio(isChecked(this)) || name !== '#event-invitecode-code' || name !== '#event-affiliate-code') {
 			console.log(name)
 			values[name] = getValue(this)
 		}
