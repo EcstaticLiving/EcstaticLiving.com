@@ -47,12 +47,15 @@ const stripeData = result => ({
 })
 
 // Stripe Elements
-const elements = (page() === 'Event' || page() === 'Update') && containsUrl('ecstaticliving.com')
-	? Stripe('pk_live_0rULIvKhv6aSLqI49Ae5rflI').elements()
-	: Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p').elements()
+const stripe = containsUrl('ecstaticliving.com')
+	? Stripe('pk_live_0rULIvKhv6aSLqI49Ae5rflI')
+	: Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
+const elements = containsUrl('ecstaticliving.com')
+	? stripe.elements()
+	: stripe.elements()
 
 // Stripe Card
-const card = page() === 'Event' || page() === 'Update'
+const card = isFormPage
 	? elements.create('card', {
 			hidePostalCode: true,
 			style: {
@@ -121,7 +124,7 @@ const indicateFailedSubmission = type => {
 
 
 // Begin
-if (page() === 'Event' || page() === 'Update') {
+if (isFormPage) {
 	card.mount('#card-element')
 	card.addEventListener('change', result => paymentValidation(result))	
 }
