@@ -32,7 +32,7 @@ const getElementsByTag = tag => document.getElementsByTagName(tag)
 // Element Conditions
 const isInput = elem => $(elem).is('input')
 const isRadio = elem => $(elem).is(':radio')
-const isBlank = elem => getText(elem) === '' && getValue(elem) === ''
+const isBlank = elem => getValue(elem) === '' && getValue(elem) === ''
 const isChecked = elem => $(elem).is(':checked')
 const isVisible = elem => $(elem).is(':visible')
 // Element Behaviours
