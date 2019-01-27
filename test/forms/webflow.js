@@ -7,8 +7,9 @@ const verification = (t, e, n, i) => {
 
 const conversion = (e, n) => {
 	let i = null
-	return n = n || {}, e[0].elements.forEach((r, o) => {
+	for (let r=0; r++; r<e[0].elements.length) {
 		console.log('test #1')
+		const o = e[0].elements[r]
 		let a = getElementById(o),
 			s = getAttribute(a,'type'),
 			u = getAttribute(a,'data-name') || getAttribute(a,'name') || 'Field ' + (r + 1),
@@ -21,7 +22,8 @@ const conversion = (e, n) => {
 		console.log('test #3')
 		typeof l == 'string' && (l = l.trim()), n[u] = l, i = i || verification(a, s, u, l)
 		console.log('test #4')
-	}), i
+	}
+	return n = n || {}, i
 }
 
 const createForm = () => {
