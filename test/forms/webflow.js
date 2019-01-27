@@ -20,7 +20,7 @@ const conversion = (e, n) => {
 			if (null === n[u] || typeof n[u] == 'string') return;
 			l = getValue(e.find('input[name="' + name + '"]:checked')) || null
 		}
-		typeof l == 'string' && (l = l.trim(), n[u] = l, i = i || verification(a, s, u, l)
+		typeof l == 'string' && (l = l.trim()), n[u] = l, i = i || verification(a, s, u, l)
 	}), i
 }
 
