@@ -38,7 +38,7 @@ const saveForm = formType => {
 		const name = getAttribute(element, 'name')
 		if (
 			isRadio(isChecked(element))
-			|| (name && name !== '#event-invitecode-code' && name !== '#event-affiliate-code')
+			|| (name && name !== '#event-invitecode-code' && name !== '#event-affiliate-code' && name !== '#event-parnter-firstname' && name !== '#event-parnter-lastname')
 		) {
 			values[name] = getValue(element)
 		}
