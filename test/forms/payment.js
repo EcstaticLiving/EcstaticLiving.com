@@ -188,6 +188,7 @@ onClick(paymentButton, async e => {
 		try {
 
 			// ...and submit reg form
+			console.log('Submitting form')
 			const formSubmit = await formSubmission({ data: createForm(), url: formUrl })
 
 			console.log(formSubmit)
