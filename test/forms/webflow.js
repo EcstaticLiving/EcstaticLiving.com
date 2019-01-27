@@ -8,8 +8,9 @@ const verification = (t, e, n, i) => {
 const conversion = (e, n) => {
 	let i = null
 	console.log(e[0])
-	console.log(e.find(':input:not([type=\'submit\'])'))
+	console.log(e.querySelectorAll(':input:not([type=\'submit\'])'))
 	return n = n || {}, e.find(':input:not([type=\'submit\'])').each((r, o) => {
+		console.log(r, o)
 		let a = getElementById(o)
 		const name = getAttribute(a,'name')
 		let s = getAttribute(a,'type'),
@@ -19,7 +20,7 @@ const conversion = (e, n) => {
 			if (null === n[u] || typeof n[u] == 'string') return;
 			l = getValue(e.find('input[name="' + name + '"]:checked')) || null
 		}
-		typeof l == 'string' && (l = $.trim(l)), n[u] = l, i = i || verification(a, s, u, l)
+		typeof l == 'string' && (l = l.trim(), n[u] = l, i = i || verification(a, s, u, l)
 	}), i
 }
 
