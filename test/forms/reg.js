@@ -295,7 +295,7 @@ const formValidation = () => {
 	const billingValidation = () => {
 		return (
 			!isBlank(billingFirstName) && !isBlank(billingLastName) && !isBlank(billingStreet) && !isBlank(billingCity)
-			&& !isBlank(billingState) && !isBlank(billingPostal) && !isBlank(billingCountry) // && isChecked(billingCard)
+			&& !isBlank(billingState) && !isBlank(billingPostal) && !isBlank(billingCountry) && isChecked(billingCard)
 		)
 	}
 
