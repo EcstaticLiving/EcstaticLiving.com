@@ -134,6 +134,8 @@ onClick('#button-stripe-error', () => hideElement('.notification-modal.card-erro
 // Always allow pay now button to be clicked
 onClick(paymentButton, async e => {
 
+	console.log('payment button clicked')
+
 	// Prevent accidental submission of form through 'enter' key
 	e.preventDefault()
 	if (e.which === 13) return false
