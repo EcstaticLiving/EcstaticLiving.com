@@ -8,21 +8,16 @@ const verification = (t, e, n, i) => {
 const conversion = (e, n) => {
 	let i = null
 	for (r=0; r<e[0].elements.length; r++) {
-		console.log('test #1')
 		const a = e[0].elements[r][0]
 		if (!a) continue
-		console.log(a)
 		let s = getAttribute(a,'type'),
 			u = getAttribute(a,'data-name') || getAttribute(a,'name') || 'Field ' + (r + 1),
 			l = getValue(a)
-		console.log('test #2')
 		if (s === 'checkbox' && (l = isChecked(a)), s === 'radio') {
 			if (n[u] === null || typeof n[u] == 'string' || s == 'submit') return;
 			l = getValue(e.find('input[name="' + getAttribute(a,'name') + '"]:checked')) || null
 		}
-		console.log('test #3')
 		typeof l == 'string' && (l = l.trim()), n[u] = l, i = i || verification(a, s, u, l)
-		console.log('test #4')
 	}
 	return n = n || {}, i
 }
