@@ -113,6 +113,7 @@ const successfulSubmission = () => {
 
 // Called whenever any submission
 const indicateFailedSubmission = type => {
+	console.log('Failed')
 	resetForm()
 	hideElement('.notification-modal.processing')
 	// Show card error notification
@@ -263,9 +264,6 @@ onClick(paymentButton, async e => {
 	}
 	// Payment not validated, so hide processing to reveal text box with error message
 	else {
-
-		console.log('Payment not validated')
-
 		hideElement('.notification-modal.processing')
 	}
 	
