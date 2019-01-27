@@ -8,18 +8,19 @@ const verification = (t, e, n, i) => {
 const conversion = (e, n) => {
 	let i = null
 	return n = n || {}, e[0].elements.forEach((r, o) => {
+		console.log('test #1')
 		let a = getElementById(o),
 			s = getAttribute(a,'type'),
 			u = getAttribute(a,'data-name') || getAttribute(a,'name') || 'Field ' + (r + 1),
 			l = getValue(a)
-		console.log('test #1')
+		console.log('test #2')
 		if (s === 'checkbox' && (l = isChecked(a)), s === 'radio') {
 			if (n[u] === null || typeof n[u] == 'string' || s == 'submit') return;
 			l = getValue(e.find('input[name="' + getAttribute(a,'name') + '"]:checked')) || null
 		}
-		console.log('test #2')
-		typeof l == 'string' && (l = l.trim()), n[u] = l, i = i || verification(a, s, u, l)
 		console.log('test #3')
+		typeof l == 'string' && (l = l.trim()), n[u] = l, i = i || verification(a, s, u, l)
+		console.log('test #4')
 	}), i
 }
 
@@ -36,5 +37,6 @@ const createForm = () => {
 		console.error(error)
 		throw error
 	}
+	console.log(formData)
 	return formData
 }
