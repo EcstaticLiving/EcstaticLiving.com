@@ -9,7 +9,7 @@ const conversion = (e, n) => {
 	let i = null
 	for (r=0; r<e[0].elements.length; r++) {
 		console.log('test #1')
-		const o = e[0].elements[r]
+		const o = e[0].elements[r][0]
 		console.log(o)
 		let a = getElementById(o),
 			s = getAttribute(a,'type'),
