@@ -7,18 +7,15 @@ const verification = (t, e, n, i) => {
 
 const conversion = (e, n) => {
 	let i = null
-	console.log(e[0])
-	console.log(e[0].querySelectorAll('input:not([type=\'submit\'])'))
-	return n = n || {}, e.find(':input:not([type=\'submit\'])').each((r, o) => {
-		console.log(r, o)
-		let a = getElementById(o)
-		const name = getAttribute(a,'name')
-		let s = getAttribute(a,'type'),
-			u = getAttribute(a,'data-name') || name || 'Field ' + (r + 1),
+	console.log(e.querySelectorAll('input:not([type=\'submit\'])'))
+	return n = n || {}, e.find('input:not([type=\'submit\'])').each((r, o) => {
+		let a = getElementById(o),
+			s = getAttribute(a,'type'),
+			u = getAttribute(a,'data-name') || getAttribute(a,'name') || 'Field ' + (r + 1),
 			l = getValue(a)
 		if (s === 'checkbox' && (l = isChecked(a)), s === 'radio') {
 			if (null === n[u] || typeof n[u] == 'string') return;
-			l = getValue(e.find('input[name="' + name + '"]:checked')) || null
+			l = getValue(e.find('input[name="' + getAttribute(a,'name') + '"]:checked')) || null
 		}
 		typeof l == 'string' && (l = l.trim()), n[u] = l, i = i || verification(a, s, u, l)
 	}), i
