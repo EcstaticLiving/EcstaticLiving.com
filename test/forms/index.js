@@ -37,7 +37,7 @@ const saveForm = formType => {
 	elements.forEach(element => {
 		const name = getAttribute(element, 'name')
 		if (
-			isRadio(isChecked(element))
+			isChecked(element)
 			|| (name && name !== '#event-invitecode-code' && name !== '#event-affiliate-code' && name !== '#event-parnter-firstname' && name !== '#event-parnter-lastname')
 		) {
 			values[name] = getValue(element)
