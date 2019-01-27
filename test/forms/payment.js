@@ -138,8 +138,6 @@ onClick(paymentButton, async e => {
 	e.preventDefault()
 	if (e.which === 13) return false
 
-	console.log('form validation: ', formValidation())
-
 	// If form hasn’t correctly been filled out...
 	if (!formValidation()) {
 		console.log('error')
@@ -166,6 +164,9 @@ onClick(paymentButton, async e => {
 	setValue('#question-diet', getValue(eventDietDetails) ? getValue(eventDietDetails) : '- none -')
 	setValue('#question-special', getValue(eventSpecialDetails) ? getValue(eventSpecialDetails) : '- none -')
 
+	// Indicate processing, since below Stripe function is async...
+	showElement('.notification-modal.processing')
+
 	// Initiate payment: first, check to see if card is valid.
 	const stripeCard = await stripe.createSource(card, {
 		owner: {
@@ -181,12 +182,10 @@ onClick(paymentButton, async e => {
 		}
 	})
 
-	console.log('Payment validation:', paymentValidation(stripeCard))
 	// Send result to be validated
 	if (paymentValidation(stripeCard)) {
 
-		// If card is valid, indicate processing...
-		showElement('.notification-modal.processing')
+		console.log('Payment validated')
 
 		try {
 
@@ -195,6 +194,8 @@ onClick(paymentButton, async e => {
 
 			// Once reg form is submitted...
 			if (formSubmit) {
+
+				console.log('Form submitted')
 
 				try {
 
@@ -247,6 +248,13 @@ onClick(paymentButton, async e => {
 
 				}
 			}
+			else {
+				
+				console.log('Form not submitted')
+
+				// Webflow form failed or timed out
+				indicateFailedSubmission('form')
+			}
 
 		}
 		catch (err) {
@@ -254,6 +262,13 @@ onClick(paymentButton, async e => {
 			indicateFailedSubmission('form')
 		}
 
+	}
+	// Payment not validated, so hide processing to reveal text box with error message
+	else {
+
+		console.log('Payment not validated')
+
+		hideElement('.notification-modal.processing')
 	}
 	
 })
