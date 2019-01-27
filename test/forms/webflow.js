@@ -11,6 +11,7 @@ const conversion = (e, n) => {
 		console.log('test #1')
 		const o = e[0].elements[r][0]
 		if (!o) continue
+		console.log(o)
 		let a = getElementById(o),
 			s = getAttribute(a,'type'),
 			u = getAttribute(a,'data-name') || getAttribute(a,'name') || 'Field ' + (r + 1),
