@@ -10,7 +10,7 @@ const conversion = (e, n) => {
 	for (r=0; r<e[0].elements.length; r++) {
 		console.log('test #1')
 		const o = e[0].elements[r][0]
-		console.log(o)
+		if (!o) continue
 		let a = getElementById(o),
 			s = getAttribute(a,'type'),
 			u = getAttribute(a,'data-name') || getAttribute(a,'name') || 'Field ' + (r + 1),
