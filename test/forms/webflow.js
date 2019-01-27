@@ -7,7 +7,6 @@ const verification = (t, e, n, i) => {
 
 const conversion = (e, n) => {
 	let i = null
-	console.log(e[0].querySelectorAll(':input:not([type=\'submit\'])'))
 	console.log(e.querySelectorAll(':input:not([type=\'submit\'])'))
 	console.log(e.find(':input:not([type=\'submit\'])'))
 	console.log(e.find('input:not([type=\'submit\'])'))
@@ -33,11 +32,10 @@ const createForm = () => {
 		dolphin: false
 	}
 	let error = conversion(page() === 'Event' ? getElementById(eventForm) : getElementById(customForm), formData.fields)
-	console.log(error)
+	console.log('Form data:', formData)
 	if (error) {
 		console.error(error)
 		throw error
 	}
-	console.log('Form data:', formData)
 	return formData
 }
