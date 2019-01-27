@@ -12,6 +12,7 @@ const conversion = (e, n) => {
 	console.log(e[0].elements)
 	console.log(e.find(':input:not([type=\'submit\'])'))
 	return n = n || {}, e.find(':input:not([type=\'submit\'])').each((r, o) => {
+		console.log(r, o)
 		let a = getElementById(o),
 			s = getAttribute(a,'type'),
 			u = getAttribute(a,'data-name') || getAttribute(a,'name') || 'Field ' + (r + 1),
