@@ -113,7 +113,6 @@ const successfulSubmission = () => {
 
 // Called whenever any submission
 const indicateFailedSubmission = type => {
-	console.log('Failed')
 	resetForm()
 	hideElement('.notification-modal.processing')
 	// Show card error notification
@@ -257,6 +256,7 @@ onClick(paymentButton, async e => {
 
 		}
 		catch (err) {
+			console.log(err)
 			// Webflow form failed or timed out
 			indicateFailedSubmission('form')
 		}
