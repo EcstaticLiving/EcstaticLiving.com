@@ -7,6 +7,7 @@ const verification = (t, e, n, i) => {
 
 const conversion = (e, n) => {
 	let i = null
+	console.log('conversion', e)
 	console.log(e.querySelectorAll('input:not([type=\'submit\'])'))
 	console.log(e.elements)
 	console.log(e.find(':input:not([type=\'submit\'])'))
