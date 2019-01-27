@@ -6,10 +6,9 @@ const verification = (t, e, n, i) => {
 }
 
 const conversion = (e, n) => {
-	let i = null;
-	console.log(e, n)
-	console.log(e.querySelectorAll(':input:not([type="submit"])'))
-	return n = n || {}, e.querySelectorAll(':input:not([type="submit"])').each((r, o) => {
+	let i = null
+	console.log(e[0])
+	return n = n || {}, e.find(':input:not([type="submit"])').each((r, o) => {
 		let a = getElementById(o)
 		const name = getAttribute(a,'name')
 		let s = getAttribute(a,'type'),
@@ -17,14 +16,13 @@ const conversion = (e, n) => {
 			l = getValue(a)
 		if (s === 'checkbox' && (l = isChecked(a)), s === 'radio') {
 			if (null === n[u] || typeof n[u] == 'string') return;
-			l = getValue(e.querySelectorAll('input[name="' + name + '"]:checked')) || null
+			l = getValue(e.find('input[name="' + name + '"]:checked')) || null
 		}
 		typeof l == 'string' && (l = $.trim(l)), n[u] = l, i = i || verification(a, s, u, l)
 	}), i
 }
 
 const createForm = () => {
-	console.log('createForm()')
 	let formData = {
 		name: page() === 'Event' ? 'Event Registration' : 'Custom Charge',
 		source: window.location.href,
