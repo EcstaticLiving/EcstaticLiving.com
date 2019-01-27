@@ -295,11 +295,9 @@ const formValidation = () => {
 	const billingValidation = () => {
 		return (
 			!isBlank(billingFirstName) && !isBlank(billingLastName) && !isBlank(billingStreet) && !isBlank(billingCity)
-			&& !isBlank(billingState) && !isBlank(billingPostal) && !isBlank(billingCountry) && isChecked(billingCard)
+			&& !isBlank(billingState) && !isBlank(billingPostal) && !isBlank(billingCountry) // && isChecked(billingCard)
 		)
 	}
-
-	console.log(!isBlank(eventFirstName), eventFirstName)
 
 	if (
 		discountCodeValidation() && personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && termsValidation() && billingValidation()
