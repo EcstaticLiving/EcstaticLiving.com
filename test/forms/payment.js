@@ -55,7 +55,7 @@ const elements = containsUrl('ecstaticliving.com')
 	: stripe.elements()
 
 // Stripe Card
-const card = isFormPage
+const card = isFormPage()
 	? elements.create('card', {
 			hidePostalCode: true,
 			style: {
@@ -124,7 +124,7 @@ const indicateFailedSubmission = type => {
 
 
 // Begin
-if (isFormPage) {
+if (isFormPage()) {
 	card.mount('#card-element')
 	card.addEventListener('change', result => paymentValidation(result))	
 }

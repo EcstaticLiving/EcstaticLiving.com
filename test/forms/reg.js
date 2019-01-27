@@ -299,8 +299,6 @@ const formValidation = () => {
 		)
 	}
 
-	console.log(discountCodeValidation())
-
 	if (
 		discountCodeValidation() && personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && termsValidation() && billingValidation()
 	) {

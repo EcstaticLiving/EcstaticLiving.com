@@ -81,7 +81,7 @@ const page = () => {
   if (endsWithUrl('/update'))   return 'Update'
   return null
 }
-const isFormPage = page() === 'Event' || page() === 'Update'
+const isFormPage = () => page() === 'Event' || page() === 'Update'
 
 const setOrientation = () => {
   let device = 'mobile'
