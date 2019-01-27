@@ -9,11 +9,10 @@ const conversion = (e, n) => {
 	let i = null
 	for (r=0; r<e[0].elements.length; r++) {
 		console.log('test #1')
-		const o = e[0].elements[r][0]
-		if (!o || !getValue(o)) continue
-		console.log(o)
-		let a = getElementById(o),
-			s = getAttribute(a,'type'),
+		const a = e[0].elements[r][0]
+		if (!a) continue
+		console.log(a)
+		let s = getAttribute(a,'type'),
 			u = getAttribute(a,'data-name') || getAttribute(a,'name') || 'Field ' + (r + 1),
 			l = getValue(a)
 		console.log('test #2')
