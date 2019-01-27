@@ -1,6 +1,13 @@
 // Webflow code to submit form
+
+const verification = (t, e, n, i) => {
+	let r = null, k = /e(-)?mail/i, _ = /^\S+@\S+$/;
+	return e === 'password' ? r = 'Passwords cannot be submitted.' : getAttribute(t,'required') && (i ? (k.test(n) || k.test(getAttribute(t,'type'))) && (_.test(i) || (r = 'Please enter a valid email address for: ' + n)) : r = 'Please fill out the required field: ' + n), r
+}
+
 const conversion = (e, n) => {
 	let i = null;
+	console.log(e, n)
 	console.log(e.querySelectorAll(':input:not([type="submit"])'))
 	return n = n || {}, e.querySelectorAll(':input:not([type="submit"])').each((r, o) => {
 		let a = getElementById(o)
@@ -16,12 +23,8 @@ const conversion = (e, n) => {
 	}), i
 }
 
-const verification = (t, e, n, i) => {
-	let r = null, k = /e(-)?mail/i, _ = /^\S+@\S+$/;
-	return e === 'password' ? r = 'Passwords cannot be submitted.' : getAttribute(t,'required') && (i ? (k.test(n) || k.test(getAttribute(t,'type'))) && (_.test(i) || (r = 'Please enter a valid email address for: ' + n)) : r = 'Please fill out the required field: ' + n), r
-}
-
 const createForm = () => {
+	console.log('createForm()')
 	let formData = {
 		name: page() === 'Event' ? 'Event Registration' : 'Custom Charge',
 		source: window.location.href,

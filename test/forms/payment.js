@@ -185,12 +185,12 @@ onClick(paymentButton, async e => {
 	// Send result to be validated
 	if (paymentValidation(stripeCard)) {
 
-		console.log('Payment validated')
-
 		try {
 
 			// ...and submit reg form
 			const formSubmit = await formSubmission({ data: createForm(), url: formUrl })
+
+			console.log(formSubmit)
 
 			// Once reg form is submitted...
 			if (formSubmit) {
