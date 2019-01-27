@@ -7,7 +7,7 @@ const verification = (t, e, n, i) => {
 
 const conversion = (e, n) => {
 	let i = null
-	for (let r=0; r++; r<e[0].elements.length) {
+	for (r=0; r<e[0].elements.length; r++) {
 		console.log('test #1')
 		const o = e[0].elements[r]
 		let a = getElementById(o),
@@ -36,7 +36,6 @@ const createForm = () => {
 	}
 	let error = conversion(page() === 'Event' ? getElementById(eventForm) : getElementById(customForm), formData.fields)
 	if (error) {
-		console.error(error)
 		throw error
 	}
 	console.log(formData)
