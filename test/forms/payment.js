@@ -19,7 +19,7 @@ const stripeUrl = containsUrl('ecstaticliving.com')
 	: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.sandbox.auth0-extend.com/stripe-test'
 
 // Stripe charge description
-const chargeDescription = eventTitle + ' ' + eventDates + ', ' + eventVenue + ', ' + getText(eventSelect).substring(0, getText(eventSelect).length - 16) + ', ' + isChecked(eventDepositDeposit) ? 'DEPOSIT' : 'FULL'
+const chargeDescription = eventCode + ' “' + eventTitle + '” ' + isChecked(eventDepositDeposit) ? 'deposit' : 'full' + ' (' + eventDates + ' at ' + eventVenue + ') ' + getLodging()
 
 // Stripe data: pass result from stripeCard into `source`
 const stripeData = result => ({

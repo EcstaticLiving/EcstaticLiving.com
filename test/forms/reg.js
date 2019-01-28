@@ -140,6 +140,9 @@ const depositAmount = () => eventDepositAmount ? parseFloat(eventDepositAmount *
 // Final amount
 const finalAmount = () => isChecked(eventDepositDeposit) && new Date() < new Date(eventDepositDate) ? depositAmount() : getValue(eventSelect)
 
+// Get lodging code
+const getLodging = () => eventOptions[getIndex(eventSelect) - 1]
+
 // Create name of party
 const partyName = () => {
 	if (participants() === 2) {

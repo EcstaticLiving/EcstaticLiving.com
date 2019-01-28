@@ -916,6 +916,12 @@ function setEventStatus() {
 		}))
 	}
 }
+
+// Get Lodging Code
+function getLodging() {
+	return eventOptions[$(eventSelect + ' option:selected').index() - 1]
+}
+
 //	Adds event options & prices based on CMS input
 function setEventPrices() {
 	hideAmount()
@@ -1505,10 +1511,10 @@ $(payButton).on('click', function(e) {
 		chargeAmount = $(eventDepositDeposit).is(':checked')
 			? depositAmount() * 100
 			: $(eventSelect).val() * 100
-		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'DEPOSIT' : 'FULL'
+		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'deposit' : 'full'
 		customerDescription = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' <' + $(eventEmail).val() + '>'
 		customerEmail = $(eventEmail).val()
-		chargeDescription = eventTitle + ' ' + eventDates + ', ' + eventVenue + ', ' + $(eventSelect + ' option:selected').text().substring(0, $(eventSelect + ' option:selected').text().length - 16) + ', ' + eventDeposit
+		chargeDescription = eventCode + ' “' + eventTitle + '” ' + eventDeposit + ' (' + eventDates + ' at ' + eventVenue + ') ' + getLodging()
 		// Form Variable: Party
 		var party = ''
 		if (participants() === 1) {
@@ -1580,7 +1586,6 @@ $(payButton).on('click', function(e) {
 			else {
 				var eventOptions = $('#event-options').text().split(' | ')
 				var eventPrices = $('#event-prices').text().split(' | ')
-				const selected = $(eventSelect + ' option:selected').index() - 1
 				stripeSourceHandler({
 					'chargeAmount': chargeAmount,
 					'chargeDescription': chargeDescription,
@@ -1601,7 +1606,7 @@ $(payButton).on('click', function(e) {
 					'costBase': !isNaN(eventBaseCost) ? (eventBaseCost * paymentQty()).toFixed(2) : 0,
 					'priceDeposit': $(eventDepositDeposit).is(':checked') ? (chargeAmount/100).toFixed(2) : 0,
 					'priceBalanceDate': eventDepositDate,
-					'lodging': eventOptions[selected],
+					'lodging': getLodging(),
 					'source': result.source.id
 				})
 			}
