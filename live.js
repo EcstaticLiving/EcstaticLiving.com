@@ -919,6 +919,7 @@ function setEventStatus() {
 
 // Get Lodging Code
 function getLodging() {
+	var eventOptions = $('#event-options').text().split(' | ')
 	return eventOptions[$(eventSelect + ' option:selected').index() - 1]
 }
 
@@ -1584,7 +1585,6 @@ $(payButton).on('click', function(e) {
 				return false
 			}
 			else {
-				var eventOptions = $('#event-options').text().split(' | ')
 				var eventPrices = $('#event-prices').text().split(' | ')
 				stripeSourceHandler({
 					'chargeAmount': chargeAmount,
