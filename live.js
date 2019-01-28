@@ -1585,7 +1585,6 @@ $(payButton).on('click', function(e) {
 				return false
 			}
 			else {
-				var eventPrices = $('#event-prices').text().split(' | ')
 				stripeSourceHandler({
 					'chargeAmount': chargeAmount,
 					'chargeDescription': chargeDescription,
