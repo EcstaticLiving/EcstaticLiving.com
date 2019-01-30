@@ -214,9 +214,18 @@ onClick(paymentButton, async e => {
 
 					// If error occurred during payment submission, notify staff of error via a new form submission.
 					const formData = createForm()
+					// TODO: add browser and OS information to error handling
 					formData.fields = err.statusText === 'timeout'
-						? { ERROR: 'Did not receive successful payment confirmation from Stripe on previous registration made by ' + formData.fields.Party + '. Staff, please verify that payment went through. Customer was informed that registration completed successfully. If Stripe payment exists, no further action has to be taken; if Stripe payment is missing, please reach out to customer for payment.' }
-						: { ERROR: 'The following error occurred on the previous registration made by ' + formData.fields.Party + '. Customer was notified of error, and payment likely did not go through. Error: ' + err }
+						? {
+							ERROR: 'Did not receive successful payment confirmation from Stripe on previous registration made by ' + formData.fields.Party + '. Staff, please verify that payment went through. Customer was informed that registration completed successfully. If Stripe payment exists, no further action has to be taken; if Stripe payment is missing, please reach out to customer for payment.',
+							BROWSER: '',
+							OS: ''
+						}
+						: {
+							ERROR: 'The following error occurred on the previous registration made by ' + formData.fields.Party + '. Customer was notified of error, and payment likely did not go through. Error: ' + err,
+							BROWSER: '',
+							OS: ''
+						}
 
 					const errorHandling = ({ status }) => {
 						console.error(status)
