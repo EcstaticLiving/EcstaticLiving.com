@@ -228,7 +228,6 @@ onClick(paymentButton, async e => {
 						}
 
 					const errorHandling = ({ status }) => {
-						console.error(status)
 						// ...if Stripe timed out, it’s possible that Stripe charge went through, but too late. So we want to prevent customer from being told that it didn’t work, even though payment went through.
 						if (status === 'timeout') {
 							successfulSubmission()
