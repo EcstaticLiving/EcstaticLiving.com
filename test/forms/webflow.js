@@ -6,7 +6,8 @@ const conversion = (e, n) => {
 	// n stores names already with values (good for checkbox/radio)
 	n = n || {}
 
-	const nodelist = e[0].querySelectorAll('input:not([type="submit"])')
+	const nodelist = e.querySelectorAll('input:not([type="submit"])')
+
 	nodelist.forEach((item, index) => {
 		// If we already have an error, exit early
 		if (i) {
@@ -21,7 +22,7 @@ const conversion = (e, n) => {
 			// If we already have a value for radio/checkbox of this name, exit early
 			if (null === n[u] || "string" == typeof n[u]) return
 			// get value
-			l = e[0].querySelector('input[name="' + item.getAttribute("name") + '"]:checked').value || null
+			l = e.querySelector('input[name="' + item.getAttribute("name") + '"]:checked').value || null
 		}
 
 		if("string" == typeof l) {
