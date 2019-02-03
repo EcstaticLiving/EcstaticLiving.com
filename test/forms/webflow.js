@@ -23,7 +23,7 @@ const conversion = (e, n) => {
 			// If we already have a value for radio/checkbox of this name, exit early
 			if (null === n[u] || "string" == typeof n[u]) return
 			// get value
-			l = e.querySelector('input[name="' + item.getAttribute("name") + '"]:checked').value || null
+			l = e[0].querySelector('input[name="' + item.getAttribute("name") + '"]:checked').value || null
 		}
 
 		if("string" == typeof l) {
