@@ -7,6 +7,7 @@ const conversion = (e, n) => {
 
 	// n stores names already with values (good for checkbox/radio)
 	n = n || {}
+	console.log(e)
 	const nodelist = e.querySelectorAll(':input:not([type="submit"])')
 
 	nodelist.forEach((item, index) => {

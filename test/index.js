@@ -27,10 +27,7 @@ const formErrorValidation = elem => $(elem).parsley().validate()
 const formReset = elem => $(elem)[0].reset()
 // Element Collections
 const getElementById = elem => $(elem)
-const getAttribute = (elem, attribute) => {
-	console.log(elem, attribute)
-	elem.getAttribute(attribute)
-}
+const getAttribute = (elem, attribute) => elem.getAttribute(attribute)
 const getElementsByTag = tag => document.getElementsByTagName(tag)
 // Element Conditions
 const isInput = elem => $(elem).is('input')
