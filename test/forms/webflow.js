@@ -24,10 +24,10 @@ const conversion = (e, n) => {
 			if (null === n[u] || "string" == typeof n[u]) return
 			// get value
 			const elem = e[0].querySelector('input[name="' + item.getAttribute("name") + '"]:checked')
-			l = elem && elem.value || null
+			l = elem ? elem.value : null
 		}
 
-		if("string" == typeof l) {
+		if ("string" == typeof l) {
 			(l = l.trim())
 		}
 		n[u] = l
@@ -47,7 +47,7 @@ const verification = (item, e, n, i) => {
 	if (!item.getAttribute("required")) {
 		return r
 	}
-	if (!i){
+	if (!i) {
 		return "Please fill out the required field: " + n
 	}
 	if ((k.test(n) || k.test(item.getAttribute("type"))) && _.test(i)) {
