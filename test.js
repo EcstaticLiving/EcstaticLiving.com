@@ -925,7 +925,7 @@ function getLodging() {
 
 function getFullAmount() {
 	var eventPrices = $('#event-prices').text().split(' | ')
-	return eventPrices[$(eventSelect + ' option:selected').index() - 1]
+	return parseFloat(eventPrices[$(eventSelect + ' option:selected').index() - 1])
 }
 
 //	Adds event options & prices based on CMS input
