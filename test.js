@@ -925,7 +925,7 @@ function getLodging() {
 
 function getFullAmount() {
 	var eventPrices = $('#event-prices').text().split(' | ')
-	return parseFloat(eventPrices[$(eventSelect + ' option:selected').index() - 1])
+	return (parseFloat(eventPrices[$(eventSelect + ' option:selected').index() - 1]) * paymentQty()).toFixed(2)
 }
 
 //	Adds event options & prices based on CMS input
@@ -1607,7 +1607,7 @@ $(payButton).on('click', function(e) {
 					'partnerLastName': $(eventPartnerLastName).val(),
 					'quantity': paymentQty(),
 					'rate': (getFullAmount()/paymentQty()).toFixed(2),
-					'priceFull': (getFullAmount()).toFixed(2),
+					'priceFull': getFullAmount(),
 					'priceDiscount': eventAffiliateDiscount(),
 					'priceBase': !isNaN(eventBasePrice) ? (eventBasePrice * paymentQty()).toFixed(2) : 0,
 					'costBase': !isNaN(eventBaseCost) ? (eventBaseCost * paymentQty()).toFixed(2) : 0,
