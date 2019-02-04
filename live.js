@@ -923,6 +923,11 @@ function getLodging() {
 	return eventOptions[$(eventSelect + ' option:selected').index() - 1]
 }
 
+function getFullAmount() {
+	var eventPrices = $('#event-prices').text().split(' | ')
+	return (parseFloat(eventPrices[$(eventSelect + ' option:selected').index() - 1]) * paymentQty()).toFixed(2)
+}
+
 //	Adds event options & prices based on CMS input
 function setEventPrices() {
 	hideAmount()
@@ -1371,12 +1376,11 @@ function stripeSourceHandler(data) {
 					'partnerFirstName': data.partnerFirstName,
 					'partnerLastName': data.partnerLastName,
 					'quantity': data.quantity,
-					'rate': data.rate,
-					'priceFull': data.priceFull,
-					'priceDiscount': data.priceDiscount,
-					'priceBase': data.priceBase,
-					'costBase': data.costBase,
-					'priceDeposit': data.priceDeposit,
+					'priceFullTotal': data.priceFullTotal,
+					'priceDiscountTotal': data.priceDiscountTotal,
+					'priceBaseTotal': data.priceBaseTotal,
+					'costBaseTotal': data.costBaseTotal,
+					'priceDepositTotal': data.priceDepositTotal,
 					'priceBalanceDate': data.priceBalanceDate,
 					'lodging': data.lodging,
 					'source': data.source
@@ -1601,12 +1605,11 @@ $(payButton).on('click', function(e) {
 					'partnerFirstName': $(eventPartnerFirstName).val(),
 					'partnerLastName': $(eventPartnerLastName).val(),
 					'quantity': paymentQty(),
-					'rate': ((chargeAmount/paymentQty())/100).toFixed(2),
-					'priceFull': ((chargeAmount/100) * paymentQty()).toFixed(2),
-					'priceDiscount': eventAffiliateDiscount(),
-					'priceBase': !isNaN(eventBasePrice) ? (eventBasePrice * paymentQty()).toFixed(2) : 0,
-					'costBase': !isNaN(eventBaseCost) ? (eventBaseCost * paymentQty()).toFixed(2) : 0,
-					'priceDeposit': $(eventDepositDeposit).is(':checked') ? (chargeAmount/100).toFixed(2) : 0,
+					'priceFullTotal': getFullAmount(),
+					'priceDiscountTotal': eventAffiliateDiscount(),
+					'priceBaseTotal': !isNaN(eventBasePrice) ? (eventBasePrice * paymentQty()).toFixed(2) : 0,
+					'costBaseTotal': !isNaN(eventBaseCost) ? (eventBaseCost * paymentQty()).toFixed(2) : 0,
+					'priceDepositTotal': $(eventDepositDeposit).is(':checked') ? (chargeAmount/100).toFixed(2) : 0,
 					'priceBalanceDate': eventDepositDate,
 					'lodging': getLodging(),
 					'source': result.source.id
