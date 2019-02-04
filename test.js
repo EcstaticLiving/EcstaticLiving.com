@@ -1607,7 +1607,7 @@ $(payButton).on('click', function(e) {
 					'partnerLastName': $(eventPartnerLastName).val(),
 					'quantity': paymentQty(),
 					'rate': ((chargeAmount/paymentQty())/100).toFixed(2),
-					'priceFull': getFullAmount().toFixed(2),
+					'priceFull': getFullAmount(),
 					'priceDiscount': eventAffiliateDiscount(),
 					'priceBase': !isNaN(eventBasePrice) ? (eventBasePrice * paymentQty()).toFixed(2) : 0,
 					'costBase': !isNaN(eventBaseCost) ? (eventBaseCost * paymentQty()).toFixed(2) : 0,
