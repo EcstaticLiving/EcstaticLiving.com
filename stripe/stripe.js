@@ -1,6 +1,6 @@
 // Uses webtask.io
 // To create a server, navigate to the /stripe folder and enter the following code on the CLI:
-// wt create stripe.js --secret elistripelive=STRIPETESTSECRET --parse-body --meta 'wt-node-dependencies'='{"stripe":"6.20.0"}'
+// wt create stripe.js --secret elistripelive=STRIPELIVESECRET --parse-body --meta 'wt-node-dependencies'='{"stripe":"6.20.0"}'
 // Then add the resulting URL to the Stripe url in the index.js file.
 module.exports = (body, callback) => {
 
@@ -19,12 +19,11 @@ module.exports = (body, callback) => {
 		partnerFirstName,
 		partnerLastName,
 		quantity,
-		rate,
-		priceFull,
-		priceDiscount,
-		priceBase,
-		costBase,
-		priceDeposit,
+		priceFullTotal,
+		priceDiscountTotal,
+		priceBaseTotal,
+		costBaseTotal,
+		priceDepositTotal,
 		priceBalanceDate,
 		lodging,
 		source
@@ -44,12 +43,11 @@ module.exports = (body, callback) => {
 			...partnerFirstName && { 'Partner First Name': partnerFirstName },
 			...partnerLastName && { 'Partner Last Name': partnerLastName },
 			...quantity && { Quantity: quantity },
-			...(chargeAmount && quantity) && { Rate: rate },
-			...priceFull && { 'Full Price': priceFull },
-			...priceDiscount && { Discount: priceDiscount },
-			...priceBase && { 'Base Price': priceBase },
-			...costBase && { 'Base Cost': costBase },
-			...priceDeposit && { Deposit: priceDeposit },
+			...priceFullTotal && { 'Full Price (total)': priceFullTotal },
+			...priceDiscountTotal && { 'Discount (total)': priceDiscountTotal },
+			...priceBaseTotal && { 'Base Price (total)': priceBaseTotal },
+			...costBaseTotal && { 'Base Cost (total)': costBaseTotal },
+			...priceDepositTotal && { 'Deposit (total)': priceDepositTotal },
 			...priceBalanceDate && { 'Balance Due Date': priceBalanceDate },
 			...lodging && { 'Lodging Option': lodging }
 		},

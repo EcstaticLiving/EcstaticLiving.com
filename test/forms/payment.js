@@ -22,6 +22,7 @@ const stripeUrl = containsUrl('ecstaticliving.com')
 const chargeDescription = eventCode + ' “' + eventTitle + '” ' + isChecked(eventDepositDeposit) ? 'deposit' : 'full' + ' (' + eventDates + ' at ' + eventVenue + ') ' + getLodging()
 
 // Stripe data: pass result from stripeCard into `source`
+
 const stripeData = result => ({
 	'chargeAmount': finalAmount() * 100,
 	'chargeDescription': chargeDescription,
@@ -35,14 +36,13 @@ const stripeData = result => ({
 	'partnerFirstName': getValue(eventPartnerFirstName),
 	'partnerLastName': getValue(eventPartnerLastName),
 	'quantity': paymentQty(),
-	'rate': (finalAmount()/paymentQty()).toFixed(2),
-	'priceFull': finalAmount(),
-	'priceDiscount': getDiscount(),
-	'priceBase': !isNaN(eventBasePrice) ? (eventBasePrice * paymentQty()).toFixed(2) : 0,
-	'costBase': !isNaN(eventBaseCost) ? (eventBaseCost * paymentQty()).toFixed(2) : 0,
-	'priceDeposit': isChecked(eventDepositDeposit) ? finalAmount() : 0,
+	'priceFullTotal': finalAmount(),
+	'priceDiscountTotal': getDiscount(),
+	'priceBaseTotal': !isNaN(eventBasePrice) ? (eventBasePrice * paymentQty()).toFixed(2) : 0,
+	'costBaseTotal': !isNaN(eventBaseCost) ? (eventBaseCost * paymentQty()).toFixed(2) : 0,
+	'priceDepositTotal': isChecked(eventDepositDeposit) ? finalAmount() : 0,
 	'priceBalanceDate': eventDepositDate,
-	'lodging': eventOptions[getIndex(eventSelect) - 1],
+	'lodging': getLodging(),
 	'source': result.source.id
 })
 
