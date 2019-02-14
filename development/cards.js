@@ -5,10 +5,7 @@ const calendarCardElements = [
   document.getElementsByClassName('calendar-detail-venue'),
   document.getElementsByClassName('calendar-detail-location'),
   document.getElementsByClassName('calendar-detail-dates'),
-  document.getElementsByClassName('card-button'),
-  document.getElementsByClassName('ribbon blue'),
-  document.getElementsByClassName('ribbon green'),
-  document.getElementsByClassName('ribbon red')
+  document.getElementsByClassName('card-button')
 ]
 const calendarCards = document.getElementsByClassName('card')
 const device = getDevice()
