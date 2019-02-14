@@ -13,10 +13,12 @@ for (let i = 0; i < calendarCards.length; i++) {
   calendarCards[i].addEventListener('mouseover', () => {
     isTapped = true
     calendarCardElements.forEach(element => element[i].classList.add('hover-tap'))
+    console.log(isTapped)
   })
   calendarCards[i].addEventListener('mouseout', () => {
     isTapped = false
     calendarCardElements.forEach(element => element[i].classList.remove('hover-tap'))
+    console.log(isTapped)
   })
   calendarCards[i].addEventListener('click', () => {
     if (isTapped) {
@@ -25,5 +27,6 @@ for (let i = 0; i < calendarCards.length; i++) {
     else {
       calendarCardElements.forEach(element => element[i].classList.add('hover-tap'))
     }
+    console.log(isTapped)
   })
 }
