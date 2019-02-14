@@ -21,7 +21,7 @@ for (let i = 0; i < calendarCards.length; i++) {
     console.log(isTapped)
   })
   calendarCards[i].addEventListener('click', () => {
-    if (isTapped) {
+    if (!isTapped) {
       calendarCardElements.forEach(element => element[i].classList.remove('hover-tap'))
     }
     else {
