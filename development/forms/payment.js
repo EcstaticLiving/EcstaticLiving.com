@@ -1,7 +1,5 @@
-// CONSTANTS
-
 // Webflow url
-const formUrl = 'https://webflow\.com/api/v1/form/564aac835a5735b1375b5cdf'
+const formUrl = 'https://webflow.com/api/v1/form/564aac835a5735b1375b5cdf'
 
 // Form submission
 const formSubmission = async ({ data, url }) => await $.ajax({
