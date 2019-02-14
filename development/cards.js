@@ -1,4 +1,5 @@
 const calendarCardElements = [
+  document.getElementsByClassName('card'),
   document.getElementsByClassName('calendar-detail-box'),
   document.getElementsByClassName('calendar-detail-day'),
   document.getElementsByClassName('calendar-detail-month'),
@@ -11,6 +12,7 @@ const calendarCards = document.getElementsByClassName('card')
 const device = getDevice()
 let isTapped = []
 for (let i = 0; i < calendarCards.length; i++) {
+  // Desktops use `mouseover` response, mobile and tablet use `tap` response.
   if (device === 'desktop') {
     calendarCards[i].addEventListener('mouseover', () => calendarCardElements.forEach(element => element[i].classList.add('hover-tap')))
     calendarCards[i].addEventListener('mouseout', () => calendarCardElements.forEach(element => element[i].classList.remove('hover-tap')))
