@@ -6,9 +6,9 @@ const calendarCardElements = [
   document.getElementsByClassName('calendar-detail-location'),
   document.getElementsByClassName('calendar-detail-dates'),
   document.getElementsByClassName('card-button'),
-  document.querySelectorAll('.ribbon > .blue'),
-  document.querySelectorAll('.ribbon > .green'),
-  document.querySelectorAll('.ribbon > .red')
+  document.getElementsByClassName('ribbon blue'),
+  document.getElementsByClassName('ribbon green'),
+  document.getElementsByClassName('ribbon red')
 ]
 const calendarCards = document.getElementsByClassName('card')
 const device = getDevice()
