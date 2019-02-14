@@ -9,6 +9,7 @@ const calendarCardElements = [
 ]
 const calendarCards = document.getElementsByClassName('card')
 const device = getDevice()
+let isTapped = []
 for (let i = 0; i < calendarCards.length; i++) {
   if (device === 'desktop') {
     calendarCards[i].addEventListener('mouseover', () => calendarCardElements.forEach(element => element[i].classList.add('hover-tap')))
@@ -16,6 +17,15 @@ for (let i = 0; i < calendarCards.length; i++) {
   }
   else {
     // Add minor delay to prevent click propagation
-    calendarCards[i].addEventListener('click', () => calendarCardElements.forEach(element => element[i].classList.add('hover-tap')))
+    calendarCards[i].addEventListener('click', () => {
+      if (isTapped[i]) {
+        calendarCardElements.forEach(element => element[i].classList.remove('hover-tap'))
+        isTapped[i] = false
+      }
+      else {
+        calendarCardElements.forEach(element => element[i].classList.add('hover-tap'))
+        isTapped[i] = true
+      }
+    })
   }
 }
