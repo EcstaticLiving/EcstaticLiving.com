@@ -962,7 +962,7 @@ function setEventPrices() {
 			text: eventSelectText
 		}))
 	}
-	$(eventDepositText).text('Pay deposit only ($' + depositAmount() + spacer + people + ')')
+	$(eventDepositText).text('Pay deposit only ($' + parseInt(depositAmount(), 10) + spacer + people + ')')
 }
 
 
