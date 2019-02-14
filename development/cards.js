@@ -16,6 +16,6 @@ for (let i = 0; i < calendarCards.length; i++) {
   }
   else {
     // Add minor delay to prevent click propagation
-    calendarCards[i].addEventListener('click', () => calendarCardElements.forEach(element => element[i].classList.add('hover-tap'))
+    calendarCards[i].addEventListener('click', () => calendarCardElements.forEach(element => element[i].classList.add('hover-tap')))
   }
 }
