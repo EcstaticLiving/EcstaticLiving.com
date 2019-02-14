@@ -8,7 +8,7 @@ const calendarCardElements = [
   document.getElementsByClassName('card-button')
 ]
 const calendarCards = document.getElementsByClassName('card')
-let isTapped = false
+let calendarDetailsVisible = false
 const device = getDevice()
 for (let i = 0; i < calendarCards.length; i++) {
   if (device === 'desktop') {
@@ -17,13 +17,13 @@ for (let i = 0; i < calendarCards.length; i++) {
   }
   else {
     calendarCards[i].addEventListener('click', () => {
-      if (isTapped) {
+      if (calendarDetailsVisible) {
         calendarCardElements.forEach(element => element[i].classList.remove('hover-tap'))
-        isTapped = false
+        calendarDetailsVisible = false
       }
       else {
         calendarCardElements.forEach(element => element[i].classList.add('hover-tap'))
-        isTapped = true
+        calendarDetailsVisible = true
       }
     })
   }
