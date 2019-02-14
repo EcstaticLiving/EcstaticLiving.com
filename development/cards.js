@@ -15,6 +15,7 @@ for (let i = 0; i < calendarCards.length; i++) {
     calendarCards[i].addEventListener('mouseout', () => calendarCardElements.forEach(element => element[i].classList.remove('hover-tap')))
   }
   else {
-    setTimeout(() => calendarCards[i].addEventListener('click', () => calendarCardElements.forEach(element => element[i].classList.add('hover-tap'))), 100)
+    // Add minor delay to prevent click propagation
+    setTimeout(() => calendarCards[i].addEventListener('click', () => calendarCardElements.forEach(element => element[i].classList.add('hover-tap'))), 400)
   }
 }
