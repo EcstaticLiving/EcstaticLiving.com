@@ -16,15 +16,14 @@ for (let i = 0; i < calendarCards.length; i++) {
     calendarCards[i].addEventListener('mouseout', () => calendarCardElements.forEach(element => element[i].classList.remove('hover-tap')))
   }
   else {
-    // Add minor delay to prevent click propagation
     calendarCards[i].addEventListener('click', () => {
-      if (isTapped[i]) {
-        calendarCardElements.forEach(element => element[i].classList.remove('hover-tap'))
-        isTapped[i] = false
-      }
-      else {
-        calendarCardElements.forEach(element => element[i].classList.add('hover-tap'))
-        isTapped[i] = true
+      // Add tap response...
+      calendarCardElements.forEach(element => element[i].classList.add('hover-tap'))
+      // ...and remove active states from all other cards.
+      for (let j = 0; j < calendarCards.length; j++) {
+        if (i !== j) {
+          calendarCardElements.forEach(element => element[j].classList.remove('hover-tap'))
+        }
       }
     })
   }
