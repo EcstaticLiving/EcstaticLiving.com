@@ -1,5 +1,4 @@
 const calendarCardElements = [
-  document.getElementsByClassName('card'),
   document.getElementsByClassName('calendar-detail-box'),
   document.getElementsByClassName('calendar-detail-day'),
   document.getElementsByClassName('calendar-detail-month'),
