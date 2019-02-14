@@ -12,7 +12,6 @@ const calendarCardElements = [
 ]
 const calendarCards = document.getElementsByClassName('card')
 const device = getDevice()
-let isTapped = []
 for (let i = 0; i < calendarCards.length; i++) {
   // Desktops use `mouseover` response, mobile and tablet use `tap` response.
   if (device === 'desktop') {
@@ -22,8 +21,16 @@ for (let i = 0; i < calendarCards.length; i++) {
   else {
     calendarCards[i].addEventListener('click', () => {
       // Add tap response...
-      calendarCardElements.forEach(element => element[i].classList.add('hover-tap'))
-      isTapped[i] = true
+      calendarCardElements.forEach(element => {
+        // ...if card is already active, deactivate it...
+        if (element[i].classList.contains('hover-tap')) {
+          element[i].classList.remove('hover-tap')
+        }
+        // ...otherwise, activate it.
+        else {
+          element[i].classList.add('hover-tap')
+        }
+      })
       // ...and remove active states from all other cards.
       for (let j = 0; j < calendarCards.length; j++) {
         if (i !== j) {
