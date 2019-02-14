@@ -5,7 +5,8 @@ const calendarCardElements = [
   document.getElementsByClassName('calendar-detail-venue'),
   document.getElementsByClassName('calendar-detail-location'),
   document.getElementsByClassName('calendar-detail-dates'),
-  document.getElementsByClassName('card-button')
+  document.getElementsByClassName('card-button'),
+  document.getElementsByClassName('ribbon')
 ]
 const calendarCards = document.getElementsByClassName('card')
 const device = getDevice()
@@ -20,6 +21,7 @@ for (let i = 0; i < calendarCards.length; i++) {
     calendarCards[i].addEventListener('click', () => {
       // Add tap response...
       calendarCardElements.forEach(element => element[i].classList.add('hover-tap'))
+      isTapped[i] = true
       // ...and remove active states from all other cards.
       for (let j = 0; j < calendarCards.length; j++) {
         if (i !== j) {
