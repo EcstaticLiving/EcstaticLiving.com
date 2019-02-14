@@ -50,13 +50,13 @@ const stripeData = result => ({
 const stripe = containsUrl('ecstaticliving.com')
 	? Stripe('pk_live_0rULIvKhv6aSLqI49Ae5rflI')
 	: Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
-const elements = containsUrl('ecstaticliving.com')
+const stripeElements = containsUrl('ecstaticliving.com')
 	? stripe.elements()
 	: stripe.elements()
 
 // Stripe Card
 const card = isFormPage()
-	? elements.create('card', {
+	? stripeElements.create('card', {
 			hidePostalCode: true,
 			style: {
 				base: {
