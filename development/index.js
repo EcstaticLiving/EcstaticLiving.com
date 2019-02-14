@@ -83,15 +83,19 @@ const page = () => {
 }
 const isFormPage = () => page() === 'Event' || page() === 'Update'
 
-const setOrientation = () => {
-  let device = 'mobile'
-	if (Math.min(windowWidth, windowHeight) >= 641) {
-		device = 'tablet'
-	}
+const getDevice = () => {
 	//	Some large tablets exist, but for all intents and purposes, we’ll treat them as desktops.
 	if (Math.max(windowWidth, windowHeight) >= 1025) {
-		device = 'desktop'
-  }
+		return 'desktop'
+	}
+	if (Math.min(windowWidth, windowHeight) >= 641) {
+		return 'tablet'
+	}
+	return 'mobile'
+}
+
+const setOrientation = () => {
+  const device = getDevice()
   const deviceOrientation = windowWidth > windowHeight
     ? 'landscape'
     : 'portrait'
