@@ -148,9 +148,11 @@ SocialShareKit.init({ title: document.title })
 onClick('.navigate-back', () => goToPreviousPage())
 // On scroll, activate menu bar gradient
 const menuBarGradient = document.getElementsByClassName('menu-bar-gradient')[0]
-if (window.scrollY > 0 && !menuBarGradient.classList.contains('scroll')) {
-	menuBarGradient.classList.add('scroll')
-}
-else if (window.scrollY === 0 && menuBarGradient.classList.contains('scroll')) {
-	menuBarGradient.classList.remove('scroll')
+window.onscroll = () => {
+	if (window.scrollY > 0 && !menuBarGradient.classList.contains('scroll')) {
+		menuBarGradient.classList.add('scroll')
+	}
+	else if (window.scrollY === 0 && menuBarGradient.classList.contains('scroll')) {
+		menuBarGradient.classList.remove('scroll')
+	}
 }
