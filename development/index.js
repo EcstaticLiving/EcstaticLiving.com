@@ -18,6 +18,8 @@ const urlString = Object.assign({}, ...window.location.search.slice(1).split('&'
 const onClick = (elem, f) => $(elem).on('click', e => f(e)) // elem.addEventListener('click', f)
 const onChange = (elem, f) => $(elem).on('change', e => f(e))
 const onInput = (elem, f) => $(elem).on('input', f)
+const onLoad = (elem, f) => $(elem).on('load', f)
+const onOrientationChange = (elem, f) => $(elem).on('orientationchange', f)
 const onSubmit = (elem, f) => $(elem).on('submit', f)
 const onKeyPress = (elem, f) => $(elem).on('keypress', e => f(e))
 // Form behaviours
@@ -123,7 +125,7 @@ const openCloseNavMenu = () => {
 	}
 }
 
-const goToLastPage = () => {
+const goToPreviousPage = () => {
 	if (document.referrer === '') {
 		window.location.href = '/'
   }
@@ -134,7 +136,8 @@ const goToLastPage = () => {
 }
 
 // If window orientation changes
-$(window).on('load orientationchange', () => setOrientation())
+onLoad(window, () => setOrientation())
+onOrientationChange(window, () => setOrientation())
 // If nav menu is opened
 onClick('.menu-icon', () => openCloseNavMenu())
 // If nav menu is closed
@@ -142,4 +145,12 @@ onClick('.nav-close', () => clickElement('.menu-icon'))
 // Social Share Kit
 SocialShareKit.init({ title: document.title })
 // Back Button
-$('.navigate-back').on('click', () => goToLastPage())
+onClick('.navigate-back', () => goToPreviousPage())
+// On scroll, activate menu bar gradient
+const menuBarGradient = document.getElementsByClassName('menu-bar-gradient')[0]
+if (window.scrollY > 0 && !menuBarGradient.classList.contains('scroll')) {
+	menuBarGradient.classList.add('scroll')
+}
+else if (window.scrollY === 0 && menuBarGradient.classList.contains('scroll')) {
+	menuBarGradient.classList.remove('scroll')
+}
