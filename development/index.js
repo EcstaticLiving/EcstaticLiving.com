@@ -149,9 +149,6 @@ onClick('.navigate-back', () => goToPreviousPage())
 // On scroll, activate menu bar gradient
 const menuBarGradient = document.getElementsByClassName('menu-bar-gradient')[0]
 window.onscroll = () => {
-	console.log(window.scrollY)
-	console.log(menuBarGradient.classList.contains('scroll'))
-	console.log(menuBarGradient)
 	if (window.scrollY > 0 && !menuBarGradient.classList.contains('scroll')) {
 		menuBarGradient.classList.add('scroll')
 	}
