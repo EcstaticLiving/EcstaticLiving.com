@@ -15,18 +15,12 @@ const urlString = Object.assign({}, ...window.location.search.slice(1).split('&'
 	return { [property]: item.split('=')[1] }
 }))
 // Element Event Listeners
-const onClick = (elem, f) => {
-	console.log(elem)
-	document.body.classList.contains(elem) ? elem.addEventListener('click', e => f(e)) : null
-}
+const onClick = (elem, f) => document.body.classList.contains(elem) ? elem.addEventListener('click', e => f(e)) : null
 const onChange = (elem, f) => elem.addEventListener('change', e => f(e))
-const onInput = (elem, f) => elem.addEventListener('input', f)
+const onInput = (elem, f) => document.body.classList.contains(elem) ? elem.addEventListener('input', f) : null
 const onLoad = (elem, f) => elem.addEventListener('load', f)
 const onOrientationChange = (elem, f) => elem.addEventListener('orientationchange', f)
-const onSubmit = (elem, f) => {
-	console.log(elem)
-	document.body.classList.contains(elem) ? elem.addEventListener('submit', f) : null
-}
+const onSubmit = (elem, f) => document.body.classList.contains(elem) ? elem.addEventListener('submit', f) : null
 const onKeyPress = (elem, f) => elem.addEventListener('keypress', e => f(e))
 // Form behaviours
 const formSubmit = elem => $(elem).submit()
