@@ -142,9 +142,9 @@ const goToPreviousPage = () => {
 onLoad(window, () => setOrientation())
 onOrientationChange(window, () => setOrientation())
 // If nav menu is opened
-onClick('.menu-icon', () => openCloseNavMenu())
+// onClick('.menu-icon', () => openCloseNavMenu())
 // If nav menu is closed
-onClick('.nav-close', () => clickElement('.menu-icon'))
+// onClick('.nav-close', () => clickElement('.menu-icon'))
 // Social Share Kit
 SocialShareKit.init({ title: document.title })
 // Back Button
