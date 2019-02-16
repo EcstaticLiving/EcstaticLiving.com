@@ -16,7 +16,7 @@ const urlString = Object.assign({}, ...window.location.search.slice(1).split('&'
 }))
 // Element Event Listeners
 const onClick = (elem, f) => document.body.classList.contains(elem) ? elem.addEventListener('click', e => f(e)) : null
-const onChange = (elem, f) => elem.addEventListener('change', e => f(e))
+const onChange = (elem, f) => document.body.classList.contains(elem) ? elem.addEventListener('change', e => f(e)) : null
 const onInput = (elem, f) => document.body.classList.contains(elem) ? elem.addEventListener('input', f) : null
 const onLoad = (elem, f) => elem.addEventListener('load', f)
 const onOrientationChange = (elem, f) => elem.addEventListener('orientationchange', f)
