@@ -79,8 +79,9 @@ const showAndScrollTo = elem => {
 
 
 const page = () => {
-  if (containsUrl('/events/'))  return 'Event'
-  if (endsWithUrl('/update'))   return 'Update'
+	if (window.location.pathname === '/')   return 'Homepage'
+  if (containsUrl('/events/'))  					return 'Event'
+  if (endsWithUrl('/update'))  						return 'Update'
   return null
 }
 const isFormPage = () => page() === 'Event' || page() === 'Update'
@@ -138,10 +139,12 @@ const goToPreviousPage = () => {
 // If window orientation changes
 window.onload = setOrientation()
 window.onorientationchange = setOrientation()
+
 // Social Share Kit
 SocialShareKit.init({ title: document.title })
+
 // On scroll, activate menu bar gradient
-const menuBarGradient = document.getElementsByClassName('menu-bar-gradient-black')[0]
+const menuBarGradient = document.getElementsByClassName('menu-bar-gradient-black')[0] || document.getElementsByClassName('menu-bar-gradient-white')[0]
 window.onscroll = () => {
 	if (window.scrollY > 0 && !menuBarGradient.classList.contains('scroll')) {
 		menuBarGradient.classList.add('scroll')
@@ -149,4 +152,11 @@ window.onscroll = () => {
 	else if (window.scrollY === 0 && menuBarGradient.classList.contains('scroll')) {
 		menuBarGradient.classList.remove('scroll')
 	}
+}
+
+if (page() === 'Homepage') {
+	// Randomly use different hero images from 1 to 4
+	const number = Math.floor(Math.random() * 4) + 1
+	const hero = document.getElementsByClassName('hero-container')[0]
+	hero.classList.add(number.toString())
 }
