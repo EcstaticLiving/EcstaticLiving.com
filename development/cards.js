@@ -2,6 +2,7 @@ const cardElementsLoad = [
   document.getElementsByClassName('card-image'),
   document.getElementsByClassName('card-gradient'),
   document.getElementsByClassName('card-header-title'),
+  document.getElementsByClassName('card-header-line'),
   document.getElementsByClassName('card-header-subtitle'),
   document.getElementsByClassName('card-header-intro'),
   document.getElementsByClassName('card-detail-circle'),
