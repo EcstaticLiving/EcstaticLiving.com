@@ -14,12 +14,14 @@ const urlString = Object.assign({}, ...window.location.search.slice(1).split('&'
 	const property = item.split('=')[0]
 	return { [property]: item.split('=')[1] }
 }))
-console.log(document.body)
 // Element Event Listeners
 const onClick = (elem, f) => document.body.contains(elem) ? elem.addEventListener('click', e => f(e)) : null
 const onChange = (elem, f) => document.body.contains(elem) ? elem.addEventListener('change', e => f(e)) : null
 const onInput = (elem, f) => document.body.contains(elem) ? elem.addEventListener('input', f) : null
-const onLoad = (elem, f) => document.body.contains(elem) ? elem.addEventListener('load', f) : null
+const onLoad = (elem, f) => {
+	console.log(elem)
+	document.body.contains(elem) ? elem.addEventListener('load', f) : null
+}
 const onOrientationChange = (elem, f) => document.body.contains(elem) ? elem.addEventListener('orientationchange', f) : null
 const onSubmit = (elem, f) => document.body.contains(elem) ? elem.addEventListener('submit', f) : null
 const onKeyPress = (elem, f) => document.body.contains(elem) ? elem.addEventListener('keypress', e => f(e)) : null
