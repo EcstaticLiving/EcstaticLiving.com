@@ -159,15 +159,20 @@ if (page() === 'Homepage') {
 	do {
 		const number = Math.floor(Math.random() * 4) + 1
 	} while (
-		(number === 1 && hero.classList.contains('1'))
-		|| (number === 2 && hero.classList.contains('2'))
-		|| (number === 3 && hero.classList.contains('3'))
-		|| (number === 4 && hero.classList.contains('4'))
+		(number === 1 && hero.classList.contains('one'))
+		|| (number === 2 && hero.classList.contains('two'))
+		|| (number === 3 && hero.classList.contains('three'))
+		|| (number === 4 && hero.classList.contains('four'))
 	)
 	const hero = document.getElementsByClassName('hero-container')[0]
-	hero.classList.remove('1')
-	hero.classList.remove('2')
-	hero.classList.remove('3')
-	hero.classList.remove('4')
-	hero.classList.add(number.toString())
+	hero.classList.remove('one')
+	hero.classList.remove('two')
+	hero.classList.remove('three')
+	hero.classList.remove('four')
+	switch (number) {
+		case 2:		hero.classList.add('two'); break;
+		case 3:		hero.classList.add('three'); break;
+		case 4:		hero.classList.add('four'); break;
+		default:	hero.classList.add('one'); break;
+	}	
 }
