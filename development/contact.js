@@ -20,4 +20,4 @@ const submitContactForm = () => {
 }
 initiateContactForm()
 // Contact form complete, send user to confirmation
-onClick('button.contact', () => submitContactForm())
+onClick('button contact', () => submitContactForm())
