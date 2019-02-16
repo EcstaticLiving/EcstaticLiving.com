@@ -15,21 +15,15 @@ const urlString = Object.assign({}, ...window.location.search.slice(1).split('&'
 	return { [property]: item.split('=')[1] }
 }))
 // Element Event Listeners
-const onClick = (elem, f) => {
-	console.log(elem)
-	elem.addEventListener('click', e => f(e))
-}
+const onClick = (elem, f) => document.body.contains(elem) ? elem.addEventListener('click', e => f(e)) : null
 const onChange = (elem, f) => elem.addEventListener('change', e => f(e))
 const onInput = (elem, f) => elem.addEventListener('input', f)
-const onLoad = (elem, f) => {
-	console.log(elem)
-	elem.addEventListener('load', f)
-}
+const onLoad = (elem, f) => elem.addEventListener('load', f)
 const onOrientationChange = (elem, f) => elem.addEventListener('orientationchange', f)
 const onSubmit = (elem, f) => elem.addEventListener('submit', f)
 const onKeyPress = (elem, f) => elem.addEventListener('keypress', e => f(e))
 // Form behaviours
-const formSubmit = elem => $(elem).submit()
+const formSubmit = elem => document.body.contains(elem) ? $(elem).submit() : null
 const formErrorInit = elem => $(elem).parsley()
 const formErrorValidation = elem => $(elem).parsley().validate()
 const formReset = elem => $(elem)[0].reset()
@@ -146,8 +140,6 @@ window.onload = setOrientation()
 window.onorientationchange = setOrientation()
 // Social Share Kit
 SocialShareKit.init({ title: document.title })
-// Back Button
-onClick('.navigate-back', () => goToPreviousPage())
 // On scroll, activate menu bar gradient
 const menuBarGradient = document.getElementsByClassName('menu-bar-gradient')[0]
 window.onscroll = () => {
