@@ -11,7 +11,7 @@ const formFields = [
   'verification'
 ]
 
-// 2. Only once all fields are entered and verification question has been answered, enable button.
+// 2. Only once all fields are entered, enable button.
 const verifyEmailSignup = e => {
   formNames.forEach(inputCategory => {
     // If change was made in a certain email signup category...
@@ -30,11 +30,10 @@ const verifyEmailSignup = e => {
           }
         }
         const emailRegex = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/igm
-        // return true if all fields have been filled out and verification answer is correct
+        // return true if all fields have been filled out
         return (
           ((inputField === 'first_name' || inputField === 'last_name') && field.value.length > 1)
           || (inputField === 'email' && field.value.length > 4 && emailRegex.test(field.value))
-          || inputField === 'verification'
         )
       })
       const showAlert = formFields.every(inputField => {
@@ -42,26 +41,8 @@ const verifyEmailSignup = e => {
         return (
           // Only show alert once every field has been touched...
           field.value.length > 0
-          // ...and...
-          && (
-            // ...user is in verification field...
-            (
-              e.target.id.includes('verification')
-              && (
-                // ...and user is either typing an incorrect verification code...
-                (field.value !== '3' && field.value !== 't' && field.value !== 'th' && field.value !== 'thr' && field.value !== 'thre' && field.value !== 'three')
-                // ...or user is typing correct verification code, but other fields are still incomplete
-                || (
-                  (field.value === '3' || field.value === 't' || field.value === 'th' || field.value === 'thr' || field.value === 'thre' || field.value === 'three') && !complete
-                )
-              )
-            )
-            // ...or user is not in verification field, and other fields are incomplete
-            || (!e.target.id.includes('verification') && !complete)
-          )
         )
       })
-      const verificationComplete = document.getElementById(inputCategory + '_verification').value === '3' || document.getElementById(inputCategory + '_verification').value === 'three'
       // ...and if so, change button class to active, and submit form.
       const buttonField = document.getElementById(inputCategory + '_button')
       const alertField = document.getElementById(inputCategory + '_alert')
@@ -72,7 +53,7 @@ const verifyEmailSignup = e => {
       else {
         alertField.classList.add('hidden')
       }
-      if (complete && !showAlert && verificationComplete) {
+      if (complete && !showAlert) {
         buttonField.classList.remove('disabled')
         const formField = document.getElementById(inputCategory + '_form')
         formField.action = 'https://app.getresponse.com/add_subscriber.html'
