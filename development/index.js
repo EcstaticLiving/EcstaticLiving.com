@@ -140,7 +140,7 @@ const goToPreviousPage = () => {
 
 // If window orientation changes
 window.onload = setOrientation()
-onOrientationChange(window, () => setOrientation())
+window.onorientationchange = setOrientation()
 // Social Share Kit
 SocialShareKit.init({ title: document.title })
 // Back Button
