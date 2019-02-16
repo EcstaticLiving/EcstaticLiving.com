@@ -1,4 +1,9 @@
-const calendarCardElements = [
+const cardElementsLoad = [
+  document.getElementsByClassName('card-image'),
+  document.getElementsByClassName('card-gradient'),
+  document.getElementsByClassName('card-header-title'),
+  document.getElementsByClassName('card-header-subtitle'),
+  document.getElementsByClassName('card-header-intro'),
   document.getElementsByClassName('card-detail-circle'),
   document.getElementsByClassName('card-detail-day'),
   document.getElementsByClassName('card-detail-month'),
@@ -8,20 +13,42 @@ const calendarCardElements = [
   document.getElementsByClassName('card-detail-button'),
   document.getElementsByClassName('ribbon blue'),
   document.getElementsByClassName('ribbon green'),
-  document.getElementsByClassName('ribbon red')
+  document.getElementsByClassName('ribbon red'),
+  document.getElementsByClassName('banner blue'),
+  document.getElementsByClassName('banner green'),
+  document.getElementsByClassName('banner red')
+]
+const cardElementsHoverTap = [
+  document.getElementsByClassName('card-detail-circle load'),
+  document.getElementsByClassName('card-detail-day load'),
+  document.getElementsByClassName('card-detail-month load'),
+  document.getElementsByClassName('card-detail-venue load'),
+  document.getElementsByClassName('card-detail-location load'),
+  document.getElementsByClassName('card-detail-dates load'),
+  document.getElementsByClassName('card-detail-button load'),
+  document.getElementsByClassName('ribbon blue load'),
+  document.getElementsByClassName('ribbon green load'),
+  document.getElementsByClassName('ribbon red load')
 ]
 const calendarCards = document.getElementsByClassName('card')
 const device = getDevice()
+
+// Add event listener for hover or tap
 for (let i = 0; i < calendarCards.length; i++) {
-  // Desktops use `mouseover` response, mobile and tablet use `tap` response.
+
+  // Init on window load
+  onLoad(window, () => cardElementsLoad.forEach(element => element[i].classList.add('load')))
+
+  // Desktops use `mouseover` response...
   if (device === 'desktop') {
-    calendarCards[i].addEventListener('mouseover', () => calendarCardElements.forEach(element => element[i].classList.add('hover-tap')))
-    calendarCards[i].addEventListener('mouseout', () => calendarCardElements.forEach(element => element[i].classList.remove('hover-tap')))
+    calendarCards[i].addEventListener('mouseover', () => cardElementsHoverTap.forEach(element => element[i].classList.add('hover-tap')))
+    calendarCards[i].addEventListener('mouseout', () => cardElementsHoverTap.forEach(element => element[i].classList.remove('hover-tap')))
   }
+  // ...mobile and tablet use `tap` response.
   else {
     calendarCards[i].addEventListener('click', () => {
       // Add tap response...
-      calendarCardElements.forEach(element => {
+      cardElementsHoverTap.forEach(element => {
         // ...if card is already active, deactivate it...
         if (element[i].classList.contains('hover-tap')) {
           element[i].classList.remove('hover-tap')
@@ -34,7 +61,7 @@ for (let i = 0; i < calendarCards.length; i++) {
       // ...and remove active states from all other cards.
       for (let j = 0; j < calendarCards.length; j++) {
         if (i !== j) {
-          calendarCardElements.forEach(element => element[j].classList.remove('hover-tap'))
+          cardElementsHoverTap.forEach(element => element[j].classList.remove('hover-tap'))
         }
       }
     })
