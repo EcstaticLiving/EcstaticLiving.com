@@ -1,5 +1,5 @@
 // Event Reg Form
-const eventForm = '#wf-form-Event-Registration'
+const eventForm = 'wf-form-Event-Registration'
 
 // Hidden fields
 const eventCode = getText('#event-code').toUpperCase(),
