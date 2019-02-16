@@ -17,7 +17,7 @@ const urlString = Object.assign({}, ...window.location.search.slice(1).split('&'
 // Element Event Listeners
 const onClick = (elem, f) => {
 	console.log(elem)
-	document.body.contains(elem) ? elem.addEventListener('click', e => f(e)) : null
+	document.body.classList.contains(elem) ? elem.addEventListener('click', e => f(e)) : null
 }
 const onChange = (elem, f) => elem.addEventListener('change', e => f(e))
 const onInput = (elem, f) => elem.addEventListener('input', f)
@@ -25,7 +25,7 @@ const onLoad = (elem, f) => elem.addEventListener('load', f)
 const onOrientationChange = (elem, f) => elem.addEventListener('orientationchange', f)
 const onSubmit = (elem, f) => {
 	console.log(elem)
-	document.body.contains(elem) ? elem.addEventListener('submit', f) : null
+	document.body.classList.contains(elem) ? elem.addEventListener('submit', f) : null
 }
 const onKeyPress = (elem, f) => elem.addEventListener('keypress', e => f(e))
 // Form behaviours
