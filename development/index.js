@@ -15,13 +15,13 @@ const urlString = Object.assign({}, ...window.location.search.slice(1).split('&'
 	return { [property]: item.split('=')[1] }
 }))
 // Element Event Listeners
-const onClick = (elem, f) => $(elem).on('click', e => f(e)) // elem.addEventListener('click', f)
-const onChange = (elem, f) => $(elem).on('change', e => f(e))
-const onInput = (elem, f) => $(elem).on('input', f)
-const onLoad = (elem, f) => $(elem).on('load', f)
-const onOrientationChange = (elem, f) => $(elem).on('orientationchange', f)
-const onSubmit = (elem, f) => $(elem).on('submit', f)
-const onKeyPress = (elem, f) => $(elem).on('keypress', e => f(e))
+const onClick = (elem, f) => elem.addEventListener('click', e => f(e)) // elem.addEventListener('click', f)
+const onChange = (elem, f) => elem.addEventListener('change', e => f(e))
+const onInput = (elem, f) => elem.addEventListener('input', f)
+const onLoad = (elem, f) => elem.addEventListener('load', f)
+const onOrientationChange = (elem, f) => elem.addEventListener('orientationchange', f)
+const onSubmit = (elem, f) => elem.addEventListener('submit', f)
+const onKeyPress = (elem, f) => elem.addEventListener('keypress', e => f(e))
 // Form behaviours
 const formSubmit = elem => $(elem).submit()
 const formErrorInit = elem => $(elem).parsley()
