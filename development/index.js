@@ -157,6 +157,7 @@ window.onscroll = () => {
 if (page() === 'Homepage') {
 	// Randomly use different hero images from 1 to 4
 	let random = 0
+	const hero = document.getElementsByClassName('hero-container')[0]
 	do {
 		random = Math.floor(Math.random() * 4) + 1
 	} while (
@@ -165,7 +166,6 @@ if (page() === 'Homepage') {
 		|| (random === 3 && hero.classList.contains('three'))
 		|| (random === 4 && hero.classList.contains('four'))
 	)
-	const hero = document.getElementsByClassName('hero-container')[0]
 	hero.classList.remove('one')
 	hero.classList.remove('two')
 	hero.classList.remove('three')
