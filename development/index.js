@@ -156,8 +156,9 @@ window.onscroll = () => {
 
 if (page() === 'Homepage') {
 	// Randomly use different hero images from 1 to 4
+	let number = 0
 	do {
-		const number = Math.floor(Math.random() * 4) + 1
+		number = Math.floor(Math.random() * 4) + 1
 	} while (
 		(number === 1 && hero.classList.contains('one'))
 		|| (number === 2 && hero.classList.contains('two'))
