@@ -11,6 +11,11 @@ body,
 .registration-section,
 .modals.register-mobile {-webkit-overflow-scrolling: touch;}
 
+/* Quadrant on homepage, adjust for iPad landscape mode and iPad Pro */
+@media (max-width:1024px) {
+	.quadrant-outer-container {top:-50px;right:10%}
+}
+
 /* Rich-text formatting */
 .w-input.input-field, .w-input.email-signup-input-field {-webkit-appearance: none;}
 .w-richtext p {
