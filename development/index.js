@@ -58,7 +58,10 @@ const emptyText = elem => document.body.contains(elem) ? $(elem).text('') : null
 const properCase = text => document.body.contains(elem) ? text.toLowerCase().charAt(0).toUpperCase() + text.slice(1) : null
 // Select
 const emptySelect = elem => document.body.contains(elem) ? $(elem).empty() : null
-const appendSelect = (elem, option) => document.body.contains(elem) ? $(elem).append(option) : null
+const appendSelect = (elem, option) => {
+	console.log(elem)
+	document.body.contains(elem) ? $(elem).append(option) : null
+}
 const getIndex = elem => document.body.contains(elem) ? $(elem).index() : null
 // HTML
 const setHtml = (elem, val) => document.body.contains(elem) ? $(elem).html(val) : null
