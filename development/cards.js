@@ -1,4 +1,5 @@
 const cardElementsLoad = [
+  document.getElementsByClassName('card'),
   document.getElementsByClassName('card-image'),
   document.getElementsByClassName('card-gradient'),
   document.getElementsByClassName('card-header-title'),
