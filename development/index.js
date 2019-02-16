@@ -15,7 +15,10 @@ const urlString = Object.assign({}, ...window.location.search.slice(1).split('&'
 	return { [property]: item.split('=')[1] }
 }))
 // Element Event Listeners
-const onClick = (elem, f) => elem.addEventListener('click', e => f(e))
+const onClick = (elem, f) => {
+	console.log(elem)
+	elem.addEventListener('click', e => f(e))
+}
 const onChange = (elem, f) => elem.addEventListener('change', e => f(e))
 const onInput = (elem, f) => elem.addEventListener('input', f)
 const onLoad = (elem, f) => {
