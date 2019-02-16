@@ -12,7 +12,7 @@ for(let i in countries) {
 	const country = countries[i] === 'United States'
 		? '<option value="' + countries[i].value + '" selected>' + countries[i].label + '</option>'
 		: '<option value="' + countries[i].value + '">' + countries[i].label + '</option>'
-	appendSelect('#country', country)
+	appendSelect('country', country)
 }
 
 // Clear reg form
