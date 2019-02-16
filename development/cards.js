@@ -20,16 +20,16 @@ const cardElementsLoad = [
   document.getElementsByClassName('banner red')
 ]
 const cardElementsHoverTap = [
-  document.getElementsByClassName('card-detail-circle load'),
-  document.getElementsByClassName('card-detail-day load'),
-  document.getElementsByClassName('card-detail-month load'),
-  document.getElementsByClassName('card-detail-venue load'),
-  document.getElementsByClassName('card-detail-location load'),
-  document.getElementsByClassName('card-detail-dates load'),
-  document.getElementsByClassName('card-detail-button load'),
-  document.getElementsByClassName('ribbon blue load'),
-  document.getElementsByClassName('ribbon green load'),
-  document.getElementsByClassName('ribbon red load')
+  document.getElementsByClassName('card-detail-circle on-load'),
+  document.getElementsByClassName('card-detail-day on-load'),
+  document.getElementsByClassName('card-detail-month on-load'),
+  document.getElementsByClassName('card-detail-venue on-load'),
+  document.getElementsByClassName('card-detail-location on-load'),
+  document.getElementsByClassName('card-detail-dates on-load'),
+  document.getElementsByClassName('card-detail-button on-load'),
+  document.getElementsByClassName('ribbon blue on-load'),
+  document.getElementsByClassName('ribbon green on-load'),
+  document.getElementsByClassName('ribbon red on-load')
 ]
 const calendarCards = document.getElementsByClassName('card')
 const device = getDevice()
