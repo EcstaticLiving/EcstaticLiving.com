@@ -14,6 +14,7 @@ const urlString = Object.assign({}, ...window.location.search.slice(1).split('&'
 	const property = item.split('=')[0]
 	return { [property]: item.split('=')[1] }
 }))
+console.log(document.body)
 // Element Event Listeners
 const onClick = (elem, f) => document.body.contains(elem) ? elem.addEventListener('click', e => f(e)) : null
 const onChange = (elem, f) => document.body.contains(elem) ? elem.addEventListener('change', e => f(e)) : null
