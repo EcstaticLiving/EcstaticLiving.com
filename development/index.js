@@ -160,12 +160,15 @@ if (page() === 'Homepage') {
 	const hero = document.getElementsByClassName('hero-container')[0]
 	do {
 		random = Math.floor(Math.random() * 4) + 1
+		console.log(random)
 	} while (
 		(random === 1 && hero.classList.contains('one'))
 		|| (random === 2 && hero.classList.contains('two'))
 		|| (random === 3 && hero.classList.contains('three'))
 		|| (random === 4 && hero.classList.contains('four'))
 	)
+	console.log(random)
+	console.log(hero)
 	hero.classList.remove('one')
 	hero.classList.remove('two')
 	hero.classList.remove('three')
