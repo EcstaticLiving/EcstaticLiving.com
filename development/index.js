@@ -141,7 +141,7 @@ window.onorientationchange = setOrientation()
 // Social Share Kit
 SocialShareKit.init({ title: document.title })
 // On scroll, activate menu bar gradient
-const menuBarGradient = document.getElementsByClassName('menu-bar-gradient')[0]
+const menuBarGradient = document.getElementsByClassName('menu-bar-gradient-black')[0]
 window.onscroll = () => {
 	if (window.scrollY > 0 && !menuBarGradient.classList.contains('scroll')) {
 		menuBarGradient.classList.add('scroll')
