@@ -156,21 +156,21 @@ window.onscroll = () => {
 
 if (page() === 'Homepage') {
 	// Randomly use different hero images from 1 to 4
-	let number = 0
+	let random = 0
 	do {
-		number = Math.floor(Math.random() * 4) + 1
+		random = Math.floor(Math.random() * 4) + 1
 	} while (
-		(number === 1 && hero.classList.contains('one'))
-		|| (number === 2 && hero.classList.contains('two'))
-		|| (number === 3 && hero.classList.contains('three'))
-		|| (number === 4 && hero.classList.contains('four'))
+		(random === 1 && hero.classList.contains('one'))
+		|| (random === 2 && hero.classList.contains('two'))
+		|| (random === 3 && hero.classList.contains('three'))
+		|| (random === 4 && hero.classList.contains('four'))
 	)
 	const hero = document.getElementsByClassName('hero-container')[0]
 	hero.classList.remove('one')
 	hero.classList.remove('two')
 	hero.classList.remove('three')
 	hero.classList.remove('four')
-	switch (number) {
+	switch (random) {
 		case 2:		hero.classList.add('two'); break;
 		case 3:		hero.classList.add('three'); break;
 		case 4:		hero.classList.add('four'); break;
