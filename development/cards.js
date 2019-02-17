@@ -12,7 +12,8 @@ const cardElementsHoverTap = [
 ]
 const calendarCards = document.getElementsByClassName('card')
 // Init on window load
-calendarCards.forEach(element => element[i].classList.add('on-load'))
+console.log(calendarCards)
+window.onload = calendarCards.forEach(element => element[i].classList.add('on-load'))
 
 // Add event listener for hover or tap
 for (let i = 0; i < calendarCards.length; i++) {
