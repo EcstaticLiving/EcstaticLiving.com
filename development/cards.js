@@ -18,8 +18,8 @@ for (let i = 0; i < calendarCards.length; i++) {
   calendarCards[i].classList.add('on-load')
   // Desktops use `mouseover` response...
   if (getDevice() === 'desktop') {
-    calendarCards[i].addEventListener('mouseover', () => cardElementsHoverTap.forEach(element => element[i].classList.add('on-hover-tap')))
-    calendarCards[i].addEventListener('mouseout', () => cardElementsHoverTap.forEach(element => element[i].classList.remove('on-hover-tap')))
+    calendarCards[i].addEventListener('mouseover', () => cardElementsHoverTap.forEach(element => element[i] ? element[i].classList.add('on-hover-tap') : null))
+    calendarCards[i].addEventListener('mouseout', () => cardElementsHoverTap.forEach(element => element[i] ? element[i].classList.remove('on-hover-tap') : null))
   }
   // ...mobile and tablet use `tap` response.
   else {
