@@ -1,25 +1,3 @@
-const cardElementsLoad = [
-  document.getElementsByClassName('card'),
-  document.getElementsByClassName('card-image'),
-  document.getElementsByClassName('card-gradient'),
-  document.getElementsByClassName('card-header-title'),
-  document.getElementsByClassName('card-header-line'),
-  document.getElementsByClassName('card-header-subtitle'),
-  document.getElementsByClassName('card-header-intro'),
-  document.getElementsByClassName('card-detail-circle'),
-  document.getElementsByClassName('card-detail-day'),
-  document.getElementsByClassName('card-detail-month'),
-  document.getElementsByClassName('card-detail-venue'),
-  document.getElementsByClassName('card-detail-location'),
-  document.getElementsByClassName('card-detail-dates'),
-  document.getElementsByClassName('card-detail-button'),
-  document.getElementsByClassName('ribbon blue'),
-  document.getElementsByClassName('ribbon green'),
-  document.getElementsByClassName('ribbon red'),
-  document.getElementsByClassName('banner blue'),
-  document.getElementsByClassName('banner green'),
-  document.getElementsByClassName('banner red')
-]
 const cardElementsHoverTap = [
   document.getElementsByClassName('card-detail-circle on-load'),
   document.getElementsByClassName('card-detail-day on-load'),
@@ -39,7 +17,7 @@ const device = getDevice()
 for (let i = 0; i < calendarCards.length; i++) {
 
   // Init on window load
-  window.onload = cardElementsLoad.forEach(element => element[i].classList.add('on-load'))
+  window.onload = document.getElementsByClassName('card').forEach(element => element[i].classList.add('on-load'))
 
   // Desktops use `mouseover` response...
   if (device === 'desktop') {
