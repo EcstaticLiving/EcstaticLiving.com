@@ -10,7 +10,7 @@ const cardElementsHoverTap = [
   document.getElementsByClassName('ribbon green'),
   document.getElementsByClassName('ribbon red')
 ]
-const calendarCards = document.getElementsByClassName('card')
+const calendarCards = [...document.getElementsByClassName('card')]
 const device = getDevice()
 
 // Add event listener for hover or tap
