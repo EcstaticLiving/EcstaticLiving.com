@@ -1,3 +1,12 @@
+
+const page = () => {
+  if (containsUrl('/events/'))  					return 'Event'
+  if (endsWithUrl('/update'))  						return 'Update'
+  return null
+}
+
+const isFormPage = () => page() === 'Event' || page() === 'Update'
+
 // Prevent accidental submission of form through 'enter' key
 onKeyPress(document, e => {
 	if (isInput(e.target) && e.which === 13) {
