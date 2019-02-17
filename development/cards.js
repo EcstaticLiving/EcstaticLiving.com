@@ -17,7 +17,7 @@ const device = getDevice()
 for (let i = 0; i < calendarCards.length; i++) {
 
   // Init on window load
-  window.onload = document.getElementsByClassName('card').forEach(element => element[i].classList.add('on-load'))
+  window.onload = calendarCards.forEach(element => element[i].classList.add('on-load'))
 
   // Desktops use `mouseover` response...
   if (device === 'desktop') {
