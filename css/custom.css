@@ -13,7 +13,7 @@ body,
 
 /* Quadrant on homepage, adjust for iPad landscape mode and iPad Pro */
 @media (max-width:1024px) {
-	.quadrant-outer-container {top:-50px;right:10%}
+	.quadrant-outer-container {top:-100px;right:10%}
 }
 
 /* Rich-text formatting */
