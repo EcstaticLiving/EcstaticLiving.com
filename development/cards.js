@@ -10,17 +10,15 @@ const cardElementsHoverTap = [
   document.getElementsByClassName('ribbon green'),
   document.getElementsByClassName('ribbon red')
 ]
-const calendarCards = [...document.getElementsByClassName('card')]
-const device = getDevice()
+const calendarCards = document.getElementsByClassName('card')
+// Init on window load
+window.onload = calendarCards.forEach(element => element[i].classList.add('on-load'))
 
 // Add event listener for hover or tap
 for (let i = 0; i < calendarCards.length; i++) {
 
-  // Init on window load
-  window.onload = calendarCards.forEach(element => element[i].classList.add('on-load'))
-
   // Desktops use `mouseover` response...
-  if (device === 'desktop') {
+  if (getDevice() === 'desktop') {
     calendarCards[i].addEventListener('mouseover', () => cardElementsHoverTap.forEach(element => element[i].classList.add('on-hover-tap')))
     calendarCards[i].addEventListener('mouseout', () => cardElementsHoverTap.forEach(element => element[i].classList.remove('on-hover-tap')))
   }
