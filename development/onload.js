@@ -37,6 +37,4 @@ if (window.location.pathname === '/') {
 		document.getElementsByClassName('hero-slide-title two')[slideNumber],
 		document.getElementsByClassName('hero-slide-title three')[slideNumber]
 	]
-	console.log(slideNumber, heroTitle)
-	heroTitle.forEach(title => title.classList.add('fade-slide'))	
 }
