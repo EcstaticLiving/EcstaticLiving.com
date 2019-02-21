@@ -19,12 +19,12 @@ if (window.location.pathname === '/') {
 	setTimeout(() => {
 		const heroButton = document.getElementsByClassName('hero-button')[0]
 		heroButton.classList.add('fade-slide')
-	}, 600)
+	}, 650)
 
 	// Slide in Hero Arrows
 	setTimeout(() => {
 		const heroArrows = document.getElementsByClassName('hero-slider-arrows')[0]
 		heroArrows.classList.add('fade-slide')
-	}, 700)
+	}, 800)
 
 }
