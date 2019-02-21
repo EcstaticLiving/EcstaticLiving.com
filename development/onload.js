@@ -23,7 +23,7 @@ if (window.location.pathname === '/') {
 	let randomSlide = 0
 	const hero = document.getElementsByClassName('hero-slide')[0]
 	do {
-		randomSlide = Math.floor(Math.randomSlide() * MAX_SLIDES) + 1
+		randomSlide = Math.floor(Math.random() * MAX_SLIDES) + 1
 	}
 	// Don’t use same slide
 	while (randomSlide === 1 && hero.classList.contains(slideClasses[randomSlide - 1]))
