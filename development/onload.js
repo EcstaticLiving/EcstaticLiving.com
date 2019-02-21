@@ -1,22 +1,6 @@
 const MAX_SLIDES = 1
 const literalNumbers = ['one', 'two', 'three', 'four', 'five', 'six']
 
-// If window orientation changes
-const getDevice = () => {
-	//	Some large tablets exist, but for all intents and purposes, we’ll treat them as desktops.
-	if (Math.max(window.innerWidth, window.innerHeight) >= 1025) {
-		return 'desktop'
-	}
-	if (Math.min(window.innerWidth, window.innerHeight) >= 641) {
-		return 'tablet'
-	}
-	return 'mobile'
-}
-const deviceOrientation = window.innerWidth > window.innerHeight
-	? 'landscape'
-	: 'portrait'
-
-
 // Preload images and randomly rotate
 if (window.location.pathname === '/') {
 	// Randomly use different hero images from 1 to 4

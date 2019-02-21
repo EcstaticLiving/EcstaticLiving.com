@@ -1,3 +1,18 @@
+// If window orientation changes
+const getDevice = () => {
+	//	Some large tablets exist, but for all intents and purposes, we’ll treat them as desktops.
+	if (Math.max(window.innerWidth, window.innerHeight) >= 1025) {
+		return 'desktop'
+	}
+	if (Math.min(window.innerWidth, window.innerHeight) >= 641) {
+		return 'tablet'
+	}
+	return 'mobile'
+}
+const deviceOrientation = window.innerWidth > window.innerHeight
+	? 'landscape'
+  : 'portrait'
+
 const cardElementsHoverTap = [
   document.getElementsByClassName('card-detail-circle'),
   document.getElementsByClassName('card-detail-day'),
