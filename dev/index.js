@@ -1,19 +1,6 @@
 // Code ©2017 - 2019 Ecstatic Life Inc. All rights reserved.
 console.log(window.location.href.indexOf('ecstaticliving.com') > -1 ? 'Welcome to EcstaticLiving.com' : 'TEST code at ', window.location.href)
 
-// CONSTANTS
-
-// Window
-const windowWidth = $(window).width()
-const windowHeight = $(window).height()
-// Urls
-const containsUrl = str => window.location.href.indexOf(str) > -1
-const endsWithUrl = str => window.location.href.endsWith(str)
-// Return url search keys and values
-const urlString = Object.assign({}, ...window.location.search.slice(1).split('&').map((item) => {
-	const property = item.split('=')[0]
-	return { [property]: item.split('=')[1] }
-}))
 // Element Event Listeners
 const onClick = (elem, f) => document.body.classList.contains(elem) ? elem.addEventListener('click', e => f(e)) : null
 const onChange = (elem, f) => document.body.classList.contains(elem) ? elem.addEventListener('change', e => f(e)) : null
@@ -23,46 +10,48 @@ const onOrientationChange = (elem, f) => elem.addEventListener('orientationchang
 const onSubmit = (elem, f) => document.body.classList.contains(elem) ? elem.addEventListener('submit', f) : null
 const onKeyPress = (elem, f) => elem.addEventListener('keypress', e => f(e))
 // Form behaviours
-const formSubmit = elem => $(elem).submit()
-const formErrorInit = elem => $(elem).parsley()
-const formErrorValidation = elem => $(elem).parsley().validate()
-const formReset = elem => $(elem)[0].reset()
+const formSubmit = elem => elem.submit()
+const formErrorInit = elem => elem.parsley()
+const formErrorValidation = elem => elem.parsley().validate()
+const formReset = elem => elem[0].reset()
 // Element Collections
-const getElementById = elem => $(elem)
+const getElementById = elem => document.getElementById(elem)
 const getAttribute = (elem, attribute) => elem.getAttribute(attribute)
 const getElementsByTag = tag => document.getElementsByTagName(tag)
 // Element Conditions
-const isInput = elem => $(elem).is('input')
-const isRadio = elem => $(elem).is(':radio')
+const isInput = elem => elem.type === 'input'
+const isRadio = elem => elem.type === 'radio'
 const isBlank = elem => getValue(elem) === '' && getValue(elem) === ''
-const isChecked = elem => $(elem).is(':checked')
-const isVisible = elem => $(elem).is(':visible')
+const isChecked = elem => elem.checked
+const isVisible = elem => elem.style.display
 // Element Behaviours
-const animateElement = (elem, style, time) => $(elem).animate(style, time)
-const clickElement = elem => $(elem).trigger('click')
-const focusElement = elem => $(elem).focus()
-const fadeElement = (elem, time, opacity) => $(elem).fadeTo(time, opacity)
-const hideElement = elem => $(elem).hide()
-const showElement = elem => $(elem).show()
+const clickElement = elem => elem.click()
+const focusElement = elem => elem.focus()
+const hideElement = elem => elem.style.display = 'none'
+const showElement = elem => elem.style.display = 'block'
 // Values
-const getValue = elem => $(elem).val()
-const emptyValue = elem => $(elem).val('')
-const setValue = (elem, val) => $(elem).val(val)
+const getValue = elem => elem.value
+const emptyValue = elem => elem.value === ''
+const setValue = (elem, val) => elem.value = val
 // Text
-const getText = elem => $(elem).text()
-const setText = (elem, val) => $(elem).text(val)
-const emptyText = elem => $(elem).text('')
+const getText = elem => elem.textContent
+const setText = (elem, val) => elem.textContent = val
+const emptyText = elem => elem.textContent = ''
 const properCase = text => text.toLowerCase().charAt(0).toUpperCase() + text.slice(1)
 // Select
-const emptySelect = elem => $(elem).empty()
-const appendSelect = (elem, option) => $(elem).append(option)
-const getIndex = elem => $(elem).index()
+const emptySelect = elem => {
+	for (let i = 0; i < elem.options.length; i++) {
+		elem.options[i] = null
+	}
+}
+const appendSelect = (elem, option) => elem.appendChild(option)
+const getIndex = elem => elem.selectedIndex
 // HTML
-const setHtml = (elem, val) => $(elem).html(val)
-const setCss = (elem, css) => $(elem).css(css)
+const setHtml = (elem, val) => elem.innerHTML = val
+const setCss = (elem, css) => elem.className = css
 // Check radio
-const checkElement = elem => $(elem).prop('checked', true)
-const unCheckElement = elem => $(elem).prop('checked', false)
+const checkElement = elem => elem.checked = true
+const unCheckElement = elem => elem.checked = false
 // Combined Behaviours
 const emptyHideText = elem => {
 	emptyText(elem)
