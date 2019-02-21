@@ -1,4 +1,4 @@
-const MAX_SLIDES = 1
+const MAX_SLIDES = 2
 const literalNumbers = ['one', 'two', 'three', 'four', 'five', 'six']
 
 // Preload images and randomly rotate
