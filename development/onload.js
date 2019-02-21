@@ -1,3 +1,6 @@
+const MAX_SLIDES = 2
+const slideClasses = ['one', 'two', 'three', 'four', 'five', 'six']
+
 // If window orientation changes
 const getDevice = () => {
 	//	Some large tablets exist, but for all intents and purposes, we’ll treat them as desktops.
@@ -17,24 +20,15 @@ const deviceOrientation = windowWidth > windowHeight
 // Preload images and randomly rotate
 if (window.location.pathname === '/') {
 	// Randomly use different hero images from 1 to 4
-	let random = 0
+	let randomSlide = 0
 	const hero = document.getElementsByClassName('hero-slide')[0]
 	do {
-		random = Math.floor(Math.random() * 4) + 1
-	} while (
-		(random === 1 && hero.classList.contains('one'))
-		|| (random === 2 && hero.classList.contains('two'))
-		|| (random === 3 && hero.classList.contains('three'))
-		|| (random === 4 && hero.classList.contains('four'))
-	)
-	hero.classList.remove('one')
-	hero.classList.remove('two')
-	hero.classList.remove('three')
-	hero.classList.remove('four')
-	switch (random) {
-		case 2:		hero.classList.add('two'); break;
-		case 3:		hero.classList.add('three'); break;
-		case 4:		hero.classList.add('four'); break;
-		default:	hero.classList.add('one'); break;
-	}	
+		randomSlide = Math.floor(Math.randomSlide() * MAX_SLIDES) + 1
+	}
+	// Don’t use same slide
+	while (randomSlide === 1 && hero.classList.contains(slideClasses[randomSlide - 1]))
+	for (let slideClass in slideClasses) {
+		hero.classList.remove(slideClass)
+	}
+	hero.classList.add(slideClasses[randomSlide - 1])
 }
