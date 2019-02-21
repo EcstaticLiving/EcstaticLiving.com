@@ -8,6 +8,7 @@ if (window.location.pathname === '/') {
 	// Slide in Hero Text
 	for (let i = 0; i++; i<3) {
 		const title = document.getElementsByClassName('hero-slide-title ' + literalNumbers[i])[0]
+		console.log(title)
 		title.classList.add('fade-slide')
 	}
 }
