@@ -32,6 +32,10 @@ if (window.location.pathname === '/') {
 	}
 	hero.classList.add(slideClasses[slideNumber - 1])
 	// Slide in Hero Text
-	const heroTitle = document.getElementsByClassName('hero-slide-title')[slideNumber]
-	heroTitle.classList.add('fade-slide')
+	const heroTitle = [
+		document.getElementsByClassName('hero-slide-title 1')[slideNumber],
+		document.getElementsByClassName('hero-slide-title 2')[slideNumber],
+		document.getElementsByClassName('hero-slide-title 3')[slideNumber]
+	]
+	heroTitle.forEach(title => title.classList.add('fade-slide'))	
 }
