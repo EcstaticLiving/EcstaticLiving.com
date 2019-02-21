@@ -6,7 +6,7 @@ if (window.location.pathname === '/') {
 	const hero = document.getElementsByClassName('hero-slide')[0]
 	hero.classList.add('fade')
 	// Slide in Hero Text
-	for (let i = 0; i++; i<3) {
+	for (let i = 0; i < 3; i++) {
 		const title = document.getElementsByClassName('hero-slide-title ' + literalNumbers[i])[0]
 		console.log(title)
 		title.classList.add('fade-slide')
