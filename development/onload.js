@@ -4,15 +4,15 @@ const literalNumbers = ['one', 'two', 'three', 'four', 'five', 'six']
 // If window orientation changes
 const getDevice = () => {
 	//	Some large tablets exist, but for all intents and purposes, we’ll treat them as desktops.
-	if (Math.max(windowWidth, windowHeight) >= 1025) {
+	if (Math.max(window.innerWidth, window.innerHeight) >= 1025) {
 		return 'desktop'
 	}
-	if (Math.min(windowWidth, windowHeight) >= 641) {
+	if (Math.min(window.innerWidth, window.innerHeight) >= 641) {
 		return 'tablet'
 	}
 	return 'mobile'
 }
-const deviceOrientation = windowWidth > windowHeight
+const deviceOrientation = window.innerWidth > window.innerHeight
 	? 'landscape'
 	: 'portrait'
 
