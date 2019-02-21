@@ -9,5 +9,7 @@ if (window.location.pathname === '/') {
 	for (let i = 0; i++; i<3) {
 		const title = document.getElementsByClassName('hero-slide-title ' + literalNumbers[i])[0]
 		title.classList.add('fade-slide')
+		const title2 = document.getElementsByClassName('hero-slide-title ' + literalNumbers[i])[1]
+		title2.classList.add('fade-slide')
 	}
 }
