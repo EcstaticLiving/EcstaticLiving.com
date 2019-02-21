@@ -10,7 +10,7 @@ if (window.location.pathname === '/') {
 	// Slide in Hero Text
 	setTimeout(() => {
 		for (let i = 0; i < 3; i++) {
-			const title = document.getElementsByClassName('hero-slide-title ' + literalNumbers[i])[0]
+			const title = document.getElementsByClassName('hero-title ' + literalNumbers[i])[0]
 			title.classList.add('fade-slide')
 		}
 	}, 500)
