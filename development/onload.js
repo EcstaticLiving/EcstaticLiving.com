@@ -18,23 +18,23 @@ const deviceOrientation = windowWidth > windowHeight
 if (window.location.pathname === '/') {
 	// Randomly use different hero images from 1 to 4
 	let random = 0
-	const hero = document.getElementsByClassName('hero-container')[0]
+	const hero = document.getElementsByClassName('hero-slide')[0]
 	do {
 		random = Math.floor(Math.random() * 4) + 1
 	} while (
-		(random === 1 && hero.classList.contains('one'))
-		|| (random === 2 && hero.classList.contains('two'))
-		|| (random === 3 && hero.classList.contains('three'))
-		|| (random === 4 && hero.classList.contains('four'))
+		(random === 1 && hero.classList.contains('1'))
+		|| (random === 2 && hero.classList.contains('2'))
+		|| (random === 3 && hero.classList.contains('3'))
+		|| (random === 4 && hero.classList.contains('4'))
 	)
-	hero.classList.remove('one')
-	hero.classList.remove('two')
-	hero.classList.remove('three')
-	hero.classList.remove('four')
+	hero.classList.remove('1')
+	hero.classList.remove('2')
+	hero.classList.remove('3')
+	hero.classList.remove('4')
 	switch (random) {
-		case 2:		hero.classList.add('two'); break;
-		case 3:		hero.classList.add('three'); break;
-		case 4:		hero.classList.add('four'); break;
-		default:	hero.classList.add('one'); break;
+		case 2:		hero.classList.add('2'); break;
+		case 3:		hero.classList.add('3'); break;
+		case 4:		hero.classList.add('4'); break;
+		default:	hero.classList.add('1'); break;
 	}	
 }
