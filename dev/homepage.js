@@ -64,9 +64,10 @@ if (window.location.pathname === '/') {
 				? 0
 				: tabIndex + 1
 			// Fade out current tab
+			console.log(tabIndex)
 			tabs[tabIndex].classList.remove('fade')
 			// Fade in new slide
-			fadeInTab(nextTabIndex)
+			setTimeout(() => fadeInTab(nextTabIndex), 500)
 			// Reset current slide
 			setTimeout(() => resetSlide(tabIndex), 500)
 		})
