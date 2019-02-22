@@ -46,23 +46,18 @@ if (window.location.pathname === '/') {
 
 	// Add event listener to cycle through all hero messages on arrow click
 	const rightArrows = getElementsByClassName('hero-arrow right')
-	for (let i = 0; i < rightArrows.length; i++) {
-		rightArrows[i].addEventListener('click', () => {
-			// Get current and next image
-			let tabIndex
-			for (let i = 0; i < tabs.length; i++) {
-				if (tabs[i].classList.contains('w--tab-active')) {
-					tabIndex = i === tabs.length - 1
-						? { current: i, next: 0 }
-						: { current: i, next: i + 1 }
-				}
-			}
+	for (let tabIndex = 0; tabIndex < rightArrows.length; tabIndex++) {
+		rightArrows[tabIndex].addEventListener('click', tabIndex => {
+			// Get next image
+			const nextTab = tabIndex === tabs.length - 1
+				? 0
+				: tabIndex + 1
 			// Deactivate current tab
-			tabs[tabIndex.current].classList.add('fade-out')
+			tabs[tabIndex].classList.add('fade-out')
 			// Fade in new slide
-			fadeInTab(tabIndex.next)
+			fadeInTab(nextTab)
 			// Reset current slide
-			resetSlide(tabIndex.current)
+			resetSlide(tabIndex)
 		})
 	}
 
