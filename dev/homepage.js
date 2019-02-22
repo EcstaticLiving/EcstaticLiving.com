@@ -13,7 +13,7 @@ const fadeInTab = tabIndex => {
 	heroArrows.classList.add('display')
 
 	// Fade in image
-	setTimeout(() => tabs[tabIndex].classList.add('fade'), 200)
+	setTimeout(() => tabs[tabIndex].classList.add('fade'), 100)
 
 	// Slide in Hero Text
 	setTimeout(() => {
