@@ -39,16 +39,15 @@ if (window.location.pathname === '/') {
 	rightArrow.addEventListener('click', () => {
 		const tabs = getElementsByClassName('hero-slider')
 		for (let i = 0; i < tabs.length; i++) {
-			console.log(tabs[i].classList)
 			if (tabs[i].classList.contains('w--tab-active')) {
 				// Remove active tab
 				tabs[i].classList.remove('w--tab-active')
 				// Add active status to next tab
 				if (i === tabs.length - 1) {
-					tabs[0].classList.addClass('w--tab-active')
+					tabs[0].classList.add('w--tab-active')
 				}
 				else {
-					tabs[i + 1].classList.addClass('w--tab-active')
+					tabs[i + 1].classList.add('w--tab-active')
 				}
 				break
 			}
