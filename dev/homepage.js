@@ -52,6 +52,7 @@ if (window.location.pathname === '/') {
 			const nextTabIndex = tabIndex === tabs.length - 1
 				? 0
 				: tabIndex + 1
+			console.log(tabIndex, nextTabIndex)
 			// Deactivate current tab
 			tabs[tabIndex].classList.add('fade-out')
 			// Fade in new slide
