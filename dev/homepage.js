@@ -52,24 +52,27 @@ const getSlideNumber = () => {
 	return obj
 }
 
+const transitionSlides = () => {
+	const slideNumber = getSlideNumber()
+	// Deactivate current tab
+	tabs[slideNumber.current].classList.remove('w--tab-active')
+	// Activate new tab
+	tabs[slideNumber.next].classList.add('w--tab-active')
+	// Fade in new slide
+	fadeInSlide(slideNumber.next)
+	// Reset current slide
+	resetSlide(slideNumber.current)
+}
+
 // Begin
 if (window.location.pathname === '/') {
 
 	fadeInSlide(0)
 
 	// Add event listener to cycle through all hero messages on arrow click
-	const rightArrow = getElementByClassName('hero-arrow right', 0)
-	rightArrow.addEventListener('click', () => {
-			const slideNumber = getSlideNumber()
-			console.log(slideNumber)
-			// Deactivate current tab
-			tabs[slideNumber.current].classList.remove('w--tab-active')
-			// Activate new tab
-			tabs[slideNumber.next].classList.add('w--tab-active')
-			// Fade in new slide
-			fadeInSlide(slideNumber.next)
-			// Reset current slide
-			resetSlide(slideNumber.current)
-	})
+	const rightArrows = getElementsByClassName('hero-arrow right')
+	for (let i = 0; i < rightArrows.length - 1; i++) {
+		rightArrows[i].addEventListener('click', () => transitionSlides())
+	}
 
 }
