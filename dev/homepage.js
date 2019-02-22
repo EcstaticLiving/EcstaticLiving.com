@@ -61,6 +61,7 @@ if (window.location.pathname === '/') {
 	const rightArrow = getElementByClassName('hero-arrow right', 0)
 	rightArrow.addEventListener('click', () => {
 			const slideNumber = getSlideNumber()
+			console.log(slideNumber)
 			// Deactivate current tab
 			tabs[slideNumber.current].classList.remove('w--tab-active')
 			// Activate new tab
