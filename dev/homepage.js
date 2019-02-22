@@ -29,6 +29,23 @@ const newSlide = () => {
 
 }
 
+const nextSlide = () => {
+	const tabs = getElementsByClassName('hero-slide-container')
+	for (let i = 0; i < tabs.length; i++) {
+		if (tabs[i].classList.contains('w--tab-active')) {
+			// Remove active tab
+			tabs[i].classList.remove('w--tab-active')
+			// Add active status to next tab
+			nextTab = i === tabs.length - 1
+				? 0
+				: i + 1
+			const slide = getElementByClassName('hero-slide')
+			tabs[nextTab].classList.add('w--tab-active')
+			break
+		}
+	}
+}
+
 // Begin
 if (window.location.pathname === '/') {
 
@@ -36,22 +53,6 @@ if (window.location.pathname === '/') {
 
 	// Add event listener to cycle through all hero messages on arrow click
 	const rightArrow = getElementByClassName('hero-arrow right')
-	rightArrow.addEventListener('click', () => {
-		const tabs = getElementsByClassName('hero-slider')
-		for (let i = 0; i < tabs.length; i++) {
-			if (tabs[i].classList.contains('w--tab-active')) {
-				// Remove active tab
-				tabs[i].classList.remove('w--tab-active')
-				// Add active status to next tab
-				if (i === tabs.length - 1) {
-					tabs[0].classList.add('w--tab-active')
-				}
-				else {
-					tabs[i + 1].classList.add('w--tab-active')
-				}
-				break
-			}
-		}
-	})
+	rightArrow.addEventListener('click', () => nextSlide())
 
 }
