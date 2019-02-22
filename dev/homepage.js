@@ -71,6 +71,7 @@ if (window.location.pathname === '/') {
 
 	// Add event listener to cycle through all hero messages on arrow click
 	const rightArrows = getElementsByClassName('hero-arrow right')
+	console.log(rightArrows.length)
 	for (let i = 0; i < rightArrows.length - 1; i++) {
 		rightArrows[i].addEventListener('click', () => transitionSlides())
 	}
