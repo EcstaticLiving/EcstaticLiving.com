@@ -4,9 +4,6 @@ const literalNumbers = ['one', 'two', 'three', 'four', 'five', 'six']
 
 // Preload images and randomly rotate
 const fadeInSlide = slideNumber => {
-	// Make sure arrows are hidden
-	const heroArrows = getElementByClassName('hero-arrows', 0)
-	heroArrows.classList.remove('fade-slide')
 	// Hero Image
 	const hero = getElementByClassName('hero-slide', slideNumber)
 	hero.classList.add('fade')
@@ -24,6 +21,7 @@ const fadeInSlide = slideNumber => {
 	}, 800)
 	// Slide in Hero Arrows
 	setTimeout(() => {
+		const heroArrows = getElementByClassName('hero-arrows', slideNumber)
 		heroArrows.classList.add('fade-slide')
 	}, 1100)
 }
@@ -37,6 +35,9 @@ const resetSlide = slideNumber => {
 	// Hide Hero Button
 	const heroButton = getElementByClassName('hero-button', slideNumber)
 	heroButton.classList.remove('fade-slide')
+	// Hide Hero Arrows
+	const heroArrows = getElementByClassName('hero-arrows', slideNumber)
+	heroArrows.classList.remove('fade-slide')
 }
 
 const getSlideNumber = () => {
