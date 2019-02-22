@@ -4,7 +4,7 @@ const literalNumbers = ['one', 'two', 'three', 'four', 'five', 'six']
 
 // Preload images and randomly rotate
 const fadeInSlide = slideNumber => {
-	// Hero Image
+	// Fade in Hero Image
 	const hero = getElementByClassName('hero-slide', slideNumber)
 	hero.classList.add('fade')
 	// Slide in Hero Text
@@ -27,6 +27,9 @@ const fadeInSlide = slideNumber => {
 }
 
 const resetSlide = slideNumber => {
+	// Hide Hero Image
+	const hero = getElementByClassName('hero-slide', slideNumber)
+	hero.classList.remove('fade')
 	// Hide Hero Text
 	for (let i = 0; i < 3; i++) {
 		const title = getElementByClassName('hero-title ' + literalNumbers[i], slideNumber)
@@ -67,12 +70,13 @@ const transitionSlides = () => {
 // Begin
 if (window.location.pathname === '/') {
 
-	fadeInSlide(0)
-
 	// Add event listener to cycle through all hero messages on arrow click
 	const rightArrows = getElementsByClassName('hero-arrow right')
 	for (let i = 0; i < rightArrows.length; i++) {
 		rightArrows[i].addEventListener('click', () => transitionSlides())
 	}
+
+	// Fade in first slide
+	fadeInSlide(0)
 
 }
