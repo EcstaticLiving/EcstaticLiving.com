@@ -38,7 +38,11 @@ if (window.location.pathname === '/') {
 	const rightArrow = getElementByClassName('hero-arrow right')
 	onClick(rightArrow, () => {
 		const tabs = getElementsByClassName('hero-slider')
-		const activeTab = tabs.findIndex(tab => tab.classList.contains('w-tab-pane w--tab-active'))
+		let activeTab
+		const found = tabs.some((tab, index) => {
+			activeTab = index
+			tab.classList.contains('w-tab-pane w--tab-active')
+		})
 		// Remove active tab
 		tabs[activeTab].classList.remove('w--tab-active')
 		// Add active status to next tab
