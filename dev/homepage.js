@@ -52,8 +52,7 @@ const getSlideNumber = () => {
 	return obj
 }
 
-const transitionSlides = i => {
-	console.log(i)
+const transitionSlides = () => {
 	const slideNumber = getSlideNumber()
 	// Deactivate current tab
 	tabs[slideNumber.current].classList.remove('w--tab-active')
@@ -73,7 +72,8 @@ if (window.location.pathname === '/') {
 	// Add event listener to cycle through all hero messages on arrow click
 	const rightArrows = getElementsByClassName('hero-arrow right')
 	for (let i = 0; i < rightArrows.length - 1; i++) {
-		rightArrows[i].addEventListener('click', () => transitionSlides(i))
+		console.log(rightArrows[i])
+		rightArrows[i].addEventListener('click', () => transitionSlides())
 	}
 
 }
