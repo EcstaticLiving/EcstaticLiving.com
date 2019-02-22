@@ -28,9 +28,9 @@ const fadeInSlide = slideNumber => {
 
 const resetSlide = slideNumber => {
 	// Hide Hero Image
-	const hero = getElementByClassName('hero-slide', slideNumber)
-	hero.classList.remove('fade')
-	hero.classList.remove('w-dyn-item')
+	// const hero = getElementByClassName('hero-slide', slideNumber)
+	// hero.classList.remove('fade')
+	// hero.classList.remove('w-dyn-item')
 	// Hide Hero Text
 	for (let i = 0; i < 3; i++) {
 		const title = getElementByClassName('hero-title ' + literalNumbers[i], slideNumber)
@@ -65,9 +65,9 @@ const transitionSlides = () => {
 	// Activate new tab
 	// tabs[slideNumber.next].classList.add('w--tab-active')
 	// Fade in new slide
-	// fadeInSlide(slideNumber.next)
+	fadeInSlide(slideNumber.next)
 	// Reset current slide
-	// resetSlide(slideNumber.current)
+	resetSlide(slideNumber.current)
 }
 
 // Begin
