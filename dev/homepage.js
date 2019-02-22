@@ -1,9 +1,9 @@
 // Load all tabs
 const tabs = getElementsByClassName('hero-slide-container')
+const literalNumbers = ['one', 'two', 'three', 'four', 'five', 'six']
 
 // Preload images and randomly rotate
 const fadeInSlide = slideNumber => {
-	const literalNumbers = ['one', 'two', 'three', 'four', 'five', 'six']
 	// Hero Image
 	const hero = getElementByClassName('hero-slide', slideNumber)
 	hero.classList.add('fade')
@@ -24,6 +24,20 @@ const fadeInSlide = slideNumber => {
 		const heroArrows = getElementByClassName('hero-arrows', slideNumber)
 		heroArrows.classList.add('fade-slide')
 	}, 1100)
+}
+
+const resetSlide = slideNumber => {
+	// Slide in Hero Text
+	for (let i = 0; i < 3; i++) {
+		const title = getElementByClassName('hero-title ' + literalNumbers[i], slideNumber)
+		title.classList.remove('fade-slide')
+	}
+	// Slide in Hero Button
+	const heroButton = getElementByClassName('hero-button', slideNumber)
+	heroButton.classList.remove('fade-slide')
+	// Slide in Hero Arrows
+	const heroArrows = getElementByClassName('hero-arrows', slideNumber)
+	heroArrows.classList.remove('fade-slide')
 }
 
 const getSlideNumber = () => {
@@ -53,6 +67,8 @@ if (window.location.pathname === '/') {
 			tabs[slideNumber.next].classList.add('w--tab-active')
 			// Fade in new slide
 			fadeInSlide(slideNumber.next)
+			// Reset current slide
+			resetSlide(slideNumber.current)
 	})
 
 }
