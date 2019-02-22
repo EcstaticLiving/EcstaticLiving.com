@@ -43,18 +43,14 @@ if (window.location.pathname === '/') {
 	fadeInSlide(0)
 
 	// Add event listener to cycle through all hero messages on arrow click
-	const rightArrow = getElementByClassName('hero-arrow right')
+	const rightArrow = getElementByClassName('hero-arrow right', 0)
 	rightArrow.addEventListener('click', () => {
-
 			// Deactivate current tab
 			tabs[getSlideNumber().current].classList.remove('w--tab-active')
-
-			// const newSlide = getElementByClassName('hero-slide', getSlideNumber().next)
 			// Activate new tab
 			tabs[getSlideNumber().next].classList.add('w--tab-active')
 			// Fade in new slide
 			fadeInSlide(getSlideNumber().next)
-
 	})
 
 }
