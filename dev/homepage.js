@@ -33,8 +33,8 @@ const newSlide = () => {
 if (window.location.pathname === '/') {
 
 	newSlide()
+	const rightArrow = getElementByClassName('hero-arrow right')
 	onClick(rightArrow, () => {
-		const rightArrow = getElementByClassName('hero-arrow right')
 		const firstTab = getElementByClassName('hero-slider:first')
 		const activeTab = getElementByClassName('hero-slider w-tab-pane w--tab-active').removeClass('w--tab-active').next('hero-slider')
 		if (activeTab.length) {
