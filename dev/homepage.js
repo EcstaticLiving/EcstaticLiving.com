@@ -4,8 +4,17 @@ const literalNumbers = ['one', 'two', 'three', 'four', 'five', 'six']
 
 // Preload images and randomly rotate
 const fadeInTab = tabIndex => {
-	// Fade in Hero Image
-	tabs[tabIndex].classList.add('fade-in')
+
+	// Make tab and clickable elements visible
+	tabs[tabIndex].classList.add('display')
+	const heroButton = getElementByClassName('hero-button', tabIndex)
+	const heroArrows = getElementByClassName('hero-arrows', tabIndex)
+	heroButton.classList.add('display')
+	heroArrows.classList.add('display')
+
+	// Fade in image
+	tabs[tabIndex].classList.add('fade')
+
 	// Slide in Hero Text
 	setTimeout(() => {
 		for (let i = 0; i < 3; i++) {
@@ -13,19 +22,17 @@ const fadeInTab = tabIndex => {
 			title.classList.add('fade-slide')
 		}
 	}, 500)
+
 	// Slide in Hero Button
-	setTimeout(() => {
-		const heroButton = getElementByClassName('hero-button', tabIndex)
-		heroButton.classList.add('fade-slide')
-	}, 800)
+	setTimeout(() => heroButton.classList.add('fade-slide'), 800)
+
 	// Slide in Hero Arrows
-	setTimeout(() => {
-		const heroArrows = getElementByClassName('hero-arrows', tabIndex)
-		heroArrows.classList.add('fade-slide')
-	}, 1100)
+	setTimeout(() => heroArrows.classList.add('fade-slide'), 1100)
+
 }
 
 const resetSlide = tabIndex => {
+
 	// Hide Hero Text
 	for (let i = 0; i < 3; i++) {
 		const title = getElementByClassName('hero-title ' + literalNumbers[i], tabIndex)
@@ -37,9 +44,13 @@ const resetSlide = tabIndex => {
 	// Hide Hero Arrows
 	const heroArrows = getElementByClassName('hero-arrows', tabIndex)
 	heroArrows.classList.remove('fade-slide')
+	
+	// Make tab and clickable elements invisible
+	tabs[tabIndex].classList.remove('display')
+	heroButton.classList.remove('display')
+	heroArrows.classList.remove('display')
+
 }
-
-
 
 // Begin
 if (window.location.pathname === '/') {
@@ -53,12 +64,12 @@ if (window.location.pathname === '/') {
 				? 0
 				: tabIndex + 1
 			console.log(tabIndex, nextTabIndex)
-			// Deactivate current tab
-			tabs[tabIndex].classList.add('fade-out')
+			// Fade out current tab
+			tabs[tabIndex].classList.remove('fade')
 			// Fade in new slide
 			fadeInTab(nextTabIndex)
 			// Reset current slide
-			resetSlide(tabIndex)
+			setTimeout(() => resetSlide(tabIndex), 500)
 		})
 	}
 
