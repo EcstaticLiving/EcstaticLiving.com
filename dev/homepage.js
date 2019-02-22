@@ -52,23 +52,29 @@ const resetSlide = tabIndex => {
 
 }
 
+const transitionTabs = ({ current, next }) => {
+	// Fade out current tab
+	tabs[tabIndex].classList.remove('fade')
+	// Fade in new slide
+	fadeInTab(nextTabIndex)
+	// Reset current slide
+	setTimeout(() => resetSlide(tabIndex), 500)
+}
+
 // Begin
 if (window.location.pathname === '/') {
 
 	// Add event listener to cycle through all hero messages on arrow click
+	const leftArrows = getElementsByClassName('hero-arrow left')
 	const rightArrows = getElementsByClassName('hero-arrow right')
 	for (let tabIndex = 0; tabIndex < rightArrows.length; tabIndex++) {
+		// Cycle forward
 		rightArrows[tabIndex].addEventListener('click', () => {
-			// Get next image
-			const nextTabIndex = tabIndex === tabs.length - 1
-				? 0
-				: tabIndex + 1
-			// Fade out current tab
-			tabs[tabIndex].classList.remove('fade')
-			// Fade in new slide
-			fadeInTab(nextTabIndex)
-			// Reset current slide
-			setTimeout(() => resetSlide(tabIndex), 500)
+			transitionTabs({ current: tabIndex, next: tabIndex === tabs.length - 1 ? 0 : tabIndex + 1 })
+		})
+		// Cycle backward
+		leftArrows[tabIndex].addEventListener('click', () => {
+			transitionTabs({ current: tabIndex, next: tabIndex === 0 ? tabs.length - 1 : tabIndex - 1 })
 		})
 	}
 
