@@ -33,15 +33,21 @@ const newSlide = () => {
 if (window.location.pathname === '/') {
 
 	newSlide()
+
+	// Add event listener to cycle through all hero messages on arrow click
 	const rightArrow = getElementByClassName('hero-arrow right')
 	onClick(rightArrow, () => {
-		const firstTab = getElementByClassName('hero-slider:first')
-		const activeTab = getElementByClassName('hero-slider w-tab-pane w--tab-active').classList.remove('w--tab-active').nextElementSibling('hero-slider')
-		if (activeTab.length) {
-			activeTab.addClass('w--tab-active')
+		const tabs = getElementsByClassName('hero-slider')
+		const activeTab = tabs.findIndex(tab => tab.classList.contains('w-tab-pane w--tab-active'))
+		// Remove active tab
+		tabs[activeTab].classList.remove('w--tab-active')
+		// Add active status to next tab
+		if (activeTab === tabs.length - 1) {
+			tabs[0].addClass('w--tab-active')
 		}
 		else {
-	
+			tabs[activeTab + 1].addClass('w--tab-active')
 		}
 	})
+
 }
