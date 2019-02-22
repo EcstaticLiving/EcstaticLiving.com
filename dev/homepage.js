@@ -29,8 +29,8 @@ const fadeInSlide = slideNumber => {
 const resetSlide = slideNumber => {
 	// Hide Hero Image
 	const hero = getElementByClassName('hero-slide', slideNumber)
-	console.log(hero)
 	hero.classList.remove('fade')
+	hero.classList.remove('w-dyn-item')
 	// Hide Hero Text
 	for (let i = 0; i < 3; i++) {
 		const title = getElementByClassName('hero-title ' + literalNumbers[i], slideNumber)
