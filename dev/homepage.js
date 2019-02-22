@@ -52,6 +52,8 @@ if (window.location.pathname === '/') {
 			// const newSlide = getElementByClassName('hero-slide', getSlideNumber().next)
 			// Activate new tab
 			tabs[getSlideNumber().next].classList.add('w--tab-active')
+			// Fade in new slide
+			fadeInSlide(getSlideNumber().next)
 
 	})
 
