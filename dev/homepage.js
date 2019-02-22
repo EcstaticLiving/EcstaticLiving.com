@@ -1,30 +1,47 @@
 // Preload images and randomly rotate
-if (window.location.pathname === '/') {
+const newSlide = () => {
 
 	const literalNumbers = ['one', 'two', 'three', 'four', 'five', 'six']
 
 	// Hero Image
-	const hero = document.getElementsByClassName('hero-slide')[0]
+	const hero = getElementByClassName('hero-slide')
 	hero.classList.add('fade')
 
 	// Slide in Hero Text
 	setTimeout(() => {
 		for (let i = 0; i < 3; i++) {
-			const title = document.getElementsByClassName('hero-title ' + literalNumbers[i])[0]
+			const title = getElementByClassName('hero-title ' + literalNumbers[i])
 			title.classList.add('fade-slide')
 		}
 	}, 500)
 
 	// Slide in Hero Button
 	setTimeout(() => {
-		const heroButton = document.getElementsByClassName('hero-button')[0]
+		const heroButton = getElementByClassName('hero-button')
 		heroButton.classList.add('fade-slide')
 	}, 800)
 
 	// Slide in Hero Arrows
 	setTimeout(() => {
-		const heroArrows = document.getElementsByClassName('hero-slider-arrows')[0]
+		const heroArrows = getElementByClassName('hero-slider-arrows')
 		heroArrows.classList.add('fade-slide')
 	}, 1100)
 
+}
+
+// Begin
+if (window.location.pathname === '/') {
+
+	newSlide()
+	onClick(rightArrow, () => {
+		const rightArrow = getElementByClassName('hero-arrow right')
+		const firstTab = getElementByClassName('hero-slider:first')
+		const activeTab = getElementByClassName('hero-slider w-tab-pane w--tab-active').removeClass('w--tab-active').next('hero-slider')
+		if (activeTab.length) {
+			activeTab.addClass('w--tab-active')
+		}
+		else {
+	
+		}
+	})
 }
