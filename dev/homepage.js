@@ -37,12 +37,10 @@ if (window.location.pathname === '/') {
 	// Add event listener to cycle through all hero messages on arrow click
 	const rightArrow = getElementByClassName('hero-arrow right')
 	rightArrow.addEventListener('click', () => {
-		console.log('clicked')
 		const tabs = getElementsByClassName('hero-slider')
 		for (let i = 0; i < tabs.length; i++) {
-			console.log(tabs[i])
-			if (tabs[i].classList.contains('w-tab-pane w--tab-active')) {
-				console.log(i)
+			console.log(tabs[i].classList)
+			if (tabs[i].classList.contains('w--tab-active')) {
 				// Remove active tab
 				tabs[i].classList.remove('w--tab-active')
 				// Add active status to next tab
