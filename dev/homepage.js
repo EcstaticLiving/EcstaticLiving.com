@@ -23,7 +23,7 @@ const newSlide = () => {
 
 	// Slide in Hero Arrows
 	setTimeout(() => {
-		const heroArrows = getElementByClassName('hero-slider-arrows')
+		const heroArrows = getElementByClassName('hero-arrows')
 		heroArrows.classList.add('fade-slide')
 	}, 1100)
 
