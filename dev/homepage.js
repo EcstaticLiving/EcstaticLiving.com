@@ -39,7 +39,9 @@ if (window.location.pathname === '/') {
 	onClick(rightArrow, () => {
 		const tabs = getElementByClassName('hero-slider')
 		for (let i = 0; i < tabs.length; i++) {
+			console.log(tabs[i])
 			if (tabs[i].classList.contains('w-tab-pane w--tab-active')) {
+				console.log(i)
 				// Remove active tab
 				tabs[i].classList.remove('w--tab-active')
 				// Add active status to next tab
