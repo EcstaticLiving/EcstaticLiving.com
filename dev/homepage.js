@@ -58,14 +58,16 @@ const getSlideNumber = () => {
 
 const transitionSlides = () => {
 	const slideNumber = getSlideNumber()
+	const heroTabs = getElementsByClassName('hero-tab')
+	heroTabs[slideNumber.next].click()
 	// Deactivate current tab
-	tabs[slideNumber.current].classList.remove('w--tab-active')
+	// tabs[slideNumber.current].classList.remove('w--tab-active')
 	// Activate new tab
-	tabs[slideNumber.next].classList.add('w--tab-active')
+	// tabs[slideNumber.next].classList.add('w--tab-active')
 	// Fade in new slide
-	fadeInSlide(slideNumber.next)
+	// fadeInSlide(slideNumber.next)
 	// Reset current slide
-	resetSlide(slideNumber.current)
+	// resetSlide(slideNumber.current)
 }
 
 // Begin
