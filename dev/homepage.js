@@ -49,15 +49,15 @@ if (window.location.pathname === '/') {
 	for (let tabIndex = 0; tabIndex < rightArrows.length; tabIndex++) {
 		rightArrows[tabIndex].addEventListener('click', tabIndex => {
 			// Get next image
-			const nextTab = tabIndex === tabs.length - 1
+			const nextTabIndex = tabIndex === tabs.length - 1
 				? 0
 				: tabIndex + 1
 			console.log(tabs)
-			console.log(nextTab, tabIndex)
+			console.log(nextTabIndex, tabIndex)
 			// Deactivate current tab
 			tabs[tabIndex].classList.add('fade-out')
 			// Fade in new slide
-			fadeInTab(nextTab)
+			fadeInTab(nextTabIndex)
 			// Reset current slide
 			resetSlide(tabIndex)
 		})
