@@ -27,14 +27,15 @@ const fadeInSlide = slideNumber => {
 }
 
 const getSlideNumber = () => {
+	let obj
 	for (let i = 0; i < tabs.length; i++) {
 		if (tabs[i].classList.contains('w--tab-active')) {
-			// Add active status to next tab
-			return i === tabs.length - 1
+			obj = i === tabs.length - 1
 				? { current: i, next: 0 }
 				: { current: i, next: i + 1 }
 		}
 	}
+	return obj
 }
 
 // Begin
