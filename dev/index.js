@@ -17,7 +17,7 @@ const formReset = elem => elem[0].reset()
 // Element Collections
 const getAttribute = (elem, attribute) => elem.getAttribute(attribute)
 const getElementById = elem => document.getElementById(elem)
-const getElementByClassName = className => document.getElementsByClassName(className)[0]
+const getElementByClassName = (className, i) => document.getElementsByClassName(className)[i]
 const getElementsByClassName = className => document.getElementsByClassName(className)
 const getElementsByTag = tag => document.getElementsByTagName(tag)
 // Element Conditions
