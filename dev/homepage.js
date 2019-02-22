@@ -3,10 +3,12 @@ const tabs = getElementsByClassName('hero-slide-container')
 const literalNumbers = ['one', 'two', 'three', 'four', 'five', 'six']
 
 // Preload images and randomly rotate
-const fadeInSlide = tabNumber => {
+const fadeInSlide = (tabNumber, initiate) => {
 	// Fade in Hero Image
-	// const hero = getElementByClassName('hero-slide', tabNumber)
-	// hero.classList.add('fade')
+	if (initiate) {
+		const hero = getElementByClassName('hero-slide', tabNumber)
+		hero.classList.add('fade')
+	}
 	// Slide in Hero Text
 	setTimeout(() => {
 		for (let i = 0; i < 3; i++) {
@@ -69,13 +71,13 @@ if (window.location.pathname === '/') {
 			// Activate new tab
 			// tabs[tabNumber.next].classList.add('w--tab-active')
 			// Fade in new slide
-			fadeInSlide(tabNumber.next)
+			fadeInSlide(tabNumber.next, false)
 			// Reset current slide
 			resetSlide(tabNumber.current)
 		})
 	}
 
 	// Fade in first slide
-	fadeInSlide(0)
+	fadeInSlide(0, true)
 
 }
