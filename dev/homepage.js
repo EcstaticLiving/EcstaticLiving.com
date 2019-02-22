@@ -35,6 +35,7 @@ const getSlideNumber = () => {
 				: { current: i, next: i + 1 }
 		}
 	}
+	console.log(obj)
 	return obj
 }
 
