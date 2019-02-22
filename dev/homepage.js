@@ -45,10 +45,10 @@ if (window.location.pathname === '/') {
 				tabs[i].classList.remove('w--tab-active')
 				// Add active status to next tab
 				if (i === tabs.length - 1) {
-					tabs[0].addClass('w--tab-active')
+					tabs[0].classList.addClass('w--tab-active')
 				}
 				else {
-					tabs[i + 1].addClass('w--tab-active')
+					tabs[i + 1].classList.addClass('w--tab-active')
 				}
 				break
 			}
