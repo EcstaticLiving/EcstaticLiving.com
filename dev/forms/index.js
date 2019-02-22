@@ -1,3 +1,22 @@
+// Urls
+const containsUrl = str => window.location.href.indexOf(str) > -1
+const endsWithUrl = str => window.location.href.endsWith(str)
+
+// Return url search keys and values
+const urlString = Object.assign({}, ...window.location.search.slice(1).split('&').map((item) => {
+	const property = item.split('=')[0]
+	return { [property]: item.split('=')[1] }
+}))
+
+// Page
+const page = () => {
+  if (containsUrl('/events/'))  					return 'Event'
+  if (endsWithUrl('/update'))  						return 'Update'
+  return null
+}
+
+const isFormPage = () => page() === 'Event' || page() === 'Update'
+
 // Prevent accidental submission of form through 'enter' key
 onKeyPress(document, e => {
 	if (isInput(e.target) && e.which === 13) {
@@ -12,7 +31,7 @@ for(let i in countries) {
 	const country = countries[i] === 'United States'
 		? '<option value="' + countries[i].value + '" selected>' + countries[i].label + '</option>'
 		: '<option value="' + countries[i].value + '">' + countries[i].label + '</option>'
-	appendSelect('#country', country)
+	appendSelect('country', country)
 }
 
 // Clear reg form

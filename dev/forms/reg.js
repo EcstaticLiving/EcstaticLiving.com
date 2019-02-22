@@ -1,5 +1,5 @@
 // Event Reg Form
-const eventForm = '#wf-form-Event-Registration'
+const eventForm = 'wf-form-Event-Registration'
 
 // Hidden fields
 const eventCode = getText('#event-code').toUpperCase(),
@@ -241,7 +241,7 @@ const setEventPrices = () => {
 		appendSelect(eventSelect, '<option value=\'' + eventSelectPrice + '\'>' + eventSelectText + '</option>')
 	}
 	// Update `Pay deposit only` field with actual deposit amount: `Pay deposit only ($...)`
-	setText(eventDepositText, 'Pay deposit only ($' + depositAmount() + paymentClarification + ')')
+	setText(eventDepositText, 'Pay deposit only ($' + parseInt(depositAmount(), 10) + paymentClarification + ')')
 }
 
 // Complete validation

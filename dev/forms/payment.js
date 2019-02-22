@@ -1,7 +1,5 @@
-// CONSTANTS
-
 // Webflow url
-const formUrl = 'https://webflow\.com/api/v1/form/564aac835a5735b1375b5cdf'
+const formUrl = 'https://webflow.com/api/v1/form/564aac835a5735b1375b5cdf'
 
 // Form submission
 const formSubmission = async ({ data, url }) => await $.ajax({
@@ -50,13 +48,13 @@ const stripeData = result => ({
 const stripe = containsUrl('ecstaticliving.com')
 	? Stripe('pk_live_0rULIvKhv6aSLqI49Ae5rflI')
 	: Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
-const elements = containsUrl('ecstaticliving.com')
+const stripeElements = containsUrl('ecstaticliving.com')
 	? stripe.elements()
 	: stripe.elements()
 
 // Stripe Card
 const card = isFormPage()
-	? elements.create('card', {
+	? stripeElements.create('card', {
 			hidePostalCode: true,
 			style: {
 				base: {
@@ -128,7 +126,7 @@ if (isFormPage()) {
 	card.mount('#card-element')
 	card.addEventListener('change', result => paymentValidation(result))	
 }
-onClick('#button-stripe-error', () => hideElement('.notification-modal.card-error'))
+onClick('button-stripe-error', () => hideElement('.notification-modal.card-error'))
 
 
 // Always allow pay now button to be clicked
