@@ -52,13 +52,13 @@ const resetSlide = tabIndex => {
 
 }
 
-const transitionTabs = ({ current, next }) => {
+const transitionTabs = ({ currentTab, nextTab }) => {
 	// Fade out current tab
-	tabs[tabIndex].classList.remove('fade')
+	tabs[currentTab].classList.remove('fade')
 	// Fade in new slide
-	fadeInTab(nextTabIndex)
+	fadeInTab(nextTab)
 	// Reset current slide
-	setTimeout(() => resetSlide(tabIndex), 500)
+	setTimeout(() => resetSlide(currentTab), 500)
 }
 
 // Begin
@@ -70,11 +70,11 @@ if (window.location.pathname === '/') {
 	for (let tabIndex = 0; tabIndex < rightArrows.length; tabIndex++) {
 		// Cycle forward
 		rightArrows[tabIndex].addEventListener('click', () => {
-			transitionTabs({ current: tabIndex, next: tabIndex === tabs.length - 1 ? 0 : tabIndex + 1 })
+			transitionTabs({ currentTab: tabIndex, nextTab: tabIndex === tabs.length - 1 ? 0 : tabIndex + 1 })
 		})
 		// Cycle backward
 		leftArrows[tabIndex].addEventListener('click', () => {
-			transitionTabs({ current: tabIndex, next: tabIndex === 0 ? tabs.length - 1 : tabIndex - 1 })
+			transitionTabs({ currentTab: tabIndex, nextTab: tabIndex === 0 ? tabs.length - 1 : tabIndex - 1 })
 		})
 	}
 
