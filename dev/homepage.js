@@ -36,7 +36,7 @@ if (window.location.pathname === '/') {
 
 	// Add event listener to cycle through all hero messages on arrow click
 	const rightArrow = getElementByClassName('hero-arrow right')
-	onClick(rightArrow, () => {
+	rightArrow.addEventListener('click', () => {
 		console.log('clicked')
 		const tabs = getElementByClassName('hero-slider')
 		for (let i = 0; i < tabs.length; i++) {
