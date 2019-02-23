@@ -4,7 +4,7 @@ const navContainer = getElementByClassName('nav-container')
 // If nav menu is opened
 onClick(navHamburger, () => {
 	//	If nav menu is opened
-	if (!isVisible(navClose)) {
+	if (!isVisible(navContainer)) {
 		navContainer.classList.add('display')
 		setTimeout(() => navContainer.classList.add('fade'), 100)
 	}
