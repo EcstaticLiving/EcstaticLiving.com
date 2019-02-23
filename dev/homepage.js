@@ -67,7 +67,7 @@ if (window.location.pathname === '/') {
 
 	// Calculate Section.Hero height
 	const heroSection = getElementByClassName('section hero')
-	heroSection.innerHeight = window.innerHeight * 0.9
+	heroSection.innerHeight = calc(window.innerHeight * 0.9)
 
 	// Add event listener to cycle through all hero messages on arrow click
 	const leftArrows = getElementsByClassName('hero-arrow left')
