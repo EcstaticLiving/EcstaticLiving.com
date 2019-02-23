@@ -1,6 +1,7 @@
 // Load all tabs
 const tabs = getElementsByClassName('hero-tab')
 const literalNumbers = ['one', 'two', 'three', 'four', 'five', 'six']
+let activeTab
 
 // Preload images and randomly rotate
 const fadeInTab = tabIndex => {
@@ -70,15 +71,19 @@ if (window.location.pathname === '/') {
 	for (let tabIndex = 0; tabIndex < rightArrows.length; tabIndex++) {
 		// Cycle forward
 		rightArrows[tabIndex].addEventListener('click', () => {
-			transitionTabs({ currentTab: tabIndex, nextTab: tabIndex === tabs.length - 1 ? 0 : tabIndex + 1 })
+			activeTab = tabIndex === tabs.length - 1 ? 0 : tabIndex + 1
+			transitionTabs({ currentTab: tabIndex, nextTab: activeTab })
 		})
 		// Cycle backward
 		leftArrows[tabIndex].addEventListener('click', () => {
-			transitionTabs({ currentTab: tabIndex, nextTab: tabIndex === 0 ? tabs.length - 1 : tabIndex - 1 })
+			activeTab = tabIndex === tabIndex === 0 ? tabs.length - 1 : tabIndex - 1
+			transitionTabs({ currentTab: tabIndex, nextTab: activeTab })
 		})
 	}
 
 	// Fade in first slide
 	fadeInTab(0)
+	// Switch tabs periodically
+	const tabInterval = setInterval(() => rightArrows[activeTab].click(), 4000)
 
 }
