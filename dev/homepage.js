@@ -86,6 +86,6 @@ if (window.location.pathname === '/') {
 	// Fade in first slide
 	fadeInTab(0)
 	// Switch tabs periodically
-	const tabInterval = setInterval(() => rightArrows[activeTab].click(), 4000)
+	const tabInterval = setInterval(() => rightArrows[activeTab].click(), 8000)
 
 }

@@ -16,3 +16,13 @@ onClick(navHamburger, () => {
 })
 // If nav menu is closed
 onClick(navClose, () => navHamburger.click())
+// On scroll
+const menuBarContainer = getElementByClassName('menu-bar-container')
+window.onscroll = () => {
+	if (window.scrollY >= 100 && !menuBarContainer.classList.contains('scroll')) {
+		menuBarContainer.classList.add('scroll')
+	}
+	else if (window.scrollY < 100 && menuBarContainer.classList.contains('scroll')) {
+		menuBarContainer.classList.remove('scroll')
+	}
+}
