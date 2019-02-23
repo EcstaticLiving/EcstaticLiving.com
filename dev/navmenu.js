@@ -13,4 +13,4 @@ onClick(navHamburger, () => {
 	}
 })
 // If nav menu is closed
-onClick(navClose, () => clickElement(navHamburger))
+onClick(navClose, () => navHamburger.click())
