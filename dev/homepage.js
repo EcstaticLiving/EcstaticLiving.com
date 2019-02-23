@@ -1,7 +1,7 @@
 // Load all tabs
 const tabs = getElementsByClassName('hero-tab')
 const literalNumbers = ['one', 'two', 'three', 'four', 'five', 'six']
-let activeTab
+let activeTab = 0
 
 // Preload images and randomly rotate
 const fadeInTab = tabIndex => {
