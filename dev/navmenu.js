@@ -5,16 +5,11 @@ const navContainer = getElementByClassName('nav-container')
 onClick(navHamburger, () => {
 	//	If nav menu is opened
 	if (!isVisible(navClose)) {
-    navContainer.classList.add('display')
-    setTimeout(() => navContainer.classList.add('fade'), 100)
-		showElement(navClose)
-		fadeElement(navClose, 1000, 1)
-  }
-  else {
-    navContainer.classList.remove('fade')
-    setTimeout(() => navContainer.classList.remove('display'), 500)
-		fadeElement(navClose, 1000, 0)
-		setTimeout(1000, () => hideElement(navClose))
+		navContainer.classList.add('display')
+		setTimeout(() => navContainer.classList.add('fade'), 100)
+	}
+	else {
+		navContainer.classList.remove('fade')
 	}
 })
 // If nav menu is closed
