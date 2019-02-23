@@ -73,11 +73,13 @@ if (window.location.pathname === '/') {
 		rightArrows[tabIndex].addEventListener('click', () => {
 			activeTab = tabIndex === tabs.length - 1 ? 0 : tabIndex + 1
 			transitionTabs({ currentTab: tabIndex, nextTab: activeTab })
+			clearInterval(tabInterval)
 		})
 		// Cycle backward
 		leftArrows[tabIndex].addEventListener('click', () => {
 			activeTab = tabIndex === tabIndex === 0 ? tabs.length - 1 : tabIndex - 1
 			transitionTabs({ currentTab: tabIndex, nextTab: activeTab })
+			clearInterval(tabInterval)
 		})
 	}
 
