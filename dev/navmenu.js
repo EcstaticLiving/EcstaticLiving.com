@@ -3,9 +3,8 @@ const navClose = getElementByClassName('nav-close')
 const navContainer = getElementByClassName('nav-container')
 // If nav menu is opened
 onClick(navHamburger, () => {
-  console.log(isVisible(navContainer))
 	//	If nav menu is opened
-	if (!isVisible(navContainer)) {
+	if (navContainer.style.display === '' || navContainer.style.display === 'none') {
 		navContainer.classList.add('display')
 		setTimeout(() => navContainer.classList.add('fade'), 100)
 	}
