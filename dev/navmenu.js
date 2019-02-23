@@ -5,13 +5,13 @@ const navContainer = getElementByClassName('nav-container')
 onClick(navHamburger, () => {
 	//	If nav menu is open, close...
 	if (navContainer.style.display === '' || navContainer.style.display === 'none') {
-    navContainer.classList.remove('fade')
-    setTimeout(() => navContainer.classList.remove('display'), 500)
+		navContainer.classList.add('display')
+		setTimeout(() => navContainer.classList.add('fade'), 100)
   }
   // ...otherwise open.
 	else {
-		navContainer.classList.add('display')
-		setTimeout(() => navContainer.classList.add('fade'), 100)
+    navContainer.classList.remove('fade')
+    setTimeout(() => navContainer.classList.remove('display'), 500)
 	}
 })
 // If nav menu is closed
