@@ -3,14 +3,15 @@ const navClose = getElementByClassName('nav-close')
 const navContainer = getElementByClassName('nav-container')
 // If nav menu is opened
 onClick(navHamburger, () => {
-  console.log(navContainer.style.display)
-	//	If nav menu is opened
+	//	If nav menu is open, close...
 	if (navContainer.style.display === '' || navContainer.style.display === 'none') {
+    navContainer.classList.remove('fade')
+    setTimeout(() => navContainer.classList.remove('display'), 500)
+  }
+  // ...otherwise open.
+	else {
 		navContainer.classList.add('display')
 		setTimeout(() => navContainer.classList.add('fade'), 100)
-	}
-	else {
-		navContainer.classList.remove('fade')
 	}
 })
 // If nav menu is closed
