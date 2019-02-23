@@ -3,6 +3,7 @@ const navClose = getElementByClassName('nav-close')
 const navContainer = getElementByClassName('nav-container')
 // If nav menu is opened
 onClick(navHamburger, () => {
+  console.log(navContainer.style.display)
 	//	If nav menu is opened
 	if (navContainer.style.display === '' || navContainer.style.display === 'none') {
 		navContainer.classList.add('display')
