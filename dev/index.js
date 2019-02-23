@@ -2,12 +2,12 @@
 console.log(window.location.href.indexOf('ecstaticliving.com') > -1 ? 'Welcome to EcstaticLiving.com' : 'TEST code at ', window.location.href)
 
 // Element Event Listeners
-const onClick = (elem, f) => document.body.classList.contains(elem) ? elem.addEventListener('click', e => f(e)) : null
-const onChange = (elem, f) => document.body.classList.contains(elem) ? elem.addEventListener('change', e => f(e)) : null
-const onInput = (elem, f) => document.body.classList.contains(elem) ? elem.addEventListener('input', f) : null
+const onClick = (elem, f) => elem.addEventListener('click', e => f(e))
+const onChange = (elem, f) => elem.addEventListener('change', e => f(e))
+const onInput = (elem, f) => elem.addEventListener('input', f)
 const onLoad = (elem, f) => elem.addEventListener('load', f)
 const onOrientationChange = (elem, f) => elem.addEventListener('orientationchange', f)
-const onSubmit = (elem, f) => document.body.classList.contains(elem) ? elem.addEventListener('submit', f) : null
+const onSubmit = (elem, f) => elem.addEventListener('submit', f)
 const onKeyPress = (elem, f) => elem.addEventListener('keypress', e => f(e))
 // Form behaviours
 const formSubmit = elem => elem.submit()
@@ -17,8 +17,8 @@ const formReset = elem => elem[0].reset()
 // Element Collections
 const getAttribute = (elem, attribute) => elem.getAttribute(attribute)
 const getElementById = elem => document.getElementById(elem)
-const getElementByClassName = (className, i) => document.getElementsByClassName(className)[i]
-const getElementsByClassName = className => document.getElementsByClassName(className)
+const getElementByClassName = (className, i) => document.body.classList.contains(className) ? document.getElementsByClassName(className)[i] : null
+const getElementsByClassName = className => document.body.classList.contains(className) ? document.getElementsByClassName(className) : null
 const getElementsByTag = tag => document.getElementsByTagName(tag)
 // Element Conditions
 const isInput = elem => elem.type === 'input'
@@ -27,6 +27,7 @@ const isBlank = elem => getValue(elem) === '' && getValue(elem) === ''
 const isChecked = elem => elem.checked
 const isVisible = elem => elem.style.display
 // Element Behaviours
+const animateElement = (elem, keyframes, options) => elem.animate(keyframes, options)
 const clickElement = elem => elem.click()
 const focusElement = elem => elem.focus()
 const hideElement = elem => elem.style.display = 'none'
