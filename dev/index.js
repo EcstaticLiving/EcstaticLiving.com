@@ -17,8 +17,8 @@ const formReset = elem => elem[0].reset()
 // Element Collections
 const getAttribute = (elem, attribute) => elem.getAttribute(attribute)
 const getElementById = elem => document.getElementById(elem)
-const getElementByClassName = (className, i) => document.body.classList.contains(className) ? document.getElementsByClassName(className)[i] : null
-const getElementsByClassName = className => document.body.classList.contains(className) ? document.getElementsByClassName(className) : null
+const getElementByClassName = (className, i) => document.getElementsByClassName(className)[i]
+const getElementsByClassName = className => document.getElementsByClassName(className)
 const getElementsByTag = tag => document.getElementsByTagName(tag)
 // Element Conditions
 const isInput = elem => elem.type === 'input'
