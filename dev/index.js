@@ -1,6 +1,34 @@
 // Code ©2017 - 2019 Ecstatic Life Inc. All rights reserved.
 console.log(window.location.href.indexOf('ecstaticliving.com') > -1 ? 'Welcome to EcstaticLiving.com' : 'TEST code at ', window.location.href)
 
+const deviceOrientation = () => window.innerWidth > window.innerHeight
+	? 'landscape'
+	: 'portrait'
+
+const deviceType = () => {
+	//	Some large tablets exist, but for all intents and purposes, we’ll treat them as desktops.
+	if (
+		(deviceOrientation() === 'portrait' && window.innerWidth > 1024)
+		|| (deviceOrientation() === 'landscape' && window.innerWidth > 1366)
+	) {
+		return 'desktop'
+	}
+	if (
+		(deviceOrientation() === 'portrait' && window.innerWidth > 768)
+		|| (deviceOrientation() === 'landscape' && window.innerWidth > 1024)
+	) {
+		return 'large tablet'
+	}
+	if (
+		(deviceOrientation() === 'portrait' && window.innerWidth > 414)
+		|| (deviceOrientation() === 'landscape' && window.innerWidth > 736)
+	) {
+		return 'tablet'
+	}
+	return 'mobile'
+}
+
+
 // Element Event Listeners
 const onClick = (elem, f) => elem.addEventListener('click', e => f(e))
 const onChange = (elem, f) => elem.addEventListener('change', e => f(e))

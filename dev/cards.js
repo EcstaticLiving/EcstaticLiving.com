@@ -1,18 +1,3 @@
-// If window orientation changes
-const getDevice = () => {
-	//	Some large tablets exist, but for all intents and purposes, we’ll treat them as desktops.
-	if (Math.max(window.innerWidth, window.innerHeight) >= 1025) {
-		return 'desktop'
-	}
-	if (Math.min(window.innerWidth, window.innerHeight) >= 641) {
-		return 'tablet'
-	}
-	return 'mobile'
-}
-const deviceOrientation = window.innerWidth > window.innerHeight
-	? 'landscape'
-  : 'portrait'
-
 const cardElementsHoverTap = [
   document.getElementsByClassName('card-detail-circle'),
   document.getElementsByClassName('card-detail-day'),
@@ -32,7 +17,7 @@ for (let i = 0; i < calendarCards.length; i++) {
   // Init on window load
   calendarCards[i].classList.add('on-load')
   // Desktops use `mouseover` response...
-  if (getDevice() === 'desktop') {
+  if (deviceType() === 'desktop') {
     calendarCards[i].addEventListener('mouseover', () => cardElementsHoverTap.forEach(element => element[i] ? element[i].classList.add('on-hover-tap') : null))
     calendarCards[i].addEventListener('mouseout', () => cardElementsHoverTap.forEach(element => element[i] ? element[i].classList.remove('on-hover-tap') : null))
   }

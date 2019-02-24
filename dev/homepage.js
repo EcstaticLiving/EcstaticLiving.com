@@ -67,7 +67,20 @@ if (window.location.pathname === '/') {
 
 	// Calculate Section.Hero height
 	const heroSection = getElementByClassName('section hero')
-	heroSection.style.height = window.innerHeight * 0.9 + 'px'
+	if (
+		deviceType() === 'laptop'
+		|| (deviceType() === 'large tablet' && deviceOrientation === 'landscape')
+		|| deviceType() === 'tablet'
+		|| deviceType() === 'mobile'
+	) {
+		// Set min height on mobile to 550px
+		heroSection.style.height = deviceType() === 'mobile' && deviceOrientation === 'landscape'
+			? Math.max(window.innerHeight * 0.9 + 'px', '550px')
+			: window.innerHeight * 0.9 + 'px'
+	}
+	else {
+		heroSection.style.height = window.innerHeight * 0.5 + 'px'
+	}
 
 	// Add event listener to cycle through all hero messages on arrow click
 	const leftArrows = getElementsByClassName('hero-arrow left')
