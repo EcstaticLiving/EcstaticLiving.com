@@ -77,15 +77,13 @@ if (window.location.pathname === '/') {
 
 	// Set width of boxes section for width that’s smaller than desktop yet larger than iPad portrait; not configurable in Webflow interface.
 	const setBoxSections = () => {
-		console.log(window.innerWidth)
 		if (window.innerWidth >= 930 && window.innerWidth < 1240) {
 			// Do this for all box section and containers on homepage
 			const boxSections = getElementsByClassName('section boxes')
 			const boxContainers = getElementsByClassName('box-container')
 			for (let i = 0; i < boxContainers.length; i++) {
-				boxSections[i].style.innerHeight = '500 px'
-				boxContainers[i].style.innerWidth = '768 px'
-				console.log(boxContainers[i])
+				boxSections[i].style.height = '500 px'
+				boxContainers[i].style.width = '768 px'
 			}
 		}
 	}
