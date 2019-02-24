@@ -76,8 +76,8 @@ if (window.location.pathname === '/') {
 		) {
 			// Set min height on mobile to 550px
 			heroSection.style.height = deviceType() === 'mobile' && deviceOrientation() === 'landscape'
-				? Math.max(window.innerHeight * 0.9 + 'px', '550px')
-				: window.innerHeight * 0.9 + 'px'
+				? Math.max(window.innerHeight * 0.95 + 'px', '550px')
+				: window.innerHeight * 0.95 + 'px'
 		}
 		else {
 			heroSection.style.height = window.innerHeight * 0.5 + 'px'
