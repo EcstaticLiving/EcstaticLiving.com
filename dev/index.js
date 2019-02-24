@@ -29,13 +29,6 @@ const deviceType = () => {
 	return 'mobile'
 }
 
-// Scrolling
-const elementScrollsIntoView = ({ element, threshold, f }) => {
-	const observer = new IntersectionObserver(f(), { threshold })
-	observer.observe(element)
-}
-
-
 // Element Event Listeners
 const onClick = (elem, f) => elem.addEventListener('click', e => f(e))
 const onChange = (elem, f) => elem.addEventListener('change', e => f(e))
