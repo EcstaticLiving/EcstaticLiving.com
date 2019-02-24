@@ -68,7 +68,7 @@ if (window.location.pathname === '/') {
 	// Calculate Section.Hero height
 	const heroSection = getElementByClassName('section hero')
 	if (
-		deviceType() === 'laptop'
+		deviceType() === 'desktop'
 		|| (deviceType() === 'large tablet' && deviceOrientation() === 'landscape')
 		|| deviceType() === 'tablet'
 		|| deviceType() === 'mobile'
@@ -77,12 +77,9 @@ if (window.location.pathname === '/') {
 		heroSection.style.height = deviceType() === 'mobile' && deviceOrientation() === 'landscape'
 			? Math.max(window.innerHeight * 0.9 + 'px', '550px')
 			: window.innerHeight * 0.9 + 'px'
-		console.log(heroSection.style.height)
 	}
 	else {
 		heroSection.style.height = window.innerHeight * 0.5 + 'px'
-		console.log(deviceType(), deviceOrientation())
-		console.log(heroSection.style.height)
 	}
 
 	// Add event listener to cycle through all hero messages on arrow click
