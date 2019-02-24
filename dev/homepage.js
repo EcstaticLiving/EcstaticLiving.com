@@ -69,19 +69,19 @@ if (window.location.pathname === '/') {
 	const heroSection = getElementByClassName('section hero')
 	if (
 		deviceType() === 'laptop'
-		|| (deviceType() === 'large tablet' && deviceOrientation === 'landscape')
+		|| (deviceType() === 'large tablet' && deviceOrientation() === 'landscape')
 		|| deviceType() === 'tablet'
 		|| deviceType() === 'mobile'
 	) {
 		// Set min height on mobile to 550px
-		heroSection.style.height = deviceType() === 'mobile' && deviceOrientation === 'landscape'
+		heroSection.style.height = deviceType() === 'mobile' && deviceOrientation() === 'landscape'
 			? Math.max(window.innerHeight * 0.9 + 'px', '550px')
 			: window.innerHeight * 0.9 + 'px'
 		console.log(heroSection.style.height)
 	}
 	else {
 		heroSection.style.height = window.innerHeight * 0.5 + 'px'
-		console.log('yo')
+		console.log(deviceType(), deviceOrientation())
 		console.log(heroSection.style.height)
 	}
 
