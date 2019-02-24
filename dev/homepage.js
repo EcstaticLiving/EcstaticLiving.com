@@ -114,11 +114,11 @@ if (window.location.pathname === '/') {
 	// Initiate scroll behaviour
 	const welcomeImage = getElementByClassName('welcome-image')
 	welcomeImage.classList.remove('fade-move')
-	const welcomeImageObserve = new IntersectionObserver(() => welcomeImage.classList.add('fade-move'), { threshold: 0.3 })
+	const welcomeImageObserve = new IntersectionObserver(() => welcomeImage.classList.add('fade-move'), { threshold: 1.0 })
 	welcomeImageObserve.observe(welcomeImage)
 
 	const welcomeText = getElementByClassName('welcome-text')
 	welcomeText.classList.remove('fade-move')
-	const welcomeTextObserve = new IntersectionObserver(() => setTimeout(() => welcomeText.classList.add('fade-move'), 200), { threshold: 0.3 })
+	const welcomeTextObserve = new IntersectionObserver(() => setTimeout(() => welcomeText.classList.add('fade-move'), 200), { threshold: 1.0 })
 	welcomeTextObserve.observe(welcomeText)
 }
