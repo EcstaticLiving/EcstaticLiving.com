@@ -1,6 +1,7 @@
 // Code ©2017 - 2019 Ecstatic Life Inc. All rights reserved.
 console.log(window.location.href.indexOf('ecstaticliving.com') > -1 ? 'Welcome to EcstaticLiving.com' : 'TEST code at ', window.location.href)
 
+// Device
 const deviceOrientation = () => window.innerWidth > window.innerHeight
 	? 'landscape'
 	: 'portrait'
@@ -26,6 +27,23 @@ const deviceType = () => {
 		return 'tablet'
 	}
 	return 'mobile'
+}
+
+// Scrolling
+const elementScrollsIntoView = ({ element, stop, f }) => {
+	window.addEventListener('scroll', () => {
+		const rect = element.getBoundingClientRect()
+		const elementIsInView =
+			rect.top >= 0
+			&& rect.left >= 0
+			&& rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+			&& rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+		// If element comes into view...
+		if (elementIsInView && !element.classList.contains(stop)) {
+			// ...do this
+			f()
+		}
+	})
 }
 
 

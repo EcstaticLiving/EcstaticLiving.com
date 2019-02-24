@@ -5,17 +5,14 @@ let activeTab = 0
 
 // Preload images and randomly rotate
 const fadeInTab = tabIndex => {
-
 	// Make tab and clickable elements visible
 	tabs[tabIndex].classList.add('display')
 	const heroButton = getElementByClassName('hero-button', tabIndex)
 	const heroArrows = getElementByClassName('hero-arrows', tabIndex)
 	heroButton.classList.add('display')
 	heroArrows.classList.add('display')
-
 	// Fade in image
 	setTimeout(() => tabs[tabIndex].classList.add('fade'), 100)
-
 	// Slide in Hero Text
 	setTimeout(() => {
 		for (let i = 0; i < 3; i++) {
@@ -23,17 +20,13 @@ const fadeInTab = tabIndex => {
 			title.classList.add('fade-move')
 		}
 	}, 500)
-
 	// Slide in Hero Button
 	setTimeout(() => heroButton.classList.add('fade-move'), 800)
-
 	// Slide in Hero Arrows
 	setTimeout(() => heroArrows.classList.add('fade-move'), 1100)
-
 }
 
 const resetSlide = tabIndex => {
-
 	// Hide Hero Text
 	for (let i = 0; i < 3; i++) {
 		const title = getElementByClassName('hero-title ' + literalNumbers[i], tabIndex)
@@ -45,12 +38,10 @@ const resetSlide = tabIndex => {
 	// Hide Hero Arrows
 	const heroArrows = getElementByClassName('hero-arrows', tabIndex)
 	heroArrows.classList.remove('fade-move')
-	
 	// Make tab and clickable elements invisible
 	tabs[tabIndex].classList.remove('display')
 	heroButton.classList.remove('display')
 	heroArrows.classList.remove('display')
-
 }
 
 const transitionTabs = ({ currentTab, nextTab }) => {
@@ -109,8 +100,10 @@ if (window.location.pathname === '/') {
 
 	// Set Hero height
 	setHeroHeight()
+
 	// Fade in first slide
 	fadeInTab(0)
+
 	// Switch tabs periodically
 	const tabInterval = setInterval(() => {
 		const currentTab = activeTab
@@ -118,4 +111,8 @@ if (window.location.pathname === '/') {
 		transitionTabs({ currentTab, nextTab: activeTab })
 	}, 8000)
 
+	const welcomeImage = getElementByClassName('welcome-image')
+	elementScrollsIntoView({ element: welcomeImage, stop: 'fade move', f: () => welcomeImage.classList.add('fade move') })
+	const welcomeText = getElementByClassName('welcome-text')
+	elementScrollsIntoView({ element: welcomeText, stop: 'fade move', f: () => setTimeout(() => welcomeText.classList.add('fade move'), 200) })
 }
