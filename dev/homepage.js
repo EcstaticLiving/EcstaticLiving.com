@@ -75,9 +75,23 @@ if (window.location.pathname === '/') {
 		}
 	}
 
-	// Recalculate hero height on orientation change
+	// Set width of boxes section for width that’s smaller than desktop yet larger than iPad portrait; not configurable in Webflow interface.
+	const setBoxSections = () => {
+		if (window.innerWidth >= 930 && window.innerWidth < 1240) {
+			// Do this for all box section and containers on homepage
+			const boxSections = getElementsByClassName('section boxes')
+			const boxContainers = getElementsByClassName('box-container')
+			for (let i = 0; i < boxContainers.length; i++) {
+				boxSections[i].style.innerHeight = '500 px'
+				boxContainers[i].style.innerWidth = '768 px'
+			}
+		}
+	}
+
 	window.addEventListener('orientationchange', () => {
+		// Recalculate hero height on orientation change
 		setHeroHeight()
+		// As well as box section and container dimensions
 		setBoxSections()
 	})
  
@@ -99,19 +113,6 @@ if (window.location.pathname === '/') {
 			// Interrupt auto-cycling if user manually clicked arrow
 			clearInterval(tabInterval)
 		})
-	}
-
-	// Set width of boxes section for width that’s smaller than desktop yet larger than iPad portrait; not configurable in Webflow interface.
-	const setBoxSections = () => {
-		if (window.innerWidth >= 930 && window.innerWidth < 1240) {
-			// Do this for all box section and containers on homepage
-			const boxSections = getElementsByClassName('section boxes')
-			const boxContainers = getElementsByClassName('box-container')
-			for (let i = 0; i < boxContainers.length; i++) {
-				boxSections[i].style.innerHeight = '500 px'
-				boxContainers[i].style.innerWidth = '768 px'
-			}
-		}
 	}
 
 	// Set Hero height
