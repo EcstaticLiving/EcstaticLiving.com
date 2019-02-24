@@ -30,16 +30,9 @@ const deviceType = () => {
 }
 
 // Scrolling
-const elementScrollsIntoView = ({ element, activate, stop, f }) => {
-	window.addEventListener('scroll', () => {
-		const rect = element.getBoundingClientRect()
-		console.log(rect)
-		// If element comes into view...
-		if (rect.top >= activate && !element.classList.contains(stop)) {
-			// ...do this
-			f()
-		}
-	})
+const elementScrollsIntoView = ({ element, threshold, f }) => {
+	const observer = new IntersectionObserver(f, { threshold })
+	observer.observe(element)
 }
 
 
