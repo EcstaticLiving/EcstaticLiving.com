@@ -77,9 +77,12 @@ if (window.location.pathname === '/') {
 		heroSection.style.height = deviceType() === 'mobile' && deviceOrientation === 'landscape'
 			? Math.max(window.innerHeight * 0.9 + 'px', '550px')
 			: window.innerHeight * 0.9 + 'px'
+		console.log(heroSection.style.height)
 	}
 	else {
 		heroSection.style.height = window.innerHeight * 0.5 + 'px'
+		console.log('yo')
+		console.log(heroSection.style.height)
 	}
 
 	// Add event listener to cycle through all hero messages on arrow click
