@@ -77,6 +77,7 @@ if (window.location.pathname === '/') {
 
 	// Set width of boxes section for width that’s smaller than desktop yet larger than iPad portrait; not configurable in Webflow interface.
 	const setBoxSections = () => {
+		console.log(window.innerWidth)
 		if (window.innerWidth >= 930 && window.innerWidth < 1240) {
 			// Do this for all box section and containers on homepage
 			const boxSections = getElementsByClassName('section boxes')
@@ -88,7 +89,7 @@ if (window.location.pathname === '/') {
 		}
 	}
 
-	window.addEventListener('orientationchange', () => {
+	windowEventListener(['orientationchange', 'resize'], () => {
 		// Recalculate hero height on orientation change
 		setHeroHeight()
 		// As well as box section and container dimensions

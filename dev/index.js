@@ -29,6 +29,8 @@ const deviceType = () => {
 	return 'mobile'
 }
 
+const windowEventListener = (triggers, f) => triggers.forEach(trigger => window.addEventListener(trigger, f))
+
 // Element Event Listeners
 const onClick = (elem, f) => elem.addEventListener('click', e => f(e))
 const onChange = (elem, f) => elem.addEventListener('change', e => f(e))
