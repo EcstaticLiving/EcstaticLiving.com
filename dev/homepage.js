@@ -66,22 +66,27 @@ const transitionTabs = ({ currentTab, nextTab }) => {
 if (window.location.pathname === '/') {
 
 	// Calculate Section.Hero height
-	const heroSection = getElementByClassName('section hero')
-	if (
-		deviceType() === 'desktop'
-		|| (deviceType() === 'large tablet' && deviceOrientation() === 'landscape')
-		|| deviceType() === 'tablet'
-		|| deviceType() === 'mobile'
-	) {
-		// Set min height on mobile to 550px
-		heroSection.style.height = deviceType() === 'mobile' && deviceOrientation() === 'landscape'
-			? Math.max(window.innerHeight * 0.9 + 'px', '550px')
-			: window.innerHeight * 0.9 + 'px'
-	}
-	else {
-		heroSection.style.height = window.innerHeight * 0.5 + 'px'
+	const setHeroHeight = () => {
+		const heroSection = getElementByClassName('section hero')
+		if (
+			deviceType() === 'desktop'
+			|| (deviceType() === 'large tablet' && deviceOrientation() === 'landscape')
+			|| deviceType() === 'tablet'
+			|| deviceType() === 'mobile'
+		) {
+			// Set min height on mobile to 550px
+			heroSection.style.height = deviceType() === 'mobile' && deviceOrientation() === 'landscape'
+				? Math.max(window.innerHeight * 0.9 + 'px', '550px')
+				: window.innerHeight * 0.9 + 'px'
+		}
+		else {
+			heroSection.style.height = window.innerHeight * 0.5 + 'px'
+		}
 	}
 
+	// Recalculate hero height on orientation change
+	window.addEventListener('orientationchange', () => setHeroHeight())
+ 
 	// Add event listener to cycle through all hero messages on arrow click
 	const leftArrows = getElementsByClassName('hero-arrow left')
 	const rightArrows = getElementsByClassName('hero-arrow right')
@@ -90,16 +95,20 @@ if (window.location.pathname === '/') {
 		rightArrows[tabIndex].addEventListener('click', () => {
 			activeTab = tabIndex === tabs.length - 1 ? 0 : tabIndex + 1
 			transitionTabs({ currentTab: tabIndex, nextTab: activeTab })
+			// Interrupt auto-cycling if user manually clicked arrow
 			clearInterval(tabInterval)
 		})
 		// Cycle backward
 		leftArrows[tabIndex].addEventListener('click', () => {
 			activeTab = tabIndex === tabIndex === 0 ? tabs.length - 1 : tabIndex - 1
 			transitionTabs({ currentTab: tabIndex, nextTab: activeTab })
+			// Interrupt auto-cycling if user manually clicked arrow
 			clearInterval(tabInterval)
 		})
 	}
 
+	// Set Hero height
+	setHeroHeight()
 	// Fade in first slide
 	fadeInTab(0)
 	// Switch tabs periodically
