@@ -59,7 +59,6 @@ if (window.location.pathname === '/') {
 	// Calculate Section.Hero height
 	const setHeroHeight = () => {
 		const heroSection = getElementByClassName('section hero')
-		console.log(deviceType(), deviceOrientation())
 		if (
 			deviceType() === 'desktop'
 			|| (deviceType() === 'large tablet' && deviceOrientation() === 'landscape')
@@ -77,7 +76,10 @@ if (window.location.pathname === '/') {
 	}
 
 	// Recalculate hero height on orientation change
-	window.addEventListener('orientationchange', () => setHeroHeight())
+	window.addEventListener('orientationchange', () => {
+		setHeroHeight()
+		setBoxSections()
+	})
  
 	// Add event listener to cycle through all hero messages on arrow click
 	const leftArrows = getElementsByClassName('hero-arrow left')
@@ -97,6 +99,19 @@ if (window.location.pathname === '/') {
 			// Interrupt auto-cycling if user manually clicked arrow
 			clearInterval(tabInterval)
 		})
+	}
+
+	// Set width of boxes section for width that’s smaller than desktop yet larger than iPad portrait; not configurable in Webflow interface.
+	const setBoxSections = () => {
+		if (window.innerWidth >= 930 && window.innerWidth < 1240) {
+			// Do this for all box section and containers on homepage
+			const boxSections = getElementsByClassName('section boxes')
+			const boxContainers = getElementsByClassName('box-container')
+			for (let i = 0; i < boxContainers.length; i++) {
+				boxSections[i].style.innerHeight = '500 px'
+				boxContainers[i].style.innerWidth = '768 px'
+			}
+		}
 	}
 
 	// Set Hero height
