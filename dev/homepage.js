@@ -114,8 +114,8 @@ if (window.location.pathname === '/') {
 	// Initiate scroll behaviour
 	const welcomeImage = getElementByClassName('welcome-image')
 	welcomeImage.classList.remove('fade-move')
-	elementScrollsIntoView({ element: welcomeImage, stop: 'fade-move', f: () => welcomeImage.classList.add('fade-move') })
+	elementScrollsIntoView({ element: welcomeImage, activate: 200, stop: 'fade-move', f: () => welcomeImage.classList.add('fade-move') })
 	const welcomeText = getElementByClassName('welcome-text')
 	welcomeText.classList.remove('fade-move')
-	elementScrollsIntoView({ element: welcomeText, stop: 'fade-move', f: () => setTimeout(() => welcomeText.classList.add('fade-move'), 200) })
+	elementScrollsIntoView({ element: welcomeText, activate: 200, stop: 'fade-move', f: () => setTimeout(() => welcomeText.classList.add('fade-move'), 200) })
 }

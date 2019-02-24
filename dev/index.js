@@ -30,11 +30,12 @@ const deviceType = () => {
 }
 
 // Scrolling
-const elementScrollsIntoView = ({ element, stop, f }) => {
+const elementScrollsIntoView = ({ element, activate, stop, f }) => {
 	window.addEventListener('scroll', () => {
 		const rect = element.getBoundingClientRect()
+		console.log(rect)
 		// If element comes into view...
-		if (rect.top >= 0 && !element.classList.contains(stop)) {
+		if (rect.top >= activate && !element.classList.contains(stop)) {
 			// ...do this
 			f()
 		}
