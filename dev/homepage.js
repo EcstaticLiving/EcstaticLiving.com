@@ -59,6 +59,7 @@ if (window.location.pathname === '/') {
 	// Calculate Section.Hero height
 	const setHeroHeight = () => {
 		const heroSection = getElementByClassName('section hero')
+		console.log(deviceType(), deviceOrientation())
 		if (
 			deviceType() === 'desktop'
 			|| (deviceType() === 'large tablet' && deviceOrientation() === 'landscape')
