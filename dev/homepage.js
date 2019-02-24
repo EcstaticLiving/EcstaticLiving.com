@@ -82,9 +82,9 @@ if (window.location.pathname === '/') {
 			const boxSections = getElementsByClassName('section boxes')
 			const boxContainers = getElementsByClassName('box-container')
 			for (let i = 0; i < boxContainers.length; i++) {
-				boxSections[i].clientHeight = '500 px'
-				boxContainers[i].clientWidth = '768 px'
-				console.log(boxContainers[i].clientWidth)
+				boxSections[i].style.height = '500px'
+				boxContainers[i].style.width = '768px'
+				console.log(boxContainers[i].style.width)
 			}
 		}
 	}
