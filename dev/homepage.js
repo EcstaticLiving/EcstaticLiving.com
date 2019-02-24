@@ -20,15 +20,15 @@ const fadeInTab = tabIndex => {
 	setTimeout(() => {
 		for (let i = 0; i < 3; i++) {
 			const title = getElementByClassName('hero-title ' + literalNumbers[i], tabIndex)
-			title.classList.add('fade-slide')
+			title.classList.add('fade-move')
 		}
 	}, 500)
 
 	// Slide in Hero Button
-	setTimeout(() => heroButton.classList.add('fade-slide'), 800)
+	setTimeout(() => heroButton.classList.add('fade-move'), 800)
 
 	// Slide in Hero Arrows
-	setTimeout(() => heroArrows.classList.add('fade-slide'), 1100)
+	setTimeout(() => heroArrows.classList.add('fade-move'), 1100)
 
 }
 
@@ -37,14 +37,14 @@ const resetSlide = tabIndex => {
 	// Hide Hero Text
 	for (let i = 0; i < 3; i++) {
 		const title = getElementByClassName('hero-title ' + literalNumbers[i], tabIndex)
-		title.classList.remove('fade-slide')
+		title.classList.remove('fade-move')
 	}
 	// Hide Hero Button
 	const heroButton = getElementByClassName('hero-button', tabIndex)
-	heroButton.classList.remove('fade-slide')
+	heroButton.classList.remove('fade-move')
 	// Hide Hero Arrows
 	const heroArrows = getElementByClassName('hero-arrows', tabIndex)
-	heroArrows.classList.remove('fade-slide')
+	heroArrows.classList.remove('fade-move')
 	
 	// Make tab and clickable elements invisible
 	tabs[tabIndex].classList.remove('display')
