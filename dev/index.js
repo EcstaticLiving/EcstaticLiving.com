@@ -31,7 +31,7 @@ const deviceType = () => {
 
 // Scrolling
 const elementScrollsIntoView = ({ element, threshold, f }) => {
-	const observer = new IntersectionObserver(f, { threshold })
+	const observer = new IntersectionObserver(f(), { threshold })
 	observer.observe(element)
 }
 
