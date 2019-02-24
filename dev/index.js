@@ -33,13 +33,8 @@ const deviceType = () => {
 const elementScrollsIntoView = ({ element, stop, f }) => {
 	window.addEventListener('scroll', () => {
 		const rect = element.getBoundingClientRect()
-		const elementIsInView =
-			rect.top >= 0
-			&& rect.left >= 0
-			&& rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
-			&& rect.right <= (window.innerWidth || document.documentElement.clientWidth)
 		// If element comes into view...
-		if (elementIsInView && !element.classList.contains(stop)) {
+		if (rect.top >= 0 && !element.classList.contains(stop)) {
 			// ...do this
 			f()
 		}
