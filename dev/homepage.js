@@ -95,7 +95,7 @@ if (window.location.pathname === '/') {
 		}
 	}
 
-	windowEventListener(['orientationchange', 'resize'], () => {
+	windowEventListener(['onload', 'orientationchange', 'resize'], () => {
 		// Recalculate hero height on orientation change
 		setHeroHeight()
 		// As well as box section and container dimensions
@@ -121,9 +121,6 @@ if (window.location.pathname === '/') {
 			clearInterval(tabInterval)
 		})
 	}
-
-	// Set Hero height
-	setHeroHeight()
 
 	// Fade in first slide
 	fadeInTab(0)
