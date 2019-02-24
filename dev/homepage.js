@@ -85,6 +85,7 @@ if (window.location.pathname === '/') {
 			for (let i = 0; i < boxContainers.length; i++) {
 				boxSections[i].style.innerHeight = '500 px'
 				boxContainers[i].style.innerWidth = '768 px'
+				console.log(boxContainers[i])
 			}
 		}
 	}
