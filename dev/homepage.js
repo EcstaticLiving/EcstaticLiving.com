@@ -103,8 +103,8 @@ if (window.location.pathname === '/') {
 	})
  
 	// Add event listener to cycle through all hero messages on arrow click
-	const leftArrows = getElementsByClassName('hero-arrow left')
-	const rightArrows = getElementsByClassName('hero-arrow right')
+	const leftArrows = getElementsByClassName('arrow left')
+	const rightArrows = getElementsByClassName('arrow right')
 	for (let tabIndex = 0; tabIndex < rightArrows.length; tabIndex++) {
 		// Cycle forward
 		rightArrows[tabIndex].addEventListener('click', () => {
