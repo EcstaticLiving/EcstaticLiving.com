@@ -15,7 +15,7 @@ const fadeInTab = tabIndex => {
 	setTimeout(() => tabs[tabIndex].classList.add('fade'), 100)
 	// Slide in Hero Text
 	setTimeout(() => {
-		for (let i = 0; i < 3; i++) {
+		for (let i = 0; i < tabs.length; i++) {
 			const title = getElementByClassName('hero-title ' + literalNumbers[i], tabIndex)
 			title.classList.add('fade-move')
 		}
@@ -28,7 +28,7 @@ const fadeInTab = tabIndex => {
 
 const resetSlide = tabIndex => {
 	// Hide Hero Text
-	for (let i = 0; i < 3; i++) {
+	for (let i = 0; i < tabs.length; i++) {
 		const title = getElementByClassName('hero-title ' + literalNumbers[i], tabIndex)
 		title.classList.remove('fade-move')
 	}
