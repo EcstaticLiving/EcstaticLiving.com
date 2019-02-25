@@ -122,6 +122,8 @@ if (window.location.pathname === '/') {
 		})
 	}
 
+	// Set hero height
+	setHeroHeight()
 	// Fade in first slide
 	fadeInTab(0)
 
