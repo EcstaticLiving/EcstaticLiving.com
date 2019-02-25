@@ -17,6 +17,7 @@ const fadeInTab = tabIndex => {
 	setTimeout(() => {
 		for (let i = 0; i < tabs.length; i++) {
 			const title = getElementByClassName('hero-title ' + literalNumbers[i], tabIndex)
+			console.log(title)
 			title.classList.add('fade-move')
 		}
 	}, 500)
