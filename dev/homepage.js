@@ -115,7 +115,7 @@ if (window.location.pathname === '/') {
 		})
 		// Cycle backward
 		leftArrows[tabIndex].addEventListener('click', () => {
-			activeTab = tabIndex === tabIndex === 0 ? tabs.length - 1 : tabIndex - 1
+			activeTab = tabIndex === 0 ? tabs.length - 1 : tabIndex - 1
 			transitionTabs({ currentTab: tabIndex, nextTab: activeTab })
 			// Interrupt auto-cycling if user manually clicked arrow
 			clearInterval(tabInterval)
