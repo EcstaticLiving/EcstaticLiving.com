@@ -24,21 +24,28 @@ const setHeroHeight = () => {
 
 // Set width of boxes section for width that’s smaller than desktop yet larger than iPad portrait; not configurable in Webflow interface.
 const setBoxSections = () => {
-	const boxSections = getElementsByClassName('section boxes')
-	const boxContainers = getElementsByClassName('box-container')
-	let sectionHeight, containerWidth
-	if (window.innerWidth >= 930 && window.innerWidth < 1240) {
-		sectionHeight = '500px'
-		containerWidth = '768px'
+	const sectionBoxes = getElementsByClassName('section boxes')
+	const boxContainer = getElementsByClassName('box-container')
+	let sectionBoxesHeight, boxContainerWidth
+	// Use desktop dimensions
+	if (window.innerWidth >= 1240) {
+		sectionBoxesHeight = '200px'
+		boxContainerWidth = ''
 	}
+	// iPad portrait, and dimensions that are smaller than desktop, yet still larger than iPad portrait (such as iPad landscape)
+	else if (window.innerWidth >= 768) {
+		sectionBoxesHeight = '500px'
+		boxContainerWidth = '768px'
+	}
+	// iPhone landscape and portrait
 	else {
-		sectionHeight = '200px'
-		containerWidth = ''
+		sectionBoxesHeight = '1100px'
+		boxContainerWidth = ''
 	}
 	// Do this for all box section and containers on homepage
-	for (let i = 0; i < boxContainers.length; i++) {
-		boxSections[i].style.height = sectionHeight
-		boxContainers[i].style.width = containerWidth
+	for (let i = 0; i < boxContainer.length; i++) {
+		sectionBoxes[i].style.height = sectionBoxesHeight
+		boxContainer[i].style.width = boxContainerWidth
 	}
 }
 
