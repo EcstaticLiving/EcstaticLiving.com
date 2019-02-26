@@ -106,12 +106,12 @@ const fadeInReview = reviewIndex => {
 	// Make review tab and clickable elements visible
 	ALL_REVIEWS[reviewIndex].classList.add('display')
 	ALL_REVIEWS[reviewIndex].classList.add('fade')
-	reviewsArrows.classList.add('display')
 	// Fade in elements
 	const reviewsQuoteMark = getElementByClassName('reviews-quote', reviewIndex)
 	const reviewsQuote = getElementByClassName('reviews-quote', reviewIndex)
 	const reviewsQuotees = getElementByClassName('reviews-quotee', reviewIndex)
 	const reviewsArrows = getElementByClassName('reviews-arrows', reviewIndex)
+	reviewsArrows.classList.add('display')
 	setTimeout(() => reviewsQuoteMark.classList.add('fade-move'), 100)
 	setTimeout(() => reviewsQuote.classList.add('fade-move'), 200)
 	setTimeout(() => reviewsQuotees.classList.add('fade-move'), 400)
