@@ -130,10 +130,10 @@ if (window.location.pathname === '/') {
 		const title = getElementByClassName('hero-title ' + NUMBER_CLASS[i], 0)
 		title.classList.remove('fade-move')
 	}
-	const heroButton = getElementByClassName('hero-button', tabIndex)
+	const heroButton = getElementByClassName('hero-button', 0)
 	heroButton.classList.remove('fade-move')
 	heroButton.classList.remove('display')
-	const heroArrows = getElementByClassName('hero-arrows', tabIndex)
+	const heroArrows = getElementByClassName('hero-arrows', 0)
 	heroArrows.classList.remove('fade-move')
 	heroArrows.classList.remove('display')
 
