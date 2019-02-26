@@ -130,9 +130,11 @@ if (window.location.pathname === '/') {
 		title.classList.remove('fade-move')
 	}
 	const heroButton = getElementByClassName('hero-button', tabIndex)
-	heroButton.classList.remove('display fade-move')
+	heroButton.classList.remove('fade-move')
+	heroButton.classList.remove('display')
 	const heroArrows = getElementByClassName('hero-arrows', tabIndex)
-	heroArrows.classList.remove('display fade-move')
+	heroArrows.classList.remove('fade-move')
+	heroArrows.classList.remove('display')
 
 	// Set hero height
 	setHeroHeight()
