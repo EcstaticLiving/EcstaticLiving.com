@@ -96,10 +96,12 @@ const resetTab = tabIndex => {
 }
 
 const transitionTabs = ({ currentTab, nextTab }) => {
-	// Reset current slide
-	resetTab(currentTab)
+	// Fade out current tab
+	ALL_TABS[currentTab].classList.remove('fade')
 	// Fade in new slide
-	setTimeout(() => fadeInTab(nextTab), 500)
+	fadeInTab(nextTab)
+	// Reset current slide
+	setTimeout(() => resetTab(currentTab), 500)
 }
 
 const fadeInReview = reviewIndex => {
@@ -135,10 +137,12 @@ const resetReview = reviewIndex => {
 }
 
 const transitionReviews = ({ currentReview, nextReview }) => {
-	// Fade out current tab
-	resetReview(currentReview)
+	// Fade out current review tab
+	ALL_REVIEWS[currentReview].classList.remove('fade')
 	// Fade in new slide
-	setTimeout(() => fadeInReview(nextReview), 500)
+	fadeInReview(nextReview)
+	// Fade out current tab
+	setTimeout(() => resetReview(currentReview), 500)
 }
 
 
