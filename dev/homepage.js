@@ -103,10 +103,10 @@ const transitionTabs = ({ currentTab, nextTab }) => {
 }
 
 const fadeInReview = reviewIndex => {
-	const reviewsQuoteMark = getElementByClassName('reviews-quote')[reviewIndex]
-	const reviewsQuote = getElementByClassName('reviews-quote')[reviewIndex]
-	const reviewsQuotees = getElementByClassName('reviews-quotee')[reviewIndex]
-	const reviewsArrows = getElementByClassName('reviews-arrows')[reviewIndex]
+	const reviewsQuoteMark = getElementByClassName('reviews-quote', reviewIndex)
+	const reviewsQuote = getElementByClassName('reviews-quote', reviewIndex)
+	const reviewsQuotees = getElementByClassName('reviews-quotee', reviewIndex)
+	const reviewsArrows = getElementByClassName('reviews-arrows', reviewIndex)
 	// Display review
 	ALL_REVIEWS[reviewIndex].classList.add('display')
 	setTimeout(() => reviewsQuoteMark.classList.add('fade-move'), 100)
@@ -116,12 +116,9 @@ const fadeInReview = reviewIndex => {
 }
 
 const resetReview = reviewIndex => {
-	const reviewsQuote = getElementByClassName('reviews-quote')[reviewIndex]
-	const reviewsQuotees = getElementByClassName('reviews-quotee')[reviewIndex]
-	const reviewsArrows = getElementByClassName('reviews-arrows')[reviewIndex]
-	console.log(document.getElementsByClassName('reviews-quote'))
-	console.log(reviewIndex)
-	console.log(reviewsQuote)
+	const reviewsQuote = getElementByClassName('reviews-quote', reviewIndex)
+	const reviewsQuotees = getElementByClassName('reviews-quotee', reviewIndex)
+	const reviewsArrows = getElementByClassName('reviews-arrows', reviewIndex)
 	reviewsQuote.classList.remove('fade-move')
 	reviewsQuotees.classList.remove('fade-move')
 	reviewsArrows.classList.remove('fade-move')
