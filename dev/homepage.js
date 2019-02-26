@@ -116,9 +116,10 @@ const fadeInReview = reviewIndex => {
 }
 
 const resetReview = reviewIndex => {
-	const reviewsQuote = getElementByClassName('reviews-quote fade-move')[reviewIndex]
+	const reviewsQuote = getElementByClassName('reviews-quote')[reviewIndex]
 	const reviewsQuotees = getElementByClassName('reviews-quotee')[reviewIndex]
 	const reviewsArrows = getElementByClassName('reviews-arrows')[reviewIndex]
+	console.log(document.getElementsByClassName('reviews-quote'))
 	console.log(reviewIndex)
 	console.log(reviewsQuote)
 	reviewsQuote.classList.remove('fade-move')
