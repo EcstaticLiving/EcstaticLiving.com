@@ -47,7 +47,7 @@ const fadeInTab = tabIndex => {
 	// Make tab and clickable elements visible
 	ALL_TABS[tabIndex].classList.add('display')
 	const heroButton = getElementByClassName('hero-button', tabIndex)
-	const heroArrows = getElementByClassName('hero-arrows', tabIndex)
+	const heroArrows = getElementByClassName('arrows', tabIndex)
 	heroButton.classList.add('display')
 	heroArrows.classList.add('display')
 	// Fade in image
@@ -75,7 +75,7 @@ const resetSlide = tabIndex => {
 	const heroButton = getElementByClassName('hero-button', tabIndex)
 	heroButton.classList.remove('fade-move')
 	// Hide Hero Arrows
-	const heroArrows = getElementByClassName('hero-arrows', tabIndex)
+	const heroArrows = getElementByClassName('arrows', tabIndex)
 	heroArrows.classList.remove('fade-move')
 	// Make tab and clickable elements invisible
 	ALL_TABS[tabIndex].classList.remove('display')
@@ -133,7 +133,7 @@ if (window.location.pathname === '/') {
 	const heroButton = getElementByClassName('hero-button', 0)
 	heroButton.classList.remove('fade-move')
 	heroButton.classList.remove('display')
-	const heroArrows = getElementByClassName('hero-arrows', 0)
+	const heroArrows = getElementByClassName('arrows', 0)
 	heroArrows.classList.remove('fade-move')
 	heroArrows.classList.remove('display')
 
