@@ -135,11 +135,9 @@ const resetReview = reviewIndex => {
 
 const transitionReviews = ({ currentReview, nextReview }) => {
 	// Fade out current review tab
-	ALL_REVIEWS[currentReview].classList.remove('fade')
+	resetReview(currentReview)
 	// Fade in new slide
-	fadeInReview(nextReview)
-	// Fade out current tab
-	setTimeout(() => resetReview(currentReview), 500)
+	setTimeout(() => fadeInReview(nextReview), 500)
 }
 
 
