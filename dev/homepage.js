@@ -103,14 +103,15 @@ const transitionTabs = ({ currentTab, nextTab }) => {
 }
 
 const fadeInReview = reviewIndex => {
+	// Make review tab and clickable elements visible
+	ALL_REVIEWS[reviewIndex].classList.add('display')
+	ALL_REVIEWS[reviewIndex].classList.add('fade')
+	reviewsArrows.classList.add('display')
+	// Fade in elements
 	const reviewsQuoteMark = getElementByClassName('reviews-quote', reviewIndex)
 	const reviewsQuote = getElementByClassName('reviews-quote', reviewIndex)
 	const reviewsQuotees = getElementByClassName('reviews-quotee', reviewIndex)
 	const reviewsArrows = getElementByClassName('reviews-arrows', reviewIndex)
-	// Make review tab and clickable elements visible
-	ALL_REVIEWS[reviewIndex].classList.add('display')
-	reviewsArrows.classList.add('display')
-	// Fade in elements
 	setTimeout(() => reviewsQuoteMark.classList.add('fade-move'), 100)
 	setTimeout(() => reviewsQuote.classList.add('fade-move'), 200)
 	setTimeout(() => reviewsQuotees.classList.add('fade-move'), 400)
@@ -135,7 +136,6 @@ const resetReview = reviewIndex => {
 const transitionReviews = ({ currentReview, nextReview }) => {
 	// Fade out current review tab
 	ALL_REVIEWS[currentReview].classList.remove('fade')
-	ALL_REVIEWS[currentReview].classList.remove('display')
 	// Fade in new slide
 	fadeInReview(nextReview)
 	// Fade out current tab
