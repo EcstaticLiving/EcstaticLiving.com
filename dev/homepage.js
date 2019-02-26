@@ -51,7 +51,7 @@ const setBoxSections = () => {
 	}
 }
 
-// Preload images and randomly rotate
+// Fade in tab
 const fadeInTab = tabIndex => {
 	// Make tab and clickable elements visible
 	ALL_TABS[tabIndex].classList.add('display')
@@ -87,10 +87,12 @@ const resetTab = tabIndex => {
 	// Hide Hero Arrows
 	const heroArrows = getElementByClassName('hero-arrows', tabIndex)
 	heroArrows.classList.remove('fade-move')
-	heroArrows.classList.remove('display')
 	// Make tab and clickable elements invisible
 	ALL_TABS[tabIndex].classList.remove('fade')
-	ALL_TABS[tabIndex].classList.remove('display')
+	setTimeout(() => {
+		heroArrows.classList.remove('display')
+		ALL_TABS[tabIndex].classList.remove('display')
+	}, 500)
 }
 
 const transitionTabs = ({ currentTab, nextTab }) => {
@@ -107,8 +109,10 @@ const fadeInReview = reviewIndex => {
 	const reviewsQuote = getElementByClassName('reviews-quote', reviewIndex)
 	const reviewsQuotees = getElementByClassName('reviews-quotee', reviewIndex)
 	const reviewsArrows = getElementByClassName('reviews-arrows', reviewIndex)
-	// Display review
+	// Make review tab and clickable elements visible
 	ALL_REVIEWS[reviewIndex].classList.add('display')
+	reviewsArrows.classList.add('display')
+	// Fade in elements
 	setTimeout(() => reviewsQuoteMark.classList.add('fade-move'), 100)
 	setTimeout(() => reviewsQuote.classList.add('fade-move'), 200)
 	setTimeout(() => reviewsQuotees.classList.add('fade-move'), 400)
@@ -124,6 +128,8 @@ const resetReview = reviewIndex => {
 	reviewsQuote.classList.remove('fade-move')
 	reviewsQuotees.classList.remove('fade-move')
 	reviewsArrows.classList.remove('fade-move')
+	ALL_REVIEWS[reviewIndex].classList.remove('fade')
+	// Make review tab and clickable elements invisible
 	setTimeout(() => {
 		reviewsArrows.classList.remove('display')
 		ALL_REVIEWS[reviewIndex].classList.remove('display')
