@@ -75,8 +75,6 @@ const fadeInTab = tabIndex => {
 }
 
 const resetTab = tabIndex => {
-	// Make tab and clickable elements invisible
-	ALL_TABS[tabIndex].classList.remove('fade')
 	// Hide Hero Text
 	for (let i = 0; i < 3; i++) {
 		const title = getElementByClassName('hero-title ' + NUMBER_CLASS[i], tabIndex)
@@ -89,10 +87,10 @@ const resetTab = tabIndex => {
 	// Hide Hero Arrows
 	const heroArrows = getElementByClassName('hero-arrows', tabIndex)
 	heroArrows.classList.remove('fade-move')
-	setTimeout(() => {
-		heroArrows.classList.remove('display')
-		ALL_TABS[tabIndex].classList.remove('display')
-	}, 500)
+	heroArrows.classList.remove('display')
+	// Hide Tab
+	ALL_TABS[tabIndex].classList.remove('fade')
+	ALL_TABS[tabIndex].classList.remove('display')
 }
 
 const transitionTabs = ({ currentTab, nextTab }) => {
@@ -128,12 +126,10 @@ const resetReview = reviewIndex => {
 	reviewsQuote.classList.remove('fade-move')
 	reviewsQuotees.classList.remove('fade-move')
 	reviewsArrows.classList.remove('fade-move')
+	reviewsArrows.classList.remove('display')
+	// Hide Review Tab
 	ALL_REVIEWS[reviewIndex].classList.remove('fade')
-	// Make review tab and clickable elements invisible
-	setTimeout(() => {
-		reviewsArrows.classList.remove('display')
-		ALL_REVIEWS[reviewIndex].classList.remove('display')
-	}, 500)
+	ALL_REVIEWS[reviewIndex].classList.remove('display')
 }
 
 const transitionReviews = ({ currentReview, nextReview }) => {
