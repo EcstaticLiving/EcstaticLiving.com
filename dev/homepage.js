@@ -124,7 +124,8 @@ if (window.location.pathname === '/') {
 	}
 
 	// Remove display classes on init
-	ALL_TABS[0].classList.remove('display fade')
+	ALL_TABS[0].classList.remove('fade')
+	ALL_TABS[0].classList.remove('display')
 	for (let i = 0; i < 3; i++) {
 		const title = getElementByClassName('hero-title ' + NUMBER_CLASS[i], 0)
 		title.classList.remove('fade-move')
