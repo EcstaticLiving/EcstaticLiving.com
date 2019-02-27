@@ -107,7 +107,7 @@ const fadeInReview = reviewIndex => {
 	ALL_REVIEWS[reviewIndex].classList.add('display')
 	ALL_REVIEWS[reviewIndex].classList.add('fade')
 	// Fade in elements
-	const reviewsQuoteMark = getElementByClassName('reviews-quote', reviewIndex)
+	const reviewsQuoteMark = getElementByClassName('reviews-quote-mark', reviewIndex)
 	const reviewsQuote = getElementByClassName('reviews-quote', reviewIndex)
 	const reviewsQuotees = getElementByClassName('reviews-quotee', reviewIndex)
 	const reviewsArrows = getElementByClassName('reviews-arrows', reviewIndex)
@@ -119,7 +119,7 @@ const fadeInReview = reviewIndex => {
 }
 
 const resetReview = reviewIndex => {
-	const reviewsQuoteMark = getElementByClassName('reviews-quote', reviewIndex)
+	const reviewsQuoteMark = getElementByClassName('reviews-quote-mark', reviewIndex)
 	const reviewsQuote = getElementByClassName('reviews-quote', reviewIndex)
 	const reviewsQuotees = getElementByClassName('reviews-quotee', reviewIndex)
 	const reviewsArrows = getElementByClassName('reviews-arrows', reviewIndex)
