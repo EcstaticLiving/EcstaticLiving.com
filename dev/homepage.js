@@ -44,7 +44,6 @@ const setBoxSections = () => {
 		sectionBoxesHeight = '1100px'
 		boxContainerWidth = ''
 	}
-	console.log(sectionBoxesHeight, boxContainerWidth)
 	// Do this for all box section and containers on homepage
 	for (let i = 0; i < boxContainer.length; i++) {
 		sectionBoxes[i].style.height = sectionBoxesHeight
@@ -147,7 +146,7 @@ const transitionReviews = ({ currentReview, nextReview }) => {
 // Begin
 if (window.location.pathname === '/') {
 
-	windowEventListener(['onload', 'orientationchange', 'resize'], () => {
+	windowEventListener(['load', 'orientationchange', 'resize'], () => {
 		// Recalculate hero height on orientation change
 		setHeroHeight()
 		// As well as box section and container dimensions
