@@ -16,6 +16,9 @@ body,
 @media (max-width:768px) { .quadrant-outer-container {top:-100px;right:10%} }
 
 /* Rich-text formatting */
+.w-richtext.text b {
+	font-weight: 500;
+}
 .w-input.input-field, .w-input.email-signup-input-field {-webkit-appearance: none;}
 .w-richtext p {
 	margin: 0 0 22px 0;
