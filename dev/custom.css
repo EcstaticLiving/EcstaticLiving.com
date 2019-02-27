@@ -1,0 +1,74 @@
+<style>
+
+/* HARMONISE SCROLLING FOR IOS */
+body,
+.main-section,
+.modal-background,
+.registration-section,
+.modals.register-mobile {-webkit-overflow-scrolling: touch;}
+
+/* RICH TEXT FORMATTING */
+.w-richtext.text b {
+	font-weight: 500;
+}
+
+/* FORM VALIDATION */
+input.parsley-error,
+textarea.parsley-error {
+	color: #FF0000;
+	background-color: #fdd;
+	border: 1px solid #FF0000;
+}
+select.parsley-error {
+	color: #FF0000;
+	border: 2px solid #FF0000;
+}
+.parsley-errors-list,
+.parsley-errors-list.filled {
+	display: none;
+}
+
+/* INPUT ON FOCUS HIGHLIGHT */
+.form-input:focus,
+.form-input.stripe:focus,
+.form-textarea:focus,
+.email-input-field:focus {
+	outline: none !important;
+}
+.radio:checked,
+.form-select:focus {
+	outline: none !important;
+}
+.form-input::placeholder,
+.form-textarea::placeholder,
+.email-input-field::placeholder {
+	color: #555;
+}
+
+/* CUSTOM RADIO BUTTONS */
+@media only screen and (max-device-width: 984px) {
+	input[type=checkbox],
+	input[type=radio   ] {
+		display          : inline-block;
+		width            : 1em;
+		height           : 1em;
+		border           : 0.0625em solid #333;
+		border-radius    : 0.25em;
+		background       : #FFF;
+	}
+	input[type=checkbox]:checked {
+	  content     : '✓';
+	  text-align  : center;
+	  font-weight : bold;
+		display          : block;
+	  border           : 0.0625em solid #800000;
+	  background       : #800000;
+	}
+	input[type=radio]:checked {
+	  display          : block;
+	  border           : 0.0625em solid #800000;
+	  background       : #800000;
+	}
+}
+
+</style>
