@@ -44,6 +44,7 @@ const setBoxSections = () => {
 		sectionBoxesHeight = '1100px'
 		boxContainerWidth = ''
 	}
+	console.log(sectionBoxesHeight, boxContainerWidth)
 	// Do this for all box section and containers on homepage
 	for (let i = 0; i < boxContainer.length; i++) {
 		sectionBoxes[i].style.height = sectionBoxesHeight
