@@ -177,8 +177,8 @@ if (window.location.pathname === '/') {
 	}
 
 	// Add event listener to cycle through all reviews on arrow click
-	const leftReviewsArrows = getElementsByClassName('hero-arrow left')
-	const rightReviewsArrows = getElementsByClassName('hero-arrow right')
+	const leftReviewsArrows = getElementsByClassName('reviews-arrow left')
+	const rightReviewsArrows = getElementsByClassName('reviews-arrow right')
 	for (let reviewIndex = 0; reviewIndex < rightReviewsArrows.length; reviewIndex++) {
 		// Cycle forward
 		rightReviewsArrows[reviewIndex].addEventListener('click', () => {
