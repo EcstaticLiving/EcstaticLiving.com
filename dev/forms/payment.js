@@ -101,7 +101,7 @@ const paymentValidation = result => {
 // Called on successful Stripe form submission, or if Stripe timed-out, since may still have charged customer’s card
 const successfulSubmission = () => {
 	// Hide processing...
-	hideElement('.notification-modal.processing')
+	hideElement(getElementByClassName('notification-modal processing'))
 	// ...and redirect to success page.
 	window.location.href = containsUrl('ecstaticliving.com')
 		? 'https://www.ecstaticliving.com/registration'
@@ -112,11 +112,11 @@ const successfulSubmission = () => {
 // Called whenever any submission
 const indicateFailedSubmission = type => {
 	resetForm()
-	hideElement('.notification-modal.processing')
+	hideElement(getElementByClassName('notification-modal processing'))
 	// Show card error notification
-	if (type === 'stripe') showElement('.notification-modal.card-error')
+	if (type === 'stripe') showElement(getElementByClassName('notification-modal card-error'))
 	// Show form error notification.
-	else if (type === 'form') showElement('.notification-modal.form-error')
+	else if (type === 'form') showElement(getElementByClassName('notification-modal form-error'))
 	return false
 }
 
@@ -126,7 +126,7 @@ if (isFormPage()) {
 	card.mount(getElementById('card-element'))
 	card.addEventListener('change', result => paymentValidation(result))	
 }
-onClick('button-stripe-error', () => hideElement('.notification-modal.card-error'))
+onClick(getElementByClassName('button-stripe-error', 0), () => hideElement(getElementByClassName('notification-modal card-error', 0)))
 
 
 // Always allow pay now button to be clicked
@@ -163,7 +163,7 @@ onClick(paymentButton, async e => {
 	setValue(getElementById('question-special'), getValue(eventSpecialDetails) ? getValue(eventSpecialDetails) : '- none -')
 
 	// Indicate processing, since below Stripe function is async...
-	showElement('.notification-modal.processing')
+	showElement(getElementByClassName('notification-modal processing'))
 
 	// Initiate payment: first, check to see if card is valid.
 	const stripeCard = await stripe.createSource(card, {
@@ -270,7 +270,7 @@ onClick(paymentButton, async e => {
 	}
 	// Payment not validated, so hide processing to reveal text box with error message
 	else {
-		hideElement('.notification-modal.processing')
+		hideElement(getElementByClassName('notification-modal processing'))
 	}
 	
 })
