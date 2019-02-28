@@ -551,7 +551,7 @@ const resetForm = () => {
 	paymentButtonDisabled()
 
 	// Connect the error checking function to the form...
-	formErrorInit(eventForm)
+	// formErrorInit(eventForm)
 	// ...and show it.
 	showElement(eventForm)
 
