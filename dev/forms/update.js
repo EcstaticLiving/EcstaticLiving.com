@@ -36,11 +36,16 @@ const showErrorsInForm = () => {
 const setCustomChargeSelect = () => {
 	//	Adds options & prices based on CMS input
 	emptySelect(customSelect)
+	let option = document.createElement('option')
 	if (customOptions.length > 0) {
-		appendSelect(customSelect, { text: 'Custom charge option...', value: '' })
+		option.text = 'Custom charge option...'
+		option.value = ''
+		appendSelect(eventStatus, option)
 	}
 	for (let i = 0; i < customOptions.length; i++) {
-		appendSelect(customSelect, { text: customOptions[i] + ' - $' + customPrices[i], value: customPrices[i] })
+		option.text = customOptions[i] + ' - $' + customPrices[i]
+		option.value = customPrices[i]
+		appendSelect(eventStatus, option)
 	}
 }
 

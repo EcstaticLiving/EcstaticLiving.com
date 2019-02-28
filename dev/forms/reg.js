@@ -218,8 +218,11 @@ const setEventPrices = () => {
 	hideElement(eventAmountContainer)
 	// Reset event options
 	emptySelect(eventOption)
+	let option = document.createElement('option')
 	if (eventOptions.length > 0) {
-		appendSelect(eventOption, '<option value=\'\'>Event option...</option>')
+		option.text = 'Event option...'
+		option.value = ''
+		appendSelect(eventOption, option)
 	}
 	const people = paymentQty() === 2
 			? 'for both'
@@ -237,8 +240,9 @@ const setEventPrices = () => {
 		const eventNote = eventNotes[i]
 			? eventNotes[i]
 			: ''
-		const eventSelectText = eventOptions[i] + ' ($' + eventSelectPrice + paymentClarification + affiliateDiscountText + ')' + eventNote
-		appendSelect(eventOption, '<option value=\'' + eventSelectPrice + '\'>' + eventSelectText + '</option>')
+		option.text = eventOptions[i] + ' ($' + eventSelectPrice + paymentClarification + affiliateDiscountText + ')' + eventNote
+		option.value = eventSelectPrice
+		appendSelect(eventOption, option)
 	}
 	// Update `Pay deposit only` field with actual deposit amount: `Pay deposit only ($...)`
 	setText(eventDepositText, 'Pay deposit only ($' + parseInt(depositAmount(), 10) + paymentClarification + ')')
@@ -435,19 +439,36 @@ const resetForm = () => {
 	
 	// Determines whether event is for both couples & singles, couples-only, or singles-only
 	emptySelect(eventStatus)
+	let option = document.createElement('option')
 	if (eventStatusRestriction === 'Couples only') {
-		appendSelect(eventStatus, '<option value:\'\'>Register as...</option>')
-		appendSelect(eventStatus, '<option value:\'Couple\'>Couple</option>')
-		appendSelect(eventStatus, '<option value:\'Two Singles (paired)\'>Two Singles (paired)</option>')
+		option.text = 'Register as...'
+		option.value = ''
+		appendSelect(eventStatus, option)
+		option.text = 'Couple'
+		option.value = 'Couple'
+		appendSelect(eventStatus, option)
+		option.text = 'Two Singles (paired)'
+		option.value = 'Two Singles (paired)'
+		appendSelect(eventStatus, option)
 	}
 	else if (eventStatusRestriction === 'Singles only') {
-		appendSelect(eventStatus, '<option value:\'Singles-only event\'>Single</option>')
+		option.text = 'Single'
+		option.value = 'Singles-only event'
+		appendSelect(eventStatus, option)
 	}
 	else {
-		appendSelect(eventStatus, '<option value:\'\'>Register as...</option>')
-		appendSelect(eventStatus, '<option value:\'Couple\'>Couple</option>')
-		appendSelect(eventStatus, '<option value:\'Single\'>Single</option>')
-		appendSelect(eventStatus, '<option value:\'Two Singles (paired)\'>Two Singles (paired)</option>')
+		option.text = 'Register as...'
+		option.value = ''
+		appendSelect(eventStatus, option)
+		option.text = 'Couple'
+		option.value = 'Couple'
+		appendSelect(eventStatus, option)
+		option.text = 'Single'
+		option.value = 'Single'
+		appendSelect(eventStatus, option)
+		option.text = 'Two Singles (paired)'
+		option.value = 'Two Singles (paired)'
+		appendSelect(eventStatus, option)
 	}
 
 	// Reset event prices
