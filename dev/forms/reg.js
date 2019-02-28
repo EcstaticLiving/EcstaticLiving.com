@@ -1,5 +1,5 @@
 // Event Reg Form
-const eventForm = getElementByClass('reg-form', 0)
+const eventForm = getElementByClassName('reg-form', 0)
 
 // Hidden fields
 const eventCode = getText(getElementById('event-code')).toUpperCase(),
