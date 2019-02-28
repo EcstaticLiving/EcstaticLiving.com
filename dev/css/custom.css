@@ -43,7 +43,7 @@ select.parsley-error {
 /* FORM COLORS */
 .textarea::placeholder,
 .input::placeholder {
-	color: #888;
+	color: #555;
 }
 .white-placeholder::placeholder {
 	color: #fff;
