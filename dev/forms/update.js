@@ -53,7 +53,7 @@ const resetForm = () => {
 	clearForm(page())
 	repopulateForm(page())
 	setCustomChargeSelect()
-	formErrorInit(customForm)
+	// formErrorInit(customForm)
 	showElement(customForm)
 	unCheckElement(customTerms)
 	formValidation()
