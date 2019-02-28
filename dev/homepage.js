@@ -53,6 +53,12 @@ const setBoxSections = () => {
 
 // Fade in tab
 const fadeInTab = tabIndex => {
+	console.log(getElementByClassName('background-red w-condition-invisible', reviewIndex))
+	// If background image is so complex that email signup form needs a red background instead of a transparent background...
+	if (getElementByClassName('background-red w-condition-invisible', reviewIndex).display !== 'none') {
+		// ...then make the email signup box title white instead of charcoal.
+		getElementByClassName('title small').style.color = '#fff'
+	}
 	// Make tab and clickable elements visible
 	ALL_TABS[tabIndex].classList.add('display')
 	const heroButton = getElementByClassName('hero-button', tabIndex)
@@ -103,12 +109,6 @@ const transitionTabs = ({ currentTab, nextTab }) => {
 }
 
 const fadeInReview = reviewIndex => {
-	console.log(getElementByClassName('background-red w-condition-invisible', reviewIndex))
-	// If background image is so complex that email signup form needs a red background instead of a transparent background...
-	if (getElementByClassName('background-red w-condition-invisible', reviewIndex).display !== 'none') {
-		// ...then make the email signup box title white instead of charcoal.
-		getElementByClassName('title small').style.color = '#fff'
-	}
 	// Make review tab and clickable elements visible
 	ALL_REVIEWS[reviewIndex].classList.add('display')
 	ALL_REVIEWS[reviewIndex].classList.add('fade')
