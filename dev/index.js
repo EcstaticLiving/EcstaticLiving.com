@@ -49,10 +49,7 @@ const onKeyPress = (elem, f) => elem.addEventListener('keypress', e => f(e))
 const formSubmit = elem => elem.submit()
 const formErrorInit = elem => elem.parsley()
 const formErrorValidation = elem => elem.parsley().validate()
-const formReset = elem => {
-	console.log(elem)
-	elem.reset()
-}
+const formReset = elem => elem.reset()
 // Element Conditions
 const isInput = elem => elem.type === 'input'
 const isRadio = elem => elem.type === 'radio'

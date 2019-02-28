@@ -13,7 +13,7 @@ eventBaseCost = parseFloat(getText(getElementById('event-base-cost'))).toFixed(2
 eventStatusRestriction = getText(getElementById('event-status-restriction'))
 
 // Event form
-const eventRegForm = getElementByClassName('event-container reg-form')
+const eventRegForm = getElementByClassName('registration-container reg-form')
 
 // Invite-only
 const eventInviteButton = getElementById('event-invitecode-button'),
@@ -35,25 +35,25 @@ eventOther = getElementById('event-gender-other')
 
 // Details
 const eventReferral = getElementById('event-referral'),
-eventExperienceContainer = getElementByClassName('event-container experience'),
+eventExperienceContainer = getElementByClassName('registration-container experience'),
 eventExperienceValidation = getElementById('event-experience-validation'),
 eventExperienceYes = getElementById('event-experience-yes'),
 eventExperienceNo = getElementById('event-experience-no'),
 eventExperienceDetails = getElementById('event-experience-details'),
-eventDietContainer = getElementByClassName('event-container diet'),
+eventDietContainer = getElementByClassName('registration-container diet'),
 eventDietValidation = getElementById('event-diet-validation'),
 eventDietYes = getElementById('event-diet-yes'),
 eventDietNo = getElementById('event-diet-no'),
 eventDietDetails = getElementById('event-diet-details'),
-eventSpecialContainer = getElementByClassName('event-container special'),
+eventSpecialContainer = getElementByClassName('registration-container special'),
 eventSpecialValidation = getElementById('event-special-validation'),
 eventSpecialYes = getElementById('event-special-yes'),
 eventSpecialNo = getElementById('event-special-no'),
 eventSpecialDetails = getElementById('event-special-details')
 
 // Affiliate Code
-const eventAffiliateContainer = getElementByClassName('event-container affiliate'),
-eventAffiliateCodeContainer = getElementByClassName('event-container affiliate-code'),
+const eventAffiliateContainer = getElementByClassName('registration-container affiliate'),
+eventAffiliateCodeContainer = getElementByClassName('registration-container affiliate-code'),
 eventAffiliateValidation = getElementById('event-affiliate-validation'),
 eventAffiliateYes = getElementById('event-affiliate-yes'),
 eventAffiliateNo = getElementById('event-affiliate-no'),
@@ -66,7 +66,7 @@ const urlDiscountCode = urlString && urlString.affiliate
 
 // Event Status: Couples, Singles, Both
 const eventStatus = getElementById('event-status'),
-eventPartnerContainer = getElementByClassName('event-container partner'),
+eventPartnerContainer = getElementByClassName('registration-container partner'),
 eventPartnerFirstName = getElementById('event-partner-firstname'),
 eventPartnerLastName = getElementById('event-partner-lastname'),
 eventPartnerGenderValidation = getElementById('event-partner-gender-validation'),
@@ -86,12 +86,12 @@ eventNotes = getText(getElementById('event-notes')).includes('|')
 
 // Pricing
 const eventPrices = getText(getElementById('event-prices')).split(' | '),
-eventDepositContainer = getElementByClassName('event-container deposit'),
+eventDepositContainer = getElementByClassName('registration-container deposit'),
 eventDepositValidation = getElementById('event-deposit-validation'),
 eventDepositText = getElementById('event-deposit-text'),
 eventDepositFull = getElementById('event-deposit-full'),
 eventDepositDeposit = getElementById('event-deposit-deposit'),
-eventAmountContainer = getElementByClassName('event-container amount'),
+eventAmountContainer = getElementByClassName('registration-container amount'),
 eventAmountDisplay = getElementById('event-amount-display'),
 eventAmountShow = getElementById('event-amount-show')
 
