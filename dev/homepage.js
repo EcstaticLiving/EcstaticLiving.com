@@ -53,9 +53,9 @@ const setBoxSections = () => {
 
 // Fade in tab
 const fadeInTab = tabIndex => {
-	console.log(getElementByClassName('background-red w-condition-invisible', reviewIndex).style.display)
+	console.log(getElementByClassName('background-red w-condition-invisible', tabIndex).style.display)
 	// If background image is so complex that email signup form needs a red background instead of a transparent background...
-	if (getElementByClassName('background-red w-condition-invisible', reviewIndex).style.display !== 'none') {
+	if (getElementByClassName('background-red w-condition-invisible', tabIndex).style.display !== 'none') {
 		// ...then make the email signup box title white instead of charcoal.
 		getElementByClassName('title small').style.color = '#fff'
 	}
