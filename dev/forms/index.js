@@ -36,9 +36,9 @@ for(let i in countries) {
 
 // Clear reg form
 const clearForm = formType => {
-	if (localStorage.getItem('EcstaticLiving:' + formType)) showElement('#form-load')
-	else hideElement('#form-load')
-	hideElement('#form-clear')
+	if (localStorage.getItem('EcstaticLiving:' + formType)) showElement(getElementById('form-load'))
+	else hideElement(getElementById('form-load'))
+	hideElement(getElementById('form-clear'))
 	hideElement('.w-form-done')
 	hideElement('.w-form-fail')
 	if (formType === 'Event') {
@@ -68,8 +68,8 @@ const saveForm = formType => {
 // Repopulate saved reg form
 const repopulateForm = formType => {
 	if (localStorage.getItem('EcstaticLiving:' + formType)) {
-		hideElement('#form-load')
-		showElement('#form-clear')
+		hideElement(getElementById('form-load'))
+		showElement(getElementById('form-clear'))
 		let values = JSON.parse(localStorage.getItem('EcstaticLiving:' + formType))
 		try {
 			for (let item in values) {

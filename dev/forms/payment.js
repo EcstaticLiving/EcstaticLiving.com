@@ -91,10 +91,10 @@ const paymentValidation = result => {
 	formValidation()
 	// Card field is missing or has incorrect data, e.g. expiration date is in the past
 	if (result.error) {
-		setText('#card-errors', result.error.message)
+		setText(getElementById('billing-card-error'), result.error.message)
 		return false
 	}
-	emptyText('#card-errors')
+	emptyText(getElementById('billing-card-error'))
 	return true
 }
 
@@ -123,7 +123,7 @@ const indicateFailedSubmission = type => {
 
 // Begin
 if (isFormPage()) {
-	card.mount('#card-element')
+	card.mount(getElementById('card-element'))
 	card.addEventListener('change', result => paymentValidation(result))	
 }
 onClick('button-stripe-error', () => hideElement('.notification-modal.card-error'))
@@ -142,8 +142,8 @@ onClick(paymentButton, async e => {
 		// ...show where there are errors...
 		showErrorsInForm()
 		// ...and as long as there is no Stripe error message, fill in the error box with a pointer for customer to look for missing information...
-		if (isBlank('#card-errors')) {
-			setText('#card-errors', 'Oops! There’s some missing information.')
+		if (isBlank(getElementById('billing-card-error'))) {
+			setText(getElementById('billing-card-error'), 'Oops! There’s some missing information.')
 		}
 		// ...and interrupt payment process.
 		return false
@@ -153,14 +153,14 @@ onClick(paymentButton, async e => {
 	saveForm(page())
 
 	// Update form submission fields
-	setValue('#party', partyName())
-	setValue('#trafficsource', urlString && urlString.source ? urlString.source : 'ELI')
-	setValue('#charge-description', chargeDescription)
-	setValue('#charge-amount', finalAmount())
-	setValue('#event-option-total', getValue(eventSelect) * 100)
-	setValue('#event-affiliate', getValue(eventAffiliateCode) ? getValue(eventAffiliateCode) : '- none -')
-	setValue('#question-diet', getValue(eventDietDetails) ? getValue(eventDietDetails) : '- none -')
-	setValue('#question-special', getValue(eventSpecialDetails) ? getValue(eventSpecialDetails) : '- none -')
+	setValue(getElementById('party'), partyName())
+	setValue(getElementById('trafficsource'), urlString && urlString.source ? urlString.source : 'ELI')
+	setValue(getElementById('charge-description'), chargeDescription)
+	setValue(getElementById('charge-amount'), finalAmount())
+	setValue(getElementById('event-option-total'), getValue(eventOption) * 100)
+	setValue(getElementById('event-affiliate'), getValue(eventAffiliateCode) ? getValue(eventAffiliateCode) : '- none -')
+	setValue(getElementById('question-diet'), getValue(eventDietDetails) ? getValue(eventDietDetails) : '- none -')
+	setValue(getElementById('question-special'), getValue(eventSpecialDetails) ? getValue(eventSpecialDetails) : '- none -')
 
 	// Indicate processing, since below Stripe function is async...
 	showElement('.notification-modal.processing')

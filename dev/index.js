@@ -31,6 +31,12 @@ const deviceType = () => {
 
 const windowEventListener = (triggers, f) => triggers.forEach(trigger => window.addEventListener(trigger, f))
 
+// Element Collections
+const getAttribute = (elem, attribute) => elem.getAttribute(attribute)
+const getElementById = elem => document.getElementById(elem)
+const getElementByClassName = (className, i) => document.getElementsByClassName(className)[i || 0]
+const getElementsByClassName = className => document.getElementsByClassName(className)
+const getElementsByTag = tag => document.getElementsByTagName(tag)
 // Element Event Listeners
 const onClick = (elem, f) => elem.addEventListener('click', e => f(e))
 const onChange = (elem, f) => elem.addEventListener('change', e => f(e))
@@ -44,12 +50,6 @@ const formSubmit = elem => elem.submit()
 const formErrorInit = elem => elem.parsley()
 const formErrorValidation = elem => elem.parsley().validate()
 const formReset = elem => elem[0].reset()
-// Element Collections
-const getAttribute = (elem, attribute) => elem.getAttribute(attribute)
-const getElementById = elem => document.getElementById(elem)
-const getElementByClassName = (className, i) => document.getElementsByClassName(className)[i || 0]
-const getElementsByClassName = className => document.getElementsByClassName(className)
-const getElementsByTag = tag => document.getElementsByTagName(tag)
 // Element Conditions
 const isInput = elem => elem.type === 'input'
 const isRadio = elem => elem.type === 'radio'

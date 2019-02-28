@@ -1,19 +1,19 @@
 // Custom charge form
-const customForm = '#wf-form-Custom-Charge',
-customCode = '#custom-code',
-customFirstName = '#custom-firstname',
-customLastName = '#custom-lastname',
-customEmail = '#custom-email',
-customMobile = '#custom-mobile',
-customSelect = '#custom-select',
-customTerms = '#custom-terms',
-customTermsValidation = '#custom-terms-validation',
-customOptions = getText('#custom-options').split(' | '),
-customPrices = getText('#custom-prices').split(' | ')
+const customForm = getElementByClass('reg-form', 0),
+customCode = getElementById('custom-code'),
+customFirstName = getElementById('custom-firstname'),
+customLastName = getElementById('custom-lastname'),
+customEmail = getElementById('custom-email'),
+customMobile = getElementById('custom-mobile'),
+customSelect = getElementById('custom-select'),
+customTerms = getElementById('custom-terms'),
+customTermsValidation = getElementById('custom-terms-validation'),
+customOptions = getText(getElementById('custom-options')).split(' | '),
+customPrices = getText(getElementById('custom-prices')).split(' | ')
 
 const formValidation = () => {
 	if (!isBlank(customFirstName) && !isBlank(customLastName) && !isBlank(customEmail) && !isBlank(customMobile) && getValue(customSelect) && isChecked(customTerms) && billingValidation()) {
-		emptyText('#card-errors')
+		emptyText(getElementById('billing-card-error'))
 		setCss(paymentButton, { 'background-color': '#800000' })
 		setCss(paymentButton, { 'color': '#ffffff' })
 		return true
@@ -74,8 +74,8 @@ onClick(paymentButton, e => {
 	if (!formValidation()) {
 		showErrorsInForm()
 		// If there’s no Stripe error message
-		if (isBlank('#card-errors')) {
-			setText('#card-errors', 'Oops! There’s some missing information.')
+		if (isBlank(getElementById('billing-card-error'))) {
+			setText(getElementById('billing-card-error'), 'Oops! There’s some missing information.')
 		}
 		return false
 	}

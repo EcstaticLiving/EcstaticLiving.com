@@ -2,116 +2,116 @@
 const eventForm = getElementByClass('reg-form', 0)
 
 // Hidden fields
-const eventCode = getText('#event-code').toUpperCase(),
-eventTitle = getText('#event-name'),
-eventDates = getText('#event-dates'),
-eventVenue = getText('#event-venue'),
-eventDepositAmount = parseFloat(getText('#event-deposit-amount')).toFixed(2),
-eventDepositDate = getText('#event-deposit-date'),
-eventBasePrice = parseFloat(getText('#event-base-price')).toFixed(2),
-eventBaseCost = parseFloat(getText('#event-base-cost')).toFixed(2),
-eventStatusRestriction = getText('#event-status-restriction')
+const eventCode = getText(getElementById('event-code')).toUpperCase(),
+eventTitle = getText(getElementById('event-name')),
+eventDates = getText(getElementById('event-dates')),
+eventVenue = getText(getElementById('event-venue')),
+eventDepositAmount = parseFloat(getText(getElementById('event-deposit-amount'))).toFixed(2),
+eventDepositDate = getText(getElementById('event-deposit-date')),
+eventBasePrice = parseFloat(getText(getElementById('event-base-price'))).toFixed(2),
+eventBaseCost = parseFloat(getText(getElementById('event-base-cost'))).toFixed(2),
+eventStatusRestriction = getText(getElementById('event-status-restriction'))
 
 // Event form
-const eventRegForm = '.event-container.reg-form'
+const eventRegForm = getElementByClassName('event-container reg-form')
 
 // Invite-only
-const eventInviteButton = '#event-invitecode-button',
-eventInviteBox = '#event-invitecode-box',
-eventInviteCode = '#event-invitecode-code',
-eventInvitePass = '#event-invitecode-pass',
-eventInviteFail = '#event-invitecode-fail'
+const eventInviteButton = getElementById('event-invitecode-button'),
+eventInviteBox = getElementById('event-invitecode-box'),
+eventInviteCode = getElementById('event-invitecode-code'),
+eventInvitePass = getElementById('event-invitecode-pass'),
+eventInviteFail = getElementById('event-invitecode-fail')
 
 // Personal
-const eventFirstName = '#event-firstname',
-eventLastName = '#event-lastname',
-eventEmail = '#event-email',
-eventMobile = '#event-mobile',
-eventBirthdate = '#event-birthdate',
-eventGenderValidation = '#event-gender-validation',
-eventFemale = '#event-gender-female',
-eventMale = '#event-gender-male',
-eventOther = '#event-gender-other'
+const eventFirstName = getElementById('event-firstname'),
+eventLastName = getElementById('event-lastname'),
+eventEmail = getElementById('event-email'),
+eventMobile = getElementById('event-mobile'),
+eventBirthdate = getElementById('event-birthdate'),
+eventGenderValidation = getElementById('event-gender-validation'),
+eventFemale = getElementById('event-gender-female'),
+eventMale = getElementById('event-gender-male'),
+eventOther = getElementById('event-gender-other')
 
 // Details
-const eventReferral = '#event-referral',
-eventExperienceContainer = '.event-container.experience',
-eventExperienceValidation = '#event-experience-validation',
-eventExperienceYes = '#event-experience-yes',
-eventExperienceNo = '#event-experience-no',
-eventExperienceDetails = '#event-experience-details',
-eventDietContainer = '.event-container.diet',
-eventDietValidation = '#event-diet-validation',
-eventDietYes = '#event-diet-yes',
-eventDietNo = '#event-diet-no',
-eventDietDetails = '#event-diet-details',
-eventSpecialContainer = '.event-container.special',
-eventSpecialValidation = '#event-special-validation',
-eventSpecialYes = '#event-special-yes',
-eventSpecialNo = '#event-special-no',
-eventSpecialDetails = '#event-special-details'
+const eventReferral = getElementById('event-referral'),
+eventExperienceContainer = getElementByClassName('event-container experience'),
+eventExperienceValidation = getElementById('event-experience-validation'),
+eventExperienceYes = getElementById('event-experience-yes'),
+eventExperienceNo = getElementById('event-experience-no'),
+eventExperienceDetails = getElementById('event-experience-details'),
+eventDietContainer = getElementByClassName('event-container diet'),
+eventDietValidation = getElementById('event-diet-validation'),
+eventDietYes = getElementById('event-diet-yes'),
+eventDietNo = getElementById('event-diet-no'),
+eventDietDetails = getElementById('event-diet-details'),
+eventSpecialContainer = getElementByClassName('event-container special'),
+eventSpecialValidation = getElementById('event-special-validation'),
+eventSpecialYes = getElementById('event-special-yes'),
+eventSpecialNo = getElementById('event-special-no'),
+eventSpecialDetails = getElementById('event-special-details')
 
 // Affiliate Code
-const eventAffiliateContainer = '.event-container.affiliate',
-eventAffiliateCodeContainer = '.event-container.affiliate-code',
-eventAffiliateValidation = '#event-affiliate-validation',
-eventAffiliateYes = '#event-affiliate-yes',
-eventAffiliateNo = '#event-affiliate-no',
-eventAffiliateCode = '#event-affiliate-code',
-eventAffiliatePass = '#event-affiliate-pass',
-eventAffiliateFail = '#event-affiliate-fail'
+const eventAffiliateContainer = getElementByClassName('event-container affiliate'),
+eventAffiliateCodeContainer = getElementByClassName('event-container affiliate-code'),
+eventAffiliateValidation = getElementById('event-affiliate-validation'),
+eventAffiliateYes = getElementById('event-affiliate-yes'),
+eventAffiliateNo = getElementById('event-affiliate-no'),
+eventAffiliateCode = getElementById('event-affiliate-code'),
+eventAffiliatePass = getElementById('event-affiliate-pass'),
+eventAffiliateFail = getElementById('event-affiliate-fail')
 const urlDiscountCode = urlString && urlString.affiliate
 	? urlString.affiliate
 	: null
 
 // Event Status: Couples, Singles, Both
-const eventStatus = '#event-status',
-eventPartnerContainer = '.event-container.partner',
-eventPartnerFirstName = '#event-partner-firstname',
-eventPartnerLastName = '#event-partner-lastname',
-eventPartnerGenderValidation = '#event-partner-gender-validation',
-eventPartnerFemale = '#event-partner-gender-female',
-eventPartnerMale = '#event-partner-gender-male',
-eventPartnerOther = '#event-partner-gender-other',
-eventPayValidation = '#event-pay-validation',
-eventPayBoth = '#event-pay-both',
-eventPayMe = '#event-pay-me'
+const eventStatus = getElementById('event-status'),
+eventPartnerContainer = getElementByClassName('event-container partner'),
+eventPartnerFirstName = getElementById('event-partner-firstname'),
+eventPartnerLastName = getElementById('event-partner-lastname'),
+eventPartnerGenderValidation = getElementById('event-partner-gender-validation'),
+eventPartnerFemale = getElementById('event-partner-gender-female'),
+eventPartnerMale = getElementById('event-partner-gender-male'),
+eventPartnerOther = getElementById('event-partner-gender-other'),
+eventPayValidation = getElementById('event-pay-validation'),
+eventPayBoth = getElementById('event-pay-both'),
+eventPayMe = getElementById('event-pay-me')
 
 // Registration options
-const eventSelect = '#event-select',
-eventOptions = getText('#event-options').split(' | '),
-eventNotes = getText('#event-notes').includes('|')
-	? getText('#event-notes').split('|')
-	: getText('#event-notes').split(',')
+const eventOption = getElementById('event-option'),
+eventOptions = getText(getElementById('event-options')).split(' | '),
+eventNotes = getText(getElementById('event-notes')).includes('|')
+	? getText(getElementById('event-notes')).split('|')
+	: getText(getElementById('event-notes')).split(',')
 
 // Pricing
-const eventPrices = getText('#event-prices').split(' | '),
-eventDepositContainer = '.event-container.deposit',
-eventDepositValidation = '#event-deposit-validation',
-eventDepositText = '#event-deposit-text',
-eventDepositFull = '#event-deposit-full',
-eventDepositDeposit = '#event-deposit-deposit',
-eventAmountContainer = '.event-container.amount',
-eventAmountDisplay = '#event-amount-display',
-eventAmountShow = '#event-amount-show'
+const eventPrices = getText(getElementById('event-prices')).split(' | '),
+eventDepositContainer = getElementByClassName('event-container deposit'),
+eventDepositValidation = getElementById('event-deposit-validation'),
+eventDepositText = getElementById('event-deposit-text'),
+eventDepositFull = getElementById('event-deposit-full'),
+eventDepositDeposit = getElementById('event-deposit-deposit'),
+eventAmountContainer = getElementByClassName('event-container amount'),
+eventAmountDisplay = getElementById('event-amount-display'),
+eventAmountShow = getElementById('event-amount-show')
 
 // Terms
-const eventTermsValidation = '#event-terms-validation',
-eventTerms = '#event-terms'
+const eventTermsValidation = getElementById('event-terms-validation'),
+eventTerms = getElementById('event-terms')
 
 // Stripe billing variables
-const billingFirstName = '#billing-firstname',
-billingLastName = '#billing-lastname',
-billingStreet = '#billing-street',
-billingCity = '#billing-city',
-billingState = '#billing-state',
-billingPostal = '#billing-postal',
-billingCountry = '#country',
-billingCard = '#billing-card',
-billingCardError = '#billing-card-error'
+const billingFirstName = getElementById('billing-firstname'),
+billingLastName = getElementById('billing-lastname'),
+billingStreet = getElementById('billing-street'),
+billingCity = getElementById('billing-city'),
+billingState = getElementById('billing-state'),
+billingPostal = getElementById('billing-postal'),
+billingCountry = getElementById('country'),
+billingCard = getElementById('billing-card'),
+billingCardError = getElementById('billing-card-error')
 
 // Pay now
-const paymentButton = '#payment-button'
+const paymentButton = getElementById('payment-button')
 
 
 const paymentButtonContinue = () => {
@@ -138,10 +138,10 @@ const paymentQty = () => participants() === 2 && isChecked(eventPayBoth) ? 2 : 1
 const depositAmount = () => eventDepositAmount ? parseFloat(eventDepositAmount * paymentQty()).toFixed(2) : 0
 
 // Final amount
-const finalAmount = () => isChecked(eventDepositDeposit) && new Date() < new Date(eventDepositDate) ? depositAmount() : getValue(eventSelect)
+const finalAmount = () => isChecked(eventDepositDeposit) && new Date() < new Date(eventDepositDate) ? depositAmount() : getValue(eventOption)
 
 // Get lodging code
-const getLodging = () => eventOptions[getIndex(eventSelect) - 1]
+const getLodging = () => eventOptions[getIndex(eventOption) - 1]
 
 // Create name of party
 const partyName = () => {
@@ -217,9 +217,9 @@ const setEventPrices = () => {
 	emptyValue(eventAmountDisplay)
 	hideElement(eventAmountContainer)
 	// Reset event options
-	emptySelect(eventSelect)
+	emptySelect(eventOption)
 	if (eventOptions.length > 0) {
-		appendSelect(eventSelect, '<option value=\'\'>Event option...</option>')
+		appendSelect(eventOption, '<option value=\'\'>Event option...</option>')
 	}
 	const people = paymentQty() === 2
 			? 'for both'
@@ -238,7 +238,7 @@ const setEventPrices = () => {
 			? eventNotes[i]
 			: ''
 		const eventSelectText = eventOptions[i] + ' ($' + eventSelectPrice + paymentClarification + affiliateDiscountText + ')' + eventNote
-		appendSelect(eventSelect, '<option value=\'' + eventSelectPrice + '\'>' + eventSelectText + '</option>')
+		appendSelect(eventOption, '<option value=\'' + eventSelectPrice + '\'>' + eventSelectText + '</option>')
 	}
 	// Update `Pay deposit only` field with actual deposit amount: `Pay deposit only ($...)`
 	setText(eventDepositText, 'Pay deposit only ($' + parseInt(depositAmount(), 10) + paymentClarification + ')')
@@ -281,7 +281,7 @@ const formValidation = () => {
 	// Event Options validation
 	const eventOptionValidation = () => {
 		return (
-			getValue(eventSelect) && (
+			getValue(eventOption) && (
 				(
 					isVisible(eventDepositContainer)
 					&& (isChecked(eventDepositFull) || isChecked(eventDepositDeposit))
@@ -431,7 +431,7 @@ const resetForm = () => {
 	repopulateForm(page())
 
 	// Set event code for form submission
-	setValue('#eventcode', eventCode)
+	setValue(getElementById('eventcode'), eventCode)
 	
 	// Determines whether event is for both couples & singles, couples-only, or singles-only
 	emptySelect(eventStatus)

@@ -2,13 +2,13 @@
 onSubmit(eventForm, () => null)
 
 // Clear form
-onClick('#form-clear', () => {
+onClick(getElementById('form-clear'), () => {
 	clearForm(page())
 	resetForm()
 })
 
 // Load form
-onClick('#form-load', () => repopulateForm(page()))
+onClick(getElementById('form-load'), () => repopulateForm(page()))
 
 // Invite-only
 onClick(eventInviteButton, () => e => {
@@ -82,10 +82,10 @@ onChange(eventPayBoth, () => setEventPrices())
 onChange(eventPayMe, () => setEventPrices())
 
 // All reg fields
-for (elem of [eventFirstName, eventLastName, eventEmail, eventMobile, eventBirthdate, eventFemale, eventMale, eventOther, eventReferral, eventExperienceYes, eventExperienceNo, eventExperienceDetails, eventDietYes, eventDietNo, eventDietDetails, eventSpecialYes, eventSpecialNo, eventSpecialDetails, eventStatus, eventPartnerFirstName, eventPartnerLastName, eventPartnerFemale, eventPartnerMale, eventPartnerOther, eventPayBoth, eventPayMe, eventSelect, eventTerms, billingFirstName, billingLastName, billingStreet, billingCity, billingState, billingPostal, billingCountry]) {
+for (elem of [eventFirstName, eventLastName, eventEmail, eventMobile, eventBirthdate, eventFemale, eventMale, eventOther, eventReferral, eventExperienceYes, eventExperienceNo, eventExperienceDetails, eventDietYes, eventDietNo, eventDietDetails, eventSpecialYes, eventSpecialNo, eventSpecialDetails, eventStatus, eventPartnerFirstName, eventPartnerLastName, eventPartnerFemale, eventPartnerMale, eventPartnerOther, eventPayBoth, eventPayMe, eventOption, eventTerms, billingFirstName, billingLastName, billingStreet, billingCity, billingState, billingPostal, billingCountry]) {
 	onChange(elem, e => {
 		// All non-discount code input fields: make proper case
-		const target = '#' + e.target.id
+		const target = getElementById(e.target.id)
 		if ([eventFirstName, eventLastName, eventPartnerFirstName, eventPartnerLastName, billingFirstName, billingLastName, billingStreet, billingCity, billingPostal].includes(target)) {
 			// Proper case
 			let value = properCase(getValue(target))
@@ -103,7 +103,7 @@ for (elem of [eventFirstName, eventLastName, eventEmail, eventMobile, eventBirth
 }
 
 // To display grand total (optional feature)
-[eventSelect, eventDepositFull, eventDepositDeposit].forEach(elem => onChange(elem, () => {
+[eventOption, eventDepositFull, eventDepositDeposit].forEach(elem => onChange(elem, () => {
 	setText(eventAmountDisplay, 'Total: $' + finalAmount())
 	if (getText(eventAmountShow) === 'Yes') showAndScrollTo(eventAmountContainer)
 }))
