@@ -77,7 +77,10 @@ const emptySelect = elem => {
 		elem.options[i] = null
 	}
 }
-const appendSelect = (elem, option) => elem.appendChild(option)
+const appendSelect = (elem, option) => {
+	console.log(elem)
+	elem.appendChild(option)
+}
 const getIndex = elem => elem.selectedIndex
 // HTML
 const setHtml = (elem, val) => elem.innerHTML = val
