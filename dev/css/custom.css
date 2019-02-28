@@ -47,6 +47,7 @@ select.parsley-error {
 }
 .white-placeholder::placeholder {
 	color: #fff;
+	background-color: rgba(255, 255, 255, 0.2);
 }
 
 /* CUSTOM RADIO BUTTONS */
