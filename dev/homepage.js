@@ -60,6 +60,10 @@ const fadeInTab = tabIndex => {
 		// ...then make the email signup box title white instead of charcoal.
 		getElementByClassName('title small').style.color = '#fff'
 	}
+	else {
+		// ...otherwise, put it back to its original color.
+		getElementByClassName('title small').style.color = '#333'
+	}
 	// Make tab and clickable elements visible
 	ALL_TABS[tabIndex].classList.add('display')
 	const heroButton = getElementByClassName('hero-button', tabIndex)
