@@ -46,7 +46,7 @@ select.parsley-error {
 	color: #555;
 }
 .input.frosted-glass {
-	backdrop-filter: blur(5px);
+	backdrop-filter: blur(20px);
 }
 
 /* CUSTOM RADIO BUTTONS */
