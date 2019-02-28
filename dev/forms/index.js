@@ -31,7 +31,7 @@ for(let i in countries) {
 	const country = countries[i] === 'United States'
 		? '<option value="' + countries[i].value + '" selected>' + countries[i].label + '</option>'
 		: '<option value="' + countries[i].value + '">' + countries[i].label + '</option>'
-	appendSelect('country', country)
+	appendSelect(getElementById('country'), country)
 }
 
 // Clear reg form
@@ -39,8 +39,8 @@ const clearForm = formType => {
 	if (localStorage.getItem('EcstaticLiving:' + formType)) showElement(getElementById('form-load'))
 	else hideElement(getElementById('form-load'))
 	hideElement(getElementById('form-clear'))
-	hideElement('.w-form-done')
-	hideElement('.w-form-fail')
+	hideElement(getElementByClassName('w-form-done', 0))
+	hideElement(getElementByClassName('w-form-fail', 0))
 	if (formType === 'Event') {
 		formReset(eventForm)
 	}
