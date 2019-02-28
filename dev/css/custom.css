@@ -45,6 +45,9 @@ select.parsley-error {
 .input::placeholder {
 	color: #888;
 }
+.white-placeholder::placeholder {
+	color: #fff;
+}
 
 /* CUSTOM RADIO BUTTONS */
 @media only screen and (max-device-width: 984px) {

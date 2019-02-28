@@ -60,11 +60,19 @@ const fadeInTab = tabIndex => {
 		// ...then make the email signup box title white instead of charcoal.
 		getElementByClassName('title small').style.color = '#fff'
 		getElementByClassName('button transparent').style.color = '#fff'
+		for (let i = 0; i < getElementsByClassName('input').length; i++) {
+			getElementsByClassName('input')[i].classList.add('white-placeholder')
+		}
+		getElementByClassName('textarea', 0).classList.add('white-placeholder')
 	}
 	else {
 		// ...otherwise, put it back to its original color.
 		getElementByClassName('title small').style.color = '#333'
 		getElementByClassName('button transparent').style.color = '#333'
+		for (let i = 0; i < getElementsByClassName('input').length; i++) {
+			getElementsByClassName('input')[i].classList.remove('white-placeholder')
+		}
+		getElementByClassName('textarea', 0).classList.remove('white-placeholder')
 	}
 	// Make tab and clickable elements visible
 	ALL_TABS[tabIndex].classList.add('display')
