@@ -45,7 +45,7 @@ select.parsley-error {
 .input::placeholder {
 	color: #555;
 }
-.input.frosted-glass {
+.hero-email-box {
 	backdrop-filter: blur(20px);
 }
 
