@@ -34,7 +34,7 @@ for(let i in countries) {
 	option.selected = countries[i] === 'United States'
 		? true
 		: false
-	appendSelect(getElementById('country'), country)
+	appendSelect(getElementById('country'), option)
 }
 
 // Clear reg form
