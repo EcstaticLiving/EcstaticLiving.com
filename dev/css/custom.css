@@ -45,7 +45,7 @@ select.parsley-error {
 .input::placeholder {
 	color: #555;
 }
-.input.transparent {
+.input.transparent::before {
 	filter: blur(5px);
 }
 
