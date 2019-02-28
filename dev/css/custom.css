@@ -39,10 +39,14 @@ select.parsley-error {
 .form-select:focus {
 	outline: none !important;
 }
-.form-input::placeholder,
-.form-textarea::placeholder,
-.email-input-field::placeholder {
+
+/* FORM COLORS */
+.textarea::placeholder,
+.input::placeholder {
 	color: #555;
+}
+.input.transparent {
+	filter: blur(5px);
 }
 
 /* CUSTOM RADIO BUTTONS */
