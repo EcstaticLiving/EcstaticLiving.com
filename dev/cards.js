@@ -24,19 +24,21 @@ for (let i = 0; i < calendarCards.length; i++) {
 		calendarCards[i].addEventListener('click', () => {
 			// Add tap response...
 			cardElementsHoverTap.forEach(element => {
-				// ...if card is already active, deactivate it...
-				if (element[i].classList.contains('hover-tap')) {
-					element[i].classList.remove('hover-tap')
-				}
-				// ...otherwise, activate it.
-				else {
-					element[i].classList.add('hover-tap')
-				}
+        if (element[i]) {
+          // ...if card is already active, deactivate it...
+          if (element[i].classList.contains('hover-tap')) {
+            element[i].classList.remove('hover-tap')
+          }
+          // ...otherwise, activate it.
+          else {
+            element[i].classList.add('hover-tap')
+          }
+        }
 			})
 			// ...and remove active states from all other cards.
 			for (let j = 0; j < calendarCards.length; j++) {
 				if (i !== j) {
-					cardElementsHoverTap.forEach(element => element[j].classList.remove('hover-tap'))
+					cardElementsHoverTap.forEach(element => element[j] ? element[j].classList.remove('hover-tap') : null)
 				}
 			}
 		})
