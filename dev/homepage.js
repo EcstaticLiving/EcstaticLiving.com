@@ -93,7 +93,7 @@ const fadeInTab = tabIndex => {
 				}
 				getElementByClassName('textarea', 0).classList.remove('white-placeholder')
 			}
-	}, 1200)
+	}, 600)
 }
 
 const resetTab = tabIndex => {
