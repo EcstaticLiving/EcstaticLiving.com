@@ -53,6 +53,14 @@ const setBoxSections = () => {
 
 // Fade in tab
 const fadeInTab = tabIndex => {
+	// Make tab and clickable elements visible
+	ALL_TABS[tabIndex].classList.add('display')
+	const heroButton = getElementByClassName('hero-button', tabIndex)
+	const heroArrows = getElementByClassName('hero-arrows', tabIndex)
+	heroButton.classList.add('display')
+	heroArrows.classList.add('display')
+	// Fade in image
+	setTimeout(() => ALL_TABS[tabIndex].classList.add('fade'), 100)
 	// If background image is so complex that email signup form needs a red background instead of a transparent background...
 	if (!getElementByClassName('background-red', tabIndex).classList.contains('w-condition-invisible')) {
 		// ...then make the email signup box title white instead of charcoal.
@@ -72,14 +80,6 @@ const fadeInTab = tabIndex => {
 		}
 		getElementByClassName('textarea', 0).classList.remove('white-placeholder')
 	}
-	// Make tab and clickable elements visible
-	ALL_TABS[tabIndex].classList.add('display')
-	const heroButton = getElementByClassName('hero-button', tabIndex)
-	const heroArrows = getElementByClassName('hero-arrows', tabIndex)
-	heroButton.classList.add('display')
-	heroArrows.classList.add('display')
-	// Fade in image
-	setTimeout(() => ALL_TABS[tabIndex].classList.add('fade'), 100)
 	// Slide in Hero Text
 	setTimeout(() => {
 		for (let i = 0; i < 3; i++) {
