@@ -11,6 +11,9 @@ body,
 h3, .w-richtext.text strong {
 	font-weight: 500;
 }
+.w-richtext.text {
+	font-weight: 300;
+}
 
 /* FORM VALIDATION */
 input.parsley-error,
