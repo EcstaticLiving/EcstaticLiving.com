@@ -9,7 +9,9 @@ const changeEmailContainerBackground = elem => {
     for (let i = 0; i < getElementsByClassName('input').length; i++) {
       getElementsByClassName('input')[i].classList.add('white-placeholder')
     }
-    getElementByClassName('textarea', 0).classList.add('white-placeholder')
+    if (getElementByClassName('textarea', 0)) {
+      getElementByClassName('textarea', 0).classList.add('white-placeholder')
+    }
   }
   else {
     // ...otherwise, put it back to its original color.
@@ -18,7 +20,9 @@ const changeEmailContainerBackground = elem => {
     for (let i = 0; i < getElementsByClassName('input').length; i++) {
       getElementsByClassName('input')[i].classList.remove('white-placeholder')
     }
-    getElementByClassName('textarea', 0).classList.remove('white-placeholder')
+    if (getElementByClassName('textarea', 0)) {
+      getElementByClassName('textarea', 0).classList.remove('white-placeholder')
+    }
   }
 }
 	
