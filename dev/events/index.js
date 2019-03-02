@@ -94,9 +94,5 @@ const repopulateForm = formType => {
 
 getElementByClassName('text read-more', 0).addEventListener('mouseover', () => {
 	hideElement(getElementByClassName('text summary'))
-	showElement(getElementByClassName('text description'))
-})
-getElementByClassName('text read-more', 0).addEventListener('mouseout', () => {
-	showElement(getElementByClassName('text summary'))
-	hideElement(getElementByClassName('text description'))
+	getElementByClassName('text description').classList.add('fade')
 })
