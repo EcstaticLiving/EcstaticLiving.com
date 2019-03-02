@@ -23,8 +23,10 @@ if (page() === 'Event') {
 	changeEmailContainerBackground(getElementByClassName('email-container-background', 1))
 	// Remove display classes on init for hero tabs
 	resetTab(0)
+	resetTab(1)
 	// Fade in first slide
 	fadeInTab(0)
+	fadeInTab(1)
 }
 
 // Prevent accidental submission of form through 'enter' key

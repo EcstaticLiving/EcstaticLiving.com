@@ -53,46 +53,66 @@ const setBoxSections = () => {
 
 // Fade in tab
 const fadeInTab = tabIndex => {
-	// Make tab and clickable elements visible
-	ALL_TABS[tabIndex].classList.add('display')
 	const heroButton = getElementByClassName('hero-button', tabIndex)
-	const heroArrows = getElementByClassName('hero-arrows', tabIndex)
-	heroButton.classList.add('display')
-	heroArrows.classList.add('display')
-	// Fade in image
-	setTimeout(() => ALL_TABS[tabIndex].classList.add('fade'), 100)
-	// Slide in Hero Text
-	setTimeout(() => {
-		for (let i = 0; i < 3; i++) {
-			const title = getElementByClassName('hero-title ' + NUMBER_CLASS[i], tabIndex)
-			title.classList.add('fade-move')
-		}
-	}, 500)
-	// Slide in Hero Button
-	setTimeout(() => heroButton.classList.add('fade-move'), 800)
-	// Slide in Hero Arrows
-	setTimeout(() => heroArrows.classList.add('fade-move'), 1100)
+	if (heroButton) {
+		// Make tab and clickable elements visible
+		ALL_TABS[tabIndex].classList.add('display')
+		const heroArrows = getElementByClassName('hero-arrows', tabIndex)
+		heroButton.classList.add('display')
+		heroArrows.classList.add('display')
+		// Fade in image
+		setTimeout(() => ALL_TABS[tabIndex].classList.add('fade'), 100)
+		// Slide in Hero Text
+		setTimeout(() => {
+			for (let i = 0; i < 3; i++) {
+				const title = getElementByClassName('hero-title ' + NUMBER_CLASS[i], tabIndex)
+				title.classList.add('fade-move')
+			}
+		}, 500)
+		// Slide in Hero Button
+		setTimeout(() => heroButton.classList.add('fade-move'), 800)
+		// Slide in Hero Arrows
+		setTimeout(() => heroArrows.classList.add('fade-move'), 1100)
+	}
+	const eventTitle = getElementByClassName('event-title', tabIndex)
+	if (eventTitle) {
+		const eventSubtitle = getElementByClassName('event-subtitle', tabIndex)
+		const eventDetails = getElementByClassName('event-details', tabIndex)
+		eventTitle.classList.add('display')
+		eventSubtitle.classList.add('display')
+		eventDetails.classList.add('display')
+	}
 	// Email signup form
 	setTimeout(() => changeEmailContainerBackground(getElementByClassName('email-container-background', tabIndex)), 600)
 }
 
 const resetTab = tabIndex => {
 	// Hide Hero Text
-	for (let i = 0; i < 3; i++) {
-		const title = getElementByClassName('hero-title ' + NUMBER_CLASS[i], tabIndex)
-		title.classList.remove('fade-move')
-	}
-	// Hide Hero Button
 	const heroButton = getElementByClassName('hero-button', tabIndex)
-	heroButton.classList.remove('fade-move')
-	heroButton.classList.remove('display')
-	// Hide Hero Arrows
-	const heroArrows = getElementByClassName('hero-arrows', tabIndex)
-	heroArrows.classList.remove('fade-move')
-	heroArrows.classList.remove('display')
-	// Hide Tab
-	ALL_TABS[tabIndex].classList.remove('fade')
-	ALL_TABS[tabIndex].classList.remove('display')
+	if (heroButton) {
+		for (let i = 0; i < 3; i++) {
+			const heroTitle = getElementByClassName('hero-title ' + NUMBER_CLASS[i], tabIndex)
+			heroTitle.classList.remove('fade-move')
+		}
+		// Hide Hero Button
+		heroButton.classList.remove('fade-move')
+		heroButton.classList.remove('display')
+		// Hide Hero Arrows
+		const heroArrows = getElementByClassName('hero-arrows', tabIndex)
+		heroArrows.classList.remove('fade-move')
+		heroArrows.classList.remove('display')
+		// Hide Tab
+		ALL_TABS[tabIndex].classList.remove('fade')
+		ALL_TABS[tabIndex].classList.remove('display')
+	}
+	const eventTitle = getElementByClassName('event-title', tabIndex)
+	if (eventTitle) {
+		const eventSubtitle = getElementByClassName('event-subtitle', tabIndex)
+		const eventDetails = getElementByClassName('event-details', tabIndex)
+		eventTitle.classList.remove('fade-move')
+		eventSubtitle.classList.remove('fade-move')
+		eventDetails.classList.remove('fade-move')
+	}
 }
 
 const transitionTabs = ({ currentTab, nextTab }) => {
