@@ -53,6 +53,7 @@ const setBoxSections = () => {
 
 // Fade in tab
 const fadeInTab = tabIndex => {
+	// For hero on homepage
 	const heroButton = getElementByClassName('hero-button', tabIndex)
 	if (heroButton) {
 		// Make tab and clickable elements visible
@@ -74,6 +75,7 @@ const fadeInTab = tabIndex => {
 		// Slide in Hero Arrows
 		setTimeout(() => heroArrows.classList.add('fade-move'), 1100)
 	}
+	// For events
 	const eventTitle = getElementByClassName('event-title', tabIndex)
 	if (eventTitle) {
 		const eventSubtitle = getElementByClassName('event-subtitle', tabIndex)
