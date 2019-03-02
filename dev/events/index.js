@@ -48,59 +48,7 @@ if (getElementById('country')) {
 	}
 }
 
-// Clear reg form
-const clearForm = formType => {
-	if (localStorage.getItem('EcstaticLiving:' + formType)) showElement(getElementById('form-load'))
-	else hideElement(getElementById('form-load'))
-	hideElement(getElementById('form-clear'))
-	hideElement(getElementByClassName('w-form-done', 0))
-	hideElement(getElementByClassName('w-form-fail', 0))
-	if (formType === 'Event') {
-		formReset(eventForm)
-	}
-	else if (formType === 'Update') {
-		formReset(customForm)
-	}
-}
-
-// Save reg form
-const saveForm = formType => {
-	let values = {}
-	const elements = [...getElementsByTag('input'), ...getElementsByTag('textarea'), ...getElementsByTag('select')]
-	elements.forEach(element => {
-		const name = getAttribute(element, 'name')
-		if (
-			isChecked(element)
-			|| (name && name !== '#event-invitecode-code' && name !== '#event-affiliate-code' && name !== '#event-parnter-firstname' && name !== '#event-parnter-lastname')
-		) {
-			values[name] = getValue(element)
-		}
-	})
-	localStorage.setItem('EcstaticLiving:' + formType, JSON.stringify(values))
-}
-
-// Repopulate saved reg form
-const repopulateForm = formType => {
-	if (localStorage.getItem('EcstaticLiving:' + formType)) {
-		hideElement(getElementById('form-load'))
-		showElement(getElementById('form-clear'))
-		let values = JSON.parse(localStorage.getItem('EcstaticLiving:' + formType))
-		try {
-			for (let item in values) {
-				if (isRadio('*[name=' + item + ']')) {
-					isChecked('input[name=' + item + '][value="' + values[item] + '"]')
-				}
-				else {
-					setValue('*[name=' + item + ']', values[item])
-				}	
-			}
-		}
-		catch (err) {
-			localStorage.removeItem('EcstaticLiving:' + formType)
-		}
-	}
-}
-
+// Event summary “Read more...” expansion
 getElementByClassName('text read-more', 0).addEventListener('mouseover', () => {
 	hideElement(getElementByClassName('text read-more'))
 	hideElement(getElementByClassName('text summary'))
