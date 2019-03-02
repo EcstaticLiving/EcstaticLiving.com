@@ -18,6 +18,8 @@ const page = () => {
 const isFormPage = () => page() === 'Event' || page() === 'Update'
 
 if (page() === 'Event') {
+	// Email signup form
+	changeEmailContainerBackground(getElementByClassName('email-container-background', 0))
 	// Remove display classes on init for hero tabs
 	resetTab(0)
 	// Fade in first slide
