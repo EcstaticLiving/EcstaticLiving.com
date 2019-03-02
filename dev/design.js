@@ -73,27 +73,7 @@ const fadeInTab = tabIndex => {
 	// Slide in Hero Arrows
 	setTimeout(() => heroArrows.classList.add('fade-move'), 1100)
 	// Email signup form
-	setTimeout(() => {
-			// If background image is so complex that email signup form needs a red background instead of a transparent background...
-			if (!getElementByClassName('email-container-background', tabIndex).classList.contains('w-condition-invisible')) {
-				// ...then make the email signup box title white instead of charcoal.
-				getElementByClassName('title small').style.color = '#fff'
-				getElementByClassName('button transparent').style.color = '#fff'
-				for (let i = 0; i < getElementsByClassName('input').length; i++) {
-					getElementsByClassName('input')[i].classList.add('white-placeholder')
-				}
-				getElementByClassName('textarea', 0).classList.add('white-placeholder')
-			}
-			else {
-				// ...otherwise, put it back to its original color.
-				getElementByClassName('title small').style.color = '#333'
-				getElementByClassName('button transparent').style.color = '#333'
-				for (let i = 0; i < getElementsByClassName('input').length; i++) {
-					getElementsByClassName('input')[i].classList.remove('white-placeholder')
-				}
-				getElementByClassName('textarea', 0).classList.remove('white-placeholder')
-			}
-	}, 600)
+	setTimeout(() => changeEmailContainerBackground(getElementByClassName('email-container-background', tabIndex)), 600)
 }
 
 const resetTab = tabIndex => {
@@ -168,15 +148,15 @@ const transitionReviews = ({ currentReview, nextReview }) => {
 }
 
 
+windowEventListener(['load', 'orientationchange', 'resize'], () => {
+	// Recalculate hero height on orientation change
+	setHeroHeight()
+	// As well as box section and container dimensions
+	setBoxSections()
+})
+
 // Begin
 if (window.location.pathname === '/') {
-
-	windowEventListener(['load', 'orientationchange', 'resize'], () => {
-		// Recalculate hero height on orientation change
-		setHeroHeight()
-		// As well as box section and container dimensions
-		setBoxSections()
-	})
  
 	// Add event listener to cycle through all hero messages on arrow click
 	const leftHeroArrows = getElementsByClassName('hero-arrow left')

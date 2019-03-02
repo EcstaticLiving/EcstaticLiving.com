@@ -17,6 +17,13 @@ const page = () => {
 
 const isFormPage = () => page() === 'Event' || page() === 'Update'
 
+if (page() === 'Event') {
+	// Remove display classes on init for hero tabs
+	resetTab(0)
+	// Fade in first slide
+	fadeInTab(0)
+}
+
 // Prevent accidental submission of form through 'enter' key
 onKeyPress(document, e => {
 	if (isInput(e.target) && e.which === 13) {
