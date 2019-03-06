@@ -40,13 +40,10 @@ const resetEventTab = tabIndex => {
 if (page() === 'Event') {
 	// Email signup forms
 	changeEmailContainerBackground(getElementByClassName('email-container-background', 0))
-	changeEmailContainerBackground(getElementByClassName('email-container-background', 1))
 	// Remove display classes on init for hero tabs
 	resetEventTab(0)
-	resetEventTab(1)
 	// Fade in first slide
 	fadeInEventTab(0)
-	fadeInEventTab(1)
 }
 
 // Prevent accidental submission of form through 'enter' key
