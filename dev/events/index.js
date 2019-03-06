@@ -17,16 +17,36 @@ const page = () => {
 
 const isFormPage = () => page() === 'Event' || page() === 'Update'
 
+const fadeInEventTab = tabIndex => {
+		const eventTitle = getElementByClassName('event-title', tabIndex)
+		const eventSubtitle = getElementByClassName('event-subtitle', tabIndex)
+		const eventDetails = getElementByClassName('event-details', tabIndex)
+		eventTitle.classList.add('display')
+		eventSubtitle.classList.add('display')
+		eventDetails.classList.add('display')
+		// Email signup form
+		setTimeout(() => changeEmailContainerBackground(getElementByClassName('email-container-background', tabIndex)), 600)
+}
+
+const resetEventTab = tabIndex => {
+	const eventTitle = getElementByClassName('event-title', tabIndex)
+	const eventSubtitle = getElementByClassName('event-subtitle', tabIndex)
+	const eventDetails = getElementByClassName('event-details', tabIndex)
+	eventTitle.classList.remove('fade-move')
+	eventSubtitle.classList.remove('fade-move')
+	eventDetails.classList.remove('fade-move')
+}
+
 if (page() === 'Event') {
 	// Email signup forms
 	changeEmailContainerBackground(getElementByClassName('email-container-background', 0))
 	changeEmailContainerBackground(getElementByClassName('email-container-background', 1))
 	// Remove display classes on init for hero tabs
-	resetTab(0)
-	resetTab(1)
+	resetEventTab(0)
+	resetEventTab(1)
 	// Fade in first slide
-	fadeInTab(0)
-	fadeInTab(1)
+	fadeInEventTab(0)
+	fadeInEventTab(1)
 }
 
 // Prevent accidental submission of form through 'enter' key
