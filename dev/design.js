@@ -52,78 +52,57 @@ const setBoxSections = () => {
 }
 
 // Fade in tab
-const fadeInTab = tabIndex => {
+const fadeInHeroTab = tabIndex => {
 	// For hero on homepage
 	const heroButton = getElementByClassName('hero-button', tabIndex)
-	if (heroButton) {
-		// Make tab and clickable elements visible
-		ALL_TABS[tabIndex].classList.add('display')
-		const heroArrows = getElementByClassName('hero-arrows', tabIndex)
-		heroButton.classList.add('display')
-		heroArrows.classList.add('display')
-		// Fade in image
-		setTimeout(() => ALL_TABS[tabIndex].classList.add('fade'), 100)
-		// Slide in Hero Text
-		setTimeout(() => {
-			for (let i = 0; i < 3; i++) {
-				const title = getElementByClassName('hero-title ' + NUMBER_CLASS[i], tabIndex)
-				title.classList.add('fade-move')
-			}
-		}, 500)
-		// Slide in Hero Button
-		setTimeout(() => heroButton.classList.add('fade-move'), 800)
-		// Slide in Hero Arrows
-		setTimeout(() => heroArrows.classList.add('fade-move'), 1100)
-	}
-	// For events
-	const eventTitle = getElementByClassName('event-title', tabIndex)
-	if (eventTitle) {
-		const eventSubtitle = getElementByClassName('event-subtitle', tabIndex)
-		const eventDetails = getElementByClassName('event-details', tabIndex)
-		eventTitle.classList.add('display')
-		eventSubtitle.classList.add('display')
-		eventDetails.classList.add('display')
-	}
+	// Make tab and clickable elements visible
+	ALL_TABS[tabIndex].classList.add('display')
+	const heroArrows = getElementByClassName('hero-arrows', tabIndex)
+	heroButton.classList.add('display')
+	heroArrows.classList.add('display')
+	// Fade in image
+	setTimeout(() => ALL_TABS[tabIndex].classList.add('fade'), 100)
+	// Slide in Hero Text
+	setTimeout(() => {
+		for (let i = 0; i < 3; i++) {
+			const title = getElementByClassName('hero-title ' + NUMBER_CLASS[i], tabIndex)
+			title.classList.add('fade-move')
+		}
+	}, 500)
+	// Slide in Hero Button
+	setTimeout(() => heroButton.classList.add('fade-move'), 800)
+	// Slide in Hero Arrows
+	setTimeout(() => heroArrows.classList.add('fade-move'), 1100)
 	// Email signup form
 	setTimeout(() => changeEmailContainerBackground(getElementByClassName('email-container-background', tabIndex)), 600)
 }
 
-const resetTab = tabIndex => {
+const resetHeroTab = tabIndex => {
 	// Hide Hero Text
 	const heroButton = getElementByClassName('hero-button', tabIndex)
-	if (heroButton) {
-		for (let i = 0; i < 3; i++) {
-			const heroTitle = getElementByClassName('hero-title ' + NUMBER_CLASS[i], tabIndex)
-			heroTitle.classList.remove('fade-move')
-		}
-		// Hide Hero Button
-		heroButton.classList.remove('fade-move')
-		heroButton.classList.remove('display')
-		// Hide Hero Arrows
-		const heroArrows = getElementByClassName('hero-arrows', tabIndex)
-		heroArrows.classList.remove('fade-move')
-		heroArrows.classList.remove('display')
-		// Hide Tab
-		ALL_TABS[tabIndex].classList.remove('fade')
-		ALL_TABS[tabIndex].classList.remove('display')
+	for (let i = 0; i < 3; i++) {
+		const heroTitle = getElementByClassName('hero-title ' + NUMBER_CLASS[i], tabIndex)
+		heroTitle.classList.remove('fade-move')
 	}
-	const eventTitle = getElementByClassName('event-title', tabIndex)
-	if (eventTitle) {
-		const eventSubtitle = getElementByClassName('event-subtitle', tabIndex)
-		const eventDetails = getElementByClassName('event-details', tabIndex)
-		eventTitle.classList.remove('fade-move')
-		eventSubtitle.classList.remove('fade-move')
-		eventDetails.classList.remove('fade-move')
-	}
+	// Hide Hero Button
+	heroButton.classList.remove('fade-move')
+	heroButton.classList.remove('display')
+	// Hide Hero Arrows
+	const heroArrows = getElementByClassName('hero-arrows', tabIndex)
+	heroArrows.classList.remove('fade-move')
+	heroArrows.classList.remove('display')
+	// Hide Tab
+	ALL_TABS[tabIndex].classList.remove('fade')
+	ALL_TABS[tabIndex].classList.remove('display')
 }
 
 const transitionTabs = ({ currentTab, nextTab }) => {
 	// Fade out current tab
 	ALL_TABS[currentTab].classList.remove('fade')
 	// Fade in new slide
-	fadeInTab(nextTab)
+	fadeInHeroTab(nextTab)
 	// Reset current slide
-	setTimeout(() => resetTab(currentTab), 500)
+	setTimeout(() => resetHeroTab(currentTab), 500)
 }
 
 const fadeInReview = reviewIndex => {
@@ -221,7 +200,7 @@ if (window.location.pathname === '/') {
 	}
 
 	// Remove display classes on init for hero tabs
-	resetTab(0)
+	resetHeroTab(0)
 
 	// Remove display classes on init for reviews
 	resetReview(0)
@@ -230,7 +209,7 @@ if (window.location.pathname === '/') {
 	setHeroHeight()
 
 	// Fade in first slide
-	fadeInTab(0)
+	fadeInHeroTab(0)
 
 	// Fade in first review
 	fadeInReview(0)
