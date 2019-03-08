@@ -60,17 +60,18 @@ if (getElementById('country')) {
 
 // Event listener for if reg form is closed
 const regFormModal = getElementByClassName('modal-status registration', 0)
+const regFormModalWindow = getElementByClassName('modal registration', 0)
 
 const regFormButtons = getElementsByClassName('button register')
 for (let i = 0; i < regFormButtons.length; i++) {
 	onClick(regFormButtons[i], () => {
 		regFormModal.style.display = 'block'
-		setTimeout(() => regFormModal.style.opacity = '1.0', 10)
+		setTimeout(() => regFormModalWindow.style.opacity = '1.0', 10)
 	})
 }
 const regFormClose = getElementByClassName('reg-form-close', 0)
 onClick(regFormClose, () => {
-	regFormModal.style.opacity = '0'
+	regFormModalWindow.style.opacity = '0'
 	setTimeout(() => regFormModal.style.display = 'none', 400)
 })
 
