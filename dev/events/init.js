@@ -28,17 +28,21 @@ for (let i = 0; i < regFormButtons.length; i++) {
 			// Load reg form scripts
 			const baseScriptUrl = 'https://ecstaticliving.github.io/ecstaticliving.com/dev/events/'
 			const scripts = ['elements', 'functions', 'onchange', 'webflow', 'payment']
-			scripts.forEach(script => {
+			const loadScript = index => {
 				let js = document.createElement('script')
 				js.src = baseScriptUrl + script + '.js'
 				js.onload = () => {
 					// Once final script has loaded, initialise
 					if (script === 'payment' && (page() === 'Event' || page() === 'Update')) {
 						resetForm()
-					}	
+					}
+					else {
+						loadScript(index + 1)
+					}
 				}
 				document.head.appendChild(js)
-			})
+			}
+			loadScript(0)
 		}, 300)
 	})
 }
