@@ -62,9 +62,16 @@ if (getElementById('country')) {
 
 
 // Event listener for if reg form is closed
+const regFormModal = getElementByClassName('modal-status reg-form', 0)
+
+const regFormButtons = getElementsByClassName('button register')
+regFormButtons.forEach(regFormButton => onClick(regFormButton, () => {
+	console.log('Reg form visible')
+	regFormModal.style.display = 'block'
+}))
 const regFormClose = getElementByClassName('reg-form-close', 0)
 onClick(regFormClose, () => {
-	const regFormModal = getElementByClassName('modal-status reg-form', 0)
+	console.log('Reg form hidden')
 	regFormModal.style.display = 'none'
 })
 
