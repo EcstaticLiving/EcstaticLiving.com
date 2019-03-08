@@ -19,17 +19,14 @@ const isFormPage = () => page() === 'Event' || page() === 'Update'
 
 // Opening for events
 if (page() === 'Event') {
-	// Remove display classes on init for hero tabs
 	const eventTitle = getElementByClassName('event-title', 0)
 	const eventSubtitle = getElementByClassName('event-subtitle', 0)
 	const eventDetails = getElementByClassName('event-details', 0)
+	// Remove display classes on init for hero tabs
 	eventTitle.classList.remove('fade-move')
 	eventSubtitle.classList.remove('fade-move')
 	eventDetails.classList.remove('fade-move')
 	// Fade in first slide
-	const eventTitle = getElementByClassName('event-title', 0)
-	const eventSubtitle = getElementByClassName('event-subtitle', 0)
-	const eventDetails = getElementByClassName('event-details', 0)
 	eventTitle.classList.add('display')
 	eventSubtitle.classList.add('display')
 	eventDetails.classList.add('display')
