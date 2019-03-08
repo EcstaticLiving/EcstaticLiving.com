@@ -1,5 +1,5 @@
 // Prevent form from being submitted. This is being done manually in on click paymentButton
-onSubmit(eventForm, () => null)
+onSubmit(regForm, () => null)
 
 // Clear form
 onClick(getElementById('form-clear'), () => {

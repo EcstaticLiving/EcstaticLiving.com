@@ -1,5 +1,6 @@
 // Event Reg Form
-const eventForm = getElementByClassName('reg-form', 0)
+const regForm = getElementByClassName('Event Registration', 0)
+const regFormContainer = getElementByClassName('container reg-form')
 
 // Hidden fields
 const eventCode = getText(getElementById('event-code')).toUpperCase(),
@@ -11,9 +12,6 @@ eventDepositDate = getText(getElementById('event-deposit-date')),
 eventBasePrice = parseFloat(getText(getElementById('event-base-price'))).toFixed(2),
 eventBaseCost = parseFloat(getText(getElementById('event-base-cost'))).toFixed(2),
 eventStatusRestriction = getText(getElementById('event-status-restriction'))
-
-// Event form
-const eventRegForm = getElementByClassName('registration-container reg-form')
 
 // Invite-only
 const eventInviteButton = getElementById('event-invitecode-button'),
@@ -35,25 +33,25 @@ eventOther = getElementById('event-gender-other')
 
 // Details
 const eventReferral = getElementById('event-referral'),
-eventExperienceContainer = getElementByClassName('registration-container experience'),
+eventExperienceContainer = getElementByClassName('container experience'),
 eventExperienceValidation = getElementById('event-experience-validation'),
 eventExperienceYes = getElementById('event-experience-yes'),
 eventExperienceNo = getElementById('event-experience-no'),
 eventExperienceDetails = getElementById('event-experience-details'),
-eventDietContainer = getElementByClassName('registration-container diet'),
+eventDietContainer = getElementByClassName('container diet'),
 eventDietValidation = getElementById('event-diet-validation'),
 eventDietYes = getElementById('event-diet-yes'),
 eventDietNo = getElementById('event-diet-no'),
 eventDietDetails = getElementById('event-diet-details'),
-eventSpecialContainer = getElementByClassName('registration-container special'),
+eventSpecialContainer = getElementByClassName('container special'),
 eventSpecialValidation = getElementById('event-special-validation'),
 eventSpecialYes = getElementById('event-special-yes'),
 eventSpecialNo = getElementById('event-special-no'),
 eventSpecialDetails = getElementById('event-special-details')
 
 // Affiliate Code
-const eventAffiliateContainer = getElementByClassName('registration-container affiliate'),
-eventAffiliateCodeContainer = getElementByClassName('registration-container affiliate-code'),
+const eventAffiliateContainer = getElementByClassName('container affiliate'),
+eventAffiliateCodeContainer = getElementByClassName('container affiliate-code'),
 eventAffiliateValidation = getElementById('event-affiliate-validation'),
 eventAffiliateYes = getElementById('event-affiliate-yes'),
 eventAffiliateNo = getElementById('event-affiliate-no'),
@@ -66,7 +64,7 @@ const urlDiscountCode = urlString && urlString.affiliate
 
 // Event Status: Couples, Singles, Both
 const eventStatus = getElementById('event-status'),
-eventPartnerContainer = getElementByClassName('registration-container partner'),
+eventPartnerContainer = getElementByClassName('container partner'),
 eventPartnerFirstName = getElementById('event-partner-firstname'),
 eventPartnerLastName = getElementById('event-partner-lastname'),
 eventPartnerGenderValidation = getElementById('event-partner-gender-validation'),
@@ -86,12 +84,12 @@ eventNotes = getText(getElementById('event-notes')).includes('|')
 
 // Pricing
 const eventPrices = getText(getElementById('event-prices')).split(' | '),
-eventDepositContainer = getElementByClassName('registration-container deposit'),
+eventDepositContainer = getElementByClassName('container deposit'),
 eventDepositValidation = getElementById('event-deposit-validation'),
 eventDepositText = getElementById('event-deposit-text'),
 eventDepositFull = getElementById('event-deposit-full'),
 eventDepositDeposit = getElementById('event-deposit-deposit'),
-eventAmountContainer = getElementByClassName('registration-container amount'),
+eventAmountContainer = getElementByClassName('container amount'),
 eventAmountDisplay = getElementById('event-amount-display'),
 eventAmountShow = getElementById('event-amount-show')
 
@@ -121,7 +119,7 @@ const clearForm = formType => {
 	hideElement(getElementByClassName('w-form-done', 0))
 	hideElement(getElementByClassName('w-form-fail', 0))
 	if (formType === 'Event') {
-		formReset(eventForm)
+		formReset(regForm)
 	}
 	else if (formType === 'Update') {
 		formReset(customForm)
@@ -377,7 +375,7 @@ const inviteOnlyCodeVerification = () => {
 		// ...but if not valid...
 		if (!discountCodeValidation()) {
 			// ...hide reg form and indicate error.
-			hideElement(eventRegForm)
+			hideElement(regFormContainer)
 			emptyHideText(eventInvitePass)
 			const text = 'The invitation code you entered is invalid.\nFor assistance, please call us at 707-987-3456.'
 			setHtml(eventInviteFail, text)
@@ -387,7 +385,7 @@ const inviteOnlyCodeVerification = () => {
 		// ...if code is valid...
 		else {
 			// ...show reg form and indicate pass.
-			showElement(eventRegForm)
+			showElement(regFormContainer)
 			emptyHideText(eventInviteFail)
 			const text = calculateDiscount(getValue(eventInviteCode)) > 0
 				? 'Congrats! Invite code accepted!<br />$' + calculateDiscount(getValue(eventInviteCode)) + ' per person discount applied! Continue below.'
@@ -398,7 +396,7 @@ const inviteOnlyCodeVerification = () => {
 	}
 	// If code doesn’t exist, hide reg form.
 	else {
-		hideElement(eventRegForm)
+		hideElement(regFormContainer)
 		emptyHideText(eventInvitePass)
 		emptyHideText(eventInviteFail)
 	}
@@ -468,7 +466,7 @@ const showErrorsInForm = () => {
 	showClearError({ condition: !isChecked(eventExperienceYes) && !isChecked(eventExperienceNo), element: eventExperienceValidation })
 	showClearError({ condition: isChecked(eventExperienceYes) && isBlank(eventExperienceDetails), element: eventExperienceDetails })
 	showClearError({ condition: !isChecked(eventFemale) && !isChecked(eventMale) && !isChecked(eventOther), element: eventGenderValidation })
-	formErrorValidation(eventForm)
+	formErrorValidation(regForm)
 }
 
 
@@ -603,9 +601,9 @@ const resetForm = () => {
 	paymentButtonDisabled()
 
 	// Connect the error checking function to the form...
-	// formErrorInit(eventForm)
+	// formErrorInit(regForm)
 	// ...and show it.
-	showElement(eventForm)
+	showElement(regForm)
 
 }
 

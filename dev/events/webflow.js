@@ -64,7 +64,7 @@ const createForm = () => {
 		fields: {},
 		dolphin: false
 	}
-	let error = conversion(page() === 'Event' ? getElementById(eventForm) : getElementById(customForm), formData.fields)
+	let error = conversion(page() === 'Event' ? getElementById(regForm) : getElementById(customForm), formData.fields)
 	if (error) {
 		throw error
 	}
