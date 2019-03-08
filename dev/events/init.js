@@ -26,32 +26,31 @@ for (let i = 0; i < regFormButtons.length; i++) {
 		setTimeout(() => {
 			// Show reg form: browser error that doesn’t show opacity of children unless scrolled to
 			showAndScrollTo(getElementByClassName('event-registration', 0))
-			// Load reg form scripts
-			const baseScriptUrl = 'https://ecstaticliving.github.io/ecstaticliving.com/dev/events/'
-			const scripts = ['elements', 'functions', 'onchange', 'webflow', 'payment']
-			// Load scripts synchronously, one after another, to make sure hierarchy is respected.
-			const loadScript = index => {
-				let js = document.createElement('script')
-				js.src = baseScriptUrl + scripts[index] + '.js'
-				js.onload = () => {
-					// Once final script has loaded, initialise
-					if (scripts[index] === 'payment' && (page() === 'Event' || page() === 'Update')) {
-						resetForm()
-						scriptsHaveBeenLoaded = true
-					}
-					else {
-						loadScript(index + 1)
-					}
-				}
-				document.head.appendChild(js)
-			}
-			console.log(scriptsHaveBeenLoaded)
-			if (!scriptsHaveBeenLoaded) {
-				loadScript(0)
-			}
 		}, 300)
 	})
 }
+
+// Load reg form scripts
+const baseScriptUrl = 'https://ecstaticliving.github.io/ecstaticliving.com/dev/events/'
+const scripts = ['elements', 'functions', 'onchange', 'webflow', 'payment']
+// Load scripts synchronously, one after another, to make sure hierarchy is respected.
+const loadScript = index => {
+	let js = document.createElement('script')
+	js.src = baseScriptUrl + scripts[index] + '.js'
+	js.onload = () => {
+		// Once final script has loaded, initialise
+		if (scripts[index] === 'payment' && (page() === 'Event' || page() === 'Update')) {
+			resetForm()
+			scriptsHaveBeenLoaded = true
+		}
+		else {
+			loadScript(index + 1)
+		}
+	}
+	document.head.appendChild(js)
+}
+loadScript(0)
+
 const regFormClose = getElementByClassName('reg-form-close', 0)
 onClick(regFormClose, () => {
 	regFormModalWindow.style.opacity = '0'
