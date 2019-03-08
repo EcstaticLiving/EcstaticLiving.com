@@ -19,8 +19,8 @@ const page = () => {
 const isFormPage = () => page() === 'Event' || page() === 'Update'
 
 // Event Reg Form
-const regForm = getElementByClassName('event-registration', 0)
-const regFormContainer = getElementByClassName('container reg-form')
+const webflowRegForm = getElementByClassName('event-registration', 0)
+const regForm = getElementByClassName('container reg-form')
 
 // Hidden fields
 const eventCode = getText(getElementById('event-code')).toUpperCase(),
