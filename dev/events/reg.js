@@ -1,5 +1,5 @@
 // Event Reg Form
-const regForm = getElementByClassName('Event Registration', 0)
+const regForm = getElementByClassName('event-registration', 0)
 const regFormContainer = getElementByClassName('container reg-form')
 
 // Hidden fields
