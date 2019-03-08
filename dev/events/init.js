@@ -17,6 +17,7 @@ setTimeout(() => changeEmailContainerBackground(getElementByClassName('email-con
 const regFormModal = getElementByClassName('modal-status registration', 0)
 const regFormModalWindow = getElementByClassName('modal registration', 0)
 const regFormButtons = getElementsByClassName('button register')
+let scriptsHaveBeenLoaded = false
 for (let i = 0; i < regFormButtons.length; i++) {
 	onClick(regFormButtons[i], () => {
 		regFormModalWindow.style.opacity = '0'
@@ -36,6 +37,7 @@ for (let i = 0; i < regFormButtons.length; i++) {
 					// Once final script has loaded, initialise
 					if (scripts[index] === 'payment' && (page() === 'Event' || page() === 'Update')) {
 						resetForm()
+						scriptsHaveBeenLoaded = true
 					}
 					else {
 						loadScript(index + 1)
@@ -43,7 +45,9 @@ for (let i = 0; i < regFormButtons.length; i++) {
 				}
 				document.head.appendChild(js)
 			}
-			loadScript(0)
+			if (!scriptsHaveBeenLoaded) {
+				loadScript(0)
+			}
 		}, 300)
 	})
 }
