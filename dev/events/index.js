@@ -65,7 +65,7 @@ const regFormButtons = getElementsByClassName('button register')
 for (let i = 0; i < regFormButtons.length; i++) {
 	onClick(regFormButtons[i], () => {
 		regFormModal.style.display = 'block'
-		regFormModal.style.opacity = '1.0'
+		setTimeout(() => regFormModal.style.opacity = '1.0', 100)
 	})
 }
 const regFormClose = getElementByClassName('reg-form-close', 0)
