@@ -24,8 +24,8 @@ for (let i = 0; i < regFormButtons.length; i++) {
 		// Fade in modal window
 		setTimeout(() => regFormModal.style.opacity = '1.0', 100)
 		setTimeout(() => {
-			// Show reg form: browser error that doesn’t show opacity of elements inside modal window unless body is scrolled by 1 px and window opacity is set to 1 during scroll
 			regFormContainer.scrollTop = 0
+			// Show reg form: browser error that doesn’t show opacity of elements inside modal window unless body is scrolled by 1 px and window opacity is set to 1 during scroll
 			window.scrollBy(0, 1)
 			onScroll(regFormContainer, () => regFormModalWindow.style.opacity = '1.0')
 		}, 300)
