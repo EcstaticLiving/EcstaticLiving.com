@@ -68,7 +68,7 @@ for (let i = 0; i < regFormButtons.length; i++) {
 		regFormModalWindow.style.opacity = '0'
 		setTimeout(() => regFormModal.style.display = 'block', 100)
 		setTimeout(() => regFormModalWindow.style.opacity = '1.0', 200)
-		showAndScrollTo()
+		showAndScrollTo(regForm)
 	})
 }
 const regFormClose = getElementByClassName('reg-form-close', 0)
