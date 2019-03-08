@@ -1,31 +1,45 @@
 // Opening for events
-if (page() === 'Event') {
-	const eventTitle = getElementByClassName('event-title', 0)
-	const eventSubtitle = getElementByClassName('event-subtitle', 0)
-	const eventDetails = getElementByClassName('event-details', 0)
-	// Remove display classes on init for hero tabs
-	eventTitle.classList.remove('fade-move')
-	eventSubtitle.classList.remove('fade-move')
-	eventDetails.classList.remove('fade-move')
-	// Fade in first slide
-	eventTitle.classList.add('display')
-	eventSubtitle.classList.add('display')
-	eventDetails.classList.add('display')
-	// Email signup form
-	setTimeout(() => changeEmailContainerBackground(getElementByClassName('email-container-background', 0)), 600)
-}
+const eventTitle = getElementByClassName('event-title', 0)
+const eventSubtitle = getElementByClassName('event-subtitle', 0)
+const eventDetails = getElementByClassName('event-details', 0)
+// Remove display classes on init for hero tabs
+eventTitle.classList.remove('fade-move')
+eventSubtitle.classList.remove('fade-move')
+eventDetails.classList.remove('fade-move')
+// Fade in first slide
+eventTitle.classList.add('display')
+eventSubtitle.classList.add('display')
+eventDetails.classList.add('display')
+// Email signup form
+setTimeout(() => changeEmailContainerBackground(getElementByClassName('email-container-background', 0)), 600)
 
 // Event listener for if reg form is closed
 const regFormModal = getElementByClassName('modal-status registration', 0)
 const regFormModalWindow = getElementByClassName('modal registration', 0)
-
 const regFormButtons = getElementsByClassName('button register')
 for (let i = 0; i < regFormButtons.length; i++) {
 	onClick(regFormButtons[i], () => {
 		regFormModalWindow.style.opacity = '0'
 		setTimeout(() => regFormModal.style.display = 'block', 100)
 		setTimeout(() => regFormModalWindow.style.opacity = '1.0', 200)
-		setTimeout(() => showAndScrollTo(regForm), 300)
+		setTimeout(() => {
+			// Show reg form: browser error that doesn’t show opacity of children unless scrolled to
+			showAndScrollTo(getElementByClassName('event-registration', 0))
+			// Load reg form scripts
+			const baseScriptUrl = 'https://ecstaticliving.github.io/ecstaticliving.com/dev/events/'
+			const scripts = ['elements', 'functions', 'onchange', 'webflow', 'payment']
+			scripts.forEach(script => {
+				let js = document.createElement('script')
+				js.src = baseScriptUrl + script + '.js'
+				js.onload = () => {
+					// Once final script has loaded, initialise
+					if (script === 'payment' && (page() === 'Event' || page() === 'Update')) {
+						resetForm()
+					}	
+				}
+				document.head.appendChild(js)
+			})
+		}, 300)
 	})
 }
 const regFormClose = getElementByClassName('reg-form-close', 0)

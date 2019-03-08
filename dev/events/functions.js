@@ -493,9 +493,3 @@ const resetForm = () => {
 	showElement(regForm)
 
 }
-
-
-// BEGIN
-if (page() === 'Event' || page() === 'Update') {
-	resetForm()
-}
