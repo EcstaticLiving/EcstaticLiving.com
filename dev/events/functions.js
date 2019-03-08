@@ -6,6 +6,7 @@ const clearForm = formType => {
 	hideElement(getElementByClassName('w-form-done', 0))
 	hideElement(getElementByClassName('w-form-fail', 0))
 	if (formType === 'Event') {
+		console.log(regForm)
 		formReset(regForm)
 	}
 	else if (formType === 'Update') {
