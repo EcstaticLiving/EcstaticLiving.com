@@ -30,10 +30,10 @@ for (let i = 0; i < regFormButtons.length; i++) {
 			const scripts = ['elements', 'functions', 'onchange', 'webflow', 'payment']
 			const loadScript = index => {
 				let js = document.createElement('script')
-				js.src = baseScriptUrl + script + '.js'
+				js.src = baseScriptUrl + scripts[index] + '.js'
 				js.onload = () => {
 					// Once final script has loaded, initialise
-					if (script === 'payment' && (page() === 'Event' || page() === 'Update')) {
+					if (scripts[index] === 'payment' && (page() === 'Event' || page() === 'Update')) {
 						resetForm()
 					}
 					else {
