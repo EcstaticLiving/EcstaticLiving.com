@@ -7,9 +7,11 @@ eventTitle.classList.remove('fade-move')
 eventSubtitle.classList.remove('fade-move')
 eventDetails.classList.remove('fade-move')
 // Fade in first slide
-eventTitle.classList.add('display')
-eventSubtitle.classList.add('display')
-eventDetails.classList.add('display')
+setTimeout(() => {
+	eventTitle.classList.add('display')
+	eventSubtitle.classList.add('display')
+	eventDetails.classList.add('display')
+}, 100)
 // Email signup form
 setTimeout(() => changeEmailContainerBackground(getElementByClassName('email-container-background', 0)), 600)
 
