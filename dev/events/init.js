@@ -15,6 +15,33 @@ if (page() === 'Event') {
 	setTimeout(() => changeEmailContainerBackground(getElementByClassName('email-container-background', 0)), 600)
 }
 
+// Event listener for if reg form is closed
+const regFormModal = getElementByClassName('modal-status registration', 0)
+const regFormModalWindow = getElementByClassName('modal registration', 0)
+
+const regFormButtons = getElementsByClassName('button register')
+for (let i = 0; i < regFormButtons.length; i++) {
+	onClick(regFormButtons[i], () => {
+		regFormModalWindow.style.opacity = '0'
+		setTimeout(() => regFormModal.style.display = 'block', 100)
+		setTimeout(() => regFormModalWindow.style.opacity = '1.0', 200)
+		setTimeout(() => showAndScrollTo(regForm), 300)
+	})
+}
+const regFormClose = getElementByClassName('reg-form-close', 0)
+onClick(regFormClose, () => {
+	regFormModalWindow.style.opacity = '0'
+	setTimeout(() => regFormModal.style.display = 'none', 200)
+})
+
+// Event summary “Read more...” expansion
+getElementByClassName('text read-more', 0).addEventListener('mouseover', () => {
+	hideElement(getElementByClassName('text read-more'))
+	hideElement(getElementByClassName('text summary'))
+	getElementByClassName('text description').classList.add('display')
+	setTimeout(() => getElementByClassName('text description display').classList.add('fade'), 100)
+})
+
 // Prevent accidental submission of form through 'enter' key
 onKeyPress(document, e => {
 	if (isInput(e.target) && e.which === 13) {
@@ -37,31 +64,3 @@ if (getElementById('country')) {
 		appendSelect(getElementById('country'), option)
 	}
 }
-
-
-// Event listener for if reg form is closed
-const regFormModal = getElementByClassName('modal-status registration', 0)
-const regFormModalWindow = getElementByClassName('modal registration', 0)
-
-const regFormButtons = getElementsByClassName('button register')
-for (let i = 0; i < regFormButtons.length; i++) {
-	onClick(regFormButtons[i], () => {
-		regFormModalWindow.style.opacity = '0'
-		setTimeout(() => regFormModal.style.display = 'block', 100)
-		setTimeout(() => regFormModalWindow.style.opacity = '1.0', 200)
-		showAndScrollTo(regForm)
-	})
-}
-const regFormClose = getElementByClassName('reg-form-close', 0)
-onClick(regFormClose, () => {
-	regFormModalWindow.style.opacity = '0'
-	setTimeout(() => regFormModal.style.display = 'none', 200)
-})
-
-// Event summary “Read more...” expansion
-getElementByClassName('text read-more', 0).addEventListener('mouseover', () => {
-	hideElement(getElementByClassName('text read-more'))
-	hideElement(getElementByClassName('text summary'))
-	getElementByClassName('text description').classList.add('display')
-	setTimeout(() => getElementByClassName('text description display').classList.add('fade'), 100)
-})
