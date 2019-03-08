@@ -31,7 +31,7 @@ for (let i = 0; i < regFormButtons.length; i++) {
 		// Show reg form: browser error that doesn’t show opacity of children unless scrolled to
 		setTimeout(() => {
 			regFormModalWindow.scrollTo(0, 0)
-			regFormModalWindow.onscroll = () => regFormModal.style.opacity = '1.0'
+			// regFormModalWindow.onscroll = () => regFormModal.style.opacity = '1.0'
 		}, 300)
 	})
 }
