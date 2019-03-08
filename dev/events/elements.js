@@ -1,3 +1,23 @@
+// Urls
+const containsUrl = str => window.location.href.indexOf(str) > -1
+const endsWithUrl = str => window.location.href.endsWith(str)
+
+// Return url search keys and values
+const urlString = Object.assign({}, ...window.location.search.slice(1).split('&').map(item => {
+	const property = item.split('=')[0]
+	return { [property]: item.split('=')[1] }
+}))
+
+// Page
+const page = () => {
+  if (containsUrl('/events/'))  					return 'Event'
+  if (endsWithUrl('/update'))  						return 'Update'
+  return null
+}
+
+// Form page
+const isFormPage = () => page() === 'Event' || page() === 'Update'
+
 // Event Reg Form
 const regForm = getElementByClassName('event-registration', 0)
 const regFormContainer = getElementByClassName('container reg-form')
