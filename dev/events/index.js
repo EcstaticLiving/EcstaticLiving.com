@@ -59,7 +59,7 @@ if (getElementById('country')) {
 
 
 // Event listener for if reg form is closed
-const regFormModal = getElementByClassName('modal-status reg-form', 0)
+const regFormModal = getElementByClassName('modal-status registration', 0)
 
 const regFormButtons = getElementsByClassName('button register')
 for (let i = 0; i < regFormButtons.length; i++) {
