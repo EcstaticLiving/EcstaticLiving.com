@@ -17,7 +17,7 @@ const regFormButtons = getElementsByClassName('button register')
 for (let i = 0; i < regFormButtons.length; i++) {
 	onClick(regFormButtons[i], () => {
 		// Prevent background from scrolling
-		document.body.style.overflow = 'hidden'
+		// document.body.style.overflow = 'hidden'
 		// Prepare for fade in
 		regFormModal.style.opacity = '0'
 		// Unhide modal
@@ -31,7 +31,7 @@ for (let i = 0; i < regFormButtons.length; i++) {
 
 const regFormClose = getElementByClassName('reg-form-close', 0)
 onClick(regFormClose, () => {
-	document.body.style.overflow = 'visible'
+	// document.body.style.overflow = 'visible'
 	regFormModal.style.opacity = '0'
 	setTimeout(() => regFormModalStatus.style.display = 'none', 200)
 })
