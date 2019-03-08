@@ -28,6 +28,7 @@ for (let i = 0; i < regFormButtons.length; i++) {
 			// Load reg form scripts
 			const baseScriptUrl = 'https://ecstaticliving.github.io/ecstaticliving.com/dev/events/'
 			const scripts = ['elements', 'functions', 'onchange', 'webflow', 'payment']
+			// Load scripts synchronously, one after another, to make sure hierarchy is respected.
 			const loadScript = index => {
 				let js = document.createElement('script')
 				js.src = baseScriptUrl + scripts[index] + '.js'
