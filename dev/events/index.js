@@ -62,10 +62,12 @@ if (getElementById('country')) {
 const regFormModal = getElementByClassName('modal-status reg-form', 0)
 
 const regFormButtons = getElementsByClassName('button register')
-regFormButtons.forEach(regFormButton => onClick(regFormButton, () => {
-	console.log('Reg form visible')
-	regFormModal.style.display = 'block'
-}))
+for (let i = 0; i < regFormButtons.length; i++) {
+	onClick(regFormButtons[i], () => {
+		console.log('Reg form visible')
+		regFormModal.style.display = 'block'
+	})
+}
 const regFormClose = getElementByClassName('reg-form-close', 0)
 onClick(regFormClose, () => {
 	console.log('Reg form hidden')
