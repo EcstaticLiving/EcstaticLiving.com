@@ -17,7 +17,6 @@ setTimeout(() => changeEmailContainerBackground(getElementByClassName('email-con
 const regFormModal = getElementByClassName('modal-status registration', 0)
 const regFormModalWindow = getElementByClassName('modal registration', 0)
 const regFormButtons = getElementsByClassName('button register')
-let scriptsHaveBeenLoaded = false
 for (let i = 0; i < regFormButtons.length; i++) {
 	onClick(regFormButtons[i], () => {
 		regFormModalWindow.style.opacity = '0'
@@ -29,27 +28,6 @@ for (let i = 0; i < regFormButtons.length; i++) {
 		}, 300)
 	})
 }
-
-// Load reg form scripts
-const baseScriptUrl = 'https://ecstaticliving.github.io/ecstaticliving.com/dev/events/'
-const scripts = ['elements', 'functions', 'onchange', 'webflow', 'payment']
-// Load scripts synchronously, one after another, to make sure hierarchy is respected.
-const loadScript = index => {
-	let js = document.createElement('script')
-	js.src = baseScriptUrl + scripts[index] + '.js'
-	js.onload = () => {
-		// Once final script has loaded, initialise
-		if (scripts[index] === 'payment' && (page() === 'Event' || page() === 'Update')) {
-			resetForm()
-			scriptsHaveBeenLoaded = true
-		}
-		else {
-			loadScript(index + 1)
-		}
-	}
-	document.head.appendChild(js)
-}
-loadScript(0)
 
 const regFormClose = getElementByClassName('reg-form-close', 0)
 onClick(regFormClose, () => {
@@ -87,3 +65,24 @@ if (getElementById('country')) {
 		appendSelect(getElementById('country'), option)
 	}
 }
+
+// Load reg form scripts
+const baseScriptUrl = 'https://ecstaticliving.github.io/ecstaticliving.com/dev/events/'
+const scripts = ['elements', 'functions', 'onchange', 'webflow', 'payment']
+// Load scripts synchronously, one after another, to make sure hierarchy is respected.
+const loadScript = index => {
+	let js = document.createElement('script')
+	js.src = baseScriptUrl + scripts[index] + '.js'
+	js.onload = () => {
+		// Once final script has loaded, initialise
+		if (scripts[index] === 'payment' && (page() === 'Event' || page() === 'Update')) {
+			resetForm()
+			scriptsHaveBeenLoaded = true
+		}
+		else {
+			loadScript(index + 1)
+		}
+	}
+	document.head.appendChild(js)
+}
+loadScript(0)
