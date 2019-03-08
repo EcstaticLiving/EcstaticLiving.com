@@ -14,23 +14,23 @@ eventDetails.classList.add('display')
 setTimeout(() => changeEmailContainerBackground(getElementByClassName('email-container-background', 0)), 600)
 
 // Event listener for if reg form is closed
-const regFormModal = getElementByClassName('modal-status registration', 0)
-const regFormModalWindow = getElementByClassName('modal registration', 0)
+const regFormModal = getElementByClassName('modal registration', 0)
+const regFormModalWindow = getElementByClassName('modal-window registration', 0)
 const regFormButtons = getElementsByClassName('button register')
 for (let i = 0; i < regFormButtons.length; i++) {
 	onClick(regFormButtons[i], () => {
 		// Prevent background from scrolling
 		document.body.style.overflow = 'hidden'
 		// Prepare for fade in
-		regFormModalWindow.style.opacity = '0'
+		regFormModal.style.opacity = '0'
 		// Unhide modal
 		setTimeout(() => regFormModal.style.display = 'block', 100)
 		// Fade in modal window
-		setTimeout(() => regFormModalWindow.style.opacity = '1.0', 200)
+		setTimeout(() => regFormModal.style.opacity = '1.0', 200)
 		// Show reg form: browser error that doesn’t show opacity of children unless scrolled to
 		setTimeout(() => {
-			window.scrollTo(0, 0)
-			window.onscroll = () => regFormModalWindow.style.opacity = '1.0'
+			regFormModalWindow.scrollTo(0, 0)
+			regFormModalWindow.onscroll = () => regFormModal.style.opacity = '1.0'
 		}, 300)
 	})
 }
@@ -38,7 +38,7 @@ for (let i = 0; i < regFormButtons.length; i++) {
 const regFormClose = getElementByClassName('reg-form-close', 0)
 onClick(regFormClose, () => {
 	document.body.style.overflow = 'visible'
-	regFormModalWindow.style.opacity = '0'
+	regFormModal.style.opacity = '0'
 	setTimeout(() => regFormModal.style.display = 'none', 200)
 })
 
