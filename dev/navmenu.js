@@ -1,6 +1,7 @@
-const navHamburger = getElementByClassName('menu-link hamburger')
-const navClose = getElementByClassName('nav-close')
-const navContainer = getElementByClassName('nav-container')
+const navHamburger = getElementByClassName('menu-link hamburger', 0)
+const navClose = getElementByClassName('nav-close', 0)
+const navContainer = getElementByClassName('nav-container', 0)
+
 // If nav menu is opened
 onClick(navHamburger, () => {
 	//	If nav menu is open, close...
@@ -14,9 +15,11 @@ onClick(navHamburger, () => {
 		setTimeout(() => navContainer.classList.add('fade'), 100)
 	}
 })
+
 // If nav menu is closed
 onClick(navClose, () => navHamburger.click())
-// On scroll
+
+// On scroll down, make menu bar smaller, and vice versa
 const menuBarContainer = getElementByClassName('menu-bar-container')
 window.onscroll = () => {
 	if (window.scrollY >= 100 && menuBarContainer.classList.contains('top')) {
