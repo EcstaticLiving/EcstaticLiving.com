@@ -72,7 +72,7 @@ for (let i = 0; i < regFormButtons.length; i++) {
 const regFormClose = getElementByClassName('reg-form-close', 0)
 onClick(regFormClose, () => {
 	regFormModalWindow.style.opacity = '0'
-	setTimeout(() => regFormModal.style.display = 'none', 400)
+	setTimeout(() => regFormModal.style.display = 'none', 200)
 })
 
 // Event summary “Read more...” expansion
