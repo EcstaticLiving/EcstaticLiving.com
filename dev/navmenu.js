@@ -21,11 +21,11 @@ onClick(navClose, () => navHamburger.click())
 
 // On scroll down, make menu bar smaller, and vice versa
 const menuBarContainer = getElementByClassName('menu-bar-container')
-window.onscroll = () => {
+windowEventListener(['scroll'], () => {
 	if (window.scrollY >= 100 && menuBarContainer.classList.contains('top')) {
 		menuBarContainer.classList.remove('top')
 	}
 	else if (window.scrollY < 100 && !menuBarContainer.classList.contains('top')) {
 		menuBarContainer.classList.add('top')
 	}
-}
+})
