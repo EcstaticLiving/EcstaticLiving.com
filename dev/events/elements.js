@@ -24,7 +24,7 @@ const regFormContainer = getElementByClassName('container reg-form')
 
 // Hidden fields
 const eventCode = getText(getElementById('event-code')).toUpperCase(),
-eventTitle = getText(getElementById('event-name')),
+eventName = getText(getElementById('event-name')),
 eventDates = getText(getElementById('event-dates')),
 eventVenue = getText(getElementById('event-venue')),
 eventDepositAmount = parseFloat(getText(getElementById('event-deposit-amount'))).toFixed(2),
