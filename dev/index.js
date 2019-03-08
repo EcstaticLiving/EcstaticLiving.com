@@ -96,5 +96,5 @@ const emptyHideValue = elem => {
 }
 const showAndScrollTo = elem => {
 	showElement(elem)
-	window.scrollTo(0, (window.pageYOffset || document.documentElement.scrollTop)  - (document.documentElement.clientTop || 0) + 1)
+	window.scrollTo(0, (window.pageYOffset || document.documentElement.scrollTop) - (document.documentElement.clientTop || 0) + 1)
 }

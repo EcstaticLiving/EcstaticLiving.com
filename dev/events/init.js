@@ -25,6 +25,7 @@ for (let i = 0; i < regFormButtons.length; i++) {
 		setTimeout(() => {
 			// Show reg form: browser error that doesn’t show opacity of children unless scrolled to
 			showAndScrollTo(getElementByClassName('event-registration', 0))
+			window.scrollTo(0, (window.pageYOffset || document.documentElement.scrollHeight) - (document.documentElement.clientHeight || 0) + 1)
 		}, 300)
 	})
 }
