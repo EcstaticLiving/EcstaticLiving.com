@@ -24,7 +24,7 @@ for (let i = 0; i < regFormButtons.length; i++) {
 		setTimeout(() => regFormModal.style.opacity = '1.0', 200)
 		setTimeout(() => {
 			// Show reg form: browser error that doesn’t show opacity of children unless body is scrolled by 1 px and window opacity is set to 1 during scroll
-			regFormModalWindow.scrollTo(0, 0)
+			regFormModalWindow.scrollTop
 			window.scrollBy(0, 1)
 			// Prevent background from scrolling
 			document.body.style.overflow = 'hidden'
