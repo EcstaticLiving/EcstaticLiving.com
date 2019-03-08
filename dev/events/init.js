@@ -22,14 +22,17 @@ for (let i = 0; i < regFormButtons.length; i++) {
 		// Unhide modal
 		showElement(regFormModalStatus)
 		// Fade in modal window
-		setTimeout(() => regFormModal.style.opacity = '1.0', 100)
 		setTimeout(() => {
+			// Fade in
+			regFormModal.style.opacity = '1.0'
+			// Scroll to top
 			regFormContainer.scrollTop = 0
 			// Show reg form: browser error that doesn’t show opacity of elements inside modal window unless body is scrolled by at least 1 px
 			window.scrollBy(0, 1)
 			// Prevent background from scrolling
 			document.body.style.overflow = 'hidden'
-		}, 1000)
+		}, 100)
+		
 	})
 }
 
