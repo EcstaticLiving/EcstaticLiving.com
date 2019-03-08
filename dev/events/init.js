@@ -38,8 +38,9 @@ for (let i = 0; i < regFormButtons.length; i++) {
 
 const regFormClose = getElementByClassName('reg-form-close', 0)
 onClick(regFormClose, () => {
+	// Reallow background to scroll
 	document.body.style.overflow = 'visible'
-	regFormModal.style.opacity = '0'
+	// regFormModal.style.opacity = '0'
 	setTimeout(() => hideElement(regFormModalStatus), 200)
 })
 
