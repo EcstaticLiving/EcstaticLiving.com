@@ -19,20 +19,24 @@ const regFormModalWindow = getElementByClassName('modal registration', 0)
 const regFormButtons = getElementsByClassName('button register')
 for (let i = 0; i < regFormButtons.length; i++) {
 	onClick(regFormButtons[i], () => {
+		// Prevent background from scrolling
+		document.body.style.overflow = 'hidden'
+		// Prepare for fade in
 		regFormModalWindow.style.opacity = '0'
+		// Unhide modal
 		setTimeout(() => regFormModal.style.display = 'block', 100)
+		// Fade in modal window
 		setTimeout(() => regFormModalWindow.style.opacity = '1.0', 200)
+		// Show reg form: browser error that doesn’t show opacity of children unless scrolled to
 		setTimeout(() => {
-			// Show reg form: browser error that doesn’t show opacity of children unless scrolled to
 			showAndScrollTo(getElementByClassName('event-registration', 0))
-			window.scrollTo(0, (window.pageYOffset || document.documentElement.scrollHeight) - (document.documentElement.clientHeight || 0) + 1)
-			regFormModalWindow.style.opacity = '1.0'
 		}, 300)
 	})
 }
 
 const regFormClose = getElementByClassName('reg-form-close', 0)
 onClick(regFormClose, () => {
+	document.body.style.overflow = 'visible'
 	regFormModalWindow.style.opacity = '0'
 	setTimeout(() => regFormModal.style.display = 'none', 200)
 })
