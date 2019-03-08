@@ -45,6 +45,7 @@ for (let i = 0; i < regFormButtons.length; i++) {
 				}
 				document.head.appendChild(js)
 			}
+			console.log(scriptsHaveBeenLoaded)
 			if (!scriptsHaveBeenLoaded) {
 				loadScript(0)
 			}
