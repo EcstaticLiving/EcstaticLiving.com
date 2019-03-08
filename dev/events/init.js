@@ -23,8 +23,9 @@ for (let i = 0; i < regFormButtons.length; i++) {
 		// Fade in modal window
 		setTimeout(() => regFormModal.style.opacity = '1.0', 200)
 		setTimeout(() => {
-			// Show reg form: browser error that doesn’t show opacity of children unless body is scrolled by 1 px
+			// Show reg form: browser error that doesn’t show opacity of children unless body is scrolled by 1 px and window opacity is set to 1 during scroll
 			window.scrollBy(0, 1)
+			onScroll(regFormModalWindow, () => regFormModalWindow.style.opacity = '1.0')
 			// Prevent background from scrolling
 			document.body.style.overflow = 'hidden'
 		}, 300)
@@ -33,7 +34,7 @@ for (let i = 0; i < regFormButtons.length; i++) {
 
 const regFormClose = getElementByClassName('reg-form-close', 0)
 onClick(regFormClose, () => {
-	// document.body.style.overflow = 'visible'
+	document.body.style.overflow = 'visible'
 	regFormModal.style.opacity = '0'
 	setTimeout(() => regFormModalStatus.style.display = 'none', 200)
 })
