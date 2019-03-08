@@ -2,16 +2,10 @@
 const eventTitle = getElementByClassName('event-title', 0)
 const eventSubtitle = getElementByClassName('event-subtitle', 0)
 const eventDetails = getElementByClassName('event-details', 0)
-// Remove display classes on init for hero tabs
-eventTitle.classList.remove('fade-move')
-eventSubtitle.classList.remove('fade-move')
-eventDetails.classList.remove('fade-move')
 // Fade in first slide
-setTimeout(() => {
-	eventTitle.classList.add('display')
-	eventSubtitle.classList.add('display')
-	eventDetails.classList.add('display')
-}, 100)
+eventTitle.classList.add('fade-move')
+eventSubtitle.classList.add('fade-move')
+eventDetails.classList.add('fade-move')
 // Email signup form
 setTimeout(() => changeEmailContainerBackground(getElementByClassName('email-container-background', 0)), 600)
 
