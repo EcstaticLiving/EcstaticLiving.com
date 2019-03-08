@@ -64,14 +64,14 @@ const regFormModal = getElementByClassName('modal-status reg-form', 0)
 const regFormButtons = getElementsByClassName('button register')
 for (let i = 0; i < regFormButtons.length; i++) {
 	onClick(regFormButtons[i], () => {
-		console.log('Reg form visible')
 		regFormModal.style.display = 'block'
+		regFormModal.style.opacity = '1.0'
 	})
 }
 const regFormClose = getElementByClassName('reg-form-close', 0)
 onClick(regFormClose, () => {
-	console.log('Reg form hidden')
-	regFormModal.style.display = 'none'
+	regFormModal.style.opacity = '0'
+	setTimeout(() => regFormModal.style.display = 'none', 400)
 })
 
 // Event summary “Read more...” expansion
