@@ -20,7 +20,7 @@ for (let i = 0; i < regFormButtons.length; i++) {
 		// Prepare for fade in
 		regFormModal.style.opacity = '0'
 		// Unhide modal
-		setTimeout(() => regFormModalStatus.style.display = 'block', 100)
+		setTimeout(() => showElement(regFormModalStatus), 100)
 		// Fade in modal window
 		setTimeout(() => regFormModal.style.opacity = '1.0', 200)
 		setTimeout(() => {
@@ -37,7 +37,7 @@ const regFormClose = getElementByClassName('reg-form-close', 0)
 onClick(regFormClose, () => {
 	document.body.style.overflow = 'visible'
 	regFormModal.style.opacity = '0'
-	setTimeout(() => regFormModalStatus.style.display = 'none', 200)
+	setTimeout(() => hideElement(regFormModalStatus), 200)
 })
 
 // Event summary “Read more...” expansion
