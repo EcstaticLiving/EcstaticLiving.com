@@ -13,7 +13,7 @@ setTimeout(() => changeEmailContainerBackground(getElementByClassName('email-con
 const regFormModalStatus = getElementByClassName('modal-status registration', 0)
 const regFormModal = getElementByClassName('modal registration', 0)
 const regFormModalWindow = getElementByClassName('modal-window registration', 0)
-const regFormContainer = getElementByClassName('container reg-form')
+const regFormContainer = getElementByClassName('container reg-form', 0)
 const regFormButtons = getElementsByClassName('button register')
 for (let i = 0; i < regFormButtons.length; i++) {
 	onClick(regFormButtons[i], () => {
@@ -25,7 +25,7 @@ for (let i = 0; i < regFormButtons.length; i++) {
 		setTimeout(() => regFormModal.style.opacity = '1.0', 200)
 		setTimeout(() => {
 			// Show reg form: browser error that doesn’t show opacity of children unless body is scrolled by 1 px and window opacity is set to 1 during scroll
-			regFormContainer.scrollTop
+			regFormContainer.scrollTop = 0
 			window.scrollBy(0, 1)
 			// Prevent background from scrolling
 			document.body.style.overflow = 'hidden'
