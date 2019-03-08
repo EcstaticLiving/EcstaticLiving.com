@@ -34,6 +34,7 @@ for (let i = 0; i < regFormButtons.length; i++) {
 		setTimeout(() => {
 			onScroll(regFormModalWindow, () => {
 				console.log('scrolling')
+				regFormModalWindow.style.width = '100%'
 				regFormModalWindow.style.opacity = '1.0'
 			})
 		}, 300)
