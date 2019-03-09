@@ -28,7 +28,7 @@ for (let i = 0; i < regFormButtons.length; i++) {
 			// Scroll to top
 			regFormContainer.scrollTop = 0
 			// Show reg form: browser error that doesn’t show opacity of elements inside modal window unless body is scrolled by at least 1 px
-			// window.scrollBy(0, 1)
+			window.scrollTop(0, 0)
 			// Prevent background from scrolling
 			document.body.style.overflow = 'hidden'
 		}, 100)
