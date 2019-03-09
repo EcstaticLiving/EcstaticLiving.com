@@ -33,7 +33,7 @@ for (let i = 0; i < regFormButtons.length; i++) {
 				// Prevent background from scrolling
 				document.body.style.overflow = 'hidden'
 			}, 10)
-		}, 10)
+		}, 100)
 		
 	})
 }
