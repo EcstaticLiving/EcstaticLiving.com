@@ -17,6 +17,8 @@ const regFormContainer = getElementByClassName('container reg-form', 0)
 const regFormButtons = getElementsByClassName('button register')
 for (let i = 0; i < regFormButtons.length; i++) {
 	onClick(regFormButtons[i], () => {
+		// Show reg form: browser error that doesn’t show opacity of elements inside modal window unless body is scrolled to top
+		window.scrollTop(0, 0)
 		// Prepare for fade in
 		regFormModal.style.opacity = '0'
 		// Unhide modal
@@ -27,8 +29,6 @@ for (let i = 0; i < regFormButtons.length; i++) {
 			regFormModal.style.opacity = '1.0'
 			// Scroll to top
 			regFormContainer.scrollTop = 0
-			// Show reg form: browser error that doesn’t show opacity of elements inside modal window unless body is scrolled to top
-			window.scrollTop(0, 0)
 			// Prevent background from scrolling
 			document.body.style.overflow = 'hidden'
 		}, 100)
