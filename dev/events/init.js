@@ -24,16 +24,16 @@ for (let i = 0; i < regFormButtons.length; i++) {
 			regFormModal.style.opacity = '0'
 			// Unhide modal
 			showElement(regFormModalStatus)
+			// Fade in modal window
+			setTimeout(() => {
+				// Fade in
+				regFormModal.style.opacity = '1.0'
+				// Scroll to top
+				regFormContainer.scrollTop = 0
+				// Prevent background from scrolling
+				document.body.style.overflow = 'hidden'
+			}, 100)
 		}, 100)
-		// Fade in modal window
-		setTimeout(() => {
-			// Fade in
-			regFormModal.style.opacity = '1.0'
-			// Scroll to top
-			regFormContainer.scrollTop = 0
-			// Prevent background from scrolling
-			document.body.style.overflow = 'hidden'
-		}, 200)
 		
 	})
 }
