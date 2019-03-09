@@ -10,30 +10,27 @@ eventDetails.classList.add('fade-move')
 setTimeout(() => changeEmailContainerBackground(getElementByClassName('email-container-background', 0)), 600)
 
 // Event listener for if reg form is closed
+const regFormButtons = getElementsByClassName('button register')
 const regFormModalStatus = getElementByClassName('modal-status registration', 0)
 const regFormModal = getElementByClassName('modal registration', 0)
 const regFormModalWindow = getElementByClassName('modal-window registration', 0)
 const regFormContainer = getElementByClassName('container reg-form', 0)
-const regFormButtons = getElementsByClassName('button register')
 for (let i = 0; i < regFormButtons.length; i++) {
 	onClick(regFormButtons[i], () => {
-		// Show reg form: browser error that doesn’t show opacity of elements inside modal window unless body is scrolled to top
-		window.scrollTo(0, 0)
+		// Unhide modal
+		showElement(regFormModalStatus)
+		// Fade in modal
+		regFormModal.classList.add('fade')
 		setTimeout(() => {
-			// Prepare for fade in
-			regFormModal.style.opacity = '0'
-			// Unhide modal
-			showElement(regFormModalStatus)
-			// Fade in modal window
-			setTimeout(() => {
-				// Fade in
-				regFormModal.style.opacity = '1.0'
-				// Scroll to top
-				regFormContainer.scrollTop = 0
-				// Prevent background from scrolling
-				document.body.style.overflow = 'hidden'
-			}, 100)
-		}, 100)
+			// Show reg form: browser error that doesn’t show opacity of elements inside modal window unless body is scrolled to top
+			window.scrollTo(0, 0)
+			// Fade in window
+			regFormModalWindow.classList.add('fade')
+			// Scroll to top
+			regFormContainer.scrollTop = 0
+			// Prevent background from scrolling
+			document.body.style.overflow = 'hidden'
+		}, 200)
 	})
 }
 
@@ -41,7 +38,11 @@ const regFormClose = getElementByClassName('reg-form-close', 0)
 onClick(regFormClose, () => {
 	// Reallow background to scroll
 	document.body.style.overflow = 'visible'
-	regFormModal.style.opacity = '0'
+	// Fade out modal
+	regFormModal.classList.remove('fade')
+	// Fade out window
+	regFormModalWindow.classList.remove('fade')
+	// Hide modal
 	setTimeout(() => hideElement(regFormModalStatus), 200)
 })
 
