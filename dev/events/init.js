@@ -11,26 +11,29 @@ setTimeout(() => changeEmailContainerBackground(getElementByClassName('email-con
 
 // Event listener for if reg form is closed
 const regFormButtons = getElementsByClassName('button register')
+const regFormModalBackground = getElementByClassName('modal-background', 0)
 const regFormModalStatus = getElementByClassName('modal-status registration', 0)
 const regFormModal = getElementByClassName('modal registration', 0)
 const regFormModalWindow = getElementByClassName('modal-window registration', 0)
 const regFormContainer = getElementByClassName('container reg-form', 0)
 for (let i = 0; i < regFormButtons.length; i++) {
 	onClick(regFormButtons[i], () => {
-		// Show reg form: browser error that doesn’t show opacity of elements inside modal window unless body is scrolled to top
-		window.scrollTo(0, 0)
+		showElement(regFormModalBackground)
+		setTimeout(() => {
+			regFormModalBackground.add('fade')
+			// Show reg form: browser error that doesn’t show opacity of elements inside modal window unless body is scrolled to top
+			window.scrollTo(0, 0)
+		}, 100)
 		setTimeout(() => {
 			// Unhide modal
 			showElement(regFormModalStatus)
-			// Fade in modal
-			regFormModal.classList.add('fade')
 			// Fade in window
 			regFormModalWindow.classList.add('fade')
 			// Scroll to top
 			regFormContainer.scrollTop = 0
 			// Prevent background from scrolling
 			document.body.style.overflow = 'hidden'
-		}, 100)
+		}, 200)
 	})
 }
 
@@ -38,12 +41,15 @@ const regFormClose = getElementByClassName('reg-form-close', 0)
 onClick(regFormClose, () => {
 	// Reallow background to scroll
 	document.body.style.overflow = 'visible'
-	// Fade out modal
-	regFormModal.classList.remove('fade')
 	// Fade out window
 	regFormModalWindow.classList.remove('fade')
+	// Fade out modal background
+	regFormModalBackground.classList.remove('fade')
 	// Hide modal
-	setTimeout(() => hideElement(regFormModalStatus), 200)
+	setTimeout(() => {
+		hideElement(regFormModalStatus)
+		hideElement(regFormModalBackground)
+	}, 200)
 })
 
 // Event summary “Read more...” expansion
