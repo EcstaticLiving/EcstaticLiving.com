@@ -16,7 +16,10 @@ const changeEmailContainerBackground = elem => {
   const mode = !invisible
     ? 'add'
     : 'remove'
+  console.log(elem)
+  console.log(elem.childNodes[i].className.includes('w-condition-invisible'))
   for (let i = 0; i < elem.childNodes.length; i++) {
+    console.log(elem.childNodes[i].className)
     // ...then make the email signup box title white instead of charcoal.
     if (
       elem.childNodes[i].className === 'title small'
