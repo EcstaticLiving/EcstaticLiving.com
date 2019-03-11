@@ -20,22 +20,21 @@ const changeEmailContainerBackground = elem => {
   console.log(elem.childNodes)
   for (let i = 0; i < elem.childNodes.length; i++) {
     console.log(elem.childNodes[i].className)
-    // ...then make the email signup box title white instead of charcoal.
-    if (
-      elem.childNodes[i].className === 'title small'
-      || elem.childNodes[i].className === 'button transparent'
-    ) {
-      elem.childNodes[i].style.color = color
-    }
-    else if (
-      elem.childNodes[i].className === 'input'
-      || elem.childNodes[i].className === 'textarea'
-    ) {
-      if (mode === 'add') {
-        elem.childNodes[i].classList.add('white-placeholder')
-      }
-      else {
-        elem.childNodes[i].classList.remove('white-placeholder')
+    if (elem.childNodes[i].className === 'email-form') {
+      for (let j = 0; j < elem.childNodes[i].length; j++) {
+        const element = elem.childNodes[i][j]
+        // ...then make the email signup box title white instead of charcoal.
+        if (element.className === 'title small' || element.className === 'button transparent') {
+          element.style.color = color
+        }
+        else if (element.className === 'input' || element.className === 'textarea') {
+          if (mode === 'add') {
+            element.classList.add('white-placeholder')
+          }
+          else {
+            element.classList.remove('white-placeholder')
+          }
+        }
       }
     }
   }
