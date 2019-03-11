@@ -11,9 +11,6 @@ const changeEmailContainerBackground = ({ element, visible }) => {
 		// Elements are contained inside `email-form` class...
 		if (element.children[i].className === 'email-form') {
       // Make the email signup box title and button white instead of charcoal.
-      console.log(element)
-      console.log(element.children)
-      console.log(element.children[i])
       const title = element.querySelectorAll('div.title.small')[0]
       title.style.color = color
       const button = element.querySelectorAll('a.button.transparent')[0]
