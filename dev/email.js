@@ -19,16 +19,16 @@ const changeEmailContainerBackground = elem => {
 	for (let i = 0; i < elem.children.length; i++) {
 		// Elements are contained inside `email-form` class...
 		if (elem.children[i].className === 'email-form') {
-      console.log(elem.children[i].querySelectorAll('div.title.small')[0])
-      console.log(elem.children[i].querySelectorAll('a.button.transparent'))
+      // Make the email signup box title and button white instead of charcoal.
+      const title = elem.children[i].querySelectorAll('div.title.small')[0]
+      title.style.color = color
+      const button = elem.children[i].querySelectorAll('a.button.transparent')[0]
+      button.style.color = color
+      // Input elements are listed as children...
 			for (let j = 0; j < elem.children[i].length; j++) {
 				const element = elem.children[i][j]
-				console.log(element)
-				// ...then make the email signup box title white instead of charcoal.
-				if (element.className.includes('title small') || element.className.includes('button transparent')) {
-					element.style.color = color
-				}
-				else if (element.className.includes('input') || element.className.includes('textarea')) {
+				// ...so make the input placeholders white instead of charcoal.
+				if (element.className.includes('input') || element.className.includes('textarea')) {
 					if (mode === 'add') {
 						element.classList.add('white-placeholder')
 					}
