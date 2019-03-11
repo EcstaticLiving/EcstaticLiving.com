@@ -5,7 +5,6 @@ const changeEmailContainerBackground = elem => {
 	let visible = false
 	for (let i = 0; i < elem.childNodes.length; i++) {
 		// Element with class `email container background` has conditional visibility in Webflow, so Webflow tags a new class called `w-condition-invisible` if Collection determines it invisible
-		console.log(elem.childNodes[i].className.includes('w-condition-invisible'))
 		visible = elem.childNodes[i].className.includes('w-condition-invisible')
 		if (visible) {
 			break
@@ -17,9 +16,8 @@ const changeEmailContainerBackground = elem => {
 	const mode = !visible
 		? 'add'
 		: 'remove'
-	console.log(elem.childNodes)
 	for (let i = 0; i < elem.childNodes.length; i++) {
-		console.log(elem.childNodes[i])
+		console.log(elem.childNodes[i][0])
 		// Elements are contained inside `email-form` class...
 		if (elem.childNodes[i].className === 'email-form') {
 			for (let j = 0; j < elem.childNodes[i].length; j++) {
