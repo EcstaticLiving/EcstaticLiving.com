@@ -80,7 +80,7 @@ const fadeInHeroTab = tabIndex => {
 	const elements = getElementsByClassName('email-box')
 	const emailBox = elements[elements.length]
 	// Element with class `email container background` has conditional visibility in Webflow, so Webflow tags a new class called `w-condition-invisible` if Collection determines it invisible
-	setTimeout(() => changeEmailContainerBackground({ element: emailBox, visible: background.classList.includes('w-condition-invisible') }), 600)
+	setTimeout(() => changeEmailContainerBackground({ element: emailBox, visible: background.classList.contains('w-condition-invisible') }), 600)
 }
 
 const resetHeroTab = tabIndex => {
