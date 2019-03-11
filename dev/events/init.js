@@ -9,7 +9,7 @@ for (let i = 0; i < eventTitles.length; i++) {
 	eventSubtitles[i].classList.add('fade-move')
 	eventDetails[i].classList.add('fade-move')
 	// Email signup form
-	setTimeout(() => changeEmailContainerBackground(emailBox[i]), 500)
+	changeEmailContainerBackground(emailBox[i])
 }
 
 // Event listener for if reg form is closed
