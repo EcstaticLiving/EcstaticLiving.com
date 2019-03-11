@@ -2,24 +2,21 @@
 
 const changeEmailContainerBackground = elem => {
   // If background image is so complex that email signup form needs a dark background instead of a transparent background...
-  let invisible = false
+  let visible = false
   for (let i = 0; i < elem.childNodes.length; i++) {
     // Element with class `email container background` has conditional visibility in Webflow, so Webflow tags a new class called `w-condition-invisible` if Collection determines it invisible
-    console.log(elem.childNodes[i].className.includes('w-condition-invisible'))
-    invisible = elem.childNodes[i].className.includes('w-condition-invisible')
-    if (invisible) {
+    visible = elem.childNodes[i].className.includes('w-condition-invisible')
+    if (visible) {
       break
     }
   }
-  const color = !invisible
+  const color = !visible
     ? '#fff'
     : '#333'
-  const mode = !invisible
+  const mode = !visible
     ? 'add'
     : 'remove'
-  console.log(elem.childNodes)
   for (let i = 0; i < elem.childNodes.length; i++) {
-    console.log(elem.childNodes[i].className)
     // ...then make the email signup box title white instead of charcoal.
     if (
       elem.childNodes[i].className === 'title small'
