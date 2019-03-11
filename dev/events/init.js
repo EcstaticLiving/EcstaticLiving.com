@@ -21,9 +21,9 @@ for (let i = 0; i < regFormButtons.length; i++) {
 		showElement(regFormModalBackground)
 		setTimeout(() => {
 			regFormModalBackground.classList.add('fade')
-			// Show reg form: browser error that doesn’t show opacity of elements inside modal window unless body is scrolled to top
-			window.scrollTo(0, 0)
 			setTimeout(() => {
+				// Show reg form: browser error that doesn’t show opacity of elements inside modal window unless body is scrolled to top
+				window.scrollTo(0, 0)
 				// Unhide modal
 				showElement(regFormModalStatus)
 				// Fade in window
