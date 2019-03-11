@@ -78,7 +78,7 @@ const fadeInHeroTab = tabIndex => {
 	const background = getElementByClassName('email-container-background', tabIndex)
 	// Email box is last element, which is visible in UI. All previous email boxes are invisible but embedded into each hero image, so as to be connected to Webflow (see below comment)
 	const elements = getElementsByClassName('email-box')
-	const emailBox = elements[elements.length]
+	const emailBox = elements[elements.length - 1]
 	// Element with class `email container background` has conditional visibility in Webflow, so Webflow tags a new class called `w-condition-invisible` if Collection determines it invisible
 	setTimeout(() => changeEmailContainerBackground({ element: emailBox, visible: background.classList.contains('w-condition-invisible') }), 600)
 }
