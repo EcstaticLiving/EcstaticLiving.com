@@ -74,7 +74,7 @@ const fadeInHeroTab = tabIndex => {
 	// Slide in Hero Arrows
 	setTimeout(() => heroArrows.classList.add('fade-move'), 1100)
 	// Email signup form
-	setTimeout(() => changeEmailContainerBackground(getElementByClassName('email-container-background', tabIndex)), 600)
+	setTimeout(() => changeEmailContainerBackground(getElementByClassName('email-form', tabIndex)), 600)
 }
 
 const resetHeroTab = tabIndex => {
