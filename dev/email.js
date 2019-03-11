@@ -26,10 +26,10 @@ const changeEmailContainerBackground = elem => {
 				const element = elem.childNodes[i][j]
 				console.log(element)
 				// ...then make the email signup box title white instead of charcoal.
-				if (element.className === 'title small' || element.className === 'button transparent') {
+				if (element.className.includes('title small') || element.className.includes('button transparent')) {
 					element.style.color = color
 				}
-				else if (element.className === 'input' || element.className === 'textarea') {
+				else if (element.className.includes('input') || element.className.includes('textarea')) {
 					if (mode === 'add') {
 						element.classList.add('white-placeholder')
 					}
