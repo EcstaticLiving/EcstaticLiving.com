@@ -17,7 +17,7 @@ const changeEmailContainerBackground = elem => {
   const mode = !invisible
     ? 'add'
     : 'remove'
-  console.log(elem)
+  console.log(elem.childNodes)
   for (let i = 0; i < elem.childNodes.length; i++) {
     console.log(elem.childNodes[i].className)
     // ...then make the email signup box title white instead of charcoal.
