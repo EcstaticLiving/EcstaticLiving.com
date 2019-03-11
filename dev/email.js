@@ -17,7 +17,7 @@ const changeEmailContainerBackground = elem => {
 	const mode = !visible
 		? 'add'
 		: 'remove'
-	console.log(elem.childNodes[i])
+	console.log(elem.childNodes)
 	for (let i = 0; i < elem.childNodes.length; i++) {
 		console.log(elem.childNodes[i])
 		// Elements are contained inside `email-form` class...
