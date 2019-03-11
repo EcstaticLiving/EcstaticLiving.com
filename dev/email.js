@@ -1,27 +1,28 @@
 // EMAIL NEWSLETTER SIGNUPS
 
 const changeEmailContainerBackground = elem => {
-  // If background image is so complex that email signup form needs a red background instead of a transparent background...
+  // If background image is so complex that email signup form needs a dark background instead of a transparent background...
   if (!elem.classList.contains('w-condition-invisible')) {
     // ...then make the email signup box title white instead of charcoal.
-    getElementByClassName('title small').style.color = '#fff'
-    getElementByClassName('button transparent').style.color = '#fff'
-    for (let i = 0; i < getElementsByClassName('input').length; i++) {
-      getElementsByClassName('input')[i].classList.add('white-placeholder')
+    elem.getElementsByClassName('title small')[0].style.color = '#fff'
+    elem.getElementsByClassName('button transparent')[0].style.color = '#fff'
+    for (let i = 0; i < elem.getElementsByClassName('input').length; i++) {
+      elem.getElementsByClassName('input')[i].classList.add('white-placeholder')
     }
-    if (getElementByClassName('textarea', 0)) {
-      getElementByClassName('textarea', 0).classList.add('white-placeholder')
+    // If email signup form has text area, e.g. for questions.
+    if (elem.getElementByClassName('textarea', 0)) {
+      elem.getElementByClassName('textarea', 0).classList.add('white-placeholder')
     }
   }
   else {
     // ...otherwise, put it back to its original color.
-    getElementByClassName('title small').style.color = '#333'
-    getElementByClassName('button transparent').style.color = '#333'
-    for (let i = 0; i < getElementsByClassName('input').length; i++) {
-      getElementsByClassName('input')[i].classList.remove('white-placeholder')
+    elem.getElementsByClassName('title small')[0].style.color = '#333'
+    elem.getElementsByClassName('button transparent')[0].style.color = '#333'
+    for (let i = 0; i < elem.getElementsByClassName('input').length; i++) {
+      elem.getElementsByClassName('input')[i].classList.remove('white-placeholder')
     }
     if (getElementByClassName('textarea', 0)) {
-      getElementByClassName('textarea', 0).classList.remove('white-placeholder')
+      elem.getElementByClassName('textarea', 0).classList.remove('white-placeholder')
     }
   }
 }
