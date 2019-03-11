@@ -1,39 +1,30 @@
 // EMAIL NEWSLETTER SIGNUPS
 
-const changeEmailContainerBackground = elem => {
-	// If background image is so complex that email signup form needs a dark background instead of a transparent background...
-	let visible = false
-	for (let i = 0; i < elem.children.length; i++) {
-		// Element with class `email container background` has conditional visibility in Webflow, so Webflow tags a new class called `w-condition-invisible` if Collection determines it invisible
-		visible = elem.children[i].className.includes('w-condition-invisible')
-		if (visible) {
-			break
-		}
-	}
+const changeEmailContainerBackground = ({ element, visible }) => {
 	const color = !visible
 		? '#fff'
 		: '#333'
 	const mode = !visible
 		? 'add'
 		: 'remove'
-	for (let i = 0; i < elem.children.length; i++) {
+	for (let i = 0; i < element.children.length; i++) {
 		// Elements are contained inside `email-form` class...
-		if (elem.children[i].className === 'email-form') {
+		if (element.children[i].className === 'email-form') {
       // Make the email signup box title and button white instead of charcoal.
-      const title = elem.children[i].querySelectorAll('div.title.small')[0]
+      const title = element.children[i].querySelectorAll('div.title.small')[0]
       title.style.color = color
-      const button = elem.children[i].querySelectorAll('a.button.transparent')[0]
+      const button = element.children[i].querySelectorAll('a.button.transparent')[0]
       button.style.color = color
       // Input elements are listed as children...
-			for (let j = 0; j < elem.children[i].length; j++) {
-				const element = elem.children[i][j]
+			for (let j = 0; j < element.children[i].length; j++) {
+				const inputElement = element.children[i][j]
 				// ...so make the input placeholders white instead of charcoal.
-				if (element.className.includes('input') || element.className.includes('textarea')) {
+				if (inputElement.className.includes('input') || inputElement.className.includes('textarea')) {
 					if (mode === 'add') {
-						element.classList.add('white-placeholder')
+						inputElement.classList.add('white-placeholder')
 					}
 					else {
-						element.classList.remove('white-placeholder')
+						inputElement.classList.remove('white-placeholder')
 					}
 				}
 			}

@@ -9,7 +9,9 @@ for (let i = 0; i < eventTitles.length; i++) {
 	eventSubtitles[i].classList.add('fade-move')
 	eventDetails[i].classList.add('fade-move')
 	// Email signup form
-	changeEmailContainerBackground(emailBox[i])
+	// If background image is so complex that email signup form needs a dark background instead of a transparent background...
+	let visible = emailBox[i].querySelectorAll('w-condition-invisible').length > 0
+	changeEmailContainerBackground({ element: emailBox[i], visible })
 }
 
 // Event listener for if reg form is closed
