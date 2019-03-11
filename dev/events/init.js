@@ -2,14 +2,14 @@
 const eventTitles = getElementsByClassName('event-title')
 const eventSubtitles = getElementsByClassName('event-subtitle')
 const eventDetails = getElementsByClassName('event-details')
-const emailForm = getElementsByClassName('email-form')
+const emailBox = getElementsByClassName('email-box')
 for (let i = 0; i < eventTitles.length; i++) {
 	// Fade in
 	eventTitles[i].classList.add('fade-move')
 	eventSubtitles[i].classList.add('fade-move')
 	eventDetails[i].classList.add('fade-move')
 	// Email signup form
-	setTimeout(() => changeEmailContainerBackground(emailForm[i]), 500)
+	setTimeout(() => changeEmailContainerBackground(emailBox[i]), 500)
 }
 
 // Event listener for if reg form is closed

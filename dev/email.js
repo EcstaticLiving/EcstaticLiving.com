@@ -2,10 +2,17 @@
 
 const changeEmailContainerBackground = elem => {
   // If background image is so complex that email signup form needs a dark background instead of a transparent background...
-  const color = !elem.classList.contains('w-condition-invisible')
+  let visible = false
+  for (let i = 0; i < elem.childNodes.length; i++) {
+    visible = elem.childNodes[i].className.includes('w-condition-invisible')
+    if (visible) {
+      break
+    }
+  }
+  const color = !visible
     ? '#fff'
     : '#333'
-  const mode = !elem.classList.contains('w-condition-invisible')
+  const mode = !visible
     ? 'add'
     : 'remove'
   for (let i = 0; i < elem.childNodes.length; i++) {
