@@ -1,13 +1,16 @@
 // Opening for events
-const eventTitle = getElementByClassName('event-title', 0)
-const eventSubtitle = getElementByClassName('event-subtitle', 0)
-const eventDetails = getElementByClassName('event-details', 0)
-// Fade in first slide
-eventTitle.classList.add('fade-move')
-eventSubtitle.classList.add('fade-move')
-eventDetails.classList.add('fade-move')
-// Email signup form
-setTimeout(() => changeEmailContainerBackground(getElementByClassName('email-container-background', 0)), 600)
+const eventTitles = getElementsByClassName('event-title')
+const eventSubtitles = getElementsByClassName('event-subtitle')
+const eventDetails = getElementsByClassName('event-details')
+const emailContainers = getElementsByClassName('email-container-background')
+for (let i = 0; i < eventTitles.length; i++) {
+	// Fade in
+	eventTitles[i].classList.add('fade-move')
+	eventSubtitles[i].classList.add('fade-move')
+	eventDetails[i].classList.add('fade-move')
+	// Email signup form
+	setTimeout(() => changeEmailContainerBackground(emailContainers[i]), 500)
+}
 
 // Event listener for if reg form is closed
 const regFormButtons = getElementsByClassName('button register')
