@@ -5,6 +5,7 @@ const changeEmailContainerBackground = elem => {
   let visible = false
   for (let i = 0; i < elem.childNodes.length; i++) {
     // Element with class `email container background` has conditional visibility in Webflow, so Webflow tags a new class called `w-condition-invisible` if Collection determines it invisible
+    console.log(elem.childNodes[i].className.includes('w-condition-invisible'))
     visible = elem.childNodes[i].className.includes('w-condition-invisible')
     if (visible) {
       break
@@ -16,7 +17,9 @@ const changeEmailContainerBackground = elem => {
   const mode = !visible
     ? 'add'
     : 'remove'
+  console.log(elem.childNodes)
   for (let i = 0; i < elem.childNodes.length; i++) {
+    console.log(elem.childNodes[i].className)
     // ...then make the email signup box title white instead of charcoal.
     if (
       elem.childNodes[i].className === 'title small'
