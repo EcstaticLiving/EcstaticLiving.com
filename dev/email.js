@@ -2,30 +2,34 @@
 
 const changeEmailContainerBackground = elem => {
   // If background image is so complex that email signup form needs a dark background instead of a transparent background...
-  if (!elem.classList.contains('w-condition-invisible')) {
+  const color = !elem.classList.contains('w-condition-invisible')
+    ? '#fff'
+    : '#333'
+  const mode = !elem.classList.contains('w-condition-invisible')
+    ? 'add'
+    : 'remove'
+  for (let i = 0; i < elem.childNodes.length; i++) {
     // ...then make the email signup box title white instead of charcoal.
-    elem.getElementsByClassName('title small')[0].style.color = '#fff'
-    elem.getElementsByClassName('button transparent')[0].style.color = '#fff'
-    for (let i = 0; i < elem.getElementsByClassName('input').length; i++) {
-      elem.getElementsByClassName('input')[i].classList.add('white-placeholder')
+    if (
+      elem.childNodes[i].className === 'title small'
+      || elem.childNodes[i].className === 'button transparent'
+    ) {
+      elem.childNodes[i].style.color = color
     }
-    // If email signup form has text area, e.g. for questions.
-    if (elem.getElementByClassName('textarea', 0)) {
-      elem.getElementByClassName('textarea', 0).classList.add('white-placeholder')
-    }
-  }
-  else {
-    // ...otherwise, put it back to its original color.
-    elem.getElementsByClassName('title small')[0].style.color = '#333'
-    elem.getElementsByClassName('button transparent')[0].style.color = '#333'
-    for (let i = 0; i < elem.getElementsByClassName('input').length; i++) {
-      elem.getElementsByClassName('input')[i].classList.remove('white-placeholder')
-    }
-    if (getElementByClassName('textarea', 0)) {
-      elem.getElementByClassName('textarea', 0).classList.remove('white-placeholder')
+    else if (
+      elem.childNodes[i].className === 'input'
+      || elem.childNodes[i].className === 'textarea'
+    ) {
+      if (mode === 'add') {
+        elem.childNodes[i].classList.add('white-placeholder')
+      }
+      else {
+        elem.childNodes[i].classList.remove('white-placeholder')
+      }
     }
   }
-}
+
+  }
 	
 // 1. Define all input fields
 const formNames = [
