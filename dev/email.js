@@ -14,9 +14,9 @@ const changeEmailContainerBackground = ({ element, visible }) => {
       console.log(element)
       console.log(element.children)
       console.log(element.children[i])
-      const title = element.children[i].querySelectorAll('div.title.small')[0]
+      const title = element.querySelectorAll('div.title.small')[0]
       title.style.color = color
-      const button = element.children[i].querySelectorAll('a.button.transparent')[0]
+      const button = element.querySelectorAll('a.button.transparent')[0]
       button.style.color = color
       // Input elements are listed as children...
 			for (let j = 0; j < element.children[i].length; j++) {
