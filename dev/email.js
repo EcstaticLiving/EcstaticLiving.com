@@ -17,9 +17,9 @@ const changeEmailContainerBackground = elem => {
 		? 'add'
 		: 'remove'
 	for (let i = 0; i < elem.childNodes.length; i++) {
-		console.log(elem.childNodes[i][0])
 		// Elements are contained inside `email-form` class...
 		if (elem.childNodes[i].className === 'email-form') {
+      console.log(elem.childNodes[i])
 			for (let j = 0; j < elem.childNodes[i].length; j++) {
 				const element = elem.childNodes[i][j]
 				console.log(element)
