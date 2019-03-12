@@ -73,12 +73,8 @@ const fadeInHeroTab = tabIndex => {
 	setTimeout(() => heroButton.classList.add('fade-move'), 800)
 	// Slide in Hero Arrows
 	setTimeout(() => heroArrows.classList.add('fade-move'), 1100)
-	// Email signup form
-	const element = getElementByClassName('email-box', tabIndex)
 	// If background image is so complex that email signup form needs a dark background instead of a transparent background...
-	const background = getElementByClassName('email-container-background', tabIndex)
-	// Element with class `email container background` has conditional visibility in Webflow, so Webflow tags a new class called `w-condition-invisible` if Collection determines it invisible
-	setTimeout(() => changeEmailContainerBackground({ element, visible: background.classList.contains('w-condition-invisible') }), 600)
+	setTimeout(() => changeEmailContainerBackground(getElementByClassName('email-box', tabIndex)), 600)
 }
 
 const resetHeroTab = tabIndex => {

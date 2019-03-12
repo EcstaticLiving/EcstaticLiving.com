@@ -1,17 +1,19 @@
 // EMAIL NEWSLETTER SIGNUPS
 
-const changeEmailContainerBackground = ({ element, visible }) => {
-	const color = !visible
-		? '#fff'
-		: '#333'
-	const mode = !visible
-		? 'add'
-		: 'remove'
+const changeEmailContainerBackground = element => {
+  // Element with class `email container background` has conditional visibility in Webflow, so Webflow tags a new class called `w-condition-invisible` if collection determines it’s invisible
+  const invisible = element.querySelectorAll('div.email-container-background.w-condition-invisible').length > 0
+	const color = invisible
+    ? '#333'
+    : '#fff'
+	const mode = invisible
+		? 'remove'
+		: 'add'
 	for (let i = 0; i < element.children.length; i++) {
 		// Elements are contained inside `email-form` class...
 		if (element.children[i].className === 'email-form') {
       // Make the email signup box title and button white instead of charcoal.
-      const title = element.querySelectorAll('div.title.small')[0]
+      const title = element.querySelectorAll('div.title.email')[0]
       title.style.color = color
       const button = element.querySelectorAll('a.button.transparent')[0]
       button.style.color = color
