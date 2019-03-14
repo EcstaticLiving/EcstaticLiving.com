@@ -1,6 +1,6 @@
-const navHamburger = getElementByClassName('menu-link hamburger', 0)
-const navClose = getElementByClassName('nav-close', 0)
-const navContainer = getElementByClassName('nav-container', 0)
+const navHamburger = getElementByClassName('menu-link hamburger')
+const navClose = getElementByClassName('nav-close')
+const navContainer = getElementByClassName('nav-container')
 
 // If nav menu is opened
 onClick(navHamburger, () => {

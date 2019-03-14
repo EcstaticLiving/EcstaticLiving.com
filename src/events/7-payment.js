@@ -126,7 +126,7 @@ if (isFormPage()) {
 	card.mount(getElementById('card-element'))
 	card.addEventListener('change', result => paymentValidation(result))	
 }
-onClick(getElementById('button-stripe-error', 0), () => hideElement(getElementByClassName('modal-status card-error', 0)))
+onClick(getElementById('button-stripe-error', 0), () => hideElement(getElementByClassName('modal-status card-error')))
 
 
 // Always allow pay now button to be clicked

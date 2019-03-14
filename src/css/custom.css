@@ -49,9 +49,10 @@ select.parsley-error {
 	color: #555;
 }
 .white-placeholder::placeholder {
-	color: #fff;
+	color: #fff !important;
 }
 .white-placeholder {
+	color: #fff !important;
 	background-color: rgba(255, 255, 255, 0.4) !important;
 }
 

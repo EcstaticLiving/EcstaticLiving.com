@@ -3,8 +3,8 @@ const clearForm = formType => {
 	if (localStorage.getItem('EcstaticLiving:' + formType)) showElement(getElementById('form-load'))
 	else hideElement(getElementById('form-load'))
 	hideElement(getElementById('form-clear'))
-	hideElement(getElementByClassName('w-form-done', 0))
-	hideElement(getElementByClassName('w-form-fail', 0))
+	hideElement(getElementByClassName('w-form-done'))
+	hideElement(getElementByClassName('w-form-fail'))
 	if (formType === 'Event') {
 		formReset(regForm)
 	}

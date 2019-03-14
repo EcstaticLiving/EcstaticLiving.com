@@ -1,3 +1,11 @@
+// Prevent accidental submission of form through 'enter' key
+onKeyPress(document, e => {
+	if (isInput(e.target) && e.which === 13) {
+		e.preventDefault()
+		return false
+	}
+})
+
 // Prevent form from being submitted. This is being done manually in on click paymentButton
 onSubmit(regForm, () => null)
 
