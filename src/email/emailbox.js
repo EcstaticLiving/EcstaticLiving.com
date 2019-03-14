@@ -81,7 +81,9 @@ emailBoxNames.forEach(emailBoxName => {
 									eventMobile.value = field.value
 								}
 								// and clear it from email box for privacy.
-								field.value = ''
+								if (field) {
+									field.value = ''
+								}
 							})
 							showRegForm()
 						}
