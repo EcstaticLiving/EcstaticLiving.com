@@ -8,13 +8,13 @@ const changeEmailContainerBackground = ({ visible = false }) => {
 		? 'add'
 		: 'remove'
 	// Make the email signup box title and button white instead of charcoal.
-	const title = document.querySelectorAll('div.title.email')[0]
-	if (title) {
-		title.style.color = color
-	}
-	const button = document.querySelectorAll('a.button.transparent')[0]
-	if (button) {
-		button.style.color = color
+	const titles = document.querySelectorAll('div.title.email')
+	const buttons = document.querySelectorAll('a.button.transparent')
+	if (titles.length) {
+		for (let i = 0; i < titles.length; i++) {
+			titles[i].style.color = color
+			buttons[i].style.color = color
+		}
 	}
 	const inputFields = document.querySelectorAll('div.email-box input')
 	const textareaFields = document.querySelectorAll('div.email-box textarea')
