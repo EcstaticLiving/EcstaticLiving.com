@@ -36,6 +36,7 @@ emailBoxNames.forEach(emailBoxName => {
 							phone: true,
 							phoneRegionCode: 'US'
 						})
+						window.intlTelInput(field)
 					}
 					// return true if all fields have been filled out
 					return (
