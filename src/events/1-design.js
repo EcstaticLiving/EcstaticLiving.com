@@ -23,7 +23,7 @@ const regFormContainer = getElementByClassName('reg-form-container')
 const showRegForm = () => {
 	// Prevent background to scroll
 	document.body.style.overflow = 'hidden'
-	showElement(regFormContainer)
+	flexElement(regFormContainer)
 	setTimeout(() => fadeInElement(regFormContainer), 100)
 }
 
