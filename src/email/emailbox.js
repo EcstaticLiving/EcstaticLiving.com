@@ -46,14 +46,14 @@ emailBoxNames.forEach(emailBoxName => {
 				// Only show alert if all fields have been filled out somewhat, but not yet validated
 				if (!valid && everyFieldHasBeenFilledOut) {
 					alertField.classList.remove('hidden')
-					buttonField.classList.add('disabled')
+					buttonField.disabled = true
 					emailBoxForm.action = ''
 					emailBoxForm.removeEventListener('click', () => null)
 				}
 				// ...and if all’s good to go, change button class to active, and submit emailBoxForm.
 				else {
 					alertField.classList.add('hidden')
-					buttonField.classList.remove('disabled')
+					buttonField.disabled = false
 					emailBoxForm.action = 'https://app.getresponse.com/add_subscriber.html'
 					buttonField.addEventListener('click', () => emailBoxForm.submit())
 				}
