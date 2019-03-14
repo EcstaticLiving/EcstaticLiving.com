@@ -2,6 +2,7 @@
 const eventTitles = getElementsByClassName('event-title')
 const eventSubtitles = getElementsByClassName('event-subtitle')
 const eventDetails = getElementsByClassName('event-details')
+console.log(eventTitles)
 for (let i = 0; i < eventTitles.length; i++) {
 	// Fade in
 	eventTitles[i].classList.add('fade-move')
