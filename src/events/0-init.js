@@ -1,6 +1,6 @@
 if (page() === 'Event' || page() === 'Update') {
 	// Load reg form scripts
-	const baseScriptUrl = 'https://cdn.jsdelivr.net/gh/EcstaticLiving/ecstaticlife.com@develop/src/events/'
+	const baseScriptUrl = 'https://ecstaticliving.github.io/ecstaticliving.com/src/events/'
 	const scripts = ['1-design', '2-elements', '3-emailbox', '4-functions', '5-onchange', '6-webflow', '7-payment']
 	// Load scripts synchronously, one after another, to make sure hierarchy is respected.
 	const loadScript = index => {
