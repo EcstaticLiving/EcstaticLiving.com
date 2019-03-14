@@ -56,8 +56,18 @@ emailBoxNames.forEach(emailBoxName => {
 				else {
 					alertField.classList.add('hidden')
 					buttonField.disabled = false
-					emailBoxForm.action = 'https://app.getresponse.com/add_subscriber.html'
-					buttonField.addEventListener('click', () => emailBoxForm.submit())
+					buttonField.addEventListener('click', () => {
+						// If email box is used on homepage...
+						if (emailBoxName === 'hero') {
+							// ...collect email newsletter
+							emailBoxForm.action = 'https://app.getresponse.com/add_subscriber.html'
+							emailBoxForm.submit()
+						}
+						// ...otherwise, bring up reg form, since used in events page
+						else {
+							showRegForm()
+						}
+					})
 				}
 				const key = e.which || e.keyCode
 				// If `enter` key is pressed, attempt to submit emailBoxForm
