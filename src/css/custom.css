@@ -82,4 +82,10 @@ select.parsley-error {
 	}
 }
 
+/* INTTEL */
+div.selected-dial-code {
+	color: #fff;
+	font-size: '12px';
+}
+
 </style>
