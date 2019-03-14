@@ -32,10 +32,10 @@ emailBoxNames.forEach(emailBoxName => {
 					}
 					else if (checkEmailBoxField === 'phone') {
 						// Uses cleave.js
-						new Cleave(field, {
-							phone: true,
-							phoneRegionCode: 'US'
-						})
+						// new Cleave(field, {
+						// 	phone: true,
+						// 	phoneRegionCode: 'US'
+						// })
 						window.intlTelInput(field, {
 							utilsScript: 'https://ecstaticliving.github.io/ecstaticliving.com/src/other/inttel-utils.js'
 						})
