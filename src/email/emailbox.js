@@ -36,9 +36,6 @@ emailBoxNames.forEach(emailBoxName => {
 						// 	phone: true,
 						// 	phoneRegionCode: 'US'
 						// })
-						window.intlTelInput(field, {
-							utilsScript: 'https://ecstaticliving.github.io/ecstaticliving.com/src/other/inttel-utils.js'
-						})
 					}
 					// return true if all fields have been filled out
 					return (

@@ -40,6 +40,14 @@ const deviceType = () => {
 	return 'mobile'
 }
 
+// Phone number input fields
+const phoneInputs = document.querySelectorAll('input[name="phone"]')
+phoneInputs.forEach(phoneInput => {
+	window.intlTelInput(phoneInput, {
+		utilsScript: 'https://ecstaticliving.github.io/ecstaticliving.com/src/other/inttel-utils.js'
+	})
+})
+
 // Element Collections
 const querySelectorAll = (className, i) => document.querySelectorAll(className)[i || 0]
 const querySelector = className => document.querySelector(className)
