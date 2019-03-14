@@ -22,11 +22,20 @@ const regFormBg = getElementByClassName('reg-form-background')
 const regFormContainer = getElementByClassName('reg-form-container')
 
 const showRegForm = () => {
+	// Prevent background to scroll
+	document.body.style.overflow = 'hidden'
+	// Unhide reg form elements
 	showElement(regFormBg)
+	showElement(regFormContainer)
 	setTimeout(() => {
+		// Fade in background after 100ms once elements are unhidden
 		fadeInElement(regFormBg)
-		// Prevent background to scroll
-		// document.body.style.overflow = 'hidden'
+		setTimeout(() => {
+			// Once background has successfully faded in after 200ms, scroll to top to prevent fade error on Chrome.
+			window.scrollTo(0, 0)
+			// Once scroll to top has occurred, fade in reg form.
+			setTimeout(() => fadeInElement(regFormContainer), 100)
+		}, 200)
 	}, 100)
 }
 
