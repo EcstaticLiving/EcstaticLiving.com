@@ -26,7 +26,7 @@ const showRegForm = () => {
 	setTimeout(() => {
 		fadeInElement(regFormBg)
 		// Prevent background to scroll
-		document.body.style.overflow = 'hidden'
+		// document.body.style.overflow = 'hidden'
 	}, 100)
 }
 
