@@ -65,6 +65,12 @@ emailBoxNames.forEach(emailBoxName => {
 						}
 						// ...otherwise, bring up reg form, since used in events page
 						else {
+							emailBoxFields.forEach(checkEmailBoxField => {
+								const field = getElementById(emailBoxName + '_' + checkEmailBoxField)
+								if (checkEmailBoxField === 'first_name') {
+									eventFirstName.value = field.value
+								}
+							})
 							showRegForm()
 						}
 					})
