@@ -70,6 +70,15 @@ emailBoxNames.forEach(emailBoxName => {
 								if (checkEmailBoxField === 'first_name') {
 									eventFirstName.value = field.value
 								}
+								else if (checkEmailBoxField === 'last_name') {
+									eventLastName.value = field.value
+								}
+								else if (checkEmailBoxField === 'email') {
+									eventEmail.value = field.value
+								}
+								else if (checkEmailBoxField === 'phone') {
+									eventMobile.value = field.value
+								}
 							})
 							showRegForm()
 						}
