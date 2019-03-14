@@ -32,7 +32,7 @@ emailBoxNames.forEach(emailBoxName => {
 					}
 					else if (checkEmailBoxField === 'phone') {
 						// Uses cleave.js
-						new Cleave(field, {
+						new CleavePhone(field, {
 							phone: true,
 							phoneRegionCode: 'US'
 						})
