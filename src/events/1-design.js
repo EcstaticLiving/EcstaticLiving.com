@@ -18,43 +18,20 @@ for (let i = 0; i < eventTitles.length; i++) {
 
 // Reg Form elements
 const regFormButtons = getElementsByClassName('button register')
-const regFormModalBackground = querySelector('div.modal-background')
-const regFormModalStatus = querySelector('div.modal-status.registration')
-const regFormModal = querySelector('div.modal.registration')
-const regFormModalWindow = querySelector('div.modal-window.registration')
-const regFormContainer = getElementByClassName('container reg-form')
+const regFormContainer = getElementByClassName('reg-form-container')
 
 const showRegForm = () => {
-	// Unhide modal & background
-	showElement(regFormModalBackground)
-	showElement(regFormModalStatus)
-	// Fade in background after it’s been made visible
-	setTimeout(() => fadeInElement(regFormModalBackground), 100)
-	// Show reg form: browser error that doesn’t show opacity of elements inside modal window unless body is scrolled to top
-	setTimeout(() => window.scrollTo(0, 0), 300)
-	setTimeout(() => {
-		fadeInElement(regFormModalStatus)
-		fadeInElement(regFormModalWindow)
-		// Scroll to top
-		regFormContainer.scrollTop = 0
-		// Prevent background from scrolling
-		document.body.style.overflow = 'hidden'
-	}, 400)
+	// Prevent background to scroll
+	document.body.style.overflow = 'hidden'
+	showElement(regFormContainer)
+	setTimeout(() => fadeInElement(regFormContainer), 100)
 }
 
 const closeRegForm = () => {
 	// Reallow background to scroll
 	document.body.style.overflow = 'visible'
-	// Fade out window
-	fadeOutElement(regFormModalStatus)
-	fadeOutElement(regFormModalWindow)
-	// Fade out modal background
-	fadeOutElement(regFormModalBackground)
-	// Hide modal
-	setTimeout(() => {
-		hideElement(regFormModalStatus)
-		hideElement(regFormModalBackground)
-	}, 200)
+	fadeOutElement(regFormContainer)
+	setTimeout(() => hideElement(regFormContainer), 200)
 }
 
 // Event listener for if reg form is opened...
