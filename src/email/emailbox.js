@@ -45,6 +45,8 @@ emailBoxNames.forEach(emailBoxName => {
 				const buttonField = getElementById(emailBoxName + '_button')
 				const alertField = getElementById(emailBoxName + '_alert')
 				const emailBoxForm = getElementById(emailBoxName + '_form')
+				console.log(valid)
+				console.log(everyFieldHasBeenFilledOut)
 				// Only show alert if all fields have been filled out somewhat, but not yet validated
 				if (!valid && everyFieldHasBeenFilledOut) {
 					alertField.classList.remove('hidden')
