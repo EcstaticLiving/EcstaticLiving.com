@@ -18,20 +18,29 @@ for (let i = 0; i < eventTitles.length; i++) {
 
 // Reg Form elements
 const regFormButtons = getElementsByClassName('button register')
+const regFormBg = getElementByClassName('reg-form-background')
 const regFormContainer = getElementByClassName('reg-form-container')
 
 const showRegForm = () => {
-	// Prevent background to scroll
-	document.body.style.overflow = 'hidden'
+	showElement(regFormBg)
 	flexElement(regFormContainer)
-	setTimeout(() => fadeInElement(regFormContainer), 100)
+	setTimeout(() => {
+		fadeInElement(regFormBg)
+		fadeInElement(regFormContainer)
+		// Prevent background to scroll
+		document.body.style.overflow = 'hidden'
+	}, 100)
 }
 
 const closeRegForm = () => {
 	// Reallow background to scroll
 	document.body.style.overflow = 'visible'
+	fadeOutElement(regFormBg)
 	fadeOutElement(regFormContainer)
-	setTimeout(() => hideElement(regFormContainer), 200)
+	setTimeout(() => {
+		hideElement(regFormBg)
+		hideElement(regFormContainer)
+	}, 200)
 }
 
 // Event listener for if reg form is opened...
