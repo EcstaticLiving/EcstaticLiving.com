@@ -66,6 +66,7 @@ emailBoxNames.forEach(emailBoxName => {
 						// ...otherwise, bring up reg form, since used in events page
 						else {
 							emailBoxFields.forEach(checkEmailBoxField => {
+								// Transfer data onto reg form where it can be either used or cleared...
 								const field = getElementById(emailBoxName + '_' + checkEmailBoxField)
 								if (checkEmailBoxField === 'first_name') {
 									eventFirstName.value = field.value
@@ -79,6 +80,8 @@ emailBoxNames.forEach(emailBoxName => {
 								else if (checkEmailBoxField === 'phone') {
 									eventMobile.value = field.value
 								}
+								// and clear it from email box for privacy.
+								field.value = ''
 							})
 							showRegForm()
 						}
