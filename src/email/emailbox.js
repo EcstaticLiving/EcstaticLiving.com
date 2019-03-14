@@ -35,9 +35,9 @@ emailBoxNames.forEach(emailBoxName => {
 						// First and last names have to have at least 2 characters each...
 						((checkEmailBoxField === 'first_name' || checkEmailBoxField === 'last_name') && field.value.length > 1)
 						// ...email has to be at least 4 characters and valid...
-						&& (checkEmailBoxField === 'email' && field.value.length > 4 && standardisationEmail.test(field.value))
+						|| (checkEmailBoxField === 'email' && field.value.length > 4 && standardisationEmail.test(field.value))
 						// Any other fields have to be at least 1 character long.
-						&& field.value.length > 0
+						|| field.value.length > 0
 					)
 				})
 				// Only show alert once every field has been touched...
@@ -45,8 +45,6 @@ emailBoxNames.forEach(emailBoxName => {
 				const buttonField = getElementById(emailBoxName + '_button')
 				const alertField = getElementById(emailBoxName + '_alert')
 				const emailBoxForm = getElementById(emailBoxName + '_form')
-				console.log(valid)
-				console.log(everyFieldHasBeenFilledOut)
 				// Only show alert if all fields have been filled out somewhat, but not yet validated
 				if (!valid && everyFieldHasBeenFilledOut) {
 					alertField.classList.remove('hidden')
