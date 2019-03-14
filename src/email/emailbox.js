@@ -39,7 +39,7 @@ emailBoxNames.forEach(emailBoxName => {
 					)
 				})
 				// Only show alert once every field has been touched...
-				const everyFieldHasBeenFilledOut = emailBoxFields.every(checkEmailBoxField => getElementById(emailBoxName + '_' + checkEmailBoxField).value.length > 0)
+				const everyFieldHasBeenFilledOut = emailBoxFields.every(checkEmailBoxField => !getElementById(emailBoxName + '_' + checkEmailBoxField) || getElementById(emailBoxName + '_' + checkEmailBoxField).value.length > 0)
 				const buttonField = getElementById(emailBoxName + '_button')
 				const alertField = getElementById(emailBoxName + '_alert')
 				const form = getElementById(emailBoxName + '_form')
