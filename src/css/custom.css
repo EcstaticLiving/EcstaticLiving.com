@@ -85,7 +85,7 @@ select.parsley-error {
 /* INTTEL */
 div.selected-dial-code {
 	color: #fff;
-	font-size: '12px';
+	font-size: '12px' !important;
 }
 
 </style>
