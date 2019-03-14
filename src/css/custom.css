@@ -46,7 +46,7 @@ select.parsley-error {
 /* FORM COLORS */
 .textarea::placeholder,
 .input::placeholder {
-	color: #555;
+	color: #555 !important;
 }
 .white-placeholder::placeholder {
 	color: #fff !important;
@@ -85,7 +85,7 @@ select.parsley-error {
 /* INTTEL */
 div.selected-dial-code {
 	color: #fff;
-	font-size: '12px' !important;
+	font-size: 12px !important;
 }
 
 </style>
