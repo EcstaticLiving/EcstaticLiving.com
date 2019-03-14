@@ -42,23 +42,23 @@ emailBoxNames.forEach(emailBoxName => {
 				const everyFieldHasBeenFilledOut = emailBoxFields.every(checkEmailBoxField => !getElementById(emailBoxName + '_' + checkEmailBoxField) || getElementById(emailBoxName + '_' + checkEmailBoxField).value.length > 0)
 				const buttonField = getElementById(emailBoxName + '_button')
 				const alertField = getElementById(emailBoxName + '_alert')
-				const form = getElementById(emailBoxName + '_form')
+				const emailBoxForm = getElementById(emailBoxName + '_form')
 				// Only show alert if all fields have been filled out somewhat, but not yet validated
 				if (!valid && everyFieldHasBeenFilledOut) {
 					alertField.classList.remove('hidden')
 					buttonField.classList.add('disabled')
-					form.action = ''
-					form.removeEventListener('click', () => null)
+					emailBoxForm.action = ''
+					emailBoxForm.removeEventListener('click', () => null)
 				}
-				// ...and if all’s good to go, change button class to active, and submit form.
+				// ...and if all’s good to go, change button class to active, and submit emailBoxForm.
 				else {
 					alertField.classList.add('hidden')
 					buttonField.classList.remove('disabled')
-					form.action = 'https://app.getresponse.com/add_subscriber.html'
-					buttonField.addEventListener('click', () => form.submit())
+					emailBoxForm.action = 'https://app.getresponse.com/add_subscriber.html'
+					buttonField.addEventListener('click', () => emailBoxForm.submit())
 				}
 				const key = e.which || e.keyCode
-				// If `enter` key is pressed, attempt to submit form
+				// If `enter` key is pressed, attempt to submit emailBoxForm
 				if (key === 13) {
 					const buttonField = getElementById(emailBoxName + '_button')
 					buttonField.click()
