@@ -35,6 +35,8 @@ const showRegForm = () => {
 			setTimeout(() => {
 				// Once scroll to top has occurred, unhide reg form...
 				showElement(regFormContainer)
+				// ...scroll to top of reg form...
+				regFormContainer.scrollTop = 0
 				// ...and fade in.
 				setTimeout(() => fadeInElement(regFormContainer), 100)
 			}, 100)
