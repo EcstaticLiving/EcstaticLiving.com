@@ -34,12 +34,12 @@ const showRegForm = () => {
 	setTimeout(() => window.scrollTo(0, 0), 300)
 	setTimeout(() => {
 		fadeInElement(regFormModalStatus)
+		fadeInElement(regFormModalWindow)
 		// Scroll to top
 		regFormContainer.scrollTop = 0
 		// Prevent background from scrolling
 		document.body.style.overflow = 'hidden'
 	}, 400)
-	
 }
 
 const closeRegForm = () => {
@@ -47,6 +47,7 @@ const closeRegForm = () => {
 	document.body.style.overflow = 'visible'
 	// Fade out window
 	fadeOutElement(regFormModalStatus)
+	fadeOutElement(regFormModalWindow)
 	// Fade out modal background
 	fadeOutElement(regFormModalBackground)
 	// Hide modal
