@@ -53,13 +53,11 @@ const repopulateForm = formType => {
 
 const paymentButtonContinue = () => {
 	emptyText(billingCardError)
-	setCss(paymentButton, { 'background-color': '#800000' })
-	setCss(paymentButton, { 'color': '#ffffff' })
+	paymentButton.classList.add('active')
 }
 
 const paymentButtonDisabled = () => {
-	setCss(paymentButton, { 'background-color': '#f5f5f5' })
-	setCss(paymentButton, { 'color': '#333333' })
+	paymentButton.classList.remove('active')
 }
 
 // Invite-only event
