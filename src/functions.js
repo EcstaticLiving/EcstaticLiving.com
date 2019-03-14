@@ -44,6 +44,7 @@ const deviceType = () => {
 const phoneInputs = document.querySelectorAll('input[name="phone"]')
 phoneInputs.forEach(phoneInput => {
 	window.intlTelInput(phoneInput, {
+		formatOnDisplay: true,
 		preferredCountries: ['us'],
 		separateDialCode: true,
 		utilsScript: 'https://ecstaticliving.github.io/ecstaticliving.com/src/other/inttel-utils.js'
