@@ -30,6 +30,13 @@ emailBoxNames.forEach(emailBoxName => {
 					if (checkEmailBoxField === 'first_name' || checkEmailBoxField === 'last_name') {
 						field.value = standardisationName(field.value)
 					}
+					else if (checkEmailBoxField === 'phone') {
+						// Uses cleave.js
+						new Cleave(field, {
+							phone: true,
+							phoneRegionCode: 'US'
+						})
+					}
 					// return true if all fields have been filled out
 					return (
 						// First and last names have to have at least 2 characters each...
