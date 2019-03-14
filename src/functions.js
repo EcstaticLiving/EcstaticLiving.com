@@ -83,6 +83,10 @@ const fadeOutElement = elem => elem.style.opacity = '0'
 const focusElement = elem => elem.focus()
 const hideElement = elem => elem.style.display = 'none'
 const showElement = elem => elem.style.display = 'block'
+const flexElement = elem => {
+	elem.style.display = 'flex'
+	elem.style.flexDirection = 'column'
+}
 
 // Values
 const getValue = elem => elem.value
