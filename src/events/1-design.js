@@ -45,9 +45,13 @@ const showRegForm = () => {
 const closeRegForm = () => {
 	// Reallow background to scroll
 	document.body.style.overflow = 'visible'
+	// Fade out elements
 	fadeOutElement(regFormBg)
+	fadeOutElement(regFormContainer)
+	// Hide elements after fade out
 	setTimeout(() => {
 		hideElement(regFormBg)
+		hideElement(regFormContainer)
 	}, 200)
 }
 
