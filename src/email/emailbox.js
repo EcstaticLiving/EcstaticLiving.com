@@ -19,7 +19,6 @@ emailBoxNames.forEach(emailBoxName => {
 	emailBoxFields.forEach(emailBoxField => {
 		const field = getElementById(emailBoxName + '_' + emailBoxField)
 		if (field) {
-			field.oninput = verifyEmailSignup
 			field.addEventListener('keypress', e => {
 
 				// Check to see if every field has been filled out correctly...
