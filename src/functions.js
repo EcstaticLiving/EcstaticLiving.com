@@ -41,7 +41,7 @@ const deviceType = () => {
 }
 
 // Phone number input fields
-const phoneInputs = document.querySelectorAll('input[name="phone"]')
+const phoneInputs = document.querySelectorAll('input[name="(phone|Event Mobile)"]')
 phoneInputs.forEach(phoneInput => {
 	window.intlTelInput(phoneInput, {
 		utilsScript: 'https://ecstaticliving.github.io/ecstaticliving.com/src/other/inttel-utils.js'
