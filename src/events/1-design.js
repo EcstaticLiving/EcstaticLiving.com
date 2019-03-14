@@ -31,7 +31,7 @@ const showRegForm = () => {
 	// Fade in background after it’s been made visible
 	setTimeout(() => fadeInElement(regFormModalBackground), 100)
 	// Show reg form: browser error that doesn’t show opacity of elements inside modal window unless body is scrolled to top
-	setTimeout(() => window.scrollTo(0, 0), 200)
+	setTimeout(() => window.scrollTo(0, 0), 300)
 	setTimeout(() => {
 		fadeInElement(regFormModalStatus)
 		// Scroll to top
