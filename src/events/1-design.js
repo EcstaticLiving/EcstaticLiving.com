@@ -37,7 +37,10 @@ const showRegForm = () => {
 	// ...scroll to top of reg form...
 	regFormContainer.scrollTop = 0
 	// ...and fade in.
-	setTimeout(() => fadeInElement(regFormContainer), 100)
+	setTimeout(() => {
+		fadeInElement(regFormContainer)
+		browserFix()
+	}, 100)
 }
 
 const closeRegForm = () => {
