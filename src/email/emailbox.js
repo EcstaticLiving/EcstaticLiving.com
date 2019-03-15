@@ -50,7 +50,7 @@ emailBoxNames.forEach(emailBoxName => {
 				const alertField = getElementById(emailBoxName + '_alert')
 				const emailBoxForm = getElementById(emailBoxName + '_form')
 				// Only show alert if all fields have been filled out somewhat, but not yet validated
-				if (!valid && everyFieldHasBeenFilledOut) {
+				if (emailBoxName === 'hero' && !valid && everyFieldHasBeenFilledOut) {
 					alertField.classList.remove('hidden')
 					buttonField.disabled = true
 					emailBoxForm.action = ''
@@ -72,7 +72,6 @@ emailBoxNames.forEach(emailBoxName => {
 							emailBoxFields.forEach(checkEmailBoxField => {
 								// Transfer data onto reg form where it can be either used or cleared...
 								const field = getElementById(emailBoxName + '_' + checkEmailBoxField)
-								// and clear it from email box for privacy.
 								if (checkEmailBoxField === 'first_name') {
 									eventFirstName.value = field.value
 								}
