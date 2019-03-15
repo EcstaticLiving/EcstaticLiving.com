@@ -330,14 +330,7 @@ const showErrorsInForm = () => {
 		const cssClear = (type === 'noborder')
 			? { property: 'style', value: 'border: 0px solid transparent; background-color: #fff;' }
 			: { property: 'style', value: 'border: 1px solid #ccc; background-color: #fff;' }
-		if (condition) {
-			setCss(element, cssError)
-			if (!isRadio(element)) focusElement(element)
-		}
-		else {
-
-			setCss(element, cssClear)
-		}
+		setCss(element, condition ? cssError : cssClear)
 	}
 	// Cycle through each element based on particular conditions
 	// TODO: update conditions (not just use `isBlank`)
