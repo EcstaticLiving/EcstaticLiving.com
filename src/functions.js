@@ -46,7 +46,7 @@ phoneInputs.forEach(phoneInput => {
 	window.intlTelInput(phoneInput, {
 		// Need to use cleave.js for validation instead, since IntTel removed formatting-as-you-type: https://github.com/jackocnr/intl-tel-input/issues/346
 		formatOnDisplay: false,
-		nationalMode: true,
+		nationalMode: false,
 		preferredCountries: ['us', 'ca'],
 		separateDialCode: false,
 		utilsScript: 'https://ecstaticliving.github.io/ecstaticliving.com/src/other/inttel-utils.js'
