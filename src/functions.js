@@ -58,7 +58,9 @@ phoneInputs.forEach(phoneInput => {
 	})
 	phoneInput.addEventListener("countrychange", () => {
 		let intTel = intlTelInput(phoneInput)
+		console.log(intTel.getSelectedCountryData().iso2)
 		cleave.phoneRegionCode = intTel.getSelectedCountryData().iso2
+		console.log(cleave)
 	})
 })
 
