@@ -329,8 +329,10 @@ const showErrorsInForm = () => {
 			setCss(element, cssError)
 		}
 		else {
+			console.log(element)
 			for (let i = 0; i < element.querySelectorAll('option').length; i++) {
 				const option = element.querySelectorAll('option')[i];
+				console.log(option)
 				setCss(option, cssError)
 			}
 		}
