@@ -32,10 +32,10 @@ emailBoxNames.forEach(emailBoxName => {
 					// iti.setNumber(field.value)
 					// console.log(iti.getNumber())
 					// Uses cleave.js
-					// new Cleave(field, {
-					// 	phone: true,
-					// 	phoneRegionCode: 'US'
-					// })
+					new Cleave(field, {
+						phone: true,
+						phoneRegionCode: 'US'
+					})
 				}
 
 				// Check to see if every field has been filled out correctly...
