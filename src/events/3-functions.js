@@ -322,12 +322,30 @@ const affiliateCodeVerification = () => {
 
 const showErrorsInForm = () => {
 	// Set CSS for errors and no errors
-	const showError = element => isRadio(element)
-		? setCss(element, [{ property: 'style', value: 'background-color: #fdd' }])
-		: setCss(element, [{ property: 'style', value: 'color: #b00000' }, { property: 'style', value: 'border-color: #b00000' }, { property: 'style', value: 'background-color: #fdd' }])
-	const clearError = element => isRadio(element)
-		? setCss(element, [{ property: 'style', value: 'background-color: transparent' }])
-		: setCss(element, [{ property: 'style', value: 'color: #333333' }, { property: 'style', value: 'border-color: #ccc' }, { property: 'style', value: 'background-color: #fff' }])
+	const cssError = [{ property: 'style', value: 'border-color: #b00000' }, { property: 'style', value: 'background-color: #fdd' }]
+	const cssClear = [{ property: 'style', value: 'border-color: #ccc' }, { property: 'style', value: 'background-color: #fff' }]
+	const showError = element => {
+		if (!isSelect(element)) {
+			setCss(element, cssError)
+		}
+		else {
+			for (let i = 0; i < element.querySelectorAll('option').length; i++) {
+				const option = element.querySelectorAll('option')[i];
+				setCss(option, cssError)
+			}
+		}
+	}
+	const clearError = element => {
+		if (!isSelect(element)) {
+			setCss(element, cssClear)
+		}
+		else {
+			for (let i = 0; i < element.querySelectorAll('option').length; i++) {
+				const option = element.querySelectorAll('option')[i];
+				setCss(option, cssClear)
+			}
+		}
+	}
 	const showClearError = ({ condition, element }) => {
 		if (condition) {
 			showError(element)
