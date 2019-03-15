@@ -7,9 +7,6 @@ const urlString = Object.assign({}, ...window.location.search.slice(1).split('&'
 // Form page
 const isFormPage = () => page() === 'Event' || page() === 'Update'
 
-// Event Reg Form
-const regForm = getElementByClassName('reg-form')
-
 // Hidden fields
 const eventCode = getText(getElementById('event-code')).toUpperCase(),
 eventName = getText(getElementById('event-name')),

@@ -20,6 +20,7 @@ for (let i = 0; i < eventTitles.length; i++) {
 const regFormButtons = getElementsByClassName('button register')
 const regFormBg = getElementByClassName('reg-form-background')
 const regFormContainer = getElementByClassName('reg-form-container')
+const regForm = getElementByClassName('reg-form')
 
 const showRegForm = () => {
 	// Prevent background to scroll
@@ -58,7 +59,7 @@ const closeRegForm = () => {
 }
 
 regFormContainer.onscroll = () => {
-	const elements = regFormContainer.querySelectorAll('input')
+	const elements = regForm.querySelectorAll('input, textarea, div')
 	for (let i = 0; i < elements.length; i++) {
 		const element = elements[i]
 		element.style.webkitTransform = 'translateZ(0)'
