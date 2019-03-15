@@ -43,7 +43,7 @@ const deviceType = () => {
 // Phone number input fields
 const phoneInputs = document.querySelectorAll('input[name="phone"]')
 phoneInputs.forEach(phoneInput => {
-	window.intlTelInput(phoneInput, {
+	let intTel = window.intlTelInput(phoneInput, {
 		// Need to use cleave.js for validation instead, since IntTel removed formatting-as-you-type: https://github.com/jackocnr/intl-tel-input/issues/346
 		formatOnDisplay: false,
 		nationalMode: false,
@@ -57,8 +57,6 @@ phoneInputs.forEach(phoneInput => {
 		phoneRegionCode: 'us'
 	})
 	phoneInput.addEventListener("countrychange", e => {
-		let intTel = intlTelInput(phoneInput)
-		console.log(intTel)
 		cleave.phoneRegionCode = intTel.getSelectedCountryData().iso2
 		console.log(cleave.phoneRegionCode)
 	})
