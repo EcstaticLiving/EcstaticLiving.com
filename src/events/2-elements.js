@@ -42,6 +42,7 @@ formatDate(eventBirthdate)
 
 // Details
 const eventReferral = getElementById('event-referral'),
+eventReferralValidation = getElementById('event-referral-validation'),
 eventExperienceContainer = getElementByClassName('container experience'),
 eventExperienceValidation = getElementById('event-experience-validation'),
 eventExperienceYes = getElementById('event-experience-yes'),
@@ -73,6 +74,7 @@ const urlDiscountCode = urlString && urlString.affiliate
 
 // Event Status: Couples, Singles, Both
 const eventStatus = getElementById('event-status'),
+eventStatusValidation = getElementById('event-status-validation'),
 eventPartnerContainer = getElementByClassName('container partner'),
 eventPartnerFirstName = getElementById('event-partner-firstname'),
 eventPartnerLastName = getElementById('event-partner-lastname'),
