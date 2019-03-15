@@ -144,7 +144,8 @@ const getIndex = elem => elem.selectedIndex
 const setHtml = (elem, val) => elem.innerHTML = val
 const setCss = (elem, cssArray) => cssArray.forEach(css => {
 	console.log(elem)
-	console.log(css.property, css.value)
+	console.log(css.property)
+	console.log(css.value)
 	elem.setAttribute(css.property, css.value)
 })
 
