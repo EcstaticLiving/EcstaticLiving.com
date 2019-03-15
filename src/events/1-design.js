@@ -18,31 +18,18 @@ for (let i = 0; i < eventTitles.length; i++) {
 
 // Reg Form elements
 const regFormButtons = getElementsByClassName('button register')
-const regFormBg = getElementByClassName('reg-form-background')
 const regFormContainer = getElementByClassName('reg-form-container')
 const regForm = getElementByClassName('reg-form')
 
 const showRegForm = () => {
 	// Prevent background to scroll
 	document.body.style.overflow = 'hidden'
-	// Unhide reg form background
-	showElement(regFormBg)
-	setTimeout(() => {
-		// Fade in background after 100ms once unhidden
-		fadeInElement(regFormBg)
-		setTimeout(() => {
-			// Once background has successfully faded in after 200ms, scroll to top to prevent fade error on Chrome.
-			window.scrollTo(0, 0)
-			setTimeout(() => {
-				// Once scroll to top has occurred, unhide reg form...
-				showElement(regFormContainer)
-				// ...scroll to top of reg form...
-				regFormContainer.scrollTop = 0
-				// ...and fade in.
-				setTimeout(() => fadeInElement(regFormContainer), 100)
-			}, 100)
-		}, 200)
-	}, 100)
+	// Unhide reg form...
+	showElement(regFormContainer)
+	// ...scroll to top of reg form...
+	regFormContainer.scrollTop = 0
+	// ...and fade in.
+	setTimeout(() => fadeInElement(regFormContainer), 100)
 }
 
 const closeRegForm = () => {
@@ -58,11 +45,11 @@ const closeRegForm = () => {
 	}, 200)
 }
 
+// BROWSER FIX: on scroll error
 regFormContainer.onscroll = () => {
 	const elements = regForm.querySelectorAll('input, textarea, div')
 	for (let i = 0; i < elements.length; i++) {
 		const element = elements[i]
-		element.style.webkitTransform = 'translateZ(0)'
 		element.style.opacity = '1.0'
 	}
 }
