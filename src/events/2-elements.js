@@ -39,6 +39,10 @@ eventFemale = getElementById('event-gender-female'),
 eventMale = getElementById('event-gender-male'),
 eventOther = getElementById('event-gender-other')
 
+// Format
+formatPhone(eventMobile)
+formatDate(eventBirthdate)
+
 // Details
 const eventReferral = getElementById('event-referral'),
 eventExperienceContainer = getElementByClassName('container experience'),

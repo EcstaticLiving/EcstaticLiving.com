@@ -40,10 +40,9 @@ const deviceType = () => {
 	return 'mobile'
 }
 
-// Phone number input fields
-const phoneInputs = document.querySelectorAll('input[name="phone"]')
-phoneInputs.forEach(phoneInput => {
-	let intTel = window.intlTelInput(phoneInput, {
+// Format input fields
+const formatPhone = elem => {
+	let intTel = window.intlTelInput(elem, {
 		// Need to use cleave.js for validation instead, since IntTel removed formatting-as-you-type: https://github.com/jackocnr/intl-tel-input/issues/346
 		formatOnDisplay: false,
 		nationalMode: false,
@@ -52,12 +51,21 @@ phoneInputs.forEach(phoneInput => {
 		utilsScript: 'https://ecstaticliving.github.io/ecstaticliving.com/src/other/inttel-utils.js'
 	})
 	// Uses cleave.js for format-as-you-type validation
-	const cleave = new Cleave(phoneInput, {
+	const cleave = new Cleave(elem, {
 		phone: true,
 		phoneRegionCode: 'us'
 	})
-	phoneInput.addEventListener("countrychange", e => cleave.phoneRegionCode = intTel.getSelectedCountryData().iso2)
-})
+	elem.addEventListener("countrychange", e => cleave.phoneRegionCode = intTel.getSelectedCountryData().iso2)
+}
+const formatDate = elem => {
+	new Cleave(elem, {
+		date: true,
+    delimiter: '/',
+    datePattern: ['m', 'd', 'Y']
+	})
+}
+const phoneInputs = document.querySelectorAll('input[name="phone"]')
+phoneInputs.forEach(phoneInput => formatPhone(phoneInput))
 
 // Element Collections
 const querySelectorAll = (className, i) => document.querySelectorAll(className)[i || 0]
