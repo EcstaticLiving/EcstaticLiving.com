@@ -91,6 +91,7 @@ ul#country-listbox.country-list {
 	font-size: 16px !important;
 }
 span.country-name {
+	font-family: 'Lato' !important;
 	font-weight: 300 !important;
 }
 
