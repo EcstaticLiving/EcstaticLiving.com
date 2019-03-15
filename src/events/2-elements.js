@@ -7,6 +7,9 @@ const urlString = Object.assign({}, ...window.location.search.slice(1).split('&'
 // Form page
 const isFormPage = () => page() === 'Event' || page() === 'Update'
 
+// Global error checking variable; only activated once “Secure Payment” button is pressed
+let checkForErrors = false
+
 // Hidden fields
 const eventCode = getText(getElementById('event-code')).toUpperCase(),
 eventName = getText(getElementById('event-name')),
