@@ -242,7 +242,7 @@ const formValidation = () => {
 	}
 
 	// Show or hide errors in form
-	if (checkForErrors) {
+	if (DISPLAYERRORS) {
 		showErrorsInForm()
 	}
 
