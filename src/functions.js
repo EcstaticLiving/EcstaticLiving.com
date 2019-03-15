@@ -47,7 +47,7 @@ phoneInputs.forEach(phoneInput => {
 		formatOnDisplay: true,
 		nationalMode: true,
 		preferredCountries: ['us', 'ca'],
-		separateDialCode: true,
+		separateDialCode: false,
 		utilsScript: 'https://ecstaticliving.github.io/ecstaticliving.com/src/other/inttel-utils.js'
 	})
 })
