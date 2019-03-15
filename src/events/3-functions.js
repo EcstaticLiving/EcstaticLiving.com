@@ -352,6 +352,10 @@ const showErrorsInForm = () => {
 	showClearError({ condition: isChecked(eventExperienceYes) && isBlank(eventExperienceDetails), element: eventExperienceDetails })
 	showClearError({ condition: !isChecked(eventFemale) && !isChecked(eventMale) && !isChecked(eventOther), element: eventGenderValidation })
 	showClearError({ condition: isBlank(eventBirthdate), element: eventBirthdate })
+	showClearError({ condition: isBlank(eventMobile), element: eventMobile })
+	showClearError({ condition: isBlank(eventEmail), element: eventEmail })
+	showClearError({ condition: isBlank(eventLastName), element: eventLastName })
+	showClearError({ condition: isBlank(eventFirstName), element: eventFirstName })
 	formErrorValidation(regForm)
 }
 
