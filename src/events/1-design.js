@@ -63,6 +63,7 @@ regFormContainer.onscroll = () => {
 	for (let i = 0; i < elements.length; i++) {
 		const element = elements[i]
 		element.style.webkitTransform = 'translateZ(0)'
+		element.style.opacity = '1.0'
 	}
 }
 
