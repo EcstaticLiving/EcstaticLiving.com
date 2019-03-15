@@ -21,6 +21,8 @@ emailBoxNames.forEach(emailBoxName => {
 		if (field) {
 			field.addEventListener('keypress', e => {
 
+				console.log(e.target.name)
+
 				// Check to see if every field has been filled out correctly...
 				const valid = emailBoxFields.every(checkEmailBoxField => {
 					const field = getElementById(emailBoxName + '_' + checkEmailBoxField)
