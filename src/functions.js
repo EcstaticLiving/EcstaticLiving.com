@@ -142,7 +142,11 @@ const getIndex = elem => elem.selectedIndex
 
 // HTML
 const setHtml = (elem, val) => elem.innerHTML = val
-const setCss = (elem, cssArray) => cssArray.forEach(css => elem.setAttribute(css.property, css.value))
+const setCss = (elem, cssArray) => cssArray.forEach(css => {
+	console.log(elem)
+	console.log(css.property, css.value)
+	elem.setAttribute(css.property, css.value)
+})
 
 // Check radio
 const checkElement = elem => elem.checked = true
