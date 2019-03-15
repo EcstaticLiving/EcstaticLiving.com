@@ -21,6 +21,14 @@ const regFormButtons = getElementsByClassName('button register')
 const regFormContainer = getElementByClassName('reg-form-container')
 const regForm = getElementByClassName('reg-form')
 
+const browserFix = () => {
+	const elements = regForm.querySelectorAll('input, textarea, div')
+	for (let i = 0; i < elements.length; i++) {
+		const element = elements[i]
+		element.style.opacity = '1.0'
+	}
+}
+
 const showRegForm = () => {
 	// Prevent background to scroll
 	document.body.style.overflow = 'hidden'
@@ -42,13 +50,7 @@ const closeRegForm = () => {
 }
 
 // BROWSER FIX: on scroll error
-regFormContainer.onscroll = () => {
-	const elements = regForm.querySelectorAll('input, textarea, div')
-	for (let i = 0; i < elements.length; i++) {
-		const element = elements[i]
-		element.style.opacity = '1.0'
-	}
-}
+regFormContainer.onscroll = () => browserFix()
 
 // Event listener for if reg form is opened...
 for (let i = 0; i < regFormButtons.length; i++) {
