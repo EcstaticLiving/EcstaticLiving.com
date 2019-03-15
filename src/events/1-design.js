@@ -61,7 +61,7 @@ regFormContainer.onscroll = () => {
 	const elements = regFormContainer.querySelectorAll('input')
 	for (let i = 0; i < elements.length; i++) {
 		const element = elements[i]
-		element.style.display = 'block'
+		element.style.webkitTransform = 'translateZ(0)'
 	}
 }
 
