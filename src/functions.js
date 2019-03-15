@@ -102,7 +102,7 @@ const formReset = elem => elem.reset()
 // Element Conditions
 const isInput = elem => elem.type === 'input'
 const isRadio = elem => elem.type === 'radio'
-const isSelect = elem => elem.type === 'select'
+const isSelect = elem => elem.type === 'select-one'
 const isBlank = elem => getValue(elem) === '' && getValue(elem) === ''
 const isChecked = elem => elem.checked
 const isVisible = elem => elem.style.display
