@@ -15,13 +15,13 @@ const emailBoxFields = [
 ]
 
 
-// 2. Assign button function to all relevant fields, and trigger submit if user presses enter
 emailBoxNames.forEach(emailBoxName => {
 
 	const alertField = getElementById(emailBoxName + '_alert')
 	const emailBoxForm = getElementById(emailBoxName + '_form')
 	const buttonField = getElementById(emailBoxName + '_button')
 
+	// 2. Assign button function to all relevant fields, and trigger submit if user presses enter
 	if (buttonField) {
 		buttonField.addEventListener('click', () => {
 			// If email box is used on homepage...
