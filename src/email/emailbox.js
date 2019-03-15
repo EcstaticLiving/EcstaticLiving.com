@@ -21,29 +21,28 @@ emailBoxNames.forEach(emailBoxName => {
 		if (field) {
 			field.addEventListener('keypress', e => {
 
-				console.log(e.target.name)
+				// Make sure first and last names don’t contain spaces
+				if (e.target.name === 'first_name' || e.target.name === 'last_name') {
+					field.value = standardisationName(field.value)
+				}
+				// Set phone number according to national format
+				else if (e.target.name === 'phone') {
+					let iti = intlTelInput(field)
+					console.log(iti)
+					iti.setNumber(field.value)
+					console.log(iti.getNumber())
+					// Uses cleave.js
+					// new Cleave(field, {
+					// 	phone: true,
+					// 	phoneRegionCode: 'US'
+					// })
+				}
 
 				// Check to see if every field has been filled out correctly...
 				const valid = emailBoxFields.every(checkEmailBoxField => {
 					const field = getElementById(emailBoxName + '_' + checkEmailBoxField)
 					// If field doesn’t exist, return true.
 					if (!field)	return true
-					// Make sure first and last names don’t contain spaces
-					if (checkEmailBoxField === 'first_name' || checkEmailBoxField === 'last_name') {
-						field.value = standardisationName(field.value)
-					}
-					// Set phone number according to national format
-					else if (checkEmailBoxField === 'phone') {
-						let iti = intlTelInput(field)
-						console.log(iti)
-						iti.setNumber(field.value)
-						console.log(iti.getNumber())
-						// Uses cleave.js
-						// new Cleave(field, {
-						// 	phone: true,
-						// 	phoneRegionCode: 'US'
-						// })
-					}
 					// return true if all fields have been filled out
 					return (
 						// First and last names have to have at least 2 characters each...
