@@ -1,6 +1,10 @@
 <style>
 
-html, body { height:100%; overflow:auto; }
+html, body, .reg-form-container, .reg-form {
+	height:100%;
+	overflow:auto;
+	-webkit-transform: translateZ(0);
+}
 
 /* HARMONISE SCROLLING FOR IOS */
 body,
@@ -88,10 +92,6 @@ select.parsley-error {
 div.selected-dial-code {
 	color: #fff;
 	font-size: 12px !important;
-}
-
-.reg-form-container, .reg-form {
-	-webkit-transform: translateZ(0)
 }
 
 </style>
