@@ -22,34 +22,36 @@ emailBoxNames.forEach(emailBoxName => {
 	const emailBoxForm = getElementById(emailBoxName + '_form')
 	const buttonField = getElementById(emailBoxName + '_button')
 
-	buttonField.addEventListener('click', () => {
-		// If email box is used on homepage...
-		if (emailBoxName === 'hero') {
-			// ...collect email newsletter
-			emailBoxForm.action = 'https://app.getresponse.com/add_subscriber.html'
-			emailBoxForm.submit()
-		}
-		// ...otherwise, bring up reg form, since used in events page
-		else {
-			emailBoxFields.forEach(checkEmailBoxField => {
-				// Transfer data onto reg form where it can be either used or cleared...
-				const field = getElementById(emailBoxName + '_' + checkEmailBoxField)
-				if (checkEmailBoxField === 'first_name') {
-					eventFirstName.value = field.value
-				}
-				else if (checkEmailBoxField === 'last_name') {
-					eventLastName.value = field.value
-				}
-				else if (checkEmailBoxField === 'email') {
-					eventEmail.value = field.value
-				}
-				else if (checkEmailBoxField === 'phone') {
-					eventMobile.value = field.value
-				}
-			})
-			showRegForm()
-		}
-	})
+	if (buttonField) {
+		buttonField.addEventListener('click', () => {
+			// If email box is used on homepage...
+			if (emailBoxName === 'hero') {
+				// ...collect email newsletter
+				emailBoxForm.action = 'https://app.getresponse.com/add_subscriber.html'
+				emailBoxForm.submit()
+			}
+			// ...otherwise, bring up reg form, since used in events page
+			else {
+				emailBoxFields.forEach(checkEmailBoxField => {
+					// Transfer data onto reg form where it can be either used or cleared...
+					const field = getElementById(emailBoxName + '_' + checkEmailBoxField)
+					if (checkEmailBoxField === 'first_name') {
+						eventFirstName.value = field.value
+					}
+					else if (checkEmailBoxField === 'last_name') {
+						eventLastName.value = field.value
+					}
+					else if (checkEmailBoxField === 'email') {
+						eventEmail.value = field.value
+					}
+					else if (checkEmailBoxField === 'phone') {
+						eventMobile.value = field.value
+					}
+				})
+				showRegForm()
+			}
+		})
+	}
 
 	emailBoxFields.forEach(emailBoxField => {
 		const field = getElementById(emailBoxName + '_' + emailBoxField)
