@@ -30,11 +30,12 @@ emailBoxNames.forEach(emailBoxName => {
 					// let intTel = intlTelInput(field)
 					// intTel.setNumber(e.key.toString())
 					// Uses cleave.js for validation
-					console.log(window.intlTelInput(field).getSelectedCountryData().iso2)
+					// console.log(window.intlTelInput(field).getSelectedCountryData().iso2)
 					new Cleave(field, {
 						phone: true,
 						phoneRegionCode: 'us'
 					})
+					field.value = e.key.toString()
 				}
 
 				// Check to see if every field has been filled out correctly...
