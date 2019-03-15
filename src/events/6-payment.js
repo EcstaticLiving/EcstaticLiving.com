@@ -123,7 +123,7 @@ const indicateFailedSubmission = type => {
 
 // Begin
 if (isFormPage()) {
-	card.mount(getElementById('card-element'))
+	card.mount(billingCardElement)
 	card.addEventListener('change', result => paymentValidation(result))	
 }
 onClick(getElementById('button-stripe-error', 0), () => hideElement(getElementByClassName('modal-status card-error')))

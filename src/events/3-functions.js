@@ -327,7 +327,7 @@ const showErrorsInForm = () => {
 	const showClearError = ({ condition, element, type }) => {
 		// Set CSS for errors and no errors
 		const cssError = { property: 'style', value: 'border: 1px solid #b00000; background-color: #fdd;' }
-		const cssClear = (type === 'select')
+		const cssClear = (type === 'noborder')
 			? { property: 'style', value: 'border: 0px solid transparent; background-color: #fff;' }
 			: { property: 'style', value: 'border: 1px solid #ccc; background-color: #fff;' }
 		if (condition) {
@@ -342,7 +342,7 @@ const showErrorsInForm = () => {
 	// Cycle through each element based on particular conditions
 	// TODO: update conditions (not just use `isBlank`)
 	showClearError({ condition: !discountCodeValidation(), element: eventInviteCode })
-	showClearError({ condition: !getValue(billingCountry), element: billingCountryValidation, type: 'select' })
+	showClearError({ condition: !getValue(billingCountry), element: billingCountryValidation, type: 'noborder' })
 	showClearError({ condition: isBlank(billingPostal), element: billingPostal })
 	showClearError({ condition: isBlank(billingState), element: billingState })
 	showClearError({ condition: isBlank(billingCity), element: billingCity })
@@ -350,21 +350,21 @@ const showErrorsInForm = () => {
 	showClearError({ condition: isBlank(billingLastName), element: billingLastName })
 	showClearError({ condition: isBlank(billingFirstName), element: billingFirstName })
 	showClearError({ condition: !isChecked(eventTerms), element: eventTermsValidation })
-	showClearError({ condition: isVisible(eventDepositContainer) && !isChecked(eventDepositFull) && !isChecked(eventDepositDeposit), element: eventDepositValidation })
-	showClearError({ condition: participants() === 2 && !isChecked(eventPayBoth) && !isChecked(eventPayMe), element: eventPayValidation })
-	showClearError({ condition: !getValue(eventOption), element: eventOptionValidation, type: 'select' })
-	showClearError({ condition: participants() === 2 && !isChecked(eventPartnerFemale) && !isChecked(eventPartnerMale) && !isChecked(eventPartnerOther), element: eventPartnerGenderValidation })
+	showClearError({ condition: isVisible(eventDepositContainer) && !isChecked(eventDepositFull) && !isChecked(eventDepositDeposit), element: eventDepositValidation, type: 'noborder' })
+	showClearError({ condition: !getValue(eventOption), element: eventOptionValidation, type: 'noborder' })
+	showClearError({ condition: participants() === 2 && !isChecked(eventPayBoth) && !isChecked(eventPayMe), element: eventPayValidation, type: 'noborder' })
+	showClearError({ condition: participants() === 2 && !isChecked(eventPartnerFemale) && !isChecked(eventPartnerMale) && !isChecked(eventPartnerOther), element: eventPartnerGenderValidation, type: 'noborder' })
 	showClearError({ condition: participants() === 2 && isBlank(eventPartnerFirstName), element: eventPartnerFirstName })
 	showClearError({ condition: participants() === 2 && isBlank(eventPartnerLastName), element: eventPartnerLastName })
-	showClearError({ condition: !getValue(eventStatus), element: eventStatusValidation, type: 'select' })
-	showClearError({ condition: (isChecked(eventAffiliateYes) && isBlank(eventAffiliateCode)) || (!isChecked(eventAffiliateNo) && !isChecked(eventAffiliateYes)), element: eventAffiliateValidation })
-	showClearError({ condition: !isChecked(eventSpecialYes) && !isChecked(eventSpecialNo), element: eventSpecialValidation })
+	showClearError({ condition: !getValue(eventStatus), element: eventStatusValidation, type: 'noborder' })
+	showClearError({ condition: (isChecked(eventAffiliateYes) && isBlank(eventAffiliateCode)) || (!isChecked(eventAffiliateNo) && !isChecked(eventAffiliateYes)), element: eventAffiliateValidation, type: 'noborder' })
+	showClearError({ condition: !isChecked(eventSpecialYes) && !isChecked(eventSpecialNo), element: eventSpecialValidation, type: 'noborder' })
 	showClearError({ condition: isChecked(eventSpecialYes) && isBlank(eventSpecialDetails), element: eventSpecialDetails })
-	showClearError({ condition: !isChecked(eventDietYes) && !isChecked(eventDietNo), element: eventDietValidation })
+	showClearError({ condition: !isChecked(eventDietYes) && !isChecked(eventDietNo), element: eventDietValidation, type: 'noborder' })
 	showClearError({ condition: isChecked(eventDietYes) && isBlank(eventDietDetails), element: eventDietDetails })
-	showClearError({ condition: !isChecked(eventExperienceYes) && !isChecked(eventExperienceNo), element: eventExperienceValidation })
+	showClearError({ condition: !isChecked(eventExperienceYes) && !isChecked(eventExperienceNo), element: eventExperienceValidation, type: 'noborder' })
 	showClearError({ condition: isChecked(eventExperienceYes) && isBlank(eventExperienceDetails), element: eventExperienceDetails })
-	showClearError({ condition: !getValue(eventReferral), element: eventReferralValidation, type: 'select' })
+	showClearError({ condition: !getValue(eventReferral), element: eventReferralValidation, type: 'noborder' })
 	showClearError({ condition: !isChecked(eventFemale) && !isChecked(eventMale) && !isChecked(eventOther), element: eventGenderValidation })
 	showClearError({ condition: isBlank(eventBirthdate), element: eventBirthdate })
 	showClearError({ condition: isBlank(eventMobile), element: eventMobile })

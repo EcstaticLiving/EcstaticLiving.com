@@ -119,6 +119,7 @@ billingPostal = getElementById('billing-postal'),
 billingCountryValidation = getElementById('billing-country-validation'),
 billingCountry = getElementById('country'),
 billingCard = getElementById('billing-card'),
+billingCardElement = getElementById('billing-card-element'),
 billingCardError = getElementById('billing-card-error')
 
 // Pay now
