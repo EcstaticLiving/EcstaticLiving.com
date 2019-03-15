@@ -64,6 +64,7 @@ emailBoxNames.forEach(emailBoxName => {
 				}
 				// Set phone number according to national format
 				else if (e.target.name === 'phone') {
+					
 				}
 
 				// Check to see if every field has been filled out correctly...

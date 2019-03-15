@@ -55,7 +55,7 @@ const formatPhone = elem => {
 		phone: true,
 		phoneRegionCode: 'us'
 	})
-	elem.addEventListener("countrychange", e => cleave.phoneRegionCode = intTel.getSelectedCountryData().iso2)
+	elem.addEventListener('countrychange', e => cleave.phoneRegionCode = intTel.getSelectedCountryData().iso2)
 }
 const formatDate = elem => {
 	new Cleave(elem, {

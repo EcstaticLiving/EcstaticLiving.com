@@ -350,7 +350,7 @@ const showErrorsInForm = () => {
 	showClearError({ condition: participants() === 2 && !isValidText(eventPartnerFirstName), element: eventPartnerFirstName })
 	showClearError({ condition: participants() === 2 && !isValidText(eventPartnerLastName), element: eventPartnerLastName })
 	showClearError({ condition: !getValue(eventStatus), element: eventStatusValidation, type: 'noborder' })
-	showClearError({ condition: (isChecked(eventAffiliateYes) && isBlank(eventAffiliateCode)) || (!isChecked(eventAffiliateNo) && !isChecked(eventAffiliateYes)), element: eventAffiliateValidation, type: 'noborder' })
+	showClearError({ condition: ((isChecked(eventAffiliateYes) && isBlank(eventAffiliateCode)) || (!isChecked(eventAffiliateNo) && !isChecked(eventAffiliateYes))), element: eventAffiliateValidation, type: 'noborder' })
 	showClearError({ condition: !isChecked(eventSpecialYes) && !isChecked(eventSpecialNo), element: eventSpecialValidation, type: 'noborder' })
 	showClearError({ condition: isChecked(eventSpecialYes) && !isValidText(eventSpecialDetails), element: eventSpecialDetails })
 	showClearError({ condition: !isChecked(eventDietYes) && !isChecked(eventDietNo), element: eventDietValidation, type: 'noborder' })
