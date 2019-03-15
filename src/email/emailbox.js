@@ -28,8 +28,7 @@ emailBoxNames.forEach(emailBoxName => {
 				// Set phone number according to national format
 				else if (e.target.name === 'phone') {
 					let iti = intlTelInput(field)
-					// console.log(iti)
-					// iti.setNumber(field.value)
+					iti.setNumber(e.target.value)
 					console.log(iti.getNumber())
 					// Uses cleave.js
 					new Cleave(field, {
