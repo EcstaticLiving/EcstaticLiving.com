@@ -35,7 +35,6 @@ emailBoxNames.forEach(emailBoxName => {
 						phone: true,
 						phoneRegionCode: 'us'
 					})
-					field.value = e.key.toString()
 				}
 
 				// Check to see if every field has been filled out correctly...
