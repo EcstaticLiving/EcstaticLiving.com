@@ -51,6 +51,15 @@ phoneInputs.forEach(phoneInput => {
 		separateDialCode: false,
 		utilsScript: 'https://ecstaticliving.github.io/ecstaticliving.com/src/other/inttel-utils.js'
 	})
+	// Uses cleave.js for format-as-you-type validation
+	const cleave = new Cleave(phoneInput, {
+		phone: true,
+		phoneRegionCode: 'us'
+	})
+	phoneInput.addEventListener("countrychange", () => {
+		let intTel = intlTelInput(phoneInput)
+		cleave.phoneRegionCode = intTel.getSelectedCountryData().iso2
+	})
 })
 
 // Element Collections
