@@ -50,6 +50,7 @@ emailBoxNames.forEach(emailBoxName => {
 				const alertField = getElementById(emailBoxName + '_alert')
 				const emailBoxForm = getElementById(emailBoxName + '_form')
 				// Only show alert if all fields have been filled out somewhat, but not yet validated
+				console.log(emailBoxName, valid, everyFieldHasBeenFilledOut)
 				if (emailBoxName === 'hero' && !valid && everyFieldHasBeenFilledOut) {
 					alertField.classList.remove('hidden')
 					buttonField.disabled = true
