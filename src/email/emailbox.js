@@ -30,9 +30,12 @@ emailBoxNames.forEach(emailBoxName => {
 					if (checkEmailBoxField === 'first_name' || checkEmailBoxField === 'last_name') {
 						field.value = standardisationName(field.value)
 					}
+					// Set phone number according to national format
 					else if (checkEmailBoxField === 'phone') {
 						let iti = intlTelInput(field)
+						console.log(iti)
 						iti.setNumber(field.value)
+						console.log(iti.getNumber())
 						// Uses cleave.js
 						// new Cleave(field, {
 						// 	phone: true,
