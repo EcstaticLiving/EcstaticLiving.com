@@ -91,10 +91,11 @@ const onSubmit = (elem, f) => elem.addEventListener('submit', f)
 
 // Form behaviours
 const formSubmit = elem => elem.submit()
-const formErrorInit = elem => elem.parsley()
+const formErrorInit = elem => {
+	// elem.parsley()
+}
 const formErrorValidation = elem => {
-	console.log(elem)
-	elem.parsley().validate()
+	// elem.parsley().validate()
 }
 const formReset = elem => elem.reset()
 
