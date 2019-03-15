@@ -87,9 +87,11 @@ div.selected-dial-code {
 	color: #fff;
 	font-size: 12px !important;
 }
-
 ul#country-listbox.country-list {
 	font-size: 16px !important;
+}
+span.country-name {
+	font-weight: 300 !important;
 }
 
 </style>
