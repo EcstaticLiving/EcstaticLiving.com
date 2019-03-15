@@ -57,6 +57,14 @@ const closeRegForm = () => {
 	}, 200)
 }
 
+regFormContainer.onscroll = () => {
+	const elements = regFormContainer.querySelectorAll('input')
+	for (let i = 0; i < elements.length; i++) {
+		const element = elements[i]
+		element.style.display = 'block'
+	}
+}
+
 // Event listener for if reg form is opened...
 for (let i = 0; i < regFormButtons.length; i++) {
 	onClick(regFormButtons[i], () => showRegForm())
