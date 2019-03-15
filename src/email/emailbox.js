@@ -40,17 +40,17 @@ emailBoxNames.forEach(emailBoxName => {
 
 				// Check to see if every field has been filled out correctly...
 				const valid = emailBoxFields.every(checkEmailBoxField => {
-					const field = getElementById(emailBoxName + '_' + checkEmailBoxField)
+					const checkField = getElementById(emailBoxName + '_' + checkEmailBoxField)
 					// If field doesn’t exist, return true.
-					if (!field)	return true
+					if (!checkField)	return true
 					// return true if all fields have been filled out
 					return (
 						// First and last names have to have at least 2 characters each...
-						((checkEmailBoxField === 'first_name' || checkEmailBoxField === 'last_name') && field.value.length > 1)
+						((checkEmailBoxField === 'first_name' || checkEmailBoxField === 'last_name') && checkField.value.length > 1)
 						// ...email has to be at least 4 characters and valid...
-						|| (checkEmailBoxField === 'email' && field.value.length > 4 && standardisationEmail.test(field.value))
+						|| (checkEmailBoxField === 'email' && checkField.value.length > 4 && standardisationEmail.test(checkField.value))
 						// Any other fields have to be at least 1 character long.
-						|| field.value.length > 0
+						|| checkField.value.length > 0
 					)
 				})
 				// Only show alert once every field has been touched...
