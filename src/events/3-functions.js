@@ -342,6 +342,7 @@ const showErrorsInForm = () => {
 	// Cycle through each element based on particular conditions
 	// TODO: update conditions (not just use `isBlank`)
 	showClearError({ condition: !discountCodeValidation(), element: eventInviteCode })
+	showClearError({ condition: !isChecked(billingCard), element: billingCardElement })
 	showClearError({ condition: !getValue(billingCountry), element: billingCountryValidation, type: 'noborder' })
 	showClearError({ condition: isBlank(billingPostal), element: billingPostal })
 	showClearError({ condition: isBlank(billingState), element: billingState })

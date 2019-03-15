@@ -89,7 +89,7 @@ div.selected-dial-code {
 }
 
 ul#country-listbox.country-list {
-	font-size: 14px;
+	font-size: 14px !important;
 }
 
 </style>
