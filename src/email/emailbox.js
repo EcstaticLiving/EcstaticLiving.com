@@ -31,6 +31,8 @@ emailBoxNames.forEach(emailBoxName => {
 						field.value = standardisationName(field.value)
 					}
 					else if (checkEmailBoxField === 'phone') {
+						let iti = intlTelInput(field)
+						iti.setNumber(field.value)
 						// Uses cleave.js
 						// new Cleave(field, {
 						// 	phone: true,
