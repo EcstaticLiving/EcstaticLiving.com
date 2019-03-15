@@ -27,13 +27,13 @@ emailBoxNames.forEach(emailBoxName => {
 				}
 				// Set phone number according to national format
 				else if (e.target.name === 'phone') {
-					let iti = intlTelInput(field)
-					iti.setNumber(e.key.toString())
-					console.log(iti.getNumber())
+					let intTel = intlTelInput(field)
+					intTel.setNumber(e.key.toString())
+					console.log(intTel.getNumber())
 					// Uses cleave.js for validation
 					new Cleave(field, {
 						phone: true,
-						phoneRegionCode: 'US'
+						phoneRegionCode: intTel.getSelectedCountryData().iso2
 					})
 				}
 
