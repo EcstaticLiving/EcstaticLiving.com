@@ -3,6 +3,7 @@
 html, body, .reg-form-container, .reg-form {
 	height:100%;
 	overflow:auto;
+	transform: translateZ(0);
 	-webkit-transform: translateZ(0);
 }
 
