@@ -35,14 +35,10 @@ const showRegForm = () => {
 const closeRegForm = () => {
 	// Reallow background to scroll
 	document.body.style.overflow = 'visible'
-	// Fade out elements
-	fadeOutElement(regFormBg)
+	// Fade out element
 	fadeOutElement(regFormContainer)
 	// Hide elements after fade out
-	setTimeout(() => {
-		hideElement(regFormBg)
-		hideElement(regFormContainer)
-	}, 200)
+	setTimeout(() => hideElement(regFormContainer), 200)
 }
 
 // BROWSER FIX: on scroll error
