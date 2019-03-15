@@ -44,7 +44,8 @@ const deviceType = () => {
 const phoneInputs = document.querySelectorAll('input[name="phone"]')
 phoneInputs.forEach(phoneInput => {
 	window.intlTelInput(phoneInput, {
-		formatOnDisplay: true,
+		// Need to use cleave.js for validation instead, since IntTel removed formatting-as-you-type: https://github.com/jackocnr/intl-tel-input/issues/346
+		formatOnDisplay: false,
 		nationalMode: true,
 		preferredCountries: ['us', 'ca'],
 		separateDialCode: false,
