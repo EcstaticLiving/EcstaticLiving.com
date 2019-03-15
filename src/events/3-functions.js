@@ -241,6 +241,9 @@ const formValidation = () => {
 		)
 	}
 
+	// Show or hide errors in form
+	showErrorsInForm()
+
 	if (
 		discountCodeValidation() && personalValidation() && detailsValidation() && partnerValidation() && eventOptionValidation() && termsValidation() && billingValidation()
 	) {
