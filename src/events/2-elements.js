@@ -113,6 +113,7 @@ billingStreet = getElementById('billing-street'),
 billingCity = getElementById('billing-city'),
 billingState = getElementById('billing-state'),
 billingPostal = getElementById('billing-postal'),
+billingCountryValidation = getElementById('billing-country-validation'),
 billingCountry = getElementById('country'),
 billingCard = getElementById('billing-card'),
 billingCardError = getElementById('billing-card-error')
