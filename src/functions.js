@@ -56,10 +56,7 @@ phoneInputs.forEach(phoneInput => {
 		phone: true,
 		phoneRegionCode: 'us'
 	})
-	phoneInput.addEventListener("countrychange", e => {
-		cleave.phoneRegionCode = intTel.getSelectedCountryData().iso2
-		console.log(cleave.phoneRegionCode)
-	})
+	phoneInput.addEventListener("countrychange", e => cleave.phoneRegionCode = intTel.getSelectedCountryData().iso2)
 })
 
 // Element Collections

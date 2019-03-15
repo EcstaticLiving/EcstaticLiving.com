@@ -75,19 +75,15 @@ emailBoxNames.forEach(emailBoxName => {
 								// and clear it from email box for privacy.
 								if (checkEmailBoxField === 'first_name') {
 									eventFirstName.value = field.value
-									field.value = ''
 								}
 								else if (checkEmailBoxField === 'last_name') {
 									eventLastName.value = field.value
-									field.value = ''
 								}
 								else if (checkEmailBoxField === 'email') {
 									eventEmail.value = field.value
-									field.value = ''
 								}
 								else if (checkEmailBoxField === 'phone') {
 									eventMobile.value = field.value
-									field.value = ''
 								}
 							})
 							showRegForm()
