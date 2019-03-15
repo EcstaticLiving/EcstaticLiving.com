@@ -81,22 +81,23 @@ emailBoxNames.forEach(emailBoxName => {
 							emailBoxFields.forEach(checkEmailBoxField => {
 								// Transfer data onto reg form where it can be either used or cleared...
 								const field = getElementById(emailBoxName + '_' + checkEmailBoxField)
+								// and clear it from email box for privacy.
 								if (checkEmailBoxField === 'first_name') {
 									eventFirstName.value = field.value
+									field.value = ''
 								}
 								else if (checkEmailBoxField === 'last_name') {
 									eventLastName.value = field.value
+									field.value = ''
 								}
 								else if (checkEmailBoxField === 'email') {
 									eventEmail.value = field.value
+									field.value = ''
 								}
 								else if (checkEmailBoxField === 'phone') {
 									eventMobile.value = field.value
+									field.value = ''
 								}
-								// and clear it from email box for privacy.
-								// if (field) {
-								// 	field.value = ''
-								// }
 							})
 							showRegForm()
 						}
