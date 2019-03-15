@@ -321,20 +321,25 @@ const affiliateCodeVerification = () => {
 }
 
 const showErrorsInForm = () => {
-	// Set CSS for errors and no errors
-	const cssError = { property: 'style', value: 'border: 2px solid #b00000; background-color: #fdd;' }
-	const cssClear = { property: 'style', value: 'border: 1px solid #ccc; background-color: #fff;' }
-	const showClearError = ({ condition, element }) => {
+	const showClearError = ({ condition, element, type }) => {
+		// Set CSS for errors and no errors
+		const cssError = { property: 'style', value: 'border: 1px solid #b00000; background-color: #fdd;' }
+		const cssClear = (type === 'select')
+			? { property: 'style', value: 'border: 0px solid transparent; background-color: #fff;' }
+			: { property: 'style', value: 'border: 1px solid #ccc; background-color: #fff;' }
 		if (condition) {
 			setCss(element, cssError)
 			if (!isRadio(element)) focusElement(element)
 		}
-		else setCss(element, cssClear)
+		else {
+
+			setCss(element, cssClear)
+		}
 	}
 	// Cycle through each element based on particular conditions
 	// TODO: update conditions (not just use `isBlank`)
 	showClearError({ condition: !discountCodeValidation(), element: eventInviteCode })
-	showClearError({ condition: !getValue(billingCountry), element: billingCountryValidation })
+	showClearError({ condition: !getValue(billingCountry), element: billingCountryValidation, type: 'select' })
 	showClearError({ condition: isBlank(billingPostal), element: billingPostal })
 	showClearError({ condition: isBlank(billingState), element: billingState })
 	showClearError({ condition: isBlank(billingCity), element: billingCity })
@@ -344,11 +349,11 @@ const showErrorsInForm = () => {
 	showClearError({ condition: !isChecked(eventTerms), element: eventTermsValidation })
 	showClearError({ condition: isVisible(eventDepositContainer) && !isChecked(eventDepositFull) && !isChecked(eventDepositDeposit), element: eventDepositValidation })
 	showClearError({ condition: participants() === 2 && !isChecked(eventPayBoth) && !isChecked(eventPayMe), element: eventPayValidation })
-	showClearError({ condition: !getValue(eventOption), element: eventOptionValidation })
+	showClearError({ condition: !getValue(eventOption), element: eventOptionValidation, type: 'select' })
 	showClearError({ condition: participants() === 2 && !isChecked(eventPartnerFemale) && !isChecked(eventPartnerMale) && !isChecked(eventPartnerOther), element: eventPartnerGenderValidation })
 	showClearError({ condition: participants() === 2 && isBlank(eventPartnerFirstName), element: eventPartnerFirstName })
 	showClearError({ condition: participants() === 2 && isBlank(eventPartnerLastName), element: eventPartnerLastName })
-	showClearError({ condition: !getValue(eventStatus), element: eventStatusValidation })
+	showClearError({ condition: !getValue(eventStatus), element: eventStatusValidation, type: 'select' })
 	showClearError({ condition: (isChecked(eventAffiliateYes) && isBlank(eventAffiliateCode)) || (!isChecked(eventAffiliateNo) && !isChecked(eventAffiliateYes)), element: eventAffiliateValidation })
 	showClearError({ condition: !isChecked(eventSpecialYes) && !isChecked(eventSpecialNo), element: eventSpecialValidation })
 	showClearError({ condition: isChecked(eventSpecialYes) && isBlank(eventSpecialDetails), element: eventSpecialDetails })
@@ -356,7 +361,7 @@ const showErrorsInForm = () => {
 	showClearError({ condition: isChecked(eventDietYes) && isBlank(eventDietDetails), element: eventDietDetails })
 	showClearError({ condition: !isChecked(eventExperienceYes) && !isChecked(eventExperienceNo), element: eventExperienceValidation })
 	showClearError({ condition: isChecked(eventExperienceYes) && isBlank(eventExperienceDetails), element: eventExperienceDetails })
-	showClearError({ condition: !getValue(eventReferral), element: eventReferralValidation })
+	showClearError({ condition: !getValue(eventReferral), element: eventReferralValidation, type: 'select' })
 	showClearError({ condition: !isChecked(eventFemale) && !isChecked(eventMale) && !isChecked(eventOther), element: eventGenderValidation })
 	showClearError({ condition: isBlank(eventBirthdate), element: eventBirthdate })
 	showClearError({ condition: isBlank(eventMobile), element: eventMobile })
