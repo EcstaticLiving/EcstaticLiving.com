@@ -324,36 +324,12 @@ const showErrorsInForm = () => {
 	// Set CSS for errors and no errors
 	const cssError = [{ property: 'style', value: 'border-color: #b00000' }, { property: 'style', value: 'background-color: #fdd' }]
 	const cssClear = [{ property: 'style', value: 'border-color: #ccc' }, { property: 'style', value: 'background-color: #fff' }]
-	const showError = element => {
-		if (!isSelect(element)) {
-			setCss(element, cssError)
-		}
-		else {
-			console.log(element)
-			for (let i = 0; i < element.querySelectorAll('option').length; i++) {
-				const option = element.querySelectorAll('option')[i];
-				console.log(option)
-				setCss(option, cssError)
-			}
-		}
-	}
-	const clearError = element => {
-		if (!isSelect(element)) {
-			setCss(element, cssClear)
-		}
-		else {
-			for (let i = 0; i < element.querySelectorAll('option').length; i++) {
-				const option = element.querySelectorAll('option')[i];
-				setCss(option, cssClear)
-			}
-		}
-	}
 	const showClearError = ({ condition, element }) => {
 		if (condition) {
-			showError(element)
+			setCss(element, cssError)
 			if (!isRadio(element)) focusElement(element)
 		}
-		else clearError(element)
+		else setCss(element, cssClear)
 	}
 	// Cycle through each element based on particular conditions
 	// TODO: update conditions (not just use `isBlank`)
