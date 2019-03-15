@@ -331,7 +331,7 @@ const showErrorsInForm = () => {
 	const showClearError = ({ condition, element }) => {
 		if (condition) {
 			showError(element)
-			if (!isRadio(element)) focusElement(element)
+			// if (!isRadio(element)) focusElement(element)
 		}
 		else clearError(element)
 	}
