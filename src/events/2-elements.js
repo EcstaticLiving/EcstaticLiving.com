@@ -9,7 +9,7 @@ const isFormPage = () => page() === 'Event' || page() === 'Update'
 
 // Event Reg Form
 const regForm = getElementByClassName('reg-form')
-regForm.style.height = window.innerHeight - 260
+// regForm.style.height = window.innerHeight - 260
 
 // Hidden fields
 const eventCode = getText(getElementById('event-code')).toUpperCase(),
