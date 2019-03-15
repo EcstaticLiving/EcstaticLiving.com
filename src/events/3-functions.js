@@ -322,7 +322,7 @@ const affiliateCodeVerification = () => {
 
 const showErrorsInForm = () => {
 	// Set CSS for errors and no errors
-	const cssError = [{ property: 'style', value: 'border: 1px solid #b00000' }, { property: 'style', value: 'background-color: #fdd' }]
+	const cssError = [{ property: 'style', value: 'border: 2px solid #b00000' }, { property: 'style', value: 'background-color: #fdd' }]
 	const cssClear = [{ property: 'style', value: 'border: 1px solid #ccc' }, { property: 'style', value: 'background-color: #fff' }]
 	const showClearError = ({ condition, element }) => {
 		if (condition) {
