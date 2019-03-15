@@ -1,6 +1,6 @@
 <style>
 
-html, body, .reg-form-container, .reg-form {
+html, body, form, .reg-form-container, .reg-form {
 	height:100%;
 	overflow:auto;
 	transform: translateZ(0);
