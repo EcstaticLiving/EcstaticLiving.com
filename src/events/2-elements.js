@@ -86,6 +86,7 @@ eventPayMe = getElementById('event-pay-me')
 
 // Registration options
 const eventOption = getElementById('event-option'),
+eventOptionValidation = getElementById('event-option-validation'),
 eventOptions = getText(getElementById('event-options')).split(' | '),
 eventNotes = getText(getElementById('event-notes')).includes('|')
 	? getText(getElementById('event-notes')).split('|')
