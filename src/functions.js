@@ -161,3 +161,6 @@ const showAndScrollTo = elem => {
 	showElement(elem)
 	window.scrollTo(0, (window.pageYOffset || document.documentElement.scrollTop) - (document.documentElement.clientTop || 0) + 1)
 }
+
+// Regex
+const isValidText = value => /([a-zA-Z\u0080-\uFFFF]){3,}$/.test(value)
