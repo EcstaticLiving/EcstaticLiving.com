@@ -135,6 +135,8 @@ const properCase = text => text.toLowerCase().charAt(0).toUpperCase() + text.sli
 const emptySelect = elem => {
 	for (let i = 0; i < elem.options.length; i++) {
 		let option = document.createElement('option')
+		option.text = ''
+		option.value = ''
 		elem.options[i] = option
 	}
 }
