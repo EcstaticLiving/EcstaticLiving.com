@@ -14,8 +14,43 @@ const emailBoxFields = [
 	'phone'				// Only on events page
 ]
 
-// 2. Assign enable button function to all relevant fields, and trigger submit if user presses enter
+
+// 2. Assign button function to all relevant fields, and trigger submit if user presses enter
 emailBoxNames.forEach(emailBoxName => {
+
+	const alertField = getElementById(emailBoxName + '_alert')
+	const emailBoxForm = getElementById(emailBoxName + '_form')
+	const buttonField = getElementById(emailBoxName + '_button')
+
+	buttonField.addEventListener('click', () => {
+		// If email box is used on homepage...
+		if (emailBoxName === 'hero') {
+			// ...collect email newsletter
+			emailBoxForm.action = 'https://app.getresponse.com/add_subscriber.html'
+			emailBoxForm.submit()
+		}
+		// ...otherwise, bring up reg form, since used in events page
+		else {
+			emailBoxFields.forEach(checkEmailBoxField => {
+				// Transfer data onto reg form where it can be either used or cleared...
+				const field = getElementById(emailBoxName + '_' + checkEmailBoxField)
+				if (checkEmailBoxField === 'first_name') {
+					eventFirstName.value = field.value
+				}
+				else if (checkEmailBoxField === 'last_name') {
+					eventLastName.value = field.value
+				}
+				else if (checkEmailBoxField === 'email') {
+					eventEmail.value = field.value
+				}
+				else if (checkEmailBoxField === 'phone') {
+					eventMobile.value = field.value
+				}
+			})
+			showRegForm()
+		}
+	})
+
 	emailBoxFields.forEach(emailBoxField => {
 		const field = getElementById(emailBoxName + '_' + emailBoxField)
 		if (field) {
@@ -46,57 +81,25 @@ emailBoxNames.forEach(emailBoxName => {
 				})
 				// Only show alert once every field has been touched...
 				const everyFieldHasBeenFilledOut = emailBoxFields.every(checkEmailBoxField => !getElementById(emailBoxName + '_' + checkEmailBoxField) || getElementById(emailBoxName + '_' + checkEmailBoxField).value.length > 0)
-				const buttonField = getElementById(emailBoxName + '_button')
-				const alertField = getElementById(emailBoxName + '_alert')
-				const emailBoxForm = getElementById(emailBoxName + '_form')
 				// Only show alert if all fields have been filled out somewhat, but not yet validated
-				console.log(emailBoxName, valid, everyFieldHasBeenFilledOut)
 				if (emailBoxName === 'hero' && !valid && everyFieldHasBeenFilledOut) {
 					alertField.classList.remove('hidden')
 					buttonField.disabled = true
 					emailBoxForm.action = ''
 					emailBoxForm.removeEventListener('click', () => null)
 				}
-				// ...and if all’s good to go, change button class to active, and submit emailBoxForm.
+				// ...and if all’s good to go, change button class to active.
 				else {
 					alertField.classList.add('hidden')
 					buttonField.disabled = false
-					buttonField.addEventListener('click', () => {
-						// If email box is used on homepage...
-						if (emailBoxName === 'hero') {
-							// ...collect email newsletter
-							emailBoxForm.action = 'https://app.getresponse.com/add_subscriber.html'
-							emailBoxForm.submit()
-						}
-						// ...otherwise, bring up reg form, since used in events page
-						else {
-							emailBoxFields.forEach(checkEmailBoxField => {
-								// Transfer data onto reg form where it can be either used or cleared...
-								const field = getElementById(emailBoxName + '_' + checkEmailBoxField)
-								if (checkEmailBoxField === 'first_name') {
-									eventFirstName.value = field.value
-								}
-								else if (checkEmailBoxField === 'last_name') {
-									eventLastName.value = field.value
-								}
-								else if (checkEmailBoxField === 'email') {
-									eventEmail.value = field.value
-								}
-								else if (checkEmailBoxField === 'phone') {
-									eventMobile.value = field.value
-								}
-							})
-							showRegForm()
-						}
-					})
 				}
 				const key = e.which || e.keyCode
 				// If `enter` key is pressed, attempt to submit emailBoxForm
 				if (key === 13) {
-					const buttonField = getElementById(emailBoxName + '_button')
 					buttonField.click()
 				}
 			})
 		}
 	})
+
 })
