@@ -178,9 +178,6 @@ const setEventPrices = () => {
 			: ''
 		addOption.text = eventOptions[i] + ' ($' + eventSelectPrice + paymentClarification + affiliateDiscountText + ')' + eventNote
 		addOption.value = eventSelectPrice
-		console.log(i)
-		console.log(option)
-		console.log(eventOptions[i])
 		appendSelect(eventOption, addOption)
 	}
 	// Update `Pay deposit only` field with actual deposit amount: `Pay deposit only ($...)`
