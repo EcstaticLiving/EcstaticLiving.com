@@ -336,7 +336,15 @@ const showErrorsInForm = () => {
 		else clearError(element)
 	}
 	// Cycle through each element based on particular conditions
+	// TODO: update conditions (not just use `isBlank`)
 	showClearError({ condition: !discountCodeValidation(), element: eventInviteCode })
+	showClearError({ condition: getIndex(billingCountry) === 0, element: billingCountry })
+	showClearError({ condition: isBlank(billingPostal), element: billingPostal })
+	showClearError({ condition: isBlank(billingState), element: billingState })
+	showClearError({ condition: isBlank(billingCity), element: billingCity })
+	showClearError({ condition: isBlank(billingStreet), element: billingStreet })
+	showClearError({ condition: isBlank(billingLastName), element: billingLastName })
+	showClearError({ condition: isBlank(billingFirstName), element: billingFirstName })
 	showClearError({ condition: !isChecked(eventTerms), element: eventTermsValidation })
 	showClearError({ condition: isVisible(eventDepositContainer) && !isChecked(eventDepositFull) && !isChecked(eventDepositDeposit), element: eventDepositValidation })
 	showClearError({ condition: participants() === 2 && !isChecked(eventPayBoth) && !isChecked(eventPayMe), element: eventPayValidation })
