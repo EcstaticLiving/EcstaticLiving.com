@@ -14,21 +14,21 @@ customPrices = getText(getElementById('custom-prices')).split(' | ')
 const formValidation = () => {
 	if (!isBlank(customFirstName) && !isBlank(customLastName) && !isBlank(customEmail) && !isBlank(customMobile) && getValue(customSelect) && isChecked(customTerms) && billingValidation()) {
 		emptyText(getElementById('billing-card-error'))
-		setCss(paymentButton, [{ property: 'background-color', value: '#800000' }])
-		setCss(paymentButton, [{ property: 'color', value: '#ffffff' }])
+		setCss(paymentButton, [{ property: 'style', value: 'background-color: #800000' }])
+		setCss(paymentButton, [{ property: 'style', value: 'color: #ffffff' }])
 		return true
 	}
-	setCss(paymentButton, [{ property: 'background-color', value: '#f5f5f5' }])
-	setCss(paymentButton, [{ property: 'color', value: '#333333' }])
+	setCss(paymentButton, [{ property: 'style', value: 'background-color: #f5f5f5' }])
+	setCss(paymentButton, [{ property: 'style', value: 'color: #333333' }])
 	return false
 }
 
 const showErrorsInForm = () => {
 	if (!isChecked(customTerms)) {
-    setCss(customTermsValidation, [{ property: 'background-color', value: '#fdd' }])
+    setCss(customTermsValidation, [{ property: 'style', value: 'background-color: #fdd' }])
   }
   else {
-    setCss(customTermsValidation, [{ property: 'background-color', value: 'transparent' }])
+    setCss(customTermsValidation, [{ property: 'style', value: 'background-color: transparent' }])
   }
 	formErrorValidation(customForm)
 }
@@ -57,8 +57,8 @@ const resetForm = () => {
 	showElement(customForm)
 	unCheckElement(customTerms)
 	formValidation()
-	setCss(paymentButton, [{ property: 'background-color', value: '#f5f5f5' }])
-	setCss(paymentButton, [{ property: 'color', value: '#333333' }])
+	setCss(paymentButton, [{ property: 'style', value: 'background-color: #f5f5f5' }])
+	setCss(paymentButton, [{ property: 'style', value: 'color: #333333' }])
 }
 
 // CUSTOM CHARGE ONCHANGE EVENTS

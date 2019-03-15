@@ -323,11 +323,11 @@ const affiliateCodeVerification = () => {
 const showErrorsInForm = () => {
 	// Set CSS for errors and no errors
 	const showError = element => isRadio(element)
-		? setCss(element, [{ property: 'background-color', value: '#fdd' }])
-		: setCss(element, [{ property: 'border-color', value: '#b00000' }, { property: 'background-color', value: '#fdd' }])
+		? setCss(element, [{ property: 'style', value: 'background-color: #fdd' }])
+		: setCss(element, [{ property: 'style', value: 'border-color: #b00000' }, { property: 'style', value: 'background-color: #fdd' }])
 	const clearError = element => isRadio(element)
-		? setCss(element, [{ property: 'background-color', value: 'transparent' }])
-		: setCss(element, [{ property: 'border-color', value: '#ccc' }, { property: 'background-color', value: '#fff' }])
+		? setCss(element, [{ property: 'style', value: 'background-color: transparent' }])
+		: setCss(element, [{ property: 'style', value: 'border-color: #ccc' }, { property: 'style', value: 'background-color: #fff' }])
 	const showClearError = ({ condition, element }) => {
 		if (condition) {
 			showError(element)
