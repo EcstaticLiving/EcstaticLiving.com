@@ -130,7 +130,7 @@ const properCase = text => text.toLowerCase().charAt(0).toUpperCase() + text.sli
 // Select
 const emptySelect = elem => {
 	const newSelect = elem.cloneNode()
-	const optionLength = newSelect.length
+	const optionLength = newSelect.options.length
 	for (let i = 0; i < optionLength; i++) {
 		elem.remove(i)
 	}
