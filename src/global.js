@@ -132,19 +132,7 @@ const emptyText = elem => elem.textContent = ''
 const properCase = text => text.toLowerCase().charAt(0).toUpperCase() + text.slice(1)
 
 // Select
-const emptySelect = elem => {
-	console.log(elem)
-	const optionLength = elem.options.length
-	for (let i = 0; i < optionLength; i++) {
-		elem.remove(i)
-		console.log(i)
-		console.log(elem.options.length)
-		if (elem.options.length === 5) {
-			console.log(elem)
-			break
-		}
-	}
-}
+const emptySelect = elem => elem.remove()
 const appendSelect = (elem, option) => elem.add(option)
 const getIndex = elem => elem.selectedIndex
 
