@@ -153,33 +153,35 @@ const setEventPrices = () => {
 	hideElement(eventAmountContainer)
 	// Reset event options
 	emptySelect(eventOption)
-	let option = document.createElement('option')
-	option.text = 'Event option...'
-	option.value = ''
-	appendSelect(eventOption, option)
-	const people = paymentQty() === 2
-		? 'for both'
-		: 'per person'
-	const paymentClarification = participants() === 2 ? ' ' + people : ''
-	// Create dropdown
-	for (let i = 0; i < eventOptions.length; i++) {
-		let addOption = document.createElement('option')
-		// Event price cannot be less than $0 after discount is applied
-		const eventSelectPrice = (eventPrices[i] - getDiscount()) * paymentQty() > 0
-			? (eventPrices[i] - getDiscount()) * paymentQty()
-			: 0
-		const affiliateDiscountText = getDiscount() > 0
-			? ' including discount'
-			: ''
-		const eventNote = eventNotes[i]
-			? eventNotes[i]
-			: ''
-		addOption.text = eventOptions[i] + ' ($' + eventSelectPrice + paymentClarification + affiliateDiscountText + ')' + eventNote
-		addOption.value = eventSelectPrice
-		appendSelect(eventOption, addOption)
-	}
-	// Update `Pay deposit only` field with actual deposit amount: `Pay deposit only ($...)`
-	setText(eventDepositText, 'Pay deposit only ($' + parseInt(depositAmount(), 10) + paymentClarification + ')')
+	setTimeout(() => {
+		let option = document.createElement('option')
+		option.text = 'Event option...'
+		option.value = ''
+		appendSelect(eventOption, option)
+		const people = paymentQty() === 2
+			? 'for both'
+			: 'per person'
+		const paymentClarification = participants() === 2 ? ' ' + people : ''
+		// Create dropdown
+		for (let i = 0; i < eventOptions.length; i++) {
+			let addOption = document.createElement('option')
+			// Event price cannot be less than $0 after discount is applied
+			const eventSelectPrice = (eventPrices[i] - getDiscount()) * paymentQty() > 0
+				? (eventPrices[i] - getDiscount()) * paymentQty()
+				: 0
+			const affiliateDiscountText = getDiscount() > 0
+				? ' including discount'
+				: ''
+			const eventNote = eventNotes[i]
+				? eventNotes[i]
+				: ''
+			addOption.text = eventOptions[i] + ' ($' + eventSelectPrice + paymentClarification + affiliateDiscountText + ')' + eventNote
+			addOption.value = eventSelectPrice
+			appendSelect(eventOption, addOption)
+		}
+		// Update `Pay deposit only` field with actual deposit amount: `Pay deposit only ($...)`
+		setText(eventDepositText, 'Pay deposit only ($' + parseInt(depositAmount(), 10) + paymentClarification + ')')
+	}, 2000)
 }
 
 // Complete validation
