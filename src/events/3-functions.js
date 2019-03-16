@@ -152,6 +152,7 @@ const setEventPrices = () => {
 	emptyValue(eventAmountDisplay)
 	hideElement(eventAmountContainer)
 	// Reset event options
+	console.log(eventOption)
 	emptySelect(eventOption)
 	let option = document.createElement('option')
 	option.text = 'Event option...'
