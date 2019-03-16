@@ -129,6 +129,7 @@ const properCase = text => text.toLowerCase().charAt(0).toUpperCase() + text.sli
 
 // Select
 const emptySelect = elem => {
+	console.log(elem)
 	const optionLength = elem.options.length
 	console.log(optionLength)
 	for (let i = 0; i < optionLength; i++) {
