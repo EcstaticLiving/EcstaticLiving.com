@@ -131,7 +131,7 @@ const properCase = text => text.toLowerCase().charAt(0).toUpperCase() + text.sli
 const emptySelect = elem => {
 	const optionLength = elem.options.length
 	console.log(optionLength)
-	for (let i = 0; i < optionLength; i++) {
+	for (let i = optionLength - 1; i >= 0; i--) {
 		elem.remove(i)
 		if (elem.options.length === 5) {
 			console.log(elem[i])
