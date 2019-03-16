@@ -179,9 +179,9 @@ const setEventPrices = () => {
 			addOption.value = eventSelectPrice
 			appendSelect(eventOption, addOption)
 		}
+		// Update `Pay deposit only` field with actual deposit amount: `Pay deposit only ($...)`
+		setText(eventDepositText, 'Pay deposit only ($' + parseInt(depositAmount(), 10) + paymentClarification + ')')
 	}
-	// Update `Pay deposit only` field with actual deposit amount: `Pay deposit only ($...)`
-	setText(eventDepositText, 'Pay deposit only ($' + parseInt(depositAmount(), 10) + paymentClarification + ')')
 }
 
 // Complete validation
