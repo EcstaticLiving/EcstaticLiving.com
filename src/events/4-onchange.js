@@ -111,7 +111,7 @@ for (elem of [eventFirstName, eventLastName, eventEmail, eventMobile, eventBirth
 }
 
 // To display grand total (optional feature)
-[eventOption, eventDepositFull, eventDepositDeposit].forEach(elem => onChange(elem, () => {
-	setText(eventAmountDisplay, 'Total: $' + finalAmount())
-	if (getText(eventAmountShow) === 'Yes') showAndScrollTo(eventAmountContainer)
-}))
+// [eventOption, eventDepositFull, eventDepositDeposit].forEach(elem => onChange(elem, () => {
+// 	setText(eventAmountDisplay, 'Total: $' + finalAmount())
+// 	if (getText(eventAmountShow) === 'Yes') showAndScrollTo(eventAmountContainer)
+// }))
