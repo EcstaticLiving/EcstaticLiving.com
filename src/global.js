@@ -139,6 +139,10 @@ const emptySelect = elem => {
 		elem.remove(i)
 		console.log(i)
 		console.log(elem.options.length)
+		if (elem.options.length === 5) {
+			console.log(elem)
+			break
+		}
 	}
 }
 const appendSelect = (elem, option) => elem.add(option)
