@@ -388,33 +388,40 @@ const resetForm = () => {
 	
 	// Determines whether event is for both couples & singles, couples-only, or singles-only
 	emptySelect(eventStatus)
-	let option = document.createElement('option')
 	if (eventStatusRestriction === 'Couples only') {
+		let option = document.createElement('option')
 		option.text = 'Register as...'
 		option.value = ''
 		appendSelect(eventStatus, option)
+		let option = document.createElement('option')
 		option.text = 'Couple'
 		option.value = 'Couple'
 		appendSelect(eventStatus, option)
+		let option = document.createElement('option')
 		option.text = 'Two Singles (paired)'
 		option.value = 'Two Singles (paired)'
 		appendSelect(eventStatus, option)
 	}
 	else if (eventStatusRestriction === 'Singles only') {
+		let option = document.createElement('option')
 		option.text = 'Single'
 		option.value = 'Singles-only event'
 		appendSelect(eventStatus, option)
 	}
 	else {
+		let option = document.createElement('option')
 		option.text = 'Register as...'
 		option.value = ''
 		appendSelect(eventStatus, option)
+		let option = document.createElement('option')
 		option.text = 'Couple'
 		option.value = 'Couple'
 		appendSelect(eventStatus, option)
+		let option = document.createElement('option')
 		option.text = 'Single'
 		option.value = 'Single'
 		appendSelect(eventStatus, option)
+		let option = document.createElement('option')
 		option.text = 'Two Singles (paired)'
 		option.value = 'Two Singles (paired)'
 		appendSelect(eventStatus, option)
