@@ -420,9 +420,6 @@ const resetForm = () => {
 		appendSelect(eventStatus, option)
 	}
 
-	// Reset event prices
-	setEventPrices()
-
 	// Show or hide containers based on previous selection from repopulateForm()
 	if (isChecked(eventAffiliateYes)) showAndScrollTo(eventAffiliateCodeContainer)
 	else {
