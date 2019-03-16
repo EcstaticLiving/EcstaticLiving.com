@@ -132,6 +132,7 @@ const emptySelect = elem => {
 	const newSelect = elem.cloneNode()
 	console.log(newSelect)
 	const optionLength = newSelect.options.length
+	console.log(optionLength)
 	for (let i = 0; i < optionLength; i++) {
 		elem.remove(i)
 		console.log(i)
