@@ -97,8 +97,6 @@ eventNotes = getText(getElementById('event-notes')).includes('|')
 	? getText(getElementById('event-notes')).split('|')
 	: getText(getElementById('event-notes')).split(',')
 
-	console.log(eventOption)
-
 // Pricing
 const eventPrices = getText(getElementById('event-prices')).split(' | '),
 eventDepositContainer = getElementByClassName('container deposit'),

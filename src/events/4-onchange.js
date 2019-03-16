@@ -106,7 +106,7 @@ for (elem of [eventFirstName, eventLastName, eventEmail, eventMobile, eventBirth
 		// Save form whenever a single field has changed...
 		saveForm(page())
 		// ...and keep validating form to either activate or deactivate Pay Now button.
-		formValidation()
+		// formValidation()
 	})
 }
 
