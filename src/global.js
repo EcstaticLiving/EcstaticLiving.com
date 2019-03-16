@@ -129,14 +129,11 @@ const properCase = text => text.toLowerCase().charAt(0).toUpperCase() + text.sli
 
 // Select
 const emptySelect = elem => {
-	const optionLength = elem.options.length
-	console.log(optionLength)
-	console.log(elem.options)
+	const newSelect = elem.cloneNode()
+	const optionLength = newSelect.length
 	for (let i = 0; i < optionLength; i++) {
 		elem.remove(i)
-		console.log(i)
 	}
-	console.log(elem.options)
 }
 const appendSelect = (elem, option) => elem.add(option)
 const getIndex = elem => elem.selectedIndex
