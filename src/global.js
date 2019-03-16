@@ -133,7 +133,6 @@ const emptySelect = elem => {
 	for (let i = 0; i < optionLength; i++) {
 		elem.remove(i)
 	}
-	console.log(elem.options)
 }
 const appendSelect = (elem, option) => elem.add(option)
 const getIndex = elem => elem.selectedIndex
