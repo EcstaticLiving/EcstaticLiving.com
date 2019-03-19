@@ -155,14 +155,15 @@ onClick(paymentButton, async e => {
 	saveForm(page())
 
 	// Update form submission fields
-	setValue(getElementById('party'), partyName())
-	setValue(getElementById('trafficsource'), urlString && urlString.source ? urlString.source : 'ELI')
-	setValue(getElementById('charge-description'), chargeDescription)
-	setValue(getElementById('charge-amount'), finalAmount())
-	setValue(getElementById('event-option-total'), getValue(eventOption) * 100)
-	setValue(getElementById('event-affiliate'), getValue(eventAffiliateCode) ? getValue(eventAffiliateCode) : '- none -')
-	setValue(getElementById('question-diet'), getValue(eventDietDetails) ? getValue(eventDietDetails) : '- none -')
-	setValue(getElementById('question-special'), getValue(eventSpecialDetails) ? getValue(eventSpecialDetails) : '- none -')
+	setValue(eventParty, partyName())
+	setValue(eventTrafficSource, urlString && urlString.source ? urlString.source : 'ELI')
+	setValue(eventChargeDescription, chargeDescription)
+	setValue(eventChargeAmount, finalAmount())
+	setValue(eventOptionTotal, getValue(eventOption) * 100)
+	setValue(eventAffiliateField, getValue(eventAffiliateCode) ? getValue(eventAffiliateCode) : '- none -')
+	setValue(eventQuestionExperience, getValue(eventExperienceDetails) ? getValue(eventExperienceDetails) : '- none -')
+	setValue(eventQuestionDiet, getValue(eventDietDetails) ? getValue(eventDietDetails) : '- none -')
+	setValue(eventQuestionSpecial, getValue(eventSpecialDetails) ? getValue(eventSpecialDetails) : '- none -')
 
 	// Indicate processing, since below Stripe function is async...
 	showElement(getElementByClassName('modal-status processing'))

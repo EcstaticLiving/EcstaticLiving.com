@@ -10,7 +10,7 @@ const isFormPage = () => page() === 'Event' || page() === 'Update'
 // Global error checking variable; only activated once “Secure Payment” button is pressed
 let DISPLAYERRORS = false
 
-// Hidden fields
+// Hidden data
 const eventCode = getText(getElementById('event-code')).toUpperCase(),
 eventName = getText(getElementById('event-name')),
 eventDates = getText(getElementById('event-dates')),
@@ -20,6 +20,17 @@ eventDepositDate = getText(getElementById('event-deposit-date')),
 eventBasePrice = parseFloat(getText(getElementById('event-base-price'))).toFixed(2),
 eventBaseCost = parseFloat(getText(getElementById('event-base-cost'))).toFixed(2),
 eventStatusRestriction = getText(getElementById('event-status-restriction'))
+
+// Hidden, initially empty form fields, to be populated later on, then submitted with remaining data
+const eventParty = getElementById('event-party'),
+eventTrafficSource = getElementById('event-traffic-source'),
+eventChargeDescription = getElementById('event-charge-description'),
+eventChargeAmount = getElementById('event-charge-amount'),
+eventOptionTotal = getElementById('event-option-total'),
+eventAffiliate = getElementById('event-affiliate'),
+eventQuestionExperience = getElementById('event-question-experience'),
+eventQuestionDiet = getElementById('event-question-diet'),
+eventQuestionSpecial = getElementById('event-question-special')
 
 // Invite-only
 const eventInviteButton = getElementById('event-invitecode-button'),
