@@ -39,6 +39,9 @@ eventInviteCode = getElementById('event-invitecode-code'),
 eventInvitePass = getElementById('event-invitecode-pass'),
 eventInviteFail = getElementById('event-invitecode-fail')
 
+// Reg Form Visibility
+const regFormVisibility = getElementByClassName('reg-form-visibility')
+
 // Personal
 const eventFirstName = getElementById('event-firstname'),
 eventLastName = getElementById('event-lastname'),

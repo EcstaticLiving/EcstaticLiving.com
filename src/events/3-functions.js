@@ -264,7 +264,7 @@ const inviteOnlyCodeVerification = () => {
 		// ...but if not valid...
 		if (!discountCodeValidation()) {
 			// ...hide reg form and indicate error.
-			hideElement(regForm)
+			hideElement(regFormVisibility)
 			emptyHideText(eventInvitePass)
 			const text = 'The invitation code you entered is invalid.\nFor assistance, please call us at 707-987-3456.'
 			setHtml(eventInviteFail, text)
@@ -274,7 +274,7 @@ const inviteOnlyCodeVerification = () => {
 		// ...if code is valid...
 		else {
 			// ...show reg form and indicate pass.
-			showElement(regForm)
+			showElement(regFormVisibility)
 			emptyHideText(eventInviteFail)
 			const text = calculateDiscount(getValue(eventInviteCode)) > 0
 				? 'Congrats! Invite code accepted!<br />$' + calculateDiscount(getValue(eventInviteCode)) + ' per person discount applied! Continue below.'
@@ -285,7 +285,7 @@ const inviteOnlyCodeVerification = () => {
 	}
 	// If code doesn’t exist, hide reg form.
 	else {
-		hideElement(regForm)
+		hideElement(regFormVisibility)
 		emptyHideText(eventInvitePass)
 		emptyHideText(eventInviteFail)
 	}
