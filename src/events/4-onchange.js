@@ -20,7 +20,6 @@ onClick(getElementById('form-load'), () => repopulateForm(page()))
 
 // Invite-only
 onClick(eventInviteButton, () => {
-	console.log('yo')
 	// Show errors, if any
 	inviteOnlyCodeVerification()
 	// Adjust prices
