@@ -259,6 +259,7 @@ const formValidation = () => {
 
 // Show errors for affiliate code or invite code
 const inviteOnlyCodeVerification = () => {
+	console.log(getValue(eventInviteCode))
 	// If the code exists, i.e. has either been entered manually or gotten from URL...
 	if (getValue(eventInviteCode).length > 0) {
 		// ...but if not valid...
