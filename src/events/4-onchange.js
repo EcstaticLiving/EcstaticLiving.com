@@ -19,7 +19,7 @@ onClick(getElementById('form-clear'), () => {
 onClick(getElementById('form-load'), () => repopulateForm(page()))
 
 // Invite-only
-onClick(eventInviteButton, () => e => {
+onClick(eventInviteButton, () => {
 	console.log('yo')
 	e.preventDefault()
 	// Show errors, if any
