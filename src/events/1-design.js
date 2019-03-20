@@ -21,6 +21,7 @@ const regFormButtons = getElementsByClassName('button register')
 const regFormContainer = getElementByClassName('reg-form-container')
 const regForm = getElementByClassName('reg-form')
 
+// Browserfix is necessary since Safari, Chrome, Firefox (only ones tested) do not render hidden elements outside of initial view upon scroll
 const browserFix = () => {
 	const elements = regForm.querySelectorAll('input, textarea, div')
 	for (let i = 0; i < elements.length; i++) {
