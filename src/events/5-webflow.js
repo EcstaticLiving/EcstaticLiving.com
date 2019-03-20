@@ -19,11 +19,11 @@ const conversion = (e, n) => {
 			l = item.value
 
 		// Checkbox/radio uses checked attribute and should be handled seperately
-		if ("checkbox" === s ||"radio" === s) {
+		if ("checkbox" === s || "radio" === s) {
 			// If we already have a value for radio/checkbox of this name, exit early
 			if (null === n[u] || "string" == typeof n[u]) return
 			// get value
-			const elem = e[0].querySelector('input[name="' + item.getAttribute("name") + '"]:checked')
+			const elem = e.querySelector('input[name="' + item.getAttribute("name") + '"]:checked')
 			l = elem ? elem.value : null
 		}
 
