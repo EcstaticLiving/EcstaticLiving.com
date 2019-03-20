@@ -1,11 +1,11 @@
 const cardElementsHoverTap = [
-	getElementsByClassName('card-detail-circle'),
-	getElementsByClassName('card-detail-day'),
-	getElementsByClassName('card-detail-month'),
-	getElementsByClassName('card-detail-venue'),
-	getElementsByClassName('card-detail-location'),
-	getElementsByClassName('card-detail-dates'),
-	getElementsByClassName('card-detail-button'),
+	getElementsByClassName('card-event-circle'),
+	getElementsByClassName('card-event-day'),
+	getElementsByClassName('card-event-month'),
+	getElementsByClassName('card-event-venue'),
+	getElementsByClassName('card-event-location'),
+	getElementsByClassName('card-event-dates'),
+	getElementsByClassName('card-event-button'),
 	getElementsByClassName('ribbon'),
 ]
 const calendarCards = getElementsByClassName('card')
