@@ -159,11 +159,7 @@ onClick(paymentButton, async e => {
 	setValue(eventTrafficSource, urlString && urlString.source ? urlString.source : 'ELI')
 	setValue(eventChargeDescription, chargeDescription)
 	setValue(eventChargeAmount, finalAmount())
-	setValue(eventOptionTotal, getValue(eventOption))
 	setValue(eventAffiliate, getValue(eventAffiliateCode) ? getValue(eventAffiliateCode) : '- none -')
-	// setValue(eventQuestionExperience, getValue(eventExperienceDetails) ? getValue(eventExperienceDetails) : '- none -')
-	// setValue(eventQuestionDiet, getValue(eventDietDetails) ? getValue(eventDietDetails) : '- none -')
-	// setValue(eventQuestionSpecial, getValue(eventSpecialDetails) ? getValue(eventSpecialDetails) : '- none -')
 
 	// Indicate processing, since below Stripe function is async...
 	showElement(getElementByClassName('modal-status processing'))

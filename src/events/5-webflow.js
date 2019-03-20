@@ -67,6 +67,5 @@ const createForm = () => {
 	if (error) {
 		throw error
 	}
-	console.log(formData)
 	return formData
 }
