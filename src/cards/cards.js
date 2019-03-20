@@ -1,4 +1,4 @@
-const cardElementsHoverTap = [
+const cardElementsEvents = [
 	getElementsByClassName('card-event-circle'),
 	getElementsByClassName('card-event-day'),
 	getElementsByClassName('card-event-month'),
@@ -8,6 +8,16 @@ const cardElementsHoverTap = [
 	getElementsByClassName('card-event-button'),
 	getElementsByClassName('ribbon'),
 ]
+const cardElementsTeachers = [
+	getElementsByClassName('card-gradient'),
+	getElementsByClassName('card-details teachers')
+]
+
+// Teachers page has special card design
+const cardElements = page() === 'Teachers'
+	? cardElementsTeachers
+	: cardElementsEvents
+
 const calendarCards = getElementsByClassName('card')
 
 // Add event listener for hover or tap
@@ -16,14 +26,14 @@ for (let i = 0; i < calendarCards.length; i++) {
 	calendarCards[i].classList.add('fade-transform')
 	// Desktops use `mouseover` response...
 	if (deviceType() === 'desktop') {
-		calendarCards[i].addEventListener('mouseover', () => cardElementsHoverTap.forEach(element => element[i] ? element[i].classList.add('hover-tap') : null))
-		calendarCards[i].addEventListener('mouseout', () => cardElementsHoverTap.forEach(element => element[i] ? element[i].classList.remove('hover-tap') : null))
+		calendarCards[i].addEventListener('mouseover', () => cardElements.forEach(element => element[i] ? element[i].classList.add('hover-tap') : null))
+		calendarCards[i].addEventListener('mouseout', () => cardElements.forEach(element => element[i] ? element[i].classList.remove('hover-tap') : null))
 	}
 	// ...mobile and tablet use `tap` response.
 	else {
 		calendarCards[i].addEventListener('click', () => {
 			// Add tap response...
-			cardElementsHoverTap.forEach(element => {
+			cardElements.forEach(element => {
         if (element[i]) {
           // ...if card is already active, deactivate it...
           if (element[i].classList.contains('hover-tap')) {
@@ -38,7 +48,7 @@ for (let i = 0; i < calendarCards.length; i++) {
 			// ...and remove active states from all other cards.
 			for (let j = 0; j < calendarCards.length; j++) {
 				if (i !== j) {
-					cardElementsHoverTap.forEach(element => element[j] ? element[j].classList.remove('hover-tap') : null)
+					cardElements.forEach(element => element[j] ? element[j].classList.remove('hover-tap') : null)
 				}
 			}
 		})
