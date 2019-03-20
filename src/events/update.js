@@ -49,7 +49,7 @@ const setCustomChargeSelect = () => {
 	}
 }
 
-const resetForm = () => {
+const initForm = () => {
 	clearForm(page())
 	repopulateForm(page())
 	setCustomChargeSelect()
@@ -72,7 +72,7 @@ for (elem of [customFirstName, customLastName, customEmail, customMobile, custom
 }
 
 // RESET CUSTOM CHARGE
-resetForm()
+initForm()
 
 onClick(paymentButton, e => {
 

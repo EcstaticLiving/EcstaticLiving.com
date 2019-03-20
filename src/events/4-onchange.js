@@ -12,7 +12,7 @@ onSubmit(regForm, () => null)
 // Clear form
 onClick(getElementById('form-clear'), () => {
 	clearForm(page())
-	resetForm()
+	initForm()
 })
 
 // Load form

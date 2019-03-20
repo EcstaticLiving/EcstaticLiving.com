@@ -111,7 +111,7 @@ const successfulSubmission = () => {
 
 // Called whenever any submission
 const indicateFailedSubmission = type => {
-	resetForm()
+	initForm()
 	hideElement(getElementByClassName('modal-status processing'))
 	// Show card error notification
 	if (type === 'stripe') showElement(getElementByClassName('modal-status card-error'))

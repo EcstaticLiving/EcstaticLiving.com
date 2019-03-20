@@ -394,7 +394,7 @@ const showErrorsInForm = () => {
 
 
 // RESET EVENT FORM
-const resetForm = () => {
+const initForm = () => {
 
 	// Reset all radio buttons
 	checkElement(eventExperienceNo)
