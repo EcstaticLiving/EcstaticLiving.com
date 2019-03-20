@@ -160,7 +160,7 @@ onClick(paymentButton, async e => {
 	setValue(eventChargeDescription, chargeDescription)
 	setValue(eventChargeAmount, finalAmount())
 	setValue(eventOptionTotal, getValue(eventOption) * 100)
-	setValue(eventAffiliateField, getValue(eventAffiliateCode) ? getValue(eventAffiliateCode) : '- none -')
+	setValue(eventAffiliate, getValue(eventAffiliateCode) ? getValue(eventAffiliateCode) : '- none -')
 	setValue(eventQuestionExperience, getValue(eventExperienceDetails) ? getValue(eventExperienceDetails) : '- none -')
 	setValue(eventQuestionDiet, getValue(eventDietDetails) ? getValue(eventDietDetails) : '- none -')
 	setValue(eventQuestionSpecial, getValue(eventSpecialDetails) ? getValue(eventSpecialDetails) : '- none -')

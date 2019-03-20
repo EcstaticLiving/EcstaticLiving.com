@@ -160,7 +160,7 @@ const showAndScrollTo = elem => {
 }
 
 // Regex
-const isValidText = elem => /([-a-zA-Z\u0080-\uFFFF]){3,}$/.test(getValue(elem))
+const isValidText = elem => /([\u0000-\u007F\u0080-\u00FF]){3,}$/.test(getValue(elem))
 const isValidAlphaNum = elem => /([0-9a-zA-Z]){3,}$/.test(getValue(elem))
 const isValidPhone = elem => /([- 0-9+]){7,}$/.test(getValue(elem))
 const isValidEmail = elem => /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(getValue(elem))
