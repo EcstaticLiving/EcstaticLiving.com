@@ -260,7 +260,7 @@ const formValidation = () => {
 	return false
 }
 
-const showRegForm = () => {
+const showRegFormHideInviteBox = () => {
 	// Hide invite only field and button...
 	hideElement(eventInviteCode)
 	hideElement(eventInviteButton)
@@ -268,11 +268,11 @@ const showRegForm = () => {
 	showElement(regFormVisibility)
 }
 const hideRegFormShowInviteBox = () => {
-	// Hide reg form...
-	hideElement(regFormVisibility)
-	// ...and show invite code box
+	// Show invite code box...
 	showElement(eventInviteCode)
 	showElement(eventInviteButton)
+	// ...and hide reg form...
+	hideElement(regFormVisibility)
 }
 
 // Show errors for affiliate code or invite code
@@ -293,7 +293,7 @@ const inviteOnlyCodeVerification = () => {
 		// ...if code is valid...
 		else {
 			// ...show reg form
-			showRegForm()
+			showRegFormHideInviteBox()
 			// ...and hide any fail text...
 			emptyHideText(eventInviteFail)
 			// ...and indicate pass.
