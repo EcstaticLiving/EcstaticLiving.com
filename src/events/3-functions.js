@@ -260,14 +260,30 @@ const formValidation = () => {
 	return false
 }
 
+const showRegForm = () => {
+	// Hide invite only field and button...
+	hideElement(eventInviteCode)
+	hideElement(eventInviteButton)
+	// ...show reg form
+	showElement(regFormVisibility)
+}
+const hideRegFormShowInviteBox = () => {
+	// Hide reg form...
+	hideElement(regFormVisibility)
+	// ...and show invite code box
+	showElement(eventInviteCode)
+	showElement(eventInviteButton)
+}
+
 // Show errors for affiliate code or invite code
 const inviteOnlyCodeVerification = () => {
 	// If the code exists, i.e. has either been entered manually or gotten from URL...
 	if (getValue(eventInviteCode).length > 0) {
 		// ...but if not valid...
 		if (!discountCodeValidation()) {
-			// ...hide reg form and indicate error.
-			hideElement(regFormVisibility)
+			// ...hide reg form...
+			hideRegFormShowInviteBox()
+			// ...and indicate error.
 			emptyHideText(eventInvitePass)
 			const html = 'The invitation code you entered is invalid.<br />For assistance, please call us at 707-987-3456.'
 			setHtml(eventInviteFail, html)
@@ -276,12 +292,11 @@ const inviteOnlyCodeVerification = () => {
 		}
 		// ...if code is valid...
 		else {
-			// ...hide invite only field and button...
-			hideElement(eventInviteCode)
-			hideElement(eventInviteButton)
-			// ...show reg form and indicate pass.
-			showElement(regFormVisibility)
+			// ...show reg form
+			showRegForm()
+			// ...and hide any fail text...
 			emptyHideText(eventInviteFail)
+			// ...and indicate pass.
 			const text = calculateDiscount(getValue(eventInviteCode)) > 0
 				? 'Congrats! Invite code accepted!<br />$' + calculateDiscount(getValue(eventInviteCode)) + ' per person discount applied! Continue below.'
 				: 'Congrats! Invite code accepted!<br />Continue below.'
@@ -289,9 +304,11 @@ const inviteOnlyCodeVerification = () => {
 			showAndScrollTo(eventInvitePass)
 		}
 	}
-	// If code doesn’t exist, hide reg form.
+	// If code doesn’t exist...
 	else {
-		hideElement(regFormVisibility)
+		// ...hide reg form...
+		hideRegFormShowInviteBox()
+		// ...and hide previous pass/fail messages
 		emptyHideText(eventInvitePass)
 		emptyHideText(eventInviteFail)
 	}
