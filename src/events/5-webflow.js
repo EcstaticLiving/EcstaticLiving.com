@@ -6,8 +6,7 @@ const conversion = (e, n) => {
 	// n stores names already with values (good for checkbox/radio)
 	n = n || {}
 
-	const nodelist = e.querySelectorAll('input:not([type="submit"])')
-	console.log(nodelist)
+	const nodelist = e.querySelectorAll('input:not([type="submit"]),select,textarea')
 
 	nodelist.forEach((item, index) => {
 		// If we already have an error, exit early
