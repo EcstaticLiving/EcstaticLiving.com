@@ -8,7 +8,7 @@ body,
 .modals.register-mobile {-webkit-overflow-scrolling: touch;}
 
 /* RICH TEXT FORMATTING */
-h3, div.accordion-dropdown-text.w-richtext, .w-richtext.text strong {
+h3, div.accordion-dropdown-text.w-richtext strong, .w-richtext.text strong {
 	font-weight: 500;
 }
 .w-richtext.text {
