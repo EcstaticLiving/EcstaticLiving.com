@@ -8,10 +8,7 @@ if (page() === 'Event' || page() === 'Update') {
 		js.src = baseScriptUrl + scripts[index] + '.js'
 		js.onload = () => {
 			// Once final script has loaded, initialise
-			if (scripts[index] === '6-payment') {
-				resetForm()
-			}
-			else {
+			if (scripts[index] !== '6-payment') {
 				loadScript(index + 1)
 			}
 		}

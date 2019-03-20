@@ -40,6 +40,8 @@ const showRegForm = () => {
 	setTimeout(() => {
 		fadeInElement(regFormContainer)
 		browserFix()
+		// Initialise form
+		resetForm()
 	}, 100)
 }
 
