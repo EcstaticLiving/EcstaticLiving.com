@@ -4,9 +4,9 @@ const eventSubtitles = getElementsByClassName('event-subtitle')
 const eventDetails = getElementsByClassName('event-details')
 for (let i = 0; i < eventTitles.length; i++) {
 	// Fade in
-	eventTitles[i].classList.add('fade-move')
-	eventSubtitles[i].classList.add('fade-move')
-	eventDetails[i].classList.add('fade-move')
+	// eventTitles[i].classList.add('fade-move')
+	// eventSubtitles[i].classList.add('fade-move')
+	// eventDetails[i].classList.add('fade-move')
 	// Email signup form
 	// If background image is so complex that email signup form needs a dark background instead of a transparent background...
 	const emailBox = getElementsByClassName('email-box')[i]

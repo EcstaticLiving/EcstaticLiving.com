@@ -18,20 +18,20 @@ const cardElements = page() === 'Teachers'
 	? cardElementsTeachers
 	: cardElementsEvents
 
-const calendarCards = getElementsByClassName('card')
+const cards = getElementsByClassName('card')
 
 // Add event listener for hover or tap
-for (let i = 0; i < calendarCards.length; i++) {
+for (let i = 0; i < cards.length; i++) {
 	// Init on window load
-	calendarCards[i].classList.add('fade-transform')
+	cards[i].classList.add('fade-transform')
 	// Desktops use `mouseover` response...
 	if (deviceType() === 'desktop') {
-		calendarCards[i].addEventListener('mouseover', () => cardElements.forEach(element => element[i] ? element[i].classList.add('hover-tap') : null))
-		calendarCards[i].addEventListener('mouseout', () => cardElements.forEach(element => element[i] ? element[i].classList.remove('hover-tap') : null))
+		cards[i].addEventListener('mouseover', () => cardElements.forEach(element => element[i] ? element[i].classList.add('hover-tap') : null))
+		cards[i].addEventListener('mouseout', () => cardElements.forEach(element => element[i] ? element[i].classList.remove('hover-tap') : null))
 	}
 	// ...mobile and tablet use `tap` response.
 	else {
-		calendarCards[i].addEventListener('click', () => {
+		cards[i].addEventListener('click', () => {
 			// Add tap response...
 			cardElements.forEach(element => {
         if (element[i]) {
@@ -46,7 +46,7 @@ for (let i = 0; i < calendarCards.length; i++) {
         }
 			})
 			// ...and remove active states from all other cards.
-			for (let j = 0; j < calendarCards.length; j++) {
+			for (let j = 0; j < cards.length; j++) {
 				if (i !== j) {
 					cardElements.forEach(element => element[j] ? element[j].classList.remove('hover-tap') : null)
 				}
