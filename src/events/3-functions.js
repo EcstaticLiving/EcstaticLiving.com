@@ -104,7 +104,7 @@ const hidePartner = () => {
 
 // Calculate discount based on discount code
 const calculateDiscount = discountCode => {
-	// New system, e.g. MADAC00TM1710FS
+	// New system, e.g. MADAC00TM1710FS: 4 digit unique + 3 digit discount + event code
 	const indicator = discountCode.replace(eventCode, '').substr(4,1)
 	if (indicator === 'A' || indicator === 'B' || indicator === 'C') {
 		const discount = discountCode.replace(eventCode, '').substr(4,3)
@@ -125,7 +125,7 @@ const calculateDiscount = discountCode => {
 			default:		return null
 		}
 	}
-	// Old system, e.g. MADA25TM1710FS
+	// Old system, e.g. MADA25TM1710FS: 4 digit unique + 2 digit discount + event code
 	else {
 		const discount = parseInt(discountCode.substr(4, 2), 10) === 10
 			// Assuming no discount, only to unlock event, e.g. ****10********
@@ -140,11 +140,9 @@ const calculateDiscount = discountCode => {
 const discountCodeValidation = () => {
 	const code = isInviteOnlyEvent() ? getValue(eventInviteCode) : getValue(eventAffiliateCode)
 	// const regex = new RegExp("([a-zA-Z0-9]){16,17}$")
-	console.log(code.substr(code.length - eventCode.length).toLowerCase())
-	console.log(eventCode.toLowerCase())
-	console.log(calculateDiscount(code))
 	return code && code.length > 0
-		? code.substr(code.length - eventCode.length).toLowerCase() === eventCode.toLowerCase() && calculateDiscount(code)
+		// Each invite or affiliate code ends with event code
+		? code.substr(code.length - eventCode.length).toLowerCase() === eventCode.toLowerCase() && calculateDiscount(code) !== null
 		: true
 }
 
@@ -264,7 +262,6 @@ const formValidation = () => {
 
 // Show errors for affiliate code or invite code
 const inviteOnlyCodeVerification = () => {
-	console.log(getValue(eventInviteCode))
 	// If the code exists, i.e. has either been entered manually or gotten from URL...
 	if (getValue(eventInviteCode).length > 0) {
 		// ...but if not valid...
