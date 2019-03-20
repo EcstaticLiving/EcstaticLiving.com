@@ -394,7 +394,7 @@ const showErrorsInForm = () => {
 
 
 // RESET EVENT FORM
-const initForm = () => {
+const initForm = ({ clearAndRepopulate = true }) => {
 
 	// Reset all radio buttons
 	checkElement(eventExperienceNo)
@@ -403,8 +403,10 @@ const initForm = () => {
 	checkElement(eventAffiliateNo)
 
 	// Clear and repopulate form
-	clearForm(page())
-	repopulateForm(page())
+	if (clearAndRepopulate) {
+		clearForm(page())
+		repopulateForm(page())
+	}
 
 	// Set event code for form submission
 	setValue(getElementById('eventcode'), eventCode)

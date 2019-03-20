@@ -48,7 +48,8 @@ emailBoxNames.forEach(emailBoxName => {
 						eventMobile.value = field.value
 					}
 				})
-				showRegForm()
+				// Don’t clear and repopulate to preserve first, last name, email, phone
+				showRegForm({ clearAndRepopulate: false })
 			}
 		})
 	}
