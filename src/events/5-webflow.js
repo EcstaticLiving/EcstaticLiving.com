@@ -6,7 +6,7 @@ const conversion = (e, n) => {
 	// n stores names already with values (good for checkbox/radio)
 	n = n || {}
 
-	const nodelist = e[0].querySelectorAll('input:not([type="submit"])')
+	const nodelist = e.querySelectorAll('input:not([type="submit"])')
 	console.log(nodelist)
 
 	nodelist.forEach((item, index) => {
@@ -64,7 +64,7 @@ const createForm = () => {
 		fields: {},
 		dolphin: false
 	}
-	let error = conversion(page() === 'Event' ? getElementById(regForm) : getElementById(customForm), formData.fields)
+	let error = conversion(page() === 'Event' ? regForm : customForm, formData.fields)
 	if (error) {
 		throw error
 	}
