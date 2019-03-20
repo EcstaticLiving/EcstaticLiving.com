@@ -273,6 +273,9 @@ const inviteOnlyCodeVerification = () => {
 		}
 		// ...if code is valid...
 		else {
+			// ...hide invite only field and button...
+			hideElement(eventInviteCode)
+			hideElement(eventInviteButton)
 			// ...show reg form and indicate pass.
 			showElement(regFormVisibility)
 			emptyHideText(eventInviteFail)
