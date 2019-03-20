@@ -466,7 +466,6 @@ const resetForm = () => {
 	else hideElement(eventDepositContainer)
 
 	// If invite-only event...
-	console.log(isInviteOnlyEvent())
 	if (isInviteOnlyEvent()) {
 		// ...hide pass/fail text
 		emptyHideText(eventInvitePass)

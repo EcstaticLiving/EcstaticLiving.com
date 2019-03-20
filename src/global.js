@@ -105,7 +105,7 @@ const isRadio = elem => elem.type === 'radio'
 const isSelect = elem => elem.type === 'select-one'
 const isBlank = elem => getValue(elem) === '' && getValue(elem) === ''
 const isChecked = elem => elem.checked
-const isVisible = elem => elem.style.display
+const isVisible = elem => elem.offsetWidth > 0 && elem.offsetHeight > 0
 
 // Element Behaviours
 const animateElement = (elem, keyframes, options) => elem.animate(keyframes, options)
