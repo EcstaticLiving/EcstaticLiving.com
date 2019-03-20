@@ -10,13 +10,13 @@ onKeyPress(document, e => {
 onSubmit(regForm, () => null)
 
 // Clear form
-onClick(getElementById('form-clear'), () => {
+onClick(formClear, () => {
 	clearForm(page())
 	initForm()
 })
 
 // Load form
-onClick(getElementById('form-load'), () => repopulateForm(page()))
+onClick(formLoad, () => repopulateForm(page()))
 
 // Invite-only
 onClick(eventInviteButton, () => {

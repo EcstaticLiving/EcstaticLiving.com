@@ -1,8 +1,11 @@
+const formLoad = getElementById('form-load')
+const formClear = getElementById('form-clear')
+
 // Clear reg form
 const clearForm = formType => {
-	if (localStorage.getItem('EcstaticLiving:' + formType)) showElement(getElementById('form-load'))
-	else hideElement(getElementById('form-load'))
-	hideElement(getElementById('form-clear'))
+	if (localStorage.getItem('EcstaticLiving:' + formType)) showElement(formLoad)
+	else hideElement(formLoad)
+	hideElement(formClear)
 	hideElement(getElementByClassName('w-form-done'))
 	hideElement(getElementByClassName('w-form-fail'))
 	if (formType === 'Event') {
@@ -32,8 +35,8 @@ const saveForm = formType => {
 // Repopulate saved reg form
 const repopulateForm = formType => {
 	if (localStorage.getItem('EcstaticLiving:' + formType)) {
-		hideElement(getElementById('form-load'))
-		showElement(getElementById('form-clear'))
+		hideElement(formLoad)
+		showElement(formClear)
 		let values = JSON.parse(localStorage.getItem('EcstaticLiving:' + formType))
 		try {
 			for (let item in values) {
@@ -406,6 +409,11 @@ const initForm = (clearAndRepopulate = true) => {
 	if (clearAndRepopulate) {
 		clearForm(page())
 		repopulateForm(page())
+	}
+	// unless reg form is pre-filled with other variables.
+	else {
+		hideElement(formLoad)
+		showElement(formClear)
 	}
 
 	// Set event code for form submission
