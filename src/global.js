@@ -7,8 +7,9 @@ const endsWithUrl = str => window.location.href.endsWith(str)
 
 // Page
 const page = () => {
-  if (containsUrl('/events/'))  					return 'Event'
-  if (endsWithUrl('/update'))  						return 'Update'
+	if (endsWithUrl('/'))					return 'Home'
+  if (containsUrl('/events/'))  return 'Event'
+  if (endsWithUrl('/update'))  	return 'Update'
   return null
 }
 

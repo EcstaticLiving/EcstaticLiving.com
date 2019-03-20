@@ -8,19 +8,21 @@ let ACTIVE_REVIEW_INDEX = 0
 // Calculate Section.Hero height
 const setHeroHeight = () => {
 	const heroSection = getElementByClassName('section hero')
-	if (
-		deviceType() === 'desktop'
-		|| (deviceType() === 'large tablet' && deviceOrientation() === 'landscape')
-		|| deviceType() === 'tablet'
-		|| deviceType() === 'mobile'
-	) {
-		// Set min height on mobile to 550px
-		heroSection.style.height = deviceType() === 'mobile' && deviceOrientation() === 'landscape'
-			? Math.max(window.innerHeight * 0.95 + 'px', '550px')
-			: window.innerHeight * 0.95 + 'px'
-	}
-	else {
-		heroSection.style.height = window.innerHeight * 0.5 + 'px'
+	if (heroSection) {
+		if (
+			deviceType() === 'desktop'
+			|| (deviceType() === 'large tablet' && deviceOrientation() === 'landscape')
+			|| deviceType() === 'tablet'
+			|| deviceType() === 'mobile'
+		) {
+			// Set min height on mobile to 550px
+			heroSection.style.height = deviceType() === 'mobile' && deviceOrientation() === 'landscape'
+				? Math.max(window.innerHeight * 0.95 + 'px', '550px')
+				: window.innerHeight * 0.95 + 'px'
+		}
+		else {
+			heroSection.style.height = window.innerHeight * 0.5 + 'px'
+		}
 	}
 }
 
