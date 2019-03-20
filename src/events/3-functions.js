@@ -138,9 +138,14 @@ const calculateDiscount = discountCode => {
 
 // Check to see if discount code applies to this event
 const discountCodeValidation = () => {
-	const discountCode = isInviteOnlyEvent() ? getValue(eventInviteCode) : getValue(eventAffiliateCode)
+	const code = isInviteOnlyEvent() ? getValue(eventInviteCode) : getValue(eventAffiliateCode)
 	// const regex = new RegExp("([a-zA-Z0-9]){16,17}$")
-	return discountCode && discountCode.length > 0 ? discountCode.substr(discountCode.length - eventCode.length).toLowerCase() === eventCode.toLowerCase() && calculateDiscount(discountCode) : true
+	console.log(code.substr(code.length - eventCode.length).toLowerCase())
+	console.log(eventCode.toLowerCase())
+	console.log(calculateDiscount(code))
+	return code && code.length > 0
+		? code.substr(code.length - eventCode.length).toLowerCase() === eventCode.toLowerCase() && calculateDiscount(code)
+		: true
 }
 
 // Get discount amount based on either invite field or affiliate code field
@@ -259,6 +264,7 @@ const formValidation = () => {
 
 // Show errors for affiliate code or invite code
 const inviteOnlyCodeVerification = () => {
+	console.log(getValue(eventInviteCode))
 	// If the code exists, i.e. has either been entered manually or gotten from URL...
 	if (getValue(eventInviteCode).length > 0) {
 		// ...but if not valid...
