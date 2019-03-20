@@ -161,6 +161,14 @@ windowEventListener(['load', 'orientationchange', 'resize'], () => {
 	setBoxSections()
 })
 
+// Event summary “Read more...” expansion
+getElementByClassName('text read-more').addEventListener('mouseover', () => {
+	hideElement(getElementByClassName('text read-more'))
+	hideElement(getElementByClassName('text summary'))
+	getElementByClassName('text description').classList.add('display')
+	setTimeout(() => getElementByClassName('text description display').classList.add('fade'), 100)
+})
+
 // Begin
 if (window.location.pathname === '/') {
  

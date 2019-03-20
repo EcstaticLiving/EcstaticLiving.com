@@ -65,11 +65,3 @@ for (let i = 0; i < regFormButtons.length; i++) {
 // ...and closed.
 const regFormClose = getElementByClassName('reg-form-close')
 onClick(regFormClose, () => closeRegForm())
-
-// Event summary “Read more...” expansion
-getElementByClassName('text read-more').addEventListener('mouseover', () => {
-	hideElement(getElementByClassName('text read-more'))
-	hideElement(getElementByClassName('text summary'))
-	getElementByClassName('text description').classList.add('display')
-	setTimeout(() => getElementByClassName('text description display').classList.add('fade'), 100)
-})
