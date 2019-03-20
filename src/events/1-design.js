@@ -30,7 +30,7 @@ const browserFix = () => {
 }
 
 // clearAndRepopulate can be set `false` to preserve data (like first name, last name, phone, email) sent to reg form
-const showRegForm = ({ clearAndRepopulate = true }) => {
+const showRegForm = (clearAndRepopulate = true) => {
 	// Prevent background to scroll
 	document.body.style.overflow = 'hidden'
 	// Unhide reg form...
@@ -41,7 +41,7 @@ const showRegForm = ({ clearAndRepopulate = true }) => {
 	setTimeout(() => {
 		fadeInElement(regFormContainer)
 		browserFix()
-		initForm({ clearAndRepopulate })
+		initForm(clearAndRepopulate)
 	}, 100)
 }
 

@@ -49,7 +49,7 @@ emailBoxNames.forEach(emailBoxName => {
 					}
 				})
 				// Don’t clear and repopulate to preserve first, last name, email, phone
-				showRegForm({ clearAndRepopulate: false })
+				showRegForm(false)
 			}
 		})
 	}
