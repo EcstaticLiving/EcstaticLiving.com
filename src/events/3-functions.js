@@ -266,8 +266,8 @@ const inviteOnlyCodeVerification = () => {
 			// ...hide reg form and indicate error.
 			hideElement(regFormVisibility)
 			emptyHideText(eventInvitePass)
-			const text = 'The invitation code you entered is invalid.\nFor assistance, please call us at 707-987-3456.'
-			setHtml(eventInviteFail, text)
+			const html = 'The invitation code you entered is invalid.<br />For assistance, please call us at 707-987-3456.'
+			setHtml(eventInviteFail, html)
 			showElement(eventInviteFail)
 			focusElement(eventInviteCode)
 		}
