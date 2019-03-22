@@ -9,6 +9,8 @@ let ACTIVE_REVIEW_INDEX = 0
 const setHeroHeight = () => {
 	const heroSection = getElementByClassName('section hero')
 	if (heroSection) {
+		// Remove height of menu bar
+		const heroHeight = window.innerHeight - 125
 		if (
 			deviceType() === 'desktop'
 			|| (deviceType() === 'large tablet' && deviceOrientation() === 'landscape')
@@ -17,11 +19,11 @@ const setHeroHeight = () => {
 		) {
 			// Set min height on mobile to 550px
 			heroSection.style.height = deviceType() === 'mobile' && deviceOrientation() === 'landscape'
-				? Math.max(window.innerHeight * 0.9 + 'px', '550px')
-				: window.innerHeight * 0.9 + 'px'
+				? Math.max(heroHeight * 0.9 + 'px', '550px')
+				: heroHeight * 0.9 + 'px'
 		}
 		else {
-			heroSection.style.height = window.innerHeight * 0.5 + 'px'
+			heroSection.style.height = heroHeight * 0.5 + 'px'
 		}
 	}
 }
