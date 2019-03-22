@@ -19,8 +19,8 @@ const setHeroHeight = () => {
 		) {
 			// Set min height on mobile to 550px
 			heroSection.style.height = deviceType() === 'mobile' && deviceOrientation() === 'landscape'
-				? Math.max(heroHeight * 0.9 + 'px', '550px')
-				: heroHeight * 0.9 + 'px'
+				? Math.max(heroHeight * 0.95 + 'px', '550px')
+				: heroHeight * 0.95 + 'px'
 		}
 		else {
 			heroSection.style.height = heroHeight * 0.5 + 'px'
