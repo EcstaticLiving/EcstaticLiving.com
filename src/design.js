@@ -25,9 +25,6 @@ const setHeroHeight = () => {
 		else {
 			heroSection.style.height = heroHeight * 0.5 + 'px'
 		}
-		console.log(window.innerHeight)
-		console.log(heroHeight)
-		console.log(heroSection.style.height)
 	}
 }
 
