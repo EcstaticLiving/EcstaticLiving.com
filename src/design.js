@@ -7,7 +7,7 @@ let ACTIVE_REVIEW_INDEX = 0
 
 // Calculate Section.Hero height
 const setHeroHeight = () => {
-	const heroSection = getElementByClassName('section hero-section')
+	const heroSection = getElementByClassName('section section-hero')
 	if (heroSection) {
 		// Remove height of menu bar
 		const heroHeight = window.innerHeight - 125
