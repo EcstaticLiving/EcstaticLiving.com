@@ -1525,7 +1525,7 @@ $(payButton).on('click', function(e) {
 			? depositAmount() * 100
 			: $(eventSelect).val() * 100
 		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'deposit' : 'full'
-		customerDescription = $(eventFirstName).val() + ' ' + $(eventLastName).val() + ' <' + $(eventEmail).val() + '>'
+		customerDescription = $(eventFirstName).val() + ' ' + $(eventLastName).val()
 		customerEmail = $(eventEmail).val()
 		chargeDescription = eventCode + ' “' + eventTitle + '” ' + eventDeposit + ' (' + eventDates + ' at ' + eventVenue + ') ' + getLodging()
 		// Form Variable: Party
