@@ -3,6 +3,7 @@
 // 1. Define all input fields
 const emailBoxNames = [
 	'hero',		// homepage hero email signup
+	'promo',	// homepage promo email signup
 	'event1',	// events pre-reg (top)
 	'event2'	// events pre-reg (bottom)
 ]
@@ -25,7 +26,7 @@ emailBoxNames.forEach(emailBoxName => {
 	if (buttonField) {
 		buttonField.addEventListener('click', () => {
 			// If email box is used on homepage...
-			if (emailBoxName === 'hero') {
+			if (emailBoxName === 'hero' || emailBoxName === 'promo') {
 				// ...collect email newsletter
 				emailBoxForm.action = 'https://app.getresponse.com/add_subscriber.html'
 				emailBoxForm.submit()
