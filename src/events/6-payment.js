@@ -2,14 +2,15 @@
 const formUrl = 'https://webflow.com/api/v1/form/564aac835a5735b1375b5cdf'
 
 // Form submission
-const formSubmission = async ({ data, url }) => await $.ajax({
-	type: 'POST',
-	url,
-	crossDomain: true,
-	data,
-	dataType: 'json',
-	timeout: 15000
-})
+const formSubmission = async ({ data, url }) =>
+	await $.ajax({
+		type: 'POST',
+		url,
+		crossDomain: true,
+		data,
+		dataType: 'json',
+		timeout: 15000
+	})
 
 // Stripe url
 const stripeUrl = containsUrl('ecstaticliving.com')
@@ -17,31 +18,44 @@ const stripeUrl = containsUrl('ecstaticliving.com')
 	: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.sandbox.auth0-extend.com/stripe-test'
 
 // Stripe charge description
-const chargeDescription = eventCode + ' “' + eventName + '” ' + isChecked(eventDepositDeposit) ? 'deposit' : 'full' + ' (' + eventDates + ' at ' + eventVenue + ') ' + getLodging()
+const chargeDescription =
+	eventCode + ' “' + eventName + '” ' + isChecked(eventDepositDeposit)
+		? 'deposit'
+		: 'full' + ' (' + eventDates + ' at ' + eventVenue + ') ' + getLodging()
 
 // Stripe data: pass result from stripeCard into `source`
 
 const stripeData = result => ({
-	'chargeAmount': finalAmount() * 100,
-	'chargeDescription': chargeDescription,
-	'customerDescription': getValue(eventFirstName) + ' ' + getValue(eventLastName) + ' <' + getValue(eventEmail) + '>',
-	'customerEmail': getValue(eventEmail),
-	'event': eventCode,
-	'party': partyName(),
-	'phone': getValue(eventMobile),
-	'participantFirstName': getValue(eventFirstName),
-	'participantLastName': getValue(eventLastName),
-	'partnerFirstName': getValue(eventPartnerFirstName),
-	'partnerLastName': getValue(eventPartnerLastName),
-	'quantity': paymentQty(),
-	'priceFullTotal': finalAmount(),
-	'priceDiscountTotal': getDiscount(),
-	'priceBaseTotal': !isNaN(eventBasePrice) ? (eventBasePrice * paymentQty()).toFixed(2) : 0,
-	'costBaseTotal': !isNaN(eventBaseCost) ? (eventBaseCost * paymentQty()).toFixed(2) : 0,
-	'priceDepositTotal': isChecked(eventDepositDeposit) ? finalAmount() : 0,
-	'priceBalanceDate': eventDepositDate,
-	'lodging': getLodging(),
-	'source': result.source.id
+	chargeAmount: finalAmount() * 100,
+	chargeDescription: chargeDescription,
+	customerDescription:
+		getValue(eventFirstName) +
+		' ' +
+		getValue(eventLastName) +
+		' <' +
+		getValue(eventEmail) +
+		'>',
+	customerEmail: getValue(eventEmail),
+	event: eventCode,
+	party: partyName(),
+	phone: getValue(eventMobile),
+	participantFirstName: getValue(eventFirstName),
+	participantLastName: getValue(eventLastName),
+	partnerFirstName: getValue(eventPartnerFirstName),
+	partnerLastName: getValue(eventPartnerLastName),
+	quantity: paymentQty(),
+	priceFullTotal: finalAmount(),
+	priceDiscountTotal: getDiscount(),
+	priceBaseTotal: !isNaN(eventBasePrice)
+		? (eventBasePrice * paymentQty()).toFixed(2)
+		: 0,
+	costBaseTotal: !isNaN(eventBaseCost)
+		? (eventBaseCost * paymentQty()).toFixed(2)
+		: 0,
+	priceDepositTotal: isChecked(eventDepositDeposit) ? finalAmount() : 0,
+	priceBalanceDate: eventDepositDate,
+	lodging: getLodging(),
+	source: result.source.id
 })
 
 // Stripe Elements
@@ -64,7 +78,7 @@ const card = isFormPage()
 					fontSize: '16px',
 					lineHeight: '24px',
 					'::placeholder': {
-						color: '#666',
+						color: '#666'
 					}
 				},
 				invalid: {
@@ -74,7 +88,7 @@ const card = isFormPage()
 					}
 				}
 			}
-		})
+	  })
 	: null
 
 // Payment validation called on form submission, or when `Billing Card` field is changed
@@ -114,24 +128,25 @@ const indicateFailedSubmission = type => {
 	initForm()
 	hideElement(getElementByClassName('modal-status processing'))
 	// Show card error notification
-	if (type === 'stripe') showElement(getElementByClassName('modal-status card-error'))
+	if (type === 'stripe')
+		showElement(getElementByClassName('modal-status card-error'))
 	// Show form error notification.
-	else if (type === 'form') showElement(getElementByClassName('modal-status form-error'))
+	else if (type === 'form')
+		showElement(getElementByClassName('modal-status form-error'))
 	return false
 }
-
 
 // Begin
 if (isFormPage()) {
 	card.mount(billingCardElement)
-	card.addEventListener('change', result => paymentValidation(result))	
+	card.addEventListener('change', result => paymentValidation(result))
 }
-onClick(getElementById('button-stripe-error', 0), () => hideElement(getElementByClassName('modal-status card-error')))
-
+onClick(getElementById('button-stripe-error', 0), () =>
+	hideElement(getElementByClassName('modal-status card-error'))
+)
 
 // Always allow pay now button to be clicked
 onClick(paymentButton, async e => {
-
 	// Prevent accidental submission of form through 'enter' key
 	e.preventDefault()
 	if (e.which === 13) return false
@@ -145,7 +160,10 @@ onClick(paymentButton, async e => {
 		DISPLAYERRORS = true
 		// ...and as long as there is no Stripe error message, fill in the error box with a pointer for customer to look for missing information...
 		if (isBlank(getElementById('billing-card-error'))) {
-			setText(getElementById('billing-card-error'), 'Oops! There’s some missing information.')
+			setText(
+				getElementById('billing-card-error'),
+				'Oops! There’s some missing information.'
+			)
 		}
 		// ...and interrupt payment process.
 		return false
@@ -156,10 +174,16 @@ onClick(paymentButton, async e => {
 
 	// Update form submission fields
 	setValue(eventParty, partyName())
-	setValue(eventTrafficSource, urlString && urlString.source ? urlString.source : 'ELI')
+	setValue(
+		eventTrafficSource,
+		urlString && urlString.source ? urlString.source : 'ELI'
+	)
 	setValue(eventChargeDescription, chargeDescription)
 	setValue(eventChargeAmount, finalAmount())
-	setValue(eventAffiliate, getValue(eventAffiliateCode) ? getValue(eventAffiliateCode) : '- none -')
+	setValue(
+		eventAffiliate,
+		getValue(eventAffiliateCode) ? getValue(eventAffiliateCode) : '- none -'
+	)
 
 	// Indicate processing, since below Stripe function is async...
 	showElement(getElementByClassName('modal-status processing'))
@@ -181,28 +205,33 @@ onClick(paymentButton, async e => {
 
 	// Send result to be validated
 	if (paymentValidation(stripeCard)) {
-
 		try {
-
 			// ...and submit reg form
-			const formSubmit = await formSubmission({ data: createForm(), url: formUrl })
+			const formSubmit = await formSubmission({
+				data: createForm(),
+				url: formUrl
+			})
 
 			// Once reg form is submitted...
 			if (formSubmit) {
-
 				console.log('Form submitted')
 
 				try {
-
 					// On successful payment submission, hide processing and redirect to success page.
-					return await formSubmission({ data: stripeData(stripeCard), url: stripeUrl }) ? successfulSubmission() : false
-
-				}
-				// ...on Stripe error...
-				catch (err) {
-
+					return (await formSubmission({
+						data: stripeData(stripeCard),
+						url: stripeUrl
+					}))
+						? successfulSubmission()
+						: false
+				} catch (err) {
+					// ...on Stripe error...
 					// ...if `update card`, $0 charge to save credit card details will cause error; do not indicate as error.
-					if (page() === 'Update' && err.responseJSON && err.responseJSON.message === 'Invalid positive integer') {
+					if (
+						page() === 'Update' &&
+						err.responseJSON &&
+						err.responseJSON.message === 'Invalid positive integer'
+					) {
 						window.location.href = containsUrl('ecstaticliving.com')
 							? 'https://www.ecstaticliving.com/updated-card'
 							: 'https://ecstaticliving.webflow.io/updated-card'
@@ -212,24 +241,31 @@ onClick(paymentButton, async e => {
 					// If error occurred during payment submission, notify staff of error via a new form submission.
 					const formData = createForm()
 					// TODO: add browser and OS information to error handling
-					formData.fields = err.statusText === 'timeout'
-						? {
-							ERROR: 'Did not receive successful payment confirmation from Stripe on previous registration made by ' + formData.fields.Party + '. Staff, please verify that payment went through. Customer was informed that registration completed successfully. If Stripe payment exists, no further action has to be taken; if Stripe payment is missing, please reach out to customer for payment.',
-							BROWSER: '',
-							OS: ''
-						}
-						: {
-							ERROR: 'The following error occurred on the previous registration made by ' + formData.fields.Party + '. Customer was notified of error, and payment likely did not go through. Error: ' + err,
-							BROWSER: '',
-							OS: ''
-						}
+					formData.fields =
+						err.statusText === 'timeout'
+							? {
+									ERROR:
+										'Did not receive successful payment confirmation from Stripe on previous registration made by ' +
+										formData.fields.Party +
+										'. Staff, please verify that payment went through. Customer was informed that registration completed successfully. If Stripe payment exists, no further action has to be taken; if Stripe payment is missing, please reach out to customer for payment.',
+									BROWSER: '',
+									OS: ''
+							  }
+							: {
+									ERROR:
+										'The following error occurred on the previous registration made by ' +
+										formData.fields.Party +
+										'. Customer was notified of error, and payment likely did not go through. Error: ' +
+										err,
+									BROWSER: '',
+									OS: ''
+							  }
 
 					const errorHandling = ({ status }) => {
 						// ...if Stripe timed out, it’s possible that Stripe charge went through, but too late. So we want to prevent customer from being told that it didn’t work, even though payment went through.
 						if (status === 'timeout') {
 							successfulSubmission()
-						}
-						else {
+						} else {
 							// ...all other errors, indicate failed payment submission.
 							indicateFailedSubmission('stripe')
 						}
@@ -237,39 +273,34 @@ onClick(paymentButton, async e => {
 
 					try {
 						// Submit reg form follow-up to staff, and indicate error
-						const formSubmit = await formSubmission({ data: formData, url: formUrl })
+						const formSubmit = await formSubmission({
+							data: formData,
+							url: formUrl
+						})
 						// Once follow-up form has been submitted to office...
 						if (formSubmit) {
 							// ...do error handling
 							errorHandling({ status: err.statusText })
 						}
-					}
-					catch (newError) {
+					} catch (newError) {
 						// Do error handling also if reg form follow-up failed to get sent.
 						errorHandling({ status: err.statusText })
 					}
-
 				}
-			}
-			else {
-				
+			} else {
 				console.log('Form not submitted')
 
 				// Webflow form failed or timed out
 				indicateFailedSubmission('form')
 			}
-
-		}
-		catch (err) {
+		} catch (err) {
 			console.log(err)
 			// Webflow form failed or timed out
 			indicateFailedSubmission('form')
 		}
-
 	}
 	// Payment not validated, so hide processing to reveal text box with error message
 	else {
 		hideElement(getElementByClassName('modal-status processing'))
 	}
-	
 })

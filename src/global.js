@@ -1,5 +1,10 @@
 // Code ©2017 - 2019 Ecstatic Life Inc. All rights reserved.
-console.log(window.location.href.indexOf('ecstaticliving.com') > -1 ? 'Welcome to EcstaticLiving.com' : 'TEST code at ', window.location.href)
+console.log(
+	window.location.href.indexOf('ecstaticliving.com') > -1
+		? 'Welcome to EcstaticLiving.com'
+		: 'TEST code at ',
+	window.location.href
+)
 
 // Urls
 const containsUrl = str => window.location.href.indexOf(str) > -1
@@ -7,35 +12,34 @@ const endsWithUrl = str => window.location.href.endsWith(str)
 
 // Page
 const page = () => {
-	if (endsWithUrl('/'))					return 'Home'
-	if (containsUrl('/events/'))  return 'Event'
-	if (endsWithUrl('/teachers'))	return 'Teachers'
-  if (endsWithUrl('/update'))  	return 'Update'
-  return null
+	if (endsWithUrl('/')) return 'Home'
+	if (containsUrl('/events/')) return 'Event'
+	if (endsWithUrl('/teachers')) return 'Teachers'
+	if (endsWithUrl('/update')) return 'Update'
+	return null
 }
 
 // Device
-const deviceOrientation = () => window.innerWidth > window.innerHeight
-	? 'landscape'
-	: 'portrait'
+const deviceOrientation = () =>
+	window.innerWidth > window.innerHeight ? 'landscape' : 'portrait'
 
 const deviceType = () => {
 	//	Some large tablets exist, but for all intents and purposes, we’ll treat them as desktops.
 	if (
-		(deviceOrientation() === 'portrait' && window.innerWidth > 1024)
-		|| (deviceOrientation() === 'landscape' && window.innerWidth > 1366)
+		(deviceOrientation() === 'portrait' && window.innerWidth > 1024) ||
+		(deviceOrientation() === 'landscape' && window.innerWidth > 1366)
 	) {
 		return 'desktop'
 	}
 	if (
-		(deviceOrientation() === 'portrait' && window.innerWidth > 768)
-		|| (deviceOrientation() === 'landscape' && window.innerWidth > 1024)
+		(deviceOrientation() === 'portrait' && window.innerWidth > 768) ||
+		(deviceOrientation() === 'landscape' && window.innerWidth > 1024)
 	) {
 		return 'large tablet'
 	}
 	if (
-		(deviceOrientation() === 'portrait' && window.innerWidth > 414)
-		|| (deviceOrientation() === 'landscape' && window.innerWidth > 736)
+		(deviceOrientation() === 'portrait' && window.innerWidth > 414) ||
+		(deviceOrientation() === 'landscape' && window.innerWidth > 736)
 	) {
 		return 'tablet'
 	}
@@ -50,36 +54,44 @@ const formatPhone = elem => {
 		nationalMode: false,
 		preferredCountries: ['us', 'ca'],
 		separateDialCode: false,
-		utilsScript: 'https://ecstaticliving.github.io/ecstaticliving.com/src/other/inttel-utils.js'
+		utilsScript:
+			'https://ecstaticliving.github.io/ecstaticliving.com/src/other/inttel-utils.js'
 	})
 	// Uses cleave.js for format-as-you-type validation
 	const cleave = new Cleave(elem, {
 		phone: true,
 		phoneRegionCode: 'us'
 	})
-	elem.addEventListener('countrychange', e => cleave.phoneRegionCode = intTel.getSelectedCountryData().iso2)
+	elem.addEventListener(
+		'countrychange',
+		e => (cleave.phoneRegionCode = intTel.getSelectedCountryData().iso2)
+	)
 }
 const formatDate = elem => {
 	new Cleave(elem, {
 		date: true,
-    delimiter: '/',
-    datePattern: ['m', 'd', 'Y']
+		delimiter: '/',
+		datePattern: ['m', 'd', 'Y']
 	})
 }
 const phoneInputs = document.querySelectorAll('input[name="phone"]')
 phoneInputs.forEach(phoneInput => formatPhone(phoneInput))
 
 // Element Collections
-const querySelectorAll = (className, i) => document.querySelectorAll(className)[i || 0]
+const querySelectorAll = (className, i) =>
+	document.querySelectorAll(className)[i || 0]
 const querySelector = className => document.querySelector(className)
 const getAttribute = (elem, attribute) => elem.getAttribute(attribute)
 const getElementById = elem => document.getElementById(elem)
-const getElementByClassName = (className, i) => document.getElementsByClassName(className)[i || 0]
-const getElementsByClassName = className => document.getElementsByClassName(className)
+const getElementByClassName = (className, i) =>
+	document.getElementsByClassName(className)[i || 0]
+const getElementsByClassName = className =>
+	document.getElementsByClassName(className)
 const getElementsByTag = tag => document.getElementsByTagName(tag)
 
 // Window Event Listener
-const windowEventListener = (triggers, f) => triggers.forEach(trigger => window.addEventListener(trigger, f))
+const windowEventListener = (triggers, f) =>
+	triggers.forEach(trigger => window.addEventListener(trigger, f))
 
 // Element Event Listeners
 const onClick = (elem, f) => elem.addEventListener('click', e => f(e))
@@ -87,7 +99,8 @@ const onChange = (elem, f) => elem.addEventListener('change', e => f(e))
 const onInput = (elem, f) => elem.addEventListener('input', f)
 const onKeyPress = (elem, f) => elem.addEventListener('keypress', e => f(e))
 const onLoad = (elem, f) => elem.addEventListener('load', f)
-const onOrientationChange = (elem, f) => elem.addEventListener('orientationchange', f)
+const onOrientationChange = (elem, f) =>
+	elem.addEventListener('orientationchange', f)
 const onScroll = (elem, f) => elem.addEventListener('scroll', f)
 const onSubmit = (elem, f) => elem.addEventListener('submit', f)
 
@@ -110,24 +123,29 @@ const isChecked = elem => elem.checked
 const isVisible = elem => elem.offsetWidth > 0 && elem.offsetHeight > 0
 
 // Element Behaviours
-const animateElement = (elem, keyframes, options) => elem.animate(keyframes, options)
+const animateElement = (elem, keyframes, options) =>
+	elem.animate(keyframes, options)
 const clickElement = elem => elem.click()
-const fadeInElement = elem => elem.style.opacity = '1.0'
-const fadeOutElement = elem => elem.style.opacity = '0'
+const fadeInElement = elem => (elem.style.opacity = '1.0')
+const fadeOutElement = elem => (elem.style.opacity = '0')
 const focusElement = elem => elem.focus()
-const hideElement = elem => elem.style.display = 'none'
-const showElement = elem => elem.style.display = 'block'
+const hideElement = elem => (elem.style.display = 'none')
+const showElement = elem => (elem.style.display = 'block')
 
 // Values
 const getValue = elem => elem.value
 const emptyValue = elem => elem.value === ''
-const setValue = (elem, val) => elem.value = val
+const setValue = (elem, val) => (elem.value = val)
 
 // Text
 const getText = elem => elem.textContent
-const setText = (elem, val) => elem.textContent = val
-const emptyText = elem => elem.textContent = ''
-const properCase = text => text.toLowerCase().charAt(0).toUpperCase() + text.slice(1)
+const setText = (elem, val) => (elem.textContent = val)
+const emptyText = elem => (elem.textContent = '')
+const properCase = text =>
+	text
+		.toLowerCase()
+		.charAt(0)
+		.toUpperCase() + text.slice(1)
 
 // Select
 const emptySelect = elem => {
@@ -140,12 +158,12 @@ const appendSelect = (elem, option) => elem.add(option)
 const getIndex = elem => elem.selectedIndex
 
 // HTML
-const setHtml = (elem, val) => elem.innerHTML = val
+const setHtml = (elem, val) => (elem.innerHTML = val)
 const setCss = (elem, css) => elem.setAttribute(css.property, css.value)
 
 // Check radio
-const checkElement = elem => elem.checked = true
-const unCheckElement = elem => elem.checked = false
+const checkElement = elem => (elem.checked = true)
+const unCheckElement = elem => (elem.checked = false)
 
 // Combined Behaviours
 const emptyHideText = elem => {
@@ -158,12 +176,24 @@ const emptyHideValue = elem => {
 }
 const showAndScrollTo = elem => {
 	showElement(elem)
-	window.scrollTo(0, (window.pageYOffset || document.documentElement.scrollTop) - (document.documentElement.clientTop || 0) + 1)
+	window.scrollTo(
+		0,
+		(window.pageYOffset || document.documentElement.scrollTop) -
+			(document.documentElement.clientTop || 0) +
+			1
+	)
 }
 
 // Regex
-const isValidText = elem => /([\u0000-\u007F\u0080-\u00FF]){2,}$/.test(getValue(elem))
+const isValidText = elem =>
+	/([\u0000-\u007F\u0080-\u00FF]){2,}$/.test(getValue(elem))
 const isValidAlphaNum = elem => /([0-9a-zA-Z]){3,}$/.test(getValue(elem))
 const isValidPhone = elem => /([- 0-9+]){7,}$/.test(getValue(elem))
-const isValidEmail = elem => /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(getValue(elem))
-const isValidDate = elem => /(0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])[- \/.](19|20)\d\d/.test(getValue(elem))
+const isValidEmail = elem =>
+	/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+		getValue(elem)
+	)
+const isValidDate = elem =>
+	/(0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])[- \/.](19|20)\d\d/.test(
+		getValue(elem)
+	)

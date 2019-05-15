@@ -1,12 +1,8 @@
 // DESIGN
 
 const changeEmailContainerBackground = ({ visible = false }) => {
-	const color = visible
-		? '#fff'
-		: '#333'
-	const mode = visible
-		? 'add'
-		: 'remove'
+	const color = visible ? '#fff' : '#333'
+	const mode = visible ? 'add' : 'remove'
 	// Make the email signup box title and button white instead of charcoal.
 	const titles = document.querySelectorAll('div.title.email')
 	const buttons = document.querySelectorAll('a.button.email')
@@ -22,8 +18,7 @@ const changeEmailContainerBackground = ({ visible = false }) => {
 		const inputField = inputFields[i]
 		if (mode === 'add') {
 			inputField.classList.add('white-placeholder')
-		}
-		else {
+		} else {
 			inputField.classList.remove('white-placeholder')
 		}
 	}
@@ -31,8 +26,7 @@ const changeEmailContainerBackground = ({ visible = false }) => {
 		const textareaField = textareaFields[i]
 		if (mode === 'add') {
 			textareaField.classList.add('white-placeholder')
-		}
-		else {
+		} else {
 			textareaField.classList.remove('white-placeholder')
 		}
 	}

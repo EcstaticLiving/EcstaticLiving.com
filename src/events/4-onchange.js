@@ -25,13 +25,16 @@ onClick(eventInviteButton, () => {
 	// Adjust prices
 	setEventPrices()
 })
-onInput(eventInviteCode, () => setValue(eventInviteCode, getValue(eventInviteCode).toUpperCase()))
+onInput(eventInviteCode, () =>
+	setValue(eventInviteCode, getValue(eventInviteCode).toUpperCase())
+)
 
 // Affiliate yes/no?
 for (elem of [eventAffiliateYes, eventAffiliateNo]) {
 	onChange(elem, () => {
 		// If affiliate code, show code input field...
-		if (isChecked(eventAffiliateYes)) showAndScrollTo(eventAffiliateCodeContainer)
+		if (isChecked(eventAffiliateYes))
+			showAndScrollTo(eventAffiliateCodeContainer)
 		// ...otherwise, hide it.
 		else {
 			emptyValue(eventAffiliateCodeContainer)
@@ -48,11 +51,17 @@ onChange(eventAffiliateCode, () => {
 	setEventPrices()
 })
 // Set uppercase
-onInput(eventAffiliateCode, () => setValue(eventAffiliateCode, getValue(eventAffiliateCode).toUpperCase()))
+onInput(eventAffiliateCode, () =>
+	setValue(eventAffiliateCode, getValue(eventAffiliateCode).toUpperCase())
+)
 
 // Personal
-onChange(eventFirstName, () => setValue(billingFirstName, getValue(eventFirstName)))
-onChange(eventLastName, () => setValue(billingLastName, getValue(eventLastName)))
+onChange(eventFirstName, () =>
+	setValue(billingFirstName, getValue(eventFirstName))
+)
+onChange(eventLastName, () =>
+	setValue(billingLastName, getValue(eventLastName))
+)
 
 // Details
 for (elem of [eventExperienceYes, eventExperienceNo]) {
@@ -84,20 +93,75 @@ for (elem of [eventSpecialYes, eventSpecialNo]) {
 }
 
 // Partner
-onChange(eventStatus, () => participants() === 2 ? showPartner() : hidePartner())
+onChange(eventStatus, () =>
+	participants() === 2 ? showPartner() : hidePartner()
+)
 onChange(eventPayBoth, () => setEventPrices())
 onChange(eventPayMe, () => setEventPrices())
 
 // All reg fields
-for (elem of [eventFirstName, eventLastName, eventEmail, eventMobile, eventBirthdate, eventFemale, eventMale, eventOther, eventReferral, eventExperienceYes, eventExperienceNo, eventExperienceDetails, eventDietYes, eventDietNo, eventDietDetails, eventSpecialYes, eventSpecialNo, eventSpecialDetails, eventStatus, eventPartnerFirstName, eventPartnerLastName, eventPartnerFemale, eventPartnerMale, eventPartnerOther, eventPayBoth, eventPayMe, eventOption, eventTerms, billingFirstName, billingLastName, billingStreet, billingCity, billingState, billingPostal, billingCountry]) {
+for (elem of [
+	eventFirstName,
+	eventLastName,
+	eventEmail,
+	eventMobile,
+	eventBirthdate,
+	eventFemale,
+	eventMale,
+	eventOther,
+	eventReferral,
+	eventExperienceYes,
+	eventExperienceNo,
+	eventExperienceDetails,
+	eventDietYes,
+	eventDietNo,
+	eventDietDetails,
+	eventSpecialYes,
+	eventSpecialNo,
+	eventSpecialDetails,
+	eventStatus,
+	eventPartnerFirstName,
+	eventPartnerLastName,
+	eventPartnerFemale,
+	eventPartnerMale,
+	eventPartnerOther,
+	eventPayBoth,
+	eventPayMe,
+	eventOption,
+	eventTerms,
+	billingFirstName,
+	billingLastName,
+	billingStreet,
+	billingCity,
+	billingState,
+	billingPostal,
+	billingCountry
+]) {
 	onChange(elem, e => {
 		// All non-discount code input fields: make proper case
 		const target = getElementById(e.target.id)
-		if ([eventFirstName, eventLastName, eventPartnerFirstName, eventPartnerLastName, billingFirstName, billingLastName, billingStreet, billingCity, billingPostal].includes(target)) {
+		if (
+			[
+				eventFirstName,
+				eventLastName,
+				eventPartnerFirstName,
+				eventPartnerLastName,
+				billingFirstName,
+				billingLastName,
+				billingStreet,
+				billingCity,
+				billingPostal
+			].includes(target)
+		) {
 			// Proper case
 			let value = properCase(getValue(target))
 			// Remove empty spaces
-			if (value.includes(' ') && target !== billingStreet && target !== billingCity && target !== billingPostal) {
+			if (
+				value.includes(' ') &&
+				target !== billingStreet &&
+				target !== billingCity &&
+				target !== billingPostal
+			) {
 				value = value.split(' ').join('-')
 			}
 			setValue(target, value)

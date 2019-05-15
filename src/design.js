@@ -12,17 +12,18 @@ const setHeroHeight = () => {
 		// Remove height of menu bar
 		const heroHeight = window.innerHeight - 125
 		if (
-			deviceType() === 'desktop'
-			|| (deviceType() === 'large tablet' && deviceOrientation() === 'landscape')
-			|| deviceType() === 'tablet'
-			|| deviceType() === 'mobile'
+			deviceType() === 'desktop' ||
+			(deviceType() === 'large tablet' &&
+				deviceOrientation() === 'landscape') ||
+			deviceType() === 'tablet' ||
+			deviceType() === 'mobile'
 		) {
 			// Set min height on mobile to 550px
-			heroSection.style.height = deviceType() === 'mobile' && deviceOrientation() === 'landscape'
-				? Math.max(heroHeight * 0.95 + 'px', '550px')
-				: heroHeight * 0.95 + 'px'
-		}
-		else {
+			heroSection.style.height =
+				deviceType() === 'mobile' && deviceOrientation() === 'landscape'
+					? Math.max(heroHeight * 0.95 + 'px', '550px')
+					: heroHeight * 0.95 + 'px'
+		} else {
 			heroSection.style.height = heroHeight * 0.5 + 'px'
 		}
 	}
@@ -69,7 +70,10 @@ const fadeInHeroTab = tabIndex => {
 	// Slide in Hero Text
 	setTimeout(() => {
 		for (let i = 0; i < 3; i++) {
-			const title = getElementByClassName('hero-title ' + NUMBER_CLASS[i], tabIndex)
+			const title = getElementByClassName(
+				'hero-title ' + NUMBER_CLASS[i],
+				tabIndex
+			)
 			title.classList.add('fade-move')
 		}
 	}, 500)
@@ -80,7 +84,10 @@ const fadeInHeroTab = tabIndex => {
 	// If background image is so complex that email signup form needs a dark background instead of a transparent background, change email box elements to white
 	const emailBox = getElementByClassName('email-box', tabIndex)
 	// emailBox with class `email container background` has conditional visibility in Webflow, so Webflow tags a new class called `w-condition-invisible` if collection determines it’s invisible
-	const visible = emailBox.querySelectorAll('div.email-container-background.w-condition-invisible').length === 0
+	const visible =
+		emailBox.querySelectorAll(
+			'div.email-container-background.w-condition-invisible'
+		).length === 0
 	setTimeout(() => changeEmailContainerBackground({ visible }), 500)
 }
 
@@ -88,7 +95,10 @@ const resetHeroTab = tabIndex => {
 	// Hide Hero Text
 	const heroButton = getElementByClassName('hero-button', tabIndex)
 	for (let i = 0; i < 3; i++) {
-		const heroTitle = getElementByClassName('hero-title ' + NUMBER_CLASS[i], tabIndex)
+		const heroTitle = getElementByClassName(
+			'hero-title ' + NUMBER_CLASS[i],
+			tabIndex
+		)
 		heroTitle.classList.remove('fade-move')
 	}
 	// Hide Hero Button
@@ -117,7 +127,10 @@ const fadeInReview = reviewIndex => {
 	ALL_REVIEWS[reviewIndex].classList.add('display')
 	ALL_REVIEWS[reviewIndex].classList.add('fade')
 	// Fade in elements
-	const reviewsQuoteMark = getElementByClassName('reviews-quote-mark', reviewIndex)
+	const reviewsQuoteMark = getElementByClassName(
+		'reviews-quote-mark',
+		reviewIndex
+	)
 	const reviewsQuote = getElementByClassName('reviews-quote', reviewIndex)
 	const reviewsQuotees = getElementByClassName('reviews-quotee', reviewIndex)
 	const reviewsArrows = getElementByClassName('reviews-arrows', reviewIndex)
@@ -129,7 +142,10 @@ const fadeInReview = reviewIndex => {
 }
 
 const resetReview = reviewIndex => {
-	const reviewsQuoteMark = getElementByClassName('reviews-quote-mark', reviewIndex)
+	const reviewsQuoteMark = getElementByClassName(
+		'reviews-quote-mark',
+		reviewIndex
+	)
 	const reviewsQuote = getElementByClassName('reviews-quote', reviewIndex)
 	const reviewsQuotees = getElementByClassName('reviews-quotee', reviewIndex)
 	const reviewsArrows = getElementByClassName('reviews-arrows', reviewIndex)
@@ -155,7 +171,6 @@ const transitionReviews = ({ currentReview, nextReview }) => {
 	setTimeout(() => resetReview(currentReview), 1000)
 }
 
-
 windowEventListener(['load', 'orientationchange', 'resize'], () => {
 	// Recalculate hero height on orientation change
 	setHeroHeight()
@@ -169,13 +184,16 @@ if (getElementByClassName('text read-more')) {
 		hideElement(getElementByClassName('text read-more'))
 		hideElement(getElementByClassName('text summary'))
 		getElementByClassName('text description').classList.add('display')
-		setTimeout(() => getElementByClassName('text description display').classList.add('fade'), 100)
+		setTimeout(
+			() =>
+				getElementByClassName('text description display').classList.add('fade'),
+			100
+		)
 	})
 }
 
 // Begin
 if (window.location.pathname === '/') {
- 
 	// Add event listener to cycle through all hero messages on arrow click
 	const leftHeroArrows = getElementsByClassName('hero-arrow left')
 	const rightHeroArrows = getElementsByClassName('hero-arrow right')
@@ -199,18 +217,30 @@ if (window.location.pathname === '/') {
 	// Add event listener to cycle through all reviews on arrow click
 	const leftReviewsArrows = getElementsByClassName('reviews-arrow left')
 	const rightReviewsArrows = getElementsByClassName('reviews-arrow right')
-	for (let reviewIndex = 0; reviewIndex < rightReviewsArrows.length; reviewIndex++) {
+	for (
+		let reviewIndex = 0;
+		reviewIndex < rightReviewsArrows.length;
+		reviewIndex++
+	) {
 		// Cycle forward
 		rightReviewsArrows[reviewIndex].addEventListener('click', () => {
-			ACTIVE_REVIEW_INDEX = reviewIndex === ALL_REVIEWS.length - 1 ? 0 : reviewIndex + 1
-			transitionReviews({ currentReview: reviewIndex, nextReview: ACTIVE_REVIEW_INDEX })
+			ACTIVE_REVIEW_INDEX =
+				reviewIndex === ALL_REVIEWS.length - 1 ? 0 : reviewIndex + 1
+			transitionReviews({
+				currentReview: reviewIndex,
+				nextReview: ACTIVE_REVIEW_INDEX
+			})
 			// Interrupt auto-cycling if user manually clicked arrow
 			clearInterval(reviewInterval)
 		})
 		// Cycle backward
 		leftReviewsArrows[reviewIndex].addEventListener('click', () => {
-			ACTIVE_REVIEW_INDEX = reviewIndex === 0 ? ALL_REVIEWS.length - 1 : reviewIndex - 1
-			transitionReviews({ currentReview: reviewIndex, nextReview: ACTIVE_REVIEW_INDEX })
+			ACTIVE_REVIEW_INDEX =
+				reviewIndex === 0 ? ALL_REVIEWS.length - 1 : reviewIndex - 1
+			transitionReviews({
+				currentReview: reviewIndex,
+				nextReview: ACTIVE_REVIEW_INDEX
+			})
 			// Interrupt auto-cycling if user manually clicked arrow
 			clearInterval(reviewInterval)
 		})
@@ -234,14 +264,17 @@ if (window.location.pathname === '/') {
 	// Switch tabs periodically
 	const tabInterval = setInterval(() => {
 		const currentTab = ACTIVE_TAB_INDEX
-		ACTIVE_TAB_INDEX = ACTIVE_TAB_INDEX === ALL_TABS.length - 1 ? 0 : ACTIVE_TAB_INDEX + 1
+		ACTIVE_TAB_INDEX =
+			ACTIVE_TAB_INDEX === ALL_TABS.length - 1 ? 0 : ACTIVE_TAB_INDEX + 1
 		transitionTabs({ currentTab, nextTab: ACTIVE_TAB_INDEX })
 	}, 8000)
 	// Switch reviews periodically
 	const reviewInterval = setInterval(() => {
 		const currentReview = ACTIVE_REVIEW_INDEX
-		ACTIVE_REVIEW_INDEX = ACTIVE_REVIEW_INDEX === ALL_REVIEWS.length - 1 ? 0 : ACTIVE_REVIEW_INDEX + 1
+		ACTIVE_REVIEW_INDEX =
+			ACTIVE_REVIEW_INDEX === ALL_REVIEWS.length - 1
+				? 0
+				: ACTIVE_REVIEW_INDEX + 1
 		transitionReviews({ currentReview, nextReview: ACTIVE_REVIEW_INDEX })
 	}, 8000)
-
 }
