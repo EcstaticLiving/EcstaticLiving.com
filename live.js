@@ -100,11 +100,6 @@ $navClose.on('click', function() {
 	$navButton.trigger('click')
 })
 
-// SOCIAL SHARE KIT
-SocialShareKit.init({
-	title: document.title
-})
-
 // BACK BUTTON
 $('.navigate-back').on('click', function() {
 	if (document.referrer === '') {
