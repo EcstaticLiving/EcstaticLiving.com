@@ -388,16 +388,8 @@ var countries = [
 for (var i = 0; i < countries.length; i++) {
 	const country =
 		countries[i] === 'United States'
-			? '<option value="' +
-			  countries[i].value +
-			  '" selected>' +
-			  countries[i].label +
-			  '</option>'
-			: '<option value="' +
-			  countries[i].value +
-			  '">' +
-			  countries[i].label +
-			  '</option>'
+			? '<option value="' + countries[i].value + '" selected>' + countries[i].label + '</option>'
+			: '<option value="' + countries[i].value + '">' + countries[i].label + '</option>'
 	$('#country').append(country)
 }
 
@@ -425,10 +417,7 @@ function repopulateForm(formType) {
 		for (var item in values) {
 			try {
 				if ($('*[name=' + item + ']').is(':radio')) {
-					$('input[name=' + item + '][value="' + values[item] + '"]').prop(
-						'checked',
-						true
-					)
+					$('input[name=' + item + '][value="' + values[item] + '"]').prop('checked', true)
 				} else {
 					$('*[name=' + item + ']').val(values[item])
 				}
@@ -624,8 +613,8 @@ function affiliateCode(code) {
 	}),
 		(obj.verify = function() {
 			return (
-				code.substr(code.length - eventCode.length).toLowerCase() ===
-					eventCode.toLowerCase() && this.discount() !== null
+				code.substr(code.length - eventCode.length).toLowerCase() === eventCode.toLowerCase() &&
+				this.discount() !== null
 			)
 		})
 	return obj
@@ -639,10 +628,7 @@ function eventAffiliateValidation() {
 		// Public event
 		if ($(eventAffiliateYes).is(':checked')) {
 			return affiliateCode($(eventAffiliateCode).val()).verify()
-		} else if (
-			!$(eventAffiliateNo).is(':checked') &&
-			!$(eventAffiliateYes).is(':checked')
-		) {
+		} else if (!$(eventAffiliateNo).is(':checked') && !$(eventAffiliateYes).is(':checked')) {
 			return false
 		}
 	}
@@ -662,9 +648,7 @@ function personalValidation() {
 		$(eventEmail).val() !== '' &&
 		$(eventMobile).val() !== '' &&
 		$(eventBirthdate).val() !== '' &&
-		($(eventFemale).is(':checked') ||
-			$(eventMale).is(':checked') ||
-			$(eventOther).is(':checked'))
+		($(eventFemale).is(':checked') || $(eventMale).is(':checked') || $(eventOther).is(':checked'))
 	) {
 		return true
 	}
@@ -674,13 +658,11 @@ function personalValidation() {
 function detailsValidation() {
 	if (
 		$(eventReferral).val() !== '' &&
-		(($(eventExperienceYes).is(':checked') &&
-			$(eventExperienceDetails).val() !== '') ||
+		(($(eventExperienceYes).is(':checked') && $(eventExperienceDetails).val() !== '') ||
 			$(eventExperienceNo).is(':checked')) &&
 		(($(eventDietYes).is(':checked') && $(eventDietDetails).val() !== '') ||
 			$(eventDietNo).is(':checked')) &&
-		(($(eventSpecialYes).is(':checked') &&
-			$(eventSpecialDetails).val() !== '') ||
+		(($(eventSpecialYes).is(':checked') && $(eventSpecialDetails).val() !== '') ||
 			$(eventSpecialNo).is(':checked'))
 	) {
 		return true
@@ -708,8 +690,7 @@ function eventOptionValidation() {
 	if (
 		$(eventSelect).val() &&
 		(($(eventDepositContainer).is(':visible') &&
-			($(eventDepositFull).is(':checked') ||
-				$(eventDepositDeposit).is(':checked'))) ||
+			($(eventDepositFull).is(':checked') || $(eventDepositDeposit).is(':checked'))) ||
 			$(eventDepositContainer).is(':hidden'))
 	) {
 		return true
@@ -810,11 +791,7 @@ function showErrorsInEventForm() {
 	} else {
 		$(eventDepositValidation).css(clearRadio)
 	}
-	if (
-		participants() === 2 &&
-		!$(eventPayBoth).is(':checked') &&
-		!$(eventPayMe).is(':checked')
-	) {
+	if (participants() === 2 && !$(eventPayBoth).is(':checked') && !$(eventPayMe).is(':checked')) {
 		$(eventPayValidation).css(errorRadio)
 	} else {
 		$(eventPayValidation).css(clearRadio)
@@ -831,8 +808,7 @@ function showErrorsInEventForm() {
 	}
 	if (
 		participants() === 2 &&
-		($(eventPartnerFirstName).val() !== '' ||
-			$(eventPartnerLastName).val() !== '')
+		($(eventPartnerFirstName).val() !== '' || $(eventPartnerLastName).val() !== '')
 	) {
 		$(eventPartnerFirstName).css(errorInput)
 		$(eventPartnerLastName).css(errorInput)
@@ -842,10 +818,8 @@ function showErrorsInEventForm() {
 		$(eventPartnerLastName).css(clearInput)
 	}
 	if (
-		($(eventAffiliateYes).is(':checked') &&
-			$(eventAffiliateCode).val() === '') ||
-		(!$(eventAffiliateNo).is(':checked') &&
-			!$(eventAffiliateYes).is(':checked'))
+		($(eventAffiliateYes).is(':checked') && $(eventAffiliateCode).val() === '') ||
+		(!$(eventAffiliateNo).is(':checked') && !$(eventAffiliateYes).is(':checked'))
 	) {
 		$(eventAffiliateParsleyError).css(errorRadio)
 	} else {
@@ -856,10 +830,7 @@ function showErrorsInEventForm() {
 	} else {
 		$(eventSpecialParsleyError).css(clearRadio)
 	}
-	if (
-		$(eventSpecialYes).is(':checked') &&
-		$(eventSpecialDetails).val() === ''
-	) {
+	if ($(eventSpecialYes).is(':checked') && $(eventSpecialDetails).val() === '') {
 		$(eventSpecialDetails).css(errorInput)
 	} else {
 		$(eventSpecialDetails).css(clearInput)
@@ -874,18 +845,12 @@ function showErrorsInEventForm() {
 	} else {
 		$(eventDietDetails).css(clearInput)
 	}
-	if (
-		!$(eventExperienceYes).is(':checked') &&
-		!$(eventExperienceNo).is(':checked')
-	) {
+	if (!$(eventExperienceYes).is(':checked') && !$(eventExperienceNo).is(':checked')) {
 		$(eventExperienceParsleyError).css(errorRadio)
 	} else {
 		$(eventExperienceParsleyError).css(clearRadio)
 	}
-	if (
-		$(eventExperienceYes).is(':checked') &&
-		$(eventExperienceDetails).val() === ''
-	) {
+	if ($(eventExperienceYes).is(':checked') && $(eventExperienceDetails).val() === '') {
 		$(eventExperienceDetails).css(errorInput)
 	} else {
 		$(eventExperienceDetails).css(clearInput)
@@ -909,8 +874,7 @@ function isPrivateEvent() {
 // Event Invite Code
 function eventInvitePassShow() {
 	const text =
-		eventAffiliateValidation() &&
-		affiliateCode($(eventInviteCode).val()).discount() > 0
+		eventAffiliateValidation() && affiliateCode($(eventInviteCode).val()).discount() > 0
 			? 'Congrats! Invite code accepted!<br />$' +
 			  affiliateCode($(eventInviteCode).val()).discount() +
 			  ' per person discount applied! Continue below.'
@@ -941,8 +905,7 @@ function hideAffiliate() {
 }
 function eventAffiliatePassShow() {
 	const text =
-		eventAffiliateValidation() &&
-		affiliateCode($(eventAffiliateCode).val()).discount() > 0
+		eventAffiliateValidation() && affiliateCode($(eventAffiliateCode).val()).discount() > 0
 			? 'Congrats! Code accepted!<br />$' +
 			  affiliateCode($(eventAffiliateCode).val()).discount() +
 			  ' per person discount applied!'
@@ -1115,8 +1078,7 @@ function getFullAmount() {
 		.text()
 		.split(' | ')
 	return (
-		parseFloat(eventPrices[$(eventSelect + ' option:selected').index() - 1]) *
-		paymentQty()
+		parseFloat(eventPrices[$(eventSelect + ' option:selected').index() - 1]) * paymentQty()
 	).toFixed(2)
 }
 
@@ -1161,8 +1123,7 @@ function setEventPrices() {
 			(eventPrices[i] - eventAffiliateDiscount()) * paymentQty() > 0
 				? (eventPrices[i] - eventAffiliateDiscount()) * paymentQty()
 				: 0
-		const affiliateDiscountText =
-			eventAffiliateDiscount() > 0 ? ' including discount' : ''
+		const affiliateDiscountText = eventAffiliateDiscount() > 0 ? ' including discount' : ''
 		const eventNote = eventNotes[i] ? eventNotes[i] : ''
 		const eventSelectText =
 			eventOptions[i] +
@@ -1181,11 +1142,7 @@ function setEventPrices() {
 		)
 	}
 	$(eventDepositText).text(
-		'Pay deposit only ($' +
-			parseInt(depositAmount(), 10) +
-			spacer +
-			people +
-			')'
+		'Pay deposit only ($' + parseInt(depositAmount(), 10) + spacer + people + ')'
 	)
 }
 
@@ -1443,20 +1400,16 @@ if (page === 'Event') {
 			e.preventDefault()
 		}
 	})
-	$(eventSelect + ',' + eventDepositFull + ',' + eventDepositDeposit).on(
-		'change',
-		function() {
-			const amount =
-				$(eventDepositDeposit).is(':checked') &&
-				new Date() < new Date(eventDepositDate)
-					? depositAmount()
-					: $(eventSelect).val()
-			$(eventAmountDisplay).text('Total: $' + amount)
-			if ($(eventAmountShow).text() === 'Yes') {
-				showAmount()
-			}
+	$(eventSelect + ',' + eventDepositFull + ',' + eventDepositDeposit).on('change', function() {
+		const amount =
+			$(eventDepositDeposit).is(':checked') && new Date() < new Date(eventDepositDate)
+				? depositAmount()
+				: $(eventSelect).val()
+		$(eventAmountDisplay).text('Total: $' + amount)
+		if ($(eventAmountShow).text() === 'Yes') {
+			showAmount()
 		}
-	)
+	})
 
 	// RESET EVENT FORM
 	resetEventForm()
@@ -1470,6 +1423,7 @@ const $customForm = $('#wf-form-Custom-Charge'),
 	customEmail = '#custom-email',
 	customMobile = '#custom-mobile',
 	customSelect = '#custom-select',
+	customPurpose = '#custom-purpose',
 	customTerms = '#custom-terms',
 	customTermsValidation = '#custom-terms-validation'
 
@@ -1482,6 +1436,7 @@ function customChargeValidation() {
 		$(customEmail).val() !== '' &&
 		$(customMobile).val() !== '' &&
 		$(customSelect).val() &&
+		$(customPurpose).val() !== '' &&
 		$(customTerms).is(':checked') &&
 		billingValidation()
 	) {
@@ -1567,6 +1522,8 @@ if (page === 'Custom') {
 			',' +
 			customSelect +
 			',' +
+			customPurpose +
+			',' +
 			customTerms +
 			',' +
 			billingFirstName +
@@ -1642,9 +1599,7 @@ function conversion(e, n) {
 				if (null === n[u] || 'string' == typeof n[u]) return
 				l = e.find('input[name="' + a.attr('name') + '"]:checked').val() || null
 			}
-			'string' == typeof l && (l = $.trim(l)),
-				(n[u] = l),
-				(i = i || verification(a, s, u, l))
+			'string' == typeof l && (l = $.trim(l)), (n[u] = l), (i = i || verification(a, s, u, l))
 		}),
 		i
 	)
@@ -1694,9 +1649,7 @@ function createForm() {
 function successfulSubmission() {
 	$('.notification-modal.processing').hide()
 	window.location.href =
-		page === 'Event'
-			? siteUrl + 'registration'
-			: siteUrl + 'updated-card-charged'
+		page === 'Event' ? siteUrl + 'registration' : siteUrl + 'updated-card-charged'
 }
 function indicateFailedSubmission(type) {
 	if (page === 'Event') {
@@ -1780,8 +1733,7 @@ function stripeSourceHandler(data) {
 							window.location.href = siteUrl + 'updated-card'
 						} else {
 							const formData = createForm()
-							const errMessage =
-								err && err.statusText ? err.statusText : '(unknown)'
+							const errMessage = err && err.statusText ? err.statusText : '(unknown)'
 							// TODO: add browser and OS information to error handling
 							formData.fields =
 								err.statusText === 'timeout'
@@ -1914,9 +1866,7 @@ $(payButton).on('click', function(e) {
 		chargeAmount = $(eventDepositDeposit).is(':checked')
 			? depositAmount() * 100
 			: $(eventSelect).val() * 100
-		const eventDeposit = $(eventDepositDeposit).is(':checked')
-			? 'deposit'
-			: 'full'
+		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'deposit' : 'full'
 		customerDescription = $(eventFirstName).val() + ' ' + $(eventLastName).val()
 		customerEmail = $(eventEmail).val()
 		chargeDescription =
@@ -1966,12 +1916,7 @@ $(payButton).on('click', function(e) {
 		// Stripe variables
 		chargeAmount = $(customSelect).val() * 100
 		customerDescription =
-			$(customFirstName).val() +
-			' ' +
-			$(customLastName).val() +
-			' <' +
-			$(customEmail).val() +
-			'>'
+			$(customFirstName).val() + ' ' + $(customLastName).val() + ' <' + $(customEmail).val() + '>'
 		customerEmail = $(customEmail).val()
 		chargeDescription =
 			'Custom Charge: ' +
@@ -1986,19 +1931,13 @@ $(payButton).on('click', function(e) {
 	// Form Variable: Event Option Total
 	$('#event-option-total').val($(eventSelect).val() * 100)
 	// Form Variable: Event Affiliate Code
-	const affiliateCodeValue = $(eventAffiliateCode).val()
-		? $(eventAffiliateCode).val()
-		: '- none -'
+	const affiliateCodeValue = $(eventAffiliateCode).val() ? $(eventAffiliateCode).val() : '- none -'
 	$('#event-affiliate').val(affiliateCodeValue)
 	// Form Variable: Question Diet
-	const dietValue = $(eventDietDetails).val()
-		? $(eventDietDetails).val()
-		: '- none -'
+	const dietValue = $(eventDietDetails).val() ? $(eventDietDetails).val() : '- none -'
 	$('#question-diet').val(dietValue)
 	// Form Variable: Question Special
-	const specialValue = $(eventSpecialDetails).val()
-		? $(eventSpecialDetails).val()
-		: '- none -'
+	const specialValue = $(eventSpecialDetails).val() ? $(eventSpecialDetails).val() : '- none -'
 	$('#question-special').val(specialValue)
 	stripe
 		.createSource(card, {
@@ -2035,12 +1974,8 @@ $(payButton).on('click', function(e) {
 					quantity: paymentQty(),
 					priceFullTotal: getFullAmount(),
 					priceDiscountTotal: eventAffiliateDiscount(),
-					priceBaseTotal: !isNaN(eventBasePrice)
-						? (eventBasePrice * paymentQty()).toFixed(2)
-						: 0,
-					costBaseTotal: !isNaN(eventBaseCost)
-						? (eventBaseCost * paymentQty()).toFixed(2)
-						: 0,
+					priceBaseTotal: !isNaN(eventBasePrice) ? (eventBasePrice * paymentQty()).toFixed(2) : 0,
+					costBaseTotal: !isNaN(eventBaseCost) ? (eventBaseCost * paymentQty()).toFixed(2) : 0,
 					priceDepositTotal: $(eventDepositDeposit).is(':checked')
 						? (chargeAmount / 100).toFixed(2)
 						: 0,
