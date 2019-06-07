@@ -139,6 +139,7 @@ $('.button.contact').on('click', function() {
 
 // Countries
 var countries = [
+	{ seperator: true },
 	{ value: 'US', label: 'United States' },
 	{ value: 'CA', label: 'Canada' },
 	{ value: 'MX', label: 'Mexico' },
