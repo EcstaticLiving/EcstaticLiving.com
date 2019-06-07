@@ -21,16 +21,10 @@ const eventCode = getText(getElementById('event-code')).toUpperCase(),
 	eventName = getText(getElementById('event-name')),
 	eventDates = getText(getElementById('event-dates')),
 	eventVenue = getText(getElementById('event-venue')),
-	eventDepositAmount = parseFloat(
-		getText(getElementById('event-deposit-amount'))
-	).toFixed(2),
+	eventDepositAmount = parseFloat(getText(getElementById('event-deposit-amount'))).toFixed(2),
 	eventDepositDate = getText(getElementById('event-deposit-date')),
-	eventBasePrice = parseFloat(
-		getText(getElementById('event-base-price'))
-	).toFixed(2),
-	eventBaseCost = parseFloat(
-		getText(getElementById('event-base-cost'))
-	).toFixed(2),
+	eventBasePrice = parseFloat(getText(getElementById('event-base-price'))).toFixed(2),
+	eventBaseCost = parseFloat(getText(getElementById('event-base-cost'))).toFixed(2),
 	eventStatusRestriction = getText(getElementById('event-status-restriction'))
 
 // Hidden, initially empty form fields, to be populated later on, then submitted with remaining data
@@ -90,17 +84,14 @@ const eventReferral = getElementById('event-referral'),
 
 // Affiliate Code
 const eventAffiliateContainer = getElementByClassName('container affiliate'),
-	eventAffiliateCodeContainer = getElementByClassName(
-		'container affiliate-code'
-	),
+	eventAffiliateCodeContainer = getElementByClassName('container affiliate-code'),
 	eventAffiliateValidation = getElementById('event-affiliate-validation'),
 	eventAffiliateYes = getElementById('event-affiliate-yes'),
 	eventAffiliateNo = getElementById('event-affiliate-no'),
 	eventAffiliateCode = getElementById('event-affiliate-code'),
 	eventAffiliatePass = getElementById('event-affiliate-pass'),
 	eventAffiliateFail = getElementById('event-affiliate-fail')
-const urlDiscountCode =
-	urlString && urlString.affiliate ? urlString.affiliate : null
+const urlDiscountCode = urlString && urlString.affiliate ? urlString.affiliate : null
 
 // Event Status: Couples, Singles, Both
 const eventStatus = getElementById('event-status'),
@@ -108,9 +99,7 @@ const eventStatus = getElementById('event-status'),
 	eventPartnerContainer = getElementByClassName('container partner'),
 	eventPartnerFirstName = getElementById('event-partner-firstname'),
 	eventPartnerLastName = getElementById('event-partner-lastname'),
-	eventPartnerGenderValidation = getElementById(
-		'event-partner-gender-validation'
-	),
+	eventPartnerGenderValidation = getElementById('event-partner-gender-validation'),
 	eventPartnerFemale = getElementById('event-partner-gender-female'),
 	eventPartnerMale = getElementById('event-partner-gender-male'),
 	eventPartnerOther = getElementById('event-partner-gender-other'),
@@ -159,6 +148,12 @@ const paymentButton = getElementByClassName('payment-button')
 
 // Countries
 let countries = [
+	{ seperator: true },
+	{ value: 'US', label: 'United States' },
+	{ value: 'CA', label: 'Canada' },
+	{ value: 'MX', label: 'Mexico' },
+	{ value: 'FR', label: 'France' },
+	{ seperator: true },
 	{ value: 'AF', label: 'Afghanistan' },
 	{ value: 'AX', label: 'Åland Islands' },
 	{ value: 'AL', label: 'Albania' },
@@ -197,7 +192,6 @@ let countries = [
 	{ value: 'BI', label: 'Burundi' },
 	{ value: 'KH', label: 'Cambodia' },
 	{ value: 'CM', label: 'Cameroon' },
-	{ value: 'CA', label: 'Canada' },
 	{ value: 'CV', label: 'Cape Verde' },
 	{ value: 'KY', label: 'Cayman Islands' },
 	{ value: 'CF', label: 'Central African Republic' },
@@ -232,7 +226,6 @@ let countries = [
 	{ value: 'FO', label: 'Faroe Islands' },
 	{ value: 'FJ', label: 'Fiji' },
 	{ value: 'FI', label: 'Finland' },
-	{ value: 'FR', label: 'France' },
 	{ value: 'GF', label: 'French Guiana' },
 	{ value: 'PF', label: 'French Polynesia' },
 	{ value: 'TF', label: 'French Southern Territories' },
@@ -301,7 +294,6 @@ let countries = [
 	{ value: 'MR', label: 'Mauritania' },
 	{ value: 'MU', label: 'Mauritius' },
 	{ value: 'YT', label: 'Mayotte' },
-	{ value: 'MX', label: 'Mexico' },
 	{ value: 'FM', label: 'Micronesia, Federated States of' },
 	{ value: 'MD', label: 'Moldova, Republic of' },
 	{ value: 'MC', label: 'Monaco' },
@@ -390,7 +382,6 @@ let countries = [
 	{ value: 'UA', label: 'Ukraine' },
 	{ value: 'AE', label: 'United Arab Emirates' },
 	{ value: 'GB', label: 'United Kingdom' },
-	{ value: 'US', label: 'United States' },
 	{ value: 'UM', label: 'United States Minor Outlying Islands' },
 	{ value: 'UY', label: 'Uruguay' },
 	{ value: 'UZ', label: 'Uzbekistan' },
@@ -409,9 +400,14 @@ let countries = [
 if (getElementById('country')) {
 	for (let i in countries) {
 		let option = document.createElement('option')
-		option.text = countries[i].label
-		option.value = countries[i].value
-		option.selected = countries[i] === 'United States' ? true : false
+		if (countries[i].seperator) {
+			option.text = '──────────'
+			option.disabled = true
+		} else {
+			option.text = countries[i].label
+			option.value = countries[i].value
+			option.selected = countries[i].label === 'United States' ? true : false
+		}
 		appendSelect(getElementById('country'), option)
 	}
 }

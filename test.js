@@ -139,6 +139,12 @@ $('.button.contact').on('click', function() {
 
 // Countries
 var countries = [
+	{ seperator: true },
+	{ value: 'US', label: 'United States' },
+	{ value: 'CA', label: 'Canada' },
+	{ value: 'MX', label: 'Mexico' },
+	{ value: 'FR', label: 'France' },
+	{ seperator: true },
 	{ value: 'AF', label: 'Afghanistan' },
 	{ value: 'AX', label: 'Åland Islands' },
 	{ value: 'AL', label: 'Albania' },
@@ -177,7 +183,6 @@ var countries = [
 	{ value: 'BI', label: 'Burundi' },
 	{ value: 'KH', label: 'Cambodia' },
 	{ value: 'CM', label: 'Cameroon' },
-	{ value: 'CA', label: 'Canada' },
 	{ value: 'CV', label: 'Cape Verde' },
 	{ value: 'KY', label: 'Cayman Islands' },
 	{ value: 'CF', label: 'Central African Republic' },
@@ -212,7 +217,6 @@ var countries = [
 	{ value: 'FO', label: 'Faroe Islands' },
 	{ value: 'FJ', label: 'Fiji' },
 	{ value: 'FI', label: 'Finland' },
-	{ value: 'FR', label: 'France' },
 	{ value: 'GF', label: 'French Guiana' },
 	{ value: 'PF', label: 'French Polynesia' },
 	{ value: 'TF', label: 'French Southern Territories' },
@@ -281,7 +285,6 @@ var countries = [
 	{ value: 'MR', label: 'Mauritania' },
 	{ value: 'MU', label: 'Mauritius' },
 	{ value: 'YT', label: 'Mayotte' },
-	{ value: 'MX', label: 'Mexico' },
 	{ value: 'FM', label: 'Micronesia, Federated States of' },
 	{ value: 'MD', label: 'Moldova, Republic of' },
 	{ value: 'MC', label: 'Monaco' },
@@ -370,7 +373,6 @@ var countries = [
 	{ value: 'UA', label: 'Ukraine' },
 	{ value: 'AE', label: 'United Arab Emirates' },
 	{ value: 'GB', label: 'United Kingdom' },
-	{ value: 'US', label: 'United States' },
 	{ value: 'UM', label: 'United States Minor Outlying Islands' },
 	{ value: 'UY', label: 'Uruguay' },
 	{ value: 'UZ', label: 'Uzbekistan' },
@@ -386,11 +388,15 @@ var countries = [
 	{ value: 'ZW', label: 'Zimbabwe' }
 ]
 for (var i = 0; i < countries.length; i++) {
-	const country =
-		countries[i] === 'United States'
-			? '<option value="' + countries[i].value + '" selected>' + countries[i].label + '</option>'
-			: '<option value="' + countries[i].value + '">' + countries[i].label + '</option>'
-	$('#country').append(country)
+	if (countries[i].seperator) {
+		$('#country').append('<option disabled>──────────</option>')
+	} else {
+		const country =
+			countries[i].label === 'United States'
+				? '<option value="' + countries[i].value + '" selected>' + countries[i].label + '</option>'
+				: '<option value="' + countries[i].value + '">' + countries[i].label + '</option>'
+		$('#country').append(country)
+	}
 }
 
 // Save Form
