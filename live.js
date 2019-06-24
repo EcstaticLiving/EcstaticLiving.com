@@ -1482,7 +1482,7 @@ function setCustomChargeSelect() {
 		$(customSelect).append(
 			$('<option>', {
 				value: '',
-				text: 'Custom charge option...'
+				text: 'Select an option...'
 			})
 		)
 	}

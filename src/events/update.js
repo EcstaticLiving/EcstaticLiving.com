@@ -57,7 +57,7 @@ const setCustomChargeSelect = () => {
 	emptySelect(customSelect)
 	let option = document.createElement('option')
 	if (customOptions.length > 0) {
-		option.text = 'Custom charge option...'
+		option.text = 'Select an option...'
 		option.value = ''
 		appendSelect(eventStatus, option)
 	}
@@ -84,12 +84,8 @@ const initForm = () => {
 }
 
 // CUSTOM CHARGE ONCHANGE EVENTS
-onChange(customFirstName, () =>
-	setValue(billingFirstName, getValue(eventFirstName))
-)
-onChange(customLastName, () =>
-	setValue(billingLastName, getValue(eventLastName))
-)
+onChange(customFirstName, () => setValue(billingFirstName, getValue(eventFirstName)))
+onChange(customLastName, () => setValue(billingLastName, getValue(eventLastName)))
 
 // If any fields have changed...
 for (elem of [
@@ -119,10 +115,7 @@ onClick(paymentButton, e => {
 		showErrorsInForm()
 		// If there’s no Stripe error message
 		if (isBlank(getElementById('billing-card-error'))) {
-			setText(
-				getElementById('billing-card-error'),
-				'Oops! There’s some missing information.'
-			)
+			setText(getElementById('billing-card-error'), 'Oops! There’s some missing information.')
 		}
 		return false
 	}
@@ -130,14 +123,8 @@ onClick(paymentButton, e => {
 	// Stripe variables
 	chargeAmount = getValue(customSelect) * 100
 	customerDescription =
-		getValue(customFirstName) +
-		' ' +
-		getValue(customLastName) +
-		' <' +
-		getValue(customEmail) +
-		'>'
+		getValue(customFirstName) + ' ' + getValue(customLastName) + ' <' + getValue(customEmail) + '>'
 	customerEmail = getValue(customEmail)
 	chargeDescription =
-		'Custom Charge: ' +
-		getText(customSelect).substring(0, getText(customSelect).length - 16)
+		'Custom Charge: ' + getText(customSelect).substring(0, getText(customSelect).length - 16)
 })
