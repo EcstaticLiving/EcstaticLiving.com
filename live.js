@@ -1457,8 +1457,6 @@ function customChargeValidation() {
 }
 
 function showErrorsInCustomForm() {
-	const errorInput = { 'border-color': '#b00000', 'background-color': '#fdd' }
-	const clearInput = { 'border-color': '#ccc', 'background-color': '#fff' }
 	const errorRadio = { 'background-color': '#fdd' }
 	const clearRadio = { 'background-color': 'transparent' }
 	if (!$(customTerms).is(':checked')) {

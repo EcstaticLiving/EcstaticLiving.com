@@ -2,11 +2,40 @@
 Code ©2018 Ecstatic Living Institute. All rights reserved.
 Created by Conscious Apps Inc. www.consciousapps.com
 */
-if (window.location.href.indexOf('ecstaticliving.com') > -1) {
+const mode = window.location.href.indexOf('ecstaticliving.com') > -1 ? 'production' : 'development'
+
+if (mode === 'production') {
 	console.log('Welcome to EcstaticLiving.com')
 } else {
 	console.log('TEST code at ', window.location.href)
 }
+
+// Recaptcha
+const recaptchaServer =
+	'https://wt-d2bd89d1d23e6c320f5aff229c206923-0.sandbox.auth0-extend.com/recaptcha'
+
+grecaptcha.ready(function() {
+	grecaptcha
+		.execute('6LcqUawUAAAAAK6C4nE-nBuc74IQ_CAiQQiPr4dY', { action: 'homepage' })
+		.then(function(token) {
+			$.ajax({
+				type: 'POST',
+				url: recaptchaServer,
+				crossDomain: true,
+				data: {
+					token
+				}
+			})
+				// Success
+				.then(function(res) {
+					console.log(res)
+				})
+				// Failure
+				.catch(function(err) {
+					console.error(err)
+				})
+		})
+})
 
 // DECLARATIONS
 // General
@@ -22,9 +51,7 @@ const $main = $('.main'),
 
 // Initialization Module
 const siteUrl =
-	window.location.href.indexOf('ecstaticliving.com') > -1
-		? 'https://www.ecstaticliving.com/'
-		: 'https://ecstaticliving.webflow.io/'
+	mode === 'production' ? 'https://www.ecstaticliving.com/' : 'https://ecstaticliving.webflow.io/'
 
 //	INITIALIZE
 function initialize() {
@@ -1457,8 +1484,6 @@ function customChargeValidation() {
 }
 
 function showErrorsInCustomForm() {
-	const errorInput = { 'border-color': '#b00000', 'background-color': '#fdd' }
-	const clearInput = { 'border-color': '#ccc', 'background-color': '#fff' }
 	const errorRadio = { 'background-color': '#fdd' }
 	const clearRadio = { 'background-color': 'transparent' }
 	if (!$(customTerms).is(':checked')) {
@@ -1678,7 +1703,7 @@ function indicateFailedSubmission(type) {
 
 function stripeSourceHandler(data) {
 	const stripeURL =
-		window.location.href.indexOf('ecstaticliving.com') > -1
+		mode === 'production'
 			? 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.sandbox.auth0-extend.com/stripe'
 			: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.sandbox.auth0-extend.com/stripe-test'
 	$('.stripe.processing').show()
@@ -1791,7 +1816,7 @@ function stripeSourceHandler(data) {
 }
 
 const stripe =
-	window.location.href.indexOf('ecstaticliving.com') > -1
+	mode === 'production'
 		? Stripe('pk_live_0rULIvKhv6aSLqI49Ae5rflI')
 		: Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
 const elements = stripe.elements()
