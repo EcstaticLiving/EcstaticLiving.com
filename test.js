@@ -16,7 +16,7 @@ const recaptchaServer =
 
 grecaptcha.ready(function() {
 	grecaptcha
-		.execute('6LcqUawUAAAAAK6C4nE-nBuc74IQ_CAiQQiPr4dY', { action: 'homepage' })
+		.execute('6LcQUqwUAAAAAN1xfTSh_9TYo_lGX48SDEsW6mqz', { action: 'homepage' })
 		.then(function(token) {
 			$.ajax({
 				type: 'POST',
