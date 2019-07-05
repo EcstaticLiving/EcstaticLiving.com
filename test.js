@@ -18,7 +18,6 @@ grecaptcha.ready(function() {
 	grecaptcha
 		.execute('6LcqUawUAAAAAK6C4nE-nBuc74IQ_CAiQQiPr4dY', { action: 'homepage' })
 		.then(function(token) {
-			console.log(token)
 			$.ajax({
 				type: 'POST',
 				url: recaptchaServer,
