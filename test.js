@@ -19,6 +19,20 @@ const emailNewsletterButtons = [
 	'community_button',
 	'contact_button'
 ]
+const enableButtons = mode => {
+	emailNewsletterButtons.forEach(emailNewsletterButton => {
+		const newsletterButton = document.getElementById(emailNewsletterButton)
+		if (newsletterButton) {
+			if (mode) {
+				newsletterButton.disabled = false
+				newsletterButton.classList.remove('disabled')
+			} else {
+				newsletterButton.disabled = true
+				newsletterButton.classList.add('disabled')
+			}
+		}
+	})
+}
 
 const recaptchaServer =
 	'https://wt-d2bd89d1d23e6c320f5aff229c206923-0.sandbox.auth0-extend.com/recaptcha'
@@ -38,25 +52,15 @@ grecaptcha.ready(function() {
 				.then(function(res) {
 					console.log(res)
 					if (res && res.success && res.score > 0.8) {
-						emailNewsletterButtons.forEach(emailNewsletterButton => {
-							const newsletterButton = document.getElementById(emailNewsletterButton)
-							if (newsletterButton) {
-								newsletterButton.disabled = false
-								newsletterButton.classList.remove('disabled')
-							}
-						})
+						enableButtons(true)
+					} else {
+						enableButtons(false)
 					}
 				})
 				// Failure
 				.catch(function(err) {
 					console.error(err)
-					emailNewsletterButtons.forEach(emailNewsletterButton => {
-						const newsletterButton = document.getElementById(emailNewsletterButton)
-						if (newsletterButton) {
-							newsletterButton.disabled = true
-							newsletterButton.classList.add('disabled')
-						}
-					})
+					enableButtons(false)
 				})
 		})
 })
