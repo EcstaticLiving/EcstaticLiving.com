@@ -51,7 +51,7 @@ grecaptcha.ready(function() {
 				// Success
 				.then(function(res) {
 					console.log(res)
-					if (res && res.success && res.score > 0.8) {
+					if (res && res.success && res.score > 0.5) {
 						enableButtons(true)
 					} else {
 						enableButtons(false)

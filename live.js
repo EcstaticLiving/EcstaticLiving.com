@@ -2,11 +2,68 @@
 Code ©2018 Ecstatic Living Institute. All rights reserved.
 Created by Conscious Apps Inc. www.consciousapps.com
 */
-if (window.location.href.indexOf('ecstaticliving.com') > -1) {
+const mode = window.location.href.indexOf('ecstaticliving.com') > -1 ? 'production' : 'development'
+
+if (mode === 'production') {
 	console.log('Welcome to EcstaticLiving.com')
 } else {
 	console.log('TEST code at ', window.location.href)
 }
+
+// Recaptcha
+const emailNewsletterButtons = [
+	'questions_tantra_button',
+	'questions_relationships_button',
+	'questions_holistic_button',
+	'questions_community_button',
+	'community_button',
+	'contact_button'
+]
+const enableButtons = mode => {
+	emailNewsletterButtons.forEach(emailNewsletterButton => {
+		const newsletterButton = document.getElementById(emailNewsletterButton)
+		if (newsletterButton) {
+			if (mode) {
+				newsletterButton.disabled = false
+				newsletterButton.classList.remove('disabled')
+			} else {
+				newsletterButton.disabled = true
+				newsletterButton.classList.add('disabled')
+			}
+		}
+	})
+}
+
+const recaptchaServer =
+	'https://wt-d2bd89d1d23e6c320f5aff229c206923-0.sandbox.auth0-extend.com/recaptcha'
+grecaptcha.ready(function() {
+	grecaptcha
+		.execute('6LcQUqwUAAAAAN1xfTSh_9TYo_lGX48SDEsW6mqz', { action: 'homepage' })
+		.then(function(token) {
+			$.ajax({
+				type: 'POST',
+				url: recaptchaServer,
+				crossDomain: true,
+				data: {
+					token
+				}
+			})
+				// Success
+				.then(function(res) {
+					console.log(res)
+					if (res && res.success && res.score > 0.5) {
+						enableButtons(true)
+					} else {
+						enableButtons(false)
+					}
+				})
+				// Failure
+				.catch(function(err) {
+					console.error(err)
+					enableButtons(false)
+				})
+		})
+})
 
 // DECLARATIONS
 // General
@@ -22,9 +79,7 @@ const $main = $('.main'),
 
 // Initialization Module
 const siteUrl =
-	window.location.href.indexOf('ecstaticliving.com') > -1
-		? 'https://www.ecstaticliving.com/'
-		: 'https://ecstaticliving.webflow.io/'
+	mode === 'production' ? 'https://www.ecstaticliving.com/' : 'https://ecstaticliving.webflow.io/'
 
 //	INITIALIZE
 function initialize() {
@@ -1676,7 +1731,7 @@ function indicateFailedSubmission(type) {
 
 function stripeSourceHandler(data) {
 	const stripeURL =
-		window.location.href.indexOf('ecstaticliving.com') > -1
+		mode === 'production'
 			? 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.sandbox.auth0-extend.com/stripe'
 			: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.sandbox.auth0-extend.com/stripe-test'
 	$('.stripe.processing').show()
@@ -1789,7 +1844,7 @@ function stripeSourceHandler(data) {
 }
 
 const stripe =
-	window.location.href.indexOf('ecstaticliving.com') > -1
+	mode === 'production'
 		? Stripe('pk_live_0rULIvKhv6aSLqI49Ae5rflI')
 		: Stripe('pk_test_QO6tO6bHny3y10LjH96f4n3p')
 const elements = stripe.elements()
