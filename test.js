@@ -10,33 +10,6 @@ if (mode === 'production') {
 	console.log('TEST code at ', window.location.href)
 }
 
-// Recaptcha
-const recaptchaServer =
-	'https://wt-d2bd89d1d23e6c320f5aff229c206923-0.sandbox.auth0-extend.com/recaptcha'
-
-grecaptcha.ready(function() {
-	grecaptcha
-		.execute('6LcQUqwUAAAAAN1xfTSh_9TYo_lGX48SDEsW6mqz', { action: 'homepage' })
-		.then(function(token) {
-			$.ajax({
-				type: 'POST',
-				url: recaptchaServer,
-				crossDomain: true,
-				data: {
-					token
-				}
-			})
-				// Success
-				.then(function(res) {
-					console.log(res)
-				})
-				// Failure
-				.catch(function(err) {
-					console.error(err)
-				})
-		})
-})
-
 // DECLARATIONS
 // General
 const $main = $('.main'),

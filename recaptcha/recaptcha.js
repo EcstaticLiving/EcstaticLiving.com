@@ -19,6 +19,10 @@ module.exports = (req, callback) => {
 		.then(res => res.json())
 		.then(res => {
 			console.log(res)
-			callback(res)
+			callback(null, res)
+		})
+		.catch(err => {
+			console.log(err)
+			callback(err)
 		})
 }
