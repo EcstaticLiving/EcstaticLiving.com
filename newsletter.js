@@ -70,45 +70,20 @@ const verifyEmailSignup = e => {
 }
 
 // 3. Assign enable button function to all relevant fields, and trigger submit if user presses enter, but only if not a bot!
-const recaptchaServer =
-	'https://wt-d2bd89d1d23e6c320f5aff229c206923-0.sandbox.auth0-extend.com/recaptcha'
-grecaptcha.ready(function() {
-	grecaptcha
-		.execute('6LcQUqwUAAAAAN1xfTSh_9TYo_lGX48SDEsW6mqz', { action: 'homepage' })
-		.then(function(token) {
-			$.ajax({
-				type: 'POST',
-				url: recaptchaServer,
-				crossDomain: true,
-				data: {
-					token
+// Question newsletter signups
+inputCategories.forEach(inputCategory => {
+	inputFields.forEach(inputField => {
+		const field = document.getElementById(inputCategory + '_' + inputField)
+		if (field) {
+			field.oninput = verifyEmailSignup
+			field.addEventListener('keypress', e => {
+				const key = e.which || e.keyCode
+				// If `enter` key is pressed, attempt to submit form
+				if (key === 13) {
+					const buttonField = document.getElementById(inputCategory + '_button')
+					buttonField.click()
 				}
 			})
-				// Success
-				.then(function(res) {
-					console.log(res)
-					if (res && res.success && res.score > 0.8) {
-						inputCategories.forEach(inputCategory => {
-							inputFields.forEach(inputField => {
-								const field = document.getElementById(inputCategory + '_' + inputField)
-								if (field) {
-									field.oninput = verifyEmailSignup
-									field.addEventListener('keypress', e => {
-										const key = e.which || e.keyCode
-										// If `enter` key is pressed, attempt to submit form
-										if (key === 13) {
-											const buttonField = document.getElementById(inputCategory + '_button')
-											buttonField.click()
-										}
-									})
-								}
-							})
-						})
-					}
-				})
-				// Failure
-				.catch(function(err) {
-					console.error(err)
-				})
-		})
+		}
+	})
 })

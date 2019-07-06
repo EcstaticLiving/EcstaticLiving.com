@@ -10,6 +10,51 @@ if (mode === 'production') {
 	console.log('TEST code at ', window.location.href)
 }
 
+// Recaptcha
+const emailNewsletterButtons = [
+	'questions_tantra_button',
+	'questions_relationships_button',
+	'questions_holistic_button',
+	'questions_community_button',
+	'community_button',
+	'contact_button'
+]
+
+const recaptchaServer =
+	'https://wt-d2bd89d1d23e6c320f5aff229c206923-0.sandbox.auth0-extend.com/recaptcha'
+grecaptcha.ready(function() {
+	grecaptcha
+		.execute('6LcQUqwUAAAAAN1xfTSh_9TYo_lGX48SDEsW6mqz', { action: 'homepage' })
+		.then(function(token) {
+			$.ajax({
+				type: 'POST',
+				url: recaptchaServer,
+				crossDomain: true,
+				data: {
+					token
+				}
+			})
+				// Success
+				.then(function(res) {
+					console.log(res)
+					emailNewsletterButtons.forEach(emailNewsletterButton => {
+						const button = document.getElementById(emailNewsletterButton)
+						button.disabled = false
+						button.classList.remove('disabled')
+					})
+				})
+				// Failure
+				.catch(function(err) {
+					console.error(err)
+					emailNewsletterButtons.forEach(emailNewsletterButton => {
+						const button = document.getElementById(emailNewsletterButton)
+						button.disabled = true
+						button.classList.add('disabled')
+					})
+				})
+		})
+})
+
 // DECLARATIONS
 // General
 const $main = $('.main'),
