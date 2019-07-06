@@ -37,13 +37,15 @@ grecaptcha.ready(function() {
 				// Success
 				.then(function(res) {
 					console.log(res)
-					emailNewsletterButtons.forEach(emailNewsletterButton => {
-						const newsletterButton = document.getElementById(emailNewsletterButton)
-						if (newsletterButton) {
-							newsletterButton.disabled = false
-							newsletterButton.classList.remove('disabled')
-						}
-					})
+					if (res && res.success && res.score > 0.8) {
+						emailNewsletterButtons.forEach(emailNewsletterButton => {
+							const newsletterButton = document.getElementById(emailNewsletterButton)
+							if (newsletterButton) {
+								newsletterButton.disabled = false
+								newsletterButton.classList.remove('disabled')
+							}
+						})
+					}
 				})
 				// Failure
 				.catch(function(err) {
