@@ -38,18 +38,22 @@ grecaptcha.ready(function() {
 				.then(function(res) {
 					console.log(res)
 					emailNewsletterButtons.forEach(emailNewsletterButton => {
-						const button = document.getElementById(emailNewsletterButton)
-						button.disabled = false
-						button.classList.remove('disabled')
+						const newsletterButton = document.getElementById(emailNewsletterButton)
+						if (newsletterButton) {
+							newsletterButton.disabled = false
+							newsletterButton.classList.remove('disabled')
+						}
 					})
 				})
 				// Failure
 				.catch(function(err) {
 					console.error(err)
 					emailNewsletterButtons.forEach(emailNewsletterButton => {
-						const button = document.getElementById(emailNewsletterButton)
-						button.disabled = true
-						button.classList.add('disabled')
+						const newsletterButton = document.getElementById(emailNewsletterButton)
+						if (newsletterButton) {
+							newsletterButton.disabled = true
+							newsletterButton.classList.add('disabled')
+						}
 					})
 				})
 		})
