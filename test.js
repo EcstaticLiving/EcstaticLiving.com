@@ -53,6 +53,7 @@ const verifyEmailSignup = e => {
 				inputFields.every(
 					inputField =>
 						// Only show alert once every field has been touched...
+						inputField &&
 						document.getElementById(inputCategory + '_' + inputField).value.length > 0 &&
 						// ...and other fields (except for email) are incomplete.
 						inputField !== 'email' &&
