@@ -61,6 +61,7 @@ const verifyEmailSignup = e => {
 			})
 
 			// ...and if so, change button class to active, and submit form.
+			console.log(inputCategory)
 			const buttonField = document.getElementById(inputCategory + '_button')
 			const alertField = document.getElementById(inputCategory + '_alert')
 
