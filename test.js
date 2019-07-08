@@ -18,6 +18,7 @@ const inputCategories = [
 	'questions_relationships',
 	'questions_holistic',
 	'questions_community',
+	'join_community',
 	'contact'
 ]
 const inputFields = ['first_name', 'last_name', 'email']
@@ -59,8 +60,6 @@ const verifyEmailSignup = e => {
 				) ||
 				// ...but always show if recaptcha has failed.
 				!recaptchaPassed
-
-			console.log(complete, showAlert)
 
 			// ...and if so, change button class to active, and submit form.
 			const buttonField = document.getElementById(inputCategory + '_button')
@@ -134,7 +133,7 @@ grecaptcha.ready(function() {
 				// Success
 				.then(function(res) {
 					console.log(res)
-					recaptchaPassed = res && res.success && res.score > 0.8 ? true : false
+					recaptchaPassed = res && res.success && res.score > 0.7 ? true : false
 					newsletterSignups()
 				})
 				// Failure
