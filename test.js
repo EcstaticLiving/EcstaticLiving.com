@@ -70,7 +70,7 @@ const verifyEmailSignup = e => {
 
 			// If recaptcha failed
 			alertField.innerHTML = !recaptchaPassed
-				? 'Please contact our office.'
+				? 'Our website thinks you’re a bot! Please call our office.'
 				: 'Hmm... something’s not quite right'
 
 			// Only show alert if all fields have been filled out somewhat, but not yet validated
@@ -81,7 +81,7 @@ const verifyEmailSignup = e => {
 			}
 
 			// ENABLE
-			if (complete && !showAlert) {
+			if (complete && !showAlert && recaptchaPassed) {
 				buttonField.classList.remove('disabled')
 				const formField = document.getElementById(inputCategory + '_form')
 				formField.action = 'https://app.getresponse.com/add_subscriber.html'
