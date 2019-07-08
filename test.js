@@ -70,7 +70,7 @@ const verifyEmailSignup = e => {
 
 			// If recaptcha failed
 			alertField.innerHTML = !recaptchaPassed
-				? 'Our website thinks you’re a bot! Please call our office.'
+				? `Our website thinks you’re a bot!\nPlease call our office.`
 				: 'Hmm... something’s not quite right'
 
 			// Only show alert if all fields have been filled out somewhat, but not yet validated
