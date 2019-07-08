@@ -18,8 +18,7 @@ const inputCategories = [
 	'questions_relationships',
 	'questions_holistic',
 	'questions_community',
-	'join_community',
-	'contact'
+	'join_community'
 ]
 const inputFields = ['first_name', 'last_name', 'email']
 
