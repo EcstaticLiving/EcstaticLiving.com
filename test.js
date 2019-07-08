@@ -29,7 +29,6 @@ const verifyEmailSignup = e => {
 		if (e.target.id.includes(inputCategory)) {
 			// ...check to see if every field has been filled out correctly...
 			const complete = inputFields.every(inputField => {
-				console.log(inputCategory + '_' + inputField)
 				const field = document.getElementById(inputCategory + '_' + inputField)
 				if (inputField === 'first_name' || inputField === 'last_name') {
 					// Prevent ALL CAPS
@@ -60,8 +59,9 @@ const verifyEmailSignup = e => {
 				)
 			})
 
+			console.log(complete, showAlert)
+
 			// ...and if so, change button class to active, and submit form.
-			console.log(inputCategory)
 			const buttonField = document.getElementById(inputCategory + '_button')
 			const alertField = document.getElementById(inputCategory + '_alert')
 
