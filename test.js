@@ -50,17 +50,15 @@ const verifyEmailSignup = e => {
 			})
 
 			const showAlert =
-				inputFields.every(inputField => {
-					console.log(inputField)
-					return (
+				inputFields.every(
+					inputField =>
 						// Only show alert once every field has been touched...
-						inputField &&
+						document.getElementById(inputCategory + '_' + inputField) &&
 						document.getElementById(inputCategory + '_' + inputField).value.length > 0 &&
 						// ...and other fields (except for email) are incomplete.
 						inputField !== 'email' &&
 						!complete
-					)
-				}) ||
+				) ||
 				// ...but always show if recaptcha has failed.
 				!recaptchaPassed
 
