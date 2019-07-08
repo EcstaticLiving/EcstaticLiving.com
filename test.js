@@ -48,16 +48,17 @@ const verifyEmailSignup = e => {
 				)
 			})
 
-			const showAlert = inputFields.every(inputField => {
-				const field = document.getElementById(inputCategory + '_' + inputField)
-				return (
-					// Only show alert once every field has been touched...
-					field.value.length > 0 &&
-					// ...and other fields (except for email) are incomplete.
-					inputField !== 'email' &&
-					!complete
-				)
-			})
+			const showAlert =
+				inputFields.every(
+					inputField =>
+						// Only show alert once every field has been touched...
+						document.getElementById(inputCategory + '_' + inputField).value.length > 0 &&
+						// ...and other fields (except for email) are incomplete.
+						inputField !== 'email' &&
+						!complete
+				) ||
+				// ...but always show if recaptcha has failed.
+				!recaptchaPassed
 
 			console.log(complete, showAlert)
 
@@ -66,7 +67,7 @@ const verifyEmailSignup = e => {
 			const alertField = document.getElementById(inputCategory + '_alert')
 
 			// If recaptcha failed
-			alertField.innerHTML = !recaptcha
+			alertField.innerHTML = !recaptchaPassed
 				? 'Please contact our office.'
 				: 'Hmm... something’s not quite right'
 
@@ -115,7 +116,7 @@ const newsletterSignups = () => {
 	})
 }
 
-let recaptcha = false
+let recaptchaPassed = false
 const recaptchaServer =
 	'https://wt-d2bd89d1d23e6c320f5aff229c206923-0.sandbox.auth0-extend.com/recaptcha'
 grecaptcha.ready(function() {
@@ -133,13 +134,13 @@ grecaptcha.ready(function() {
 				// Success
 				.then(function(res) {
 					console.log(res)
-					recaptcha = res && res.success && res.score > 0.8 ? true : false
+					recaptchaPassed = res && res.success && res.score > 0.8 ? true : false
 					newsletterSignups()
 				})
 				// Failure
 				.catch(function(err) {
 					console.error(err)
-					recaptcha = false
+					recaptchaPassed = false
 					newsletterSignups()
 				})
 		})
