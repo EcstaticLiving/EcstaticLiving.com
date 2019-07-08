@@ -44,7 +44,9 @@ const verifyEmailSignup = e => {
 				const emailRegex = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/gim
 				// return true if all fields have been filled out
 				return (
-					((inputField === 'first_name' || inputField === 'last_name') && field.value.length > 1) ||
+					((inputField === 'first_name' || inputField === 'last_name') &&
+						field &&
+						field.value.length > 1) ||
 					(inputField === 'email' && emailRegex.test(field.value))
 				)
 			})
