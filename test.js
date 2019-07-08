@@ -156,7 +156,7 @@ const $main = $('.main'),
 	$navMenu = $('.navigation-menu'),
 	$navContainer = $('.nav-container'),
 	// Contact
-	$contactForm = $('.contact-form'),
+	$contactForm = $('.contact_form'),
 	$contactSection = $('.contact-section'),
 	$receivedSection = $('.received-section')
 
