@@ -31,7 +31,7 @@ const verifyEmailSignup = e => {
 			// ...check to see if every field has been filled out correctly...
 			const complete = inputFields.every(inputField => {
 				const field = document.getElementById(inputCategory + '_' + inputField)
-				if (inputField === 'first_name' || inputField === 'last_name') {
+				if (field && (inputField === 'first_name' || inputField === 'last_name')) {
 					// Prevent ALL CAPS
 					field.value = field.value.toLowerCase()
 					// Title case
