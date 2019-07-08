@@ -18,7 +18,6 @@ const inputCategories = [
 	'questions_relationships',
 	'questions_holistic',
 	'questions_community',
-	'community',
 	'contact'
 ]
 const inputFields = ['first_name', 'last_name', 'email']
@@ -30,6 +29,7 @@ const verifyEmailSignup = e => {
 		if (e.target.id.includes(inputCategory)) {
 			// ...check to see if every field has been filled out correctly...
 			const complete = inputFields.every(inputField => {
+				console.log(inputCategory + '_' + inputField)
 				const field = document.getElementById(inputCategory + '_' + inputField)
 				if (inputField === 'first_name' || inputField === 'last_name') {
 					// Prevent ALL CAPS
