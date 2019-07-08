@@ -12,24 +12,24 @@ if (mode === 'production') {
 
 // Recaptcha
 const emailNewsletterButtons = [
-	'questions_tantra_button',
-	'questions_relationships_button',
-	'questions_holistic_button',
-	'questions_community_button',
-	'community_button',
-	'contact_button'
+	'questions_tantra',
+	'questions_relationships',
+	'questions_holistic',
+	'questions_community',
+	'community',
+	'contact'
 ]
 const enableButtons = mode => {
-	emailNewsletterButtons.forEach(emailNewsletterButton => {
-		const newsletterButton = document.getElementById(emailNewsletterButton)
-		if (newsletterButton) {
-			if (mode) {
-				newsletterButton.disabled = false
-				newsletterButton.classList.remove('disabled')
-			} else {
-				newsletterButton.disabled = true
-				newsletterButton.classList.add('disabled')
-			}
+	emailNewsletters.forEach(emailNewsletter => {
+		const newsletterButton = document.getElementById(emailNewsletter + '_button')
+		if (newsletterButton && mode) {
+			newsletterButton.disabled = false
+			newsletterButton.classList.remove('disabled')
+		} else if (newsletterButton && !mode) {
+			const alert = document.getElementById(emailNewsletter + '_alert')
+			alert.innerText('Bot')
+			newsletterButton.disabled = true
+			newsletterButton.classList.add('disabled')
 		}
 	})
 }
