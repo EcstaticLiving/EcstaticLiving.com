@@ -11,7 +11,7 @@ if (mode === 'production') {
 }
 
 // Recaptcha
-const emailNewsletterButtons = [
+const emailNewsletters = [
 	'questions_tantra',
 	'questions_relationships',
 	'questions_holistic',
