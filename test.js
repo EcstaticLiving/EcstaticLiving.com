@@ -27,7 +27,7 @@ const enableButtons = mode => {
 			newsletterButton.classList.remove('disabled')
 		} else if (newsletterButton && !mode) {
 			const alert = document.getElementById(emailNewsletter + '_alert')
-			alert.innerText('Bot')
+			alert.innerHTML('Bot')
 			newsletterButton.disabled = true
 			newsletterButton.classList.add('disabled')
 		}
