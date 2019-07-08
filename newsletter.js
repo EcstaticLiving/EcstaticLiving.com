@@ -31,9 +31,12 @@ const verifyEmailSignup = e => {
 				// return true if all fields have been filled out
 				return (
 					((inputField === 'first_name' || inputField === 'last_name') && field.value.length > 1) ||
-					(inputField === 'email' && field.value.length > 4 && emailRegex.test(field.value))
+					(inputField === 'email' &&
+						((field.value.length > 4 && emailRegex.test(field.value)) ||
+							(field.value.length <= 4 && !emailRegex.test(field.value))))
 				)
 			})
+
 			const showAlert = inputFields.every(inputField => {
 				const field = document.getElementById(inputCategory + '_' + inputField)
 				return (
@@ -43,15 +46,18 @@ const verifyEmailSignup = e => {
 					!complete
 				)
 			})
+
 			// ...and if so, change button class to active, and submit form.
 			const buttonField = document.getElementById(inputCategory + '_button')
 			const alertField = document.getElementById(inputCategory + '_alert')
+
 			// Only show alert if all fields have been filled out somewhat, but not yet validated
 			if (showAlert) {
 				alertField.classList.remove('hidden')
 			} else {
 				alertField.classList.add('hidden')
 			}
+
 			if (complete && !showAlert) {
 				buttonField.classList.remove('disabled')
 				const formField = document.getElementById(inputCategory + '_form')
