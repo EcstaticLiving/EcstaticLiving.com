@@ -1791,7 +1791,7 @@ function createForm() {
 
 // Payment
 function successfulSubmission() {
-	$('.button.processing').toggleClass('button pay')
+	$('.button.processing').toggleClass('.button.pay')
 	window.location.href =
 		page === 'Event' ? siteUrl + 'registration' : siteUrl + 'updated-card-charged'
 }
@@ -1801,7 +1801,7 @@ function indicateFailedSubmission(type) {
 	} else if (page === 'Custom') {
 		resetCustomChargeForm()
 	}
-	$('.button.processing').toggleClass('button pay')
+	$('.button.processing').toggleClass('.button.pay')
 	// Show card error notification
 	if (type === 'stripe') {
 		console.error('Stripe error')
