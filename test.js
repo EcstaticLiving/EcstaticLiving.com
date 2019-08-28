@@ -1821,7 +1821,9 @@ function stripeSourceHandler(data) {
 			: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.sandbox.auth0-extend.com/stripe-test'
 	$('.stripe.processing').show()
 	$('.stripe.error').hide()
-	$('.notification-modal.processing').show()
+	// $('.notification-modal.processing').show()
+	$('.button.pay').hide()
+	$('.button.processing').show()
 	// Webflow submission
 	$.ajax({
 		type: 'POST',
