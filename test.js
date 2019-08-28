@@ -1826,6 +1826,7 @@ function stripeSourceHandler(data) {
 	$('.stripe.processing').show()
 	$('.stripe.error').hide()
 	$('.button.pay')
+		.empty()
 		.removeClass('pay')
 		.addClass('processing')
 		.show()
