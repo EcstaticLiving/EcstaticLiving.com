@@ -1359,7 +1359,7 @@ function resetEventForm() {
 	if (isPrivateEvent()) {
 		// Hide the affiliate code box
 		$(eventAffiliateSelectionContainer).hide()
-		if (affiliateString.affiliate) {
+		if (affiliateString && affiliateString.affiliate) {
 			// Add the affiliate code from the URL into the invite code box
 			$(eventInviteCode).val(affiliateString.affiliate)
 			// Verify affiliate code
@@ -1373,7 +1373,7 @@ function resetEventForm() {
 		// Show the affiliate code box
 		$(eventAffiliateSelectionContainer).show()
 		window.scrollTo(0, scrollPosition() + 1)
-		if (affiliateString.affiliate) {
+		if (affiliateString && affiliateString.affiliate) {
 			// Check the affiliate radio button
 			$(eventAffiliateYes).prop('checked', true)
 			// Show whether the affiliate code is valid or invalid
@@ -1791,7 +1791,6 @@ function createForm() {
 
 // Payment
 function successfulSubmission() {
-	$('.notification-modal.processing').hide()
 	window.location.href =
 		page === 'Event' ? siteUrl + 'registration' : siteUrl + 'updated-card-charged'
 }
@@ -1801,7 +1800,10 @@ function indicateFailedSubmission(type) {
 	} else if (page === 'Custom') {
 		resetCustomChargeForm()
 	}
-	$('.notification-modal.processing').hide()
+	$('.button.processing')
+		.removeClass('processing')
+		.addClass('pay')
+	$('.button.pay').attr('disabled', false)
 	// Show card error notification
 	if (type === 'stripe') {
 		console.error('Stripe error')
@@ -1821,7 +1823,11 @@ function stripeSourceHandler(data) {
 			: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.sandbox.auth0-extend.com/stripe-test'
 	$('.stripe.processing').show()
 	$('.stripe.error').hide()
-	$('.notification-modal.processing').show()
+	$('.button.pay')
+		.val(null)
+		.removeClass('pay')
+		.addClass('processing')
+		.show()
 	// Webflow submission
 	$.ajax({
 		type: 'POST',
@@ -1976,10 +1982,12 @@ $(payButton).on('click', function(e) {
 	if (e.which === 13) {
 		return false
 	}
+	$('.button.pay').attr('disabled', true)
 	e.preventDefault()
 	if (page === 'Event') {
 		try {
 			if (!eventFormValidation()) {
+				$('.button.pay').attr('disabled', false)
 				showErrorsInEventForm()
 				// If there’s no Stripe error message
 				if ($('#card-errors').text() === '') {
@@ -1988,10 +1996,12 @@ $(payButton).on('click', function(e) {
 				return false
 			}
 		} catch (err) {
+			$('.button.pay').attr('disabled', false)
 			alert(err)
 		}
 	} else if (page === 'Custom') {
 		if (!customChargeValidation()) {
+			$('.button.pay').attr('disabled', false)
 			showErrorsInCustomForm()
 			// If there’s no Stripe error message
 			if ($('#card-errors').text() === '') {
@@ -2100,6 +2110,7 @@ $(payButton).on('click', function(e) {
 		.then(function(result) {
 			paymentValidation(result)
 			if (result.error) {
+				$('.button.pay').attr('disabled', false)
 				$('#card-errors').text(result.error.message)
 				return false
 			} else {
@@ -2130,6 +2141,7 @@ $(payButton).on('click', function(e) {
 			}
 		})
 		.catch(function(error) {
+			$('.button.pay').attr('disabled', false)
 			alert(error)
 		})
 })
