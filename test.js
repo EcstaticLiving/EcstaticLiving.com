@@ -1359,7 +1359,7 @@ function resetEventForm() {
 	if (isPrivateEvent()) {
 		// Hide the affiliate code box
 		$(eventAffiliateSelectionContainer).hide()
-		if (affiliateString.affiliate) {
+		if (affiliateString && affiliateString.affiliate) {
 			// Add the affiliate code from the URL into the invite code box
 			$(eventInviteCode).val(affiliateString.affiliate)
 			// Verify affiliate code
