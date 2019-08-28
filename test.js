@@ -1373,7 +1373,7 @@ function resetEventForm() {
 		// Show the affiliate code box
 		$(eventAffiliateSelectionContainer).show()
 		window.scrollTo(0, scrollPosition() + 1)
-		if (affiliateString.affiliate) {
+		if (affiliateString && affiliateString.affiliate) {
 			// Check the affiliate radio button
 			$(eventAffiliateYes).prop('checked', true)
 			// Show whether the affiliate code is valid or invalid
