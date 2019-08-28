@@ -155,13 +155,11 @@ if (page === 'Contact') {
 //	Contact form complete, send user to confirmation
 $('.button.contact').on('click', function() {
 	$contactForm.parsley()
-	if ($contactForm.parsley().validate()) {
-		$contactForm.submit()
-		$contactSection.fadeTo(500, 0)
-		$contactSection.hide()
-		$receivedSection.show()
-		$receivedSection.fadeTo(500, 1)
-	}
+	$contactForm.submit()
+	$contactSection.fadeTo(500, 0)
+	$contactSection.hide()
+	$receivedSection.show()
+	$receivedSection.fadeTo(500, 1)
 })
 
 // FORMS
