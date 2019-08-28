@@ -1803,6 +1803,7 @@ function indicateFailedSubmission(type) {
 	$('.button.processing')
 		.removeClass('processing')
 		.addClass('pay')
+	$('.button.pay').attr('disabled', false)
 	// Show card error notification
 	if (type === 'stripe') {
 		console.error('Stripe error')
@@ -2108,6 +2109,7 @@ $(payButton).on('click', function(e) {
 				$('#card-errors').text(result.error.message)
 				return false
 			} else {
+				$('.button.pay').attr('disabled', true)
 				stripeSourceHandler({
 					chargeAmount: chargeAmount,
 					chargeDescription: chargeDescription,
