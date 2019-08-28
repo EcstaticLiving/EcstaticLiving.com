@@ -1792,7 +1792,6 @@ function createForm() {
 // Payment
 function successfulSubmission() {
 	$('.button.processing').hide()
-	$('.button.pay').show()
 	window.location.href =
 		page === 'Event' ? siteUrl + 'registration' : siteUrl + 'updated-card-charged'
 }
