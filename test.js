@@ -29,13 +29,12 @@ grecaptcha.ready(function() {
 				.then(function(res) {
 					console.log(res)
 					recaptchaPassed = res && res.success && res.score > 0.7 ? true : false
-					newsletterSignups()
+					// Do something
 				})
 				// Failure
 				.catch(function(err) {
 					console.error(err)
-					recaptchaPassed = false
-					newsletterSignups()
+					// Prevent something
 				})
 		})
 })
