@@ -1791,7 +1791,7 @@ function createForm() {
 
 // Payment
 function successfulSubmission() {
-	$('.button.processing').hide()
+	$('.button.processing').toggleClass('button pay')
 	window.location.href =
 		page === 'Event' ? siteUrl + 'registration' : siteUrl + 'updated-card-charged'
 }
@@ -1801,8 +1801,7 @@ function indicateFailedSubmission(type) {
 	} else if (page === 'Custom') {
 		resetCustomChargeForm()
 	}
-	$('.button.processing').hide()
-	$('.button.pay').show()
+	$('.button.processing').toggleClass('button pay')
 	// Show card error notification
 	if (type === 'stripe') {
 		console.error('Stripe error')
@@ -1822,8 +1821,9 @@ function stripeSourceHandler(data) {
 			: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.sandbox.auth0-extend.com/stripe-test'
 	$('.stripe.processing').show()
 	$('.stripe.error').hide()
-	$('.button.processing').show()
-	$('.button.pay').hide()
+	$('.button.pay')
+		.toggleClass('button processing')
+		.show()
 	// Webflow submission
 	$.ajax({
 		type: 'POST',
