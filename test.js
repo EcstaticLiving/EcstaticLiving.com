@@ -1982,10 +1982,12 @@ $(payButton).on('click', function(e) {
 	if (e.which === 13) {
 		return false
 	}
+	$('.button.pay').attr('disabled', true)
 	e.preventDefault()
 	if (page === 'Event') {
 		try {
 			if (!eventFormValidation()) {
+				$('.button.pay').attr('disabled', false)
 				showErrorsInEventForm()
 				// If there’s no Stripe error message
 				if ($('#card-errors').text() === '') {
@@ -1994,10 +1996,12 @@ $(payButton).on('click', function(e) {
 				return false
 			}
 		} catch (err) {
+			$('.button.pay').attr('disabled', false)
 			alert(err)
 		}
 	} else if (page === 'Custom') {
 		if (!customChargeValidation()) {
+			$('.button.pay').attr('disabled', false)
 			showErrorsInCustomForm()
 			// If there’s no Stripe error message
 			if ($('#card-errors').text() === '') {
@@ -2106,10 +2110,10 @@ $(payButton).on('click', function(e) {
 		.then(function(result) {
 			paymentValidation(result)
 			if (result.error) {
+				$('.button.pay').attr('disabled', false)
 				$('#card-errors').text(result.error.message)
 				return false
 			} else {
-				$('.button.pay').attr('disabled', true)
 				stripeSourceHandler({
 					chargeAmount: chargeAmount,
 					chargeDescription: chargeDescription,
@@ -2137,6 +2141,7 @@ $(payButton).on('click', function(e) {
 			}
 		})
 		.catch(function(error) {
+			$('.button.pay').attr('disabled', false)
 			alert(error)
 		})
 })
