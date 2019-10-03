@@ -1680,8 +1680,8 @@ function indicateFailedSubmission(type) {
 function stripeSourceHandler(data) {
 	const stripeURL =
 		mode === 'production'
-			? 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.sandbox.auth0-extend.com/stripe'
-			: 'https://wt-607887792589a1d1a518ce2c83b6dddd-0.sandbox.auth0-extend.com/stripe-test'
+			? 'https://wt-d2bd89d1d23e6c320f5aff229c206923-0.sandbox.auth0-extend.com/stripe'
+			: 'https://wt-d2bd89d1d23e6c320f5aff229c206923-0.sandbox.auth0-extend.com/stripe-test'
 	$('.stripe.processing').show()
 	$('.stripe.error').hide()
 	$('.button.pay')
@@ -1707,7 +1707,7 @@ function stripeSourceHandler(data) {
 					data: {
 						chargeAmount: data.chargeAmount,
 						chargeDescription: data.chargeDescription,
-						customerDescription: data.customerDescription,
+						customerName: data.customerName,
 						customerEmail: data.customerEmail,
 						event: data.event,
 						party: data.party,
@@ -1872,7 +1872,7 @@ $(payButton).on('click', function(e) {
 		}
 	}
 	saveForm(page)
-	var customerDescription = '',
+	var customerName = '',
 		customerEmail = '',
 		chargeDescription = '',
 		chargeAmount = 0
@@ -1882,7 +1882,7 @@ $(payButton).on('click', function(e) {
 			? depositAmount() * 100
 			: $(eventSelect).val() * 100
 		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'deposit' : 'full'
-		customerDescription = $(eventFirstName).val() + ' ' + $(eventLastName).val()
+		customerName = $(eventFirstName).val() + ' ' + $(eventLastName).val()
 		customerEmail = $(eventEmail).val()
 		chargeDescription =
 			eventCode +
@@ -1930,8 +1930,7 @@ $(payButton).on('click', function(e) {
 	} else if (page === 'Custom') {
 		// Stripe variables
 		chargeAmount = $(customSelect).val() * 100
-		customerDescription =
-			$(customFirstName).val() + ' ' + $(customLastName).val() + ' <' + $(customEmail).val() + '>'
+		customerName = $(customFirstName).val() + ' ' + $(customLastName).val()
 		customerEmail = $(customEmail).val()
 		chargeDescription =
 			'Custom Charge: ' +
@@ -1978,7 +1977,7 @@ $(payButton).on('click', function(e) {
 				stripeSourceHandler({
 					chargeAmount: chargeAmount,
 					chargeDescription: chargeDescription,
-					customerDescription: customerDescription,
+					customerName: customerName,
 					customerEmail: customerEmail,
 					event: eventCode,
 					party: party,
