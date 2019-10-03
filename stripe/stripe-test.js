@@ -66,9 +66,13 @@ module.exports = (body, callback) => {
 			stripe.customers
 				.createSource(customerId, { source })
 				.then(res => {
-					// ...make new source default payment source...
+					// ...make new source default payment source and update customer name with latest name used...
 					stripe.customers
-						.update(customerId, { default_source: source })
+						.update(customerId, {
+							name: customerName,
+							description: customerName,
+							default_source: source
+						})
 						// ...then create charge using existing customer.
 						.then(res => createCharge({ customer: customerId }))
 						.catch(err => console.error(err))
