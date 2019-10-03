@@ -26,7 +26,7 @@ module.exports = (body, callback) => {
 		priceBalanceDate,
 		lodging,
 		source
-	} = body.data
+	} = body.body
 
 	const createCharge = ({ customer }) =>
 		stripe.charges.create(
@@ -64,15 +64,11 @@ module.exports = (body, callback) => {
 			const customerId = customerList.data[0].id
 			// ...update existing customer with new source...
 			stripe.customers
-				.createSource(customerId, {
-					source
-				})
+				.createSource(customerId, { source })
 				.then(res => {
 					// ...make new source default payment source...
 					stripe.customers
-						.update(customerId, {
-							default_source: source
-						})
+						.update(customerId, { default_source: source })
 						// ...then create charge using existing customer.
 						.then(res => createCharge({ customer: customerId }))
 						.catch(err => console.error(err))

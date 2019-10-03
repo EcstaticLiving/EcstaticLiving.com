@@ -1,6 +1,6 @@
 // Uses webtask.io
 // To create a server, navigate to the /stripe folder and enter the following code on the CLI:
-// wt create stripe-test.js --secret elistripelive=__STRIPE_TEST_SECRET__ --meta 'wt-node-dependencies'='{"stripe":"7.9.1"}'
+// wt create stripe-test.js --secret elistripetest=__STRIPE_TEST_SECRET__ --meta 'wt-node-dependencies'='{"stripe":"7.9.1"}'
 // Then add the resulting URL to the Stripe url in the index.js file: https://wt-d2bd89d1d23e6c320f5aff229c206923-0.sandbox.auth0-extend.com/stripe-test
 module.exports = (body, callback) => {
 	var stripe = require('stripe')(body.secrets.elistripetest)
@@ -26,7 +26,7 @@ module.exports = (body, callback) => {
 		priceBalanceDate,
 		lodging,
 		source
-	} = body.data
+	} = body.body
 
 	const createCharge = ({ customer }) =>
 		stripe.charges.create(
@@ -64,15 +64,11 @@ module.exports = (body, callback) => {
 			const customerId = customerList.data[0].id
 			// ...update existing customer with new source...
 			stripe.customers
-				.createSource(customerId, {
-					source
-				})
+				.createSource(customerId, { source })
 				.then(res => {
 					// ...make new source default payment source...
 					stripe.customers
-						.update(customerId, {
-							default_source: source
-						})
+						.update(customerId, { default_source: source })
 						// ...then create charge using existing customer.
 						.then(res => createCharge({ customer: customerId }))
 						.catch(err => console.error(err))
