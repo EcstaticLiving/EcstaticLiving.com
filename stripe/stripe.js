@@ -69,8 +69,8 @@ module.exports = (body, callback) => {
 					// ...make new source default payment source and update customer name with latest name used...
 					stripe.customers
 						.update(customerId, {
-							name: customerName,
-							description: customerName,
+							name: customerList.data[0].name ? customerList.data[0].name : customerName,
+							description: customerList.data[0].name ? customerList.data[0].name : customerName,
 							default_source: source
 						})
 						// ...then create charge using existing customer.
