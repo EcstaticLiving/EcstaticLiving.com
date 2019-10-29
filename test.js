@@ -1736,12 +1736,12 @@ function stripeSourceHandler(data) {
 					.catch(function(err) {
 						console.error(err)
 						// $0 charge to save credit card details on custom charge form
-						if (
-							err.responseJSON &&
-							err.responseJSON.message === 'Invalid positive integer' &&
-							page === 'Custom'
-						) {
+						if (page === 'Custom') {
 							window.location.href = siteUrl + 'updated-card'
+						}
+						// For $0 charges
+						else if (err.responseJSON && err.responseJSON.message === 'Invalid positive integer') {
+							window.location.href = siteUrl + 'registration'
 						} else {
 							const formData = createForm()
 							const errMessage = err && err.statusText ? err.statusText : '(unknown)'
