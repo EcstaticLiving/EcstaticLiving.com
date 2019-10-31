@@ -53,7 +53,8 @@ module.exports = (body, callback) => {
 					...(lodging && { 'Lodging Option': lodging })
 				},
 				source,
-				statement_descriptor: 'ECST LVNG ' + event
+				// Important! Truncate descriptor to max 22 chars to prevent Stripe error.
+				statement_descriptor: 'ECST LVNG ' + event.slice(0, 12)
 			},
 			callback
 		)
