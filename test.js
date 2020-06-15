@@ -1,5 +1,5 @@
 /*
-Code ©2018 Ecstatic Living Institute. All rights reserved.
+Code ©2018-2020 Ecstatic Living Institute. All rights reserved.
 Created by Conscious Apps Inc. www.consciousapps.com
 */
 const mode =
@@ -119,26 +119,24 @@ $('.navigate-back').on('click', function () {
 })
 
 //	CONTACT
-if (page === 'Contact') {
-	$receivedSection.fadeTo(500, 0)
-	$receivedSection.hide()
-	$contactSection.fadeTo(500, 1)
-	$contactSection.show()
-	$('.w-form-done').hide()
-	$('.w-form-fail').hide()
-	$contactForm.show()
-}
+// if (page === 'Contact') {
+// 	$receivedSection.fadeTo(500, 0)
+// 	$receivedSection.hide()
+// 	$contactSection.fadeTo(500, 1)
+// 	$contactSection.show()
+// 	$('.w-form-done').hide()
+// 	$('.w-form-fail').hide()
+// 	$contactForm.show()
+// }
 //	Contact form complete, send user to confirmation
-/*
-$('.button.contact').on('click', function() {
-	$contactForm.parsley()
-	$contactForm.submit()
-	$contactSection.fadeTo(500, 0)
-	$contactSection.hide()
-	$receivedSection.show()
-	$receivedSection.fadeTo(500, 1)
-})
-*/
+// $('.button.contact').on('click', function() {
+// 	$contactForm.parsley()
+// 	$contactForm.submit()
+// 	$contactSection.fadeTo(500, 0)
+// 	$contactSection.hide()
+// 	$receivedSection.show()
+// 	$receivedSection.fadeTo(500, 1)
+// })
 
 // FORMS
 
