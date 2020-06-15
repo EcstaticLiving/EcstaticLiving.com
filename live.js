@@ -2,7 +2,10 @@
 Code ©2018 Ecstatic Living Institute. All rights reserved.
 Created by Conscious Apps Inc. www.consciousapps.com
 */
-const mode = window.location.href.indexOf('ecstaticliving.com') > -1 ? 'production' : 'development'
+const mode =
+	window.location.href.indexOf('ecstaticliving.com') > -1
+		? 'production'
+		: 'development'
 
 if (mode === 'production') {
 	console.log('Welcome to EcstaticLiving.com')
@@ -24,7 +27,9 @@ const $main = $('.main'),
 
 // Initialization Module
 const siteUrl =
-	mode === 'production' ? 'https://www.ecstaticliving.com/' : 'https://ecstaticliving.webflow.io/'
+	mode === 'production'
+		? 'https://www.ecstaticliving.com/'
+		: 'https://ecstaticliving.webflow.io/'
 
 //	INITIALIZE
 function initialize() {
@@ -59,7 +64,7 @@ function initialize() {
 	}
 }
 
-$(window).on('load orientationchange', function() {
+$(window).on('load orientationchange', function () {
 	initialize()
 })
 
@@ -78,7 +83,7 @@ if (window.location.href.endsWith('/contact')) {
 const $navButton = $('.menu-icon')
 const $navClose = $('.nav-close')
 // If nav menu is opened
-$navButton.on('click', function() {
+$navButton.on('click', function () {
 	//	If nav menu is opened
 	if ($navClose.is(':hidden')) {
 		$navContainer.show().animate(
@@ -99,12 +104,12 @@ $navButton.on('click', function() {
 	}
 })
 // If nav menu is closed
-$navClose.on('click', function() {
+$navClose.on('click', function () {
 	$navButton.trigger('click')
 })
 
 // BACK BUTTON
-$('.navigate-back').on('click', function() {
+$('.navigate-back').on('click', function () {
 	if (document.referrer === '') {
 		window.location.href = '/'
 	} else {
@@ -124,6 +129,7 @@ if (page === 'Contact') {
 	$contactForm.show()
 }
 //	Contact form complete, send user to confirmation
+/*
 $('.button.contact').on('click', function() {
 	$contactForm.parsley()
 	$contactForm.submit()
@@ -132,6 +138,7 @@ $('.button.contact').on('click', function() {
 	$receivedSection.show()
 	$receivedSection.fadeTo(500, 1)
 })
+*/
 
 // FORMS
 
@@ -391,8 +398,16 @@ for (var i = 0; i < countries.length; i++) {
 	} else {
 		const country =
 			countries[i].label === 'United States'
-				? '<option value="' + countries[i].value + '" selected>' + countries[i].label + '</option>'
-				: '<option value="' + countries[i].value + '">' + countries[i].label + '</option>'
+				? '<option value="' +
+				  countries[i].value +
+				  '" selected>' +
+				  countries[i].label +
+				  '</option>'
+				: '<option value="' +
+				  countries[i].value +
+				  '">' +
+				  countries[i].label +
+				  '</option>'
 		$('#country').append(country)
 	}
 }
@@ -400,7 +415,7 @@ for (var i = 0; i < countries.length; i++) {
 // Save Form
 function saveForm(formType) {
 	var values = {}
-	$('input, textarea, select').each(function() {
+	$('input, textarea, select').each(function () {
 		if ($(this).is(':radio')) {
 			if ($(this).is(':checked')) {
 				values[$(this).attr('name')] = $(this).val()
@@ -421,7 +436,10 @@ function repopulateForm(formType) {
 		for (var item in values) {
 			try {
 				if ($('*[name=' + item + ']').is(':radio')) {
-					$('input[name=' + item + '][value="' + values[item] + '"]').prop('checked', true)
+					$('input[name=' + item + '][value="' + values[item] + '"]').prop(
+						'checked',
+						true
+					)
 				} else {
 					$('*[name=' + item + ']').val(values[item])
 				}
@@ -449,21 +467,21 @@ function clearForm(formType) {
 if (window.location.href.indexOf('/forms/let-questionnaire') > -1) {
 	repopulateForm('LET')
 	$('.form.let').parsley()
-	$('#let-button').on('click', function() {
+	$('#let-button').on('click', function () {
 		saveForm('LET')
 	})
 }
 if (window.location.href.indexOf('/forms/elf-application') > -1) {
 	repopulateForm('ELF')
 	$('.form.elf').parsley()
-	$('#elf-button').on('click', function() {
+	$('#elf-button').on('click', function () {
 		saveForm('ELF')
 	})
 }
 if (window.location.href.indexOf('/forms/ctt-application') > -1) {
 	repopulateForm('CTT')
 	$('.form.ctt').parsley()
-	$('#ctt-button').on('click', function() {
+	$('#ctt-button').on('click', function () {
 		saveForm('CTT')
 	})
 }
@@ -472,9 +490,7 @@ if (window.location.href.indexOf('/forms/ctt-application') > -1) {
 const $eventForm = $('#wf-form-Event-Registration')
 
 // Hidden fields
-const eventCode = $('#event-code')
-		.text()
-		.toUpperCase(),
+const eventCode = $('#event-code').text().toUpperCase(),
 	eventTitle = $('#event-name').text(), // Stripe description
 	eventStartDate = $('#event-start').text(),
 	eventDates = $('#event-dates').text(),
@@ -571,19 +587,11 @@ function scrollPosition() {
 // PARTICIPANTS
 function participants() {
 	if (
-		$(eventStatus)
-			.find('option:selected')
-			.val() === 'Couple' ||
-		$(eventStatus)
-			.find('option:selected')
-			.val() === 'Two Singles (paired)'
+		$(eventStatus).find('option:selected').val() === 'Couple' ||
+		$(eventStatus).find('option:selected').val() === 'Two Singles (paired)'
 	) {
 		return 2
-	} else if (
-		$(eventStatus)
-			.find('option:selected')
-			.val() === 'Single'
-	) {
+	} else if ($(eventStatus).find('option:selected').val() === 'Single') {
 		return 1
 	}
 }
@@ -600,7 +608,7 @@ function depositAmount() {
 // Affiliate code, e.g. MADA25TM1710FS
 function affiliateCode(code) {
 	var obj = new Object()
-	;(obj.discount = function() {
+	;(obj.discount = function () {
 		const discount =
 			100 - parseInt(code.substr(4, 2), 10) === 90
 				? // Assuming no discount, only to unlock event, e.g. ****10********
@@ -615,10 +623,10 @@ function affiliateCode(code) {
 			? discount
 			: null
 	}),
-		(obj.verify = function() {
+		(obj.verify = function () {
 			return (
-				code.substr(code.length - eventCode.length).toLowerCase() === eventCode.toLowerCase() &&
-				this.discount() !== null
+				code.substr(code.length - eventCode.length).toLowerCase() ===
+					eventCode.toLowerCase() && this.discount() !== null
 			)
 		})
 	return obj
@@ -632,7 +640,10 @@ function eventAffiliateValidation() {
 		// Public event
 		if ($(eventAffiliateYes).is(':checked')) {
 			return affiliateCode($(eventAffiliateCode).val()).verify()
-		} else if (!$(eventAffiliateNo).is(':checked') && !$(eventAffiliateYes).is(':checked')) {
+		} else if (
+			!$(eventAffiliateNo).is(':checked') &&
+			!$(eventAffiliateYes).is(':checked')
+		) {
 			return false
 		}
 	}
@@ -642,17 +653,15 @@ function eventAffiliateValidation() {
 function personalValidation() {
 	if (
 		$(eventFirstName).val() !== '' &&
-		!$(eventFirstName)
-			.val()
-			.includes(' ') &&
+		!$(eventFirstName).val().includes(' ') &&
 		$(eventLastName).val() !== '' &&
-		!$(eventLastName)
-			.val()
-			.includes(' ') &&
+		!$(eventLastName).val().includes(' ') &&
 		$(eventEmail).val() !== '' &&
 		$(eventMobile).val() !== '' &&
 		$(eventBirthdate).val() !== '' &&
-		($(eventFemale).is(':checked') || $(eventMale).is(':checked') || $(eventOther).is(':checked'))
+		($(eventFemale).is(':checked') ||
+			$(eventMale).is(':checked') ||
+			$(eventOther).is(':checked'))
 	) {
 		return true
 	}
@@ -662,11 +671,13 @@ function personalValidation() {
 function detailsValidation() {
 	if (
 		$(eventReferral).val() !== '' &&
-		(($(eventExperienceYes).is(':checked') && $(eventExperienceDetails).val() !== '') ||
+		(($(eventExperienceYes).is(':checked') &&
+			$(eventExperienceDetails).val() !== '') ||
 			$(eventExperienceNo).is(':checked')) &&
 		(($(eventDietYes).is(':checked') && $(eventDietDetails).val() !== '') ||
 			$(eventDietNo).is(':checked')) &&
-		(($(eventSpecialYes).is(':checked') && $(eventSpecialDetails).val() !== '') ||
+		(($(eventSpecialYes).is(':checked') &&
+			$(eventSpecialDetails).val() !== '') ||
 			$(eventSpecialNo).is(':checked'))
 	) {
 		return true
@@ -694,7 +705,8 @@ function eventOptionValidation() {
 	if (
 		$(eventSelect).val() &&
 		(($(eventDepositContainer).is(':visible') &&
-			($(eventDepositFull).is(':checked') || $(eventDepositDeposit).is(':checked'))) ||
+			($(eventDepositFull).is(':checked') ||
+				$(eventDepositDeposit).is(':checked'))) ||
 			$(eventDepositContainer).is(':hidden'))
 	) {
 		return true
@@ -795,7 +807,11 @@ function showErrorsInEventForm() {
 	} else {
 		$(eventDepositValidation).css(clearRadio)
 	}
-	if (participants() === 2 && !$(eventPayBoth).is(':checked') && !$(eventPayMe).is(':checked')) {
+	if (
+		participants() === 2 &&
+		!$(eventPayBoth).is(':checked') &&
+		!$(eventPayMe).is(':checked')
+	) {
 		$(eventPayValidation).css(errorRadio)
 	} else {
 		$(eventPayValidation).css(clearRadio)
@@ -812,7 +828,8 @@ function showErrorsInEventForm() {
 	}
 	if (
 		participants() === 2 &&
-		($(eventPartnerFirstName).val() !== '' || $(eventPartnerLastName).val() !== '')
+		($(eventPartnerFirstName).val() !== '' ||
+			$(eventPartnerLastName).val() !== '')
 	) {
 		$(eventPartnerFirstName).css(errorInput)
 		$(eventPartnerLastName).css(errorInput)
@@ -822,8 +839,10 @@ function showErrorsInEventForm() {
 		$(eventPartnerLastName).css(clearInput)
 	}
 	if (
-		($(eventAffiliateYes).is(':checked') && $(eventAffiliateCode).val() === '') ||
-		(!$(eventAffiliateNo).is(':checked') && !$(eventAffiliateYes).is(':checked'))
+		($(eventAffiliateYes).is(':checked') &&
+			$(eventAffiliateCode).val() === '') ||
+		(!$(eventAffiliateNo).is(':checked') &&
+			!$(eventAffiliateYes).is(':checked'))
 	) {
 		$(eventAffiliateParsleyError).css(errorRadio)
 	} else {
@@ -834,7 +853,10 @@ function showErrorsInEventForm() {
 	} else {
 		$(eventSpecialParsleyError).css(clearRadio)
 	}
-	if ($(eventSpecialYes).is(':checked') && $(eventSpecialDetails).val() === '') {
+	if (
+		$(eventSpecialYes).is(':checked') &&
+		$(eventSpecialDetails).val() === ''
+	) {
 		$(eventSpecialDetails).css(errorInput)
 	} else {
 		$(eventSpecialDetails).css(clearInput)
@@ -849,12 +871,18 @@ function showErrorsInEventForm() {
 	} else {
 		$(eventDietDetails).css(clearInput)
 	}
-	if (!$(eventExperienceYes).is(':checked') && !$(eventExperienceNo).is(':checked')) {
+	if (
+		!$(eventExperienceYes).is(':checked') &&
+		!$(eventExperienceNo).is(':checked')
+	) {
 		$(eventExperienceParsleyError).css(errorRadio)
 	} else {
 		$(eventExperienceParsleyError).css(clearRadio)
 	}
-	if ($(eventExperienceYes).is(':checked') && $(eventExperienceDetails).val() === '') {
+	if (
+		$(eventExperienceYes).is(':checked') &&
+		$(eventExperienceDetails).val() === ''
+	) {
 		$(eventExperienceDetails).css(errorInput)
 	} else {
 		$(eventExperienceDetails).css(clearInput)
@@ -878,7 +906,8 @@ function isPrivateEvent() {
 // Event Invite Code
 function eventInvitePassShow() {
 	const text =
-		eventAffiliateValidation() && affiliateCode($(eventInviteCode).val()).discount() > 0
+		eventAffiliateValidation() &&
+		affiliateCode($(eventInviteCode).val()).discount() > 0
 			? 'Congrats! Invite code accepted!<br />$' +
 			  affiliateCode($(eventInviteCode).val()).discount() +
 			  ' per person discount applied! Continue below.'
@@ -909,7 +938,8 @@ function hideAffiliate() {
 }
 function eventAffiliatePassShow() {
 	const text =
-		eventAffiliateValidation() && affiliateCode($(eventAffiliateCode).val()).discount() > 0
+		eventAffiliateValidation() &&
+		affiliateCode($(eventAffiliateCode).val()).discount() > 0
 			? 'Congrats! Code accepted!<br />$' +
 			  affiliateCode($(eventAffiliateCode).val()).discount() +
 			  ' per person discount applied!'
@@ -1071,18 +1101,15 @@ function setEventStatus() {
 
 // Get Lodging Code
 function getLodging() {
-	var eventOptions = $('#event-options')
-		.text()
-		.split(' | ')
+	var eventOptions = $('#event-options').text().split(' | ')
 	return eventOptions[$(eventSelect + ' option:selected').index() - 1]
 }
 
 function getFullAmount() {
-	var eventPrices = $('#event-prices')
-		.text()
-		.split(' | ')
+	var eventPrices = $('#event-prices').text().split(' | ')
 	return (
-		parseFloat(eventPrices[$(eventSelect + ' option:selected').index() - 1]) * paymentQty()
+		parseFloat(eventPrices[$(eventSelect + ' option:selected').index() - 1]) *
+		paymentQty()
 	).toFixed(2)
 }
 
@@ -1095,21 +1122,11 @@ function setEventPrices() {
 	} else if (paymentQty() === 1 && participants() === 2) {
 		people = 'per person'
 	}
-	var eventOptions = $('#event-options')
-		.text()
-		.split(' | ')
-	var eventPrices = $('#event-prices')
-		.text()
-		.split(' | ')
-	var eventNotes = $('#event-notes')
-		.text()
-		.includes('|')
-		? $('#event-notes')
-				.text()
-				.split('|')
-		: $('#event-notes')
-				.text()
-				.split(',')
+	var eventOptions = $('#event-options').text().split(' | ')
+	var eventPrices = $('#event-prices').text().split(' | ')
+	var eventNotes = $('#event-notes').text().includes('|')
+		? $('#event-notes').text().split('|')
+		: $('#event-notes').text().split(',')
 	$(eventSelect).empty()
 	if (eventOptions.length > 0) {
 		$(eventSelect).append(
@@ -1127,7 +1144,8 @@ function setEventPrices() {
 			(eventPrices[i] - eventAffiliateDiscount()) * paymentQty() > 0
 				? (eventPrices[i] - eventAffiliateDiscount()) * paymentQty()
 				: 0
-		const affiliateDiscountText = eventAffiliateDiscount() > 0 ? ' including discount' : ''
+		const affiliateDiscountText =
+			eventAffiliateDiscount() > 0 ? ' including discount' : ''
 		const eventNote = eventNotes[i] ? eventNotes[i] : ''
 		const eventSelectText =
 			eventOptions[i] +
@@ -1146,7 +1164,11 @@ function setEventPrices() {
 		)
 	}
 	$(eventDepositText).text(
-		'Pay deposit only ($' + parseInt(depositAmount(), 10) + spacer + people + ')'
+		'Pay deposit only ($' +
+			parseInt(depositAmount(), 10) +
+			spacer +
+			people +
+			')'
 	)
 }
 
@@ -1252,7 +1274,7 @@ function resetEventForm() {
 // EVENT FORM: BEGIN SEQUENCE
 if (page === 'Event' || page === 'Custom') {
 	// Prevent accidental submission of form through 'enter' key
-	$('.form-input').keypress(function(e) {
+	$('.form-input').keypress(function (e) {
 		if (e.which === 13) {
 			e.preventDefault()
 			return false
@@ -1265,7 +1287,7 @@ if (page === 'Event') {
 	if (isPrivateEvent()) {
 		// If private event, hide registration form until successful invite code has been entered
 		$(eventRegForm).hide()
-		$(eventInviteButton).on('click', function(e) {
+		$(eventInviteButton).on('click', function (e) {
 			e.preventDefault()
 			// Show errors, if any
 			eventAffiliateShowErrors()
@@ -1276,7 +1298,7 @@ if (page === 'Event') {
 		// Make sure event reg form is shown if not private event
 		$(eventRegForm).show()
 		// Affiliate code shown on public events, not private events
-		$(eventAffiliateNo + ',' + eventAffiliateYes).on('change', function() {
+		$(eventAffiliateNo + ',' + eventAffiliateYes).on('change', function () {
 			// Show errors, if any
 			eventAffiliateShowErrors()
 			// Adjust prices
@@ -1286,7 +1308,7 @@ if (page === 'Event') {
 			if ($(eventAffiliateYes).is(':checked')) showAffiliate()
 			if ($(eventAffiliateNo).is(':checked')) hideAffiliate()
 		})
-		$(eventAffiliateCode).on('change', function() {
+		$(eventAffiliateCode).on('change', function () {
 			if ($(eventAffiliateYes).is(':checked')) {
 				// Show errors, if any
 				eventAffiliateShowErrors()
@@ -1295,28 +1317,28 @@ if (page === 'Event') {
 			}
 		})
 	}
-	$(eventFirstName).on('change', function() {
+	$(eventFirstName).on('change', function () {
 		$(billingFirstName).val($(eventFirstName).val())
 	})
-	$(eventLastName).on('change', function() {
+	$(eventLastName).on('change', function () {
 		$(billingLastName).val($(eventLastName).val())
 	})
-	$(eventExperienceNo + ',' + eventExperienceYes).on('change', function() {
+	$(eventExperienceNo + ',' + eventExperienceYes).on('change', function () {
 		if ($(eventExperienceYes).is(':checked')) showExperience()
 		if ($(eventExperienceNo).is(':checked')) hideExperience()
 	})
-	$(eventDietNo + ',' + eventDietYes).on('change', function() {
+	$(eventDietNo + ',' + eventDietYes).on('change', function () {
 		if ($(eventDietYes).is(':checked')) showDiet()
 		if ($(eventDietNo).is(':checked')) hideDiet()
 	})
-	$(eventSpecialNo + ',' + eventSpecialYes).on('change', function() {
+	$(eventSpecialNo + ',' + eventSpecialYes).on('change', function () {
 		if ($(eventSpecialYes).is(':checked')) showSpecial()
 		if ($(eventSpecialNo).is(':checked')) hideSpecial()
 	})
-	$(eventStatus).on('change', function() {
+	$(eventStatus).on('change', function () {
 		participants() === 2 ? showPartner() : hidePartner()
 	})
-	$(eventPayBoth + ',' + eventPayMe).on('change', function() {
+	$(eventPayBoth + ',' + eventPayMe).on('change', function () {
 		setEventPrices()
 	})
 	const eventFieldsPersonal =
@@ -1398,25 +1420,29 @@ if (page === 'Event') {
 			eventTerms +
 			',' +
 			eventFieldsBilling
-	).on('change', function() {
+	).on('change', function () {
 		saveForm(page)
 		eventFormValidation()
 	})
-	$(billingState).keypress(function(e) {
+	$(billingState).keypress(function (e) {
 		if (this.value.length >= 2) {
 			e.preventDefault()
 		}
 	})
-	$(eventSelect + ',' + eventDepositFull + ',' + eventDepositDeposit).on('change', function() {
-		const amount =
-			$(eventDepositDeposit).is(':checked') && new Date() < new Date(eventDepositDate)
-				? depositAmount()
-				: $(eventSelect).val()
-		$(eventAmountDisplay).text('Total: $' + amount)
-		if ($(eventAmountShow).text() === 'Yes') {
-			showAmount()
+	$(eventSelect + ',' + eventDepositFull + ',' + eventDepositDeposit).on(
+		'change',
+		function () {
+			const amount =
+				$(eventDepositDeposit).is(':checked') &&
+				new Date() < new Date(eventDepositDate)
+					? depositAmount()
+					: $(eventSelect).val()
+			$(eventAmountDisplay).text('Total: $' + amount)
+			if ($(eventAmountShow).text() === 'Yes') {
+				showAmount()
+			}
 		}
-	})
+	)
 
 	// RESET EVENT FORM
 	resetEventForm()
@@ -1470,12 +1496,8 @@ function showErrorsInCustomForm() {
 
 function setCustomChargeSelect() {
 	//	Adds options & prices based on CMS input
-	var customOptions = $('#custom-options')
-		.text()
-		.split(' | ')
-	var customPrices = $('#custom-prices')
-		.text()
-		.split(' | ')
+	var customOptions = $('#custom-options').text().split(' | ')
+	var customPrices = $('#custom-prices').text().split(' | ')
 	$(customSelect).empty()
 	if (customOptions.length > 0) {
 		$(customSelect).append(
@@ -1510,10 +1532,10 @@ function resetCustomChargeForm() {
 // CUSTOM CHARGE FORM: BEGIN SEQUENCE
 if (page === 'Custom') {
 	// CUSTOM CHARGE ONCHANGE EVENTS
-	$(customFirstName).on('change', function() {
+	$(customFirstName).on('change', function () {
 		$(billingFirstName).val($(eventFirstName).val())
 	})
-	$(customLastName).on('change', function() {
+	$(customLastName).on('change', function () {
 		$(billingLastName).val($(eventLastName).val())
 	})
 	$(
@@ -1544,7 +1566,7 @@ if (page === 'Custom') {
 			billingPostal +
 			',' +
 			billingCountry
-	).on('change', function() {
+	).on('change', function () {
 		customChargeValidation()
 	})
 
@@ -1560,10 +1582,10 @@ if (localStorage.getItem('EcstaticLiving:' + page)) {
 	$('#form-load').hide()
 	$('#form-clear').hide()
 }
-$('#form-clear').on('click', function() {
+$('#form-clear').on('click', function () {
 	clearForm(page)
 })
-$('#form-load').on('click', function() {
+$('#form-load').on('click', function () {
 	repopulateForm(page)
 })
 
@@ -1595,7 +1617,7 @@ function conversion(e, n) {
 	var i = null
 	return (
 		(n = n || {}),
-		e.find(':input:not([type="submit"])').each(function(r, o) {
+		e.find(':input:not([type="submit"])').each(function (r, o) {
 			var a = $(o),
 				s = a.attr('type'),
 				u = a.attr('data-name') || a.attr('name') || 'Field ' + (r + 1),
@@ -1604,7 +1626,9 @@ function conversion(e, n) {
 				if (null === n[u] || 'string' == typeof n[u]) return
 				l = e.find('input[name="' + a.attr('name') + '"]:checked').val() || null
 			}
-			'string' == typeof l && (l = $.trim(l)), (n[u] = l), (i = i || verification(a, s, u, l))
+			'string' == typeof l && (l = $.trim(l)),
+				(n[u] = l),
+				(i = i || verification(a, s, u, l))
 		}),
 		i
 	)
@@ -1653,7 +1677,9 @@ function createForm() {
 // Payment
 function successfulSubmission() {
 	window.location.href =
-		page === 'Event' ? siteUrl + 'registration' : siteUrl + 'updated-card-charged'
+		page === 'Event'
+			? siteUrl + 'registration'
+			: siteUrl + 'updated-card-charged'
 }
 function indicateFailedSubmission(type) {
 	if (page === 'Event') {
@@ -1661,9 +1687,7 @@ function indicateFailedSubmission(type) {
 	} else if (page === 'Custom') {
 		resetCustomChargeForm()
 	}
-	$('.button.processing')
-		.removeClass('processing')
-		.addClass('pay')
+	$('.button.processing').removeClass('processing').addClass('pay')
 	$('.button.pay').attr('disabled', false)
 	// Show card error notification
 	if (type === 'stripe') {
@@ -1684,11 +1708,7 @@ function stripeSourceHandler(data) {
 			: 'https://wt-d2bd89d1d23e6c320f5aff229c206923-0.sandbox.auth0-extend.com/stripe-test'
 	$('.stripe.processing').show()
 	$('.stripe.error').hide()
-	$('.button.pay')
-		.val(null)
-		.removeClass('pay')
-		.addClass('processing')
-		.show()
+	$('.button.pay').val(null).removeClass('pay').addClass('processing').show()
 	// Webflow submission
 	$.ajax({
 		type: 'POST',
@@ -1698,7 +1718,7 @@ function stripeSourceHandler(data) {
 		dataType: 'json'
 	})
 		// Stripe submission
-		.then(function(res) {
+		.then(function (res) {
 			return (
 				$.ajax({
 					type: 'POST',
@@ -1729,22 +1749,26 @@ function stripeSourceHandler(data) {
 					timeout: 15000
 				})
 					// Stripe charge succeeded
-					.then(function(res) {
+					.then(function (res) {
 						successfulSubmission()
 					})
 					// Stripe charge failed or timed out
-					.catch(function(err) {
+					.catch(function (err) {
 						console.error(err)
 						// $0 charge to save credit card details on custom charge form
 						if (page === 'Custom') {
 							window.location.href = siteUrl + 'updated-card'
 						}
 						// For $0 charges
-						else if (err.responseJSON && err.responseJSON.message === 'Invalid positive integer') {
+						else if (
+							err.responseJSON &&
+							err.responseJSON.message === 'Invalid positive integer'
+						) {
 							window.location.href = siteUrl + 'registration'
 						} else {
 							const formData = createForm()
-							const errMessage = err && err.statusText ? err.statusText : '(unknown)'
+							const errMessage =
+								err && err.statusText ? err.statusText : '(unknown)'
 							// TODO: add browser and OS information to error handling
 							formData.fields =
 								err.statusText === 'timeout'
@@ -1773,7 +1797,7 @@ function stripeSourceHandler(data) {
 								dataType: 'json'
 							})
 								// Redirect customer to successful event.
-								.then(function(res) {
+								.then(function (res) {
 									// On timeout, it’s possible that Stripe charge went through, but too late. So we want to prevent customer from being told that it didn’t work, even though payment went through.
 									if (err.statusText === 'timeout') {
 										successfulSubmission()
@@ -1781,7 +1805,7 @@ function stripeSourceHandler(data) {
 										indicateFailedSubmission('stripe')
 									}
 								})
-								.catch(function() {
+								.catch(function () {
 									indicateFailedSubmission('stripe')
 								})
 						}
@@ -1790,7 +1814,7 @@ function stripeSourceHandler(data) {
 			)
 		})
 		// Webflow form failed or timed out
-		.catch(function(err) {
+		.catch(function (err) {
 			indicateFailedSubmission('webflow')
 		})
 }
@@ -1824,21 +1848,21 @@ const card = elements.create('card', {
 })
 if (page === 'Event' || page === 'Custom') {
 	card.mount('#card-element')
-	card.addEventListener('change', function(result) {
+	card.addEventListener('change', function (result) {
 		paymentValidation(result)
 	})
 }
 
-$('#button-stripe-error').on('click', function() {
+$('#button-stripe-error').on('click', function () {
 	$('.notification-modal.card-error').hide()
 })
 
 // Prevent form from being submitted. This is being done manually in stripeSourceHandler()
-$($eventForm).on('submit', function(e) {
+$($eventForm).on('submit', function (e) {
 	return false
 })
 
-$(payButton).on('click', function(e) {
+$(payButton).on('click', function (e) {
 	// Prevent accidental submission of form through 'enter' key
 	if (e.which === 13) {
 		return false
@@ -1881,7 +1905,9 @@ $(payButton).on('click', function(e) {
 		chargeAmount = $(eventDepositDeposit).is(':checked')
 			? depositAmount() * 100
 			: $(eventSelect).val() * 100
-		const eventDeposit = $(eventDepositDeposit).is(':checked') ? 'deposit' : 'full'
+		const eventDeposit = $(eventDepositDeposit).is(':checked')
+			? 'deposit'
+			: 'full'
 		customerName = $(eventFirstName).val() + ' ' + $(eventLastName).val()
 		customerEmail = $(eventEmail).val()
 		chargeDescription =
@@ -1945,13 +1971,19 @@ $(payButton).on('click', function(e) {
 	// Form Variable: Event Option Total
 	$('#event-option-total').val($(eventSelect).val() * 100)
 	// Form Variable: Event Affiliate Code
-	const affiliateCodeValue = $(eventAffiliateCode).val() ? $(eventAffiliateCode).val() : '- none -'
+	const affiliateCodeValue = $(eventAffiliateCode).val()
+		? $(eventAffiliateCode).val()
+		: '- none -'
 	$('#event-affiliate').val(affiliateCodeValue)
 	// Form Variable: Question Diet
-	const dietValue = $(eventDietDetails).val() ? $(eventDietDetails).val() : '- none -'
+	const dietValue = $(eventDietDetails).val()
+		? $(eventDietDetails).val()
+		: '- none -'
 	$('#question-diet').val(dietValue)
 	// Form Variable: Question Special
-	const specialValue = $(eventSpecialDetails).val() ? $(eventSpecialDetails).val() : '- none -'
+	const specialValue = $(eventSpecialDetails).val()
+		? $(eventSpecialDetails).val()
+		: '- none -'
 	$('#question-special').val(specialValue)
 	stripe
 		.createSource(card, {
@@ -1967,7 +1999,7 @@ $(payButton).on('click', function(e) {
 				email: customerEmail
 			}
 		})
-		.then(function(result) {
+		.then(function (result) {
 			paymentValidation(result)
 			if (result.error) {
 				$('.button.pay').attr('disabled', false)
@@ -1989,8 +2021,12 @@ $(payButton).on('click', function(e) {
 					quantity: paymentQty(),
 					priceFullTotal: getFullAmount(),
 					priceDiscountTotal: eventAffiliateDiscount(),
-					priceBaseTotal: !isNaN(eventBasePrice) ? (eventBasePrice * paymentQty()).toFixed(2) : 0,
-					costBaseTotal: !isNaN(eventBaseCost) ? (eventBaseCost * paymentQty()).toFixed(2) : 0,
+					priceBaseTotal: !isNaN(eventBasePrice)
+						? (eventBasePrice * paymentQty()).toFixed(2)
+						: 0,
+					costBaseTotal: !isNaN(eventBaseCost)
+						? (eventBaseCost * paymentQty()).toFixed(2)
+						: 0,
 					priceDepositTotal: $(eventDepositDeposit).is(':checked')
 						? (chargeAmount / 100).toFixed(2)
 						: 0,
@@ -2000,7 +2036,7 @@ $(payButton).on('click', function(e) {
 				})
 			}
 		})
-		.catch(function(error) {
+		.catch(function (error) {
 			$('.button.pay').attr('disabled', false)
 			alert(error)
 		})
