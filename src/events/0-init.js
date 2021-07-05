@@ -1,3 +1,15 @@
+// Urls
+const containsUrl = str => window.location.href.indexOf(str) > -1
+const endsWithUrl = str => window.location.href.endsWith(str)
+
+const page = () => {
+	if (endsWithUrl('/')) return 'Home'
+	if (containsUrl('/events/')) return 'Event'
+	if (endsWithUrl('/teachers')) return 'Teachers'
+	if (endsWithUrl('/update')) return 'Update'
+	return null
+}
+
 if (page() === 'Event' || page() === 'Update') {
 	// Load reg form scripts
 	const baseScriptUrl =
